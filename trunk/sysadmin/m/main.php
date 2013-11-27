@@ -43,11 +43,7 @@ $ucategory_num = $dbo->getRow($sql);
 
 <?php
 $installfile = "../install";
-if(file_exists($installfile)){ ?>
-	<ul style="list-style-type:none">
-		<li style="border: 1px solid rgb(204, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 204); padding: 10px; margin-top: 15px; margin-left:20px; margin-right:20px;"><?php echo $a_langpackage->a_notice;?></li>
-	</ul>
-<?php }?>
+?>
 
 	<div class="wrap">
 		<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_global_settings; ?> &gt;&gt; <?php echo $a_langpackage->a_manager_index; ?></div>

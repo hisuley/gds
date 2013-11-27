@@ -267,12 +267,6 @@ $plugin=$dbo->getRs($sql);
 	   <?php if ($id == 'promotions'){?><!-- 网站 -->
 			<ul class="submenu" id="index">
 	        	<li id="separator" class="separator"></li>
-			<?php if($right_array["news_list"]){?>
-				<li id="news_list" class="active" onclick="changeMenu(this);"><a href="m.php?app=news_list" target="main-frame"><?php echo $a_langpackage->a_news_list; ?></a></li>
-			<?php }?>
-			<?php if($right_array["news_catlist"]){?>
-				<li id="news_catlist" class="" onclick="changeMenu(this);"><a href="m.php?app=news_catlist" target="main-frame"><?php echo $a_langpackage->a_news_category; ?></a></li>
-			<?php }?>
 			<?php if($right_array["adv_position_list"]){?>
 				<li id="adv_position_list" class="" onclick="changeMenu(this);"><a href="m.php?app=asd_position_list" target="main-frame"><?php echo $a_langpackage->a_asdposition_list; ?></a></li>
 			<?php }?>
@@ -298,6 +292,22 @@ $plugin=$dbo->getRs($sql);
 			<?php if($right_array["remind_info"]){?>
 					<li id="error_set" class="" onclick="changeMenu(this);"><a href="m.php?app=message_list" target="main-frame"><?php echo $a_langpackage->a_set_message; ?></a></li><!-- 站内消息管理 -->
 			<?php }?>
+			<ul>
+	   <?php }?>
+
+	   <?php if ($id == 'contents'){?><!-- 咨询 -->
+			<ul class="submenu" id="index">
+	        	<li id="separator" class="separator"></li>
+			<?php if($right_array["news_list"]){?>
+				<li id="news_list" class="active" onclick="changeMenu(this);"><a href="m.php?app=news_list" target="main-frame"><?php echo $a_langpackage->a_news_list; ?></a></li>
+			<?php }?>
+			<?php if($right_array["news_catlist"]){?>
+				<li id="news_catlist" class="" onclick="changeMenu(this);"><a href="m.php?app=news_catlist" target="main-frame"><?php echo $a_langpackage->a_news_category; ?></a></li>
+			<?php }?>
+	       
+			<?php if($right_array["image_browse"]){?>
+	            	<li id="image_browse" class="" onclick="changeMenu(this);"><a href="m.php?app=index_images" target="main-frame"><?php echo $a_langpackage->a_index_image; ?></a></li>
+	        <?php }?>
 			<ul>
 	   <?php }?>
 	   

@@ -9,7 +9,7 @@ class adminlp{
 
 	var $a_yuan = "元";
 	var $a_mana_center = "管理中心";
-	var $a_footer = "版權所有 © 2005-2009 聚易開放式技術實驗室，並保留所有權利。";
+	var $a_footer = "版權所有 © 2005-2009 美景假期開放式技術實驗室，並保留所有權利。";
 	var $a_error = "非法操作!";
 	var $a_operate = "操作";
 	var $a_serach = "搜索";
@@ -956,7 +956,7 @@ class uilp{
 	var $u_prompt_4="4、如果您需要應用新的網站模板方案，請點擊應用模板，但是其目錄結構一定要與根目錄結構像匹配；";
 	var $u_prompt_5="5、應用模板操作會把當前的風格樣式替換成所選擇的方案，替換時要謹慎；";
 	var $u_prompt_6="6、如果替換時發生錯誤可以進入站點UI恢復——>恢復模板，進行恢復；";
-	var $u_footer="版權所有 © 2005-2009 聚易開放式技術實驗室，並保留所有權利。";
+	var $u_footer="版權所有 © 2005-2009 美景假期開放式技術實驗室，並保留所有權利。";
 
 	var $u_tempfile_list="模板文件列表";
 	var $u_template_list="模板列表";

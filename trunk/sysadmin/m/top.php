@@ -30,13 +30,14 @@ $a_langpackage=new adminlp;
 		<li id="member"><a href="m.php?app=menu&value=member" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_m_member_oprate; ?></a></li>
 		<li id="commodity"><a href="m.php?app=menu&value=commodity" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_m_aboutgoods_management; ?></a></li>
 		<li id="order"><a href="m.php?app=menu&value=order" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_m_order_mengament; ?></a></li>
+		<li id="contents"><a href="m.php?app=menu&value=contents" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_content; ?></a></li>
 		<li id="promotions"><a href="m.php?app=menu&value=promotions" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_promotion_manage; ?></a></li>
 		<li id="application"><a href="m.php?app=menu&value=application" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_application_management; ?></a></li>
 	</ul>
 </div>
 <div class="uinfo">
 	<div align="right"> 
-	<div class="cfff" style="background-color:#FFF;color:#F67A06"><a class="c_F67" style="color:#F67A06" href="../" target="_blank"><?php echo $a_langpackage->a_site_index; ?></a>|<a class="c_F67" style="color:#F67A06" href="m.php?app=change_password" target="main-frame"><?php echo $a_langpackage->a_password_edit; ?></a>|<a class="c_F67" style="color:#F67A06" href="m.php?app=navigate" target="main-frame">功能导航</a></div>
+	<div class="cfff" style="background-color:transparent;color:white"><a class="c_F67" style="" href="../" target="_blank"><?php echo $a_langpackage->a_site_index; ?></a>|<a class="c_F67" style="" href="m.php?app=change_password" target="main-frame"><?php echo $a_langpackage->a_password_edit; ?></a>|<a class="c_F67" style="" href="m.php?app=navigate" target="main-frame">功能导航</a></div>
 	<p style="margin-top:10px;"><?php echo $a_langpackage->a_hello; ?><em><?php echo $_SESSION['admin_name']; ?></em> <a href="a.php?act=logout" target="main-frame" style="width:30px; display:inline-block;text-align: left;"><?php echo $a_langpackage->a_admin_logout; ?></a></p>
 		
 		<!-- <div class="uinfo">

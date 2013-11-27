@@ -491,6 +491,11 @@ class adminlp{
 	var $a_set = " 设置";
 	var $a_select_status = "请选择您要设置的状态";
 	var $a_select_at_least = " 致少要选择一项，才能进行操作！";
+	/*news view */
+	var $a_content = '资讯管理';
+
+	/*Promote */
+	var $a_promotemanage = '营销管理';
 	/*order view*/
 	var $a_order = "订单";
 	var $a_order_info = "商品信息";
@@ -916,7 +921,7 @@ class adminlp{
     var $a_tag_color="颜色";
     var $a_tags_manage="标签集管理";
     var $a_tag_num="标示数量";
-    var $a_promotion_manage="网站管理";
+    var $a_promotion_manage="营销管理";
     var $a_commend="是否推荐";
     var $a_value_commend="批量推荐";
     var $acommend="推荐";

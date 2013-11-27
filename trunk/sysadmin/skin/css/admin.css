@@ -112,7 +112,7 @@ select { padding:2px; color:#333; border:1px #d2d2d2 solid; }
 #siteNavi .listPan li a:hover { color:#F7881E; text-decoration:underline; }
 /* 8 -18 add*/
 .cfff { background-color:#FFF; }
-.uinfo .c_F67 { color:#F67A06 }
+.uinfo .c_F67 { color:white; background:none;}
 /* 11 -9 */
 .templageimg span { display:block; float:left; margin-left:3px; text-align:left; }
 /* 10-11-16*/

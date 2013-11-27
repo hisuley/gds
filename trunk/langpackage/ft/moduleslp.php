@@ -639,7 +639,7 @@ class moduleslp{
 	var $m_cooperation_proposal ="合作提案";
 	var $m_site_map ="網站地圖";
 
-	var $m_copyright = "版權所有 © 2005-2009 聚易開放式技術實驗室，並保留所有權利。";
+	var $m_copyright = "版權所有 © 2005-2009 美景假期開放式技術實驗室，並保留所有權利。";
 	var $m_isset_payment = "您還沒有設置支付方式!";
 
 

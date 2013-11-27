@@ -63,7 +63,7 @@ function selectlangpackage(v){
     <!-- <?php echo $i_langpackage->i_language_ch;?>：<?php echo  show_back_lp($langpackage);?> 
     <?php echo $i_langpackage->i_language_ch;?><?php echo  show_back_lp($langpackage);?>-->
     <a href="<?php echo  article_url(2);?>"><?php echo $i_langpackage->i_question_see;?></a>|<a href="<?php echo  article_url(3);?>"><?php echo $i_langpackage->i_safe_compp;?></a>|<a href="<?php echo  article_url(4);?>"><?php echo $i_langpackage->i_process_of_purchase;?></a>|<a href="<?php echo  article_url(5);?>"><?php echo $i_langpackage->i_howto_pay;?></a>|<a href="<?php echo  article_url(6);?>"><?php echo $i_langpackage->i_contact_us;?></a>|<a href="<?php echo  article_url(7);?>"><?php echo $i_langpackage->i_make_a_proposal;?></a>|<a href="<?php echo  article_url(8);?>"><?php echo $i_langpackage->i_site_map;?></a></p>
-  <p>Powered by <a href="http://www.jmlvyou.com">iWebMall<?php echo  $SYSINFO['version'];?></a><?php echo  $SYSINFO['sys_company'];?></p>
+  <p>Powered by <a href="http://www.jmlvyou.com">Guilin GDS</a><?php echo  $SYSINFO['sys_company'];?></p>
   <?php echo  $SYSINFO['sys_copyright'];?> <?php echo  $SYSINFO['sys_icp'];?> <?php echo  $SYSINFO['sys_countjs'];?> </div>
 
 <?php } ?>
