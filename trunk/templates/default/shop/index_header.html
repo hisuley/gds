@@ -1,3 +1,4 @@
+<!-- 头部菜单 -->
 <div id="header" class="clearfix">
     <div class="site_nav clearfix">
       <p class="login_info"><span>{echo: lp{i_welcome};/}{echo:$SYSINFO['sys_name'];/}!</span>{sta: if($USER['login'])[exc]}{echo: lp{i_hi};/}! {echo: $USER['user_name'];/} <a href="do.php?act=logout">{echo: lp{i_logout};/}</a>{sta:} else [exc]}<a href="login.php">{echo:lp{i_login};/}</a>&nbsp;|&nbsp;<a href="modules.php?app=reg">{echo:lp{i_register_free};/}</a>{end:if/}</p>
@@ -18,7 +19,7 @@
   		{sta:if/}
       </h1>
       <form action="search.php" method="POST" id="search_form" >
-      <div class="search_panel clearfix">
+      <div class="search_panel">
     	<p class="search_sel" onclick="setShow('sel_content');setOnShowPara('sel_content');">
 			{sta: if($search_header_type == lp{i_s_company})[exc]}
 				<input class="sel_value" id="sel_value" value="{echo:lp{i_s_company};/}" name="search_type" type="text" />
@@ -37,8 +38,29 @@
         	<ul><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''">{echo:lp{i_goods_search};/}</li><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''">{echo:lp{i_s_company};/}</li></ul>
         </div>
       </div>
+     
       </form>
+       <div class="weather_panel clearfix">
+        <div class="weather_content">
+          <span class="weather_icon_fine">晴 18~20度</span>
+          <p style="text-align:center;">东北风转四到五级</p>
+        </div>
+        <div class="contact_content">
+          
+        </div>
+        
+      </div>
     </div>
 </div>
 
 <input type="text" name="sel_content_c" id="sel_content_c" size="0" onblur="javascript:timerSetHidden('sel_content',200);" style="top:-100px;position:absolute;width:1px;height:1px;border:0px;background-color:transparent;" value="1">
+
+<div class="header-nav">
+  <ul class="nav-list">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">资讯全览</a></li>
+    <li><a href="#">无忧预订</a></li>
+    <li><a href="#">特惠专区</a></li>
+    <li><a href="#">分享乐园</a></li>
+  </ul>
+</div>
