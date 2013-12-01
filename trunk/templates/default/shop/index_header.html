@@ -15,7 +15,7 @@
 				<img src="{echo:$SYSINFO['sys_logo'];/}" title="{echo:$SYSINFO['sys_name'];/}" style="float:left;width:209px; height:43px;" onerror="this.src='skin/default/images/nopic.gif'"/>
 			</a>
   		{sta:}else [exc]}
-  			<a href="index.php"><img src="skin/{echo: $SYSINFO['templates'];/}/images/img_logo.gif" title="" alt="{echo:$SYSINFO['sys_name'];/}" /></a>
+  			<a href="index.php"><img src="skin/{echo: $SYSINFO['templates'];/}/images/logo.png" title="" alt="{echo:$SYSINFO['sys_name'];/}" /></a>
   		{sta:if/}
       </h1>
       <form action="search.php" method="POST" id="search_form" >
@@ -33,7 +33,8 @@
        <p class="search_txt"><input name="k" type="text" onblur="inputTxt(this,'set');" onfocus="inputTxt(this,'clean');" style="color:#000000;"; value="{echo:$ksearch;/}" /></p>
        {sta:if/}
        
-        <p class="search_btn"><input type="submit" value="" /></p>
+        <p class=""><input type="submit" value="搜索" class="search-button"/></p>
+        <p class="hot_keywords">热门关键词：<a href="#">象鼻山</a> <a href="#">刘三姐</a> <a href="#">漓江</a> <a href="#">阳朔</a> <a href="#">七星岩</a> <a href="#">西街</a></p>
         <div id="sel_content" class="sel_list" style="display:none">
         	<ul><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''">{echo:lp{i_goods_search};/}</li><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''">{echo:lp{i_s_company};/}</li></ul>
         </div>
@@ -58,9 +59,28 @@
 <div class="header-nav">
   <ul class="nav-list">
     <li><a href="#">首页</a></li>
-    <li><a href="#">资讯全览</a></li>
-    <li><a href="#">无忧预订</a></li>
-    <li><a href="#">特惠专区</a></li>
-    <li><a href="#">分享乐园</a></li>
+    <li class="sep"></li>
+    <li><a href="#">资讯全览</a>
+      <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="http://hotels.ctrip.com" title="国内酒店">国内酒店</a>|<a href="http://hotels.ctrip.com/international/" title="海外酒店">海外酒店</a>|<a href="http://huixuan.ctrip.com" title="惠选酒店">惠选酒店</a>|<a href="http://package.ctrip.com" title="机+酒">机+酒</a>|<a href="http://tuan.ctrip.com" title="团购">团购</a>|<a href="http://hotels.ctrip.com/hotsale/" title="特价超市">特价超市</a></div>
+      </div>
+    </li>
+    <li class="sep"></li>
+    <li><a href="#">无忧预订</a>
+        <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="http://hotels.ctrip.com" title="国内酒店">国内酒店</a>|<a href="http://hotels.ctrip.com/international/" title="海外酒店">海外酒店</a>|<a href="http://huixuan.ctrip.com" title="惠选酒店">惠选酒店</a>|<a href="http://package.ctrip.com" title="机+酒">机+酒</a>|<a href="http://tuan.ctrip.com" title="团购">团购</a>|<a href="http://hotels.ctrip.com/hotsale/" title="特价超市">特价超市</a></div>
+      </div>
+
+    </li>
+    <li class="sep"></li>
+    <li><a href="#">特惠专区</a>
+      <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="http://hotels.ctrip.com" title="国内酒店">国内酒店</a>|<a href="http://hotels.ctrip.com/international/" title="海外酒店">海外酒店</a>|<a href="http://huixuan.ctrip.com" title="惠选酒店">惠选酒店</a>|<a href="http://package.ctrip.com" title="机+酒">机+酒</a>|<a href="http://tuan.ctrip.com" title="团购">团购</a>|<a href="http://hotels.ctrip.com/hotsale/" title="特价超市">特价超市</a></div>
+      </div>
+    </li>
+    <li class="sep"></li>
+    <li><a href="#">分享乐园</a>
+      <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="http://hotels.ctrip.com" title="国内酒店">国内酒店</a>|<a href="http://hotels.ctrip.com/international/" title="海外酒店">海外酒店</a>|<a href="http://huixuan.ctrip.com" title="惠选酒店">惠选酒店</a>|<a href="http://package.ctrip.com" title="机+酒">机+酒</a>|<a href="http://tuan.ctrip.com" title="团购">团购</a>|<a href="http://hotels.ctrip.com/hotsale/" title="特价超市">特价超市</a></div>
+      </div>
+    </li>
   </ul>
 </div>
+<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/common.js"></script>
