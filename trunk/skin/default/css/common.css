@@ -27,7 +27,7 @@ a:hover { text-decoration:underline; color:#F77A07 }
 #mall_banner { height:150px; border:1px solid #ccc; background-color:#F1F1F1 }
 body { background:url(../images/body_bg.gif) repeat-x left top; }
 #wrapper { width:960px; margin:0 auto; overflow:hidden; }
-#header { padding-top:8px; padding-bottom:6px; width:960px; line-height:16px; margin:0 auto 15px; }
+#header { padding-top:8px; padding-bottom:6px; width:960px; line-height:16px; margin:0 auto 0px; }
 #header .site_nav { color:#4E4E4E; }
 #header .site_nav span { margin-right:15px; }
 #header .site_nav a { color:#4E4E4E; }
@@ -37,14 +37,117 @@ body { background:url(../images/body_bg.gif) repeat-x left top; }
 #header .quick_menu a { padding-top:4px; margin:-3px 6px 0; }
 #header .quick_menu a.shop_cart { padding-left:25px; background:url(../images/icon_shopcart.gif) no-repeat left top; }
 #header .quick_menu a.site_map { padding-right:10px; background:url(../images/icon_arrow_down.gif) no-repeat right center; }
-#header .topMain { padding-left:20px; padding-top:30px }
-#header #logo { float:left; width:209px; margin-right:45px }
-#header .search_panel { float:left; width:620px; height:30px; padding:13px 12px 8px; background-color:#F7F7F7; position:relative; }
+#header .topMain { padding-top:30px }
+#header #logo { float:left; width:170px; margin-right:45px }
+#header .search_panel { float:left; width:425px; height:30px; padding:5px 12px 8px;  position:relative; }
 #header .search_panel .search_sel { float:left; width:95px; height:25px; background:url(../images/select_bg_index.gif) no-repeat left top; border:none; }
-#header .search_panel .search_txt { float:left; width:390px; padding-left:10px; }
-#header .search_panel .search_txt input { height:19px; width:400px; _margin-top:-1px; padding:2px 3px; line-height:20px; color:#ccc; border:1px solid #ccc; }
+#header .search_panel .search_txt { float:left; width:200px; padding-left:10px; }
+#header .search_panel .search_txt input { height:19px; width:200px; _margin-top:-1px; padding:2px 3px; line-height:20px; color:#ccc; border:1px solid #ccc; }
 #header .search_panel .search_btn { width:87px; float:left; display:inline; margin-left:30px; _margin-left:15px; }
 #header .search_panel .search_btn input { width:87px; height:25px; background:url(../images/btn_search_bg.gif) no-repeat left top; border:none; text-indent:-9999; cursor:pointer }
+.search-button {
+	margin-left: 20px;
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:30px;
+	line-height:30px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+}
+.search-button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.search-button:active {
+	position:relative;
+	top:1px;
+}
+#header .hot_keywords{padding-top:5px;}
+#header .weather_panel { float:left; width:275px; height:70px; padding:0px 0px 0px 12px; position:relative; }
+#header .weather_panel .weather_content{width:150px;height:70px;float:left;}
+#header .weather_panel .weather_icon_fine{background:url('../images/weather.png') no-repeat;background-size: 35px 35px; width:150px; height:30px; padding-left:40px;padding-top:10px;display:block;font-size:14px;font-weight: bold}
+#header .weather_panel .contact_content{width:115px;height:70px;background-size:115px 50px;float:left;background:url('../images/contact.png') no-repeat left top;}
+/* Header Nav */
+.header-nav{width:100%;}
+.header-nav ul.nav-list{height:40px;background:url('../images/nav_bg.png') repeat-x;width:100%;}
+.header-nav ul.nav-list li{height:30px;float:left;width:128px;padding-top:10px;text-align: center;}
+.header-nav ul.nav-list li a{color:white;font-size:16px;font-weight: bold;}
+.header-nav ul.nav-list li.active, .header-nav ul.nav-list li:hover{background-color:#2d8b05;}
+.header-nav .cui_subnav_wrap{
+	display: none;
+position: relative;
+z-index: 8;
+left: 0;
+top: 10px;
+line-height: 40px;
+color: rgb(102, 102, 102);
+min-width: 600px;
+max-width: 600px;
+background-color: rgb(255, 255, 255);
+}
+.header-nav .cui_sub_nav {
+background:url('../images/sub_nav_bg.png') repeat-x; 
+white-space: nowrap;
+color:black;
+background-repeat: repeat-x;
+border: 1px solid rgb(187, 187, 187);
+border-top: none;
+box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+font-size: 12px;
+text-align: left;
+padding-left:10px;
+padding-right:20px;
+float: left;
+}
+
+.header-nav ul.nav-list li .cui_sub_nav a {
+position: relative;
+margin-left: 6px;
+margin-right: 6px;
+color: rgb(51, 51, 51);
+font-size: 14px;
+color:black;
+font-weight: normal;
+}
+.header-nav .cui_sub_nav {
+box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+.header-nav ul.nav-list li.sep {
+width: 1px;
+height: 5px;
+padding-left: 0;
+margin: 13px 2px 0;
+_margin-top: 11px;
+background-color: rgb(255, 255, 255);
+}
 /* sel */
 .sel_list { border:1px #ccc solid; padding:5px 0 0; min-width:93px; width:auto!important; _width:93px; position:absolute; left:12px; top:37px; background-color:#fff; font-size:14px; z-index:101; }
 .sel_list li { float:left; height:18px; padding:3px 5px; min-width:83px; width:auto!important; _width:83px; clear:both; cursor:pointer; }
