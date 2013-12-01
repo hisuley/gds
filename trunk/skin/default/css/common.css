@@ -167,6 +167,10 @@ background-color: rgb(255, 255, 255);
 #footer { padding-bottom:20px; margin-top:30px; text-align:center; color:#4E4E4E; font-family:Arial }
 #footer p { margin-bottom:10px; }
 #footer a { margin:0 15px }
+#flink{height: auto;border: 1px solid #F6F6F6;padding: 5px 10px 10px 10px;background:-webkit-linear-gradient(top, #f6f6f6, #ffffff);width:100%;height:auto;}
+#flink h2{font-size:16px;margin-bottom: 10px;margin-top: 10px;}
+#flink ul>li{float:left;padding-right:20px;}
+#flink ul{display:inline-table;}
 #footer .link_bar { padding-bottom:8px; border-bottom:1px dotted #ccc; }
 #footer .developer { color:#AAA; }
 #footer .developer span { color:#F77A07; font-weight:bolder; }
@@ -193,6 +197,9 @@ background-color: rgb(255, 255, 255);
 #rightColumn .viewrecord li.lst { margin-right:0 }
 #rightColumn .viewrecord li .photo img { margin-bottom:15px; border:1px solid #ccc }
 #rightColumn .viewrecord li .price { font-weight:bolder; color:#F77A07 }
+
+/* -------Content Box----------*/
+
 /*
 ----------winItems-------------*/
 
