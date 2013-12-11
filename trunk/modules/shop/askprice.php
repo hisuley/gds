@@ -61,6 +61,8 @@ $result = get_shop_askprice_list($dbo,$t_shop_inquiry,$shop_id,13);
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
 

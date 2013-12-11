@@ -14,6 +14,8 @@ function get_attribute_info(&$dbo,$table,$cat_id) {
 			$array[$i]['attr_name'] = $v['attr_name'];
 			$array[$i]['input_type'] = $v['input_type'];
 			$array[$i]['attr_values'] = $v['attr_values'];
+			$array[$i]['selectable'] = $v['selectable'];
+			$array[$i]['price'] = $v['price'];
 			$i++;
 		}
 	}

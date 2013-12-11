@@ -11,6 +11,7 @@
 <link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
 <link href="skin/{echo: $SYSINFO['templates'];/}/css/shop.css" type="text/css" rel="stylesheet" />
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
+<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/izoom.js"></script>
 <script type="text/javascript">
@@ -47,28 +48,7 @@ function changeImage(obj){
 <body>
 <div id="wrapper" style=""> {inc: include("shop/index_header.php");/}
 	<div id="contents" class="clearfix" >
-		<div id="sub_channel">
-			<ul class="clearfix">
-				<li>
-					<h3><img onmouseover="show_obj('category_box')" onmouseout="hidden_obj('category_box')" alt="{echo:lp{s_all_category};/}" src="skin/{echo: $SYSINFO['templates'];/}/images/part/ttl_channel_all.gif"  /></h3>
-				</li>
-				{sta:foreach($sub_category as $value)[loop]}
-				<li><a href="{echo:$value['url'];/}">{echo:$value['cat_name'];/}</a></li>
-				{end:foreach/}
-			</ul>
-		</div>
-		<div id="category_box" class="allMerchan" style=" display:none" onmouseover="show_obj(this)"  onmouseout="hidden_obj(this)">
-			<ul  >
-				{sta: foreach(array_slice ($CATEGORY[0], 0) as $key=>$cat)[loop]}
-				<li class="clearfix">
-					<h3><a href="{echo: category_url($cat['cat_id']);/}" title="{echo: $cat['cat_name'];/}">{echo: $cat['cat_name'];/}</a></h3>
-					{sta:if(isset($CATEGORY[$cat['cat_id']]) && $CATEGORY[$cat['cat_id']])[exc]}
-					<p> {sta: foreach(array_slice ($CATEGORY[$cat['cat_id']], 0, 8) as $subcat)[loop]} <a href="{echo: category_url($subcat['cat_id']);/}" title="{echo: $cat['cat_name'];/}">{echo: $subcat['cat_name'];/}</a>|
-						{end:foreach/} </p>
-					{end:if/} </li>
-				{end:foreach/}
-			</ul>
-		</div>
+		
 		<div id="itemContents" class="clearfix">
 			<div id="intro" >
 				<h3>{echo: $goodsinfo['goods_name'];/}</h3>
@@ -181,8 +161,8 @@ function changeImage(obj){
 				</form>
 			</div>
 		</div>
-		<div id="sellrecom" class="bg_gary">
-			<h3 class="ttlm_sellrecom">{echo:lp{s_seller_commend};/}</h3>
+		<div id="sellrecom" class="bg_gary content-common-box">
+			<div class="title"><h2>{echo:lp{s_seller_commend};/}</h2></div>
 			<ul class="list_125 clearfix">
 				{sta:if($best_goods) {
 				foreach($best_goods as $value)[loop]}

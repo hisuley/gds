@@ -29,7 +29,7 @@ if(!$IWEB_SHOP_IN) {
 	trigger_error('Hacking attempt');
 }
  
-?><?php $plugins=array();?>
+?><?php $plugins=unserialize('a:0:{}');?>
 <div class="header">
     <div class="top">
         <div class="top_left left"></div>
@@ -47,7 +47,7 @@ if(!$IWEB_SHOP_IN) {
 	    </div>
 	<?php } else {?>
 		<div class="logo left">
-	    	<h1><a href="index.php">jooyea</a></h1>
+	    	<h1><a href="index.php">GDS</a></h1>
 	    </div>
 	<?php }?>
 	<div class="tool left">

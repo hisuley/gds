@@ -336,10 +336,10 @@ class indexlp{
 	var $i_groupbuy_say="团购说明";
 	var $i_lay_out="团购展示";
 	var $i_brand_navigation="名优品牌导航";
-	var $i_better_shop="优秀店铺推荐";
+	var $i_better_shop="优秀企业推荐";
 	var $i_groupbuy="团购";
 	var $i_integral="积分";
-	var $i_shop_infomation="店铺信息";
+	var $i_shop_infomation="企业信息";
 	var $i_jian="件";
 	var $i_contract_goods="商品对比";
 	var $i_close="关闭";

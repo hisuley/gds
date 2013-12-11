@@ -89,6 +89,8 @@ if(filemtime("templates/default/modules/shop/shipping_list.html") > filemtime(__
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo  $m_langpackage->m_u_center;?></title>
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type='text/javascript' src='servtools/date/WdatePicker.js'></script>

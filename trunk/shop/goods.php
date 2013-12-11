@@ -215,6 +215,7 @@ if($result_category) {
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/shop.css" type="text/css" rel="stylesheet" />
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/izoom.js"></script>
 <script type="text/javascript">
@@ -251,28 +252,7 @@ function changeImage(obj){
 <body>
 <div id="wrapper" style=""> <?php  include("shop/index_header.php");?>
 	<div id="contents" class="clearfix" >
-		<div id="sub_channel">
-			<ul class="clearfix">
-				<li>
-					<h3><img onmouseover="show_obj('category_box')" onmouseout="hidden_obj('category_box')" alt="<?php echo $s_langpackage->s_all_category;?>" src="skin/<?php echo  $SYSINFO['templates'];?>/images/part/ttl_channel_all.gif"  /></h3>
-				</li>
-				<?php foreach($sub_category as $value){?>
-				<li><a href="<?php echo $value['url'];?>"><?php echo $value['cat_name'];?></a></li>
-				<?php }?>
-			</ul>
-		</div>
-		<div id="category_box" class="allMerchan" style=" display:none" onmouseover="show_obj(this)"  onmouseout="hidden_obj(this)">
-			<ul  >
-				<?php  foreach(array_slice ($CATEGORY[0], 0) as $key=>$cat){?>
-				<li class="clearfix">
-					<h3><a href="<?php echo  category_url($cat['cat_id']);?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a></h3>
-					<?php if(isset($CATEGORY[$cat['cat_id']]) && $CATEGORY[$cat['cat_id']]){?>
-					<p> <?php  foreach(array_slice ($CATEGORY[$cat['cat_id']], 0, 8) as $subcat){?> <a href="<?php echo  category_url($subcat['cat_id']);?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $subcat['cat_name'];?></a>|
-						<?php }?> </p>
-					<?php }?> </li>
-				<?php }?>
-			</ul>
-		</div>
+		
 		<div id="itemContents" class="clearfix">
 			<div id="intro" >
 				<h3><?php echo  $goodsinfo['goods_name'];?></h3>
@@ -385,8 +365,8 @@ function changeImage(obj){
 				</form>
 			</div>
 		</div>
-		<div id="sellrecom" class="bg_gary">
-			<h3 class="ttlm_sellrecom"><?php echo $s_langpackage->s_seller_commend;?></h3>
+		<div id="sellrecom" class="bg_gary content-common-box">
+			<div class="title"><h2><?php echo $s_langpackage->s_seller_commend;?></h2></div>
 			<ul class="list_125 clearfix">
 				<?php if($best_goods) {
 				foreach($best_goods as $value){?>

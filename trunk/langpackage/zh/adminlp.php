@@ -175,7 +175,7 @@ class adminlp{
 	var $a_hot = "热销";
 	var $a_promote = "特价";
 	var $a_on_sale = "上架";
-	var $a_admin_promote = "热卖特价";
+	var $a_admin_promote = "首页推荐";
 	var $a_search = "搜索";
 
 	var $a_text_type = "文本框输入";
@@ -201,6 +201,8 @@ class adminlp{
 	var $a_attr_add = "增加新属性";
 	var $a_input_type = "录入方式";
 	var $a_input_value_o = "录入值(多个值时请一行一个)";
+	var $a_input_selectable = "可选择（购买的时候需要用户选择的属性）";
+	var $a_input_price = "价格";
 	var $a_flink_list = "友情链接列表";
 	var $a_flink_add = "添加友情链接";
 	var $a_brand_list = "品牌列表";
@@ -732,7 +734,7 @@ class adminlp{
 	var $a_system_design = "系统设计";
 	var $a_theme_ui ="主题及UI";
 	var $a_product_web_site ="产品网站";
-	var $a_home = "北京美景假期国际旅行社有限公司";
+	var $a_home = "桂林旅游局";
 	var $a_admin_logout = "退出";
 	var $a_hello = "您好，";
 	var $a_application_management ="扩展管理";
@@ -888,6 +890,7 @@ class adminlp{
     var $a_title_color="标题颜色";
     var $a_whether_bold="是否粗体";
     var $a_title_desc="标题排序";
+    var $a_news_thumb="新闻缩略图";
     var $a_color_select="点击颜色选取";
     var $a_five_category="支持二级分类";
     var $a_shop_category="企业分类";

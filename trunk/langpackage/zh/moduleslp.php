@@ -714,7 +714,7 @@ class moduleslp{
 	var $m_cooperation_proposal ="合作提案";
 	var $m_site_map ="网站地图";
 
-	var $m_copyright = "版权所有 © 2005-2009 北京美景假期国际旅行社有限公司，并保留所有权利。";
+	var $m_copyright = "版权所有 © 2013 桂林旅游局，并保留所有权利。";
 	var $m_isset_payment = "您还没有设置支付方式!";
 
 

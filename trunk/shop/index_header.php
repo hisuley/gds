@@ -43,7 +43,8 @@ $ksearch=short_check(get_args("k"));
 if($i_langpackage->i_search_keyword==$ksearch){
 	$ksearch="";
 }
-?><div id="header" class="clearfix">
+?><!-- 头部菜单 -->
+<div id="header" class="clearfix">
     <div class="site_nav clearfix">
       <p class="login_info"><span><?php echo  $i_langpackage->i_welcome;?><?php echo $SYSINFO['sys_name'];?>!</span><?php  if($USER['login']){?><?php echo  $i_langpackage->i_hi;?>! <?php echo  $USER['user_name'];?> <a href="do.php?act=logout"><?php echo  $i_langpackage->i_logout;?></a><?php } else {?><a href="login.php"><?php echo $i_langpackage->i_login;?></a>&nbsp;|&nbsp;<a href="modules.php?app=reg"><?php echo $i_langpackage->i_register_free;?></a><?php }?></p>
       <p class="quick_menu">
@@ -59,11 +60,11 @@ if($i_langpackage->i_search_keyword==$ksearch){
 				<img src="<?php echo $SYSINFO['sys_logo'];?>" title="<?php echo $SYSINFO['sys_name'];?>" style="float:left;width:209px; height:43px;" onerror="this.src='skin/default/images/nopic.gif'"/>
 			</a>
   		<?php }else {?>
-  			<a href="index.php"><img src="skin/<?php echo  $SYSINFO['templates'];?>/images/img_logo.gif" title="" alt="<?php echo $SYSINFO['sys_name'];?>" /></a>
+  			<a href="index.php"><img src="skin/<?php echo  $SYSINFO['templates'];?>/images/logo.png" title="" alt="<?php echo $SYSINFO['sys_name'];?>" /></a>
   		<?php }?>
       </h1>
       <form action="search.php" method="POST" id="search_form" >
-      <div class="search_panel clearfix">
+      <div class="search_panel">
     	<p class="search_sel" onclick="setShow('sel_content');setOnShowPara('sel_content');">
 			<?php  if($search_header_type == $i_langpackage->i_s_company){?>
 				<input class="sel_value" id="sel_value" value="<?php echo $i_langpackage->i_s_company;?>" name="search_type" type="text" />
@@ -77,14 +78,55 @@ if($i_langpackage->i_search_keyword==$ksearch){
        <p class="search_txt"><input name="k" type="text" onblur="inputTxt(this,'set');" onfocus="inputTxt(this,'clean');" style="color:#000000;"; value="<?php echo $ksearch;?>" /></p>
        <?php }?>
        
-        <p class="search_btn"><input type="submit" value="" /></p>
+        <p class=""><input type="submit" value="搜索" class="search-button"/></p>
+        <p class="hot_keywords">热门关键词：<a href="#">象鼻山</a> <a href="#">刘三姐</a> <a href="#">漓江</a> <a href="#">阳朔</a> <a href="#">七星岩</a> <a href="#">西街</a></p>
         <div id="sel_content" class="sel_list" style="display:none">
         	<ul><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''"><?php echo $i_langpackage->i_goods_search;?></li><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''"><?php echo $i_langpackage->i_s_company;?></li></ul>
         </div>
       </div>
+     
       </form>
+       <div class="weather_panel clearfix">
+        <div class="weather_content">
+          <span class="weather_icon_fine">晴 6~18度</span>
+          <p style="text-align:center;">东北风转四到五级</p>
+        </div>
+        <div class="contact_content">
+          
+        </div>
+        
+      </div>
     </div>
 </div>
 
 <input type="text" name="sel_content_c" id="sel_content_c" size="0" onblur="javascript:timerSetHidden('sel_content',200);" style="top:-100px;position:absolute;width:1px;height:1px;border:0px;background-color:transparent;" value="1">
-<?php } ?>
+
+<div class="header-nav">
+  <ul class="nav-list">
+    <li><a href="index.php">首页</a></li>
+    <li class="sep"></li>
+    <li><a href="article_index.php">资讯全览</a>
+      <div class="cui_subnav_wrap">
+        <div class="cui_sub_nav"><a href="news_list.php?id=11" title="最新资讯">最新资讯</a>|<a href="news_list.php?id=12" title="桂林景点">桂林景点</a>|<a href="news_list.php?id=13" title="桂林酒店">桂林酒店</a>|<a href="news_list.php?id=14" title="桂林线路">桂林线路</a>|<a href="news_list.php?id=16" title="桂林交通">桂林交通</a>|<a href="news_list.php?id=15" title="桂林美食">桂林美食</a>|<a href="news_list.php?id=17" title="桂林特产">桂林特产</a>|<a href="news_list.php?id=18" title="购在桂林">购在桂林</a>|<a href="news_list.php?id=19" title="夜美桂林">夜美桂林</a>|<a href="news_list.php?id=20" title="节庆活动">节庆活动</a></div>
+
+      </div>
+    </li>
+    <li class="sep"></li>
+    <li><a href="goods_index.php">无忧预订</a>
+        <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="category.php?id=434" title="国内酒店">景点预订</a>|<a href="ticket.php" title="海外酒店">机票预订</a>|<a href="category.php?id=433" title="惠选酒店">酒店预订</a>|<a href="category.php?id=435" title="机+酒">线路预订</a>|<a href="category.php?id=436" title="团购">商务会议</a></div>
+      </div>
+    </li>
+    <li class="sep"></li>
+    <li><a href="promote_index.php">特惠专区</a>
+      <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="category.php?id=437" title="旅游卡特惠">旅游卡特惠</a>|<a href="groupbuy.php" title="团购乐翻天">团购乐翻天</a>|<a href="category.php?id=438" title="秒杀超值购">秒杀超值购</a>|<a href="news_list.php?id=11" title="优惠全掌握">优惠全掌握</a></div>
+      </div>
+    </li>
+    <li class="sep"></li>
+    <li><a href="share_index.php">分享乐园</a>
+      <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="news_list.php?id=21" title="攻略分享">攻略分享</a>|<a href="news_list.php?id=22" title="美图分享">美图分享</a>|<a href="news_list.php?id=23" title="微博分享">微博分享</a>|<a href="news_list.php?id=24" title="桂林大向导">桂林大向导</a>|<a href="news_list.php?id=25" title="评价汇总">评价汇总</a></div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/common.js"></script><?php } ?>

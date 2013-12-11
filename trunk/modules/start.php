@@ -139,14 +139,14 @@ $order_sale_no_liu=$row[0];
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
-
 <style type="text/css">
-
 </style>
 </head>
 <body>
+<div id="wrapper">
 <?php  require("shop/index_header.php");?>
 	<div class="site_map">
 	  <?php echo $m_langpackage->m_current_position;?><A href="index.php"><?php echo $SYSINFO['sys_name'];?></A>/<a href="modules.php"><?php echo $m_langpackage->m_u_center;?></a>/&nbsp;&nbsp;<?php echo $m_langpackage->m_page_first;?>
@@ -212,6 +212,7 @@ $order_sale_no_liu=$row[0];
 	  	  <div class="back_top"><a href="#"></a></div>
     </div>
 <?php  require("shop/index_footer.php");?>
+</div>
 </body>
 <script language="JavaScript">
 <!--

@@ -1,1 +1,1 @@
-document.write('');
+document.write('<a href="http://www.jmlvyou.com"><img src="docs/images/asd/03.png" width="200" height="120" alt="广告"></a>');

@@ -4,13 +4,13 @@ if(!$IWEB_SHOP_IN) {
 }
 
 /* 默认配置系统信息 */
-$SYSINFO['sys_name'] = 'iweb Mall';
-$SYSINFO['sys_title'] = 'iweb Mall';
-$SYSINFO['sys_keywords'] = 'iweb mall';
-$SYSINFO['sys_description'] = 'iweb mall';
-$SYSINFO['sys_company'] = '北京美景假期国际旅行社有限公司';
-$SYSINFO['sys_copyright'] = 'Copyright © 2005-2009';
-$SYSINFO['sys_icp'] = '鲁ICP备01000010号';
+$SYSINFO['sys_name'] = 'GDS';
+$SYSINFO['sys_title'] = 'GDS';
+$SYSINFO['sys_keywords'] = 'GDS';
+$SYSINFO['sys_description'] = 'GDS';
+$SYSINFO['sys_company'] = '桂林旅游局';
+$SYSINFO['sys_copyright'] = 'Copyright © 2013-2013';
+$SYSINFO['sys_icp'] = '桂ICP备01000010号';
 $SYSINFO['sys_registerinfo'] = '';
 $SYSINFO['sys_kftelphone'] = '0531-';
 $SYSINFO['sys_kfqq'] = '';
@@ -22,7 +22,7 @@ $SYSINFO['sys_smtpuser'] = '';
 $SYSINFO['sys_smtppass'] = '';
 $SYSINFO['session'] = 'iweb_';
 $SYSINFO['lp'] = 'zh';
-$SYSINFO['web'] = 'http://localhost/iweb_mall/';
+$SYSINFO['web'] = 'http://localhost/gds/';
 $SYSINFO['url_r'] = 'false';
 $SYSINFO['im_enable'] = 'false';
 $SYSINFO['seller_page'] = '10';

@@ -17,6 +17,8 @@ $post['attr_name'] = short_check(get_args('attr_name'));
 $post['input_type'] = intval(get_args('input_type'));
 $post['attr_values'] = big_check(get_args('attr_values'));
 $post['sort_order'] = intval(get_args('sort_order'));
+$post['selectable'] = get_args('selectable');
+$post['price'] = get_args('price');
 $attr_id = intval(get_args('attr_id'));
 
 if(!$post['cat_id']) {exit("-1");}

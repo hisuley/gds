@@ -43,7 +43,7 @@ if($cat_id) {
 		}
 	}
 	if($cat_info) {
-		$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order from `$t_attribute` where cat_id=".$cat_id;
+		$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id;
 		$attr_info = $dbo->getRs($sql);
 		$parent_id = $cat_info['parent_id'];
 	}
@@ -94,6 +94,8 @@ function attr_info_save(v) {
 	var input_type = document.getElementsByName("input_type["+v+"]");
 	var attr_values = document.getElementsByName("attr_values["+v+"]")[0];
 	var sort_order = document.getElementsByName("sort_order["+v+"]")[0];
+	var selectable = document.getElementsByName("selectable["+v+"]")[0];
+	var price = document.getElementsByName("price["+v+"]")[0];
 	if(attr_name.value=='') { ShowMessageBox("<?php echo $a_langpackage->a_attrname_notnone; ?>!",'0'); return false; }
 	var input_type_v = 0;
 	for(var i=0; i<input_type.length; i++) {
@@ -102,7 +104,7 @@ function attr_info_save(v) {
 		}
 	}
 
-	ajax("a.php?act=goods_attr_edit","POST","attr_id="+attr_id+"&cat_id="+cat_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values.value+"&sort_order="+sort_order.value,function(data){
+	ajax("a.php?act=goods_attr_edit","POST","attr_id="+attr_id+"&cat_id="+cat_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values.value+"&sort_order="+sort_order.value+"&selectable="+selectable.value+"&price="+price.value,function(data){
 		if(data=='-2') {
 			ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>","m.php?app=error");
 			// location.href="m.php?app=error";
@@ -115,7 +117,7 @@ function attr_info_save(v) {
 				} else {
 					var tr_0 = document.getElementById("tr_0");
 
-					add_new_attr_info(data,attr_name.value,input_type_v,attr_values.value,sort_order.value)
+					add_new_attr_info(data,attr_name.value,input_type_v,attr_values.value,seletable.value, price.value, sort_order.value)
 
 					attr_name.value = '';
 					attr_values.value = '';
@@ -128,7 +130,7 @@ function attr_info_save(v) {
 	});
 }
 
-function add_new_attr_info(data,attr_name,input_type,attr_values,sort_order) {
+function add_new_attr_info(data,attr_name,input_type,attr_values, selectable, price, sort_order) {
 	var attr_tbody = document.getElementById("attr_tbody");
 	// 创建新tr
 	var newtr = document.createElement("tr");
@@ -182,16 +184,30 @@ function add_new_attr_info(data,attr_name,input_type,attr_values,sort_order) {
 	td5.className = "";
 	td5.width="60px";
 	td5.align="center";
-	td5.innerHTML = '<input type="text" class="small-text" name="sort_order['+data+']" value="'+sort_order+'" style="width:25px;" maxlength="3" />';
+	td5.innerHTML = '<input type="text" class="small-text" name="selectable['+data+']" value="'+selectable+'" style="width:25px;" maxlength="3" />';
 	newtr.appendChild(td5);
 
 	var td6 = document.createElement("td");
 	td6.className = "";
-	td6.width="175px";
+	td6.width="60px";
 	td6.align="center";
-	td6.innerHTML = '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn['+data+']" onclick="attr_info_save('+data+');" />&nbsp;';
-	td6.innerHTML += '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn['+data+']" onclick="attr_info_del('+data+');" />';
+	td6.innerHTML = '<input type="text" class="small-text" name="price['+data+']" value="'+price+'" style="width:25px;" maxlength="100" />';
 	newtr.appendChild(td6);
+
+	var td7 = document.createElement("td");
+	td7.className = "";
+	td7.width="60px";
+	td7.align="center";
+	td7.innerHTML = '<input type="text" class="small-text" name="sort_order['+data+']" value="'+sort_order+'" style="width:25px;" maxlength="3" />';
+	newtr.appendChild(td7);
+
+	var td8 = document.createElement("td");
+	td8.className = "";
+	td8.width="175px";
+	td8.align="center";
+	td8.innerHTML = '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn['+data+']" onclick="attr_info_save('+data+');" />&nbsp;';
+	td8.innerHTML += '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn['+data+']" onclick="attr_info_del('+data+');" />';
+	newtr.appendChild(td8);
 
 	attr_tbody.appendChild(newtr);
 }
@@ -243,7 +259,7 @@ function attr_info_extend(v) {
 						ShowMessageBox("<?php echo $a_langpackage->a_noattr_extended; ?>!",'0');
 					} else {
 						for(var i=0; i<data.length; i++) {
-							add_new_attr_info(data[i].attr_id,data[i].attr_name,data[i].input_type,data[i].attr_values,data[i].sort_order);
+							add_new_attr_info(data[i].attr_id,data[i].attr_name,data[i].input_type,data[i].attr_values,data[i].selectable, data[i].price,data[i].sort_order);
 						}
 					}
 				},'JSON');
@@ -287,6 +303,8 @@ function attr_info_extend(v) {
 				<th width="100px"><?php echo $a_langpackage->a_attr_name; ?></th>
 				<th width="500px"><?php echo $a_langpackage->a_input_type; ?></th>
 				<th width="300px"><?php echo $a_langpackage->a_input_value_o; ?></th>
+				<th width="60px"><?php echo $a_langpackage->a_input_selectable; ?></th>
+				<th width="60px"><?php echo $a_langpackage->a_input_price; ?></th>
 				<th width="60px" align="center"><?php echo $a_langpackage->a_sort; ?></th>
 				<th width="175px" align="center"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
@@ -300,7 +318,10 @@ function attr_info_extend(v) {
 				<?php if($i==2) { echo "<br />";}	} ?>
 				</td>
 				<td width="300px"><textarea name="attr_values[0]"></textarea></td>
+				<td width="60px" align="center"><input type="text" class="small-text" name="selectable[0]" value="0" style="width:25px;" maxlength="1" /></td>
+				<td width="60px" align="center"><input type="text" class="small-text" name="price[0]" value="0" style="width:25px;" maxlength="10" /></td>
 				<td width="60px" align="center"><input type="text" class="small-text" name="sort_order[0]" value="0" style="width:25px;" maxlength="3" /></td>
+
 				<td width="175px" align="center">
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[0]" onclick="attr_info_save(0);" />
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_cancel; ?>" onclick="attr_info_cancel(0);" />
@@ -318,7 +339,10 @@ function attr_info_extend(v) {
 				<?php if($i==2) { echo "<br />";}	} ?>
 				</td>
 				<td width="300px"><textarea name="attr_values[<?php echo $value['attr_id'];?>]" ><?php echo $value['attr_values'];?></textarea></td>
+					<td width="60px" align="center"><input type="text" class="small-text" name="selectable[<?php echo $value['attr_id'];?>]" value="<?php echo $value['selectable'];?>" style="width:25px;" maxlength="1" /></td>
+				<td width="60px" align="center"><input type="text" class="small-text" name="price[<?php echo $value['attr_id'];?>]" value="<?php echo $value['price'];?>" style="width:25px;" maxlength="100" /></td>
 				<td width="60px" align="center"><input type="text" class="small-text" class="small-text" name="sort_order[<?php echo $value['attr_id'];?>]" value="<?php echo $value['sort_order'];?>" style="width:25px;" maxlength="3" /></td>
+			
 				<td width="175px" align="center">
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[<?php echo $value['attr_id'];?>]" onclick="attr_info_save(<?php echo $value['attr_id'];?>);" />
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn[<?php echo $value['attr_id'];?>]" onclick="attr_info_del(<?php echo $value['attr_id'];?>)">

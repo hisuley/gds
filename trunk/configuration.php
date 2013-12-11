@@ -18,7 +18,7 @@ $langPackagePara = 'zh';
 $langPackageBasePath = 'langpackage/'.$langPackagePara.'/';
 
 //支持库配置
-$baseLibsPath = 'iweb_mini_lib/';
+$baseLibsPath = 'dms_mini_lib/';
 
 //plugins位置文件
 $pluginOpsition = array("index.html");

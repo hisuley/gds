@@ -109,7 +109,7 @@ set_session("goodsvercode",md5(rand(10000,999999)));
 
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 
 <style type="text/css">
 .red { color:red; }
@@ -137,6 +137,8 @@ td{text-align:left;}
 </style>
 <script type="text/javascript" src="servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
 <script type="text/javascript" src="servtools/xheditor/xheditor.min.js?v=1.0.0-final"></script>
+
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
 <link href="servtools/swfupload/css/default.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="servtools/swfupload/swfupload.js"></script>
 <script type="text/javascript" src="servtools/swfupload/swfupload.queue.js"></script>
@@ -193,6 +195,8 @@ td{text-align:left;}
 	     };
 	</script>
 <script type="text/javascript">
+jQuery.noConflict(); 
+jQuery(document).ready(function($){
 var introeditor;
 $(function(){
 	introeditor=$("#goods_intro").xheditor({skin:'vista',tools:"Cut,Copy,Paste,Pastetext,Separator,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,Separator,Align,List,Outdent,Indent,Separator,Link,Unlink,Img,Table,Separator,Fullscreen,About"});
@@ -296,7 +300,8 @@ function checkForm() {
 		}
 	}
 	return true;
-}   
+}
+});   
 </script>
 </head>
 

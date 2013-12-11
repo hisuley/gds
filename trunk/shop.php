@@ -40,7 +40,11 @@ $appArray = array(
 	'credit'	=> 'shop/credit.php',
 	'map'		=> 'shop/map.php',
 	'groupbuy'	=> 'shop/groupbuy.php',
+	'ticket' 	=> 'shop/ticket',
 	'plugin'	=> 'shop/plugin.php',
+	'article' 	=> 'shop/article.php',
+	'article_list' => 'shop/article_list',
+	'article_index' => 'shop/article_index'
 );
 
 $appId = getAppId();

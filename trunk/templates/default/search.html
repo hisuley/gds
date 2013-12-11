@@ -20,43 +20,19 @@
 	<!-- /header -->
 	<!-- contents -->
 	<div id="contents" class="clearfix" >
-		<div id="channel" class="clearfix">
-			<ul class="clearfix">
-				<li >
-					<h2><img onmouseover="show_obj('category_box1')" onmouseout="hidden_obj('category_box1')" src="skin/default/images/ttl_channel_all.gif" alt="{echo:$i_langpackage->i_allgoodsheader_category;/}" /></h2>
-				</li>
-				{sta: foreach($nav_list as  $value)[loop]}
-				<li><span><a href="{echo: $value['url'];/}">{echo: $value['nav_name'];/}</a>|</span></li>
-				{end:foreach/}
-			</ul>
-		</div>
-	</div>
-	<div id="category_box1" class="allMerchan" style="display:none;" onmouseover="show_obj(this)"  onmouseout="hidden_obj(this)">
-		<ul  >
-			{sta: foreach(array_slice ($CATEGORY1[0], 0) as $key=>$cat)[loop]}
-			<li class="clearfix">
-				<h3><a href="{echo: category_url($cat['cat_id']);/}" title="{echo: $cat['cat_name'];/}">{echo: $cat['cat_name'];/}</a></h3>
-				{sta:if(isset($CATEGORY1[$cat['cat_id']]) && $CATEGORY1[$cat['cat_id']])[exc]}
-				<p> {sta: foreach(array_slice ($CATEGORY1[$cat['cat_id']], 0, 8) as $subcat)[loop]} <a href="{echo: category_url($subcat['cat_id']);/}" title="{echo: $cat['cat_name'];/}">{echo: $subcat['cat_name'];/}</a>|
-					{end:foreach/} </p>
-				{end:if/} </li>
-			{end:foreach/}
-		</ul>
-	</div>
-	<div class="SubCategoryBox mg12b">
+	<div class="SubCategoryBox mg12b search-filter-box">
 		<h3>{echo:lp{i_category_filter};/}</h3>
 		{sta:if($search_type==$i_langpackage->i_goods_search)[exc]}
 		<ul>
 			{sta: foreach(array_slice ($CATEGORY[0], 0) as $key=>$cat)[loop]}
-			<li class="clearfix"><span><a href="category.php?id={echo: $cat['cat_id'];/}&k={echo: $k;/}" title="{echo: $cat['cat_name'];/}">{echo: $cat['cat_name'];/}</a>：</span> {sta:if(isset($CATEGORY[$cat['cat_id']]) && $CATEGORY[$cat['cat_id']])[exc]}
-				{sta: foreach(array_slice ($CATEGORY[$cat['cat_id']], 0) as $subcat)[loop]} <a href="category.php?id={echo: $subcat['cat_id'];/}&k={echo: $k;/}" title="{echo: $cat['cat_name'];/}">{echo: $subcat['cat_name'];/}</a> {end:foreach/}
-				{end:if/} </li>
+			<li><span><a href="category.php?id={echo: $cat['cat_id'];/}&k={echo: $k;/}" title="{echo: $cat['cat_name'];/}">{echo: $cat['cat_name'];/}</a></span></li>
 			{end:foreach/}
+			<li class="clearfix"></li>
 		</ul>
 		{inc:}else [exc]}
 		<ul>
 			{sta: foreach(array_slice ($CATEGORY[0], 0) as $key=>$cat)[loop]}
-			<li class="clearfix"> <span> {sta:if($cat['cat_id']==$cat_id)[exc]} <a class='active' href="search.php?cat_id={echo: $cat['cat_id'];/}&k={echo: $k;/}&search_type='{echo: lp{i_s_company};/}'" title="{echo: $cat['cat_name'];/}">{echo: $cat['cat_name'];/}</a>：
+			<li> <span> {sta:if($cat['cat_id']==$cat_id)[exc]} <a class='active' href="search.php?cat_id={echo: $cat['cat_id'];/}&k={echo: $k;/}&search_type='{echo: lp{i_s_company};/}'" title="{echo: $cat['cat_name'];/}">{echo: $cat['cat_name'];/}</a>：
 				{inc:}else [exc]} <a href="search.php?cat_id={echo: $cat['cat_id'];/}&k={echo: $k;/}&search_type='{echo: lp{i_s_company};/}'" title="{echo: $cat['cat_name'];/}">{echo: $cat['cat_name'];/}</a>：
 				{end:if/} </span> {sta:if(isset($CATEGORY[$cat['cat_id']]) && $CATEGORY[$cat['cat_id']])[exc]}
 				{sta: foreach(array_slice ($CATEGORY[$cat['cat_id']], 0) as $subcat)[loop]}
@@ -64,6 +40,7 @@
 				{end:foreach/}
 				{end:if/} </li>
 			{end:foreach/}
+			<li class="clearfix"></li>
 		</ul>
 		{end:if/} </div>
 	{sta:if($type_search==1)[exc]}
@@ -80,9 +57,9 @@
 	</div>
 	<!-- leftColumn -->
 	<div id="leftColumn">
-		<div id="leftMian">
-			<div class="top clearfix">
-				<h3 class="ttlm_selitems">{echo:lp{i_choice_good};/}</h3>
+		<div id="leftMian" class="content-common-box content-left-big-box">
+			<div class="title">
+					<h2>{echo:lp{i_choice_good};/}</h2>
 				<div class="toolbar"> <a id="list" class="{echo: $viewselect?'':'selected' ;/}"  hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('list',this)">{echo:lp{i_list};/}</a> <a id="window" class="{echo: $viewselect ;/}" hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('window',this)">{echo:lp{i_show_window};/}</a> </div>
 			</div>
 			<div id="listItems" class="c_m" style="{echo: $viewlist;/}; position:relative">
@@ -107,7 +84,7 @@
 						<div class="address">
 							<p>{echo: $areainfo[$v['shop_province']];/}.{echo: $areainfo[$v['shop_city']];/}</p>
 						</div>
-						<div class="operating"> <a class="addfavorite" title="{echo:lp{i_collection};/}" href="javascript:addFavorite({echo: $v['goods_id'];/},{echo: $v['shop_id'];/},{echo:$USER['user_id']!=''?$USER['user_id']:'0';/});"></a> {sta:if($v['goods_price']=='0.00')[loop]} <a class="ask" title="{echo:lp{i_inquiry};/}" href="modules.php?app=user_order_adress&gid={echo:$v['goods_id'];/}&v=1"></a> {inc:}else[exc]} <a class="itembuy" title="{echo:lp{i_buy};/}" href="modules.php?app=user_order_adress&gid={echo:$v['goods_id'];/}&v=1"></a> {end:if/} <a class="compare" title="{echo:lp{i_contrast};/}" href="javascript:;" onclick="initFloatTips('{echo:$v['goods_id'];/}','{echo:sub_str($v['goods_name'],10);/}',1,'{echo:$v['cat_id'];/}')"></a> </div>
+						<div class="operating"> <a class="addfavorite" title="{echo:lp{i_collection};/}" href="javascript:addFavorite({echo: $v['goods_id'];/},{echo: $v['shop_id'];/},{echo:$USER['user_id']!=''?$USER['user_id']:'0';/});"></a> {sta:if($v['goods_price']=='0.00')[loop]} <a class="ask" title="{echo:lp{i_inquiry};/}" href="modules.php?app=user_order_adress&gid={echo:$v['goods_id'];/}&v=1"></a> {inc:}else[exc]} <a class="itembuy" title="{echo:lp{i_buy};/}" href="modules.php?app=user_order_adress&gid={echo:$v['goods_id'];/}&v=1"></a> {end:if/}  </div>
 						<div style="display: none;" id="showbox_{echo:$v['goods_id'];/}" class="showbox">
 							<div class="subbox"><img id="showimg_{echo:$v['goods_id'];/}" src="{echo: $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';/}" width="234" height="234" alt="{echo:lp{i_loading_img};/}" onerror="this.src='skin/default/images/nopic.gif'"/></div>
 						</div>
@@ -140,7 +117,7 @@
 								{sta:}else[exc]}
 								<li><a class="itembuy" title="{echo:lp{i_buy};/}" href="modules.php?app=user_order_adress&gid={echo:$v['goods_id'];/}&v=1"></a> </li>
 								{end:if/}
-								<li><a class="compare" title="{echo:lp{i_contrast};/}" href="javascript:;" onclick="initFloatTips('{echo:$v['goods_id'];/}','{echo:sub_str($v['goods_name'],10);/}',1,'{echo:$v['cat_id'];/}')"></a></li>
+								<li></li>
 							</ul>
 						</div>
 						<div style="display: none;" id="showbox_{echo:$v['goods_id'];/}" class="showbox">
@@ -164,8 +141,10 @@
 		{sta:if($type_search==2)[exc]}
 		<div id="leftColumn">
 			<div id="leftMian">
-				<div class="top clearfix">
-					<h3 class="ttlm_listshop">{echo:lp{i_like_storelist};/}</h3>
+				<div class="top clearfix content-common-box content-left-big-box">
+					<div class="title">
+						<h2>{echo:lp{i_like_storelist};/}</h2>
+					</div>
 				</div>
 				<div id="listShop" class="c_m">
 					<ul class="list_title clearfix">
@@ -201,12 +180,16 @@
 			{end:if/} </div>
 		<!-- rightColumn -->
 		<div id="rightColumn">
-			<div class="tagSet bg_gary mg12b">
-				<h3 class="ttlm_hottag">{echo:lp{i_hot_label};/}</h3>
+			<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+				<div class="title">
+					<h2>{echo:lp{i_hot_label};/}</h2>
+				</div>
 				<div class="tags"> {sta:foreach($tag_list as $value)[loop]} <a href="{echo:$value['url'];/}" style="color:{echo:$value['tag_color'];/};{sta:if($value['is_blod'])[exc]}font-weight:bold;{end:if/}">{echo:$value['tag_name'];/}</a> {end:foreach/} </div>
 			</div>
-			<div class="hotgoods bg_gary mg12b">
-				<h3 class="ttlm_hotgoods">{echo:lp{i_goods_commend};/}</h3>
+			<div class="hotgoods bg_gary mg12b  content-common-box content-right-middle-box">
+				<div class="title">
+					<h2>{echo:lp{i_goods_commend};/}</h2>
+				</div>
 				<ul>
 					{sta:foreach($goods_hot as $k=> $v)[loop]}
 					<li  {sta:if($k%2!=0)[exc]}class="doublenum"{end:if/}>
@@ -217,8 +200,10 @@
 					{end:foreach/}
 				</ul>
 			</div>
-			<div class="viewrecord bg_gary mg12b">
-				<h3 class="ttlm_viewrecord">{echo:lp{i_brower_register};/}</h3>
+			<div class="viewrecord bg_gary mg12b content-common-box content-right-middle-box">
+				<div class="title">
+					<h2>{echo:lp{i_brower_register};/}</h2>
+				</div>
 				<ul class="clearfix">
 					{sta:foreach($goodshistory as $k=> $v)[loop]}
 					<li {sta:if($k%2!=0)[exc]}class="lst"{end:if/}>
@@ -246,7 +231,7 @@
 			<a onclick="clearItems()" style="float:right; position:relative; top:-23px;right:10px" href="javascript:void(0);">{echo:lp{i_close};/}</a>
 			<div id="contrast_goods_name_show"></div>
 		</div>
-		<a onclick="document.getElementById('contrastform').submit();return false;" href="javascript:;" class="button_4" style=" position:relative;top:25px;display:block;margin-left:100px; width:76px;height:24px;"><img src="skin/default/images/icon_contrast.gif" alt="{echo:lp{i_start_compare};/}"  /></a>
+		
 	</form>
 </div>
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>

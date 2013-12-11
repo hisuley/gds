@@ -87,9 +87,13 @@ $nav_selected=5;
 </head>
 <body>
 <div id="wrapper">
-	<?php  require("shop/index_header.php");?>
+   <?php  require("shop/index_header.php");?>
 
   <div id="contents" class="clearfix" >
+  <?php if($cat_id == 11){?>
+  
+
+  <?php }else{ ;?>
   <div id="pkz"> <?php echo $i_langpackage->i_location;?>：<a href="index.php"><?php echo $i_langpackage->i_index;?></a> > <?php echo $cat_name;?> </div>
   <div id="mall_banner" class="mg12b"><script language="JavaScript" src="uploadfiles/asd/5.js"></script></div>
   <h3 class="ttlm_infoContents"><?php echo $s_langpackage->s_message_center;?></h3>
@@ -119,6 +123,7 @@ $nav_selected=5;
 		</div>
     </div>
 	</div>
+    <?php }?>
 </div>
 <!-- main end -->
 <?php  require("shop/index_footer.php");?>

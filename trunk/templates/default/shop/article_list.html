@@ -13,9 +13,13 @@
 </head>
 <body>
 <div id="wrapper">
-	{inc: require("shop/index_header.php");/}
+   {inc: require("shop/index_header.php");/}
 
   <div id="contents" class="clearfix" >
+  {sta:if($cat_id == 11)[exc]}
+  
+
+  {end:}else{ ;/}
   <div id="pkz"> {echo:lp{i_location};/}：<a href="index.php">{echo:lp{i_index};/}</a> > {echo:$cat_name;/} </div>
   <div id="mall_banner" class="mg12b"><script language="JavaScript" src="uploadfiles/asd/5.js"></script></div>
   <h3 class="ttlm_infoContents">{echo:lp{s_message_center};/}</h3>
@@ -45,6 +49,7 @@
 		</div>
     </div>
 	</div>
+    {end:if/}
 </div>
 <!-- main end -->
 {inc: require("shop/index_footer.php");/}

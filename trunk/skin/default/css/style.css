@@ -15,29 +15,11 @@ a:hover { color:#f36100; }
 * html .clearfix { height: 1%; }
 .clearfix { display: block; }
 q:before, q:after { content:''; }
-#header { padding-top:8px; padding-bottom:6px; width:960px; line-height:16px; margin:0 auto 25px; }
-#header .site_nav { color:#4E4E4E; }
-#header .site_nav span { margin-right:15px; }
-#header .site_nav a { color:#4E4E4E; }
-#header .site_nav a:hover { color:#F67A06 }
-#header .login_info { float:left; width:450px }
-#header .quick_menu { float:right; }
-#header .quick_menu a { padding-top:4px; margin:-3px 6px 0; }
-#header .quick_menu a.shop_cart { padding-left:25px; background:url(../images/icon_shopcart.gif) no-repeat left top; }
-#header .quick_menu a.site_map { padding-right:10px; background:url(../images/icon_arrow_down.gif) no-repeat right center; }
-#header .topMain { padding-left:20px; padding-top:30px }
-#header #logo { float:left; width:209px; margin-right:45px }
-#header .search_panel { float:left; width:620px; height:30px; padding:13px 12px 8px; background-color:#F7F7F7; position:relative; }
-#header .search_panel .search_sel { float:left; width:95px; height:25px; background:url(../images/select_bg_index.gif) no-repeat left top; border:none; }
-#header .search_panel .search_txt { float:left; width:390px; padding-left:10px; }
-#header .search_panel .search_txt input { height:19px; width:380px; padding:2px 5px; color:#ccc; border:1px solid #ccc; }
-#header .search_panel .search_btn { width:87px; float:left; display:inline; margin-left:30px; _margin-left:15px; }
-#header .search_panel .search_btn input { width:87px; height:25px; background:url(../images/btn_search_bg.gif) no-repeat left top; border:none; text-indent:-9999 }
 .sel_value { width:59px; margin-left:1px; padding:5px 0 0 5px; height:14px; margin-top:0; border:none; background:none; border-width:0; font-size:14px }/* sel */
 .sel_list { border:1px #ccc solid; padding:5px 0 0; min-width:93px; width:auto!important; _width:93px; position:absolute; left:12px; top:37px; background-color:#fff; font-size:14px; z-index:101; }
 .sel_list li { float:left; height:18px; padding:3px 5px; min-width:83px; width:auto!important; _width:83px; clear:both; cursor:pointer; }
 .sel_list li.li_hover { background-color:#666; color:#fff; }
-.site_map { width:955px; margin:10px auto; padding:5px 0 0 5px; border-top:2px solid #F77A07; }
+.site_map { width:955px; margin:10px auto; padding:5px 0 0 5px; border-top:2px solid #CCC; }
 .site_map a { margin:0px 5px; color:#F60; }
 .main_body { width:960px; *width:963px;
 margin-left:auto; margin-right:auto; }

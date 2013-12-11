@@ -57,7 +57,7 @@ $(function(){
 	<h3><span class="left"><?php echo $a_langpackage->a_news_add; ?></span><span class="right" style="margin-right:15px;"><a href="m.php?app=news_list"><?php echo $a_langpackage->a_news_list; ?></a></span></h3>
     <div class="content2">
 
-		<form action="a.php?act=news_add" method="post" onsubmit="return checkForm();">
+		<form action="a.php?act=news_add" method="post" onsubmit="return checkForm();" enctype="multipart/form-data" >
 		<table class="form-table">
 			<tr>
 				<td width="75px"><?php echo $a_langpackage->a_select_n_category; ?>：</td>
@@ -89,6 +89,11 @@ $(function(){
 			<tr>
 				<td><?php echo $a_langpackage->a_title_desc; ?>：</td>
 				<td><input type="text" class="small-text" name="short_order" value="" /></td>
+			</tr>
+
+			<tr>
+				<td><?php echo $a_langpackage->a_news_thumb; ?>：</td>
+				<td><input type="file" name="attach[]" /></td>
 			</tr>
 
 			<tr>

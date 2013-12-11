@@ -160,6 +160,7 @@ if($result_category) {
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/parts.css" rel="stylesheet" type="text/css" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 </head>
 <body>
@@ -169,43 +170,13 @@ if($result_category) {
   <input type="hidden" name="order" value="">
   <!--header end -->
   <div id="contents" class="clearfix"  >
-  	<div id="channel" class="clearfix">
-      <ul class="clearfix">
-        <li >
-           <h2><img onmouseover="show_obj('category_box')" onmouseout="hidden_obj('category_box')" src="skin/default/images/ttl_channel_all.gif" alt="<?php echo $i_langpackage->i_allgoodsheader_category;?>"  onerror="this.src='skin/default/images/nopic.gif'"/></h2>
-        </li>
-        <?php
-        	foreach ($nav_list as $value){
-        ?>
-        <li><span><a href="<?php echo $value['url']?>"><?php echo $value['nav_name']?></a>|</span></li>
-		<?php
-        	}
-		?>
-      </ul>
-      </div>
-	    <div id="category_box" class="allMerchan" style=" display:none" onmouseover="show_obj(this)"  onmouseout="hidden_obj(this)">
-        <ul  >
-        <?php  foreach(array_slice ($CATEGORY[0], 0) as $key=>$cat){?>
-        	<li class="clearfix">
-            <h3><a href="<?php echo  category_url($cat['cat_id']);?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a></h3>
-            <?php if(isset($CATEGORY[$cat['cat_id']]) && $CATEGORY[$cat['cat_id']]){?>
-            <p>
-                <?php  foreach(array_slice ($CATEGORY[$cat['cat_id']], 0, 8) as $subcat){?>
-                    <a href="<?php echo  category_url($subcat['cat_id']);?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $subcat['cat_name'];?></a>|
-                <?php }?>
-             </p>
-             <?php }?>
-            </li>
-		<?php }?>
-        </ul>
-    </div>
-    </div>
+  	
 
     <div id="leftColumn">
-      <div id="leftMian">
-        <div class="top2 clearfix">
+      <div id="leftMian" class="content-common-box content-left-big-box">
+        <div class="title">
           <!--<span class="right"><a id="list" onclick="changeStyle2('list',this)" class="selected" href="javascript:void(0);" hidefocus="true"><?php echo $i_langpackage->i_list;?></a><a id="window" onclick="changeStyle2('window',this)" href="javascript:void(0);" hidefocus="true"><?php echo $i_langpackage->i_show_window;?></a></span> -->
-          <h3 class="ttlm_selitems"><?php echo $i_langpackage->i_choice_good;?></h3>
+          <h2><?php echo $i_langpackage->i_choice_good;?></h2>
         </div>
         <div class="groupShow clearfix">
           <table class="tab_group " width="100%">
@@ -249,15 +220,19 @@ if($result_category) {
       <!-- leftColumn -->
     </div>
     <div id="rightColumn">
-      <div class="tagSet bg_gary mg12b">
-        <h3 class="ttlm_hottag"><?php echo $i_langpackage->i_hot_label;?></h3>
+      <div class="tagSet bg_gary mg12b  content-common-box content-right-middle-box">
+        <div class="title">
+         <h2><?php echo $i_langpackage->i_hot_label;?></h2>
+       </div>
         <div class="tags">
 			<?php foreach($tag_list as $value){?>
         	<a href="<?php echo $value['url'];?>" style="color:<?php echo $value['tag_color'];?>;<?php if($value['is_blod']){?>font-weight:bold;<?php }?>"><?php echo $value['tag_name'];?></a>
         	<?php }?>
        </div>
-      <div class="hotgoods bg_gary mg12b">
-        <h3 class="ttlm_hotgoods"><?php echo $i_langpackage->i_goods_commend;?></h3>
+      <div class="hotgoods bg_gary mg12b  content-common-box content-right-middle-box">
+        <div class="title">
+          <h2><?php echo $i_langpackage->i_goods_commend;?></h2>
+        </div>
         <ul>
           <?php foreach($goods_hot as $key => $v){?>
           <li <?php if($key%2!=0){?> class="doublenum"<?php }?>>
@@ -268,8 +243,10 @@ if($result_category) {
           <?php }?>
         </ul>
       </div>
-      <div class="viewrecord bg_gary mg12b">
-        <h3 class="ttlm_viewrecord"><?php echo $i_langpackage->i_brower_register;?></h3>
+      <div class="viewrecord bg_gary mg12b  content-common-box content-right-middle-box">
+        <div class="title">
+         <h2><?php echo $i_langpackage->i_brower_register;?></h2>
+        </div>
         <ul class="clearfix">
           <?php foreach($goodshistory as $k=> $v){?>
           <li <?php if($k%2!=0){?>class="lst"<?php }?>>

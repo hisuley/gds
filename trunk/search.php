@@ -390,43 +390,19 @@ if($result_category) {
 	<!-- /header -->
 	<!-- contents -->
 	<div id="contents" class="clearfix" >
-		<div id="channel" class="clearfix">
-			<ul class="clearfix">
-				<li >
-					<h2><img onmouseover="show_obj('category_box1')" onmouseout="hidden_obj('category_box1')" src="skin/default/images/ttl_channel_all.gif" alt="<?php echo $i_langpackage->i_allgoodsheader_category;?>" /></h2>
-				</li>
-				<?php  foreach($nav_list as  $value){?>
-				<li><span><a href="<?php echo  $value['url'];?>"><?php echo  $value['nav_name'];?></a>|</span></li>
-				<?php }?>
-			</ul>
-		</div>
-	</div>
-	<div id="category_box1" class="allMerchan" style="display:none;" onmouseover="show_obj(this)"  onmouseout="hidden_obj(this)">
-		<ul  >
-			<?php  foreach(array_slice ($CATEGORY1[0], 0) as $key=>$cat){?>
-			<li class="clearfix">
-				<h3><a href="<?php echo  category_url($cat['cat_id']);?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a></h3>
-				<?php if(isset($CATEGORY1[$cat['cat_id']]) && $CATEGORY1[$cat['cat_id']]){?>
-				<p> <?php  foreach(array_slice ($CATEGORY1[$cat['cat_id']], 0, 8) as $subcat){?> <a href="<?php echo  category_url($subcat['cat_id']);?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $subcat['cat_name'];?></a>|
-					<?php }?> </p>
-				<?php }?> </li>
-			<?php }?>
-		</ul>
-	</div>
-	<div class="SubCategoryBox mg12b">
+	<div class="SubCategoryBox mg12b search-filter-box">
 		<h3><?php echo $i_langpackage->i_category_filter;?></h3>
 		<?php if($search_type==$i_langpackage->i_goods_search){?>
 		<ul>
 			<?php  foreach(array_slice ($CATEGORY[0], 0) as $key=>$cat){?>
-			<li class="clearfix"><span><a href="category.php?id=<?php echo  $cat['cat_id'];?>&k=<?php echo  $k;?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a>：</span> <?php if(isset($CATEGORY[$cat['cat_id']]) && $CATEGORY[$cat['cat_id']]){?>
-				<?php  foreach(array_slice ($CATEGORY[$cat['cat_id']], 0) as $subcat){?> <a href="category.php?id=<?php echo  $subcat['cat_id'];?>&k=<?php echo  $k;?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $subcat['cat_name'];?></a> <?php }?>
-				<?php }?> </li>
+			<li><span><a href="category.php?id=<?php echo  $cat['cat_id'];?>&k=<?php echo  $k;?>" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a></span></li>
 			<?php }?>
+			<li class="clearfix"></li>
 		</ul>
 		<?php }else {?>
 		<ul>
 			<?php  foreach(array_slice ($CATEGORY[0], 0) as $key=>$cat){?>
-			<li class="clearfix"> <span> <?php if($cat['cat_id']==$cat_id){?> <a class='active' href="search.php?cat_id=<?php echo  $cat['cat_id'];?>&k=<?php echo  $k;?>&search_type='<?php echo  $i_langpackage->i_s_company;?>'" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a>：
+			<li> <span> <?php if($cat['cat_id']==$cat_id){?> <a class='active' href="search.php?cat_id=<?php echo  $cat['cat_id'];?>&k=<?php echo  $k;?>&search_type='<?php echo  $i_langpackage->i_s_company;?>'" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a>：
 				<?php }else {?> <a href="search.php?cat_id=<?php echo  $cat['cat_id'];?>&k=<?php echo  $k;?>&search_type='<?php echo  $i_langpackage->i_s_company;?>'" title="<?php echo  $cat['cat_name'];?>"><?php echo  $cat['cat_name'];?></a>：
 				<?php }?> </span> <?php if(isset($CATEGORY[$cat['cat_id']]) && $CATEGORY[$cat['cat_id']]){?>
 				<?php  foreach(array_slice ($CATEGORY[$cat['cat_id']], 0) as $subcat){?>
@@ -434,6 +410,7 @@ if($result_category) {
 				<?php }?>
 				<?php }?> </li>
 			<?php }?>
+			<li class="clearfix"></li>
 		</ul>
 		<?php }?> </div>
 	<?php if($type_search==1){?>
@@ -450,9 +427,9 @@ if($result_category) {
 	</div>
 	<!-- leftColumn -->
 	<div id="leftColumn">
-		<div id="leftMian">
-			<div class="top clearfix">
-				<h3 class="ttlm_selitems"><?php echo $i_langpackage->i_choice_good;?></h3>
+		<div id="leftMian" class="content-common-box content-left-big-box">
+			<div class="title">
+					<h2><?php echo $i_langpackage->i_choice_good;?></h2>
 				<div class="toolbar"> <a id="list" class="<?php echo  $viewselect?'':'selected' ;?>"  hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('list',this)"><?php echo $i_langpackage->i_list;?></a> <a id="window" class="<?php echo  $viewselect ;?>" hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('window',this)"><?php echo $i_langpackage->i_show_window;?></a> </div>
 			</div>
 			<div id="listItems" class="c_m" style="<?php echo  $viewlist;?>; position:relative">
@@ -477,7 +454,7 @@ if($result_category) {
 						<div class="address">
 							<p><?php echo  $areainfo[$v['shop_province']];?>.<?php echo  $areainfo[$v['shop_city']];?></p>
 						</div>
-						<div class="operating"> <a class="addfavorite" title="<?php echo $i_langpackage->i_collection;?>" href="javascript:addFavorite(<?php echo  $v['goods_id'];?>,<?php echo  $v['shop_id'];?>,<?php echo $USER['user_id']!=''?$USER['user_id']:'0';?>);"></a> <?php if($v['goods_price']=='0.00'){?> <a class="ask" title="<?php echo $i_langpackage->i_inquiry;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a> <?php }else{?> <a class="itembuy" title="<?php echo $i_langpackage->i_buy;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a> <?php }?> <a class="compare" title="<?php echo $i_langpackage->i_contrast;?>" href="javascript:;" onclick="initFloatTips('<?php echo $v['goods_id'];?>','<?php echo sub_str($v['goods_name'],10);?>',1,'<?php echo $v['cat_id'];?>')"></a> </div>
+						<div class="operating"> <a class="addfavorite" title="<?php echo $i_langpackage->i_collection;?>" href="javascript:addFavorite(<?php echo  $v['goods_id'];?>,<?php echo  $v['shop_id'];?>,<?php echo $USER['user_id']!=''?$USER['user_id']:'0';?>);"></a> <?php if($v['goods_price']=='0.00'){?> <a class="ask" title="<?php echo $i_langpackage->i_inquiry;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a> <?php }else{?> <a class="itembuy" title="<?php echo $i_langpackage->i_buy;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a> <?php }?>  </div>
 						<div style="display: none;" id="showbox_<?php echo $v['goods_id'];?>" class="showbox">
 							<div class="subbox"><img id="showimg_<?php echo $v['goods_id'];?>" src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" width="234" height="234" alt="<?php echo $i_langpackage->i_loading_img;?>" onerror="this.src='skin/default/images/nopic.gif'"/></div>
 						</div>
@@ -510,7 +487,7 @@ if($result_category) {
 								<?php }else{?>
 								<li><a class="itembuy" title="<?php echo $i_langpackage->i_buy;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a> </li>
 								<?php }?>
-								<li><a class="compare" title="<?php echo $i_langpackage->i_contrast;?>" href="javascript:;" onclick="initFloatTips('<?php echo $v['goods_id'];?>','<?php echo sub_str($v['goods_name'],10);?>',1,'<?php echo $v['cat_id'];?>')"></a></li>
+								<li></li>
 							</ul>
 						</div>
 						<div style="display: none;" id="showbox_<?php echo $v['goods_id'];?>" class="showbox">
@@ -534,8 +511,10 @@ if($result_category) {
 		<?php if($type_search==2){?>
 		<div id="leftColumn">
 			<div id="leftMian">
-				<div class="top clearfix">
-					<h3 class="ttlm_listshop"><?php echo $i_langpackage->i_like_storelist;?></h3>
+				<div class="top clearfix content-common-box content-left-big-box">
+					<div class="title">
+						<h2><?php echo $i_langpackage->i_like_storelist;?></h2>
+					</div>
 				</div>
 				<div id="listShop" class="c_m">
 					<ul class="list_title clearfix">
@@ -571,12 +550,16 @@ if($result_category) {
 			<?php }?> </div>
 		<!-- rightColumn -->
 		<div id="rightColumn">
-			<div class="tagSet bg_gary mg12b">
-				<h3 class="ttlm_hottag"><?php echo $i_langpackage->i_hot_label;?></h3>
+			<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+				<div class="title">
+					<h2><?php echo $i_langpackage->i_hot_label;?></h2>
+				</div>
 				<div class="tags"> <?php foreach($tag_list as $value){?> <a href="<?php echo $value['url'];?>" style="color:<?php echo $value['tag_color'];?>;<?php if($value['is_blod']){?>font-weight:bold;<?php }?>"><?php echo $value['tag_name'];?></a> <?php }?> </div>
 			</div>
-			<div class="hotgoods bg_gary mg12b">
-				<h3 class="ttlm_hotgoods"><?php echo $i_langpackage->i_goods_commend;?></h3>
+			<div class="hotgoods bg_gary mg12b  content-common-box content-right-middle-box">
+				<div class="title">
+					<h2><?php echo $i_langpackage->i_goods_commend;?></h2>
+				</div>
 				<ul>
 					<?php foreach($goods_hot as $k=> $v){?>
 					<li  <?php if($k%2!=0){?>class="doublenum"<?php }?>>
@@ -587,8 +570,10 @@ if($result_category) {
 					<?php }?>
 				</ul>
 			</div>
-			<div class="viewrecord bg_gary mg12b">
-				<h3 class="ttlm_viewrecord"><?php echo $i_langpackage->i_brower_register;?></h3>
+			<div class="viewrecord bg_gary mg12b content-common-box content-right-middle-box">
+				<div class="title">
+					<h2><?php echo $i_langpackage->i_brower_register;?></h2>
+				</div>
 				<ul class="clearfix">
 					<?php foreach($goodshistory as $k=> $v){?>
 					<li <?php if($k%2!=0){?>class="lst"<?php }?>>
@@ -616,7 +601,7 @@ if($result_category) {
 			<a onclick="clearItems()" style="float:right; position:relative; top:-23px;right:10px" href="javascript:void(0);"><?php echo $i_langpackage->i_close;?></a>
 			<div id="contrast_goods_name_show"></div>
 		</div>
-		<a onclick="document.getElementById('contrastform').submit();return false;" href="javascript:;" class="button_4" style=" position:relative;top:25px;display:block;margin-left:100px; width:76px;height:24px;"><img src="skin/default/images/icon_contrast.gif" alt="<?php echo $i_langpackage->i_start_compare;?>"  /></a>
+		
 	</form>
 </div>
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>

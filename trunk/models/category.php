@@ -3,11 +3,11 @@ header("content-type:text/html;charset=utf-8");
 $IWEB_SHOP_IN = true;
 require("foundation/asession.php");
 require("configuration.php");
-require("foundation/module_category.php");
-require("foundation/module_tag.php");
 require("includes.php");
 require_once("foundation/fstring.php");
 require_once("foundation/module_areas.php");
+require_once("foundation/module_category.php");
+require_once("foundation/module_tag.php");
 error_reporting(1);
 /* URL信息处理 */
 $cat_id = intval(get_args('id'));

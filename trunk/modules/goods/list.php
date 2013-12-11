@@ -94,6 +94,8 @@ $html_shop_category = html_format_shop_category($shop_category,$ucat_id);
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <style type="text/css">
@@ -156,7 +158,7 @@ td span.category{color:#FF6600;}
 						<td class="center"><a href="goods.php?id=<?php echo  $v['goods_id'];?>" target="_blank"><img src="<?php echo  $v['goods_thumb'];?>" width="80" height="80" onerror="this.src='skin/default/images/nopic.gif'"/></a></td>
 						<td align="left" valign="top">
 							<div class="goodsname"><a href="goods.php?id=<?php echo  $v['goods_id'];?>" target="_blank"><?php echo  $v['goods_name'];?></a></div>
-							<?php echo  $m_langpackage->m_custom_categories;?>：<span class="category"><?php if(isset($shop_category_info[$v['ucat_id']])){?><?php echo $shop_category_info[$v['ucat_id']];?><?php  } else {?><?php echo  $m_langpackage->m_undefinition;?><?php }?></span> &nbsp; <?php echo  $m_langpackage->m_goods_type;?>：<span class="category"><?php echo  $typeinfo[$v['type_id']];?></span> <br />
+							<?php echo  $m_langpackage->m_custom_categories;?>：<span class="category"><?php if(isset($shop_category_info[$v['ucat_id']])){?><?php echo $shop_category_info[$v['ucat_id']];?><?php  } else {?><?php echo  $m_langpackage->m_undefinition;?><?php }?></span> &nbsp; <?php echo  $m_langpackage->m_goods_type;?>：<span class="category"><?php if(isset($typeinfo[$v['type_id']])){?><?php echo  $typeinfo[$v['type_id']];?><?php }?></span> <br />
 							<?php if($v['lock_flg']==0) {?>
 							<?php echo  $m_langpackage->m_best;?>:<?php if($v['is_best']){?><img src="skin/default/images/yes.gif" onclick="toggle_show(this,'best','<?php echo  $v['goods_id'];?>')" /><?php  } else {?><img src="skin/default/images/no.gif" onclick="toggle_show(this,'best','<?php echo  $v['goods_id'];?>')" /><?php }?> &nbsp;
 							<?php echo  $m_langpackage->m_promote;?>:<?php if($v['is_promote']){?><img src="skin/default/images/yes.gif" onclick="toggle_show(this,'promote','<?php echo  $v['goods_id'];?>')" /><?php  } else {?><img src="skin/default/images/no.gif" onclick="toggle_show(this,'promote','<?php echo  $v['goods_id'];?>')" /><?php }?> &nbsp;

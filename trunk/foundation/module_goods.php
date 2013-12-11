@@ -200,6 +200,11 @@ function get_hot_goods(&$dbo,$table,$limit){
 	$sql = "SELECT * FROM $table WHERE is_on_sale=1 AND is_hot=1 and lock_flg=0 order by pv desc limit $limit";
 	return $dbo->getRs($sql);
 }
+/* 推荐商品 */
+function get_hot_goods_by_cat(&$dbo,$table,$cat_id, $limit){
+	$sql = "SELECT * FROM $table WHERE is_on_sale=1 AND is_admin_promote=1 and lock_flg=0 AND cat_id = $cat_id AND is_set_image = 1 order by pv desc limit $limit";
+	return $dbo->getRs($sql);
+}
 /* 浏览记录 */
 function get_good_shistory(&$dbo,$getcookie,$table){
 	arsort($getcookie);

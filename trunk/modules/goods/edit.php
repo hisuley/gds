@@ -248,6 +248,8 @@ td{text-align:left;}
 	     };
 	</script>
 <script type="text/javascript">
+jQuery.noConflict(); 
+jQuery(document).ready(function($){
 var introeditor;
 $(function(){
 	introeditor=$("#goods_intro").xheditor({skin:'vista',tools:"Cut,Copy,Paste,Pastetext,Separator,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,Separator,Align,List,Outdent,Indent,Separator,Link,Unlink,Img,Table,Separator,Fullscreen,About"});
@@ -352,6 +354,7 @@ function checkForm() {
 	}
 	return true;
 }
+});
 </script>
 </head>
 <body>

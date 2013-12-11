@@ -33,11 +33,11 @@ color:#F67A06;
 #leftColumn #listItems .list_title { padding:7px 0 7px; background-color:#FCF2E7; border-bottom:1px solid #F77A07; color:#666; }
 #leftColumn #listItems.window_type .list_title { display:none }
 #leftColumn #listItems .list_title li { float:left; text-align:center; color:#000; }
-#leftColumn #listItems .list_title li.summary { width:450px; }
+#leftColumn #listItems .list_title li.summary { width:430px; }
 #leftColumn #listItems .list_title li.price { width:90px }
 #leftColumn #listItems .list_title li.address { width:80px }
 #leftColumn #listItems .list_title li.operating { width:88px }
-#leftColumn #listItems .list_view li { padding:19px 0 20px 20px; border-bottom:1px dotted #CDCDCD }
+#leftColumn #listItems .list_view li { padding:19px 0 20px 0px; border-bottom:1px dotted #CDCDCD }
 #leftColumn #listItems .list_view div { float:left }
 #leftColumn #listItems .list_view .photo { width:112px; height:112px; border: 1px solid #ccc; text-align:center; overflow:hidden }
 #leftColumn #listItems .list_view .photo a { display: table-cell; vertical-align:middle; width:112px; height:112px; vertical-align:middle; *display: block;

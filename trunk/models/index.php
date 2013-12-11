@@ -94,6 +94,20 @@ $notice = $dbo->getRs($sql_notice);
 $maller = $dbo->getRs($sql_maller);
 $seller = $dbo->getRs($sql_seller);
 $tag_list = get_tag_list($dbo,$t_tag,20);
+
+/* 获取首页商品 */
+$hotel_id = 433;
+$scenic_id = 434;
+$line_id = 435;
+$meeting_id = 436;
+$card_id = 437;
+$promote_id = 438;
+$goods_hotel = get_hot_goods_by_cat($dbo, $t_goods, $hotel_id, 6);
+$goods_scenic = get_hot_goods_by_cat($dbo, $t_goods, $scenic_id, 6);
+$goods_line = get_hot_goods_by_cat($dbo, $t_goods, $line_id, 6);
+$goods_meeting = get_hot_goods_by_cat($dbo, $t_goods, $meeting_id, 6);
+$goods_card = get_hot_goods_by_cat($dbo, $t_goods, $card_id, 6);
+$goods_promote = get_hot_goods_by_cat($dbo, $t_goods, $promote_id, 6);
 /* 友情链接 */
 $flink_rs = $dbo->getRs($sql_flink);
 /* 商家信息 */
