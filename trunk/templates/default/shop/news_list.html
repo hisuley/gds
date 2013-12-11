@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{echo: $header['title'];/}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{echo: $header['keywords'];/}" />
+<meta name="description" content="{echo: $header['description'];/}" />
+<base href="{echo: $baseUrl;/}" />
+<link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css" />
+<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
+<link href="skin/{echo: $SYSINFO['templates'];/}/css/article.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+</head>
+<body>
+<div id="wrapper">
+   {inc: require("shop/index_header.php");/}
+
+  <div id="contents" class="clearfix" >
+  {sta:if($cat_id == 12)[exc]}
+    <div class="filters">
+      
+    </div>
+    <div class="content-common-box">
+      <div class="item-box">
+          <div class="images">
+            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
+          </div>
+          <div class="description">
+            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
+            <p class="intro">
+              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
+            </p>
+            <span class="price">￥ 29990</span>
+          </div>
+        </div>
+
+        <div class="item-box">
+          <div class="images">
+            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
+          </div>
+          <div class="description">
+            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
+            <p class="intro">
+              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
+            </p>
+            <span class="price">￥ 29990</span>
+          </div>
+        </div>
+
+        <div class="item-box">
+          <div class="images">
+            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
+          </div>
+          <div class="description">
+            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
+            <p class="intro">
+              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
+            </p>
+            <span class="price">￥ 29990</span>
+          </div>
+        </div>
+
+        <div class="item-box">
+          <div class="images">
+            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
+          </div>
+          <div class="description">
+            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
+            <p class="intro">
+              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
+            </p>
+            <span class="price">￥ 29990</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {end:}else{ ;/}
+  <div class="filters">
+      
+  </div>
+  <div class="content-common-box">
+    <div class="title"><h2>{echo:$cat_name;/}<h2></div>
+    <div class="content-news-box">
+      <ul class="artlist_txt" >
+        {sta:if($result['result'])[exc]}
+        {sta:foreach($result['result'] as $val)[loop]}
+            <li class="clearfix"><span class="right">{echo: $val['add_time'];/}</span>
+            <a href="{echo:article_list_url($val['cat_id']);/}">[{echo:$cat_name;/}]</a>
+            <a class="ttls" href="{echo:article_url($val['article_id']);/}"><font style="color:{echo: $val['tag_color'];/} ">{echo: $val['title'];/}</font></a></li>
+        {end:foreach/}
+        {end:}else{ ;/}
+        {echo:lp{i_none_articles};/}
+        {end:if/}
+        </ul>
+    </div>
+  </div>
+  {end:if/}
+
+</div>
+<!-- main end -->
+{inc: require("shop/index_footer.php");/}
+<!--footer end-->
+</div>
+</body>
+</html>

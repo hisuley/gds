@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="keywords" content="机票预订" />
+<meta name="description" content="机票预订" />
+<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
+<link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css" />
+<link href="skin/{echo: $SYSINFO['templates'];/}/css/parts.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+<title>机票购买</title>
+</head>
+<body>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- header -->
+  {inc: include("shop/index_header.php");/}
+  <!-- /header -->
+  <!-- contents -->
+  <div id="contents" class="clearfix" >
+    <!-- leftColumn -->
+    <div id="leftColumn" style="width:960px;">
+      <div class="content-common-box">
+        <div class="title">
+          <h2>机票预订</h2>
+        </div>
+        <div class="content" style="height:70px;">
+	            <form class="pretty-form ticket-form" method="POST">
+	              
+	              <div class="column-1">
+	                <div class="radio-group">
+	                  <input type="radio" name="SearchType" value="S" id="singleRadio" checked/>
+	                  <label for="singleRadio">单程</label>
+	                </div>
+
+	                <div class="radio-group">
+	                  <input type="radio" name="SearchType" value="D" id="doubleRadio"/>
+	                  <label for="doubleRadio">双程</label>
+	                </div>
+	              </div>
+	              <div class="column-3">
+	                <div class="column-2">
+	                  <label for="none">城市：</label>
+	                </div>
+	                <div class="column-8">
+	                  <input class="column-10" type="text" name="DepartCity" value=""/>
+	                  <input class="column-10" type="text" name="ArriveCity" value=""/>
+	                </div>
+	              </div>
+	              <div class="column-1" style="height:1px;width:5%;"></div>
+	              <div class="column-3">
+	                <div class="column-2">
+	                  <label for="none">日期：</label>
+	                </div>
+	                <div class="column-8">
+	                  <input class="column-10" type="text" name="DepartDate" value=""/>
+	                  <input class="column-10" type="text" name="ArriveDate" value=""/>
+	                </div>
+	              </div>
+	              <div class="column-2">
+	                <input style="width:70px" type="submit" class="common-button"  value="搜索"/>
+	              </div>
+	            </form>
+        </div>
+      </div>
+      <div id="leftMian" class="content-common-box">
+        <div class="title">
+          <h2>{echo:lp{i_choice_good};/}</h2>
+        </div>
+        <div id="listItems" class="c_m search_box" style="position:relative">
+          <ul class="list_view">
+         {sta:if(!empty($ticket_list))[exc]}
+         {sta:foreach($ticket_list as $v)[loop]}
+            <li id="showli_{echo:(string)$v->AirlineCode;/}" class="clearfix" style="padding:0px;">
+            	<table class="search_table_header">
+				    <tbody><tr>
+				        <td class="logo">
+				            <div class="clearfix">
+				                <span class="pubFlights_{echo:strtolower((string)$v->AirlineCode);/} flight_logo">{echo:translateAirline((string)$v->AirlineCode);/}</span>
+				                <strong>{echo:(string)$v->Flight;/}</strong></div>
+				            <div class="low_text">
+
+				    <span class="model">计划机型：<span>{echo:translateCraft((string)$v->CraftType);/}</span>
+				    </span>
+				            </div>
+				        </td>
+				        <td class="right">
+				            <div>
+				                <strong class="time">{echo:date('H:i',strtotime((string)$v->TakeOffTime));/}</strong></div>
+				            <div>
+				                {echo:translateAirport((string)$v->DPortCode);/}</div>
+				        </td>
+				        <td class="center">
+				                <div class="arrow">
+				                </div>
+				        </td>
+				        <td class="left">
+				            <div>
+				                <strong class="time">{echo:date('H:i',strtotime((string)$v->ArriveTime));/}</strong>
+				            </div>
+				            <div>
+				                {echo:translateAirport((string)$v->APortCode);/}</div>
+				        </td>
+				        <td>
+				            <div class="low_text">
+				                <label>燃油+机建：</label>{echo:(string)$v->AdultOilFee;/}元+{echo:(string)$v->AdultTax;/}元</div>
+				            <div class="low_text">
+				                    <label>历史准点率：</label>97%</div>
+				        </td>
+				        <td class="price" style="padding-top:0px;">
+				            <span class="base_price02 flightLowestPrice"><dfn>¥</dfn>{echo:intval((string)$v->StandardPrice);/}</span><i>起</i>
+				        </td>
+				        <td class="special">
+				        	<a class="itembuy common-button" title="{echo:lp{i_buy};/}" style="width:60px;" href="">购买</a>
+				        </td>
+				    </tr>
+				</tbody></table>
+            </li>
+             {end:foreach/}
+             {end:if/}
+          </ul>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <!-- leftColumn -->
+    </div>
+    <!-- rightColumn -->
+    <div id="rightColumn">
+   
+    <!-- /rightColumn -->
+    </div>
+    <!-- /contents -->
+</div>
+  <!-- footer -->
+ {inc: require("shop/index_footer.php");/}
+    <!-- /footer -->
+  </div>
+  <!-- /wrapper -->
+</div>
+</body>
+<div id="contrastbox" style="z-index:999;position:absolute;right:0;border:1px solid #ccc; background:#FFF; display:none; width:188px;">
+	<form action="modules.php?app=contrast" method="post" target="_blank" id="contrastform">
+		<input type="hidden" name="contrast_goods_num" id="contrast_goods_num" value="0" />
+		<input type="hidden" name="contrast_goods_id" id="contrast_goods_id" value="" />
+		<input type="hidden" name="contrast_cid" id="contrast_cid" value="" />
+		<input type="hidden" name="contrast_goods_name" id="contrast_goods_name" value="" />
+		<div style="padding-bottom:12px;">
+  <h2 style="padding:6px 10px;display:block;background:url(skin/default/images/ttlm_01_bg.gif) repeat-x left top;font-size:14px;font-weight:bolder;color:#F77A07;border-bottom:1px solid #ccc">{echo:lp{i_contract_goods};/}</h2> <a onclick="clearItems()" style="float:right; position:relative; top:-23px;right:10px" href="javascript:void(0);">{echo:lp{i_close};/}</a>
+  <div id="contrast_goods_name_show"></div>
+  </div>
+		<!--<input type="submit" name="sub" value="对比" /> -->
+        <a onclick="document.getElementById('contrastform').submit();return false;" href="javascript:;" class="button_4" style=" position:relative;top:25px;display:block;margin-left:100px; width:76px;height:24px;"><img src="skin/default/images/icon_contrast.gif" alt="{echo:lp{i_start_compare};/}"   onerror="this.src='skin/default/images/nopic.gif'"/></a>
+	</form>
+</div>
+<script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
+<script language="JavaScript">
+function clearItems(){
+	document.getElementById('contrast_goods_id').value ="";
+	document.getElementById('contrast_goods_name').value="";
+	document.getElementById("contrastbox").style.display='none';
+	document.getElementById("contrast_goods_name_show").innerHTML='';
+	document.getElementById('contrast_cid').value = '';
+}
+function delNow(linkitem){
+	linkitem.parentNode.parentNode.removeChild(linkitem.parentNode);
+	}
+function showbox(id) {
+	document.getElementById("showbox_"+id).style.display = '';
+	var showimg = document.getElementById("showimg_"+id);
+	if(showimg.alt=='{echo:lp{i_loading_img};/}') {
+		ajax("do.php?act=goods_get_imgurl","POST","id="+id,function(data){
+			if(data) {
+				showimg.src = data;
+				showimg.alt = '';
+			}
+		});
+	}
+}
+function hidebox(id) {
+	document.getElementById("showbox_"+id).style.display = 'none';
+}
+function addFavorite(id,sid,uid) {
+	if(uid=='0'){
+		alert("{echo: lp{i_g_addfailed};/}");
+		return;
+		}
+	if (sid == uid){
+		alert('{echo:lp{i_mygoods_error};/}');
+	}else {
+		ajax("do.php?act=goods_add_favorite","POST","id="+id,function(data){
+			if(data == 1) {
+				alert("{echo: lp{i_g_addedfavorite};/}");
+			} else if(data == -1) {
+				alert("{echo: lp{i_g_stayfavorite};/}");
+			} else {
+				alert("{echo: lp{i_g_addfailed};/}");
+			}
+		});
+	}
+}
+</script>
+<script language="JavaScript" type="text/javascript">
+var tips; var theTop = 145/*这是默认高度,越大越往下*/;
+var old = theTop;
+function initFloatTips(goodsid,goodsname,action,cid) {
+	tips = document.getElementById('contrastbox');
+	document.getElementById('contrastbox').style.display="";
+	var goods_cid = document.getElementById('contrast_cid').value;
+	if(goods_cid!=''&& goods_cid!=cid&&action==1){
+		alert("{echo:lp{i_compare_error1};/}");
+		return;
+	}else{
+		document.getElementById('contrast_cid').value=cid;
+	}
+	var goods_num = parseInt(document.getElementById('contrast_goods_num').value);
+	var goods_id = document.getElementById('contrast_goods_id').value;
+	var goods_name= document.getElementById('contrast_goods_name').value;
+	var goods_name_show= document.getElementById('contrast_goods_name_show');
+	var goods_id_arr = goods_id.split(",");
+	var goods_name_arr = goods_name.split(",");
+	if(action==1){
+		if(goods_num<5){
+			var same_num=0;
+			for(i=0;i<goods_id_arr.length;i++){
+				if(goods_id_arr[i]==goodsid){
+					same_num++;
+				}
+			}
+			if(same_num>0){
+				alert("{echo:lp{i_compare_error2};/}");
+			}else{
+				document.getElementById('contrast_goods_id').value+=goodsid+",";
+				document.getElementById('contrast_goods_name').value+=goodsname+",";
+				document.getElementById('contrast_goods_num').value=parseInt(goods_num+1);
+			}
+		}else{
+			alert("{echo:lp{i_compare_error3};/}");
+		}
+	}
+	if(action==0){
+		var str="";
+		var namestr="";
+		for(i=0;i<goods_id_arr.length;i++){
+			if(goods_id_arr[i]!=goodsid&&goods_id_arr[i]!=''){
+				str+=goods_id_arr[i]+",";
+				namestr+=goods_name_arr[i]+",";
+			}
+		}
+		document.getElementById('contrast_goods_id').value=str;
+		document.getElementById('contrast_goods_name').value=namestr;
+	}
+
+	var goods_id_arr = document.getElementById('contrast_goods_id').value.split(",");
+	var goods_name_arr = document.getElementById('contrast_goods_name').value.split(",");
+	goods_name_show.innerHTML="";
+	for(i=0;i<goods_id_arr.length-1;i++){
+		goods_name_show.innerHTML+="<li style='padding:8px 0 5px 10px; _padding:8px 0 5px;position:relative;border-bottom:1px solid #f1f1f1;margin-right:10px'>"+"<a href='javascript:;' style='position:absolute;right:0;_right:10px;top:8px;' onclick=\"initFloatTips('"+goods_id_arr[i]+"','"+goods_name_arr[i]+"',0)\">{echo:lp{i_remove};/}</a>" + goods_name_arr[i]+"</li>";
+	}
+	document.getElementById('contrast_goods_num').value=goods_id_arr.length-1;
+	if(document.getElementById('contrast_goods_num').value==0){
+		document.getElementById('contrastbox').style.display="none";
+		document.getElementById('contrast_cid').value="";
+	}
+	moveTips();
+}
+function moveTips() {
+	var tt=55;
+	if (window.innerHeight) {
+		pos = window.pageYOffset
+	}else if (document.documentElement && document.documentElement.scrollTop) {
+		pos = document.documentElement.scrollTop
+	}else if (document.body) {
+		pos = document.body.scrollTop;
+	}
+	pos=pos-tips.offsetTop+theTop;
+	pos=tips.offsetTop+pos/10;
+	if (pos < theTop) {
+		pos = theTop
+	}
+	if (pos != old) {
+		tips.style.top = pos+"px";
+		tt=10;
+	}
+	old = pos;
+	setTimeout(moveTips,tt);
+}
+</script>
+</html>

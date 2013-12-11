@@ -1,0 +1,26 @@
+/************ 通用属性 **************/
+
+/** 导航 **/
+.nav-bar
+
+
+/** 按钮 **/
+
+
+
+/** 表单 **/
+
+
+
+/** 列表 **/
+
+
+
+/** 翻页 **/
+
+
+
+/************ 通用工具 ************/
+.float-left{float:left;}
+.float-right{float:right;}
+.clearfix{float:none;clear:both;}
