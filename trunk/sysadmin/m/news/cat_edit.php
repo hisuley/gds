@@ -23,6 +23,16 @@ $sql="select * from $t_article_cat where cat_id=$cat_id";
 
 $row=$dbo->getRow($sql);
 
+/* 处理系统分类 */
+$sql_cat = "select * from `$t_article_cat` order by cat_id asc,sort_order asc";
+$result_cat = $dbo->getRs($sql_cat);
+$cat_dg = get_dg_category($result_cat);
+foreach($result_cat as $v) {
+	if($v['cat_id']==$cat_id) {
+		$info = $v;
+	}
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -53,13 +63,22 @@ bkLib.onDomLoaded(function() {
 		<form action="a.php?act=news_catedit" method="post" onsubmit="return checkForm();">
 		<table class="form-table">
 		<input type="hidden" name="cat_id" value="<?php echo $cat_id?>" />
+                        <tr>
+				<td width="60px"><?php echo $a_langpackage->a_parent_category; ?>：</td>
+				<td><select name="parent_id">
+				<option value="0"><?php echo $a_langpackage->a_top_category; ?></option>
+				<?php foreach($cat_dg as $value) {?>
+				<option value="<?php echo $value['cat_id'];?>" <?php if($value['cat_id']==$info['parent_id']) echo "selected";?>><?php echo $value['str_pad'];?><?php echo $value['cat_name'];?></option>
+				<?php }?>
+				</select></td>
+			</tr>
 			<tr>
 				<td width="60px"><?php echo $a_langpackage->a_category_name; ?>：</td>
-				<td><input class="small-text" type="text" name="cat_name" value="<?php echo $row['cat_name']?>" style="width:200px;" /></td>
+				<td><input class="small-text" type="text" name="cat_name" value="<?php echo $info['cat_name']?>" style="width:200px;" /></td>
 			</tr>
 			<tr>
 				<td><?php echo $a_langpackage->a_category_sort; ?>：</td>
-				<td><input type="text" class="small-text" name="sort_order" value="<?php echo $row['sort_order']?>" style="width:200px;" /></td>
+				<td><input type="text" class="small-text" name="sort_order" value="<?php echo $info['sort_order']?>" style="width:200px;" /></td>
 			</tr>
 			<tr><td colspan="2"><span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_category_edit; ?>" /></span></td></tr>
 		</table>

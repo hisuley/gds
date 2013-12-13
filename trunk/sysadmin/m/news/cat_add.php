@@ -7,17 +7,21 @@ require_once("../foundation/module_news.php");
 
 //引入语言包
 $a_langpackage=new adminlp;
-//
-////定义读操作
-//dbtarget('r',$dbServs);
-//$dbo=new dbex;
-
 //数据表定义区
-//$t_article = $tablePreStr."article";
-//$t_article_cat = $tablePreStr."article_cat";
-//
-//$cat_info = get_news_cat_list($dbo,$t_article_cat);
+$t_article_cat = $tablePreStr."article_cat";
+//定义读操作
+$dbo = new dbex;
+dbtarget('r',$dbServs);
+/* 处理分类 */
+$sql_cat = "select * from `$t_article_cat` order by cat_id asc,sort_order asc";
+$result_cat = $dbo->getRs($sql_cat);
 
+$cat_dg = get_dg_category($result_cat);
+$info = array(
+	'cat_name'		=> '',
+	'parent_id'		=> 0,
+	'sort_order'	=> 0
+);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,15 +45,30 @@ td span {color:red;}
     <div class="content2">
 		<form action="a.php?act=news_catadd" method="post" onsubmit="return checkForm();">
 		<table class="form-table">
+		  <tbody>
 			<tr>
-				<td width="70px" class="left"><?php echo $a_langpackage->a_category_name; ?>：</td>
-				<td class="left"><input class="small-text" type="text" name="cat_name" value="" style="width:200px;" /></td>
+				<td width="60px;"><?php echo $a_langpackage->a_parent_category; ?>：</td>
+				<td><select name="parent_id" onchange="getbrandlist(this.value);">
+				<option value="0"><?php echo $a_langpackage->a_top_category; ?></option>
+				<?php foreach($cat_dg as $value) {?>
+				<option value="<?php echo $value['cat_id'];?>" <?php if($value['cat_id']==$info['parent_id']) echo "selected";?>><?php echo $value['str_pad'];?><?php echo $value['cat_name'];?></option>
+				<?php }?>
+				</select>&nbsp;&nbsp;&nbsp;(<?php echo $a_langpackage->a_five_category; ?>)</td>
 			</tr>
 			<tr>
-				<td width="70px" class="left"><?php echo $a_langpackage->a_category_sort; ?>：</td>
-				<td class="left"><input class="small-text" type="text" name="sort_order" value="" style="width:200px;" /></td>
+				<td><?php echo $a_langpackage->a_category_name; ?>：</td>
+				<td><input class="small-text" type="text" name="cat_name" value="<?php echo $info['cat_name']; ?>" /> <span>*</span></td>
 			</tr>
-			<tr><td colspan="2"><span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_category_add; ?>" /></td></span></tr>
+			<tr>
+				<td><?php echo $a_langpackage->a_category_sort; ?>：</td>
+				<td><input class="small-text" type="text" name="sort_order" value="<?php echo $info['sort_order']; ?>" style="width:60px" /> <span>*</span></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_category_add; ?>" /></span>
+				</td>
+			</tr>
+		  </tbody>
 		</table>
 		</form>
 	  </div>
@@ -66,6 +85,19 @@ function checkForm() {
 		return false;
 	}
 	return true;
+}
+function getbrandlist(idvalue){
+	ajax("a.php?act=get_cat_brand_list","POST","cat_id="+idvalue,function(data){
+			var obj = document.getElementById('brand_id');
+			for(i=0;i<obj.length;i++){
+				for(j=0;j<data.length;j++){
+					var obj2 = data[j];
+					if(obj[i].value==obj2.brand_id){
+						obj[i].selected=true;
+					}
+				}
+			}
+		},'json');
 }
 //-->
 </script>

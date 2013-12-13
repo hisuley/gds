@@ -20,7 +20,12 @@ dbtarget('r',$dbServs);
 
 $sql = "select * from `$t_article_cat` where 1 ";
 $result = $dbo->fetch_page($sql,13);
+/* 处理系统分类 */
+$sql_cat = "select * from `$t_article_cat` order by cat_id asc,sort_order asc";
+$result_cat = $dbo->getRs($sql_cat);
 
+$cat_dg = get_dg_category($result_cat);
+require ("a/updateJsAjax.php");
 //$cat_info = get_news_cat_list($dbo,$t_article_cat);
 //print_r($cat_info);
 ?>
@@ -36,6 +41,7 @@ $result = $dbo->fetch_page($sql,13);
 td span {color:red;}
 .green {color:green;}
 .red {color:red;}
+#divname{float:left; margin:0px;}
 </style>
 </head>
 <body>
@@ -61,13 +67,19 @@ td span {color:red;}
 			</tr>
 			</thead>
 			<tbody>
-			<?php if($result['result']) {
-			foreach($result['result'] as $value) { ?>
+			<?php if($cat_dg) {
+			foreach($cat_dg as $value) { ?>
 			<tr style=" text-align:center">
 				<td width="30px"><input type="checkbox" name="cat_id[]" value="<?php echo $value['cat_id'];?>" <?php if($value['parent_id']==-1){echo "disabled"; }?>/></td>
 				<td width="30px"><?php echo $value['cat_id'];?></td>
-				<td width="" align="left"><a href="m.php?app=news_list&id=<?php echo $value['cat_id'];?>"><?php echo $value['cat_name'];?></a></td>
-				<td width="80px"><?php if($value['parent_id']==-1){echo $a_langpackage->a_sys_type;}elseif($value['parent_id']==0){echo $a_langpackage->a_cus_type;}?></td>
+				<td align="left" <?php if(in_array($value['parent_id'],array(0,-1))) {echo 'style="font-weight:bold;"';} ?>>
+				<div>
+				    <div id="divname"><?php echo $value['str_pad'];?>&nbsp;</div>
+				    <div id="divname" onclick="edit(this,<?php echo $value['cat_id'];?>,'divname<?php echo $value['cat_id'];?>','a.php?act=updateAjax','tablename=shop_categories&colname=cat_name&idname=cat_id&idvalue=<?php echo $value['cat_id'];?>&logcontent=<?php echo $a_langpackage->a_edit_category; ?>：&colvalue=',5);"><a href="m.php?app=news_list&id=<?php echo $value['cat_id'];?>"><?php echo $value['cat_name'];?></a></div>
+				    <div id="divname" style="display:none"></div>
+				</div>
+                                 </td>
+				<td width="80px"><?php if($value['parent_id']==-1){echo $a_langpackage->a_sys_type;}else{echo $a_langpackage->a_cus_type;}?></td>
 				<td width="60px"><?php echo $value['sort_order'];?></td>
 				<td width="60px">
 					<a href="m.php?app=news_catedit&id=<?php echo $value['cat_id'];?>"><?php echo $a_langpackage->a_update; ?></a>
@@ -87,9 +99,6 @@ td span {color:red;}
 				<td colspan="6" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
 			</tr>
 			<?php } ?>
-			<tr>
-				<td colspan="6" class="center"><?php include("m/page.php"); ?></td>
-			</tr>
 		</table>
 		</form>
 	   </div>

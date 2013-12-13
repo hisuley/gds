@@ -6,7 +6,6 @@ require_once("../foundation/module_news.php");
 require_once("../foundation/module_admin_logs.php");
 //语言包引入
 $a_langpackage=new adminlp;
-
 //权限管理
 $right=check_rights("news_catlist_add");
 if(!$right){
@@ -14,10 +13,8 @@ if(!$right){
 }
 /* post 数据处理 */
 $post['cat_name'] = short_check(get_args('cat_name'));
-$post['parent_id'] = '0';
+$post['parent_id'] = intval(get_args('parent_id'));
 $post['sort_order'] = intval(get_args('sort_order'));
-//print_r($post);
-//exit;
 if(empty($post['cat_name'])) {
 	action_return(0,$a_langpackage->a_title_null,'-1');
 	exit;
