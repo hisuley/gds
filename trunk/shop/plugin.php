@@ -71,6 +71,8 @@ $header['description'] = sub_str(strip_tags($SHOP['shop_intro']),100);
 <meta name="description" content="<?php echo  $header['description'];?>" />
 <base href="<?php echo  $baseUrl;?>" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/shop_<?php echo  $SHOP['shop_template'];?>.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <style>
 .shop_header {background:#4A9DA5;}

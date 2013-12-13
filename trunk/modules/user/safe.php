@@ -35,6 +35,7 @@ if(!$IWEB_SHOP_IN) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo  $m_langpackage->m_u_center;?></title>
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 <style type="text/css">
 .right_operate .title {font-size:12px; color:#fff; background-color:#1E88C0; padding-left:10px; font-weight:bold; line-height:24px; height:24px;}
 table { border-collapse:collapse; border:solid #999; border-width:1px 0 0 1px; margin:5px auto;} 

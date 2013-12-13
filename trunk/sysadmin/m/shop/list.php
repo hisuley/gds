@@ -230,7 +230,11 @@ td span {color:red;}
 						<a href="../shop.php?shopid=<?php echo $value['shop_id'];?>&app=index" target="_blank"><?php echo $value['shop_name'];?></a>
 						(<a href="m.php?app=goods_list&shopid=<?php echo $value['shop_id'];?>"><?php echo $a_langpackage->a_view_product;?></a>)
 					</td>
-					<td><?php echo $areainfo[$value['shop_province']].','.$areainfo[$value['shop_city']].','.$areainfo[$value['shop_district']];?></td>
+					<td><?php 
+					echo isset($areainfo[$value['shop_province']]) ? $areainfo[$value['shop_province']]."," : '';
+					echo isset($areainfo[$value['shop_city']]) ? $areainfo[$value['shop_city']]."," : '';
+					echo isset($areainfo[$value['shop_district']]) ? $areainfo[$value['shop_district']] : '';
+					?></td>
 					<td align="left"><?php echo $value['shop_management'];?></td>
 					<td>
 						<?php if($value['lock_flg']==0) {?>

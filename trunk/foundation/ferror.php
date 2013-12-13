@@ -5,7 +5,7 @@
  * @param  $errno 错误码
  * @param  $errstr　错误提示
  */
- function throw_errors($errno, $errstr)
+ function throw_errors($errno, $errstr, $errfile = '', $errline = 0)
  {
 	global $baseUrl;
 	$beforeurl = '';
@@ -14,7 +14,8 @@
 	if(!$beforeurl){
 	 	$beforeurl="";
 	 }
-	$errstr=$errstr.'-'.$beforeurl;
+	error_log('Error Message:'.$errstr." Error No:".$errno." Error File:".$errfile." LineNo:".$errline);
+	$errstr=$errstr.$errno.'-'.$beforeurl;
 	$errstr=urlencode($errstr);
 	if(!headers_sent())
 	{

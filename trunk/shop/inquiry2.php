@@ -72,6 +72,7 @@ $nav_selected='1';
 <base href="<?php echo $baseUrl;?>" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 </head>
 <style type="text/css">

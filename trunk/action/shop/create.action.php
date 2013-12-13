@@ -52,14 +52,29 @@ $post['shop_creat_time'] = $ctime->long_time();
 $post['shop_categories'] =short_check(get_args('categories'));
 if($post['shop_categories']==0)
 	$post['shop_categories'] =short_check(get_args('categories_parent'));
+error_log('Shop create info:'.print_r($post, true));
 
-if(insert_shop_info($dbo,$t_shop_info,$post)) {
-	set_sess_shop_id($post['shop_id']);
-	set_session('shop_lock',0);
-	set_session('shop_open',0);
-	action_return(1,$m_langpackage->m_shopcreate_success,'modules.php?app=shop_request');
-} else {
-	action_return(0,$m_langpackage->m_shopcreate_fail,'-1');
+$sql = "select * from $t_shop_info where shop_id=$user_id";
+$array = $dbo->getRs($sql);
+if($array){
+	if(update_shop_info($dbo,$t_shop_info,$post, $user_id)) {
+		set_sess_shop_id($post['shop_id']);
+		set_session('shop_lock',0);
+		set_session('shop_open',0);
+		action_return(1,$m_langpackage->m_shopcreate_success,'modules.php?app=shop_request');
+	} else {
+		action_return(0,$m_langpackage->m_shopcreate_fail,'-1');
+	}
+}else{
+	if(insert_shop_info($dbo,$t_shop_info,$post)) {
+		set_sess_shop_id($post['shop_id']);
+		set_session('shop_lock',0);
+		set_session('shop_open',0);
+		action_return(1,$m_langpackage->m_shopcreate_success,'modules.php?app=shop_request');
+	} else {
+		action_return(0,$m_langpackage->m_shopcreate_fail,'-1');
+	}
 }
+
 exit;
 ?>

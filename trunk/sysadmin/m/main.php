@@ -71,7 +71,7 @@ $installfile = "../install";
 					<div class="content2">
 						<table>
 							<tr>
-								<td><?php echo $a_langpackage->a_news_overview; ?>&nbsp;&nbsp;<a href="http://www.jmlvyou.com" target="_blank">http://www.jmlvyou.com</a></td>
+								<td><?php echo $a_langpackage->a_news_overview; ?>&nbsp;&nbsp;<a href="http://www.guilin.com" target="_blank">http://www.guilin.com</a></td>
 							</tr>
 							<tr>
 								<td>您的版本已经是最新。</td>
@@ -103,9 +103,9 @@ $installfile = "../install";
                 	<h3><?php echo $a_langpackage->a_development_testing; ?></h3>
                     <div class="content2">
                     	<p><?php echo $a_langpackage->a_copyright_info; ?>：<?php echo $a_langpackage->a_home; ?></p>
-						<p><?php echo $a_langpackage->a_system_design; ?>：Suley </p>
-    					<p><?php echo $a_langpackage->a_development_testing; ?>：Yawei Liu , Rui Wang ，Richard Mu ，Jack，E.T</p>
-						<p><?php echo $a_langpackage->a_product_web_site; ?>：<a href="http://www.jmlvyou.com" target="_blank">http://www.jmlvyou.com</a></p>
+						<p><?php echo $a_langpackage->a_system_design; ?>：小莫 </p>
+    					<p><?php echo $a_langpackage->a_development_testing; ?>：小赵 , Rui Wang ，Richard Mu ，Jack，E.T</p>
+						<p><?php echo $a_langpackage->a_product_web_site; ?>：<a href="http://www.guilin.com" target="_blank">http://www.guilin.com</a></p>
                     </div>
                 </div>
             </div>

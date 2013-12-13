@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 //定义本系统的相对路径根部
 if(!defined('ABSPATH')) {
 	define('ABSPATH',dirname(__FILE__).'/');

@@ -159,6 +159,7 @@ $nav_list = get_nav_list($t_nav,$dbo);
 <script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script src="skin/<?php echo $SYSINFO['templates'];?>/js/slide.js" type="text/javascript"></script>
+<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
 </head>
 <body>
 <div id="wrapper">
@@ -279,8 +280,8 @@ $nav_list = get_nav_list($t_nav,$dbo);
                   <label for="none">日期：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');" onfocus="inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
-                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onfocus="inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
+                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');"  onFocus="WdatePicker({isShowClear:false,readOnly:true});inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
+                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true});inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
                 </div>
               </div>
               <div class="column-2">

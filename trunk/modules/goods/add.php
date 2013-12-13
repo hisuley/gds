@@ -268,6 +268,9 @@ function AddContentImg(ImgName,classId){
 	obj.innerHTML = obj.innerHTML + "<br><IMG src='./"+ImgName+"' /><br>";
 }
 
+
+});   
+var form_submit = false;
 function checkForm() {
 	var goods_name = document.getElementsByName("goods_name")[0];
 	var goods_price = document.getElementById("goods_price");
@@ -285,29 +288,30 @@ function checkForm() {
 		return false;
 	}
 	if (goods_price.value !=''){
-		if (!goods_price.value.match(num)){
+		if (!num.test(goods_price.value)){
 			alert('<?php echo $m_langpackage->m_goods_price_error;?>');
 			goods_price.focus();
 			return false;
 		}
 	}
 	if(transport_price.value !=''){
-		if (!transport_price.value.match(num)){
+		if (!num.test(transport_price.value)){
 			alert("<?php echo $m_langpackage->m_transport_error;?>");
 			transport_price.focus();
 			return false;
 		}
 	}
 	if (goods_number.value !=''){
-		if(!goods_number.value.match(num)){
+		if(!num.test(goods_number.value)){
 			alert('<?php echo $m_langpackage->m_store_form_error;?>');
 			goods_number.focus();
 			return false;
 		}
 	}
+	var submit_button = document.getElementsByName('submit')[0];
+	submit_button.disabled = true;
 	return true;
 }
-});   
 </script>
 </head>
 

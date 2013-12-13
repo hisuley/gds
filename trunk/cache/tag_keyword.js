@@ -1,1 +1,1 @@
-document.write("");
+document.write("<a href='search.php?k=%E6%B5%8B%E8%AF%95'>测试</a> <a href='search.php?k=%E9%85%92%E5%BA%97'>酒店</a> ");

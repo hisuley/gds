@@ -195,7 +195,13 @@ function checkForm() {
 		alert("{echo: lp{m_shopname_notnone};/}");
 		shop_name.focus();
 		return false;
-	} else if(document.getElementsByName("country")[0].value==0) {
+	}
+	else if(shop_name.value.length > 50) {
+		alert("{echo: lp{m_shopname_overflow};/}");
+		shop_name.focus();
+		return false;
+	}
+	else if(document.getElementsByName("country")[0].value==0) {
 		alert("{echo: lp{m_select_countrypl};/}");
 		return false;
 	} else if(document.getElementsByName("province")[0].value==0) {

@@ -149,6 +149,7 @@ class shoplp{
 	var $s_groupbuy_buy_num = "购买数量";
 	var $s_groupbuy_real_name = "真实姓名";
 	var $s_groupbuy_tel = "联系电话";
+	var $s_groupbuy_mobile = "手机号码";
 	var $s_groupbuy_add = "参加团购";
 	var $s_groupbuy_del = "退出团购";
 	var $s_groupbuy_isset_num = "请填写购买数量!";
