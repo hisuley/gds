@@ -73,6 +73,7 @@ class moduleslp{
 	var $m_my_groupbuy ="我的团购";
 	var $m_groupbuy_list ="团购管理";
 	var $m_add_groupbuy ="添加新团购";
+	var $m_shop_intro_no_back = "添加成功";
 	//user
 	var $m_collect_num= "收藏人气";
 	var $m_ico_set = "头像设置";
@@ -128,6 +129,7 @@ class moduleslp{
     var $m_already_valuation="已评价";
     var $m_already_complain="已投诉";
 
+    var $m_wholesale_price = "批发价格";
 	var $m_wholesale = "批发说明";
 	var $m_goods_number = "库存量";
 	var $m_keyword = "关键字";

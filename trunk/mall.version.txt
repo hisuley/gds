@@ -169,7 +169,7 @@
 13. 丰富列表，搜索页筛选功能
 14. 每天查看论坛用户提问的bug写入到mall.version.txt
 15. iweb_mall用户手册
-17. iweb mall http://tech.jmlvyou.com/bbs/viewthread.php?tid=582&extra=page%3D1
+17. iweb mall viewthread.php?tid=582&extra=page%3D1
 
 /*需要修改的BUG*/
 开店的申请表单可自定义几项

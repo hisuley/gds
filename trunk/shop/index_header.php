@@ -8,7 +8,7 @@
  * 如果您开启了debug模式运行，那么您可以省去上面这一步，但是debug模式每次都会判断程序是否更新，debug模式只适合开发调试。
  * 如果您正式运行此程序时，请切换到service模式运行！
  *
- * 如您有问题请到官方论坛（http://tech.jmlvyou.com/bbs/）提问，谢谢您的支持。
+ * 如您有问题请到官方论坛（）提问，谢谢您的支持。
  */
 ?><?php
 /*
@@ -43,6 +43,20 @@ $ksearch=short_check(get_args("k"));
 if($i_langpackage->i_search_keyword==$ksearch){
 	$ksearch="";
 }
+
+//数据表定义区
+$t_keywords_count = $tablePreStr."keywords_count";
+if(!isset($dbo)){
+	/* 数据库操作 */
+	dbtarget('r',$dbServs);
+	$dbo=new dbex();
+}
+$keyword_sql = "select * from $t_keywords_count order by count desc LIMIT 0,5";
+$keyword_result = $dbo->getRs($keyword_sql);
+
+//获取天气，定时更新
+//$weather = file_get_contents('http://m.weather.com.cn/data/101300501.html', 'r');
+//$weather = json_decode($weather);
 ?><!-- 头部菜单 -->
 <div id="header" class="clearfix">
     <div class="site_nav clearfix">
@@ -79,7 +93,10 @@ if($i_langpackage->i_search_keyword==$ksearch){
        <?php }?>
        
         <p class=""><input type="submit" value="搜索" class="search-button"/></p>
-        <p class="hot_keywords">热门关键词：<a href="#">象鼻山</a> <a href="#">刘三姐</a> <a href="#">漓江</a> <a href="#">阳朔</a> <a href="#">七星岩</a> <a href="#">西街</a></p>
+        <p class="hot_keywords">热门关键词：
+          <?php foreach($keyword_result as $keyword){?>
+          <a href="search.php?k=<?php echo $keyword['keywords'];?>"><?php echo $keyword['keywords'];?></a>
+          <?php }?></p>
         <div id="sel_content" class="sel_list" style="display:none">
         	<ul><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''"><?php echo $i_langpackage->i_goods_search;?></li><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''"><?php echo $i_langpackage->i_s_company;?></li></ul>
         </div>
@@ -88,8 +105,10 @@ if($i_langpackage->i_search_keyword==$ksearch){
       </form>
        <div class="weather_panel clearfix">
         <div class="weather_content">
-          <span class="weather_icon_fine">晴 6~18度</span>
-          <p style="text-align:center;">东北风转四到五级</p>
+          <span class="weather_icon">
+            <img src="" />
+          小雨 13℃~9℃</span>
+          <p style="text-align:center;">北风小于三级</p>
         </div>
         <div class="contact_content">
           

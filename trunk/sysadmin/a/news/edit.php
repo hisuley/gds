@@ -40,6 +40,26 @@ if(empty($post['title'])) {
 	action_return(0,$a_langpackage->a_title_null,'-1');
 	exit;
 }
+/* 图片上传处理 */
+$cupload = new upload();
+$cupload->set_dir("../uploadfiles/news/","{y}/{m}/{d}");
+$setthumb = array(
+	'width' => array($SYSINFO['width1'],$SYSINFO['width2']),
+	'height' => array($SYSINFO['height1'],$SYSINFO['height2']),
+	'name' => array('thumb','m')
+);
+$cupload->set_thumb($setthumb);
+$file = $cupload->execute();
+	if(count($file)) {
+		$insert_array = array();
+		foreach($file as $k=>$v) {
+			if($v['flag']==1) {
+				if(!empty($v['dir'])){
+					$post['thumb'] = str_replace('../', '', $v['dir']).$v['name'];
+				}
+			}
+		}		
+}
 
 //数据表定义区
 $t_article = $tablePreStr."article";

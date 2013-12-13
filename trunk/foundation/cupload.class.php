@@ -43,7 +43,7 @@ class upload {
     //$filedir  : 自定义子目录，可用参数{y}、{m}、{d}
     function set_dir($basedir,$filedir = '') {
         $dir = $basedir;
-        !is_dir($dir) && @mkdir($dir,0777);
+        !is_dir($dir) && self::mkdirs($dir);
         if (!empty($filedir)) {
             $filedir = str_replace(array('{y}','{m}','{d}'),array(date('Y',$this->time),date('m',$this->time),date('d',$this->time)),strtolower($filedir));
             $dirs = explode('/',$filedir);
@@ -54,6 +54,19 @@ class upload {
         }
         $this->dir = $dir;
     }
+
+    public static function mkdirs($dir){  
+        if(!is_dir($dir))  
+        {  
+            if(!self::mkdirs(dirname($dir))){  
+                return false;  
+            }  
+            if(!mkdir($dir,0777)){  
+                return false;  
+            }  
+        }  
+        return true;  
+    }  
 
     //图片缩略图设置，如果不生成缩略图则不用设置
     //$width : 缩略图宽度 , $height : 缩略图高度

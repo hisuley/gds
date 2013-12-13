@@ -8,7 +8,7 @@
  * 如果您开启了debug模式运行，那么您可以省去上面这一步，但是debug模式每次都会判断程序是否更新，debug模式只适合开发调试。
  * 如果您正式运行此程序时，请切换到service模式运行！
  *
- * 如您有问题请到官方论坛（http://tech.jmlvyou.com/bbs/）提问，谢谢您的支持。
+ * 如您有问题请到官方论坛（）提问，谢谢您的支持。
  */
 ?><?php
 /*
@@ -134,6 +134,7 @@ $goods_line = get_hot_goods_by_cat($dbo, $t_goods, $line_id, 6);
 $goods_meeting = get_hot_goods_by_cat($dbo, $t_goods, $meeting_id, 6);
 $goods_card = get_hot_goods_by_cat($dbo, $t_goods, $card_id, 6);
 $goods_promote = get_hot_goods_by_cat($dbo, $t_goods, $promote_id, 6);
+
 /* 友情链接 */
 $flink_rs = $dbo->getRs($sql_flink);
 /* 商家信息 */
@@ -194,8 +195,8 @@ $nav_list = get_nav_list($t_nav,$dbo);
           <h2>景区预订</h2>
 
         </div>
-        <?php  foreach($goods_scenic as $v){?>
-         <div class="item-box" style="margin-left:0px;">
+        <?php  foreach($goods_scenic as $key=>$v){?>
+         <div class="item-box" style="<?php if($key%3 == 0){?>margin-left:0px;<?php }?>">
           <div class="images">
             <a href="<?php echo  goods_url($v['goods_id']);?>"><img src="<?php echo $v['goods_thumb'];?>" /></a>
           </div>
@@ -215,8 +216,8 @@ $nav_list = get_nav_list($t_nav,$dbo);
           <h2>酒店预订</h2>
 
         </div>
-       <?php  foreach($goods_hotel as $v){?>
-         <div class="item-box" style="margin-left:0px;">
+       <?php  foreach($goods_hotel as $key=>$v){?>
+         <div class="item-box" style="<?php if($key%3 == 0){?>margin-left:0px;<?php }?>">
           <div class="images">
             <a href="<?php echo  goods_url($v['goods_id']);?>"><img src="<?php echo $v['goods_thumb'];?>" /></a>
           </div>
@@ -236,7 +237,7 @@ $nav_list = get_nav_list($t_nav,$dbo);
         </div>
         <div class="content" style="height:70px;">
         <script type="text/javascript">
-        function inputTxt(obj,act, initVal){
+        function inputTxt2(obj,act, initVal){
           var str = initVal;
           if(obj.value==''&&act=='set')
           {
@@ -250,7 +251,7 @@ $nav_list = get_nav_list($t_nav,$dbo);
           }
         }
         </script>
-            <form class="pretty-form ticket-form" method="POST" action="ticket.php">
+            <form class="pretty-form ticket-form" method="POST" action="ticket.php" onsubmit="return checkTicketForm(this);">
               
               <div class="column-1">
                 <div class="radio-group">
@@ -268,8 +269,8 @@ $nav_list = get_nav_list($t_nav,$dbo);
                   <label for="none">城市：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10" type="text" name="DepartCity" onblur="inputTxt(this,'set', '请输入城市名称');" onfocus="inputTxt(this,'clean', '请输入城市名称');" style="color:#cccccc;" value="请输入城市名称" >
-                  <input class="column-10" type="text" name="ArriveCity" value="桂林" readonly/>
+                  <input class="column-10 cityinput" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" style="color:#cccccc;" value="请输入城市名称" >
+                  <input class="column-10 cityinput" id="endCity"  type="text" name="ArriveCity" value="桂林" readonly/>
                 </div>
               </div>
               <div class="column-1" style="height:1px;width:5%;"></div>
@@ -278,13 +279,16 @@ $nav_list = get_nav_list($t_nav,$dbo);
                   <label for="none">日期：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt(this,'set', '请选择出发日期');" onfocus="inputTxt(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
-                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt(this,'set', '请选择回程日期');" onfocus="inputTxt(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
+                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');" onfocus="inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
+                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onfocus="inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
                 </div>
               </div>
               <div class="column-2">
                 <input style="width:70px" type="submit" class="common-button"  value="搜索"/>
               </div>
+              <script type="text/javascript">
+              var startCity = new Vcity.CitySelector({input:'startCity'});
+              </script>
             </form>
         </div>
       </div>
@@ -292,8 +296,8 @@ $nav_list = get_nav_list($t_nav,$dbo);
         <div class="title">
           <h2>会议预订</h2>
         </div>
-        <?php  foreach($goods_meeting as $v){?>
-         <div class="item-box" style="margin-left:0px;">
+        <?php  foreach($goods_meeting as $key=>$v){?>
+         <div class="item-box" style="<?php if($key%3 == 0){?>margin-left:0px;<?php }?>">
           <div class="images">
             <a href="<?php echo  goods_url($v['goods_id']);?>"><img src="<?php echo $v['goods_thumb'];?>" /></a>
           </div>
@@ -315,8 +319,8 @@ $nav_list = get_nav_list($t_nav,$dbo);
           <h2>线路预订</h2>
 
         </div>
-       <?php  foreach($goods_line as $v){?>
-         <div class="item-box" style="margin-left:0px;">
+       <?php  foreach($goods_line as $key=>$v){?>
+         <div class="item-box" style="<?php if($key%3 == 0){?>margin-left:0px;<?php }?>">
           <div class="images">
             <a href="<?php echo  goods_url($v['goods_id']);?>"><img src="<?php echo $v['goods_thumb'];?>" /></a>
           </div>

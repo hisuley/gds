@@ -49,8 +49,8 @@
           <h2>景区预订</h2>
 
         </div>
-        {sta: foreach($goods_scenic as $v)[loop]}
-         <div class="item-box" style="margin-left:0px;">
+        {sta: foreach($goods_scenic as $key=>$v)[loop]}
+         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
           <div class="images">
             <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
           </div>
@@ -70,8 +70,8 @@
           <h2>酒店预订</h2>
 
         </div>
-       {sta: foreach($goods_hotel as $v)[loop]}
-         <div class="item-box" style="margin-left:0px;">
+       {sta: foreach($goods_hotel as $key=>$v)[loop]}
+         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
           <div class="images">
             <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
           </div>
@@ -91,7 +91,7 @@
         </div>
         <div class="content" style="height:70px;">
         <script type="text/javascript">
-        function inputTxt(obj,act, initVal){
+        function inputTxt2(obj,act, initVal){
           var str = initVal;
           if(obj.value==''&&act=='set')
           {
@@ -105,7 +105,7 @@
           }
         }
         </script>
-            <form class="pretty-form ticket-form" method="POST" action="ticket.php">
+            <form class="pretty-form ticket-form" method="POST" action="ticket.php" onsubmit="return checkTicketForm(this);">
               
               <div class="column-1">
                 <div class="radio-group">
@@ -123,8 +123,8 @@
                   <label for="none">城市：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10" type="text" name="DepartCity" onblur="inputTxt(this,'set', '请输入城市名称');" onfocus="inputTxt(this,'clean', '请输入城市名称');" style="color:#cccccc;" value="请输入城市名称" >
-                  <input class="column-10" type="text" name="ArriveCity" value="桂林" readonly/>
+                  <input class="column-10 cityinput" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" style="color:#cccccc;" value="请输入城市名称" >
+                  <input class="column-10 cityinput" id="endCity"  type="text" name="ArriveCity" value="桂林" readonly/>
                 </div>
               </div>
               <div class="column-1" style="height:1px;width:5%;"></div>
@@ -133,13 +133,16 @@
                   <label for="none">日期：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt(this,'set', '请选择出发日期');" onfocus="inputTxt(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
-                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt(this,'set', '请选择回程日期');" onfocus="inputTxt(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
+                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');" onfocus="inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
+                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onfocus="inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
                 </div>
               </div>
               <div class="column-2">
                 <input style="width:70px" type="submit" class="common-button"  value="搜索"/>
               </div>
+              <script type="text/javascript">
+              var startCity = new Vcity.CitySelector({input:'startCity'});
+              </script>
             </form>
         </div>
       </div>
@@ -147,8 +150,8 @@
         <div class="title">
           <h2>会议预订</h2>
         </div>
-        {sta: foreach($goods_meeting as $v)[loop]}
-         <div class="item-box" style="margin-left:0px;">
+        {sta: foreach($goods_meeting as $key=>$v)[loop]}
+         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
           <div class="images">
             <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
           </div>
@@ -170,8 +173,8 @@
           <h2>线路预订</h2>
 
         </div>
-       {sta: foreach($goods_line as $v)[loop]}
-         <div class="item-box" style="margin-left:0px;">
+       {sta: foreach($goods_line as $key=>$v)[loop]}
+         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
           <div class="images">
             <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
           </div>

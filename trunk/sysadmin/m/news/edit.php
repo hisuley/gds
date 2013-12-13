@@ -86,6 +86,11 @@ $(function(){
 			</tr>
 
 			<tr>
+				<td><?php echo $a_langpackage->a_news_thumb; ?>：</td>
+				<td><input type="file" name="attach[]" /></td>
+			</tr>
+
+			<tr>
 				<td><?php echo $a_langpackage->a_news_content; ?>：</td>
 				<td><textarea name="content" id="content" cols="100" rows="15"><?php echo $news_info['content'];?></textarea>
 				<iframe name="KindImageIframe" id="KindImageIframe" width="100%" height='30' align="top" allowTransparency="true" scrolling="no" src='m.php?app=upload_form' frameborder=0></iframe></td>

@@ -17,4 +17,18 @@ $ksearch=short_check(get_args("k"));
 if($i_langpackage->i_search_keyword==$ksearch){
 	$ksearch="";
 }
+
+//数据表定义区
+$t_keywords_count = $tablePreStr."keywords_count";
+if(!isset($dbo)){
+	/* 数据库操作 */
+	dbtarget('r',$dbServs);
+	$dbo=new dbex();
+}
+$keyword_sql = "select * from $t_keywords_count order by count desc LIMIT 0,5";
+$keyword_result = $dbo->getRs($keyword_sql);
+
+//获取天气，定时更新
+//$weather = file_get_contents('http://m.weather.com.cn/data/101300501.html', 'r');
+//$weather = json_decode($weather);
 ?>

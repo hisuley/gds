@@ -8,7 +8,7 @@
  * 如果您开启了debug模式运行，那么您可以省去上面这一步，但是debug模式每次都会判断程序是否更新，debug模式只适合开发调试。
  * 如果您正式运行此程序时，请切换到service模式运行！
  *
- * 如您有问题请到官方论坛（http://tech.jmlvyou.com/bbs/）提问，谢谢您的支持。
+ * 如您有问题请到官方论坛（）提问，谢谢您的支持。
  */
 ?><?php
 /*
@@ -106,8 +106,6 @@ set_session("goodsvercode",md5(rand(10000,999999)));
 <title><?php echo  $m_langpackage->m_u_center;?></title>
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
-
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 
@@ -129,7 +127,7 @@ td{text-align:left;}
 .category_com {height:30px; padding-bottom:10px; line-height:30px; text-align:center;}
 .attr_class { background:#FFF2E6; }
 .attr_class div.div {border:2px solid #fff; padding:3px;}
-.attr_class div span.left{display:block; width:150px; float:left; margin-left:10px; text-align:right; _line-height:24px;}
+.attr_class div span.left{display:block; width:auto; float:left; margin-left:10px; text-align:right; _line-height:24px;}
 .attr_class div span.right{display:block; width:350px; float:left; margin-left:5px; text-align:left;}
 .attr_class div span.right input {margin-left:5px;}
 
@@ -137,7 +135,7 @@ td{text-align:left;}
 </style>
 <script type="text/javascript" src="servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
 <script type="text/javascript" src="servtools/xheditor/xheditor.min.js?v=1.0.0-final"></script>
-
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
 <link href="servtools/swfupload/css/default.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="servtools/swfupload/swfupload.js"></script>
@@ -195,13 +193,26 @@ td{text-align:left;}
 	     };
 	</script>
 <script type="text/javascript">
+var introeditor;
+function addIntroImg(obj){
+    var li=jQuery(obj).parent().parent().children(".photo").children("img").attr("src");
+    var str=li.substring(li.indexOf("uploadfiles"));
+	introeditor.appendHTML("<img src="+str+"/>");
+	return false;
+}
 jQuery.noConflict(); 
 jQuery(document).ready(function($){
-var introeditor;
 $(function(){
 	introeditor=$("#goods_intro").xheditor({skin:'vista',tools:"Cut,Copy,Paste,Pastetext,Separator,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,Separator,Align,List,Outdent,Indent,Separator,Link,Unlink,Img,Table,Separator,Fullscreen,About"});
 	$("#goods_intro").val("");
 });
+
+function addIntroImg(obj){
+    var li=$(obj).parent().parent().children(".photo").children("img").attr("src");
+    var str=li.substring(li.indexOf("uploadfiles"));
+	introeditor.appendHTML("<img src="+str+"/>");
+	return false;
+}
 
 function introimage(id,imagepath){
 	var is=$("#image_size_id").val();
@@ -215,12 +226,7 @@ function introimage(id,imagepath){
 
 }
 
-function addIntroImg(obj){
-    var li=$(obj).parent().parent().children(".photo").children("img").attr("src");
-    var str=li.substring(li.indexOf("uploadfiles"));
-	introeditor.appendHTML("<img src="+str+"/>");
-	return false;
-}
+
 
 function delIntroImg(obj){
 	if(!confirm('你真的要删除这张图片吗?')){
@@ -323,7 +329,7 @@ function checkForm() {
             <hr />
 			<form action="do.php?act=goods_add" method="post" name="form_goods_add" onsubmit="return checkForm();" enctype="multipart/form-data">
 				<table width="100%" style="border:0" cellspacing="0">
-					<tr><td class="textright" width="130"><?php echo  $m_langpackage->m_goods_category;?>123：</td>
+					<tr><td class="textright" width="130"><?php echo  $m_langpackage->m_goods_category;?>:</td>
 						<td>&nbsp;<span id="show_cat_name"><?php echo $m_langpackage->m_pls_select_cateogry;?></span> &nbsp;&nbsp;<a href="javascript:;" onclick="showbgdiv();" style="color:#F1A24C; font-weight:bold;text-decoration:underline;"><?php echo $m_langpackage->m_edit_cateogry;?></a>
 						<input name="cat_id" value='' type="hidden"></td>
 					</tr>
@@ -331,10 +337,7 @@ function checkForm() {
 						<td class="textright"><?php echo $m_langpackage->m_goods_brand;?>：</td>
 						<td id="brand_box">&nbsp;&nbsp;</td>
 					</tr>
-					<tr>
-						<td class="textright"><?php echo $m_langpackage->m_goods_type;?>：</td>
-						<td><input type="radio" name="type_id" value="1" checked /><?php echo $m_langpackage->m_goods_new;?> &nbsp;&nbsp;<input type="radio" name="type_id" value="2" /><?php echo $m_langpackage->m_goods_notnew;?> &nbsp;&nbsp;<input type="radio" name="type_id" value="3" /><?php echo $m_langpackage->m_goods_isnull;?> </span></td>
-					</tr>
+					<input type="hidden" name="type_id" value="1"  />
 					<tr id="goods_attr_tr">
 						<td class="textright"><?php echo $m_langpackage->m_goods_attr;?>：</td>
 						<td class="attr_class" id="attr_content"></td>
@@ -444,6 +447,9 @@ function checkForm() {
 			                  </div>
 							
 <!--						<textarea name="goods_intro" id="goods_intro" cols="65" rows="15"><?php echo  $goods_info['goods_intro'];?></textarea>-->
+					</td></tr>
+					<tr><td class="textright"><?php echo  $m_langpackage->m_wholesale_price;?>：</td><td>
+					
 					</td></tr>
 					<tr><td class="textright"><?php echo  $m_langpackage->m_wholesale;?>：</td><td>
 					<textarea name="goods_wholesale" cols="45" rows="3"><?php echo  $goods_info['goods_wholesale'];?></textarea>
@@ -641,8 +647,21 @@ function changeAttrTr(objvalue) {
 	for(var i=0; i<objvalue.length; i++) {
 		temp = formatFormElement(objvalue[i].attr_id,objvalue[i].input_type,objvalue[i].attr_name,objvalue[i].attr_values);
 		html += '<div class="div"><span class="left">'+objvalue[i].attr_name+'：</span><span class="right">'+temp+'</span><div class="clear"></div></div>';
+		/*
+		if(objvalue[i].input_type == 4){
+		jQuery.noConflict(); 
+		jQuery(document).ready(function($){
+			var introeditor_temp;
+			$(function(){
+				var introeditor_temp;
+				introeditor_temp = $(attr_content).children('textarea').xheditor({skin:'vista',tools:"Cut,Copy,Paste,Pastetext,Separator,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,Separator,Align,List,Outdent,Indent,Separator,Link,Unlink,Img,Table,Separator,Fullscreen,About"});
+				$(attr_content).children('textarea').val("");
+			});
+		});
+	}*/
 	}
 	attr_content.innerHTML = html;
+	
 }
 
 //属性input类型 0:TEXT,1:SELECT,2:radio,3:checkbox
@@ -683,6 +702,8 @@ function formatFormElement(id,type,name,value) {
 			var re = new RegExp("((iwebshop)|([^\r\n]+))[\r\n]*","g");
 		}
 		var str = value.replace(re,"<input type='checkbox' name='attr[" + id + "][]' value='$1' checked$3 />$1");
+	} else if (type==4){
+		 str = '<textarea name="attr[' + id + ']" id="attr_text_area" cols="65" rows="10">'+cValue+'</textarea>';
 	}
 	return str;
 }
@@ -696,7 +717,19 @@ function showimg(obj) {
 		if(navigator.userAgent.indexOf("MSIE")>0) {
 			Img.src = obj.value;
 		} else {
-			Img.src = obj['files'][0].getAsDataURL();
+			if (obj.files) {
+				file = obj.files[0];
+		        var fr = new FileReader;
+		        fr.onloadend = function(str){
+		        	if(typeof str === "object") {
+				        str = str.target.result; // file reader
+				    }
+				    Img.src = str;
+		        };
+		        fr.readAsDataURL(file);
+		    }else{
+		    	Img.src = obj['files'][0].getAsDataURL();
+		    }
 		}
 
 	picspan.appendChild(Img);

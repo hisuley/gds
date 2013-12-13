@@ -11,6 +11,7 @@ $inputtype_arr = array(
 	'1' => $a_langpackage->a_select_type.'(select)',
 	'2' => $a_langpackage->a_radio_type.'(radio)',
 	'3' => $a_langpackage->a_checkbox_type.'(checkbox)',
+	'4' => $a_langpackage->a_rich_text."(richtext)",
 );
 
 //数据表定义区
@@ -103,8 +104,15 @@ function attr_info_save(v) {
 			input_type_v = input_type[i].value;
 		}
 	}
-
-	ajax("a.php?act=goods_attr_edit","POST","attr_id="+attr_id+"&cat_id="+cat_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values.value+"&sort_order="+sort_order.value+"&selectable="+selectable.value+"&price="+price.value,function(data){
+	var price_value = 0;
+	if(price.checked){
+		price_value = 1;
+	}
+	var selectable_value = 0;
+	if(selectable.checked){
+		selectable_value = 1;
+	}
+	ajax("a.php?act=goods_attr_edit","POST","attr_id="+attr_id+"&cat_id="+cat_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values.value+"&sort_order="+sort_order.value+"&selectable="+selectable_value+"&price="+price_value,function(data){
 		if(data=='-2') {
 			ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>","m.php?app=error");
 			// location.href="m.php?app=error";
@@ -117,7 +125,7 @@ function attr_info_save(v) {
 				} else {
 					var tr_0 = document.getElementById("tr_0");
 
-					add_new_attr_info(data,attr_name.value,input_type_v,attr_values.value,seletable.value, price.value, sort_order.value)
+					add_new_attr_info(data,attr_name.value,input_type_v,attr_values.value,selectable_value, price_value, sort_order.value)
 
 					attr_name.value = '';
 					attr_values.value = '';
@@ -172,6 +180,11 @@ function add_new_attr_info(data,attr_name,input_type,attr_values, selectable, pr
 	} else {
 		td3.innerHTML += '<input type="radio" name="input_type['+data+']" value="3" /><?php echo $a_langpackage->a_checkbox_type; ?>(checkbox)';
 	}
+	if(input_type==4){
+		td3.innerHTML += '<input type="radio" name="input_type['+data+']" value="4" checked="checked" /><?php echo $a_langpackage->a_rich_text; ?>(richtext)';
+	} else {
+		td3.innerHTML += '<input type="radio" name="input_type['+data+']" value="4" /><?php echo $a_langpackage->a_rich_text; ?>(richtext)';
+	}
 	newtr.appendChild(td3);
 
 	var td4 = document.createElement("td");
@@ -184,14 +197,14 @@ function add_new_attr_info(data,attr_name,input_type,attr_values, selectable, pr
 	td5.className = "";
 	td5.width="60px";
 	td5.align="center";
-	td5.innerHTML = '<input type="text" class="small-text" name="selectable['+data+']" value="'+selectable+'" style="width:25px;" maxlength="3" />';
+	td5.innerHTML = '<input type="checkbox" class="small-text" name="selectable['+data+']" value="'+selectable+'" style="width:25px;" maxlength="3" />';
 	newtr.appendChild(td5);
 
 	var td6 = document.createElement("td");
 	td6.className = "";
 	td6.width="60px";
 	td6.align="center";
-	td6.innerHTML = '<input type="text" class="small-text" name="price['+data+']" value="'+price+'" style="width:25px;" maxlength="100" />';
+	td6.innerHTML = '<input type="checkbox" class="small-text" name="price['+data+']" value="'+price+'" style="width:25px;" />';
 	newtr.appendChild(td6);
 
 	var td7 = document.createElement("td");
@@ -318,8 +331,8 @@ function attr_info_extend(v) {
 				<?php if($i==2) { echo "<br />";}	} ?>
 				</td>
 				<td width="300px"><textarea name="attr_values[0]"></textarea></td>
-				<td width="60px" align="center"><input type="text" class="small-text" name="selectable[0]" value="0" style="width:25px;" maxlength="1" /></td>
-				<td width="60px" align="center"><input type="text" class="small-text" name="price[0]" value="0" style="width:25px;" maxlength="10" /></td>
+				<td width="60px" align="center"><input type="checkbox" class="small-text" name="selectable[0]" value="0" style="width:25px;" maxlength="1" /></td>
+				<td width="60px" align="center"><input type="checkbox" class="small-text" name="price[0]" value="1" style="width:25px;" /></td>
 				<td width="60px" align="center"><input type="text" class="small-text" name="sort_order[0]" value="0" style="width:25px;" maxlength="3" /></td>
 
 				<td width="175px" align="center">
@@ -339,8 +352,8 @@ function attr_info_extend(v) {
 				<?php if($i==2) { echo "<br />";}	} ?>
 				</td>
 				<td width="300px"><textarea name="attr_values[<?php echo $value['attr_id'];?>]" ><?php echo $value['attr_values'];?></textarea></td>
-					<td width="60px" align="center"><input type="text" class="small-text" name="selectable[<?php echo $value['attr_id'];?>]" value="<?php echo $value['selectable'];?>" style="width:25px;" maxlength="1" /></td>
-				<td width="60px" align="center"><input type="text" class="small-text" name="price[<?php echo $value['attr_id'];?>]" value="<?php echo $value['price'];?>" style="width:25px;" maxlength="100" /></td>
+					<td width="60px" align="center"><input type="checkbox" class="small-text" name="selectable[<?php echo $value['attr_id'];?>]" value="1" style="width:25px;" <?php  if($value['selectable']){echo "checked";}?> /></td>
+				<td width="60px" align="center"><input type="checkbox" class="small-text" name="price[<?php echo $value['attr_id'];?>]" value="1" style="width:25px;" <?php  if($value['price']){echo "checked";}?> /></td>
 				<td width="60px" align="center"><input type="text" class="small-text" class="small-text" name="sort_order[<?php echo $value['attr_id'];?>]" value="<?php echo $value['sort_order'];?>" style="width:25px;" maxlength="3" /></td>
 			
 				<td width="175px" align="center">

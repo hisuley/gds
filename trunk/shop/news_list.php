@@ -8,7 +8,7 @@
  * 如果您开启了debug模式运行，那么您可以省去上面这一步，但是debug模式每次都会判断程序是否更新，debug模式只适合开发调试。
  * 如果您正式运行此程序时，请切换到service模式运行！
  *
- * 如您有问题请到官方论坛（http://tech.jmlvyou.com/bbs/）提问，谢谢您的支持。
+ * 如您有问题请到官方论坛（）提问，谢谢您的支持。
  */
 ?><?php
 /*
@@ -96,57 +96,20 @@ $nav_selected=5;
       
     </div>
     <div class="content-common-box">
+      <?php if($result['result']){?>
+      <?php foreach($result['result'] as $val){?>
       <div class="item-box">
           <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
+            <a href="<?php echo article_url($val['article_id']);?>"><img src="<?php echo $val['thumb'];?>" /></a>
           </div>
           <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
+            <a href="<?php echo article_url($val['article_id']);?>"><h3><?php echo sub_str($val['title'], 40);?></h3></a>
             <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
+              <?php echo sub_str(strip_tags($val['content']), 120);?>
             </p>
-            <span class="price">￥ 29990</span>
           </div>
         </div>
-
-        <div class="item-box">
-          <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
-          </div>
-          <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
-            </p>
-            <span class="price">￥ 29990</span>
-          </div>
-        </div>
-
-        <div class="item-box">
-          <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
-          </div>
-          <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
-            </p>
-            <span class="price">￥ 29990</span>
-          </div>
-        </div>
-
-        <div class="item-box">
-          <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
-          </div>
-          <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
-            </p>
-            <span class="price">￥ 29990</span>
-          </div>
-        </div>
+      <?php }?>
       </div>
     </div>
   <?php }else{ ;?>

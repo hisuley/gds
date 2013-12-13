@@ -93,6 +93,7 @@ body { background:url(../images/body_bg.gif) repeat-x left top; }
 #header .hot_keywords{padding-top:5px;}
 #header .weather_panel { float:left; width:275px; height:70px; padding:0px 0px 0px 12px; position:relative; }
 #header .weather_panel .weather_content{width:150px;height:70px;float:left;}
+#header .weather_panel .weather_icon{display:block;width:150px; height:30px; padding-left:5px;padding-top:10px;display:block;font-size:14px;font-weight: bold}
 #header .weather_panel .weather_icon_fine{display:block;background:url('../images/weather.png') no-repeat;background-size: 35px 35px; width:150px; height:30px; padding-left:40px;padding-top:10px;display:block;font-size:14px;font-weight: bold}
 #header .weather_panel .contact_content{width:115px;height:70px;background-size:115px 50px;float:left;background:url('../images/contact.png') no-repeat left top;}
 /* Header Nav */
@@ -106,7 +107,7 @@ body { background:url(../images/body_bg.gif) repeat-x left top; }
 position: relative;
 z-index: 8;
 left: 0;
-top: 10px;
+top: 5px;
 line-height: 37px;
 color: rgb(102, 102, 102);
 min-width: 600px;
@@ -306,6 +307,11 @@ margin-top: 5px;
     margin-bottom: 5px;
 
 }
+.content-common-box .item-box .description .intro{
+	height:50px;
+	display:block;
+	overflow: hidden;
+}
 .content-common-box .item-box .description h3 span.stars{
 
     color: #ff8800;
@@ -397,6 +403,10 @@ margin-bottom: 20px;
 	border: 1px solid #CCC;
 box-shadow: 1px 1px 1px #CCC;
 }
+.content-right-middle-box .content ul#promote_goods li a img{
+	height:60px;
+}
+
 .content-right-middle-box .content ul li a div.inner{
 	float:left;
 	width:125px;
@@ -716,4 +726,33 @@ div.big-box{width:630px;}
 	padding:15px 10px 10px;
 	margin-left:-480px; 
 	border:3px #ffd7ba solid;
-	background-color:#fff7e4;}
+	background-color:#fff7e4;
+}
+
+.cityinput{
+	background: url(http://img02.taobaocdn.com/tps/i2/T1EPyLXm0hXXXXXXXX-200-100.png) no-repeat 147px 3px
+}
+
+.citySelector{  font:12px/1.5 tahoma,arial,\5b8b\4f53; background: #fff; text-align:left; }
+.cityslide {width:250px; list-style:none; margin:0; padding:0; border: 1px solid #85BEE5; border-right-color: #3485C0; border-bottom-color: #3485C0;box-shadow: 2px 2px 3px rgba(0,0,0,0.3);  margin-top:-2px;}
+.cityslide li { list-style:none; overflow:hidden;  height:16px; padding:4px 5px;}
+.cityslide li.on{background:#9CD9FF; color:#fff;}
+.cityslide li b { font-weight:normal;}
+.cityslide li.empty{ background: #fff2e8; color: #666;}
+.cityslide li.empty em{color: red; font-style:normal;}
+.cityname {float:left;}
+.cityspell {float:right;}
+.cityBox{ width: 320px; border: 1px solid #85BEE5; overflow: hidden; /*box-shadow: 2px 2px 3px rgba(0,0,0,0.3); */}
+.cityBox ul{ margin: 0; padding: 0; overflow: hidden;}
+.cityBox ul li{ float: left; list-style: none; padding: 2px 4px; border: 1px solid #85BEE5; cursor:pointer; margin-left: 4px; display: inline; background: #E1EFFE;}
+.cityBox ul li.on{ background: #fff; border-bottom-color:#fff; position: relative;}
+.hide{ display: none;}
+p.tip{ color:#666; line-height: 20px; padding: 5px; margin: 0; text-indent: 3px;}
+.hotCity{ border-top: 1px solid #85BEE5; margin-top: -1px; clear:left; overflow: hidden; padding-bottom: 5px; padding-top: 5px; _margin-bottom:8px;}
+.cityTab{overflow: hidden;}
+.cityTab dl{ margin:0; padding: 0; overflow: hidden; }
+.cityTab dl dt{float: left; padding-left: 3px;color: #F30;text-indent: 5px; font-family: "Lucida console","consolas","courier new";line-height: 22px; font-size: 14px; width: 20px;}
+.cityTab dl dd{ margin-left:2px; float:left; width: 290px;}
+.cityTab dl dd a{ padding-left:5px; width:66px; line-height: 22px; display: inline-block; color: #000; text-decoration: none;}
+.cityTab dl dd a:hover{text-decoration:underline; color: red}
+

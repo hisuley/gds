@@ -22,57 +22,21 @@
       
     </div>
     <div class="content-common-box">
+      {sta:if($result['result'])[exc]}
+      {sta:foreach($result['result'] as $val)[loop]}
       <div class="item-box">
           <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
+            <a href="{echo:article_url($val['article_id']);/}"><img src="{echo:$val['thumb'];/}" /></a>
           </div>
           <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
+            <a href="{echo:article_url($val['article_id']);/}"><h3>{echo:sub_str($val['title'], 40);/}</h3></a>
             <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
+              {echo:sub_str(strip_tags($val['content']), 120);/}
             </p>
-            <span class="price">￥ 29990</span>
           </div>
         </div>
-
-        <div class="item-box">
-          <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
-          </div>
-          <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
-            </p>
-            <span class="price">￥ 29990</span>
-          </div>
-        </div>
-
-        <div class="item-box">
-          <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
-          </div>
-          <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
-            </p>
-            <span class="price">￥ 29990</span>
-          </div>
-        </div>
-
-        <div class="item-box">
-          <div class="images">
-            <a href="#"><img src="http://images4.c-ctrip.com/target/hotel/3000/2874/10F2AED6-E09B-445A-B797-8E895F382E1D_130_130.jpg" /></a>
-          </div>
-          <div class="description">
-            <a href="#"><h3>桂林漓江饭店<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              叠彩区螺蛳山路1号（ 市中心地区 ，近老人山脚下 ）
-            </p>
-            <span class="price">￥ 29990</span>
-          </div>
-        </div>
+      {end:foreach/}
+      {end:if/}
       </div>
     </div>
   {end:}else{ ;/}

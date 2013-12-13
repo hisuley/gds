@@ -5,10 +5,6 @@ function SetCookie (name, value) {
 	expires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 365);
 	document.cookie = name + "=" + escape(value) + "; expires=" + expires.toGMTString();
 }
-function selectlangpackage(v){
-	SetCookie ('language', v);
-	window.location.reload();
-}
 </script>
 
 <div style="clear:both"></div>

@@ -34,7 +34,10 @@
        {sta:if/}
        
         <p class=""><input type="submit" value="搜索" class="search-button"/></p>
-        <p class="hot_keywords">热门关键词：<a href="#">象鼻山</a> <a href="#">刘三姐</a> <a href="#">漓江</a> <a href="#">阳朔</a> <a href="#">七星岩</a> <a href="#">西街</a></p>
+        <p class="hot_keywords">热门关键词：
+          {sta:foreach($keyword_result as $keyword)[loop]}
+          <a href="search.php?k={echo:$keyword['keywords'];/}">{echo:$keyword['keywords'];/}</a>
+          {end:foreach/}</p>
         <div id="sel_content" class="sel_list" style="display:none">
         	<ul><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''">{echo:lp{i_goods_search};/}</li><li onclick="document.getElementById('sel_value').value = this.innerHTML" onmouseover="this.className = 'li_hover'" onmouseout="this.className = ''">{echo:lp{i_s_company};/}</li></ul>
         </div>
@@ -43,8 +46,10 @@
       </form>
        <div class="weather_panel clearfix">
         <div class="weather_content">
-          <span class="weather_icon_fine">晴 6~18度</span>
-          <p style="text-align:center;">东北风转四到五级</p>
+          <span class="weather_icon">
+            <img src="" />
+          小雨 13℃~9℃</span>
+          <p style="text-align:center;">北风小于三级</p>
         </div>
         <div class="contact_content">
           

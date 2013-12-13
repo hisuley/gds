@@ -182,6 +182,7 @@ class adminlp{
 	var $a_select_type = "下拉框选择";
 	var $a_radio_type = "单选框选择";
 	var $a_checkbox_type = "多选框选择";
+	var $a_rich_text = "富媒体输入";
 	var $a_add_category_need = "您还没有增加产品分类";
 	var $a_attrname_notnone = "属性名称不能为空";
 	var $a_edit_success = "修改成功";
@@ -676,7 +677,7 @@ class adminlp{
 	var $a_setting_message2 = "（网站标题，显示在页面的左上角。如：桂林GDS）";
 	var $a_setting_message3 = "（便于引擎查找，当输入多个时，用“，”或者“|”分隔。如：mall|iweb）";
 	var $a_setting_message4 = "（网站的重点描述信息，让访客清楚了解网站概要。如：桂林旅游目的地信息系统）";
-	var $a_setting_message5 = "（网站所属的版权。如：Copyright©2013 www.jmlvyou.com）";
+	var $a_setting_message5 = "（网站所属的版权。如：Copyright©2013 ）";
 	var $a_setting_message6 = "（信息产业部所颁发的备案信息。如：京ICP备09092256号 ）";
 	var $a_setting_message7 = "（用户注册时所需要同意的服务条款。支持html代码格式:&lt;br /&gt;换行；&lt;b&gt;加粗）";
 	var $a_setting_message8 = "（定义本系统的session前缀，默认：iweb_）";
@@ -1059,7 +1060,7 @@ class toollp{
 	var $t_tool_pro_1="1，\"工具箱列表\" 列出了目前系统内所有可用的工具箱组件，其路径在后台目录(sysadmin)->toolsBox目录下。";
 	var $t_tool_pro_2="2，您可以通过 \"下载工具箱\" 操作，来获取最新的工具箱组件；您也可以通过 \"工具箱管理\" 来卸载不需要的工具箱组件。";
 	var $t_tool_pro_3="3，只要您遵循我们的组件规范，您也可以自己编写工具箱组件，详情请参考我们开发手册。";
-	var $t_tool_pro_4="4，下载最新的模板需要产品授权，详情请登陆我们的官方主站：http://www.jmlvyou.com";
+	var $t_tool_pro_4="4，下载最新的模板需要产品授权，详情请登陆我们的官方主站：http://";
 	var $t_download_none="您的系统当前没有可下载的工具箱";
 	var $t_get_false="获取最新的远程工具箱列表失败，请您稍后再试";
 	var $t_loading="正在下载，请稍等...";
@@ -1082,13 +1083,13 @@ class toollp{
 	var $t_download="下载";
 	var $t_download_pro_1="1，当前列出了您的系统中没有集成的工具组件，点击 \"下载\" 即可把他们下载到后台目录(sysadmin)->toolsBox目录中，并在 \"工具箱列表\" 中使用。";
 	var $t_download_pro_2="2，工具组件的编号是唯一的，如果您的系统中没有列表中的某个工具，却又下载不了，请您修改后台目录(sysadmin)->toolsBox目录中的 \"tool.xml\" 文件。";
-	var $t_download_pro_3="3，下载最新的模板需要产品授权，详情请登陆我们的官方主站：http://www.jmlvyou.com";
+	var $t_download_pro_3="3，下载最新的模板需要产品授权，详情请登陆我们的官方主站：http://";
 	var $t_tool_manage="工具管理";
 	var $t_ask_unset="您确定要卸载此工具么？";
 	var $t_unset="卸载";
 	var $t_manage_pro_1="1，当前列出您系统中集成的工具箱组件，点击 \"卸载\" 即可把不需要的组件从系统中卸载掉。";
 	var $t_manage_pro_2="2，工具箱组件存放在后台目录(sysadmin)->toolsBox目录中，详情请参考开发手册。";
-	var $t_manage_pro_3="3，下载最新的模板需要产品授权，详情请登陆我们的官方主站：http://www.jmlvyou.com";
+	var $t_manage_pro_3="3，下载最新的模板需要产品授权，详情请登陆我们的官方主站：http://";
 	var $t_code_wrong="工具编号发生错误！";
 	var $t_unload_sucess="卸载成功";
 	var $t_unload_false="卸载失败，请检查工具配置文件";

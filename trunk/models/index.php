@@ -108,6 +108,7 @@ $goods_line = get_hot_goods_by_cat($dbo, $t_goods, $line_id, 6);
 $goods_meeting = get_hot_goods_by_cat($dbo, $t_goods, $meeting_id, 6);
 $goods_card = get_hot_goods_by_cat($dbo, $t_goods, $card_id, 6);
 $goods_promote = get_hot_goods_by_cat($dbo, $t_goods, $promote_id, 6);
+
 /* 友情链接 */
 $flink_rs = $dbo->getRs($sql_flink);
 /* 商家信息 */
