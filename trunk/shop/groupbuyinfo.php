@@ -420,7 +420,7 @@ function changeImage(obj){
 		            <li><span><?php echo $s_langpackage->s_groupbuy_real_name;?>:</span>
 		              <label><?php echo  $groupbuyinfo['linkman'];?></label>
 		            </li>
-		            <li><span><?php echo $s_langpackage->s_groupbuy_tel;?>:</span>
+		            <li><span><?php echo $s_langpackage->s_groupbuy_mobile;?>:</span>
 		              <label><?php echo  $groupbuyinfo['tel'];?></label>
 		            </li>
 		            <?php  if($groupbuyinfo['recommended']){?>
@@ -437,7 +437,7 @@ function changeImage(obj){
 		            <li><span><?php echo $s_langpackage->s_groupbuy_real_name;?>:</span>
 		              <input size="8" value="" id='groupbuyname' />
 		              (<?php echo $s_langpackage->s_required;?>)</li>
-		            <li><span><?php echo $s_langpackage->s_groupbuy_tel;?>:</span>
+		            <li><span><?php echo $s_langpackage->s_groupbuy_mobile;?>:</span>
 		              <input size="8" value="" id='groupbuytel' />
 		              (<?php echo $s_langpackage->s_required;?>)</li>
 		            <li><a href="javascript:gotoGroupbuy(<?php echo  $groupbuyinfo['group_id'];?>);"

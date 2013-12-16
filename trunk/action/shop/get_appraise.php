@@ -59,8 +59,17 @@ if($t=="seller"){
 //echo $sql;
 //exit;
 $result=$dbo->fetch_page($sql,10);
-//print_r($result);
 if($result['result']){
+	foreach($result['result'] as &$val){
+		if(empty($val['seller_evaluate'])){
+			$val['seller_evaluate'] = '没有填写评论内容';
+		}
+		if(empty($val['seller_explanation'])){
+			$val['seller_explanation'] = '没有填写回复内容';
+		}
+	}
+	error_reporting(E_ALL);
+	error_log("Comment:".print_r($result, true));
 	echo json_encode($result);
 }else{
 	exit('-1');

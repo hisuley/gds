@@ -59,6 +59,10 @@ if(isset($_POST['DepartCity']) && isset($_POST['DepartDate'])){
 	$ticket->DepartDate = $_POST['DepartDate'];
 	$requestXML = $ticket->main();
 	$returnXML=$ticket->ResponseXML;//返回的数据是一个XML
+	if(empty($returnXML)){
+		error_log(print_r($returnXML, true));
+		trigger_error('与携程通信出错，请检查服务器网络链接。');
+	}
 	$ticket_list = $returnXML->FlightSearchResponse->FlightRoutes->DomesticFlightRoute->FlightsList->DomesticFlightData;
 }
 
@@ -109,19 +113,39 @@ if(get_sess_user_id()) {
           <h2>机票预订</h2>
         </div>
         <div class="content" style="height:70px;">
-	           <script type="text/javascript">
+	    <script type="text/javascript">
         function inputTxt2(obj,act, initVal){
           var str = initVal;
           if(obj.value==''&&act=='set')
           {
             obj.value=str;
-            obj.style.color="#cccccc"
+            //obj.style.color="#cccccc"
           }
           if(obj.value==str&&act=='clean')
           {
             obj.value='';
-            obj.style.color="#000000"
+            //obj.style.color="#000000"
           }
+        }
+        function compareDate(){
+        	var departDate = document.getElementById('departDateInput').value;
+        	var departDateArray = departDate.split("-");
+
+        	var arriveDate = document.getElementById('arriveDateInput').value;
+        	var arriveDateArray = arriveDate.split("-");
+        	var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
+        	var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
+        	if(departDate > arriveDate){
+        		document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
+        	}
+        }
+        function compareCity(){
+        	var startCity = document.getElementById('startCity').value;
+        	var endCity = document.getElementById('endCity').value;
+        	if(startCity == endCity){
+        		alert('不能选择相同的城市！');
+        		document.getElementById('startCity').value = '';
+        	}
         }
         </script>
             <form class="pretty-form ticket-form" method="POST" action="ticket.php" onsubmit="return checkTicketForm(this);">
@@ -142,7 +166,7 @@ if(get_sess_user_id()) {
                   <label for="none">城市：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10 cityinput" style="background-position:200px 3px;" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" style="color:#cccccc;" value="请输入城市名称" >
+                  <input class="column-10 cityinput" style="background-position:200px 3px;" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');compareCity();" onfocus="inputTxt2(this,'clean', '请输入城市名称');compareCity();" onchange="compareCity();" value="请输入城市名称" >
                   <input class="column-10 cityinput" id="endCity"  style="background-position:200px 3px;"  type="text" name="ArriveCity" value="桂林" readonly/>
                 </div>
               </div>
@@ -152,8 +176,8 @@ if(get_sess_user_id()) {
                   <label for="none">日期：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');"  onFocus="WdatePicker({isShowClear:false,readOnly:true});inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
-                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true});inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
+                  <input class="column-10" type="text" id="departDateInput" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');compareDate();"  value="请选择出发日期" />
+                  <input class="column-10" type="text" id="arriveDateInput" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');" value="请选择回程日期" />
                 </div>
               </div>
               <div class="column-2">

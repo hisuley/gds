@@ -362,13 +362,14 @@ function checkForm() {
 		         	  </td>
 					</tr>
 					<tr><td class="textright"><?php echo  $m_langpackage->m_goods_price;?>：</td>
-						<td><input type="text" id="goods_price" name="goods_price" value="<?php echo  $goods_info['goods_price'];?>" style="width:80px;text-align:right;" maxlength="8" /> <?php echo  $m_langpackage->m_yuan;?> (<?php echo  $m_langpackage->m_goods_pricezero;?>)</td>
+						<td><input type="text" id="goods_price" name="goods_price" value="<?php echo  $goods_info['goods_price'];?>" style="width:80px;text-align:right;" maxlength="8" /> <label><?php echo  $m_langpackage->m_yuan;?> (<?php echo  $m_langpackage->m_goods_pricezero;?>)</label></td>
 					</tr>
 					<tr>
 						<td class="textright"><?php echo $m_langpackage->m_stort_type;?>：</td>
 						<td class="">
-							<input type="radio" value="1" id="is_transport_template" onclick="chostransporttype(1)"  name="is_transport_template" /> <?php echo $m_langpackage->m_is_transport_template;?>&nbsp;&nbsp;
-							<input type="radio"  onclick="chostransporttype(0)" value="0" name="is_transport_template" /><?php echo   $m_langpackage->m_transport_price;?>
+							<input type="radio" value="1" id="is_transport_template" onclick="chostransporttype(1)"  name="is_transport_template" /> 
+							<label><?php echo $m_langpackage->m_is_transport_template;?>&nbsp;&nbsp;</label>
+							<input type="radio"  onclick="chostransporttype(0)" value="0" name="is_transport_template" /><label><?php echo   $m_langpackage->m_transport_price;?></label>
 						</td>
 					</tr>
 
@@ -389,7 +390,7 @@ function checkForm() {
 
 					<tr  id="transport2" style="display:none;">
 						<td class="textright"><?php echo $m_langpackage->m_stort_expense;?>：</td>
-						<td><input type="text" name="transport_price" id="transport_price" value="<?php echo   $goods_info['transport_price'];?>" style="width:80px; text-align:right;" maxlength="8" /> <?php echo $m_langpackage->m_yuan;?></td>
+						<td><input type="text" name="transport_price" id="transport_price" value="<?php echo   $goods_info['transport_price'];?>" style="width:80px; text-align:right;" maxlength="8" /> <label><?php echo $m_langpackage->m_yuan;?></label></td>
 					</tr>
 
 					<tr><td class="textright"><span id="picspan"><?php echo  $m_langpackage->m_showgoods_photo;?></span></td>
@@ -459,21 +460,21 @@ function checkForm() {
 					<textarea name="goods_wholesale" cols="45" rows="3"><?php echo  $goods_info['goods_wholesale'];?></textarea>
 					</td></tr>
 					<tr><td class="textright"><?php echo  $m_langpackage->m_goods_number;?>：</td>
-						<td><input type="text" name="goods_number" id="goods_number" value="<?php echo  $goods_info['goods_number'];?>" style="width:80px; text-align:right;" maxlength="5" /> <?php echo  $m_langpackage->m_jian;?></td></tr>
+						<td><input type="text" name="goods_number" id="goods_number" value="<?php echo  $goods_info['goods_number'];?>" style="width:80px; text-align:right;" maxlength="5" /> <label><?php echo  $m_langpackage->m_jian;?></label></td></tr>
 					<tr><td class="textright"><?php echo  $m_langpackage->m_keyword;?>：</td>
-						<td><input type="text" name="keyword" value="<?php echo  $goods_info['keyword'];?>" style="width:250px;" maxlength="200" />  <?php echo $m_langpackage->m_more_keyword_exp;?></td></tr>
+						<td><input type="text" name="keyword" value="<?php echo  $goods_info['keyword'];?>" style="width:250px;" maxlength="200" />  <label><?php echo $m_langpackage->m_more_keyword_exp;?></label></td></tr>
 					<tr><td class="textright"><?php echo  $m_langpackage->m_on_sale;?>：</td>
-						<td><input type="checkbox" name="is_on_sale" value="1" <?php if($goods_info['is_on_sale']){ echo "checked";?><?php }?> />
-							<?php echo  $m_langpackage->m_view_status;?></td></tr>
+						<td><input type="checkbox" name="is_on_sale" value="1" <?php if($goods_info['is_on_sale']){ echo "checked";?><?php }?> /><label>
+							<?php echo  $m_langpackage->m_view_status;?></label></td></tr>
 					<tr><td class="textright"><?php echo  $m_langpackage->m_add_recommend;?>：</td><td>
 						<input type="checkbox" name="is_best" value="1" <?php if($goods_info['is_best']){ echo "checked";}?> />
-						<?php echo  $m_langpackage->m_best;?>&nbsp;
+						<label><?php echo  $m_langpackage->m_best;?>&nbsp;</label>
 						<input type="checkbox" name="is_promote" value="1" <?php if($goods_info['is_promote']){ echo "checked";;}?> />
-						<?php echo  $m_langpackage->m_promote;?>&nbsp;
+						<label><?php echo  $m_langpackage->m_promote;?>&nbsp;</label>
 						<input type="checkbox" name="is_new" value="1" <?php if($goods_info['is_new']){ echo "checked";}?> />
-						<?php echo  $m_langpackage->m_new;?>&nbsp;
+						<label><?php echo  $m_langpackage->m_new;?>&nbsp;</label>
 						<input type="checkbox" name="is_hot" value="1" <?php if($goods_info['is_hot']){ echo "checked";}?> />
-						<?php echo  $m_langpackage->m_hot;?>&nbsp;
+						<label><?php echo  $m_langpackage->m_hot;?>&nbsp;</label>
 						<?php echo  $m_langpackage->m_set_num;?><?php echo $user_privilege['4'];?><?php echo  $m_langpackage->m_best;?>，<?php echo $user_privilege['5'];?><?php echo  $m_langpackage->m_promote;?>，<?php echo $user_privilege['6'];?><?php echo  $m_langpackage->m_new;?>，<?php echo $user_privilege['7'];?><?php echo  $m_langpackage->m_hot;?>，<?php echo  $m_langpackage->m_num_much;?>
 					</td></tr>
 					<tr><td colspan="2" class="center"><input class="submit" type="submit" name="submit" value="<?php echo  $m_langpackage->m_add_goods;?>" /></td></tr>

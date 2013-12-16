@@ -52,6 +52,7 @@ if(get_sess_user_id()) {
 	$USER['shop_id'] = '';
 }
 
+
 //引入语言包
 $i_langpackage = new indexlp;
 $s_langpackage=new shoplp;
@@ -77,6 +78,9 @@ $sql_best = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND is_best=1 and lock_fl
 $sql_hot = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND is_hot=1 and lock_flg=0 order by pv desc limit 10";
 $goods_best = $dbo->getRs($sql_best);
 $goods_hot = $dbo->getRs($sql_hot);
+
+/* 用户资料 */
+
 
 /* 浏览记录 */
 $getcookie = get_hisgoods_cookie();

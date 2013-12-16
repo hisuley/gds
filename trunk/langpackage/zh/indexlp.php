@@ -171,6 +171,7 @@ class indexlp{
 	var $i_goto_manage = "进入管理";
 	var $i_find_goods = "查找商品";
 	var $i_member_login = "会员登录";
+	var $i_notice_title = "提示信息";
 	var $i_welcome_iwebshop = "欢迎您登录{iweb_mall}多用户商城系统";
 	var $i_remembe_me = "记住我（请不要在公共计算机上使用此项）";
 	var $i_login_info_first = "便宜有好货！超过1000万件商品任您选。";

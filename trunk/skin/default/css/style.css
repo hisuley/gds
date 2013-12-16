@@ -147,9 +147,11 @@ color:#FFFFFF; font-weight:bold; }
 .main_right .openMain { margin:30px 0 100px 30px; width:500px; /*border:1px solid #E1E1E1;*/ font-size:12px }
 .main_right .tab_pay { padding:0; border:none; }
 .main_right .tab_pay .ttls { padding:5px 10px; background-color:#FEE9D6; color:#333; text-align:left }
-.main_right .tab_pay th, .main_right table td { padding:5px }
+.main_right .tab_pay th, .main_right table td { padding:5px;}
+.main_right .tab_pay th, .main_right table td.textright { padding-top:10px;}
 .main_right .tab_pay th { width:60px; color:#000; font-weight:normal; text-align:right; border:none }
 .main_right table.tab_pay td { color:#666; border:none }
+input,label{vertical-align: top}
 /* 8 -17 add */
 .imgPan { width:570px; overflow:hidden; }
 .imgPan li { float:left; text-align:center }

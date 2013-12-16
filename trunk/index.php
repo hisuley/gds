@@ -280,8 +280,8 @@ $nav_list = get_nav_list($t_nav,$dbo);
                   <label for="none">日期：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10" type="text" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');"  onFocus="WdatePicker({isShowClear:false,readOnly:true});inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
-                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true});inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
+                  <input class="column-10" type="text" id="departDateInput" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
+                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
                 </div>
               </div>
               <div class="column-2">

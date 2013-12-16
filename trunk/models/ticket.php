@@ -33,6 +33,10 @@ if(isset($_POST['DepartCity']) && isset($_POST['DepartDate'])){
 	$ticket->DepartDate = $_POST['DepartDate'];
 	$requestXML = $ticket->main();
 	$returnXML=$ticket->ResponseXML;//返回的数据是一个XML
+	if(empty($returnXML)){
+		error_log(print_r($returnXML, true));
+		trigger_error('与携程通信出错，请检查服务器网络链接。');
+	}
 	$ticket_list = $returnXML->FlightSearchResponse->FlightRoutes->DomesticFlightRoute->FlightsList->DomesticFlightData;
 }
 
