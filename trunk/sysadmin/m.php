@@ -128,6 +128,7 @@ $appArray = array(
 	'news_catedit'			=> 'm/news/cat_edit.php',
 	'news_list'			=> 'm/news/list.php',
 	'news_catlist'		=> 'm/news/cat_list.php',
+        'news_attr_manage'		=> 'm/news/attr_manage.php',
 
 	/* 插件 */
 	'plugin_list'		=> 'm/plugin/pluginlist.php',

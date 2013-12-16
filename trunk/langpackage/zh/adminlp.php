@@ -248,6 +248,8 @@ class adminlp{
 	var $a_news_list = "新闻列表";
 	var $a_news_add = "添加新闻";
 	var $a_news_edit = "新闻修改";
+        var $a_news_attr_management = "新闻属性管理";
+        var $a_add_cat_need = "您还没有增加新闻分类";
 	var $a_news_title = "新闻标题";
 	var $a_news_category = "新闻分类";
 	var $a_select_n_category = "选择分类";

@@ -37,10 +37,13 @@ $actArray = array(
 	'news_catedit'			=> array('a/news/catedit.php','m.php?app=news_catlist'),
 	'news_catdel'			=> array('a/news/catdel.php','m.php?app=news_catlist'),
 	'news_catadd'			=> array('a/news/catadd.php','m.php?app=news_catlist'),
+        'news_attr_edit'		=> array('a/news/attr_edit.php'),
+	'news_attr_del'		=> array('a/news/attr_del.php'),
+	'news_attr_extend'		=> array('a/news/attr_extend.php'),
 
 	'index_images_upload'	=> array('a/index/images_upload.php','m.php?app=index_images'),
 	'index_images_del'		=> array('a/index/images_del.php','m.php?app=index_images'),
-
+    
 	'verifycode_status'		=> array('a/sys/verifycode_status.php'),
 	'sys_setting_update'	=> array('a/sys/setting_update.php','m.php?app=sys_setting'),
 	'searchkey_del'			=> array('a/sys/searchkey_del.php'),

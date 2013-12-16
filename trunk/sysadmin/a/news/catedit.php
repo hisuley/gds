@@ -15,6 +15,7 @@ if(!$right){
 
 /* post 数据处理 */
 $post['cat_name'] = short_check(get_args('cat_name'));
+$post['parent_id'] = intval(get_args('parent_id'));
 $post['sort_order'] = intval(get_args('sort_order'));
 $cat_id = intval(get_args('cat_id'));
 

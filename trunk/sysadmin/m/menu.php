@@ -53,6 +53,7 @@ $right_array=array(
     "news_list"    =>   "0",
     "add_news_cat"    =>   "0",
     "add_news"    =>   "0",
+    "news_attr_manager"    =>   "0",
 
     "template_mana"    =>   "0",
 
@@ -308,6 +309,9 @@ $plugin=$dbo->getRs($sql);
 			<?php if($right_array["image_browse"]){?>
 	            	<li id="image_browse" class="" onclick="changeMenu(this);"><a href="m.php?app=index_images" target="main-frame"><?php echo $a_langpackage->a_index_image; ?></a></li>
 	        <?php }?>
+                        <?php if($right_array["news_attr_manager"]){?>
+				<li id="attr_manager" class="" onclick="changeMenu(this);"><a href="m.php?app=news_attr_manage" target="main-frame"><?php echo $a_langpackage->a_news_attr_management; ?></a></li>
+			<?php }?>
 			<ul>
 	   <?php }?>
 	   
