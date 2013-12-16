@@ -40,7 +40,7 @@ body { background:url(../images/body_bg.gif) repeat-x left top; }
 #header .topMain { padding-top:30px }
 #header #logo { float:left; width:170px; margin-right:45px }
 #header .search_panel { float:left; width:425px; height:30px; padding:5px 12px 8px;  position:relative; }
-#header .search_panel .search_sel { float:left; width:95px; height:25px; background:url(../images/select_bg_index.gif) no-repeat left top; border:none; }
+#header .search_panel .search_sel { float:left; width:95px; padding:5px 0 0 0px; height:20px; background:url(../images/select_bg_index.gif) no-repeat left top; border:none; }
 #header .search_panel .search_txt { float:left; width:200px; padding-left:10px; }
 #header .search_panel .search_txt input { height:19px; width:200px; _margin-top:-1px; padding:2px 3px; line-height:20px; color:#ccc; border:1px solid #ccc; }
 #header .search_panel .search_btn { width:87px; float:left; display:inline; margin-left:30px; _margin-left:15px; }
@@ -110,9 +110,8 @@ left: 0;
 top: 5px;
 line-height: 37px;
 color: rgb(102, 102, 102);
-min-width: 600px;
-max-width: 600px;
-background-color: rgb(255, 255, 255);
+min-width: 300px;
+max-width: 800px;
 }
 .header-nav .cui_sub_nav {
 background:url('../images/sub_nav_bg.png') repeat-x; 
@@ -635,7 +634,7 @@ div.search-filter-box ul li.clearfix{float:none;clear:both;}
 .sel_list { border:1px #ccc solid; padding:5px 0 0; min-width:93px; width:auto!important; _width:93px; position:absolute; left:12px; top:37px; background-color:#fff; font-size:14px; z-index:101; }
 .sel_list li { float:left; height:18px; padding:3px 5px; min-width:83px; width:auto!important; _width:83px; clear:both; cursor:pointer; }
 .sel_list li.li_hover { background-color:#666; color:#fff; }
-.sel_value { width:59px; margin-left:1px; padding:5px 0 0 5px; height:14px; margin-top:0; border:none; background:none; border-width:0; font-size:14px }
+.sel_value { width:59px; margin-left:1px; padding:0px 0 0 5px; height:auto; margin-top:0; border:none; background:none; border-width:0; font-size:14px }
 .bg_gary { background-color:#F7F7F7 }
 .bg_gary h3 { display:block; padding-top:13px; padding-left:15px; padding-bottom:10px; border-bottom:2px solid #F77A07; text-indent:-9999px }
 .bg_gradual { padding:8px 0 9px 8px; background:url(../images/ttlm_01_bg.gif) repeat-x left top; }

@@ -58,7 +58,7 @@ if(!$errorarray[1]){
 	$errorarray[1]=$baseUrl;
 }
 
-?>														<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><?php echo $i_langpackage->i_member_login;?></title>
@@ -69,7 +69,6 @@ if(!$errorarray[1]){
 <base href="<?php echo  $baseUrl;?>" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" rel="stylesheet" type="text/css" />
-
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/area.js"></script>
 <script type='text/javascript' src='./servtools/md5.js'></script>

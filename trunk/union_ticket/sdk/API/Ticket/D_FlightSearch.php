@@ -2,6 +2,7 @@
 /**
  * 请求D_HotelSearch的服务（酒店列表查询）
  */
+error_reporting(0);
 class get_D_FlightSearch{
 	/**
 	 * @var城市的ID，必须填写

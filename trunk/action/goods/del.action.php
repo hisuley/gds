@@ -13,6 +13,7 @@ $m_langpackage=new moduleslp;
 //定义文件表
 $t_goods = $tablePreStr."goods";
 $t_users = $tablePreStr."users";
+$t_order_goods = $tablePreStr."order_goods";
 $t_shop_info=$tablePreStr."shop_info";
 $t_goods_gallery = $tablePreStr."goods_gallery";
 $t_img_size=$tablePreStr."img_size";
@@ -21,6 +22,11 @@ $id = intval(get_args('id'));
 //数据库操作
 dbtarget('w',$dbServs);
 $dbo=new dbex();
+$sql = "select goods_id from $t_order_goods where goods_id=$id";
+$row = $dbo->getRow($sql);
+if($row){
+	trigger_error('商品存在订单，无法删除！');
+}
 //判断用户是否锁定，锁定则不许操作
 $sql ="select locked from $t_users where user_id=$user_id";
 $row = $dbo->getRow($sql);

@@ -28,10 +28,15 @@ foreach($goods_r as $value) {
 	if(isset($cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']) && $cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']>0) {
 		$array[$cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']]++;
 	}
+	/*
 	// 四级分类
 	if(isset($cat_info[$cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']]['parent_id']) && $cat_info[$cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']]['parent_id']>0) {
-		$array[$cat_info[$cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']]['parent_id']]++;
+		if(isset($array[$cat_info[$cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']]['parent_id']])){
+			$array[$cat_info[$cat_info[$cat_info[$value['cat_id']]['parent_id']]['parent_id']]['parent_id']]++;
+
+		}
 	}
+	*/
 	// ..
 }
 //定义写操作

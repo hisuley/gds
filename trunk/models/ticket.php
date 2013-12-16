@@ -5,7 +5,7 @@ require("foundation/asession.php");
 require("configuration.php");
 require("includes.php");
 require_once("foundation/fstring.php");
-error_reporting(1);
+error_reporting(0);
 /* URL信息处理 */
 $cat_id = 1;
 //引入语言包

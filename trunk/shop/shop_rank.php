@@ -69,6 +69,7 @@ $header=array('title'=>'商铺信用等级','keywords'=>'商铺信用等级','de
 <base href="<?php echo  $baseUrl;?>" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/article.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <style type="text/css">
 .knowledge_content p{

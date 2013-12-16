@@ -415,7 +415,8 @@ function checkform(){
 	}
 
 	var zipcode = document.getElementsByName('zipcode')[0];
-	if(zipcode.value==''){
+	var zipcode_reg = /^\d{6}$/;
+	if(zipcode.value=='' || !zipcode_reg.test(zipcode.value)){
 		alert('<?php echo $m_langpackage->m_pl_getgoods_zipcode;?>');
 		return false;
 	}
@@ -428,7 +429,7 @@ function checkform(){
 	}
 
 	var user_mobile = document.getElementsByName('mobile')[0];
-	var reg = /^\d+(\.d+)?$/;
+	var reg = /^\d{11}$/;
 
 	var user_telphone = document.getElementsByName('telphone')[0];
 	var tel_reg=/^([0-9]|[-])+$/g ;

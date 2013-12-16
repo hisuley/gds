@@ -109,6 +109,7 @@ $shoptemplate_arr[] = array(
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 <style type="text/css">
 .red{color:red;}
 .templageimg span{float:left; display:block; text-align:left; margin-left:1px;}
@@ -297,7 +298,13 @@ function checkForm() {
 		alert("<?php echo  $m_langpackage->m_shopname_notnone;?>");
 		shop_name.focus();
 		return false;
-	} else if(document.getElementsByName("country")[0].value==0) {
+	}
+	else if(shop_name.value.length > 50) {
+		alert("<?php echo  $m_langpackage->m_shopname_overflow;?>");
+		shop_name.focus();
+		return false;
+	}
+	else if(document.getElementsByName("country")[0].value==0) {
 		alert("<?php echo  $m_langpackage->m_select_countrypl;?>");
 		return false;
 	} else if(document.getElementsByName("province")[0].value==0) {

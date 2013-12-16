@@ -26,13 +26,15 @@ if(!$request_id) {exit($a_langpackage->a_error);}
 $t_shop_request = $tablePreStr."shop_request";
 $t_users = $tablePreStr."users";
 $t_admin_log = $tablePreStr."admin_log";
+$t_remind = $tablePreStr."remind_info";
 
 // 定义读操作
 dbtarget('r',$dbServs);
 $dbo = new dbex;
 $sql = "select user_id from `$t_shop_request` where request_id in($request_id)";
 $rs = $dbo->getRs($sql);
-
+error_reporting(E_ALL);
+error_log('Refuse ID:'.$request_id." Refuse Type:".$s);
 //if($row['status']==$s) {
 //	action_return(1,$a_langpackage->a_handle_suc);
 //}
@@ -54,6 +56,21 @@ if(!$right){
 		$user_id=implode(",", $userid_array);
 		$sql = "update `$t_users` set rank_id=2 where user_id in($user_id)";
 		$dbo->exeUpdate($sql);
+	}elseif($s == '2'){
+		error_log('Refuse:'.print_r($rs, true));
+		require_once("../foundation/module_remind.php");
+		foreach($rs as $key=>$val){
+			$rejectInfo = array(
+				'user_id' => $val['user_id'],
+				'remind_info' => '您的开店申请审核失败，请修改后提交',
+				'remind_time' => date('Y-m-d h:i:s'),
+				'isread' => 0
+				);
+			error_log('Reject Info:'.print_r($rejectInfo, true));
+			$returnMsg = insert_remind_info($dbo, $t_remind, $rejectInfo);
+			error_log('Insert Return:'.print_r($returnMsg, true));
+		}
+		
 	}
 	admin_log($dbo,$t_admin_log,$sn = $a_langpackage->a_audit_operate);
 	action_return(1,$a_langpackage->a_handle_suc);

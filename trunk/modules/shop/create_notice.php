@@ -44,6 +44,10 @@ if(isset($user_privilege[1])&&!$user_privilege[1]) {
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
+<script type="text/javaScript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
+
+<script type="text/javaScript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <style type="text/css">
 
 </style>

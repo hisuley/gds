@@ -6,7 +6,7 @@
 class adminlp{
 	/* common */
 
-
+	var $a_verify_fail = "您的开店申请审核失败";
 	var $a_yuan = "元";
 	var $a_mana_center = "管理中心";
 	var $a_footer = "版权所有 © 2013 桂林市旅游局。";

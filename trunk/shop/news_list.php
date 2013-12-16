@@ -110,6 +110,7 @@ $nav_selected=5;
           </div>
         </div>
       <?php }?>
+      <?php }?>
       </div>
     </div>
   <?php }else{ ;?>

@@ -51,6 +51,7 @@ $honor_list = get_honor_list($dbo,$t_shop_honor,$shop_id);
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo  $m_langpackage->m_u_center;?></title>
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
+<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 <style type="text/css">
 th{background:#EFEFEF}
 .red { color:red; }

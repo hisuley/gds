@@ -96,7 +96,7 @@ class moduleslp{
 	var $m_choice= "至少要选择一项！";
 	var $m_rem_type= "提醒类型";
 	var $m_rem_name= "提醒名称";
-	var $m_site_rem= "站内消息";
+	var $m_site_rem= "未读站内消息";
 	var $m_inputtrue_username = "请输入正确的用户名";
 	var $m_email_reminder ="邮件提醒";
 	var $m_complaints ="投诉";
@@ -301,6 +301,7 @@ class moduleslp{
 	var $m_shop_bannerimg = "店铺头上大图片";
 	var $m_shop_bannerimg_msg = "建议大小:960X150,不修改请留空！";
 	var $m_shopname_notnone = "店铺名称不能为空！";
+	var $m_shopname_overflow = "店铺名称不能超过50字符！";
 	var $m_select_categoriespl = "请选择分类！";
 	var $m_select_countrypl = "请选择国家！";
 	var $m_select_provincepl = "请选择省份！";
@@ -438,9 +439,10 @@ class moduleslp{
 	var $m_transport_info="物流信息";
 	var $m_addres_info ="收货信息";
 	var $m_view_orderinfo = "查看订单详情";
-	var $m_order_cancel = "订单状态异常";
+	//var $m_order_cancel = "订单状态异常";
 	var $m_order_dell = "该订单已删除";
 	var $m_order_combuy = "已完成购买";
+	var $m_order_cancel = "已取消";
 	var $m_order_nosure = "未确认";
 	var $m_order_sure = "已确认";
 	var $m_order_payed = "已支付";
@@ -532,7 +534,7 @@ class moduleslp{
 	var $m_pl_getgoods_city = "请选择收件人城市";
 	var $m_pl_getgoods_district = "请选择收件人地区";
 	var $m_pl_getgoods_address = "请填写收件人详细地址";
-	var $m_pl_getgoods_zipcode = "请填写邮政编码";
+	var $m_pl_getgoods_zipcode = "邮政编码格式不正确";
 	var $m_email_type_notine = "您填写的邮箱格式不正确";
 	var $m_sorry_p_mselectone = "对不起，电话和手机至少填写一项。";
 	var $m_sorry_mobiletype = "对不起，您输入的手机号码错误。";

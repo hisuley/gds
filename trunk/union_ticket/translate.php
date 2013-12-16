@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 //定义本系统的相对路径根部
 if(!defined('ABSPATH')) {
 	define('ABSPATH',dirname(__FILE__).'/');
@@ -29,7 +30,10 @@ function findCity($name){
 function translateCraft($code){
 	$xml = simplexml_load_file(ABSPATH.'static/craft.xml');
 	$matches = $xml->xpath('//CraftInfoEntity[CraftType="'.$code.'"]');
-	return (string)$matches[0]->CTName;
+	if(isset($matches[0]))
+		return (string)$matches[0]->CTName;
+	else
+		return $code;
 }
 function translateClass($code){
 	switch($code){

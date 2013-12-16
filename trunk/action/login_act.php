@@ -102,7 +102,22 @@ if($user_info['email_check']!='1'){
 
 	//定义写操作
 	dbtarget('w',$dbServs);
-	$last_ip = $_SERVER['REMOTE_ADDR'];
+	function GetIP(){
+		if(!empty($_SERVER["HTTP_CLIENT_IP"])){
+		  $cip = $_SERVER["HTTP_CLIENT_IP"];
+		}
+		elseif(!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+		  $cip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+		}
+		elseif(!empty($_SERVER["REMOTE_ADDR"])){
+		  $cip = $_SERVER["REMOTE_ADDR"];
+		}
+		else{
+		  $cip = "0.0.0.0";
+		}
+		return $cip;
+	}
+	$last_ip = GetIP();
 	$sql="update $t_users set last_login_time=now(),last_ip='$last_ip' where user_id='$user_id'";
 	$dbo->exeUpdate($sql);
 	
