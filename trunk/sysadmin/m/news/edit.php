@@ -15,6 +15,8 @@ $dbo=new dbex;
 //数据表定义区
 $t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
+$t_article_attr = $tablePreStr."article_attr";
+$t_attribute = $tablePreStr."attribute";
 
 $article_id = intval(get_args('id'));
 if(!$article_id) { exit($a_langpackage->a_error);}
@@ -22,6 +24,12 @@ if(!$article_id) { exit($a_langpackage->a_error);}
 $cat_info = get_news_cat_list($dbo,$t_article_cat);
 $news_info = get_news_info($dbo,$t_article,$article_id);
 
+$attribute_info = array();
+if($news_info['cat_id']) {
+	$attribute_info = get_attribute_info($dbo,$t_attribute,$news_info['cat_id']);
+}
+$js_attribute_info = json_encode($attribute_info);
+$news_attr = get_goods_attr($dbo,$t_article_attr,$article_id);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,9 +38,15 @@ $news_info = get_news_info($dbo,$t_article,$article_id);
 <title></title>
 <link rel="stylesheet" type="text/css" href="skin/css/admin.css">
 <link rel="stylesheet" type="text/css" href="skin/css/main.css">
-
+<style>
+.attr_class div.div {border:2px solid #fff; padding:3px;}
+.attr_class div span.left{display:block; width:auto; float:left; margin-left:10px; text-align:right; _line-height:24px;}
+.attr_class div span.right{display:block; width:350px; float:left; margin-left:5px; text-align:left;}
+.attr_class div span.right input {margin-left:5px;}
+</style>
 <script type="text/javascript" src="../servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
 <script type="text/javascript" src="skin/xheditor/xheditor.min.js?v=1.0.0-final"></script>
+<script language="JavaScript" src="../servtools/ajax_client/ajax.js"></script>
 <script type="text/javascript">
 
 var introeditor;
@@ -55,7 +69,7 @@ $(function(){
 		<table class="form-table">
 			<tr>
 				<td width="80px"><?php echo $a_langpackage->a_select_n_category; ?>：</td>
-				<td><select name="cat_id">
+				<td><select name="cat_id" onchange="changeAttr(this.value);">
 					<option value="0"><?php echo $a_langpackage->a_select_n_category; ?></option>
 					<?php foreach($cat_info as $value) {?>
 					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$news_info['cat_id']){ echo "selected";} ?> ><?php echo $value['cat_name']; ?></option>
@@ -66,7 +80,10 @@ $(function(){
 				<td><?php echo $a_langpackage->a_news_title; ?>：</td>
 				<td><input class="small-text" type="text" name="title" value="<?php echo $news_info['title']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
 			</tr>
-
+                        <tr id="goods_attr_tr">
+                                <td><?php echo $a_langpackage->a_news_attr; ?>：</td>
+                                <td class="attr_class" id="attr_content"></td>
+                        </tr>
 			<tr>
 				<td><?php echo $a_langpackage->a_title_color; ?>：</td>
 				<td>
@@ -117,6 +134,17 @@ $(function(){
  </div>
 <script language="JavaScript">
 <!--
+var attribute = <?php echo  $js_attribute_info;?>;
+var newsAttr = new Array();
+<?php if($news_attr) {
+	foreach($news_attr as $v) {
+		$v['attr_values'] = preg_replace("/[\r\n]+/",'|',$v['attr_values']);
+		if(substr($v['attr_values'],'-1') == '|') {
+			$v['attr_values'] = substr($v['attr_values'],'0','-1');
+		}
+		echo "newsAttr['".$v['attr_id']."'] = '".$v['attr_values']."'; \r\n";
+	}
+}?>
 var ColorHex=new Array('00','33','66','99','CC','FF')
 var SpColorHex=new Array('FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF')
 var current=null
@@ -193,6 +221,67 @@ function checkForm() {
 function AddContentImg(ImgName,classId){
 	introeditor.appendHTML("<img src=../"+ImgName+"/><br>");
 }
+function changeAttr(value) {
+	ajax("a.php?act=news_attr_list","POST","v="+value,function(data){
+		changeAttrTr(data);
+	},'JSON');
+}
+
+function changeAttrTr(objvalue) {
+	var attr_content = document.getElementById("attr_content");
+	attr_content.innerHTML = '';
+	var html = '';
+	var temp = '';
+	for(var i=0; i<objvalue.length; i++) {
+		temp = formatFormElement(objvalue[i].attr_id,objvalue[i].input_type,objvalue[i].attr_name,objvalue[i].attr_values);
+		html += '<div class="div"><span class="left">'+objvalue[i].attr_name+'：</span><span class="right">'+temp+'</span><div class="clear"></div></div>';
+	}
+	attr_content.innerHTML = html;
+}
+
+//属性input类型 0:TEXT,1:SELECT,2:radio,3:checkbox
+function formatFormElement(id,type,name,value) {
+	var optionValue;
+	var cValue = str = '';
+	if(newsAttr[id]) {
+		cValue = newsAttr[id];
+	}
+	if(type==0) {
+		str = '<input type="text" name="attr[' + id + ']" value="'+cValue+'" maxlength="200" />';
+	} else if (type==1 && value!='') {
+		optionValue = value.split("\r\n");
+		str = '<select name="attr[' + id + ']">';
+		str += '<option value="0">{echo: lp{m_select_pl};/}' + name + '</option>';
+		for(var i=0; i<optionValue.length; i++) {
+			if(optionValue[i] == cValue) {
+				str += '<option value="'+optionValue[i]+'" selected>' + optionValue[i] + '</option>';
+			} else {
+				str += '<option value="'+optionValue[i]+'">' + optionValue[i] + '</option>';
+			}
+		}
+		str += '</select>';
+	} else if (type==2 && value!='') {
+		optionValue = value.split("\r\n");
+		for(var i=0; i<optionValue.length; i++) {
+			if(optionValue[i] == cValue) {
+				str += '<input type="radio" name="attr[' + id + ']" value="'+optionValue[i]+'" checked />' + optionValue[i] + ' ';
+			} else {
+				str += '<input type="radio" name="attr[' + id + ']" value="'+optionValue[i]+'" />' + optionValue[i] + ' ';
+			}
+		}
+	} else if (type==3 && value!='') {
+		var regv = cValue.replace(/[\r\n]/g,"|");
+		if(regv) {
+			var re = new RegExp("(("+regv+")|([^\r\n]+))[\r\n]*","g");
+		} else {
+			var re = new RegExp("((iwebshop)|([^\r\n]+))[\r\n]*","g");
+		}
+		var str = value.replace(re,"<input type='checkbox' name='attr[" + id + "][]' value='$1' checked$3 />$1 ");
+	}
+	return str;
+}
+
+changeAttrTr(attribute);
 //-->
 </script>
 </body>

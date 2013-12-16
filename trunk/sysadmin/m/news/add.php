@@ -16,7 +16,10 @@ $dbo=new dbex;
 $t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
 
-$cat_info = get_news_cat_list($dbo,$t_article_cat);
+$sql_cat = "select * from `$t_article_cat` order by cat_id asc,sort_order asc";
+$result_cat = $dbo->getRs($sql_cat);
+
+$cat_dg = get_dg_category($result_cat);
 
 $news_info = array(
 	'cat_id'		=> 0,
@@ -36,9 +39,14 @@ $news_info = array(
 <link rel="stylesheet" type="text/css" href="skin/css/main.css">
 <style>
 td span {color:red;}
+.attr_class div.div {border:2px solid #fff; padding:3px;}
+.attr_class div span.left{display:block; width:auto; float:left; margin-left:10px; text-align:right; _line-height:24px;}
+.attr_class div span.right{display:block; width:350px; float:left; margin-left:5px; text-align:left;}
+.attr_class div span.right input {margin-left:5px;}
 </style>
 <script type="text/javascript" src="../servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
 <script type="text/javascript" src="skin/xheditor/xheditor.min.js?v=1.0.0-final"></script>
+<script language="JavaScript" src="../servtools/ajax_client/ajax.js"></script>
 <script type="text/javascript">
 var introeditor;
 $(function(){
@@ -61,10 +69,10 @@ $(function(){
 		<table class="form-table">
 			<tr>
 				<td width="75px"><?php echo $a_langpackage->a_select_n_category; ?>：</td>
-				<td><select name="cat_id">
+				<td><select name="cat_id" onchange="changeAttr(this.value);">
 					<option value="0"><?php echo $a_langpackage->a_select_n_category; ?></option>
-					<?php foreach($cat_info as $value) {?>
-					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$news_info['cat_id']){ echo "selected";} ?> ><?php echo $value['cat_name']; ?></option>
+					<?php foreach($cat_dg as $value) {?>
+					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$news_info['cat_id']){ echo "selected";} ?> ><?php echo $value['str_pad'];?><?php echo $value['cat_name']; ?></option>
 					<?php }?>
 				</select> <span id="position_id_message">*</span></td>
 			</tr>
@@ -72,7 +80,10 @@ $(function(){
 				<td><?php echo $a_langpackage->a_news_title; ?>：</td>
 				<td><input class="small-text" type="text" name="title" value="<?php echo $news_info['title']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
 			</tr>
-
+                        <tr id="goods_attr_tr">
+                                <td><?php echo $a_langpackage->a_news_attr; ?>：</td>
+                                <td class="attr_class" id="attr_content"></td>
+                        </tr>
 			<tr>
 				<td><?php echo $a_langpackage->a_title_color; ?>：</td>
 				<td>
@@ -198,7 +209,79 @@ function checkForm() {
 function AddContentImg(ImgName,classId){
 	introeditor.appendHTML("<img src=../"+ImgName+"/><br>");
 }
+function changeAttr(value) {
+	ajax("a.php?act=news_attr_list","POST","v="+value,function(data){
+		changeAttrTr(data);
+	},'JSON');
+}
 
+function changeAttrTr(objvalue) {
+	var attr_content = document.getElementById("attr_content");
+	attr_content.innerHTML = '';
+	var html = '';
+	var temp = '';
+	for(var i=0; i<objvalue.length; i++) {
+		temp = formatFormElement(objvalue[i].attr_id,objvalue[i].input_type,objvalue[i].attr_name,objvalue[i].attr_values);
+		html += '<div class="div"><span class="left">'+objvalue[i].attr_name+'：</span><span class="right">'+temp+'</span><div class="clear"></div></div>';
+		
+		if(objvalue[i].input_type == 4){
+		jQuery.noConflict(); 
+		jQuery(document).ready(function($){
+			var introeditor_temp;
+			$(function(){
+				var introeditor_temp;
+				introeditor_temp = $(attr_content).children('textarea').xheditor({skin:'vista',tools:"Cut,Copy,Paste,Pastetext,Separator,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,Separator,Align,List,Outdent,Indent,Separator,Link,Unlink,Img,Table,Separator,Fullscreen,About"});
+				$(attr_content).children('textarea').val("");
+			});
+		});
+	}
+	}
+	attr_content.innerHTML = html;
+	
+}
+//属性input类型 0:TEXT,1:SELECT,2:radio,3:checkbox
+function formatFormElement(id,type,name,value) {
+	var optionValue;
+	var cValue = str = '';
+	//if(goodsAttr[id]) {
+	//cValue = goodsAttr[id];
+	//}
+	if(type==0) {
+		str = '<input type="text" name="attr[' + id + ']" value="'+cValue+'" maxlength="200" />';
+	} else if (type==1 && value!='') {
+		optionValue = value.split("\n");
+		str = '<select name="attr[' + id + ']">';
+		str += '<option value="0">{echo: lp{m_select_pl};/}' + name + '</option>';
+		for(var i=0; i<optionValue.length; i++) {
+			if(optionValue[i] == cValue) {
+				str += '<option value="'+optionValue[i]+'" selected>' + optionValue[i] + '</option>';
+			} else {
+				str += '<option value="'+optionValue[i]+'">' + optionValue[i] + '</option>';
+			}
+		}
+		str += '</select>';
+	} else if (type==2 && value!='') {
+		optionValue = value.split("\r\n");
+		for(var i=0; i<optionValue.length; i++) {
+			if(optionValue[i] == cValue) {
+				str += '<input type="radio" name="attr[' + id + ']" value="'+optionValue[i]+'" checked />' + optionValue[i] + ' ';
+			} else {
+				str += '<input type="radio" name="attr[' + id + ']" value="'+optionValue[i]+'" />' + optionValue[i] + ' ';
+			}
+		}
+	} else if (type==3 && value!='') {
+		var regv = cValue.replace(/[\r\n]/g,"|");
+		if(regv) {
+			var re = new RegExp("(("+regv+")|([^\r\n]+))[\r\n]*","g");
+		} else {
+			var re = new RegExp("((iwebshop)|([^\r\n]+))[\r\n]*","g");
+		}
+		var str = value.replace(re,"<input type='checkbox' name='attr[" + id + "][]' value='$1' checked$3 />$1");
+	} else if (type==4){
+		 str = '<textarea name="attr[' + id + ']" id="attr_text_area" cols="65" rows="10">'+cValue+'</textarea>';
+	}
+	return str;
+}
 //-->
 </script>
 </body>

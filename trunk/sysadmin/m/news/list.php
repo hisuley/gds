@@ -30,8 +30,9 @@ $sql .= " order by add_time desc";
 $result = $dbo->fetch_page($sql,13);
 $cat_info = get_news_cat_list($dbo,$t_article_cat);
 //新闻分类
-$sql ="select cat_id,cat_name from `$t_article_cat`";
-$cat_list = $dbo->getRs($sql);
+$sql_cat = "select * from `$t_article_cat` order by cat_id asc,sort_order asc";
+$cat_list = $dbo->getRs($sql_cat);
+$cat_dg = get_dg_category($cat_list);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -64,8 +65,8 @@ td span {color:red;}
 	                   		<?php echo $a_langpackage->a_news_category; ?>：
 	                   		<select name="id">
 								<option value="0"><?php echo $a_langpackage->a_select_news_category; ?></option>
-								<?php foreach($cat_list as $value) { ?>
-								<option value="<?php echo $value['cat_id']; ?>" <?php if($cat_id==$value['cat_id']){echo "selected";} ?> ><?php echo $value['cat_name'];?></option>
+								<?php foreach($cat_dg as $value) { ?>
+								<option value="<?php echo $value['cat_id']; ?>" <?php if($cat_id==$value['cat_id']){echo "selected";} ?> ><?php echo $value['str_pad'];?><?php echo $value['cat_name'];?></option>
 								<?php } ?>
 							</select>
 	                   	</td>

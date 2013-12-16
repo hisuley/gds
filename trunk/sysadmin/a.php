@@ -134,6 +134,7 @@ $actArray = array(
 	'remind_update'	=> array('a/remind/edit.php'),
 	'remind_del'	=> array('a/remind/del.php'),
 	'order_update'	=> array('a/order/update.php'),
+        'news_attr_list'=> array('a/news/attr_list.php'),
 );
 
 $actId=getActId();

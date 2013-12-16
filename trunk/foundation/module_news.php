@@ -87,4 +87,80 @@ function get_dg_category($array,$parentid=array(-1,0),$level=0,$add=2) {
 	}
 	return $newarray;
 }
+
+function update_news_attr(&$dbo,$table,$array,$article_id) {
+	if(empty($array)) {
+		return false;
+	}
+	$i = 0;
+	foreach($array as $key=>$value) {
+		if(is_array($value)) {
+			$value = implode("\n",$value);
+		}
+		$sql = "update `$table` set attr_values='$value' where article_id='$article_id' and attr_id='$key'";
+		//echo $sql;
+		if($dbo->exeUpdate($sql)){
+			$i++;
+		}
+	}
+	return $i;
+}
+
+function insert_news_attr(&$dbo,$table,$array,$article_id) {
+	if(empty($array)) {
+		return false;
+	}
+	$dot = '';
+	$sql = "insert into `$table` (article_id,attr_id,attr_values) values";
+	foreach($array as $key=>$value) {
+		if($value) {
+			if(is_array($value)) {
+				$value = implode("\n",$value);
+				$sql .= $dot . " ('$article_id','$key','$value')";
+				$dot = ',';
+			} else {
+				$sql .= $dot . " ('$article_id','$key','$value')";
+				$dot = ',';
+			}
+		}
+	}
+	return $dbo->exeUpdate($sql);
+}
+
+function delete_news_attr(&$dbo,$table,$array,$goods_id) {
+	if(empty($array)) {
+		return false;
+	}
+	$attr_id = $dot = '';
+	foreach($array as $k=>$v) {
+		$attr_id .= $dot.$k;
+		$dot = ',';
+	}
+	$sql = "delete from `$table` where attr_id in ($attr_id) and goods_id='$goods_id'";
+	return $dbo->exeUpdate($sql);
+}
+
+function get_goods_attr(&$dbo,$table,$article_id) {
+	$sql = "select * from `$table` where article_id='$article_id'";
+	return $dbo->getRs($sql);
+}
+
+function get_attribute_info(&$dbo,$table,$cat_id) {
+	$sql = "select * from `$table` where cat_id='$cat_id' AND attr_type=1 order by sort_order asc";
+	$result = $dbo->getRs($sql);
+	$array = array();
+	if($result) {
+		$i = 0;
+		foreach($result as $k=>$v) {
+			$array[$i]['attr_id'] = $v['attr_id'];
+			$array[$i]['attr_name'] = $v['attr_name'];
+			$array[$i]['input_type'] = $v['input_type'];
+			$array[$i]['attr_values'] = $v['attr_values'];
+			$array[$i]['selectable'] = $v['selectable'];
+			$array[$i]['price'] = $v['price'];
+			$i++;
+		}
+	}
+	return $array;
+}
 ?>

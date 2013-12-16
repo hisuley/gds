@@ -6,6 +6,7 @@ require_once("../foundation/module_news.php");
 require_once("../foundation/module_admin_logs.php");
 //语言包引入
 $a_langpackage=new adminlp;
+$dbo=new dbex;
 
 //权限管理
 $right=check_rights("news_edit");
@@ -64,15 +65,57 @@ $file = $cupload->execute();
 //数据表定义区
 $t_article = $tablePreStr."article";
 $t_admin_log = $tablePreStr."admin_log";
+$t_article_attr = $tablePreStr."article_attr";
 
+//数据库操作
+dbtarget('r',$dbServs);
+
+$news_attr = get_goods_attr($dbo,$t_article_attr,$article_id);
+$have_attr = array();
+if($news_attr) {
+	foreach($news_attr as $v) {
+		$have_attr[$v['attr_id']] = $v['attr_values'];
+	}
+}
+
+$post_attr = get_args('attr');
+$filterAttr = filterAttr($have_attr,$post_attr);
 //定义写操作
 dbtarget('w',$dbServs);
-$dbo=new dbex;
 
 if(update_news_info($dbo,$t_article,$post,$article_id)) {
+        if(isset($filterAttr['insert'])) {
+		insert_news_attr($dbo,$t_article_attr,$filterAttr['insert'],$article_id);
+	}
+
+	if(isset($filterAttr['update'])) {
+		update_news_attr($dbo,$t_article_attr,$filterAttr['update'],$article_id);
+	}
+
+	if(isset($filterAttr['delete'])) {
+		delete_news_attr($dbo,$t_article_attr,$filterAttr['delete'],$article_id);
+	}
 	admin_log($dbo,$t_admin_log,$a_langpackage->a_modify_uml."：$article_id");
 	action_return(1,$a_langpackage->a_amend_suc,'m.php?app=news_edit&id='.$article_id);
 } else {
 	action_return(0,$a_langpackage->a_amend_lose,'-1');
+}
+
+// 通过现有的属性与提交上来的属性进行比较
+// 取得 需要更新，删除，添加的属性
+function filterAttr($haveArray,$postArray) {
+	$array = array();
+	foreach($haveArray as $key=>$value) {
+		if($postArray[$key]) {
+			if($postArray[$key] != $value) {
+				$array['update'][$key] = $postArray[$key];
+			}
+			unset($postArray[$key]);
+		} else {
+			$array['delete'][$key] = $value;
+		}
+	}
+	$array['insert'] = $postArray;
+	return $array;
 }
 ?>

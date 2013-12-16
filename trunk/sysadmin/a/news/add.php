@@ -55,9 +55,13 @@ $file = $cupload->execute();
 		}		
 }
 
+/* 属性处理 */
+$post_attr = get_args('attr');
+
 //数据表定义区
 $t_article = $tablePreStr."article";
 $t_admin_log = $tablePreStr."admin_log";
+$t_news_attr = $tablePreStr."article_attr";
 //定义写操作
 dbtarget('w',$dbServs);
 $dbo=new dbex;
@@ -65,6 +69,7 @@ $article_id = insert_news_info($dbo,$t_article,$post);
 
 if($article_id) {
 	admin_log($dbo,$t_admin_log,$a_langpackage->a_add_uml."：$article_id");
+        insert_news_attr($dbo,$t_news_attr,$post_attr,$article_id);
 	action_return(1,$a_langpackage->a_add_suc);
 } else {
 	action_return(0,$a_langpackage->a_add_lose,'-1');

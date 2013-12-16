@@ -1,1 +1,1 @@
-document.write('<a href="http://www.jmlvyou.com"><img src="docs/images/asd/01.png" width="220" height="60"></a>');
+document.write('<a href="http://www.jmlvyou.com"><img src="docs/images/asd/2010/1.jpg" width="960" height="90" alt="iwebshop"></a>');

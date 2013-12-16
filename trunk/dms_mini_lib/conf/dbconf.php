@@ -4,8 +4,8 @@ if(!$IWEB_SHOP_IN) {
 }
 $host = 'localhost';//mysql数据库服务器,比如localhost:3306
 $user = 'root'; //mysql数据库默认用户名
-$pwd = 'yanslwangss'; //mysql数据库默认密码
-$db = 'webmall'; //默认数据库名
+$pwd = '123123'; //mysql数据库默认密码
+$db = 'gds'; //默认数据库名
 global $tablePreStr;
 $tablePreStr = 'imall_';//表前缀
 
