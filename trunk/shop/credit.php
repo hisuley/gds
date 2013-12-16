@@ -428,6 +428,7 @@ function get_appraise(t,userid,credit,time,page){
 
 				seller_selected.className="selected";
 				buyer_selected.className="";
+        console.log(result);
 				for($i=0;$i<result.length;$i++){
 					scredit=result[$i].seller_credit;
 					if(scredit=='1'){
@@ -439,7 +440,7 @@ function get_appraise(t,userid,credit,time,page){
 					if(scredit=='-1'){
 						seller_credit="<?php echo $s_langpackage->s_credit_bad;?>";
 					}
-					if(result[$i].seller_explanation==null)
+					if(result[$i].seller_explanation==null || result[$i].seller_explanation === null)
 						result[$i].seller_explanation="";
 					credit+='<tr><td class="rate">'+seller_credit+'</td><td class="comment"><p>'+result[$i].seller_evaluate+'</p><p class="explan">[<?php echo $s_langpackage->s_explain;?>]'+result[$i].seller_explanation+'</p><p>['+result[$i].seller_evaltime+']</p></td><td><a href="goods.php?id='+result[$i].goods_id+'" target="_blank" style="font-size:12px; font-weight:bold; color:#0044DD" title="'+result[$i].goods_name+'">'+result[$i].goods_name+'</a><br /><?php echo $s_langpackage->s_price;?>：<?php echo $m_langpackage->m_money_sign;?><span style="color:#FF6600; font-weight:bold;">'+result[$i].goods_price+'</span><?php echo $s_langpackage->s_yan;?><br/>'+result[$i].user_name+'</td></tr>';
 				}
@@ -447,6 +448,7 @@ function get_appraise(t,userid,credit,time,page){
 			if(t=='seller'){
 				seller_selected.className="";
 				buyer_selected.className="selected";
+        console.log(result);
 				for($i=0;$i<result.length;$i++){
 					bcredit=result[$i].buyer_credit;
 					if(bcredit=='1'){
@@ -458,6 +460,7 @@ function get_appraise(t,userid,credit,time,page){
 					if(bcredit=='-1'){
 						buyer_credit="<?php echo $s_langpackage->s_credit_bad;?>";
 					}
+
 					if(result[$i].buyer_explanation==null)
 						result[$i].buyer_explanation="";
 					if(result[$i].buyer_evaluate==null)

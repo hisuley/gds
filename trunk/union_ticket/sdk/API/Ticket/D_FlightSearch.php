@@ -2,24 +2,24 @@
 /**
  * 请求D_HotelSearch的服务（酒店列表查询）
  */
-error_reporting(0);
+error_reporting(1);
 class get_D_FlightSearch{
 	/**
 	 * @var城市的ID，必须填写
 	 */
-	var $currentDate = '2013-12-10';
+	var $currentDate = '2013-12-25';
 	var $CityID="";
 	var $SearchType = 'S';
 	var $Routes = array(
 		'FlightRoute' => array(
 			'DepartCity'=>'BJS',
 			'ArriveCity'=>'KWL',
-			'DepartDate'=> '2013-12-10'
+			'DepartDate'=> '2013-12-25'
 			)
 		);
 	var $DepartCity = 'BJS';
 	var $ArriveCity = 'KWL';
-	var $DepartDate = '2013-12-10';
+	var $DepartDate = '2013-12-25';
 	var $SendTicketCity = 'BJS';
 	var $ResponseXML="";
 
