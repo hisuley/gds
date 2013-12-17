@@ -97,6 +97,7 @@ $appArray = array(
 	'goods_brand_add'		=> 'm/goods/brand_add.php',
 	'goods_brand_edit'		=> 'm/goods/brand_edit.php',
 	'goods_brand_list'		=> 'm/goods/brand_list.php',
+    'goods_brand_attr'     => 'm/goods/brand_attr_manage.php',
 	'goods_category_add'	=> 'm/goods/category_add.php',
 	'goods_category_edit'	=> 'm/goods/category_edit.php',
 	'goods_category_list'	=> 'm/goods/category_list.php',

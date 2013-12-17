@@ -86,6 +86,7 @@ class adminlp{
 	var $a_m_dbs_recover = "数据库恢复";
 	var $a_m_admin_set = "管理员设置";
 	var $a_m_admingroup_set = "管理员组管理";
+        var $a_m_brand_attr_management = "品牌属性管理";
 	var $a_super_admin ="超级管理员";
 	var $a_linke_category="关联分类";
 
@@ -212,6 +213,9 @@ class adminlp{
 	var $a_brand_edit = "修改品牌";
 	var $a_brand_name = "品牌名称";
 	var $a_brand_desc = "品牌介绍";
+        var $a_brand_attr_list = "品牌属性列表";
+        var $a_plselect_brand = "请先选择品牌";
+        var $a_add_brand_need = "您还没有添加品牌";
 	var $a_flink_name = "链接名称";
 	var $a_flink_desc = "链接介绍";
 	var $a_flink_siteurl = "友情连接网址";
@@ -249,6 +253,7 @@ class adminlp{
 	var $a_news_add = "添加新闻";
 	var $a_news_edit = "新闻修改";
         var $a_news_attr_management = "新闻属性管理";
+        var $a_news_attr_list = "新闻属性列表";
         var $a_add_cat_need = "您还没有增加新闻分类";
 	var $a_news_title = "新闻标题";
 	var $a_news_category = "新闻分类";

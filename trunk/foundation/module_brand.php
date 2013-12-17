@@ -52,4 +52,24 @@ function get_brand_list(&$dbo,$table,$limit='',$page=''){
 	}
 }
 
+function del_attr_info(&$dbo,$table,$id) {
+	$sql = "delete from `$table` where brand_attr_id='$id'";
+	return $dbo->exeUpdate($sql);
+}
+
+function insert_attr_info(&$dbo,$table,$insert_items){
+	$item_sql = get_insert_item($insert_items);
+	$sql = "insert `$table` $item_sql";
+	if($dbo->exeUpdate($sql)) {
+		return mysql_insert_id();
+	} else {
+		return false;
+	}
+}
+
+function update_attr_info(&$dbo,$table,$update_items,$attr_id) {
+	$item_sql = get_update_item($update_items);
+	$sql = "update `$table` set $item_sql where brand_attr_id='$attr_id'";
+	return $dbo->exeUpdate($sql);
+}
 ?>

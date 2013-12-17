@@ -5,7 +5,7 @@ if(!$IWEB_SHOP_IN) {
 
 $a_langpackage=new adminlp;
 
-require_once("../foundation/module_news.php");
+require_once("../foundation/module_brand.php");
 $inputtype_arr = array(
 	'0'	=> $a_langpackage->a_text_type.'(text)',
 	'1' => $a_langpackage->a_select_type.'(select)',
@@ -15,38 +15,36 @@ $inputtype_arr = array(
 );
 
 //数据表定义区
-$t_article_cat = $tablePreStr."article_cat";
-$t_attribute = $tablePreStr."attribute";
+$t_brand = $tablePreStr."brand";
+$t_brand_attr = $tablePreStr."brand_attr";
 
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$cat_id = intval(get_args('cat_id'));
+$brand_id = intval(get_args('brand_id'));
 
-/* 处理系统分类 */
-$sql_cat = "select * from `$t_article_cat` order by cat_id asc,sort_order asc";
-$result_cat = $dbo->getRs($sql_cat);
+/* 处理品牌 */
+$sql = "select brand_id,brand_name from `$t_brand` order by brand_id asc";
+$result_brand = $dbo->getRs($sql);
 
-if(!$result_cat) { trigger_error($a_langpackage->a_add_cat_need.'!'); }
-
-$cat_dg = get_dg_category($result_cat);
+if(!$result_brand) { trigger_error($a_langpackage->a_add_brand_need.'!'); }
 
 // 当前选中的分类信息
 $parent_id = 0;
 $cat_info = array();
 $attr_info = array();
-if($cat_id) {
-	foreach($result_cat as $value) {
-		if($value['cat_id'] == $cat_id) {
+if($brand_id) {
+	foreach($result_brand as $value) {
+		if($value['brand_id'] == $brand_id) {
 			$cat_info = $value;
 			break;
 		}
 	}
 	if($cat_info) {
-		$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id;
+		$sql = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where brand_id=".$brand_id;
 		$attr_info = $dbo->getRs($sql);
-		$parent_id = $cat_info['parent_id'];
+		$parent_id = $cat_info['brand_id'];
 	}
 }
 $right_array=array(
@@ -77,10 +75,10 @@ td .inputtext{width:120px;}
 <script language="JavaScript" src="../servtools/ajax_client/ajax.js"></script>
 <script language="JavaScript">
 <!--
-var cat_id = "<?php echo $cat_id;?>";
+var brand_id = "<?php echo $brand_id;?>";
 
 function change_cat_id(v) {
-	location.href = "m.php?app=news_attr_manage&cat_id=" + v;
+	location.href = "m.php?app=goods_brand_attr&brand_id=" + v;
 }
 
 function attr_info_cancel(v) {
@@ -90,7 +88,7 @@ function attr_info_cancel(v) {
 
 function attr_info_save(v) {
 
-	var attr_id = v;
+	var brand_attr_id = v;
 	var attr_name = document.getElementsByName("attr_name["+v+"]")[0];
 	var input_type = document.getElementsByName("input_type["+v+"]");
 	var attr_values = document.getElementsByName("attr_values["+v+"]")[0];
@@ -112,7 +110,7 @@ function attr_info_save(v) {
 	if(selectable.checked){
 		selectable_value = 1;
 	}
-	ajax("a.php?act=news_attr_edit","POST","attr_id="+attr_id+"&cat_id="+cat_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values.value+"&sort_order="+sort_order.value+"&selectable="+selectable_value+"&price="+price_value,function(data){
+	ajax("a.php?act=brand_attr_edit","POST","brand_attr_id="+brand_attr_id+"&brand_id="+brand_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values.value+"&sort_order="+sort_order.value+"&selectable="+selectable_value+"&price="+price_value,function(data){
 		if(data=='-2') {
 			ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>","m.php?app=error");
 			// location.href="m.php?app=error";
@@ -120,7 +118,7 @@ function attr_info_save(v) {
 			if(data=='-1') {
 				ShowMessageBox("<?php echo $a_langpackage->a_fail; ?>!",'0');
 			} else {
-				if(attr_id>0) {
+				if(brand_attr_id>0) {
 					ShowMessageBox("<?php echo $a_langpackage->a_edit_success; ?>!",'0');
 				} else {
 					var tr_0 = document.getElementById("tr_0");
@@ -228,7 +226,7 @@ function add_new_attr_info(data,attr_name,input_type,attr_values, selectable, pr
 function attr_info_del(v) {
 	if(confirm('<?php echo $a_langpackage->a_attr_suredel; ?>')) {
 		if(v) {
-			ajax("a.php?act=news_attr_del","POST","id="+v+"&cat_id="+cat_id,function(data){
+			ajax("a.php?act=brand_attr_del","POST","id="+v+"&brand_id="+brand_id,function(data){
 				if(data=='-2') {
 					ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>",'m.php?app=error');
 					location.href="m.php?app=error";
@@ -248,43 +246,17 @@ function attr_info_del(v) {
 function attr_info_add() {
 	var rights = document.getElementsByName("attr_add")[0].value;
 	if(rights != '0'){
-		if(cat_id > 0) {
+		if(brand_id > 0) {
 			var tr_0 = document.getElementById("tr_0");
 			tr_0.style.display = '';
 		} else {
-			ShowMessageBox("<?php echo $a_langpackage->a_plselect_category; ?>!",'0');
+			ShowMessageBox("<?php echo $a_langpackage->a_plselect_brand; ?>!",'0');
 		}
 	}else{
 		ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>",'m.php?app=error');
 
 	}
 }
-
-function attr_info_extend(v) {
-	var rights = document.getElementsByName("attr_append")[0].value;
-	if(rights != '0'){
-		if(v>0) {
-			if(confirm('<?php echo $a_langpackage->a_extended_category; ?>')) {
-				ajax("a.php?act=news_attr_extend","POST","parent_id="+v+"&cat_id="+cat_id,function(data){
-					if(data=='-1') {
-						ShowMessageBox("<?php echo $a_langpackage->a_operate_fail_repeat; ?>",'0');
-					} else if (data=='-2') {
-						ShowMessageBox("<?php echo $a_langpackage->a_noattr_extended; ?>!",'0');
-					} else {
-						for(var i=0; i<data.length; i++) {
-							add_new_attr_info(data[i].attr_id,data[i].attr_name,data[i].input_type,data[i].attr_values,data[i].selectable, data[i].price,data[i].sort_order);
-						}
-					}
-				},'JSON');
-			}
-		} else {
-			ShowMessageBox("<?php echo $a_langpackage->a_nocateogyr_opefail; ?>",'0');
-		}
-	}else{
-		ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>",'m.php?app=error');
-	}
-}
-
 //-->
 </script>
 </head>
@@ -292,20 +264,18 @@ function attr_info_extend(v) {
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <?php echo $a_langpackage->a_news_attr_list; ?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_brand_attr_list; ?></div>
         <hr />
 		<div class="infobox">
-    	<h3><?php echo $a_langpackage->a_news_attr_list; ?></h3>
+    	<h3><?php echo $a_langpackage->a_brand_attr_list; ?></h3>
         <div class="content2">
 		<div class="oprate" style="line-height:24px;">&nbsp;&nbsp;<?php echo $a_langpackage->a_select_extended_category; ?></div>
 		<div class="oprate" style="line-height:50px;"><span style="float:right;">
-
-			<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_extended_parentattr; ?>" onclick="attr_info_extend(<?php echo $parent_id; ?>)" />&nbsp;&nbsp;
-			<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_attr_add; ?>" onclick="attr_info_add()" />&nbsp;&nbsp;</span>&nbsp;&nbsp;<?php echo $a_langpackage->a_plselect_category; ?>：
+			<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_attr_add; ?>" onclick="attr_info_add()" />&nbsp;&nbsp;</span>&nbsp;&nbsp;<?php echo $a_langpackage->a_plselect_brand; ?>：
 			<select name="id" onchange="change_cat_id(this.value);">
-				<option value="0"><?php echo $a_langpackage->a_plselect_category; ?></option>
-				<?php foreach($cat_dg as $value) { ?>
-				<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$cat_id) echo "selected"; ?>><?php echo $value['str_pad'].$value['cat_name']; ?></option>
+				<option value="0"><?php echo $a_langpackage->a_plselect_brand; ?></option>
+				<?php foreach($result_brand as $value) { ?>
+				<option value="<?php echo $value['brand_id']; ?>" <?php if($value['brand_id']==$brand_id) echo "selected"; ?>><?php echo $value['brand_name']; ?></option>
 				<?php } ?>
 			</select>
 		</div>
@@ -342,23 +312,23 @@ function attr_info_extend(v) {
 			</tr>
 			<?php if($attr_info) {
 			foreach($attr_info as $value) { ?>
-			<tr id="tr_<?php echo $value['attr_id'];?>">
-				<td width="60px"><?php echo $value['attr_id'];?>.</td>
-				<td width="100px"><input type="text" class="small-text" style="width:50px;" name="attr_name[<?php echo $value['attr_id'];?>]" value="<?php echo $value['attr_name'];?>" class="inputtext"></td>
+			<tr id="tr_<?php echo $value['brand_attr_id'];?>">
+				<td width="60px"><?php echo $value['brand_attr_id'];?>.</td>
+				<td width="100px"><input type="text" class="small-text" style="width:50px;" name="attr_name[<?php echo $value['brand_attr_id'];?>]" value="<?php echo $value['attr_name'];?>" class="inputtext"></td>
 				<td width="500px">
 				<?php $i=0;
 				foreach($inputtype_arr as $k=>$v) { $i++; ?>
-					<input type="radio" name="input_type[<?php echo $value['attr_id'];?>]" value="<?php echo $k; ?>" <?PHP if($value['input_type']==$k) {echo "checked";} ?> /><?php echo $v; ?>
+					<input type="radio" name="input_type[<?php echo $value['brand_attr_id'];?>]" value="<?php echo $k; ?>" <?PHP if($value['input_type']==$k) {echo "checked";} ?> /><?php echo $v; ?>
 				<?php if($i==2) { echo "<br />";}	} ?>
 				</td>
-				<td width="300px"><textarea name="attr_values[<?php echo $value['attr_id'];?>]" ><?php echo $value['attr_values'];?></textarea></td>
-					<td width="60px" align="center"><input type="checkbox" class="small-text" name="selectable[<?php echo $value['attr_id'];?>]" value="1" style="width:25px;" <?php  if($value['selectable']){echo "checked";}?> /></td>
-				<td width="60px" align="center"><input type="checkbox" class="small-text" name="price[<?php echo $value['attr_id'];?>]" value="1" style="width:25px;" <?php  if($value['price']){echo "checked";}?> /></td>
-				<td width="60px" align="center"><input type="text" class="small-text" class="small-text" name="sort_order[<?php echo $value['attr_id'];?>]" value="<?php echo $value['sort_order'];?>" style="width:25px;" maxlength="3" /></td>
+				<td width="300px"><textarea name="attr_values[<?php echo $value['brand_attr_id'];?>]" ><?php echo $value['attr_values'];?></textarea></td>
+					<td width="60px" align="center"><input type="checkbox" class="small-text" name="selectable[<?php echo $value['brand_attr_id'];?>]" value="1" style="width:25px;" <?php  if($value['selectable']){echo "checked";}?> /></td>
+				<td width="60px" align="center"><input type="checkbox" class="small-text" name="price[<?php echo $value['brand_attr_id'];?>]" value="1" style="width:25px;" <?php  if($value['price']){echo "checked";}?> /></td>
+				<td width="60px" align="center"><input type="text" class="small-text" class="small-text" name="sort_order[<?php echo $value['brand_attr_id'];?>]" value="<?php echo $value['sort_order'];?>" style="width:25px;" maxlength="3" /></td>
 			
 				<td width="175px" align="center">
-					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[<?php echo $value['attr_id'];?>]" onclick="attr_info_save(<?php echo $value['attr_id'];?>);" />
-					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn[<?php echo $value['attr_id'];?>]" onclick="attr_info_del(<?php echo $value['attr_id'];?>)">
+					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[<?php echo $value['brand_attr_id'];?>]" onclick="attr_info_save(<?php echo $value['brand_attr_id'];?>);" />
+					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn[<?php echo $value['brand_attr_id'];?>]" onclick="attr_info_del(<?php echo $value['brand_attr_id'];?>)">
 				</td>
 			</tr>
 			<?php }} else { ?>

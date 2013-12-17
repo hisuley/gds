@@ -38,6 +38,7 @@ $right_array=array(
     "cat_list"    =>   "0",
     "brand_add"    =>   "0",
     "brand_show"    =>   "0",
+    "brand_attr_manager" => "0",
     "attr_manager"    =>   "0",
     "groupbuy_list"    =>   "0",
 
@@ -245,6 +246,9 @@ $plugin=$dbo->getRs($sql);
 			<?php }?>
 			<?php if($right_array["brand_show"]){?>
 				<li id="brand_show" class="" onclick="changeMenu(this);"><a href="m.php?app=goods_brand_list" target="main-frame"><?php echo $a_langpackage->a_brand_list; ?></a></li>
+            <?php }?>
+            <?php if($right_array["brand_attr_manager"]){?>
+				<li id="brand_attr_manager" class="" onclick="changeMenu(this);"><a href="m.php?app=goods_brand_attr" target="main-frame"><?php echo $a_langpackage->a_m_brand_attr_management; ?></a></li>
 			<?php }?>
 			<?php if($right_array["cat_list"]){?>
 				<li id="cat_list" class="" onclick="changeMenu(this);"><a href="m.php?app=goods_category_list" target="main-frame"><?php echo $a_langpackage->a_category_list; ?></a></li>
@@ -310,7 +314,7 @@ $plugin=$dbo->getRs($sql);
 	            	<li id="image_browse" class="" onclick="changeMenu(this);"><a href="m.php?app=index_images" target="main-frame"><?php echo $a_langpackage->a_index_image; ?></a></li>
 	        <?php }?>
                         <?php if($right_array["news_attr_manager"]){?>
-				<li id="attr_manager" class="" onclick="changeMenu(this);"><a href="m.php?app=news_attr_manage" target="main-frame"><?php echo $a_langpackage->a_news_attr_management; ?></a></li>
+				<li id="news_attr_manager" class="" onclick="changeMenu(this);"><a href="m.php?app=news_attr_manage" target="main-frame"><?php echo $a_langpackage->a_news_attr_management; ?></a></li>
 			<?php }?>
 			<ul>
 	   <?php }?>

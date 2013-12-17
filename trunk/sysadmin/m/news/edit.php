@@ -21,7 +21,7 @@ $t_attribute = $tablePreStr."attribute";
 $article_id = intval(get_args('id'));
 if(!$article_id) { exit($a_langpackage->a_error);}
 
-$cat_info = get_news_cat_list($dbo,$t_article_cat);
+$cat_info = get_dg_category(get_news_cat_list($dbo,$t_article_cat));
 $news_info = get_news_info($dbo,$t_article,$article_id);
 
 $attribute_info = array();
@@ -72,7 +72,7 @@ $(function(){
 				<td><select name="cat_id" onchange="changeAttr(this.value);">
 					<option value="0"><?php echo $a_langpackage->a_select_n_category; ?></option>
 					<?php foreach($cat_info as $value) {?>
-					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$news_info['cat_id']){ echo "selected";} ?> ><?php echo $value['cat_name']; ?></option>
+					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$news_info['cat_id']){ echo "selected";} ?> ><?php echo $value['str_pad'];?><?php echo $value['cat_name']; ?></option>
 					<?php }?>
 				</select> <span id="position_id_message">*</span></td>
 			</tr>
