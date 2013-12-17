@@ -33,3 +33,16 @@ CREATE TABLE `imall_article_attr` (
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 ALTER TABLE `gds`.`imall_attribute` ADD COLUMN `attr_type` TINYINT(1) DEFAULT 0 NOT NULL COMMENT '属性类型 0:商品,1:新闻' AFTER `price`; 
+
+/* 创建品牌属性表 */
+CREATE TABLE `imall_brand_attr` (
+  `brand_attr_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '品牌属性ID',
+  `brand_id` int(10) NOT NULL COMMENT '品牌ID',
+  `attr_name` varchar(255) NOT NULL COMMENT '属性名称',
+  `input_type` tinyint(1) NOT NULL COMMENT '属性input类型 0:text,1:select,2:radio,3:checkbox',
+  `attr_values` text COMMENT '属性值 一行代表一个',
+  `sort_order` tinyint(1) NOT NULL COMMENT '显示排序',
+  `selectable` tinyint(1) DEFAULT NULL,
+  `price` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`brand_attr_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
