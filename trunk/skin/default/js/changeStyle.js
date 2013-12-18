@@ -250,7 +250,7 @@ Vcity.allCity = ['北京|beijing|bj','上海|shanghai|sh', '重庆|chongqing|cq'
     '阿克苏|akesu|aks', '包头|baotou|bt', '北海|beihai|bh', '百色|baise|bs','保山|baoshan|bs', '长治|changzhi|cz', '长春|changchun|cc', '常州|changzhou|cz', '昌都|changdu|cd',
     '朝阳|chaoyang|cy', '常德|changde|cd', '长白山|changbaishan|cbs', '赤峰|chifeng|cf', '大同|datong|dt', '大连|dalian|dl', '达县|daxian|dx', '东营|dongying|dy', '大庆|daqing|dq', '丹东|dandong|dd',
     '大理|dali|dl', '敦煌|dunhuang|dh', '鄂尔多斯|eerduosi|eeds', '恩施|enshi|es', '福州|fuzhou|fz', '阜阳|fuyang|fy', '贵阳|guiyang|gy',
-    '桂林|guilin|gl', '广元|guangyuan|gy', '格尔木|geermu|gem', '呼和浩特|huhehaote|hhht', '哈密|hami|hm',
+    '广元|guangyuan|gy', '格尔木|geermu|gem', '呼和浩特|huhehaote|hhht', '哈密|hami|hm',
     '黑河|heihe|hh', '海拉尔|hailaer|hle', '哈尔滨|haerbin|heb', '海口|haikou|hk', '黄山|huangshan|hs', '邯郸|handan|hd',
     '汉中|hanzhong|hz', '和田|hetian|ht', '晋江|jinjiang|jj', '锦州|jinzhou|jz', '景德镇|jingdezhen|jdz',
     '嘉峪关|jiayuguan|jyg', '井冈山|jinggangshan|jgs', '济宁|jining|jn', '九江|jiujiang|jj', '佳木斯|jiamusi|jms', '济南|jinan|jn',
@@ -617,11 +617,16 @@ Vcity.CitySelector.prototype = {
                 Vcity._m.addClass('on',lis[this.count]);
                 break;
             case 13: // enter键
-                this.input.value = Vcity.regExChiese.exec(lis[this.count].innerHTML)[0];
-                Vcity._m.addClass('hide',this.ul);
-                Vcity._m.addClass('hide',this.ul);
-                /* IE6 */
-                Vcity._m.addClass('hide',this.myIframe);
+                if(Vcity.regExChiese.exec(lis[this.count].innerHTML)[0] == '桂林'){
+                    alert('出发城市不允许选择桂林');
+                }else{
+                    this.input.value = Vcity.regExChiese.exec(lis[this.count].innerHTML)[0];
+                    Vcity._m.addClass('hide',this.ul);
+                    Vcity._m.addClass('hide',this.ul);
+                    /* IE6 */
+                    Vcity._m.addClass('hide',this.myIframe);
+                }
+               
                 break;
             default:
                 break;
@@ -642,10 +647,14 @@ Vcity.CitySelector.prototype = {
                 var target = Vcity._m.getTarget(event);
                 if(target.nodeName.toUpperCase() !== "LI") target = target.parentNode;
                 if(target.nodeName.toUpperCase() !== "LI") return;
-                that.input.value = Vcity.regExChiese.exec(target.innerHTML)[0];
-                Vcity._m.addClass('hide',that.ul);
-                /* IE6 下拉菜单点击事件 */
-                Vcity._m.addClass('hide',that.myIframe);
+                if(Vcity.regExChiese.exec(target.innerHTML)[0] == '桂林'){
+                    alert('出发城市不允许选择桂林');
+                }else{
+                    that.input.value = Vcity.regExChiese.exec(target.innerHTML)[0];
+                    Vcity._m.addClass('hide',that.ul);
+                    /* IE6 下拉菜单点击事件 */
+                    Vcity._m.addClass('hide',that.myIframe);
+                }
             });
             Vcity._m.on(lis[i],'mouseover',function(event){
                 event = Vcity._m.getEvent(event);

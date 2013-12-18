@@ -243,12 +243,24 @@ $nav_list = get_nav_list($t_nav,$dbo);
           if(obj.value==''&&act=='set')
           {
             obj.value=str;
-            obj.style.color="#cccccc"
+            //obj.style.color="#cccccc"
           }
           if(obj.value==str&&act=='clean')
           {
             obj.value='';
-            obj.style.color="#000000"
+            //obj.style.color="#000000"
+          }
+        }
+        function compareDate(){
+          var departDate = document.getElementById('departDateInput').value;
+          var departDateArray = departDate.split("-");
+
+          var arriveDate = document.getElementById('arriveDateInput').value;
+          var arriveDateArray = arriveDate.split("-");
+          var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
+          var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
+          if(departDate > arriveDate){
+            document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
           }
         }
         </script>
@@ -270,7 +282,7 @@ $nav_list = get_nav_list($t_nav,$dbo);
                   <label for="none">城市：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10 cityinput" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" style="color:#cccccc;" value="请输入城市名称" >
+                  <input class="column-10 cityinput" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" value="请输入城市名称" >
                   <input class="column-10 cityinput" id="endCity"  type="text" name="ArriveCity" value="桂林" readonly/>
                 </div>
               </div>
@@ -279,9 +291,9 @@ $nav_list = get_nav_list($t_nav,$dbo);
                 <div class="column-2">
                   <label for="none">日期：</label>
                 </div>
-                <div class="column-8">
-                  <input class="column-10" type="text" id="departDateInput" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');" style="color:#cccccc;" value="请选择出发日期" />
-                  <input class="column-10" type="text" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');" style="color:#cccccc;" value="请选择回程日期" />
+                 <div class="column-8">
+                  <input class="column-10" type="text" id="departDateInput" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');compareDate();"  value="请选择出发日期" />
+                  <input class="column-10" type="text" id="arriveDateInput" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');" value="请选择回程日期" />
                 </div>
               </div>
               <div class="column-2">
