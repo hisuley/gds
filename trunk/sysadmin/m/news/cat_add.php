@@ -48,7 +48,7 @@ td span {color:red;}
 		  <tbody>
 			<tr>
 				<td width="60px;"><?php echo $a_langpackage->a_parent_category; ?>：</td>
-				<td><select name="parent_id" onchange="getbrandlist(this.value);">
+				<td><select name="parent_id">
 				<option value="0"><?php echo $a_langpackage->a_top_category; ?></option>
 				<?php foreach($cat_dg as $value) {?>
 				<option value="<?php echo $value['cat_id'];?>" <?php if($value['cat_id']==$info['parent_id']) echo "selected";?>><?php echo $value['str_pad'];?><?php echo $value['cat_name'];?></option>
@@ -85,19 +85,6 @@ function checkForm() {
 		return false;
 	}
 	return true;
-}
-function getbrandlist(idvalue){
-	ajax("a.php?act=get_cat_brand_list","POST","cat_id="+idvalue,function(data){
-			var obj = document.getElementById('brand_id');
-			for(i=0;i<obj.length;i++){
-				for(j=0;j<data.length;j++){
-					var obj2 = data[j];
-					if(obj[i].value==obj2.brand_id){
-						obj[i].selected=true;
-					}
-				}
-			}
-		},'json');
 }
 //-->
 </script>

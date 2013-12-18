@@ -261,6 +261,15 @@ class adminlp{
 	var $a_select_n_category = "选择分类";
 	var $a_select_news_category ="请选择新闻分类";
 	var $a_news_content = "新闻内容";
+        var $a_news_source_management = "文章来源管理";
+        var $a_news_source_name = "文章来源名称";
+        var $a_news_source_list = "文章来源列表";
+        var $a_news_source_add = "添加文章来源";
+        var $a_nonews_source_list = "没有文章来源列表信息";
+        var $a_news_source_repeat = "文章来源名称已存在";
+        var $a_news_source_edit = "文章来源修改";
+        var $a_add_news_source="新增文章来源";
+        var $a_news_source_del = "删除文章来源";
 	var $a_news_links = "外部链接";
 	var $a_news_alinks = "外链";
 	var $a_use_news_links = "使用外链";

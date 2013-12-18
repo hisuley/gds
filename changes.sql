@@ -46,3 +46,12 @@ CREATE TABLE `imall_brand_attr` (
   `price` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`brand_attr_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
+CREATE TABLE `imall_article_source` (
+  `source_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章来源ID',
+  `name` varchar(255) NOT NULL COMMENT '文章来源名称',
+  PRIMARY KEY (`source_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+ 
+
+ALTER TABLE `gds`.`imall_article` ADD COLUMN `source_id` INT(10) DEFAULT 0 NOT NULL COMMENT '文章来源ID' AFTER `short_order`; 

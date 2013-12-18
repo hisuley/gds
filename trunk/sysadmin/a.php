@@ -40,6 +40,9 @@ $actArray = array(
         'news_attr_edit'		=> array('a/news/attr_edit.php'),
 	'news_attr_del'		=> array('a/news/attr_del.php'),
 	'news_attr_extend'		=> array('a/news/attr_extend.php'),
+        'news_source_add'               => array('a/news/source_add.php','m.php?app=news_source_list'),
+        'news_source_edit'              => array('a/news/source_edit.php','m.php?app=news_source_list'),
+        'news_source_del'               => array('a/news/source_del.php','m.php?app=news_source_list'),
 
 	'index_images_upload'	=> array('a/index/images_upload.php','m.php?app=index_images'),
 	'index_images_del'		=> array('a/index/images_del.php','m.php?app=index_images'),
