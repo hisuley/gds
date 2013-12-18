@@ -16,7 +16,7 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`gds` /*!40100 DEFAULT CHARACTER SET utf
 
 USE `gds`;
 
-/*Table structure for table `imall_article_attr` */
+/* 创建新闻属性表 */
 
 DROP TABLE IF EXISTS `imall_article_attr`;
 
@@ -47,11 +47,14 @@ CREATE TABLE `imall_brand_attr` (
   PRIMARY KEY (`brand_attr_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 
+/* 文章来源表 */
 CREATE TABLE `imall_article_source` (
   `source_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章来源ID',
   `name` varchar(255) NOT NULL COMMENT '文章来源名称',
   PRIMARY KEY (`source_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
  
-
+/* 文章表增加文章来源字段 */
 ALTER TABLE `gds`.`imall_article` ADD COLUMN `source_id` INT(10) DEFAULT 0 NOT NULL COMMENT '文章来源ID' AFTER `short_order`; 
+/* 文章分类表增加图标字段 */
+ALTER TABLE `gds`.`imall_article_cat` ADD COLUMN `cat_icon` CHAR(255) DEFAULT '' NOT NULL COMMENT '分类图标' AFTER `sort_order`;

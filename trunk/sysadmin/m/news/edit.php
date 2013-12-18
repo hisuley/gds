@@ -65,7 +65,7 @@ $(function(){
 	<div class="infobox">
 	<h3><span class="left"><?php echo $a_langpackage->a_news_edit; ?></span> <span class="right" style="margin-right:15px;"><a href="m.php?app=news_list"><?php echo $a_langpackage->a_news_list; ?></a></span></h3>
     <div class="content2">
-		<form action="a.php?act=news_edit" method="post" onsubmit="return checkForm();">
+		<form action="a.php?act=news_edit" method="post" onsubmit="return checkForm();" enctype="multipart/form-data">
 		<table class="form-table">
 			<tr>
 				<td width="80px"><?php echo $a_langpackage->a_select_n_category; ?>：</td>
