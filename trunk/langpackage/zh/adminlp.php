@@ -257,6 +257,7 @@ class adminlp{
         var $a_add_cat_need = "您还没有增加新闻分类";
 	var $a_news_title = "新闻标题";
 	var $a_news_category = "新闻分类";
+        var $a_category_icon = "分类图标";
         var $a_news_attr = '新闻属性';
 	var $a_select_n_category = "选择分类";
 	var $a_select_news_category ="请选择新闻分类";

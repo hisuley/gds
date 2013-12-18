@@ -15,6 +15,7 @@ if(!$right){
 $post['cat_name'] = short_check(get_args('cat_name'));
 $post['parent_id'] = intval(get_args('parent_id'));
 $post['sort_order'] = intval(get_args('sort_order'));
+$post['cat_icon'] = short_check(get_args('cat_icon'));
 if(empty($post['cat_name'])) {
 	action_return(0,$a_langpackage->a_title_null,'-1');
 	exit;

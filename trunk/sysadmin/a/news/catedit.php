@@ -17,6 +17,7 @@ if(!$right){
 $post['cat_name'] = short_check(get_args('cat_name'));
 $post['parent_id'] = intval(get_args('parent_id'));
 $post['sort_order'] = intval(get_args('sort_order'));
+$post['cat_icon'] = short_check(get_args('cat_icon'));
 $cat_id = intval(get_args('cat_id'));
 
 if(empty($cat_id)) {

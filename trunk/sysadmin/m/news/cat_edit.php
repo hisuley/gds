@@ -80,6 +80,10 @@ bkLib.onDomLoaded(function() {
 				<td><?php echo $a_langpackage->a_category_sort; ?>：</td>
 				<td><input type="text" class="small-text" name="sort_order" value="<?php echo $info['sort_order']?>" style="width:200px;" /></td>
 			</tr>
+                        <tr>
+				<td><?php echo $a_langpackage->a_category_icon; ?>：</td>
+				<td><input type="text" class="small-text" name="cat_icon" value="<?php echo $info['cat_icon']?>" style="width:200px;" /></td>
+			</tr>
 			<tr><td colspan="2"><span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_category_edit; ?>" /></span></td></tr>
 		</table>
 		</form>

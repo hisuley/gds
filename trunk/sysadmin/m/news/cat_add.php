@@ -63,6 +63,10 @@ td span {color:red;}
 				<td><?php echo $a_langpackage->a_category_sort; ?>：</td>
 				<td><input class="small-text" type="text" name="sort_order" value="<?php echo $info['sort_order']; ?>" style="width:60px" /> <span>*</span></td>
 			</tr>
+                        <tr>
+				<td><?php echo $a_langpackage->a_category_icon; ?>：</td>
+				<td><input class="small-text" type="text" name="cat_icon" value="<?php echo $info['cat_icon']; ?>" style="width:200px" /></td>
+			</tr>
 			<tr>
 				<td colspan="2">
 				<span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_category_add; ?>" /></span>
