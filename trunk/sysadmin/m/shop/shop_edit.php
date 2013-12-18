@@ -52,6 +52,8 @@ $user_info = get_user_info($dbo,$t_users,$user_id);
 $rank_info = get_userrank_info($dbo,$t_user_rank,$user_info['rank_id']);
 //echo $user_info['rank_id'];exit();
 //echo $rank_info['privilege'];exit();
+if(empty($rank_info['privilege']))
+	$rank_info['privilege'] = serialize(array());
 $privilege = unserialize($rank_info['privilege']);
 $shop_categories_parent = get_categories_item_parentid($dbo,$t_shop_categories,0);
 $categories_parent = 0;

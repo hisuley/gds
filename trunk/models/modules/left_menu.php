@@ -60,7 +60,7 @@
 	$s_order_num = 0;
 	foreach($rs as $value) {
 		if($value['shop_id']==$user_id) {
-			if($value['order_status']=='3') {
+			if($value['order_status']=='3' || $value['order_status'] == '0') {
 				$u_order_num++;
 			}else{
 				$get_order_num++;

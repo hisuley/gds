@@ -55,13 +55,28 @@
         	}
         }
         function compareCity(){
-        	var startCity = document.getElementById('startCity').value;
-        	var endCity = document.getElementById('endCity').value;
-        	if(startCity == endCity){
+        	/*
+        	var obj = document.getElementById("startCity");
+        	if(obj.value == '桂林'){
         		alert('不能选择相同的城市！');
-        		document.getElementById('startCity').value = '';
+        		obj.value = '';
         	}
+        	*/
         }
+        if(!+[1,]){
+        	var isIE = true;
+        }else{
+        	var isIE = false;
+        }
+        window.onload=function(){
+	        if (isIE) {
+			 	document.getElementById("startCity").onpropertychange = compareCity();
+			 } else // 需要用addEventListener来注册事件
+			 {
+				document.getElementById("startCity").addEventListener("input",
+			   	compareCity, false);
+			}
+		}
         </script>
             <form class="pretty-form ticket-form" method="POST" action="ticket.php" onsubmit="return checkTicketForm(this);">
               
@@ -81,7 +96,7 @@
                   <label for="none">城市：</label>
                 </div>
                 <div class="column-8">
-                  <input class="column-10 cityinput" style="background-position:200px 3px;" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" onchange="compareCity();" value="请输入城市名称" >
+                  <input class="column-10 cityinput" style="background-position:200px 3px;" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" onchange="compareCity();" onpropertychange="compareCity()" oninput="compareCity()" value="请输入城市名称" >
                   <input class="column-10 cityinput" id="endCity"  style="background-position:200px 3px;"  type="text" name="ArriveCity" value="桂林" readonly/>
                 </div>
               </div>
