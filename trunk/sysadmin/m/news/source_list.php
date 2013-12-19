@@ -98,7 +98,7 @@ td span {color:red;}
                                 <span><a href="m.php?app=news_source_edit&id=<?php echo $value['source_id'];?>"><?php echo $value['name'];?></a></span>
 				</td>
 				<td>
-					<a href="m.php?app=news_source_edit&id=<?php echo $value['source_id'];?>"><?php echo $a_langpackage->a_update; ?></a><br />
+					<a href="m.php?app=news_source_edit&id=<?php echo $value['source_id'];?>"><?php echo $a_langpackage->a_update; ?></a>
 					<a href="a.php?act=news_source_del&id=<?php echo $value['source_id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_message_del; ?>');"><?php echo $a_langpackage->a_delete; ?></a>
 				</td>
 			</tr>

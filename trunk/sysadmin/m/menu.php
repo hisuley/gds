@@ -32,6 +32,8 @@ $right_array=array(
     "pay_order_list_browse"    =>   "0",
     "complaint_list"       => "0",
     "complaint_title"      => "0",
+    "order_receiv_list"     => "0",
+    "order_refund_list"     => "0",
 
     "goods_list_browse"    =>   "0",
     "cat_add"    =>   "0",
@@ -236,7 +238,13 @@ $plugin=$dbo->getRs($sql);
 	        <?php }?>
 			<?php if($right_array["protect_rights"]){?>
 	        	<li id="protect_rights" class="" onclick="changeMenu(this);"><a href="m.php?app=protect_rights" target="main-frame"><?php echo $a_langpackage->a_protect_rights; ?></a></li><!-- 自定义导航 -->
-	        <?php }?>
+            <?php }?>
+            <?php if($right_array["order_receiv_list"]){?>
+				<li id="order_receiv_list" class="" onclick="changeMenu(this);"><a href="m.php?app=order_receiv_list" target="main-frame"><?php echo $a_langpackage->a_receiv_list; ?></a></li>
+            <?php }?>
+            <?php if($right_array["order_refund_list"]){?>
+				<li id="order_refund_list" class="" onclick="changeMenu(this);"><a href="m.php?app=order_refund_list" target="main-frame"><?php echo $a_langpackage->a_refund_list; ?></a></li>
+			<?php }?>
 			</ul>
 	   <?php }?>
 	   <?php if ($id == 'commodity'){?><!-- 商品 -->

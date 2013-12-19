@@ -512,6 +512,25 @@ class adminlp{
 	var $a_set = " 设置";
 	var $a_select_status = "请选择您要设置的状态";
 	var $a_select_at_least = " 致少要选择一项，才能进行操作！";
+        var $a_receiv_list = "收款单列表";
+        var $a_receiv_payid = "支付单号";
+        var $a_receiv_date = "收款时间";
+        var $a_payment_type = "支付方式";
+        var $a_pay_date = "支付时间";
+        var $a_receiver = "收款人";
+        var $a_receiv_account = "收款账号";
+        var $a_receiv_money = "收款金额";
+        var $a_operator = "操作人";
+        var $a_receiv_export = "导出收款单";
+        var $a_refund_export = "导出退款单";
+        var $a_refund_list = "退款单列表";
+        var $a_refund_way = "退款方式";
+        var $a_refund_account = "退款账号";
+        var $a_refund_money = "退款金额";
+        var $a_operator_date = "操作日期";
+        var $a_export_name = "导出的文件名";
+        var $a_iconv_receiv ="收款单编号,订单号,支付单号,商铺名称,支付方式,支付日期,收款人,收款日期,收款账户,收款金额,操作者 \n";
+        var $a_iconv_refund ="退款单编号,订单号,商铺名称,退款方式,会员名称,退款账号,退款金额,操作者,操作日期 \n";
 	/*news view */
 	var $a_content = '资讯管理';
         
@@ -970,6 +989,7 @@ class adminlp{
     var $a_shop_intro="店铺简介";
     
     var $a_check_complay="名称不能为空！";
+    var $a_check_file = "文件名不能为空！";
     var $a_check_person="法人代表姓名不能为空！";
     var $a_check_card="证件号码不能为空！";
     var $a_check_truecard="请填写真实的证件号码！";

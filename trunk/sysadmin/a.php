@@ -93,6 +93,8 @@ $actArray = array(
 	'order_set_status'		=> array('a/order/set_status.php','m.php?app=order_alllist'),
 	'close_protect_rights'	=> array('a/order/close_protect_rights.action.php'),
 	'order_view'		=> array('a/order/view.php','m.php?app=order_alllist'),
+    'order_receiv_export'   => array('a/order/receiv_export.php','m.php?app=order_receiv_list'),
+    'order_refund_export'   => array('a/order/refund_export.php','m.php?app=order_refund_list'),
 
 	'shop_goodsdownsale'	=> array('a/shop/goodsdownsale.php','m.php?app=shop_list'),
 	'shop_request'			=> array('a/shop/request.php','m.php?app=shop_request'),
