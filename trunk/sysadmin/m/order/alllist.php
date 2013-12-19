@@ -19,6 +19,8 @@ $pay_status = intval(get_args('pay_status'));
 $transport_status = intval(get_args('transport_status'));
 $pay_id = intval(get_args('pay_id'));
 $order_status = intval(get_args('order_status'));
+$start_time = get_args('start_time');
+$end_time = get_args('end_time');
 
 $sql = "select * from `$t_order_info` as a, `$t_shop_info` as b where a.shop_id=b.shop_id ";
 //权限管理
@@ -64,6 +66,20 @@ if($order_status) {
 		$sql .= " and a.order_status='$order_status' ";
 	}
 }
+if($start_time) {
+	if(!$right){
+		header('Location: m.php?app=error');
+	}else{
+		$sql .= " and a.order_time >= '$start_time' ";
+	}
+}
+if($end_time) {
+	if(!$right){
+		header('Location: m.php?app=error');
+	}else{
+		$sql .= " and a.order_time  <= '$end_time' ";
+	}
+}
 
 $sql .= " order by a.order_time desc;";
 $result = $dbo->fetch_page($sql,13);
@@ -87,6 +103,7 @@ foreach($right_array as $key => $value){
 <link rel="stylesheet" type="text/css" href="skin/css/admin.css">
 <link rel="stylesheet" type="text/css" href="skin/css/main.css">
 <script type='text/javascript' src="skin/js/jy.js"></script>
+<script type='text/javascript' src='../servtools/date/WdatePicker.js'></script>
 <style>
 td span {color:red;}
 .green {color:green;}
@@ -127,7 +144,13 @@ td span {color:red;}
 						<?php echo $a_langpackage->a_send_goods;?><input type="checkbox" name="transport_status" value="1" <?php if($transport_status) echo "checked";?> />
 						<input type="hidden" name="app" value="order_alllist">
 					</td>
-					<td align="left"><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" /></td>
+                  </tr>
+                  <tr><td></td>
+                      <td><?php echo $a_langpackage->a_shop_time;?>：
+						<input class="Wdate" type="text" name="start_time" id="start_time" onFocus="WdatePicker({isShowClear:false,readOnly:true})" value="<?php echo $start_time;?>" /><?php echo $a_langpackage->a_to;?>
+						
+						
+						<input class="Wdate" type="text" name="end_time" id="end_time" onFocus="WdatePicker({isShowClear:false,readOnly:true})"  value="<?php echo $end_time;?>"/>　<input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" /></td>
                   </tr>
                 </tbody>
             </table>
