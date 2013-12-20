@@ -531,6 +531,17 @@ class adminlp{
         var $a_export_name = "导出的文件名";
         var $a_iconv_receiv ="收款单编号,订单号,支付单号,商铺名称,支付方式,支付日期,收款人,收款日期,收款账户,收款金额,操作者 \n";
         var $a_iconv_refund ="退款单编号,订单号,商铺名称,退款方式,会员名称,退款账号,退款金额,操作者,操作日期 \n";
+        var $a_account_list = "现金账户列表";
+        var $a_account_prepay = "预付费";
+        var $a_account_refund = "退款";
+        var $a_account_branktype = "现金账户付款";
+        var $a_amount = "金额";
+        var $a_account_addtime = "记录插入时间";
+        var $a_account_edittime = "记录更新时间";
+        var $a_admin_note = "管理员备注";
+        var $a_user_note = "用户备注";
+        var $a_process_type = "操作类型";
+        var $a_account_ispaid = "是否付款";
 	/*news view */
 	var $a_content = '资讯管理';
         

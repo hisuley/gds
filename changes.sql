@@ -58,3 +58,24 @@ CREATE TABLE `imall_article_source` (
 ALTER TABLE `gds`.`imall_article` ADD COLUMN `source_id` INT(10) DEFAULT 0 NOT NULL COMMENT '文章来源ID' AFTER `short_order`; 
 /* 文章分类表增加图标字段 */
 ALTER TABLE `gds`.`imall_article_cat` ADD COLUMN `cat_icon` CHAR(255) DEFAULT '' NOT NULL COMMENT '分类图标' AFTER `sort_order`;
+/* 前台用户表增加用户现有资金字段 */
+ALTER TABLE `gds`.`imall_users` ADD COLUMN `user_money` DECIMAL(10,2) DEFAULT 0.00 NOT NULL COMMENT '用户现有资金' AFTER `locked`; 
+/* 现金账户表 */
+CREATE TABLE `imall_user_account` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID号',
+  `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '跟users表中的user_id对应',
+  `admin_user` varchar(255) NOT NULL COMMENT '操作该笔交易的管理员的用户名',
+  `amount` decimal(10,2) NOT NULL COMMENT '资金的数目，正数为增加，负数为减少',
+  `add_time` datetime NOT NULL COMMENT '记录插入时间',
+  `paid_time` datetime NOT NULL COMMENT '记录更新时间',
+  `admin_note` varchar(255) NOT NULL COMMENT '管理员的备注',
+  `user_note` varchar(255) NOT NULL COMMENT '用户备注',
+  `process_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '操作类型:1退款,0预付费，其实就是充值,2用现金账户付款交易',
+  `payment` varchar(90) NOT NULL COMMENT '支付渠道的名称,取自payment的pay_name字段',
+  `is_paid` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已经付款:0未付,1已付',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `is_paid` (`is_paid`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+
+

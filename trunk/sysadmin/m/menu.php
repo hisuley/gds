@@ -34,6 +34,7 @@ $right_array=array(
     "complaint_title"      => "0",
     "order_receiv_list"     => "0",
     "order_refund_list"     => "0",
+    "order_account"         => "0",
 
     "goods_list_browse"    =>   "0",
     "cat_add"    =>   "0",
@@ -244,6 +245,9 @@ $plugin=$dbo->getRs($sql);
             <?php }?>
             <?php if($right_array["order_refund_list"]){?>
 				<li id="order_refund_list" class="" onclick="changeMenu(this);"><a href="m.php?app=order_refund_list" target="main-frame"><?php echo $a_langpackage->a_refund_list; ?></a></li>
+            <?php }?>
+            <?php if($right_array["order_account"]){?>
+				<li id="order_account" class="" onclick="changeMenu(this);"><a href="m.php?app=order_account" target="main-frame"><?php echo $a_langpackage->a_account_list; ?></a></li>
 			<?php }?>
 			</ul>
 	   <?php }?>

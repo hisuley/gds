@@ -115,6 +115,7 @@ $appArray = array(
     'order_refund_list'     => 'm/order/refund_list.php',
     'order_receiv_export'   => 'm/order/receiv_export.php',
     'order_refund_export'   => 'm/order/refund_export.php',
+    'order_account'         => 'm/order/account.php',
 
 	/* 广告 */
 	'asd_position_add'	=> 'm/asd/position_add.php',
