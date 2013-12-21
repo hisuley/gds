@@ -59,6 +59,8 @@ $right_array=array(
     "add_news"    =>   "0",
     "news_attr_manager"    =>   "0",
     "news_source_list"  =>  "0",
+    "news_first_list"   =>  "0",
+    "news_recheck_list" =>  "0",
 
     "template_mana"    =>   "0",
 
@@ -318,6 +320,12 @@ $plugin=$dbo->getRs($sql);
 	        	<li id="separator" class="separator"></li>
 			<?php if($right_array["news_list"]){?>
 				<li id="news_list" class="active" onclick="changeMenu(this);"><a href="m.php?app=news_list" target="main-frame"><?php echo $a_langpackage->a_news_list; ?></a></li>
+            <?php }?>
+            <?php if($right_array["news_first_list"]){?>
+				<li id="news_first_list" class="" onclick="changeMenu(this);"><a href="m.php?app=news_first_list" target="main-frame"><?php echo $a_langpackage->a_news_first_list; ?></a></li>
+            <?php }?>
+            <?php if($right_array["news_recheck_list"]){?>
+				<li id="news_recheck_list" class="" onclick="changeMenu(this);"><a href="m.php?app=news_recheck_list" target="main-frame"><?php echo $a_langpackage->a_news_recheck_list; ?></a></li>
 			<?php }?>
 			<?php if($right_array["news_catlist"]){?>
 				<li id="news_catlist" class="" onclick="changeMenu(this);"><a href="m.php?app=news_catlist" target="main-frame"><?php echo $a_langpackage->a_news_category; ?></a></li>

@@ -138,6 +138,9 @@ $appArray = array(
         'news_source_list'                   => 'm/news/source_list.php',
         'news_source_add'               => '/m/news/source_add.php',
         'news_source_edit'               => '/m/news/source_edit.php',
+        'news_first_list'  => 'm/news/first_list.php',
+        'news_recheck_list'      => 'm/news/recheck_list.php',
+        'news_audit_false'    => 'm/news/audit_false.php',
 
 	/* 插件 */
 	'plugin_list'		=> 'm/plugin/pluginlist.php',

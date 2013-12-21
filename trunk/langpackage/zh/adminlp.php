@@ -250,6 +250,15 @@ class adminlp{
 	var $a_batch_unlock = "批量解锁";
 
 	var $a_news_list = "新闻列表";
+        var $a_news_first_list = "初审新闻列表";
+        var $a_news_recheck_list = "复审新闻列表";
+        var $a_news_audit_true = "审核通过";
+        var $a_news_audit_false = "审核不通过";
+        var $a_news_first_audit_true = "初审新闻通过";
+        var $a_news_recheck_audit_true = "复审新闻通过";
+        var $a_news_first_audit_false = "初审新闻不通过";
+        var $a_news_recheck_audit_false = "复审新闻不通过";
+        var $a_news_audit_note = "提交审核不通过备注";
 	var $a_news_add = "添加新闻";
 	var $a_news_edit = "新闻修改";
         var $a_news_attr_management = "新闻属性管理";

@@ -77,5 +77,6 @@ CREATE TABLE `imall_user_account` (
   KEY `user_id` (`user_id`),
   KEY `is_paid` (`is_paid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
-
+/* 文章表增加审核状态和审核备注字段 */
+ALTER TABLE `gds`.`imall_article` ADD COLUMN `is_audit` TINYINT(1) DEFAULT 0 NOT NULL COMMENT '文章是否审核:0待审核,1初审通过,2初审不通过,3复审不通过,4复审通过' AFTER `source_id`, ADD COLUMN `audit_note` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '文章审核不通过的备注' AFTER `is_audit`; 
 
