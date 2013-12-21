@@ -90,7 +90,8 @@ $appArray = array(
 	'member_reinfo'		=> 'm/member/reinfo.php',
 	'member_rank'		=> 'm/member/rank.php',
 	'member_rank_edit'	=> 'm/member/rank_edit.php',
-	'member_rank_add'	=> 'm/member/rank_add.php',
+    'member_rank_add'	=> 'm/member/rank_add.php',
+    'member_view'       => 'm/member/view.php',
 
 	/* 商品相关 */
 	'goods_attr_manage'		=> 'm/goods/attr_manage.php',

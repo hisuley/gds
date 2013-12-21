@@ -21,6 +21,7 @@ $pay_id = intval(get_args('pay_id'));
 $order_status = intval(get_args('order_status'));
 $start_time = get_args('start_time');
 $end_time = get_args('end_time');
+$user_id = intval(get_args('user_id'));
 
 $sql = "select * from `$t_order_info` as a, `$t_shop_info` as b where a.shop_id=b.shop_id ";
 //权限管理
@@ -78,6 +79,14 @@ if($end_time) {
 		header('Location: m.php?app=error');
 	}else{
 		$sql .= " and a.order_time  <= '$end_time' ";
+	}
+}
+if($user_id) {
+	if(!$right){
+		header('location:m.php?app=error');
+		exit;
+	}else {
+		$sql .= " and a.user_id='$user_id' ";
 	}
 }
 

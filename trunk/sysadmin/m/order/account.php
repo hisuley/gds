@@ -15,6 +15,7 @@ dbtarget('r',$dbServs);
 
 $start_time = get_args('start_time');
 $end_time = get_args('end_time');
+$user_id = intval(get_args('user_id'));
 
 $sql = "select a.id,a.admin_user,a.amount,a.add_time,a.paid_time,a.admin_note,a.user_note,a.process_type,a.payment,a.is_paid,b.user_name from `$t_account_info` a left join `$t_users` b on a.user_id = b.user_id where 1";
 //权限管理
@@ -32,6 +33,14 @@ if($end_time) {
 		header('Location: m.php?app=error');
 	}else{
 		$sql .= " and a.add_time  <= '$end_time' ";
+	}
+}
+if($user_id) {
+	if(!$right){
+		header('location:m.php?app=error');
+		exit;
+	}else {
+		$sql .= " and a.user_id='$user_id' ";
 	}
 }
 

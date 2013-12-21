@@ -196,7 +196,9 @@ td span { color:red; }
 									<a href="a.php?act=member_unlock&id=<?php echo $value['user_id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_sure_member_unlock; ?>');"><?php echo $a_langpackage->a_unlock; ?></a>
 									<?php }else { ?>
 									<a href="a.php?act=member_locked&id=<?php echo $value['user_id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_sure_member_lock; ?>');"><?php echo $a_langpackage->a_lock; ?></a>
-									<?php } ?></td>
+									<?php } ?><br />
+                                                                        <a href="m.php?app=member_view&id=<?php echo $value['user_id'];?>"><?php echo $a_langpackage->a_view; ?></a>
+                                                                </td>
 							</tr>
 							<?php }?>
 							<tr>

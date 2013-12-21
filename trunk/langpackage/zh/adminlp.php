@@ -408,6 +408,25 @@ class adminlp{
 	var $a_verify = "已验证";
 	var $a_unverify = "未验证";
 
+        var $a_memeber_view = "会员详细信息查看";
+        var $a_memeber_id = "会员ID";
+        var $a_memeber_realname = "真实姓名";
+        var $a_memeber_sex = "性别";
+        var $a_memeber_secret = "保密";
+        var $a_memeber_man = "男";
+        var $a_memeber_woman = "女";
+        var $a_memeber_marry = "婚姻状况";
+        var $a_memeber_unmarried = "未婚";
+        var $a_memeber_married = "已婚";
+        var $a_memeber_birthday = "出生日期";
+        var $a_memeber_integral = "总积分";
+        var $a_memeber_integral_surplus = "剩余可用积分";
+        var $a_memeber_money = "余额";
+        var $a_memeber_address = "详细地址";
+        var $a_memeber_zipcode = "邮政编码";
+        var $a_memeber_orderinfo = "筛选该用户订单";
+        var $a_memeber_account = "筛选该会员现金账户充值记录";
+        var $a_memeber_ico = "用户头像";
 	/* memeber reinfo*/
 	var $a_memeber_info_update = "会员基本信息修改";
 	var $a_normal = "正常";
