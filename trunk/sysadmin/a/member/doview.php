@@ -7,6 +7,7 @@ if(!$IWEB_SHOP_IN) {
 require_once("../foundation/module_users.php");
 require_once("../foundation/module_admin_logs.php");
 require_once("../foundation/module_remind.php");
+require_once("../foundation/module_account.php");
 
 //语言包引入
 $a_langpackage=new adminlp;
@@ -24,6 +25,7 @@ $dbo=new dbex();
 //定义文件表
 $t_user_info = $tablePreStr."user_info";
 $t_users = $tablePreStr."users";
+$t_user_account = $tablePreStr."user_account";
 $t_admin_log = $tablePreStr."admin_log";
 $t_remind_info = $tablePreStr."remind_info";
 
@@ -51,6 +53,9 @@ $post2['user_email'] = short_check(get_args('user_email'));
 if(get_args('password')) {
 	$post2['user_passwd'] = md5(get_args('password'));
 }
+$post2['user_integral'] = intval(get_args('user_integral'));
+$post2['user_integral_surplus'] = intval(get_args('user_integral_surplus'));
+$post2['user_money'] = intval(get_args('user_money'));
 $user_id = intval(get_args('user_id'));
 if(!$user_id) { trigger_error($a_langpackage->a_error);}
 
@@ -61,7 +66,7 @@ $rs = $dbo->getRow($sql);
 if($rs){
 	$nowtime = $ctime->long_time();
 	if(intval(get_args('rank_id'))) {
-		if($rs['rank_id']!=$post['rank_id']){
+		if($rs['rank_id']!=$post2['rank_id']){
 			$array = array(
 				'user_id' => $user_id,
 				'remind_info' => $a_langpackage->a_zai.$nowtime."，".$a_langpackage->a_mem_level,
@@ -71,7 +76,7 @@ if($rs){
 		}
 	}
 	if(get_args('password')) {
-		if($rs['user_passwd']!=md5($post['user_passwd'])){
+		if($rs['user_passwd']!=md5($post2['user_passwd'])){
 			$array = array(
 				'user_id' => $user_id,
 				'remind_info' => $a_langpackage->a_zai.$nowtime."，".$a_langpackage->a_mi_ti,
@@ -80,6 +85,39 @@ if($rs){
 			insert_remind_info($dbo,$t_remind_info,$array);
 		}
 	}
+        //修改用户余额时更新现金账户表
+        if(get_args('user_money')) {
+            if($rs['user_money'] > $post2['user_money']){
+                $array = array(
+                        'user_id' => $user_id,
+                        'admin_user' => $_SESSION['admin_name'],
+                        'amount' => -($rs['user_money'] - $post2['user_money']),
+                        'add_time' => $nowtime,
+                        'paid_time' => $nowtime,
+                        'admin_note' => '',
+                        'user_note' => '',
+                        'process_type' => 2,
+                        'payment' => '',
+                        'is_paid' => 1,
+                );
+                insert_account_info($dbo,$t_user_account,$array);
+            }
+            if($rs['user_money'] < $post2['user_money']){
+                $array = array(
+                        'user_id' => $user_id,
+                        'admin_user' => $_SESSION['admin_name'],
+                        'amount' => -($rs['user_money'] - $post2['user_money']),
+                        'add_time' => $nowtime,
+                        'paid_time' => $nowtime,
+                        'admin_note' => '',
+                        'user_note' => '',
+                        'process_type' => 0,
+                        'payment' => '',
+                        'is_paid' => 0,
+                );
+                insert_account_info($dbo,$t_user_account,$array);
+            }
+        }
 }
 
 if(update_user_info($dbo,$t_users,$post2,$user_id) && update_user_info($dbo,$t_user_info,$post,$user_id)) {

@@ -291,10 +291,6 @@ td span {color:red;}
 			<tr>
 				<td><a href="m.php?app=order_account&user_id=<?php echo $user_info['user_id'];?>"><?php echo $a_langpackage->a_memeber_account;?></a></td><td></td>
 			</tr>
-			<tr>
-				<td align="right"><?php echo  $a_langpackage->a_memeber_ico;?>：</td>
-                                <img src="<?php echo $user_info['user_id'];?>">
-			</tr>
 		  </tbody>
 		</table>
 		</form>
