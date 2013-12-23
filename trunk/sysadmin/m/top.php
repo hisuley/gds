@@ -26,6 +26,7 @@ $a_langpackage=new adminlp;
 <div class="nav">
 	<ul class="menu">
 		<li id="index" class="active"><a href="m.php?app=menu&value=index" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_global_settings; ?></a></li>
+        <li id="suppliers"><a href="m.php?app=menu&value=suppliers" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_m_suppliers_mengament; ?></a></li>
 		<li id="shops"><a href="m.php?app=menu&value=shops" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_m_shop_mengament; ?></a></li>
 		<li id="member"><a href="m.php?app=menu&value=member" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_m_member_oprate; ?></a></li>
 		<li id="commodity"><a href="m.php?app=menu&value=commodity" target="menu-frame" hidefocus="true"><?php echo $a_langpackage->a_m_aboutgoods_management; ?></a></li>

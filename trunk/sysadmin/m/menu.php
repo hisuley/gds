@@ -26,6 +26,8 @@ $right_array=array(
     "add_user_rank_browse"    =>   "0",
     "audit_company"    =>   "0",
 
+    "suppliers_list"    => "0",
+
     "shop_browse"    =>   "0",
 
     "order_list_browse"    =>   "0",
@@ -44,6 +46,8 @@ $right_array=array(
     "brand_attr_manager" => "0",
     "attr_manager"    =>   "0",
     "groupbuy_list"    =>   "0",
+    "travel_theme"        =>  "0",
+    "travel_type"       =>  "0",
 
     "nav_list"    =>   "0",
     "nav_edit"    =>   "0",
@@ -161,6 +165,14 @@ $plugin=$dbo->getRs($sql);
 	        	<li id="nav_list" class="" onclick="changeMenu(this);"><a href="m.php?app=nav_list" target="main-frame"><?php echo $a_langpackage->a_custom_navigation; ?></a></li><!-- 自定义导航 -->
 	        <?php }?>
 	        </ul>
+        <?php }?>
+		<?php if ($id == 'suppliers'){?><!-- 供应商 -->
+			<ul class="submenu" id="index">
+	        	<li id="separator" class="separator"></li>
+			<?php if($right_array["suppliers_list"]){?>
+				<li id="suppliers_list" class="active" onclick="changeMenu(this);"><a href="m.php?app=suppliers_list" target="main-frame"><?php echo $a_langpackage->a_suppliers_list; ?></a></li><!-- 供应商列表 -->
+			<?php }?>
+			</ul>
 		<?php }?>
 		<?php if ($id == 'shops'){?><!-- 商铺 -->
 			<ul class="submenu" id="index">
@@ -280,6 +292,12 @@ $plugin=$dbo->getRs($sql);
 			<?php }?>
 			<?php if($right_array["tag_list"]){?>
 					<li id="tag_list" class="" onclick="changeMenu(this);"><a href="m.php?app=tag_list" target="main-frame"><?php echo $a_langpackage->a_tags_manage; ?></a></li><!-- 标签集管理 -->
+            <?php }?>
+            <?php if($right_array["travel_theme"]){?>
+            <li id="travel_theme" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_theme" target="main-frame"><?php echo $a_travel_theme_management; ?></a></li><!-- 旅游线路主题管理 -->
+            <?php }?>
+            <?php if($right_array["travel_type"]){?>
+					<li id="travel_type" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_type" target="main-frame"><?php echo $a_travel_type_management; ?></a></li><!-- 旅游线路类型管理 -->
 			<?php }?>
 			</ul>
        <?php }?>

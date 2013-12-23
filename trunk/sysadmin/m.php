@@ -71,6 +71,11 @@ $appArray = array(
 	'shop_categories_add' => 'm/shop/categories_add.php',
 	'shop_categories_edit' => 'm/shop/categories_edit.php',
 
+    /* 供应商 */
+    'suppliers_list'    => 'm/suppliers/list.php',
+    'suppliers_add'     => 'm/suppliers/add.php',
+    'suppliers_edit'    => 'm/suppliers/edit.php',
+
 	'shop_add' => 'm/shop/add.php',
 	'shop_create' => 'm/shop/create.php',
 	'shop_edit' => 'm/shop/shop_edit.php',
@@ -103,7 +108,9 @@ $appArray = array(
 	'goods_category_edit'	=> 'm/goods/category_edit.php',
 	'goods_category_list'	=> 'm/goods/category_list.php',
 	'goods_list'			=> 'm/goods/list.php',
-	'goods_edit'			=> 'm/goods/edit.php',
+    'goods_edit'			=> 'm/goods/edit.php',
+    'travel_theme'      => 'm/goods/travel_theme.php',
+    'travel_type'      => 'm/goods/travel_type.php',
 
 	/* 订单 */
 	'order_alllist'			=> 'm/order/alllist.php',

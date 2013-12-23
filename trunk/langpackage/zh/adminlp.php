@@ -68,6 +68,7 @@ class adminlp{
 	var $a_m_member_level_add = "添加会员级别";
 	var $a_m_check_commember = "未审核企业";
 	var $a_m_shop_mengament = "企业管理";
+        var $a_m_suppliers_mengament = "供应商管理";
 	var $a_m_order_mengament = "交易管理";
 	var $a_m_opayedrder_list = "已付款订单列表";
 	var $a_m_aboutgoods_management = "商品管理";
@@ -225,6 +226,9 @@ class adminlp{
 	var $a_sure_delbrand = "确定要删除这条记录吗？";
 	var $a_brand_name_notnone = "名称不能为空！";
 	var $a_brand_site_url_error = "网站格式不正确！";
+        
+        var $a_travel_theme_management = "旅游线路主题管理";
+        var $a_travel_type_management = "旅游线路类型管理";
 
 	var $a_category_add = "添加分类";
 	var $a_category_edit = "修改分类";
@@ -456,6 +460,27 @@ class adminlp{
 	/*member rank_add*/
 	var $a_add_memeber_rank = "添加会员等级";
 	var $a_memeber_rank_add = "会员等级添加";
+        /* suppliers list */
+        var $a_suppliers_add = "添加供应商";
+        var $a_suppliers_edit = "修改供应商";
+	var $a_suppliers_list = "供应商列表";
+	var $a_suppliers_name = "供应商名称";
+        var $a_suppliers_zip ="供应商邮编";
+        var $a_suppliers_category = "供应商分类";
+        var $a_user_name_none = "会员名称不能为空！";
+        var $a_suppliers_categories_export = "供应商分类导出";
+	var $a_suppliers_categories_import = "供应商分类导入";
+        var $a_suppliers_iconv_str="供应商分类ID,供应商分类名称,父级分类ID,排序,供应商数量 \n";
+        var $a_suppliers_status = "供应商状态";
+	var $a_lock_suppliers = "锁定供应商";
+        var $a_free_suppliers_mess1 = "供应商，该供应商下的商品同时下架！";
+        var $a_m_suppliers_integral = "供应商信用等级";
+        var $a_m_check_suppliers = "未审核供应商";
+        var $a_suppliers_memeber_reg = "会员账号信息";
+        var $a_suppliers_memeber_false = "请检查会员账号信息";
+        var $a_suppliers_legal_person_false = "请检查法人信息";
+        var $a_suppliers_legal_person = "法人信息";
+        var $a_suppliers_shop = "商铺信息";
 	/*shop list*/
 	var $a_shop_add = "添加企业";
 	var $a_shop_list = "企业列表";
