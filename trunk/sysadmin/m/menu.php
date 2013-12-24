@@ -294,10 +294,10 @@ $plugin=$dbo->getRs($sql);
 					<li id="tag_list" class="" onclick="changeMenu(this);"><a href="m.php?app=tag_list" target="main-frame"><?php echo $a_langpackage->a_tags_manage; ?></a></li><!-- 标签集管理 -->
             <?php }?>
             <?php if($right_array["travel_theme"]){?>
-            <li id="travel_theme" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_theme" target="main-frame"><?php echo $a_travel_theme_management; ?></a></li><!-- 旅游线路主题管理 -->
+            <li id="travel_theme" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_theme" target="main-frame"><?php echo $a_langpackage->a_travel_theme_management; ?></a></li><!-- 旅游线路主题管理 -->
             <?php }?>
             <?php if($right_array["travel_type"]){?>
-					<li id="travel_type" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_type" target="main-frame"><?php echo $a_travel_type_management; ?></a></li><!-- 旅游线路类型管理 -->
+					<li id="travel_type" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_type" target="main-frame"><?php echo $a_langpackage->a_travel_type_management; ?></a></li><!-- 旅游线路类型管理 -->
 			<?php }?>
 			</ul>
        <?php }?>

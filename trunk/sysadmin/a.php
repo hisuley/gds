@@ -86,6 +86,8 @@ $actArray = array(
 	'flink_add'				=> array('a/goods/flink_add.php','m.php?app=flink_list'),
 	'flink_edit'			=> array('a/goods/flink_edit.php','m.php?app=flink_list'),
 	'flink_del'				=> array('a/goods/flink_del.php'),
+    'travel_attr_edit'      => array('a/goods/travel_attr_edit.php'),
+    'travel_attr_del'       => array('a/goods/travel_attr_del.php'),
 
 	'complaint_type_edit'	=> array('a/complaint/type_edit.php'),
 	'complaint_type_del'	=> array('a/complaint/type_del.php'),

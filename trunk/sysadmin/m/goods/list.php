@@ -8,6 +8,7 @@ $a_langpackage=new adminlp;
 
 //数据表定义区
 $t_goods = $tablePreStr."goods";
+$t_goods_attr = $tablePreStr."goods_attr";
 
 //读写分离定义方法
 $dbo = new dbex;
@@ -22,6 +23,8 @@ $admin_promote = intval(get_args('admin_promote'));
 $sale = intval(get_args('sale'));
 $shop_id = intval(get_args('shopid'));
 
+$index = intval(get_args('index'));
+$attr_values = short_check(get_args('attr_name'));
 $sql = "select * from `$t_goods` where 1 ";
 //权限管理
 $right=check_rights("goods_search");
@@ -92,6 +95,15 @@ if ($shop_id){
 }
 
 $sql .= " order by add_time desc;";
+
+if ($index){
+	if(!$right){
+		header('location:m.php?app=error');
+		exit;
+	}else {
+		$sql = "SELECT * FROM `$t_goods` a,`$t_goods_attr` b WHERE a.`goods_id`=b.`goods_id` AND b.`attr_values`='$attr_values'";
+	}
+}
 
 $result = $dbo->fetch_page($sql,13);
 

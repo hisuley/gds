@@ -229,6 +229,7 @@ class adminlp{
         
         var $a_travel_theme_management = "旅游线路主题管理";
         var $a_travel_type_management = "旅游线路类型管理";
+        var $a_travel_attr_goods = "查看关联商品";
 
 	var $a_category_add = "添加分类";
 	var $a_category_edit = "修改分类";
