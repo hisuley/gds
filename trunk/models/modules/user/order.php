@@ -6,6 +6,7 @@ require("foundation/module_users.php");
 require("foundation/module_areas.php");
 require("foundation/module_goods.php");
 require("foundation/module_payment.php");
+require("foundation/module_category.php");
 
 if(!get_sess_user_id()){
 	exit('请先<a href="login.php">登陆</a>！');
@@ -55,6 +56,7 @@ $t_payment = $tablePreStr."payment";
 $t_user_address = $tablePreStr."user_address";
 $t_cart = $tablePreStr."cart";
 $t_transport = $tablePreStr."transport";
+$t_category = $tablePreStr."category";
 
 $dbo=new dbex;
 //读写分离定义方法
@@ -115,6 +117,8 @@ foreach ($buy_goods as $k=>$v){
 	}
 }
 if(!$goods_info) { exit($m_langpackage->m_handle_err); }
+//是否是酒店或者景点分类下的商品, 酒店ID：433，景点ID：434
+$cid_arr = get_category_cid($dbo,$t_category,$goods_info[0]['cat_id']);$grogshop_flag=in_array(433,$cid_arr);$scenic_flag=in_array(434,$cid_arr);
 $shop_id=get_sess_shop_id();
 if($shop_id == $goods_info[0]['shop_id']) {
 	set_sess_err_msg($m_langpackage->m_dontbuy_youself);

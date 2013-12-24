@@ -243,6 +243,18 @@ td { text-align:left; }
 				</td>
 			</tr>
 		</table>
+                <h3 class="ttlm_02">{echo: lp{m_order_message};/}</h3>
+                <form action="do.php?act=user_order_newmessage" method="post" name="order_message">
+                    <table class="form_table_02" width="100%" border="0" cellspacing="0">
+                            <tr>
+                                <th width="100px">{echo: lp{m_order_message};/}：</th>
+                                <td><textarea name="new_message" style="width:280px;height:60px" id="textareac" onkeyup="this.value=this.value.slice(0,300);"></textarea></td>
+                            </tr>
+                            <tr><input type="hidden" value="{echo: $info['order_id'];/}" name="order_id" /><input type="hidden" value="{echo: $info['message'];/}" name="message" />
+                                <td colspan="2"><span class="tr_op"><input type="submit" name="submit" class="submit" value="{echo: lp{m_view_order_new_message};/}" /></span></td>
+                            </tr>
+                    </table>
+                </form>
 	</div>
 	<div class="clear"></div>
 	<div class="right_bottom"></div>

@@ -35,6 +35,7 @@ $actArray = array(
 	'user_favorite_del'	=> array('action/user/favorite_del.action.php','modules.php?app=user_favorite'),
 	'user_cart_del'		=> array('action/user/cart_del.action.php','modules.php?app=user_cart'),
 	'user_order'		=> array('action/user/order.action.php','modules.php?app=user_my_order'),
+        'user_order_newmessage'    => array('action/user/order_newmessage.php','modules.php?app=user_my_order'),
 	'user_order_del'	=> array('action/user/order_del.action.php','modules.php?app=user_my_order'),
 	'user_order_checkget'	=> array('action/user/order_checkget.action.php','modules.php?app=user_my_order'),
 	'user_address_add'	=> array('action/user/address_add.action.php','modules.php?app=user_address'),

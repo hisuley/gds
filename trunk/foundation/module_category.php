@@ -3,6 +3,19 @@ if(!$IWEB_SHOP_IN) {
 	die('Hacking attempt');
 }
 
+function get_category_cid(&$dbo,$table,$cat_id){
+    $sql = "select * from `$table` where cat_id=".$cat_id;
+    $catinfo = $dbo->getRs($sql);
+    foreach($catinfo as $catval){
+        if($catval['parent_id'] != 0){
+            $tmp = get_category_cid($dbo,$table,$catval['parent_id']);
+            $cat_tmp = $tmp;
+        }
+        $cat_tmp[] = $catval['cat_id'];
+    }
+    return $cat_tmp;
+}
+
 function get_category_info(&$dbo,$table) {
 	$sql = "select * from `$table` order by sort_order asc, cat_id asc";
 	return $dbo->getRs($sql);

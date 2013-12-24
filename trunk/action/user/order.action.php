@@ -98,7 +98,14 @@ $post['email'] = short_check(get_args('email'));
 $post['telphone'] = short_check(get_args('telphone'));
 $post['zipcode'] = short_check(get_args('zipcode'));
 $post['address'] = long_check(get_args('full_address'));
-$post['message'] = long_check(get_args('message'));
+
+$checkinDate = short_check(get_args('checkinDate'));
+$checkoutDate = short_check(get_args('checkoutDate'));
+$latest_toshop = short_check(get_args('latest_toshop'));
+$contact_person = short_check(get_args('contact_person'));
+$contact_mobile = intval(get_args('contact_mobile'));
+$post['message'] = $checkinDate."\n".$checkoutDate."\n".$latest_toshop."\n".$contact_person."\n".$contact_mobile."\n";   
+$post['message'] .= long_check(get_args('message'));
 $post['order_time'] = $ctime->long_time();
 $rand = rand(10,99);
 $post['payid'] = date("YmdHis".$rand);
