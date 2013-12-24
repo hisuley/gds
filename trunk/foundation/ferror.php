@@ -17,7 +17,7 @@
 	error_log('Error Message:'.$errstr." Error No:".$errno." Error File:".$errfile." LineNo:".$errline);
 	$errstr=$errstr.$errno.'-'.$beforeurl;
 	$errstr=urlencode($errstr);
-	/*if(!headers_sent())
+	if(!headers_sent())
 	{
 	    header('Location:'.$baseUrl.'error.php?errstr='.$errstr);
 	}
@@ -25,7 +25,7 @@
 	{
 	    echo '<meta http-equiv="Refresh" content="0;URL='.$baseUrl.'error.php?errstr='.$errstr.'" />';
 	}
-	exit(1);*/
+	exit(1);
  }
  function throw_succes($success, $errstr,$return_url=''){
 	global $baseUrl;
