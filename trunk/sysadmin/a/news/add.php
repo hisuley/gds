@@ -17,6 +17,7 @@ $ctime = new time_class;
 
 /* post 数据处理 */
 $post['title'] = short_check(get_args('title'));
+$post['source_id'] = intval(get_args('source_id'));
 $post['cat_id'] = intval(get_args('cat_id'));
 $post['is_link'] = intval(get_args('is_link'));
 $post['is_show'] = intval(get_args('is_show'));

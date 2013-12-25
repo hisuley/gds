@@ -297,7 +297,7 @@ function attr_info_extend(v) {
 		<div class="infobox">
     	<h3><?php echo $a_langpackage->a_news_attr_list; ?></h3>
         <div class="content2">
-		<div class="oprate" style="line-height:24px;">&nbsp;&nbsp;<?php echo $a_langpackage->a_select_extended_category; ?></div>
+		<div class="oprate" style="line-height:24px;">&nbsp;&nbsp;选择新闻分类，进行该分类下的新闻属性管理。新闻属性作为同一种类新闻的共有属性供用户选择。</div>
 		<div class="oprate" style="line-height:50px;"><span style="float:right;">
 
 			<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_extended_parentattr; ?>" onclick="attr_info_extend(<?php echo $parent_id; ?>)" />&nbsp;&nbsp;

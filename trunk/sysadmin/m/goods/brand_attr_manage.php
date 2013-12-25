@@ -269,7 +269,7 @@ function attr_info_add() {
 		<div class="infobox">
     	<h3><?php echo $a_langpackage->a_brand_attr_list; ?></h3>
         <div class="content2">
-		<div class="oprate" style="line-height:24px;">&nbsp;&nbsp;<?php echo $a_langpackage->a_select_extended_category; ?></div>
+		<div class="oprate" style="line-height:24px;">&nbsp;&nbsp;选择品牌，进行该品牌的属性管理。品牌属性作为同一种类商品的共有属性供卖家选择。</div>
 		<div class="oprate" style="line-height:50px;"><span style="float:right;">
 			<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_attr_add; ?>" onclick="attr_info_add()" />&nbsp;&nbsp;</span>&nbsp;&nbsp;<?php echo $a_langpackage->a_plselect_brand; ?>：
 			<select name="id" onchange="change_cat_id(this.value);">

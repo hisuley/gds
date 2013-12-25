@@ -276,6 +276,8 @@ class adminlp{
 	var $a_select_n_category = "选择分类";
 	var $a_select_news_category ="请选择新闻分类";
 	var $a_news_content = "新闻内容";
+        var $a_news_source = "新闻来源";
+        var $a_news_select_source = "选择新闻来源";
         var $a_news_source_management = "文章来源管理";
         var $a_news_source_name = "文章来源名称";
         var $a_news_source_list = "文章来源列表";
