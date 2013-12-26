@@ -15,6 +15,7 @@ dbtarget('r',$dbServs);
 $payid = short_check(get_args('payid'));
 $start_time = get_args('start_time');
 $end_time = get_args('end_time');
+$orderby = short_check(get_args('orderby'));
 
 $sql = "select * from `$t_receiv_info` where 1";
 //权限管理
@@ -43,8 +44,11 @@ if($end_time) {
 		$sql .= " and receiv_date  <= '$end_time' ";
 	}
 }
-
-$sql .= " order by receiv_date desc;";
+if($orderby) {
+	$sql .= " order by $orderby";
+} else {
+        $sql .= " order by receiv_date desc;";
+}
 $result = $dbo->fetch_page($sql,13);
 
 ?>
@@ -99,14 +103,15 @@ td span {color:red;}
 		<table class="list_table">
 			<thead>
 			<tr style=" text-align:center">
-				<th width="100px"><?php echo $a_langpackage->a_orderID;?></th>
-				<th width="100px"><?php echo $a_langpackage->a_receiv_payid;?></th>
-				<th width="90px"><?php echo $a_langpackage->a_payment_type;?></th>
+                                <th width="15px"><a href="m.php?app=order_receiv_list&orderby=receiv_id">ID</a></th>
+				<th width="100px"><a href="m.php?app=order_receiv_list&orderby=order_id"><?php echo $a_langpackage->a_orderID;?></a></th>
+				<th width="100px"><a href="m.php?app=order_receiv_list&orderby=payid"><?php echo $a_langpackage->a_receiv_payid;?></a></th>
+				<th width="90px"><a href="m.php?app=order_receiv_list&orderby=payment_type"><?php echo $a_langpackage->a_payment_type;?></a></th>
 				<th width="120px"><?php echo $a_langpackage->a_pay_date;?></th>
 				<th width="40px"><?php echo $a_langpackage->a_receiver;?></th>
-				<th width="120px"><?php echo $a_langpackage->a_receiv_date;?></th>
+				<th width="120px"><a href="m.php?app=order_receiv_list&orderby=receiv_date"><?php echo $a_langpackage->a_receiv_date;?></a></th>
 				<th width="150px"><?php echo $a_langpackage->a_receiv_account;?></th>
-                                <th width="45px"><?php echo $a_langpackage->a_receiv_money;?></th>
+                                <th width="45px"><a href="m.php?app=order_receiv_list&orderby=receiv_money"><?php echo $a_langpackage->a_receiv_money;?></a></th>
                                 <th width="40px"><?php echo $a_langpackage->a_operator;?></th>
 			</tr>
 			</thead>
@@ -114,6 +119,7 @@ td span {color:red;}
 			<?php if($result['result']) {
 			foreach($result['result'] as $value) { ?>
 			<tr style=" text-align:center">
+                                <td><?php echo $value['receiv_id'];?></td>
 				<td><font size="-6"><?php echo $value['order_id'];?></font></td>
 				<td><font size="-6"><?php echo $value['payid'];?></font></td>
 				<td><?php echo $value['payment_type'];?></td>

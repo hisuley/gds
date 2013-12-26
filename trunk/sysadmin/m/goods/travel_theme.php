@@ -20,7 +20,7 @@ $t_attribute = $tablePreStr."attribute";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$cat_id = 435;  //分类中主题的ID
+$cat_id = 435;  //分类中线路的ID
 
 $sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='主题'";
 $result = $dbo->getRs($sql);
@@ -277,7 +277,6 @@ function attr_goods_list(v) {
 		<div class="infobox">
     	<h3><?php echo $a_langpackage->a_attr_list; ?></h3>
         <div class="content2">
-		<div class="oprate" style="line-height:24px;">&nbsp;&nbsp;<?php echo $a_langpackage->a_select_extended_category; ?></div>
 		<div class="oprate" style="line-height:50px;"><span style="float:left;margin-left:25px;">
                     <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_attr_add; ?>" onclick="attr_info_add()" />&nbsp;&nbsp;</span>&nbsp;&nbsp;
 
