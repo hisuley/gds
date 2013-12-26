@@ -9,6 +9,8 @@ $a_langpackage=new adminlp;
 //权限管理
 $right=check_rights("news_show");
 $cat_id = intval(get_args('id'));
+$orderby = short_check(get_args('orderby'));
+$title = short_check(get_args('title'));
 if ($cat_id){
 	if(!$right){
 		header('location:m.php?app=error');
@@ -22,11 +24,18 @@ $t_article_cat = $tablePreStr."article_cat";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select * from `$t_article` ";
+$sql = "select * from `$t_article` where 1=1";
 if($cat_id) {
-	$sql .= " where cat_id='$cat_id' ";
+	$sql .= " and cat_id='$cat_id' ";
 }
-$sql .= " order by add_time desc";
+if($title) {
+	$sql .= " and title like '%$title%' ";
+}
+if($orderby) {
+	$sql .= " order by $orderby";
+}else {
+    $sql .= " order by add_time desc";
+}
 $result = $dbo->fetch_page($sql,13);
 $cat_info = get_news_cat_list($dbo,$t_article_cat);
 //新闻分类
@@ -60,8 +69,9 @@ td span {color:red;}
             	<table class="form-table">
 	            	<tbody>
 	            	<tr>
-	                   	<td width="240px">
-	                   		<img src="skin/images/icon_search.gif" border="0" alt="SEARCH" />
+                                <td width="2px" style="padding:0 0 0 5px"><span style="margin:1px 0px 0px 0px; float:left; color: #000" > <img src="skin/images/icon_search.gif" border="0" alt="SEARCH" /> </span></td>
+	                   	<td width="450px">
+                                        <?php echo $a_langpackage->a_news_title; ?>： <input type="text" class="small-text" name="title" value="<?php echo $title; ?>" style="width:100px" /> 
 	                   		<?php echo $a_langpackage->a_news_category; ?>：
 	                   		<select name="id">
 								<option value="0"><?php echo $a_langpackage->a_select_news_category; ?></option>
@@ -86,9 +96,9 @@ td span {color:red;}
         	<thead>
 			<tr style="text-align:center">
 				<th width="20px"><input type="checkbox" onclick="checkall(this,'article_id[]');" value='' /></th>
-				<th width="40px">ID</th>
-				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?></th>
-				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?></th>
+				<th width="40px"><a href="m.php?app=news_list&orderby=article_id">ID</a></th>
+				<th align="left" width="150px"><a href="m.php?app=news_list&orderby=title"><?php echo $a_langpackage->a_news_title; ?></a></th>
+				<th align="left" width="110px"><a href="m.php?app=news_list&orderby=cat_id"><?php echo $a_langpackage->a_news_category; ?></a></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
 				<th width="300px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>

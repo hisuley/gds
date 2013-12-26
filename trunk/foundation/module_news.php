@@ -163,4 +163,14 @@ function get_attribute_info(&$dbo,$table,$cat_id) {
 	}
 	return $array;
 }
+
+function check_cat_name(&$dbo,$table,$name){
+    $sql = "SELECT COUNT(*) FROM `$table` WHERE cat_name ='$name'";
+    return $dbo->getRow($sql);
+}
+
+function check_news_name(&$dbo,$table,$name){
+    $sql = "SELECT COUNT(*) FROM `$table` WHERE title ='$name'";
+    return $dbo->getRow($sql);
+}title
 ?>

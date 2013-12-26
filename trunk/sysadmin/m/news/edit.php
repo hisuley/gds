@@ -14,6 +14,7 @@ $dbo=new dbex;
 
 //数据表定义区
 $t_article = $tablePreStr."article";
+$t_article_source = $tablePreStr."article_source";
 $t_article_cat = $tablePreStr."article_cat";
 $t_article_attr = $tablePreStr."article_attr";
 $t_attribute = $tablePreStr."attribute";
@@ -23,6 +24,9 @@ if(!$article_id) { exit($a_langpackage->a_error);}
 
 $cat_info = get_dg_category(get_news_cat_list($dbo,$t_article_cat));
 $news_info = get_news_info($dbo,$t_article,$article_id);
+
+$sql = "SELECT source_id,name FROM `$t_article_source`";
+$cat_source = $dbo->getRs($sql);
 
 $attribute_info = array();
 if($news_info['cat_id']) {
@@ -79,6 +83,15 @@ $(function(){
 			<tr>
 				<td><?php echo $a_langpackage->a_news_title; ?>：</td>
 				<td><input class="small-text" type="text" name="title" value="<?php echo $news_info['title']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
+			</tr>
+                        <tr>
+				<td><?php echo $a_langpackage->a_news_source; ?>：</td>
+				<td><select name="source_id">
+					<option value="0"><?php echo $a_langpackage->a_news_select_source; ?></option>
+					<?php foreach($cat_source as $value) {?>
+					<option value="<?php echo $value['source_id']; ?>" <?php if($value['source_id']==$news_info['source_id']){ echo "selected";} ?> ><?php echo $value['name']; ?></option>
+					<?php }?>
+				</select></td>
 			</tr>
                         <tr id="goods_attr_tr">
                                 <td><?php echo $a_langpackage->a_news_attr; ?>：</td>

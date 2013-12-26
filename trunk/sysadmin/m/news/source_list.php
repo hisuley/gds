@@ -11,6 +11,7 @@ $right=check_rights("news_source_show");
 
 $name = short_check(get_args('name'));
 $source_id = intval(get_args('source_id'));
+$orderby = short_check(get_args('orderby'));
 if ($source_id){
 	if(!$right){
 		header('location:m.php?app=error');
@@ -33,7 +34,9 @@ if($name) {
 		$sql .= " and name like '%$name%' ";
 	}
 }
-
+if($orderby) {
+	$sql .= " order by $orderby";
+}
 $result = $dbo->fetch_page($sql,13);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -83,8 +86,8 @@ td span {color:red;}
         	<thead>
 			<tr style="text-align:center">
 				<th width="10%"><input type="checkbox" onclick="checkall(this,'source_id[]');" value='' /></th>
-				<th width="20%" align="left">ID</th>
-				<th align="left" width="50%"><?php echo $a_langpackage->a_news_source_name; ?></th>
+				<th width="20%" align="left"><a href="m.php?app=news_source_list&orderby=source_id">ID</a></th>
+				<th align="left" width="50%"><a href="m.php?app=news_source_list&orderby=name"><?php echo $a_langpackage->a_news_source_name; ?></a></th>
 				<th width="20%"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

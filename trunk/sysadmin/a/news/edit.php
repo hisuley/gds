@@ -80,6 +80,12 @@ if($news_attr) {
 
 $post_attr = get_args('attr');
 $filterAttr = filterAttr($have_attr,$post_attr);
+
+$count = check_news_name($dbo,$t_article,$post['title']);
+if($count[0]) {
+	action_return(0,$a_langpackage->a_news_title_repeat,'-1');
+	exit;
+}
 //定义写操作
 dbtarget('w',$dbServs);
 

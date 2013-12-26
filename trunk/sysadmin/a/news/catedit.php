@@ -33,6 +33,11 @@ $t_admin_log = $tablePreStr."admin_log";
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
+$count = check_cat_name($dbo,$t_article_cat,$post['cat_name']);
+if($count[0]) {
+	action_return(0,$a_langpackage->a_news_category_repeat,'-1');
+	exit;
+}
 if(update_news_cat($dbo,$t_article_cat,$post,$cat_id)) {
 	admin_log($dbo,$t_admin_log,$a_langpackage->a_modify_story_category."：$cat_id");
 	action_return(1,$a_langpackage->a_amend_suc,'m.php?app=news_catlist');

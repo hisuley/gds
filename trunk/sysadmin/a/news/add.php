@@ -66,6 +66,12 @@ $t_news_attr = $tablePreStr."article_attr";
 //定义写操作
 dbtarget('w',$dbServs);
 $dbo=new dbex;
+
+$count = check_news_name($dbo,$t_article,$post['title']);
+if($count[0]) {
+	action_return(0,$a_langpackage->a_news_title_repeat,'-1');
+	exit;
+}
 $article_id = insert_news_info($dbo,$t_article,$post);
 
 if($article_id) {

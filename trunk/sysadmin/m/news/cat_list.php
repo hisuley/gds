@@ -9,7 +9,7 @@ require("../foundation/module_news.php");
 $a_langpackage=new adminlp;
 
 //$cat_id = intval(get_args('id'));
-
+$orderby = short_check(get_args('orderby'));
 //数据表定义区
 //$t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
@@ -21,7 +21,12 @@ dbtarget('r',$dbServs);
 $sql = "select * from `$t_article_cat` where 1 ";
 $result = $dbo->fetch_page($sql,13);
 /* 处理系统分类 */
-$sql_cat = "select * from `$t_article_cat` order by cat_id asc,sort_order asc";
+$sql_cat = "select * from `$t_article_cat`";
+if($orderby) {
+	$sql_cat .= " order by $orderby";
+} else {
+    $sql_cat .= " order by cat_id asc,sort_order asc";
+}
 $result_cat = $dbo->getRs($sql_cat);
 
 $cat_dg = get_dg_category($result_cat);
@@ -59,10 +64,10 @@ td span {color:red;}
 		  <thead>
 			<tr style=" text-align:center">
 				<th width="30px"><input type="checkbox" onclick="checkall(this,'cat_id[]');" value='' /></th>
-				<th width="30px">ID</th>
-				<th width="" align="left"><?php echo $a_langpackage->a_category_name; ?></th>
+				<th width="30px"><a href="m.php?app=news_catlist&orderby=cat_id">ID</a></th>
+				<th width="" align="left"><a href="m.php?app=news_catlist&orderby=cat_name"><?php echo $a_langpackage->a_category_name; ?></a></th>
 				<th width="80px"><?php echo $a_langpackage->a_type; ?></th>
-				<th width="60px"><?php echo $a_langpackage->a_sort; ?></th>
+				<th width="60px"><a href="m.php?app=news_catlist&orderby=sort_order"><?php echo $a_langpackage->a_sort; ?></a></th>
 				<th width="60px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
