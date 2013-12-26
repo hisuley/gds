@@ -270,7 +270,9 @@ class adminlp{
         var $a_news_attr_list = "新闻属性列表";
         var $a_add_cat_need = "您还没有增加新闻分类";
 	var $a_news_title = "新闻标题";
+        var $a_news_title_repeat = "新闻标题已存在";
 	var $a_news_category = "新闻分类";
+        var $a_news_category_repeat = "文章分类名称已存在";
         var $a_category_icon = "分类图标";
         var $a_news_attr = '新闻属性';
 	var $a_select_n_category = "选择分类";
