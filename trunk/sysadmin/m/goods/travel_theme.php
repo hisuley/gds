@@ -101,7 +101,9 @@ function attr_info_save(v) {
 		}else{
 			if(data=='-1') {
 				ShowMessageBox("<?php echo $a_langpackage->a_fail; ?>!",'0');
-			} else {
+			} else if(data=='-3') {
+                                ShowMessageBox("<?php echo $a_langpackage->a_goods_attr_repeat; ?>!",'0');
+                        } else {
 				if(index>0) {
 					ShowMessageBox("<?php echo $a_langpackage->a_edit_success; ?>!",'0');
 				} else {
@@ -272,7 +274,7 @@ function attr_goods_list(v) {
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_attr_list; ?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_travel_theme_management; ?></div>
         <hr />
 		<div class="infobox">
     	<h3><?php echo $a_langpackage->a_attr_list; ?></h3>

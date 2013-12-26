@@ -19,21 +19,21 @@ $post['sort_order'] = intval(get_args('sort_order'));
 $post['selectable'] = get_args('selectable');
 $post['price'] = get_args('price');
 
-$cat_id = intval(get_args('cat_id'));
+$brand_id = intval(get_args('brand_id'));
 $index = intval(get_args('index'));
 $attr_name = short_check(get_args('attr_values'));
-if(!$cat_id) {exit("-1");}
+if(!$brand_id) {exit("-1");}
 
 if(empty($attr_name)) { exit("-1"); }
 
 //数据表定义区
-$t_attribute = $tablePreStr."attribute";
+$t_brand_attr = $tablePreStr."brand_attr";
 
 //定义写操作
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='$attr_name'";
+$sql = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where brand_id=".$brand_id." and attr_name='$attr_name'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -47,10 +47,11 @@ foreach($result as $row){
         
     }
 }
+
 if(count($tmp) == count(array_unique($tmp))){
     $post['attr_values'] = join("\n", $tmp);
     $item_sql = get_update_item($post);
-    $sql_travel = "update `$t_attribute` set $item_sql where cat_id=".$cat_id." and attr_name='$attr_name'";
+    $sql_travel = "update `$t_brand_attr` set $item_sql where brand_id=".$brand_id." and attr_name='$attr_name'";
     if($dbo->exeUpdate($sql_travel)) {
             echo "1";
     } else {

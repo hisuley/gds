@@ -8,13 +8,19 @@ $a_langpackage=new adminlp;
 
 //数据表定义区
 $t_brand = $tablePreStr."brand";
+$t_brand_attr = $tablePreStr."brand_attr";
+
+$index = intval(get_args('index'));
+$attr_values = short_check(get_args('attr_name'));
 
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select * from `$t_brand`";
-
+$sql = "select * from `$t_brand` where 1";
+if ($index){
+    $sql = "SELECT * FROM `$t_brand` a,`$t_brand_attr` b WHERE a.`brand_id`=b.`brand_id` AND b.`attr_values`='$attr_values'";
+}
 $result = $dbo->fetch_page($sql,13);
 $right=check_rights("brand_update");
 

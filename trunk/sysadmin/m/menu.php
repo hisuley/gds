@@ -48,6 +48,106 @@ $right_array=array(
     "groupbuy_list"    =>   "0",
     "travel_theme"        =>  "0",
     "travel_type"       =>  "0",
+    "travel_days"       =>  "0",
+    "travel_price"       =>  "0",
+    "hotel_brand"       =>  "0",
+    "hotel_stars"       =>  "0",
+    "hotel_facilities"       =>  "0",
+    "hotel_landmark"       =>  "0",
+    "scenic_type"       =>  "0",
+    "scenic_rank"       =>  "0",
+    "scenic_ticket"       =>  "0",
+    "scenic_ticket_sales"       =>  "0",
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
+
+    "nav_list"    =>   "0",
+    "nav_edit"    =>   "0",
+	"protect_rights"	=>"0",
+    "adv_position_list"    =>   "0",
+    "adv_add"    =>   "0",
+    "adv_list"    =>   "0",
+    "adver_add"    =>   "0",
+
 
     "nav_list"    =>   "0",
     "nav_edit"    =>   "0",
@@ -299,7 +399,37 @@ $plugin=$dbo->getRs($sql);
             <?php if($right_array["travel_type"]){?>
 					<li id="travel_type" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_type" target="main-frame"><?php echo $a_langpackage->a_travel_type_management; ?></a></li><!-- 旅游线路类型管理 -->
 			<?php }?>
-			</ul>
+            <?php if($right_array["travel_days"]){?>
+					<li id="travel_days" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_days" target="main-frame"><?php echo $a_langpackage->a_travel_days_management; ?></a></li><!-- 旅游线路天数管理 -->
+			<?php }?>
+            <?php if($right_array["travel_price"]){?>
+					<li id="travel_price" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_price" target="main-frame"><?php echo $a_langpackage->a_travel_price_management; ?></a></li><!-- 旅游线路价位管理 -->
+			<?php }?>
+            <?php if($right_array["hotel_brand"]){?>
+					<li id="hotel_brand" class="" onclick="changeMenu(this);"><a href="m.php?app=hotel_brand" target="main-frame"><?php echo $a_langpackage->a_hotel_brand_management; ?></a></li><!-- 酒店品牌管理 -->
+			<?php }?>
+            <?php if($right_array["hotel_stars"]){?>
+					<li id="hotel_stars" class="" onclick="changeMenu(this);"><a href="m.php?app=hotel_stars" target="main-frame"><?php echo $a_langpackage->a_hotel_stars_management; ?></a></li><!-- 酒店星级管理 -->
+			<?php }?>
+            <?php if($right_array["hotel_facilities"]){?>
+					<li id="hotel_facilities" class="" onclick="changeMenu(this);"><a href="m.php?app=hotel_facilities" target="main-frame"><?php echo $a_langpackage->a_hotel_facilities_management; ?></a></li><!-- 酒店设施管理 -->
+			<?php }?>
+            <?php if($right_array["hotel_landmark"]){?>
+					<li id="hotel_landmark" class="" onclick="changeMenu(this);"><a href="m.php?app=hotel_landmark" target="main-frame"><?php echo $a_langpackage->a_hotel_landmark_management; ?></a></li><!-- 酒店地标管理 -->
+			<?php }?>
+            <?php if($right_array["scenic_type"]){?>
+					<li id="scenic_type" class="" onclick="changeMenu(this);"><a href="m.php?app=scenic_type" target="main-frame"><?php echo $a_langpackage->a_scenic_type_management; ?></a></li><!-- 景点类别管理 -->
+			<?php }?>
+            <?php if($right_array["scenic_rank"]){?>
+					<li id="scenic_rank" class="" onclick="changeMenu(this);"><a href="m.php?app=scenic_rank" target="main-frame"><?php echo $a_langpackage->a_scenic_rank_management; ?></a></li><!-- 景点级别管理 -->
+			<?php }?>
+            <?php if($right_array["scenic_ticket"]){?>
+					<li id="scenic_ticket" class="" onclick="changeMenu(this);"><a href="m.php?app=scenic_ticket" target="main-frame"><?php echo $a_langpackage->a_scenic_ticket_management; ?></a></li><!-- 景点门票管理 -->
+			<?php }?>
+            <?php if($right_array["scenic_ticket_sales"]){?>
+					<li id="scenic_ticket_sales" class="" onclick="changeMenu(this);"><a href="m.php?app=scenic_ticket_sales" target="main-frame"><?php echo $a_langpackage->a_scenic_ticket_sales_management; ?></a></li><!-- 景点门票促销管理 -->
+			<?php }?>
+            </ul>
        <?php }?>
 
 	   <?php if ($id == 'promotions'){?><!-- 网站 -->

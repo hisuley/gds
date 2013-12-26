@@ -229,7 +229,18 @@ class adminlp{
         
         var $a_travel_theme_management = "旅游线路主题管理";
         var $a_travel_type_management = "旅游线路类型管理";
+        var $a_travel_days_management = "旅游线路天数管理";
+        var $a_travel_price_management = "旅游线路价位管理";
+        var $a_hotel_brand_management = "酒店品牌管理";
+        var $a_hotel_stars_management = "酒店星级管理";
+        var $a_hotel_facilities_management = "酒店设施管理";
+        var $a_hotel_landmark_management = "酒店地标管理";
+        var $a_scenic_type_management = "景点类别管理";
+        var $a_scenic_rank_management = "景点级别管理";
+        var $a_scenic_ticket_management = "景点门票管理";
+        var $a_scenic_ticket_sales_management = "景点门票促销管理";
         var $a_travel_attr_goods = "查看关联商品";
+        var $a_travel_attr_brand = "查看关联品牌";
 
 	var $a_category_add = "添加分类";
 	var $a_category_edit = "修改分类";
@@ -513,6 +524,7 @@ class adminlp{
 	var $a_export_file_success="数据导出成功!";
 	var $a_import_file_error="数据导入失败!";
 	var $a_export_file_error="数据导出失败!";
+        var $a_goods_attr_repeat = "属性名称已存在!";
 	/*shop request*/
 	var $a_status = "状态";
 	var $a_show_all = "全部显示";

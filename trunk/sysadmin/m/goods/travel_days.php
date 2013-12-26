@@ -20,9 +20,9 @@ $t_attribute = $tablePreStr."attribute";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$cat_id = '435';  //分类中线路的ID
+$cat_id = 435;  //分类中线路的ID
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='类型'";
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='天数'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -64,7 +64,7 @@ td .inputtext{width:120px;}
 <script language="JavaScript">
 <!--
 var cat_id = "<?php echo $cat_id;?>";
-var attr_values = '类型';
+var attr_values = '天数';
 
 function attr_info_cancel(v) {
 	var deltr = document.getElementById("tr_"+v);
@@ -274,7 +274,7 @@ function attr_goods_list(v) {
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_travel_type_management; ?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_travel_days_management; ?></div>
         <hr />
 		<div class="infobox">
     	<h3><?php echo $a_langpackage->a_attr_list; ?></h3>

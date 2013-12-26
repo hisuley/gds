@@ -14,15 +14,15 @@ $inputtype_arr = array(
 );
 
 //数据表定义区
-$t_attribute = $tablePreStr."attribute";
+$t_brand_attr = $tablePreStr."brand_attr";
 
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$cat_id = '435';  //分类中线路的ID
+$brand_id = 25;  //分类中线路的ID
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='类型'";
+$sql = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where brand_id=".$brand_id." and attr_name='门票促销'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -63,8 +63,8 @@ td .inputtext{width:120px;}
 <script language="JavaScript" src="../servtools/ajax_client/ajax.js"></script>
 <script language="JavaScript">
 <!--
-var cat_id = "<?php echo $cat_id;?>";
-var attr_values = '类型';
+var brand_id = "<?php echo $brand_id;?>";
+var attr_values = '门票促销';
 
 function attr_info_cancel(v) {
 	var deltr = document.getElementById("tr_"+v);
@@ -94,7 +94,7 @@ function attr_info_save(v) {
 	if(selectable.checked){
 		selectable_value = 1;
 	}
-	ajax("a.php?act=travel_attr_edit","POST","index="+index+"&cat_id="+cat_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values+"&sort_order="+sort_order.value+"&selectable="+selectable_value+"&price="+price_value,function(data){
+	ajax("a.php?act=scenic_attr_edit","POST","index="+index+"&brand_id="+brand_id+"&attr_name="+attr_name.value+"&input_type="+input_type_v+"&attr_values="+attr_values+"&sort_order="+sort_order.value+"&selectable="+selectable_value+"&price="+price_value,function(data){
 		if(data=='-2') {
 			ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>","m.php?app=error");
 			// location.href="m.php?app=error";
@@ -196,7 +196,7 @@ function add_new_attr_info(data,attr_name,input_type,attr_values, selectable, pr
 	td8.align="center";
 	td8.innerHTML = '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn['+data+']" onclick="attr_info_save('+data+');" />&nbsp;';
 	td8.innerHTML += '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn['+data+']" onclick="attr_info_del('+data+');" />&nbsp;';
-        td8.innerHTML += '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_goods; ?>" name="viewbtn['+data+']" onclick="attr_goods_list('+data+');" />';
+        td8.innerHTML += '<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_brand; ?>" name="viewbtn['+data+']" onclick="attr_goods_list('+data+');" />';
 	newtr.appendChild(td8);
 
 	attr_tbody.appendChild(newtr);
@@ -205,7 +205,7 @@ function add_new_attr_info(data,attr_name,input_type,attr_values, selectable, pr
 function attr_info_del(v) {
 	if(confirm('<?php echo $a_langpackage->a_attr_suredel; ?>')) {
 		if(v) {
-			ajax("a.php?act=travel_attr_del","POST","index="+v+"&cat_id="+cat_id+"&attr_values="+attr_values,function(data){
+			ajax("a.php?act=scenic_attr_del","POST","index="+v+"&brand_id="+brand_id+"&attr_values="+attr_values,function(data){
 				if(data=='-2') {
 					ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>",'m.php?app=error');
 					location.href="m.php?app=error";
@@ -225,7 +225,7 @@ function attr_info_del(v) {
 function attr_info_add() {
 	var rights = document.getElementsByName("attr_add")[0].value;
 	if(rights != '0'){
-		if(cat_id > 0) {
+		if(brand_id > 0) {
 			var tr_0 = document.getElementById("tr_0");
 			tr_0.style.display = '';
 		} else {
@@ -242,14 +242,14 @@ function attr_info_extend(v) {
 	if(rights != '0'){
 		if(v>0) {
 			if(confirm('<?php echo $a_langpackage->a_extended_category; ?>')) {
-				ajax("a.php?act=goods_attr_extend","POST","parent_id="+v+"&cat_id="+cat_id,function(data){
+				ajax("a.php?act=goods_attr_extend","POST","parent_id="+v+"&brand_id="+brand_id,function(data){
 					if(data=='-1') {
 						ShowMessageBox("<?php echo $a_langpackage->a_operate_fail_repeat; ?>",'0');
 					} else if (data=='-2') {
 						ShowMessageBox("<?php echo $a_langpackage->a_noattr_extended; ?>!",'0');
 					} else {
 						for(var i=0; i<data.length; i++) {
-							add_new_attr_info(data[i].attr_id,data[i].attr_name,data[i].input_type,data[i].attr_values,data[i].selectable, data[i].price,data[i].sort_order);
+							add_new_attr_info(data[i].brand_attr_id,data[i].attr_name,data[i].input_type,data[i].attr_values,data[i].selectable, data[i].price,data[i].sort_order);
 						}
 					}
 				},'JSON');
@@ -265,7 +265,7 @@ function attr_info_extend(v) {
 function attr_goods_list(v) {
     var index = v;
     var attr_values = document.getElementsByName("attr_name["+index+"]")[0].value;
-    window.location.href = "m.php?app=goods_list&index="+index+"&attr_name="+attr_values;
+    window.location.href = "m.php?app=goods_brand_list&index="+index+"&attr_name="+attr_values;
 }
 //-->
 </script>
@@ -274,10 +274,10 @@ function attr_goods_list(v) {
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_travel_type_management; ?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_scenic_ticket_sales_management; ?></div>
         <hr />
 		<div class="infobox">
-    	<h3><?php echo $a_langpackage->a_attr_list; ?></h3>
+    	<h3><?php echo $a_langpackage->a_brand_attr_list; ?></h3>
         <div class="content2">
 		<div class="oprate" style="line-height:50px;"><span style="float:left;margin-left:25px;">
                     <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_attr_add; ?>" onclick="attr_info_add()" />&nbsp;&nbsp;</span>&nbsp;&nbsp;
@@ -310,13 +310,13 @@ function attr_goods_list(v) {
 				<td width="175px" align="center">
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[0]" onclick="attr_info_save(0);" />
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_cancel; ?>" onclick="attr_info_cancel(0);" />
-                                        <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_goods; ?>" onclick="attr_goods_list(0);" />
+                                        <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_brand; ?>" onclick="attr_goods_list(0);" />
 				</td>
 			</tr>
 			<?php if($attr_info) {
 			foreach($attr_info as $value) { ?>
 			<tr id="tr_<?php echo $value['index'];?>">
-				<td width="60px"><?php echo $value['attr_id'];?>.</td>
+				<td width="60px"><?php echo $value['brand_attr_id'];?>.</td>
 				<td width="100px"><input type="text" class="small-text" style="width:50px;" name="attr_name[<?php echo $value['index'];?>]" value="<?php echo $value['attr_values'];?>" class="inputtext"></td>
 				<td width="300px">
 				<?php $i=0;
@@ -331,7 +331,7 @@ function attr_goods_list(v) {
 				<td width="175px" align="center">
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[<?php echo $value['index'];?>]" onclick="attr_info_save(<?php echo $value['index'];?>);" />
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn[<?php echo $value['index'];?>]" onclick="attr_info_del(<?php echo $value['index'];?>)">
-                                        <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_goods; ?>" onclick="attr_goods_list(<?php echo $value['index'];?>);" />   
+                                        <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_brand; ?>" onclick="attr_goods_list(<?php echo $value['index'];?>);" />   
 				</td>
 			</tr>
 			<?php }} else { ?>

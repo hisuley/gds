@@ -111,6 +111,16 @@ $appArray = array(
     'goods_edit'			=> 'm/goods/edit.php',
     'travel_theme'      => 'm/goods/travel_theme.php',
     'travel_type'      => 'm/goods/travel_type.php',
+    'travel_days'           => 'm/goods/travel_days.php',
+    'travel_price'          => 'm/goods/travel_price.php',
+    'hotel_brand'           => 'm/goods/hotel_brand.php',
+    'hotel_stars'           => 'm/goods/hotel_stars.php',
+    'hotel_facilities'      => 'm/goods/hotel_facilities.php',
+    'hotel_landmark'        => 'm/goods/hotel_landmark.php',
+    'scenic_type'           => 'm/goods/scenic_type.php',
+    'scenic_rank'           => 'm/goods/scenic_rank.php',
+    'scenic_ticket'         => 'm/goods/scenic_ticket.php',
+    'scenic_ticket_sales'   => 'm/goods/scenic_ticket_sales.php',
 
 	/* 订单 */
 	'order_alllist'			=> 'm/order/alllist.php',
