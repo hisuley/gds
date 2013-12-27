@@ -23,6 +23,7 @@ $actArray = array(
 	'member_rank_add'		=> array('a/member/rank_add.php','m.php?app=member_rank'),
     'member_rank_del'		=> array('a/member/rank_del.php','m.php?app=member_rank'),
     'member_doview'         => array('a/member/doview.php','m.php?app=member_list'),
+    'member_points_update'  => array('a/member/points_update.php','m.php?app=member_points'),
 
 	'asd_position_add'		=> array('a/asd/position_add.php','m.php?app=asd_position_list'),
 	'asd_position_del'		=> array('a/asd/position_del.php','m.php?app=asd_position_list'),

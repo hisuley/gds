@@ -65,6 +65,7 @@ class adminlp{
 	var $a_m_mailtpl_set = "邮件模版";
 	var $a_m_member_oprate = "用户管理";
 	var $a_m_member_level_set = "会员级别设置";
+        var $a_m_member_points_set = "会员积分设置";
 	var $a_m_member_level_add = "添加会员级别";
 	var $a_m_check_commember = "未审核企业";
 	var $a_m_shop_mengament = "企业管理";
@@ -459,6 +460,15 @@ class adminlp{
 	var $a_email_error = "填写的会员邮箱格式不正确!";
 	var $a_email_checking = "正在检测会员邮箱是否可用!";
 	var $a_email_used = "很抱歉，此会员邮箱已被使用！";
+        /* points */
+        var $a_registered_presented_integral = "注册赠送积分";
+        var $a_perfect_information_presented_integral = "完善资料赠送积分";
+        var $a_binding_email_presented_integral = "绑定邮箱赠送积分";
+        var $a_binding_phone_presented_integral = "绑定手机赠送积分";
+        var $a_integral_rmb_rate = "积分与RMB兑换率";
+        var $a_integral_rmb_rate_mess = "如消费1元得1积分,100积分可当1元使用";
+        var $a_give_specified_points = " (赠送指定的积分) ";
+        var $a_update_points_set = "更新会员积分设置";
 	/*member rank*/
 	var $a_ID = "ID";
 	var $a_privilege = "权限";
