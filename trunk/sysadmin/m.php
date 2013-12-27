@@ -75,6 +75,11 @@ $appArray = array(
     'suppliers_list'    => 'm/suppliers/list.php',
     'suppliers_add'     => 'm/suppliers/add.php',
     'suppliers_edit'    => 'm/suppliers/edit.php',
+    'suppliers_categories_list' => 'm/suppliers/categories_list.php',
+	'suppliers_categories_add' => 'm/suppliers/categories_add.php',
+    'suppliers_categories_edit' => 'm/suppliers/categories_edit.php',
+    'suppliers_categories_export' => 'm/suppliers/export_categories.php',
+	'suppliers_categories_import' => 'm/suppliers/import_categories.php',
 
 	'shop_add' => 'm/shop/add.php',
 	'shop_create' => 'm/shop/create.php',

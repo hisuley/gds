@@ -27,6 +27,7 @@ $right_array=array(
     "audit_company"    =>   "0",
 
     "suppliers_list"    => "0",
+    "suppliers_categories" => "0",
 
     "shop_browse"    =>   "0",
 
@@ -192,7 +193,7 @@ $right_array=array(
 
 	"sys_navigate"=> "0",
 
-	"shop_method"=>"0",
+    "shop_method"=>"0",
 	"error_set"=>"0",
 	"goods_edit"=>"0",
 	"shop_edit"=>"0",
@@ -271,6 +272,9 @@ $plugin=$dbo->getRs($sql);
 	        	<li id="separator" class="separator"></li>
 			<?php if($right_array["suppliers_list"]){?>
 				<li id="suppliers_list" class="active" onclick="changeMenu(this);"><a href="m.php?app=suppliers_list" target="main-frame"><?php echo $a_langpackage->a_suppliers_list; ?></a></li><!-- 供应商列表 -->
+            <?php }?>
+			<?php if($right_array["suppliers_categories"]){?>
+				<li id="suppliers_categories" class="" onclick="changeMenu(this);"><a href="m.php?app=suppliers_categories_list" target="main-frame"><?php echo $a_langpackage->a_suppliers_categorys; ?></a></li><!-- 商铺分类 -->
 			<?php }?>
 			</ul>
 		<?php }?>

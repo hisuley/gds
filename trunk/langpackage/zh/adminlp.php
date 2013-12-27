@@ -482,7 +482,7 @@ class adminlp{
 	var $a_suppliers_list = "供应商列表";
 	var $a_suppliers_name = "供应商名称";
         var $a_suppliers_zip ="供应商邮编";
-        var $a_suppliers_category = "供应商分类";
+        var $a_suppliers_categorys = "供应商分类";
         var $a_user_name_none = "会员名称不能为空！";
         var $a_suppliers_categories_export = "供应商分类导出";
 	var $a_suppliers_categories_import = "供应商分类导入";

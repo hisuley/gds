@@ -153,6 +153,11 @@ $actArray = array(
     'suppliers_add'         => array('a/suppliers/add.php'),
     'suppliers_edit'         => array('a/suppliers/edit.php'),
     'suppliers_goodsdownsale'   => array('a/suppliers/goodsdownsale.php','m.php?app=suppliers_list'),
+    'suppliers_categories_add'   => array('a/suppliers/categories_add.php'),
+	'suppliers_categories_edit'  => array('a/suppliers/categories_edit.php'),
+	'suppliers_categories_del'  	=> array('a/suppliers/categories_del.php'),
+	'suppliers_categories_export'  	=> array('a/suppliers/categories_export.php'),
+	'suppliers_categories_import'  	=> array('a/suppliers/categories_import.php'),
 );
 
 $actId=getActId();
