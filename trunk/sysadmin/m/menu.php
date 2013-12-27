@@ -28,6 +28,8 @@ $right_array=array(
 
     "suppliers_list"    => "0",
     "suppliers_categories" => "0",
+    "notification_policy"   => "0",
+    "distributor_list"  => "0",
 
     "shop_browse"    =>   "0",
 
@@ -274,7 +276,13 @@ $plugin=$dbo->getRs($sql);
 				<li id="suppliers_list" class="active" onclick="changeMenu(this);"><a href="m.php?app=suppliers_list" target="main-frame"><?php echo $a_langpackage->a_suppliers_list; ?></a></li><!-- 供应商列表 -->
             <?php }?>
 			<?php if($right_array["suppliers_categories"]){?>
-				<li id="suppliers_categories" class="" onclick="changeMenu(this);"><a href="m.php?app=suppliers_categories_list" target="main-frame"><?php echo $a_langpackage->a_suppliers_categorys; ?></a></li><!-- 商铺分类 -->
+				<li id="suppliers_categories" class="" onclick="changeMenu(this);"><a href="m.php?app=suppliers_categories_list" target="main-frame"><?php echo $a_langpackage->a_suppliers_categorys; ?></a></li><!-- 供应商分类 -->
+            <?php }?>
+            <?php if($right_array["notification_policy"]){?>
+				<li id="notification_policy" class="" onclick="changeMenu(this);"><a href="m.php?app=notification_policy_list" target="main-frame"><?php echo $a_langpackage->a_notification_policy_management; ?></a></li><!-- 政策通知管理 -->
+            <?php }?>
+            <?php if($right_array["distributor_list"]){?>
+				<li id="distributor_list" class="" onclick="changeMenu(this);"><a href="m.php?app=distributor_list" target="main-frame"><?php echo $a_langpackage->a_distributor_management; ?></a></li><!-- 分销商管理 -->
 			<?php }?>
 			</ul>
 		<?php }?>

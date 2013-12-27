@@ -157,7 +157,13 @@ $actArray = array(
 	'suppliers_categories_edit'  => array('a/suppliers/categories_edit.php'),
 	'suppliers_categories_del'  	=> array('a/suppliers/categories_del.php'),
 	'suppliers_categories_export'  	=> array('a/suppliers/categories_export.php'),
-	'suppliers_categories_import'  	=> array('a/suppliers/categories_import.php'),
+    'suppliers_categories_import'  	=> array('a/suppliers/categories_import.php'),
+    'notification_policy_add'   => array('a/suppliers/notification_policy_add.php'),
+    'notification_policy_edit'   => array('a/suppliers/notification_policy_edit.php'),
+    'notification_policy_del'   => array('a/suppliers/notification_policy_del.php'),
+    'distributor_add'        => array('a/suppliers/distributor_add.php'),
+    'distributor_edit'       => array('a/suppliers/distributor_edit.php'),
+    'distributor_del'        => array('a/suppliers/distributor_del.php'),
 );
 
 $actId=getActId();

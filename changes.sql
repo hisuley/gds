@@ -79,4 +79,19 @@ CREATE TABLE `imall_user_account` (
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 /* 文章表增加审核状态和审核备注字段 */
 ALTER TABLE `gds`.`imall_article` ADD COLUMN `is_audit` TINYINT(1) DEFAULT 0 NOT NULL COMMENT '文章是否审核:0待审核,1初审通过,2初审不通过,3复审不通过,4复审通过' AFTER `source_id`, ADD COLUMN `audit_note` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '文章审核不通过的备注' AFTER `is_audit`; 
-
+/* 分销商表 */
+CREATE TABLE `imall_distributor` (
+  `distributor_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '分销商ID',
+  `distributor_name` varchar(255) NOT NULL DEFAULT '' COMMENT '分销商名称',
+  `distributor_intro` text NOT NULL COMMENT '分销商简介',
+  `sort_order` int(10) NOT NULL DEFAULT '0' COMMENT '序号',
+  PRIMARY KEY (`distributor_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+/* 政策通知表 */
+CREATE TABLE `imall_notification_policy` (
+  `policy_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '政策通知ID',
+  `policy_title` varchar(255) NOT NULL DEFAULT '' COMMENT '政策通知标题',
+  `policy_content` text NOT NULL COMMENT '政策通知内容',
+  `sort_order` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`policy_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8

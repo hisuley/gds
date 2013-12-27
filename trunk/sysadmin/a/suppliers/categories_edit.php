@@ -33,6 +33,11 @@ $t_admin_log = $tablePreStr."admin_log";
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
+$count = check_categories_name($dbo,$t_shop_categories,$post['cat_name']);
+if($count[0]) {
+	action_return(0,$a_langpackage->a_suppliers_categories_repeat,'-1');
+	exit;
+}
 if(update_category_info($dbo,$t_shop_categories,$post,$cat_id)) {
 	admin_log($dbo,$t_admin_log,$a_langpackage->a_edit_category."：$cat_id");
 	action_return(1,$a_langpackage->a_amend_suc,'m.php?app=suppliers_categories_edit&id='.$cat_id);

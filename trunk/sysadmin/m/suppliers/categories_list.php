@@ -19,6 +19,7 @@ $right_update=check_rights("cat_update");
 $t_shop_categories = $tablePreStr."shop_categories";
 
 $cat_name = get_args('cat_name');
+$orderby = short_check(get_args('orderby'));
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
@@ -34,7 +35,11 @@ if($cat_name) {
 	}
 	$sql_category .= " and cat_name like '%$cat_name%' ";
 }
-$sql_category .= " order by sort_order asc,cat_id asc";
+if($orderby) {
+	$sql_category .= " order by $orderby";
+}else {
+        $sql_category .= " order by sort_order asc,cat_id asc";
+}
 $result_category = $dbo->getRs($sql_category);
 
 $category_dg = get_dg_category($result_category);
@@ -96,10 +101,10 @@ td span {color:red;}
 		<table class="list_table" style='font-size:12px;'>
 			<thead>
 			<tr style=" text-align:center;">
-				<th width="50px">ID</th>
+				<th width="50px"><a href="m.php?app=suppliers_categories_list&orderby=cat_id">ID</a></th>
 				<th align="left"><?php echo $a_langpackage->a_category_name; ?></th>
 				<th width="65px"><?php echo $a_langpackage->a_shop_num; ?></th>
-				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?></th>
+				<th width="65px"><a href="m.php?app=suppliers_categories_list&orderby=sort_order"><?php echo $a_langpackage->a_show_sort; ?></a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

@@ -80,6 +80,12 @@ $appArray = array(
     'suppliers_categories_edit' => 'm/suppliers/categories_edit.php',
     'suppliers_categories_export' => 'm/suppliers/export_categories.php',
 	'suppliers_categories_import' => 'm/suppliers/import_categories.php',
+    'notification_policy_list'   => 'm/suppliers/notification_policy_list.php',
+    'notification_policy_add'   => 'm/suppliers/notification_policy_add.php',
+    'notification_policy_edit'   => 'm/suppliers/notification_policy_edit.php',
+    'distributor_list'  => 'm/suppliers/distributor_list.php',
+    'distributor_add'  => 'm/suppliers/distributor_add.php',
+    'distributor_edit'  => 'm/suppliers/distributor_edit.php',
 
 	'shop_add' => 'm/shop/add.php',
 	'shop_create' => 'm/shop/create.php',

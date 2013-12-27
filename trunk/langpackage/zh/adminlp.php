@@ -486,6 +486,7 @@ class adminlp{
         var $a_user_name_none = "会员名称不能为空！";
         var $a_suppliers_categories_export = "供应商分类导出";
 	var $a_suppliers_categories_import = "供应商分类导入";
+        var $a_suppliers_categories_repeat = "供应商分类名称已存在!";
         var $a_suppliers_iconv_str="供应商分类ID,供应商分类名称,父级分类ID,排序,供应商数量 \n";
         var $a_suppliers_status = "供应商状态";
 	var $a_lock_suppliers = "锁定供应商";
@@ -497,6 +498,28 @@ class adminlp{
         var $a_suppliers_legal_person_false = "请检查法人信息";
         var $a_suppliers_legal_person = "法人信息";
         var $a_suppliers_shop = "商铺信息";
+        var $a_notification_policy_management = "政策通知管理";
+        var $a_notification_policy_list = "政策通知列表";
+        var $a_notification_policy_add = "添加政策通知";
+        var $a_notification_policy_edit = "修改政策通知";
+        var $a_notification_policy_del = "删除政策通知";
+        var $a_notification_policy_name = "政策通知标题";
+        var $a_notification_policy_content = "政策通知内容";
+        var $a_notification_policy_sort = "政策通知排序";
+        var $a_policy_title_notnone = "政策通知标题不能为空!";
+        var $a_notification_policy_repeat = "政策通知标题已存在!";
+        var $a_notification_policy_del_mess = "你确定要删除这个政策通知吗?";
+        var $a_distributor_name_repeat = "分销商名称已存在!";
+        var $a_distributor_management = "分销商管理";
+        var $a_distributor_list = "分销商列表";
+        var $a_distributor_name = "分销商名称";
+        var $a_distributor_name_notnone = "分销商名称不能为空!";
+        var $a_distributor_intro = "分销商简介";
+        var $a_distributor_sort = "分销商排序";
+        var $a_distributor_add = "添加分销商";
+        var $a_distributor_edit = "修改分销商";
+        var $a_distributor_del = "删除分销商";
+        var $a_distributor_del_mess = "你确定要删除这个分销商吗?";
 	/*shop list*/
 	var $a_shop_add = "添加企业";
 	var $a_shop_list = "企业列表";
