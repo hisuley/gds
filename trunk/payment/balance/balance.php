@@ -35,7 +35,7 @@ if($r_srcstr == $srcstr){
 			$result=$user_info['user_money']-$orderinfo['order_amount'];
 			dbtarget('w',$dbServs);
 			$dbo=new dbex();
-			$sql="UPDATE `ishop_users` SET `user_money` = ".$result." WHERE `user_id` =".$orderinfo['user_id']." LIMIT 1";
+			$sql="UPDATE `$t_users` SET `user_money` = ".$result." WHERE `user_id` =".$orderinfo['user_id']." LIMIT 1";
 			if($dbo->exeUpdate($sql)){
 				return 1;
 			}else{
