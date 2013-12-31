@@ -78,7 +78,7 @@ function changeImage(obj){
 							{sta: } else[exc]}
 							<span>{echo: $goodsinfo['transport_price'];/}</span>
 							{end:if/}
-							</li>
+							</li> 
 						<li> <span>{echo:lp{s_goods_wtbuy};/}：</span> <span> <input type="text" size="4" value="1" maxvalue="1" minvalue="1" id='num' /> <input type="hidden" value="{echo:$goodsinfo['goods_number'];/}" id="goods_number" /> <input type="hidden" value="{echo:$shop_id;/}" id="shop_id" /> <input type="hidden" value="{echo:$USER['user_id'];/}" id="shop_user" /> <input type="hidden" value="{echo: $goodsinfo['favpv'];/}" id="favpv_num"> <label></label> </span> ({echo:lp{s_may_buy};/}{echo:$goodsinfo['goods_number'];/} {echo:lp{s_piece};/}) </li>
 						{sta: if($goodsinfo['goods_price']=='0.00') [exc]}
 						<li class="b_none clearfix"> <a class="btn_inquiry" href="inquiry.php?gid={echo: $goodsinfo['goods_id'];/}" title="{echo: lp{s_g_askprice};/}"></a> {sta: } else [exc]}
@@ -127,8 +127,12 @@ function changeImage(obj){
 						if($attr_status) {
 						$i = 0;
 						foreach($attr as $key=>$value)[loop]}
-						<td class="text_right">{echo: $attribute[$key];/}:</td>
+                                                {sta:if($attribute[$key]['attr_values'] == '地图') [exc]}
+                                                <img src="http://api.map.baidu.com/staticimage?width=400&height=200&center={echo: $value;/}&markers={echo: $value;/}&zoom=14&markerStyles=s,A,0xff0000">
+                                                {sta: } else [exc]}
+						<td class="text_right">{echo: $attribute[$key]['attr_values'];/}:</td>
 						<td class="text_left">{echo: $value;/}</td>
+                                                {end:if/}
 						{sta:
 						if($i%2) {
 						echo "</tr>
