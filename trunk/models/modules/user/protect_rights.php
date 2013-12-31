@@ -2,7 +2,7 @@
 if(!$IWEB_SHOP_IN) {
 	die('Hacking attempt');
 }
-require("foundation/acheck_shop_creat.php");
+//require("foundation/acheck_shop_creat.php");
 require("foundation/module_order.php");
 require("foundation/module_goods.php");
 //语言包引入
