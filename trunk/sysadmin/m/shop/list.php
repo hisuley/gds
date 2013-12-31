@@ -77,7 +77,7 @@ if($shop_categorie) {
 	foreach($category_dg as $v) {
 		if($v['cat_id'] == $shop_categorie) {
 			if($v['parent_id']=='0'){
-				$parent_id = $v['cat_id'];
+				$parent_id = $categories_str = $v['cat_id'];
 			} else {
 				$categories_str = $shop_categorie;
 			}
