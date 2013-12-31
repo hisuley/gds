@@ -8,100 +8,78 @@
         <p><strong>会员卡代理</strong><span>0773-000000-0000</span></p>
     </div>
 </div>
+<div class="onlineService">
+  <p class="ico_os"></p>
+    <a class="ico_gt" href="javascript:" target="_self" title=""></a>
+</div>
 <script type="text/javascript">
-$(function(){
-  
-  var _userAgent = window.navigator.userAgent.toLowerCase();
-  if(_userAgent.indexOf('android')<0 && _userAgent.indexOf('iphone')<0 &&  _userAgent.indexOf('ipad')<0 )
-  { 
-  
-  if($.cookie("onlineSP")==null||$.cookie("onlineSP")=="0"||$.cookie("onlineSP")=="")
-    {
-      $('.onlineService').show();
-      $('.box_os').hide();    
-    }
-    else if($.cookie("onlineSP")=="1")
-    {
-      $('.onlineService').hide();
-      $('.box_os').show();    
-    }
-  
-  }
-  else{
-    $('.onlineService').show();
-    $('.box_os').show();
-    
-  }
-  
-  $('.onlineService .ico_os').click(function()
+var $j = jQuery.noConflict();
+$j(document).ready(function(){
+  $j('.onlineService .ico_os').click(function()
   {   
-    $('.onlineService').hide();
-    $('.box_os').show();
-    $.cookie("onlineSP","0",{expires:1,path:"/",domain:"lanrenzhijia.com"});    
+    $j('.onlineService').hide();
+    $j('.box_os').show();   
   });
-  $('.os_x').click(function()
+  $j('.os_x').click(function()
   {
-    $('.box_os').hide();
-    $('.onlineService').show();
-    $.cookie("onlineSP","1",{expires:2100000000,path:"/",domain:"lanrenzhijia.com"});
+    $j('.box_os').hide();
+    $j('.onlineService').show();
   });
-  $boxOsFun = function(){var st=$(document).scrollTop();if (!window.XMLHttpRequest) {$('.box_os').css('top',st+44);$('.onlineService').css('top',st+44);}};
-  $(window).bind('scroll', $boxOsFun);
+  $boxOsFun = function(){var st=$j(document).scrollTop();if (!window.XMLHttpRequest) {$j('.box_os').css('top',st+44);$j('.onlineService').css('top',st+44);}};
+  $j(window).bind('scroll', $boxOsFun);
   $boxOsFun();
   
-  var feedback_url ='http://www.lanrenzhijia.com';
-  
-  $('.acbox .ico_pp').hover(function(){
-    $(this).stop().animate({height:'52px'},'fast');
+  $j('.acbox .ico_pp').hover(function(){
+    $j(this).stop().animate({height:'52px'},'fast');
     },function(){
-    $(this).stop().animate({height:'33px'},'fast');
+    $j(this).stop().animate({height:'33px'},'fast');
     }
   );
-  $('.acbox .ico_gt').hover(function(){
-    $(this).stop().animate({height:'52px'},'fast');
+  $j('.acbox .ico_gt').hover(function(){
+    $j(this).stop().animate({height:'52px'},'fast');
     },function(){
-    $(this).stop().animate({height:'33px'},'fast');
-    }
-  );
-  
-  $('.onlineService .ico_pp').hover(function(){
-    $(this).stop().animate({width:'87px'},'fast');
-    },function(){
-    $(this).stop().animate({width:'39px'},'fast');
-    }
-  );
-  $('.onlineService .ico_gt').hover(function(){
-    $(this).stop().animate({width:'97px'},'fast');
-    },function(){
-    $(this).stop().animate({width:'39px'},'fast');
+    $j(this).stop().animate({height:'33px'},'fast');
     }
   );
   
-  $('.ico_gt').click(function(){
-    $("html, body").animate({scrollTop:0}, 1);
+  $j('.onlineService .ico_pp').hover(function(){
+    $j(this).stop().animate({width:'87px'},'fast');
+    },function(){
+    $j(this).stop().animate({width:'39px'},'fast');
+    }
+  );
+  $j('.onlineService .ico_gt').hover(function(){
+    $j(this).stop().animate({width:'97px'},'fast');
+    },function(){
+    $j(this).stop().animate({width:'39px'},'fast');
+    }
+  );
+  
+  $j('.ico_gt').click(function(){
+    $j("html, body").animate({scrollTop:0}, 1);
   })
   
   
   //分辨率
-  if ( $(window).width()<1200 || screen.width<1200) 
+  if ( $j(window).width()<1200 || screen.width<1200) 
     { 
-      $('.hydp950,.w_950,.sdmain,.main').css('overflow','hidden');
-    $('.top_bg').css({'overflow':'hidden','width':'950px','margin':'0 auto'});
-    $('.db_bg2').addClass('db_bg2_s');
-    $('.jstd_c .bg_l,.jstd_c .bg_r').css('display','none');
-    $('#js_play .prev').css('left','0');
-    $('#js_play .next').css('right','0');
-    $('#videoplay .prev, #videoplay2 .prev').addClass('prev_s');
-    $('#videoplay .next, #videoplay2 .next').addClass('next_s');
+      $j('.hydp950,.w_950,.sdmain,.main').css('overflow','hidden');
+    $j('.top_bg').css({'overflow':'hidden','width':'950px','margin':'0 auto'});
+    $j('.db_bg2').addClass('db_bg2_s');
+    $j('.jstd_c .bg_l,.jstd_c .bg_r').css('display','none');
+    $j('#js_play .prev').css('left','0');
+    $j('#js_play .next').css('right','0');
+    $j('#videoplay .prev, #videoplay2 .prev').addClass('prev_s');
+    $j('#videoplay .next, #videoplay2 .next').addClass('next_s');
     }else{
-      $('.hydp950,.w_950,.sdmain,.main').removeAttr('style');
-    $('.top_bg').removeAttr('style');
-    $('.db_bg2').removeClass('db_bg2_s');
-    $('.jstd_c .bg_l,.jstd_c .bg_r').removeAttr('style');
-    $('#js_play .prev').removeAttr('style');
-    $('#js_play .next').removeAttr('style');
-    $('#videoplay .prev, #videoplay2 .prev').removeClass('prev_s');
-    $('#videoplay .next, #videoplay2 .next').removeClass('next_s');
+      $j('.hydp950,.w_950,.sdmain,.main').removeAttr('style');
+    $j('.top_bg').removeAttr('style');
+    $j('.db_bg2').removeClass('db_bg2_s');
+    $j('.jstd_c .bg_l,.jstd_c .bg_r').removeAttr('style');
+    $j('#js_play .prev').removeAttr('style');
+    $j('#js_play .next').removeAttr('style');
+    $j('#videoplay .prev, #videoplay2 .prev').removeClass('prev_s');
+    $j('#videoplay .next, #videoplay2 .next').removeClass('next_s');
     }
 
 });
