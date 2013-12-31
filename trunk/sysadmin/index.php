@@ -23,7 +23,7 @@ if (window.top != window) {
 <frameset rows="100,*" framespacing="0" border="0">
 	<frame src="m.php?app=top" id="header-frame" name="header-frame" frameborder="no" scrolling="no">
 	<frameset cols="180,*"	framespacing="0" border="0"	id="frame-body">
-		<frame src="m.php?app=menu&value="	id="menu-frame"	name="menu-frame" frameborder="no" scrolling="no">
+		<frame src="m.php?app=menu&value="	id="menu-frame"	name="menu-frame" frameborder="no" scrolling="yes">
 		<frame src="m.php?app=main"	id="main-frame"	name="main-frame" frameborder="no" scrolling="yes">
 	</frameset>
 </frameset>
