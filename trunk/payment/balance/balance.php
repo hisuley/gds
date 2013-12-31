@@ -23,7 +23,7 @@ function respond($orderinfo,$payinfo){
 	$r_srcstr = MD5($r_pass);
 	global $tablePreStr;
 	$userid=get_sess_user_id();
-if($r_srcstr == $srcstr){
+	if($r_srcstr == $srcstr){
 	if($userid) {
 		dbtarget('r',$dbServs);
 		$dbo=new dbex();
