@@ -20,12 +20,11 @@ $t_attribute = $tablePreStr."attribute";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$cat_id = 435;  //分类中线路的ID
-
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='天数'";
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_name='天数'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
+    $cat_id = $row['cat_id'];
     $tmp = explode("\n",$row['attr_values']);
     if(!empty($tmp)){
         for($i=0, $j=count($tmp); $i<$j; $i++){
@@ -103,7 +102,9 @@ function attr_info_save(v) {
 				ShowMessageBox("<?php echo $a_langpackage->a_fail; ?>!",'0');
 			} else if(data=='-3') {
                                 ShowMessageBox("<?php echo $a_langpackage->a_goods_attr_repeat; ?>!",'0');
-                        } else {
+                        } else if(data=='-4') {
+                                ShowMessageBox("<?php echo $a_langpackage->a_goods_attr_none; ?>!",'0');
+                        }  else {
 				if(index>0) {
 					ShowMessageBox("<?php echo $a_langpackage->a_edit_success; ?>!",'0');
 				} else {
@@ -229,7 +230,7 @@ function attr_info_add() {
 			var tr_0 = document.getElementById("tr_0");
 			tr_0.style.display = '';
 		} else {
-			ShowMessageBox("<?php echo $a_langpackage->a_plselect_category; ?>!",'0');
+			ShowMessageBox("<?php echo $a_langpackage->a_goods_attr_none; ?>!",'0');
 		}
 	}else{
 		ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>",'m.php?app=error');

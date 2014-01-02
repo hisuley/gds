@@ -558,6 +558,7 @@ class adminlp{
 	var $a_import_file_error="数据导入失败!";
 	var $a_export_file_error="数据导出失败!";
         var $a_goods_attr_repeat = "属性名称已存在!";
+        var $a_goods_attr_none = "请先在属性管理中的分类下添加此属性!";
 	/*shop request*/
 	var $a_status = "状态";
 	var $a_show_all = "全部显示";
