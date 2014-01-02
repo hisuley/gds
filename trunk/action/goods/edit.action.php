@@ -61,7 +61,8 @@ $goods_attr = get_goods_attr($dbo,$t_goods_attr,$goods_id);
 $have_attr = array();
 if($goods_attr) {
 	foreach($goods_attr as $v) {
-		$have_attr[$v['attr_id']] = $v['attr_values'];
+		$have_attr[$v['attr_id']]['attr_values'] = $v['attr_values'];
+                $have_attr[$v['attr_id']]['price'] = $v['price'];
 	}
 }
 if($post['is_best']==1 || $post['is_new']==1 || $post['is_hot']==1 || $post['is_promote']==1){
@@ -102,7 +103,8 @@ if($post['is_best']==1 || $post['is_new']==1 || $post['is_hot']==1 || $post['is_
 	}
 }
 
-$post_attr = get_args('attr');
+$post_attr['attr_values'] = get_args('attr');
+$post_attr['price'] = get_args('price');
 $filterAttr = filterAttr($have_attr,$post_attr);
 /* 图片上传处理 */
 $cupload = new upload();
@@ -215,13 +217,26 @@ exit;
 function filterAttr($haveArray,$postArray) {
 	$array = array();
 	foreach($haveArray as $key=>$value) {
-		if($postArray[$key]) {
-			if($postArray[$key] != $value) {
-				$array['update'][$key] = $postArray[$key];
+		if($postArray['attr_values'][$key]) {
+			if($postArray['attr_values'][$key] != $value['attr_values'] || $postArray['price'][$key] != $value['price']) {
+                                if(is_array($postArray['price'][$key])){
+                                    foreach ($postArray['price'][$key] as $k => $v){
+                                            $postArray['price'][$key][$k] = intval($v);
+                                            for($i=count($postArray['attr_values'][$key]),$j=count($postArray['price'][$key]); $i<=$j; $i++){
+                                                unset($postArray['price'][$key][$i]);
+                                            }
+                                    }
+                                }else{
+                                    $postArray['price'][$key] = intval($val);
+                                }
+				$array['update'][$key]['attr_values'] = $postArray['attr_values'][$key];
+                                $array['update'][$key]['price'] = $postArray['price'][$key];
 			}
-			unset($postArray[$key]);
+			unset($postArray['attr_values'][$key]);
+                        unset($postArray['price'][$key]);
 		} else {
-			$array['delete'][$key] = $value;
+			$array['delete'][$key]['attr_values'] = $value['attr_values'];
+                        $array['delete'][$key]['price'] = $value['price'];
 		}
 	}
 	$array['insert'] = $postArray;

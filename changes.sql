@@ -95,3 +95,5 @@ CREATE TABLE `imall_notification_policy` (
   `sort_order` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`policy_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+/* 商品属性表更改价格类型 */
+ALTER TABLE `gds`.`imall_goods_attr` CHANGE `price` `price` TEXT NULL;

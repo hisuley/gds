@@ -66,7 +66,8 @@ if($row){
 $image_size_id=short_check(get_args("image_size_id"));
 
 /* 属性处理 */
-$post_attr = get_args('attr');
+$post_attr['attr_values'] = get_args('attr');
+$post_attr['price'] = get_args('price');
 
 /* 图片上传处理 */
 $cupload = new upload();

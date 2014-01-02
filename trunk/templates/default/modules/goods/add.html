@@ -549,7 +549,7 @@ function changeAttrTr(objvalue) {
 	var html = '';
 	var temp = '';
 	for(var i=0; i<objvalue.length; i++) {
-		temp = formatFormElement(objvalue[i].attr_id,objvalue[i].input_type,objvalue[i].attr_name,objvalue[i].attr_values);
+		temp = formatFormElement(objvalue[i].attr_id,objvalue[i].input_type,objvalue[i].attr_name,objvalue[i].attr_values,objvalue[i].price);
 		html += '<div class="div"><span class="left">'+objvalue[i].attr_name+'：</span><span class="right">'+temp+'</span><div class="clear"></div></div>';
 		/*
 		if(objvalue[i].input_type == 4){
@@ -569,7 +569,7 @@ function changeAttrTr(objvalue) {
 }
 
 //属性input类型 0:TEXT,1:SELECT,2:radio,3:checkbox
-function formatFormElement(id,type,name,value) {
+function formatFormElement(id,type,name,value,price) {
 	var optionValue;
 	var cValue = str = '';
 	//if(goodsAttr[id]) {
@@ -577,6 +577,10 @@ function formatFormElement(id,type,name,value) {
 	//}
 	if(type==0) {
 		str = '<input type="text" name="attr[' + id + ']" value="'+cValue+'" maxlength="200" />';
+                if(price == 1){
+                    price0 = name; 
+                    str += '<input type="text" name="price['+id+']" value="请输入价格" onfocus="focusPrice(this)" onblur="blurPrice(this)" style="width:70px;" />';
+                }
 	} else if (type==1 && value!='') {
 		optionValue = value.split("\n");
 		str = '<select name="attr[' + id + ']">';
@@ -589,6 +593,10 @@ function formatFormElement(id,type,name,value) {
 			}
 		}
 		str += '</select>';
+                if(price == 1){
+                    price1 = value; 
+                    str += '<input type="text" name="price['+id+']" value="请输入价格" onfocus="focusPrice(this)" onblur="blurPrice(this)" style="width:70px;" />';
+                }
 	} else if (type==2 && value!='') {
 		optionValue = value.split("\r\n");
 		for(var i=0; i<optionValue.length; i++) {
@@ -598,6 +606,10 @@ function formatFormElement(id,type,name,value) {
 				str += '<input type="radio" name="attr[' + id + ']" value="'+optionValue[i]+'" />' + optionValue[i] + ' ';
 			}
 		}
+                if(price == 1){
+                    price2 = value; 
+                    str += '<input type="text" name="price['+id+']" value="请输入价格" onfocus="focusPrice(this)" onblur="blurPrice(this)" style="width:70px;" />';
+                }
 	} else if (type==3 && value!='') {
 		var regv = cValue.replace(/[\r\n]/g,"|");
 		if(regv) {
@@ -605,13 +617,27 @@ function formatFormElement(id,type,name,value) {
 		} else {
 			var re = new RegExp("((iwebshop)|([^\r\n]+))[\r\n]*","g");
 		}
-		var str = value.replace(re,"<input type='checkbox' name='attr[" + id + "][]' value='$1' checked$3 />$1");
+		
+                if(price == 1){
+                    price3 = value; 
+                    var str = value.replace(re,"<input type='checkbox' name='attr[" + id + "][]' value='$1' checked$3 />$1<input type='text' name='price["+id+"][]' value='请输入价格' onfocus='focusPrice(this)' onblur='blurPrice(this)' style='width:70px;' />");
+                } else {
+                    var str = value.replace(re,"<input type='checkbox' name='attr[" + id + "][]' value='$1' checked$3 />$1");
+                }
 	} else if (type==4){
 		 str = '<textarea name="attr[' + id + ']" id="attr_text_area" cols="65" rows="10">'+cValue+'</textarea>';
 	}
 	return str;
 }
 
+function focusPrice(obj){
+    obj.value= '';
+}
+function blurPrice(obj) {
+    if(obj.value == ''){
+        obj.value = '请输入价格';
+    }
+}
 function showimg(obj) {
 	var picspan = document.getElementById("picspan");
 	picspan.innerHTML = '';
