@@ -53,7 +53,7 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <?php echo $a_langpackage->a_news_category; ?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <?php echo $a_langpackage->a_news_category; ?></div>
         <hr />
 	<div class="infobox">
 	<h3><span class="left"><?php echo $a_langpackage->a_news_category; ?></span> <span class="right" style="margin-right:15px;"><a href="m.php?app=news_catadd"><?php echo $a_langpackage->a_category_add; ?></a></span></h3>

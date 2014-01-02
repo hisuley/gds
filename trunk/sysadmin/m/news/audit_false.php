@@ -28,7 +28,7 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <?php echo $a_langpackage->a_news_audit_note; ?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <?php echo $a_langpackage->a_news_audit_note; ?></div>
         <hr />
 	<div class="infobox">
 	<h3><span class="left"><?php echo $a_langpackage->a_news_audit_note; ?></span><span class="right" style="margin-right:15px;"><?php if($audit === 2){ ?> <a href="m.php?app=news_first_list"><?php echo $a_langpackage->a_news_first_list; ?></a></span><?php } ?><?php if($audit === 3){ ?><a href="m.php?app=news_recheck_list"><?php echo $a_langpackage->a_news_recheck_list; ?></a></span><?php } ?></h3>

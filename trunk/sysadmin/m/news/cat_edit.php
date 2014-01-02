@@ -55,7 +55,7 @@ bkLib.onDomLoaded(function() {
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <?php echo $a_langpackage->a_classification_changes;?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <?php echo $a_langpackage->a_classification_changes;?></div>
         <hr />
 	<div class="infobox">
 	<h3><span class="left"><?php echo $a_langpackage->a_classification_changes;?></span> <span class="right" style="margin-right:15px;"><a href="m.php?app=news_catlist"><?php echo $a_langpackage->a_category_list; ?></a></span></h3>
@@ -83,6 +83,10 @@ bkLib.onDomLoaded(function() {
                         <tr>
 				<td><?php echo $a_langpackage->a_category_icon; ?>：</td>
 				<td><input type="text" class="small-text" name="cat_icon" value="<?php echo $info['cat_icon']?>" style="width:200px;" /></td>
+			</tr>
+                        <tr>
+				<td><?php echo $a_langpackage->a_category_seo; ?>：</td>
+				<td><input class="small-text" type="text" name="seo" value="<?php echo $info['seo']; ?>" /></td>
 			</tr>
 			<tr><td colspan="2"><span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_category_edit; ?>" /></span></td></tr>
 		</table>

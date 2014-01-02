@@ -248,6 +248,7 @@ class adminlp{
 	var $a_category_list = "商品分类列表";
 	var $a_category_name = "分类名称";
 	var $a_category_sort = "分类排序";
+        var $a_category_seo = "分类seo";
 	var $a_category_and_brand = "关联品牌";
 	var $a_goods_num = "产品数量";
 	var $a_show_sort = "显示排序";
@@ -267,8 +268,10 @@ class adminlp{
 	var $a_batch_unlock = "批量解锁";
 
 	var $a_news_list = "新闻列表";
+        var $a_news_draft_list = "草稿新闻列表";
         var $a_news_first_list = "初审新闻列表";
         var $a_news_recheck_list = "复审新闻列表";
+        var $a_news_nocheck_list = "未通过审核新闻列表";
         var $a_news_audit_true = "审核通过";
         var $a_news_audit_false = "审核不通过";
         var $a_news_first_audit_true = "初审新闻通过";
@@ -276,6 +279,7 @@ class adminlp{
         var $a_news_first_audit_false = "初审新闻不通过";
         var $a_news_recheck_audit_false = "复审新闻不通过";
         var $a_news_audit_note = "提交审核不通过备注";
+        var $a_news_retraction_log = "新闻撤稿";
 	var $a_news_add = "添加新闻";
 	var $a_news_edit = "新闻修改";
         var $a_news_attr_management = "新闻属性管理";
@@ -306,6 +310,8 @@ class adminlp{
 	var $a_use_news_links = "使用外链";
 	var $a_news_links_url = "链接地址";
 	var $a_news_isshow = "是否显示";
+        var $a_news_retraction = "撤稿";
+        var $a_news_retraction_suss = "撤稿成功";
 	var $a_show = "显示";
 	var $a_news_title_notnone = "标题不能为空！";
 	var $a_plsselectcategory = "请选择分类！";

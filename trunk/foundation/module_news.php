@@ -164,8 +164,11 @@ function get_attribute_info(&$dbo,$table,$cat_id) {
 	return $array;
 }
 
-function check_cat_name(&$dbo,$table,$name){
+function check_cat_name(&$dbo,$table,$name,$catid=0){
     $sql = "SELECT COUNT(*) FROM `$table` WHERE cat_name ='$name'";
+    if($catid){
+        $sql .= " and cat_id <> $catid";
+    }
     return $dbo->getRow($sql);
 }
 

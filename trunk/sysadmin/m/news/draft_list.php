@@ -9,8 +9,6 @@ $a_langpackage=new adminlp;
 //权限管理
 $right=check_rights("news_show");
 $cat_id = intval(get_args('id'));
-$orderby = short_check(get_args('orderby'));
-$title = short_check(get_args('title'));
 if ($cat_id){
 	if(!$right){
 		header('location:m.php?app=error');
@@ -24,18 +22,11 @@ $t_article_cat = $tablePreStr."article_cat";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select * from `$t_article` where is_audit=4";
+$sql = "select * from `$t_article` where is_draft=1";
 if($cat_id) {
 	$sql .= " and cat_id='$cat_id' ";
 }
-if($title) {
-	$sql .= " and title like '%$title%' ";
-}
-if($orderby) {
-	$sql .= " order by $orderby";
-}else {
-    $sql .= " order by add_time desc";
-}
+$sql .= " order by add_time desc";
 $result = $dbo->fetch_page($sql,13);
 $cat_info = get_news_cat_list($dbo,$t_article_cat);
 //新闻分类
@@ -61,17 +52,16 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_list; ?></a></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_draft_list; ?></a></div>
         <hr />
-    <div class="seachbox">
+        <div class="seachbox">
         <div class="content2">
-        	<form action="m.php?app=news_list" name="searchForm" method="get">
+        	<form action="m.php?app=news_draft_list" name="searchForm" method="get">
             	<table class="form-table">
 	            	<tbody>
 	            	<tr>
-                                <td width="2px" style="padding:0 0 0 5px"><span style="margin:1px 0px 0px 0px; float:left; color: #000" > <img src="skin/images/icon_search.gif" border="0" alt="SEARCH" /> </span></td>
-	                   	<td width="450px">
-                                        <?php echo $a_langpackage->a_news_title; ?>： <input type="text" class="small-text" name="title" value="<?php echo $title; ?>" style="width:100px" /> 
+	                   	<td width="240px">
+	                   		<img src="skin/images/icon_search.gif" border="0" alt="SEARCH" />
 	                   		<?php echo $a_langpackage->a_news_category; ?>：
 	                   		<select name="id">
 								<option value="0"><?php echo $a_langpackage->a_select_news_category; ?></option>
@@ -80,7 +70,7 @@ td span {color:red;}
 								<?php } ?>
 							</select>
 	                   	</td>
-	                   	<td><input type="hidden" name="app" value="news_list"><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" /></td>
+	                   	<td><input type="hidden" name="app" value="news_draft_list"><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" /></td>
 	                </tr>
                 </tbody>
             </table>
@@ -88,29 +78,26 @@ td span {color:red;}
         </div>
     </div>
 	<div class="infobox">
-	<h3><span class="left"><?php echo $a_langpackage->a_news_list; ?></span><span class="right" style="margin-right:15px;"><a href="m.php?app=news_add"><?php echo $a_langpackage->a_news_add; ?></a></span></h3>
+	<h3><span class="left"><?php echo $a_langpackage->a_news_draft_list; ?></span></h3>
     <div class="content2">
 		<form action="a.php?act=news_del" name="form1" id="form1" method="post">
 		<input type="hidden" id="show_right" value="<?php echo $right;?>">
 		<table class="list_table"  style="table-layout:fixed;">
         	<thead>
 			<tr style="text-align:center">
-				<th width="20px"><input type="checkbox" onclick="checkall(this,'article_id[]');" value='' /></th>
-				<th width="40px"><a href="m.php?app=news_list&orderby=article_id">ID</a></th>
-				<th align="left" width="150px"><a href="m.php?app=news_list&orderby=title"><?php echo $a_langpackage->a_news_title; ?></a></th>
-				<th align="left" width="110px"><a href="m.php?app=news_list&orderby=cat_id"><?php echo $a_langpackage->a_news_category; ?></a></th>
+				<th width="40px">ID</th>
+				<th align="left" width="200px"><?php echo $a_langpackage->a_news_title; ?></th>
+				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
 				<th width="300px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>
 				<th width="189px"><?php echo $a_langpackage->a_add_time; ?></th>
-				<th width="40px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
 			<tbody>
 			<?php if($result['result']) {
 			foreach($result['result'] as $value) { ?>
 			<tr style="text-align:center">
-				<td><input type="checkbox" name="article_id[]" value="<?php echo $value['article_id'];?>" /></td>
 				<td><?php echo $value['article_id'];?></td>
 				<td class="limit" align="left">
 					<?php if($value['is_blod'] && $value['tag_color']) { ?>
@@ -134,25 +121,15 @@ td span {color:red;}
 					<?php } ?>
 				</td>
 				<td><?php echo $value['add_time'];?></td>
-				<td>
-					<a href="m.php?app=news_edit&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_update; ?></a><br />
-					<a href="a.php?act=news_del&id=<?php echo $value['article_id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_message_del; ?>');"><?php echo $a_langpackage->a_delete; ?></a><br />
-                                        <a href="a.php?act=news_audit&audit=5&draft=1&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_retraction; ?></a>
-				</td>
 			</tr>
 			<?php }?>
-			<tr>
-				<td colspan="9">
-					<span class="button-container"><input class="regular-button" type="submit" name=""  onclick="return delcheck();" value="<?php echo $a_langpackage->a_batch_del; ?>" /></span>
-				</td>
-			</tr>
 			<?php } else { ?>
 			<tr>
-				<td colspan="9" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
+				<td colspan="7" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
 			</tr>
 			<?php } ?>
 			<tr>
-				<td colspan="9" class="center"><?php include("m/page.php"); ?></td>
+				<td colspan="7" class="center"><?php include("m/page.php"); ?></td>
 			</tr>
            </tbody>
 		</table>
@@ -184,30 +161,6 @@ function toggle_show(obj,id) {
 		ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>",'0');
 		location.href="m.php?app=error";
 	}
-}
-var inputs = document.getElementsByTagName("input");
-
-function delcheck(){
-	var checked = false; 
-    for (var i = 0; i < inputs.length; i++) 
-    { 
-    	if (inputs[i].checked == true) 
-        {
-            checked = true;
-            if(confirm('<?php echo $a_langpackage->a_exe_message; ?>')){
-            	break; 
-                }else{
-                	return false;
-                	break; 
-                    }
-        }  
-    } 
-    if (!checked) 
-    { 
-        ShowMessageBox("请至少选择一个标题！",'0'); 
-        return false; 
-    }
-    return true;
 }
 //-->
 </script>

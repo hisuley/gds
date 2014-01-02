@@ -52,7 +52,7 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_recheck_list; ?></a></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_recheck_list; ?></a></div>
         <hr />
         <div class="seachbox">
         <div class="content2">

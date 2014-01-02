@@ -64,7 +64,7 @@ $(function(){
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_edit; ?></a></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_edit; ?></a></div>
         <hr />
 	<div class="infobox">
 	<h3><span class="left"><?php echo $a_langpackage->a_news_edit; ?></span> <span class="right" style="margin-right:15px;"><a href="m.php?app=news_list"><?php echo $a_langpackage->a_news_list; ?></a></span></h3>
