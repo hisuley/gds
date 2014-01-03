@@ -97,3 +97,7 @@ CREATE TABLE `imall_notification_policy` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
 /* 商品属性表更改价格类型 */
 ALTER TABLE `gds`.`imall_goods_attr` CHANGE `price` `price` TEXT NULL;
+/* 文章分类表增加SEO字段 */
+ALTER TABLE `gds`.`imall_article_cat` ADD COLUMN `seo` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '分类搜索引擎优化' AFTER `cat_icon`; 
+/* 文章表增加草稿字段 */
+ALTER TABLE `gds`.`imall_article` ADD COLUMN `is_draft` TINYINT(1) DEFAULT 1 NOT NULL COMMENT '1是草稿,0不是草稿' AFTER `audit_note`; 

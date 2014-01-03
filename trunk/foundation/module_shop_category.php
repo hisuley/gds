@@ -126,8 +126,11 @@ function get_categories_rank($cat,&$dbo,$table)
     return array_reverse($cats);
 }
 
-function check_categories_name(&$dbo,$table,$cat_name){
+function check_categories_name(&$dbo,$table,$cat_name,$cat_id=0){
     $sql = "SELECT COUNT(*) FROM `$table` WHERE cat_name ='$cat_name'";
+    if($cat_id){
+        $sql .= " and cat_id <> $cat_id";
+    }
     return $dbo->getRow($sql);
 }
 ?>

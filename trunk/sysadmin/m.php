@@ -121,6 +121,7 @@ $appArray = array(
 	'goods_category_list'	=> 'm/goods/category_list.php',
 	'goods_list'			=> 'm/goods/list.php',
     'goods_edit'			=> 'm/goods/edit.php',
+    'travel_number'      => 'm/goods/travel_number.php',
     'travel_theme'      => 'm/goods/travel_theme.php',
     'travel_type'      => 'm/goods/travel_type.php',
     'travel_days'           => 'm/goods/travel_days.php',

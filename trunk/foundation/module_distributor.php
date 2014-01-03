@@ -37,8 +37,11 @@ function get_distributor_info(&$dbo,$table)
 	return get_distributor_info_item($dbo,'*',$table);
 }
 
-function check_distributor_name(&$dbo,$table,$distributor_name){
+function check_distributor_name(&$dbo,$table,$distributor_name,$distributor_id=0){
     $sql = "SELECT COUNT(*) FROM `$table` WHERE distributor_name ='$distributor_name'";
+    if($distributor_id){
+        $sql .= " and distributor_id <> $distributor_id";
+    }
     return $dbo->getRow($sql);
 }
 ?>

@@ -37,8 +37,11 @@ function get_policy_info(&$dbo,$table)
 	return get_policy_info_item($dbo,'*',$table);
 }
 
-function check_policy_title(&$dbo,$table,$policy_title){
+function check_policy_title(&$dbo,$table,$policy_title,$policy_id=0){
     $sql = "SELECT COUNT(*) FROM `$table` WHERE policy_title ='$policy_title'";
+    if($policy_id){
+        $sql .= " and policy_id <> $policy_id";
+    }
     return $dbo->getRow($sql);
 }
 ?>

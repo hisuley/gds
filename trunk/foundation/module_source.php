@@ -10,8 +10,11 @@ function insert_source_info(&$dbo,$table,$insert_items){
 	return mysql_insert_id();
 }
 /* 检测来源名称唯一性 */
-function check_source_name(&$dbo,$table,$name){
+function check_source_name(&$dbo,$table,$name,$source_id=0){
     $sql = "SELECT COUNT(*) FROM `$table` WHERE name ='$name'";
+    if($source_id){
+        $sql .= " and source_id <> $source_id";
+    }
     return $dbo->getRow($sql);
 }
 /* 文章来源信息 */

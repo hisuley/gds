@@ -33,7 +33,7 @@ $t_admin_log = $tablePreStr."admin_log";
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
-$count = check_distributor_name($dbo,$t_distributor,$post['distributor_name']);
+$count = check_distributor_name($dbo,$t_distributor,$post['distributor_name'],$distributor_id);
 if($count[0]) {
 	action_return(0,$a_langpackage->a_distributor_name_repeat,'-1');
 	exit;

@@ -16,6 +16,7 @@ $dbo=new dbex();
 //定义文件表
 $t_goods = $tablePreStr."goods";
 $t_goods_attr = $tablePreStr."goods_attr";
+$t_attribute = $tablePreStr."attribute";
 $t_goods_gallery = $tablePreStr."goods_gallery";
 $t_shop_info=$tablePreStr."shop_info";
 @$t_img_size=$tablePreStr."img_size";
@@ -105,6 +106,13 @@ if($post['is_best']==1 || $post['is_new']==1 || $post['is_hot']==1 || $post['is_
 
 $post_attr['attr_values'] = get_args('attr');
 $post_attr['price'] = get_args('price');
+$sql="select attr_id from `$t_attribute` where attr_name='编号'";
+$attr_id = $dbo->getRow($sql);
+$sql = "select count(*) from `$t_goods_attr` where attr_values='".$post_attr['attr_values'][$attr_id['attr_id']]."' and attr_id ='".$attr_id['attr_id']."' and goods_id <> $goods_id";
+$result = $dbo->getRow($sql);
+if($result['count(*)']){
+    action_return(0,$m_langpackage->m_travel_number_repeat,'-1');
+}
 $filterAttr = filterAttr($have_attr,$post_attr);
 /* 图片上传处理 */
 $cupload = new upload();

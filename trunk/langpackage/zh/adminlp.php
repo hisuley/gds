@@ -228,6 +228,7 @@ class adminlp{
 	var $a_brand_name_notnone = "名称不能为空！";
 	var $a_brand_site_url_error = "网站格式不正确！";
         
+        var $a_travel_number_management = "旅游线路编号管理";
         var $a_travel_theme_management = "旅游线路主题管理";
         var $a_travel_type_management = "旅游线路类型管理";
         var $a_travel_days_management = "旅游线路天数管理";

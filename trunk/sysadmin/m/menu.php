@@ -50,6 +50,7 @@ $right_array=array(
     "brand_attr_manager" => "0",
     "attr_manager"    =>   "0",
     "groupbuy_list"    =>   "0",
+    "travel_number"     =>  "0",
     "travel_theme"        =>  "0",
     "travel_type"       =>  "0",
     "travel_days"       =>  "0",
@@ -410,6 +411,9 @@ $plugin=$dbo->getRs($sql);
 			<?php }?>
 			<?php if($right_array["tag_list"]){?>
 					<li id="tag_list" class="" onclick="changeMenu(this);"><a href="m.php?app=tag_list" target="main-frame"><?php echo $a_langpackage->a_tags_manage; ?></a></li><!-- 标签集管理 -->
+            <?php }?>
+            <?php if($right_array["travel_number"]){?>
+            <li id="travel_number" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_number" target="main-frame"><?php echo $a_langpackage->a_travel_number_management; ?></a></li><!-- 旅游线路编号管理 -->
             <?php }?>
             <?php if($right_array["travel_theme"]){?>
             <li id="travel_theme" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_theme" target="main-frame"><?php echo $a_langpackage->a_travel_theme_management; ?></a></li><!-- 旅游线路主题管理 -->
