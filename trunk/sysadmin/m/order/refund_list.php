@@ -103,9 +103,9 @@ td span {color:red;}
 		<table class="list_table">
 			<thead>
 			<tr style=" text-align:center">
-                                <th width="15px"><a href="m.php?app=order_refund_list&orderby=refund_id">ID</a></th>
-				<th width="100px"><a href="m.php?app=order_refund_list&orderby=order_id"><?php echo $a_langpackage->a_orderID;?></a></th>
-				<th width="90px"><a href="m.php?app=order_refund_list&orderby=refund_way"><?php echo $a_langpackage->a_refund_way;?></a></th>
+                                <th width="40px">ID <a href="m.php?app=order_refund_list&orderby=refund_id">↑</a></th>
+				<th width="100px"><?php echo $a_langpackage->a_orderID;?> <a href="m.php?app=order_refund_list&orderby=order_id">↑</a></th>
+				<th width="90px"><?php echo $a_langpackage->a_refund_way;?> <a href="m.php?app=order_refund_list&orderby=refund_way">↑</a></th>
 				<th width="120px"><?php echo $a_langpackage->a_refund_account;?></th>
 				<th width="40px"><?php echo $a_langpackage->a_refund_money;?></th>
 				<th width="60px"><?php echo $a_langpackage->a_memeber_name;?></th>

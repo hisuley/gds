@@ -94,9 +94,9 @@ td span {color:red;}
 		<table class="list_table" style='font-size:12px;'>
 			<thead>
 			<tr style=" text-align:center;">
-				<th width="50px"><a href="m.php?app=notification_policy_list&orderby=notification_id">ID</a></th>
+				<th width="50px">ID <a href="m.php?app=notification_policy_list&orderby=policy_id">↑</a></th>
 				<th align="left"><?php echo $a_langpackage->a_notification_policy_name; ?></th>
-				<th width="65px"><a href="m.php?app=notification_policy_list&orderby=sort_order"><?php echo $a_langpackage->a_show_sort; ?></a></th>
+				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=notification_policy_list&orderby=sort_order">↑</a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

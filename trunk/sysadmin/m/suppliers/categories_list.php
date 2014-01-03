@@ -101,10 +101,10 @@ td span {color:red;}
 		<table class="list_table" style='font-size:12px;'>
 			<thead>
 			<tr style=" text-align:center;">
-				<th width="50px"><a href="m.php?app=suppliers_categories_list&orderby=cat_id">ID</a></th>
+				<th width="50px">ID <a href="m.php?app=suppliers_categories_list&orderby=cat_id">↑</a></th>
 				<th align="left"><?php echo $a_langpackage->a_category_name; ?></th>
 				<th width="65px"><?php echo $a_langpackage->a_shop_num; ?></th>
-				<th width="65px"><a href="m.php?app=suppliers_categories_list&orderby=sort_order"><?php echo $a_langpackage->a_show_sort; ?></a></th>
+				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=suppliers_categories_list&orderby=sort_order">↑</a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

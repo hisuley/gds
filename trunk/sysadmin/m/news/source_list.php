@@ -86,8 +86,8 @@ td span {color:red;}
         	<thead>
 			<tr style="text-align:center">
 				<th width="10%"><input type="checkbox" onclick="checkall(this,'source_id[]');" value='' /></th>
-				<th width="20%" align="left"><a href="m.php?app=news_source_list&orderby=source_id">ID</a></th>
-				<th align="left" width="50%"><a href="m.php?app=news_source_list&orderby=name"><?php echo $a_langpackage->a_news_source_name; ?></a></th>
+				<th width="20%" align="left">ID <a href="m.php?app=news_source_list&orderby=source_id">↑</a></th>
+				<th align="left" width="50%"><?php echo $a_langpackage->a_news_source_name; ?> <a href="m.php?app=news_source_list&orderby=name">↑</a></th>
 				<th width="20%"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

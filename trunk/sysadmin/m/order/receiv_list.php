@@ -103,15 +103,15 @@ td span {color:red;}
 		<table class="list_table">
 			<thead>
 			<tr style=" text-align:center">
-                                <th width="15px"><a href="m.php?app=order_receiv_list&orderby=receiv_id">ID</a></th>
-				<th width="100px"><a href="m.php?app=order_receiv_list&orderby=order_id"><?php echo $a_langpackage->a_orderID;?></a></th>
-				<th width="100px"><a href="m.php?app=order_receiv_list&orderby=payid"><?php echo $a_langpackage->a_receiv_payid;?></a></th>
-				<th width="90px"><a href="m.php?app=order_receiv_list&orderby=payment_type"><?php echo $a_langpackage->a_payment_type;?></a></th>
+                                <th width="40px">ID <a href="m.php?app=order_receiv_list&orderby=receiv_id">↑</a></th>
+				<th width="100px"><?php echo $a_langpackage->a_orderID;?> <a href="m.php?app=order_receiv_list&orderby=order_id">↑</a></th>
+				<th width="100px"><?php echo $a_langpackage->a_receiv_payid;?> <a href="m.php?app=order_receiv_list&orderby=payid">↑</a></th>
+				<th width="90px"><?php echo $a_langpackage->a_payment_type;?> <a href="m.php?app=order_receiv_list&orderby=payment_type">↑</a></th>
 				<th width="120px"><?php echo $a_langpackage->a_pay_date;?></th>
 				<th width="40px"><?php echo $a_langpackage->a_receiver;?></th>
-				<th width="120px"><a href="m.php?app=order_receiv_list&orderby=receiv_date"><?php echo $a_langpackage->a_receiv_date;?></a></th>
+				<th width="120px"><?php echo $a_langpackage->a_receiv_date;?> <a href="m.php?app=order_receiv_list&orderby=receiv_date">↑</a></th>
 				<th width="150px"><?php echo $a_langpackage->a_receiv_account;?></th>
-                                <th width="45px"><a href="m.php?app=order_receiv_list&orderby=receiv_money"><?php echo $a_langpackage->a_receiv_money;?></a></th>
+                                <th width="60px"><?php echo $a_langpackage->a_receiv_money;?> <a href="m.php?app=order_receiv_list&orderby=receiv_money">↑</a></th>
                                 <th width="40px"><?php echo $a_langpackage->a_operator;?></th>
 			</tr>
 			</thead>
