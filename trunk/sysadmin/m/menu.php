@@ -22,6 +22,7 @@ $right_array=array(
     'tag_eidt'=>'0',
     'tag_del'=>'0',
     "user_browse"    =>   "0",
+    "user_level"     =>     "0",
     "user_rank_browse"    =>   "0",
     "member_points"     => "0",
     "add_user_rank_browse"    =>   "0",
@@ -333,7 +334,10 @@ $plugin=$dbo->getRs($sql);
 	        	<li id="separator" class="separator"></li>
 			<?php if($right_array["user_browse"]){?>
 				<li id="user_browse" class="active" onclick="changeMenu(this);"><a href="m.php?app=member_list" target="main-frame"><?php echo $a_langpackage->a_memeber_list; ?></a></li>
-			<?php }?>
+            <?php }?>
+            <?php if($right_array["user_level"]){?>
+				<li id="user_level" class="" onclick="changeMenu(this);"><a href="m.php?app=member_level_list" target="main-frame"><?php echo $a_langpackage->a_m_user_level_list; ?></a></li>
+            <?php }?>
 			<?php if($right_array["user_rank_browse"]){?>
 				<li id="user_rank_browse" class="" onclick="changeMenu(this);"><a href="m.php?app=member_rank" target="main-frame"><?php echo $a_langpackage->a_m_member_level_set; ?></a></li>
             <?php }?>

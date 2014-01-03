@@ -455,6 +455,17 @@ class adminlp{
         var $a_memeber_orderinfo = "筛选该用户订单";
         var $a_memeber_account = "筛选该会员现金账户充值记录";
         var $a_memeber_ico = "用户头像";
+        /* memeber level */
+        var $a_m_user_level_list = "会员等级列表";
+        var $a_user_level_add = "添加会员等级";
+        var $a_user_level_edit = "修改会员等级";
+        var $a_user_level_new = "新增会员等级";
+        var $a_user_level_del = "删除会员等级";
+        var $a_user_level_name = "会员等级名称";
+        var $a_user_level_name_repeat = "会员等级名称已存在!";
+        var $a_user_level_points = "积分范围";
+        var $a_user_price_img = "价格图片";
+        var $a_user_head_img = "头像图片";
 	/* memeber reinfo*/
 	var $a_memeber_info_update = "会员基本信息修改";
 	var $a_normal = "正常";
