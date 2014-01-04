@@ -137,7 +137,7 @@ $(function(){
 				<td><?php echo $a_langpackage->a_news_isshow; ?>：</td>
 				<td><input type="checkbox" name="is_show" value="1" <?php if($news_info['is_show']){ echo "checked"; }?> /></td>
 			</tr>
-			<tr><td colspan="2"><span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_news_add; ?>" /></span></td></tr>
+			<tr><td colspan="2"><span class="button-container"><input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_news_draft_save; ?>" /> <input class="regular-button" type="submit" name="submit" value="<?php echo $a_langpackage->a_news_add; ?>" /></span></td></tr>
 		</table>
 		</form>
 	   </div>

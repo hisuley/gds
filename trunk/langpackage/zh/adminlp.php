@@ -270,6 +270,9 @@ class adminlp{
 
 	var $a_news_list = "新闻列表";
         var $a_news_draft_list = "草稿新闻列表";
+        var $a_news_draft_save = "保存为草稿";
+        var $a_news_draft_sub = "提交初审";
+        var $a_news_draft_subs = "已提交初审";
         var $a_news_first_list = "初审新闻列表";
         var $a_news_recheck_list = "复审新闻列表";
         var $a_news_nocheck_list = "未通过审核新闻列表";

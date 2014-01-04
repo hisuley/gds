@@ -23,6 +23,8 @@ $a_langpackage=new adminlp;
 		action_return(0,$a_langpackage->a_fail,'-1');
 	}else if($realtxt[flag]==-2){
 		action_return(0,$a_langpackage->a_fail,'-1');
-	}
+	}else{
+            action_return(1,"",'m.php?app=upload_form');
+        }
 ?>
 

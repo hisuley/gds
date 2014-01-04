@@ -96,10 +96,11 @@ td span {color:red;}
 				<th align="left" width="200px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_draft_list&orderby=title&orderway=asc">↑</a><a href="m.php?app=news_draft_list&orderby=title&orderway=desc">↓</a></th>
 				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_draft_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_draft_list&orderby=cat_id&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
-				<th width="300px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
+				<th width="160px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>
 				<th width="189px"><?php echo $a_langpackage->a_add_time; ?></th>
                                 <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_draft_list&orderby=short_order&orderway=asc">↑</a><a href="m.php?app=news_draft_list&orderby=short_order&orderway=desc">↓</a></th>
+                                <th width="40px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -131,15 +132,18 @@ td span {color:red;}
 				<td><?php echo $value['add_time'];?></td>
                                 <td><div onclick="edit(this,<?php echo $value['article_id'];?>,'divlink<?php echo $value['article_id'];?>','a.php?act=updateAjax','tablename=article&colname=short_order&idname=article_id&idvalue=<?php echo $value['article_id'];?>&logcontent=修改新闻标题排序&colvalue=',5);"><?php echo $value['short_order'];?></div>
 				<div style="displya:none";></div></td>
+                                <td>
+                                    <a href="a.php?act=news_audit&audit=0&draft=0&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_draft_sub; ?></a><br />
+				</td>
 			</tr>
 			<?php }?>
 			<?php } else { ?>
 			<tr>
-				<td colspan="8" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
+				<td colspan="9" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
 			</tr>
 			<?php } ?>
 			<tr>
-				<td colspan="8" class="center"><?php include("m/page.php"); ?></td>
+				<td colspan="9" class="center"><?php include("m/page.php"); ?></td>
 			</tr>
            </tbody>
 		</table>

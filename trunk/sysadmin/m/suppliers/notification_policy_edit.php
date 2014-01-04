@@ -15,6 +15,7 @@ if(!$right){
 }
 //数据表定义区
 $t_notification_policy = $tablePreStr."notification_policy";
+$t_shop_categories = $tablePreStr."shop_categories";
 
 //读写分离定义方法
 $dbo = new dbex;
@@ -25,6 +26,8 @@ if(!$policy_id) {exit($a_langpackage->a_error);}
 
 /* 政策通知数据 */
 $info = get_policy_row($dbo, $t_notification_policy, $policy_id);
+
+$cat_info = get_dg_category(get_shop_cat_list($dbo,$t_shop_categories));
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -49,6 +52,16 @@ td span {color:red;}
 		<form action="a.php?act=notification_policy_edit" method="post" onsubmit="return checkform();">
 		<table class="form-table">
 		  <tbody>
+                        <tr>
+				<td width="75px"><?php echo $a_langpackage->a_select_n_category; ?>：</td>
+				<td><select name="shop_cat_id">
+					<option value="0"><?php echo $a_langpackage->a_select_n_category; ?></option>
+                                        <option value="-1"><?php echo $a_langpackage->a_shop_lock_status_all; ?></option>
+					<?php foreach($cat_info as $value) {?>
+					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$info['shop_cat_id']){ echo "selected";} ?> ><?php echo $value['str_pad'];?><?php echo $value['cat_name']; ?></option>
+					<?php }?>
+				</select> <span id="position_id_message">*</span></td>
+			</tr>
 			<tr>
 				<td width="100px"><?php echo $a_langpackage->a_notification_policy_name; ?>：</td>
 				<td><input type="text" class="small-text" name="policy_title" value="<?php echo $info['policy_title']; ?>" /> <span>*</span></td>

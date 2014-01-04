@@ -96,7 +96,7 @@ td span {color:red;}
 				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_first_list&orderby=title&orderway=asc">↑</a><a href="m.php?app=news_first_list&orderby=title&orderway=desc">↓</a></th>
 				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_first_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_first_list&orderby=cat_id&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
-				<th width="300px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
+				<th width="160px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>
 				<th width="189px"><?php echo $a_langpackage->a_add_time; ?></th>
                                 <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_first_list&orderby=short_order&orderway=asc">↑</a><a href="m.php?app=news_first_list&orderby=short_order&orderway=desc">↓</a></th>

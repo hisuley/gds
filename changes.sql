@@ -116,3 +116,5 @@ CREATE TABLE `imall_user_level` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 /* 会员表增加等级ID字段 */
 ALTER TABLE `gds`.`imall_users` ADD COLUMN `level_id` INT(10) DEFAULT 1 NOT NULL COMMENT '用户等级' AFTER `rank_id`; 
+/* 政策通知增加供应商分类字段 */
+ALTER TABLE `gds`.`imall_notification_policy` ADD COLUMN `shop_cat_id` INT(10) NOT NULL COMMENT '供应商分类ID' AFTER `sort_order`; 

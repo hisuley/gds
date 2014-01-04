@@ -47,5 +47,10 @@ if($audit === 1){
     $dbo->exeUpdate($sql);
     admin_log($dbo,$t_admin_log,$a_langpackage->a_news_retraction_log."：$id");
     action_return(1,$a_langpackage->a_news_retraction_suss,'m.php?app=news_list');
+}elseif($audit===0 && $draft ===0){
+    $sql = "update `$t_article`  set is_audit=0,is_draft=0 where article_id='$id'";
+    $dbo->exeUpdate($sql);
+    admin_log($dbo,$t_admin_log,$a_langpackage->a_news_draft_sub."：$id");
+    action_return(1,$a_langpackage->a_news_draft_subs,'m.php?app=news_draft_list');
 }
 ?>

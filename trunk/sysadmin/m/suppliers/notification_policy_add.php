@@ -14,15 +14,21 @@ if(!$right){
 	exit;
 }
 //数据表定义区
-$t_notification_policy = $tablePreStr."notification_policy";
+$t_shop_categories = $tablePreStr."shop_categories";
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
+$sql_cat = "select * from `$t_shop_categories` order by cat_id asc,sort_order asc";
+$result_cat = $dbo->getRs($sql_cat);
+
+$cat_dg = get_dg_category($result_cat);
+
 $info = array(
 	'policy_title'		=> '',
 	'policy_content'		=> '',
-	'sort_order'	=> 0
+	'sort_order'	=> 0,
+    	'shop_cat_id'		=> 0,
 );
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -49,6 +55,16 @@ td span {color:red;}
 		<form action="a.php?act=notification_policy_add" method="post" onsubmit="return checkform();">
 		<table class="form-table">
 		  <tbody>
+                        <tr>
+				<td width="75px"><?php echo $a_langpackage->a_select_n_category; ?>：</td>
+				<td><select name="shop_cat_id">
+					<option value="0"><?php echo $a_langpackage->a_select_n_category; ?></option>
+                                        <option value="-1"><?php echo $a_langpackage->a_shop_lock_status_all; ?></option>
+					<?php foreach($cat_dg as $value) {?>
+					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$info['shop_cat_id']){ echo "selected";} ?> ><?php echo $value['str_pad'];?><?php echo $value['cat_name']; ?></option>
+					<?php }?>
+				</select> <span id="position_id_message">*</span></td>
+			</tr>
 			<tr>
 				<td width="100px;"><?php echo $a_langpackage->a_notification_policy_name; ?>：</td>
 				<td><input class="small-text" type="text" name="policy_title" value="<?php echo $info['policy_title']; ?>" /> <span>*</span></td>
