@@ -449,6 +449,7 @@ class adminlp{
         var $a_memeber_birthday = "出生日期";
         var $a_memeber_integral = "总积分";
         var $a_memeber_integral_surplus = "剩余可用积分";
+        var $a_memeber_nonote = "备注不能为空!";
         var $a_memeber_money = "余额";
         var $a_memeber_address = "详细地址";
         var $a_memeber_zipcode = "邮政编码";

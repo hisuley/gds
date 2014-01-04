@@ -20,6 +20,7 @@ $t_notification_policy = $tablePreStr."notification_policy";
 
 $policy_title = get_args('policy_title');
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
@@ -35,8 +36,8 @@ if($policy_title) {
 	}
 	$sql .= " and policy_title like '%$policy_title%' ";
 }
-if($orderby) {
-	$sql .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql .= " order by $orderby $orderway";
 }else {
         $sql .= " order by sort_order";
 }
@@ -94,9 +95,9 @@ td span {color:red;}
 		<table class="list_table" style='font-size:12px;'>
 			<thead>
 			<tr style=" text-align:center;">
-				<th width="50px">ID <a href="m.php?app=notification_policy_list&orderby=policy_id">↑</a></th>
+				<th width="50px">ID <a href="m.php?app=notification_policy_list&orderby=policy_id&orderway=asc">↑</a><a href="m.php?app=notification_policy_list&orderby=policy_id&orderway=desc">↓</a></th>
 				<th align="left"><?php echo $a_langpackage->a_notification_policy_name; ?></th>
-				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=notification_policy_list&orderby=sort_order">↑</a></th>
+				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=notification_policy_list&orderby=sort_order&orderway=asc">↑</a><a href="m.php?app=notification_policy_list&orderby=sort_order&orderway=desc">↓</a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

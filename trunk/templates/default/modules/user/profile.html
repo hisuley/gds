@@ -30,6 +30,9 @@ td{text-align:left;}
 				<form action="do.php?act=user_profile" method="post" name="form_profile">
 					<table width="100%" style="border:0" cellspacing="0">
 						<tr><td class="textright" width="40%">Email：</td><td>{echo: get_sess_user_email();/}</td></tr>
+                                                <tr><td class="textright">{echo: lp{m_user_integral};/}：</td><td>{echo: $user_detail['user_integral'];/}</td></tr>
+                                                <tr><td class="textright">{echo: lp{m_user_integral_surplus};/}：</td><td>{echo: $user_detail['user_integral_surplus'];/}</td></tr>
+                                                <tr><td class="textright">{echo: lp{m_user_money};/}：</td><td>{echo: $user_detail['user_money'];/}</td></tr>
 						<tr><td class="textright">{echo: lp{m_truename};/}：</td><td><input type="text" name="user_truename" value="{echo: $user_info['user_truename'];/}" maxlength="12" /></td></tr>
 						<tr>
 							<td class="textright">{echo: lp{m_birthday};/}：</td>

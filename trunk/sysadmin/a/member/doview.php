@@ -119,6 +119,17 @@ if($rs){
                 insert_account_info($dbo,$t_user_account,$array);
             }
         }
+        //修改用户积分时提醒备注
+        if($post2['user_integral']){
+            if($rs['user_integral'] != $post2['user_integral'] && empty($post['user_notes'])){
+                action_return(0,$a_langpackage->a_memeber_nonote,'-1');
+            }
+        }
+        if($post2['user_integral_surplus']){
+            if($rs['user_integral_surplus'] != $post2['user_integral_surplus'] && empty($post['user_notes'])){
+                action_return(0,$a_langpackage->a_memeber_nonote,'-1');
+            }
+        }
 }
 
 if(update_user_info($dbo,$t_users,$post2,$user_id) && update_user_info($dbo,$t_user_info,$post,$user_id)) {

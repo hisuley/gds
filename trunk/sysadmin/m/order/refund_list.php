@@ -16,6 +16,7 @@ $order_id = short_check(get_args('order_id'));
 $start_time = get_args('start_time');
 $end_time = get_args('end_time');
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 
 $sql = "select * from `$t_refund_info` where 1";
 //权限管理
@@ -44,8 +45,8 @@ if($end_time) {
 		$sql .= " and operator_date  <= '$end_time' ";
 	}
 }
-if($orderby) {
-	$sql .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql .= " order by $orderby $orderway";
 } else {
         $sql .= " order by operator_date desc;";
 }
@@ -103,9 +104,9 @@ td span {color:red;}
 		<table class="list_table">
 			<thead>
 			<tr style=" text-align:center">
-                                <th width="40px">ID <a href="m.php?app=order_refund_list&orderby=refund_id">↑</a></th>
-				<th width="100px"><?php echo $a_langpackage->a_orderID;?> <a href="m.php?app=order_refund_list&orderby=order_id">↑</a></th>
-				<th width="90px"><?php echo $a_langpackage->a_refund_way;?> <a href="m.php?app=order_refund_list&orderby=refund_way">↑</a></th>
+                                <th width="40px">ID <a href="m.php?app=order_refund_list&orderby=refund_id&orderway=asc">↑</a><a href="m.php?app=order_refund_list&orderby=refund_id&orderway=desc">↓</a></th>
+				<th width="100px"><?php echo $a_langpackage->a_orderID;?> <a href="m.php?app=order_refund_list&orderby=order_id&orderway=asc">↑</a><a href="m.php?app=order_refund_list&orderby=order_id&orderway=desc">↓</a></th>
+				<th width="90px"><?php echo $a_langpackage->a_refund_way;?> <a href="m.php?app=order_refund_list&orderby=refund_way&orderway=asc">↑</a><a href="m.php?app=order_refund_list&orderby=refund_way&orderway=desc">↓</a></th>
 				<th width="120px"><?php echo $a_langpackage->a_refund_account;?></th>
 				<th width="40px"><?php echo $a_langpackage->a_refund_money;?></th>
 				<th width="60px"><?php echo $a_langpackage->a_memeber_name;?></th>

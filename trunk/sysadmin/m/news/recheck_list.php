@@ -10,6 +10,7 @@ $a_langpackage=new adminlp;
 $right=check_rights("news_show");
 $cat_id = intval(get_args('id'));
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 if ($cat_id){
 	if(!$right){
 		header('location:m.php?app=error');
@@ -27,8 +28,8 @@ $sql = "select * from `$t_article` where is_audit=1";
 if($cat_id) {
 	$sql .= " and cat_id='$cat_id' ";
 }
-if($orderby) {
-	$sql .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql .= " order by $orderby $orderway";
 }else {
     $sql .= " order by add_time desc";
 }
@@ -91,14 +92,14 @@ td span {color:red;}
 		<table class="list_table"  style="table-layout:fixed;">
         	<thead>
 			<tr style="text-align:center">
-				<th width="40px">ID <a href="m.php?app=news_recheck_list&orderby=article_id">↑</a></th>
-				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_recheck_list&orderby=title">↑</a></th>
-				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_recheck_list&orderby=cat_id">↑</a></th>
+				<th width="40px">ID <a href="m.php?app=news_recheck_list&orderby=article_id&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=article_id&orderway=desc">↓</a></th>
+				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_recheck_list&orderby=title&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=title&orderway=desc">↓</a></th>
+				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_recheck_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=cat_id&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
 				<th width="300px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>
 				<th width="189px"><?php echo $a_langpackage->a_add_time; ?></th>
-                                <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_recheck_list&orderby=short_order">↑</a></th>
+                                <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_recheck_list&orderby=short_order&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=short_order&orderway=desc">↓</a></th>
 				<th width="80px"><?php echo $a_langpackage->a_audit_operate; ?></th>
 			</tr>
 			</thead>

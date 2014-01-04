@@ -16,6 +16,8 @@ $t_order_info = $tablePreStr."order_info";
 $dbo=new dbex;
 //读写分离定义方法
 dbtarget('r',$dbServs);
-
+$sql = "select order_id from `$t_order_info` where payid='$payid'";
+$row = $dbo->getRow($sql);
+$order_id = $row['order_id'];
 
 ?>

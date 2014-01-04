@@ -10,6 +10,7 @@ $a_langpackage=new adminlp;
 
 //$cat_id = intval(get_args('id'));
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 //数据表定义区
 //$t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
@@ -22,8 +23,8 @@ $sql = "select * from `$t_article_cat` where 1 ";
 $result = $dbo->fetch_page($sql,13);
 /* 处理系统分类 */
 $sql_cat = "select * from `$t_article_cat`";
-if($orderby) {
-	$sql_cat .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql_cat .= " order by $orderby $orderway";
 } else {
     $sql_cat .= " order by cat_id asc,sort_order asc";
 }
@@ -65,10 +66,10 @@ td span {color:red;}
 		  <thead>
 			<tr style=" text-align:center">
 				<th width="30px"><input type="checkbox" onclick="checkall(this,'cat_id[]');" value='' /></th>
-				<th width="60px">ID <a href="m.php?app=news_catlist&orderby=cat_id">↑</a></th>
-				<th width="" align="left"><?php echo $a_langpackage->a_category_name; ?> <a href="m.php?app=news_catlist&orderby=cat_name">↑</a></th>
+				<th width="60px">ID <a href="m.php?app=news_catlist&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_catlist&orderby=cat_id&orderway=desc">↓</a></th>
+				<th width="" align="left"><?php echo $a_langpackage->a_category_name; ?> <a href="m.php?app=news_catlist&orderby=cat_name&orderway=asc">↑</a><a href="m.php?app=news_catlist&orderby=cat_name&orderway=desc">↓</a></th>
 				<th width="80px"><?php echo $a_langpackage->a_type; ?></th>
-				<th width="60px"><?php echo $a_langpackage->a_sort; ?> <a href="m.php?app=news_catlist&orderby=sort_order">↑</a></th>
+				<th width="60px"><?php echo $a_langpackage->a_sort; ?> <a href="m.php?app=news_catlist&orderby=sort_order&orderway=asc">↑</a><a href="m.php?app=news_catlist&orderby=sort_order&orderway=desc">↓</a></th>
 				<th width="60px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
