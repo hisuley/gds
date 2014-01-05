@@ -23,7 +23,6 @@
       <a href="#newest"><h2 class="active">最新资讯</h2></a>
       <a href="#travel"><h2>旅游资讯</h2></a>
       <a href="#media"><h2>媒体关注</h2></a>
-      <a href="#know"><h2>游资先知</h2></a>
     </div>
     <div class="content" id="newest">
       <div class="column-3">
@@ -53,9 +52,6 @@
     </div>
     <div class="content"  style="display:none;" id="media">
       test3
-    </div>
-    <div class="content"  style="display:none;" id="know">
-      test4
     </div>
   </div>
   <div class="column-3">
@@ -143,6 +139,24 @@
     <div class="content-common-box">
       <div class="title"><h2>桂林美食</h2><span><a href="news_list.php?id=15">更多&gt;&gt;</a></span></div>
       {sta: foreach($food_result['result'] as $v)[loop]}
+       {sta:if($v['thumb'] != '')[exc]}
+         <div class="item-box" style="margin-left:0px;">
+          <div class="images">
+            <a href="{echo: article_url($v['article_id']);/}"><img src="{echo:$v['thumb'];/}" /></a>
+          </div>
+          <div class="description">
+            <a href="{echo: article_url($v['article_id']);/}"><h3>{echo:sub_str($v['title'], 40);/}</h3></a>
+            <p class="intro">
+              {echo:sub_str(strip_tags($v['content']), 80);/}
+            </p>
+          </div>
+        </div>
+        {end:if/}
+        {end:foreach/}
+    </div>
+     <div class="content-common-box">
+      <div class="title"><h2>夜美桂林</h2><span><a href="news_list.php?id=19">更多&gt;&gt;</a></span></div>
+      {sta: foreach($night_result['result'] as $v)[loop]}
        {sta:if($v['thumb'] != '')[exc]}
          <div class="item-box" style="margin-left:0px;">
           <div class="images">
