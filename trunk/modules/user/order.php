@@ -32,6 +32,7 @@ require("foundation/module_users.php");
 require("foundation/module_areas.php");
 require("foundation/module_goods.php");
 require("foundation/module_payment.php");
+require("foundation/module_category.php");
 
 if(!get_sess_user_id()){
 	exit('请先<a href="login.php">登陆</a>！');
@@ -81,6 +82,7 @@ $t_payment = $tablePreStr."payment";
 $t_user_address = $tablePreStr."user_address";
 $t_cart = $tablePreStr."cart";
 $t_transport = $tablePreStr."transport";
+$t_category = $tablePreStr."category";
 
 $dbo=new dbex;
 //读写分离定义方法
@@ -141,6 +143,8 @@ foreach ($buy_goods as $k=>$v){
 	}
 }
 if(!$goods_info) { exit($m_langpackage->m_handle_err); }
+//是否是酒店或者景点分类下的商品, 酒店ID：433，景点ID：434
+$cid_arr = get_category_cid($dbo,$t_category,$goods_info[0]['cat_id']);$grogshop_flag=in_array(433,$cid_arr);$scenic_flag=in_array(434,$cid_arr);
 $shop_id=get_sess_shop_id();
 if($shop_id == $goods_info[0]['shop_id']) {
 	set_sess_err_msg($m_langpackage->m_dontbuy_youself);
@@ -203,6 +207,7 @@ $transport_type_str.="</select>";
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
 <script language="JavaScript" type="text/javascript" src="servtools/NewDialog/Dialog.js"></script>
 <link href="servtools/NewDialog/skin/default.css" rel="stylesheet" />
+<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
 <style type="text/css">
 th{background:#EFEFEF}
 td span{color:red;}
@@ -233,11 +238,10 @@ td span{color:red;}
 					<?php foreach($goods_info as $k=>$v){?>
 					<tr><td class="name" colspan="2"><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><?php echo  $v['goods_name'];?></a></td>
 					<td align="center"><?php echo  $v['goods_price'];?><?php echo  $m_langpackage->m_yuan;?></td>
-					<td align="center" ><?php echo  $buy_goods[$v['goods_id']];?></td>
+					<td align="center"><input type="text" value="<?php echo  $buy_goods[$v['goods_id']];?>" name="order_num[]" style="width:30px"></td>
 					<input type="hidden" value="<?php echo  $v['goods_id'];?>" name="goods_id[]" />
 					<input type="hidden" value="<?php echo  $v['goods_name'];?>" name="goods_name[]" />
 					<input type="hidden" value="<?php echo  $v['goods_price'];?>" name="goods_price[]" />
-					<input type="hidden" value="<?php echo  $buy_goods[$v['goods_id']];?>" name="order_num[]" />
 					<input type="hidden" value="<?php echo  $v['goods_price'] *$buy_goods[$v['goods_id']] ;?>" id="order_amount" name="order_amount[]" />
 					</tr>
 					<?php }?>
@@ -288,7 +292,34 @@ td span{color:red;}
 					<tr>
 						<th width="200" align="left">&nbsp;&nbsp;<?php echo  $m_langpackage->m_sure_postorder;?></th><th></th>
 					</tr>
-					<tr><td class="textright" valign="top"><?php echo  $m_langpackage->m_order_message;?>：</td><td><textarea name="message" style="width:280px;height:60px" id="textareac" onkeyup="this.value=this.value.slice(0,300);"></textarea></td></tr>
+                                        <?php if($grogshop_flag==true){?>
+                                        <tr><td class="textright"><?php echo  $m_langpackage->m_order_checkin_time;?>：</td>
+						<td><input class="column-10" type="text" id="departDateInput" name="checkinDate" onblur="inputTxt2(this,'set', '请选择入住日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择入住日期');compareDate();"  value="请选择入住日期" />
+                  <input class="column-10" type="text" id="arriveDateInput" name="checkoutDate" onblur="inputTxt2(this,'set', '请选择离店日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择离店日期');" value="请选择离店日期" />　<span>*</span></td></tr>
+                                        <tr><td class="textright"><?php echo  $m_langpackage->m_order_checkin_person;?>：</td>
+						<td><input type="text" name="checkin_person" />　<span>*</span></td></tr>
+                                        <tr><td class="textright"><?php echo  $m_langpackage->m_order_latest_toshop;?>：</td>
+                                            <td><select name="latest_toshop">
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="18:00" selected>18:00</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="22:00">22:00</option>
+                                                    <option value="23:59">23:59</option>
+                                                    <option value="次日2:00">次日2:00</option>
+                                                    <option value="次日6:00">次日6:00</option>
+                                                </select>　<span>*</span></td></tr>
+                                        <tr><td class="textright"><?php echo  $m_langpackage->m_contact;?>：</td>
+						<td><input type="text" name="contact_person" />　<span>*</span></td></tr>
+                                        <tr><td class="textright"><?php echo  $m_langpackage->m_request_mobile;?>：</td>
+						<td><input type="text" name="contact_mobile" />　<span>*</span></td></tr>
+                                        <?php }?>
+                                        <?php if($scenic_flag==true){?>
+                                        <tr><td class="textright"><?php echo  $m_langpackage->m_order_checkin_time;?>：</td>
+						<td><input class="column-10" type="text" id="departDateInput" name="travelDate" onblur="inputTxt2(this,'set', '请选择旅行日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择旅行日期');compareDate();"  value="请选择旅行日期" />　<span>*</span></td></tr>
+                                         <?php }?>
+                                         <tr><td class="textright" valign="top"><?php echo  $m_langpackage->m_order_message;?>：</td><td><textarea name="message" style="width:280px;height:60px" id="textareac" onkeyup="this.value=this.value.slice(0,300);"></textarea></td></tr>
 					<tr><td colspan="2" align="center">
 					<input type="hidden" name="to_user_name" value="<?php echo  $user_info['to_user_name'];?>" />
 					<input type="hidden" name="full_address" value="<?php echo  $user_info['full_address'];?>" />
@@ -315,7 +346,31 @@ td span{color:red;}
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
 <script language="JavaScript">
 <!--
+function inputTxt2(obj,act, initVal){
+    var str = initVal;
+    if(obj.value==''&&act=='set')
+    {
+    obj.value=str;
+    //obj.style.color="#cccccc"
+    }
+    if(obj.value==str&&act=='clean')
+    {
+    obj.value='';
+    //obj.style.color="#000000"
+    }
+}
+function compareDate(){
+    var departDate = document.getElementById('departDateInput').value;
+    var departDateArray = departDate.split("-");
 
+    var arriveDate = document.getElementById('arriveDateInput').value;
+    var arriveDateArray = arriveDate.split("-");
+    var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
+    var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
+    if(departDate > arriveDate){
+    document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
+    }
+}
 function areachanged(value,type){
 	if(value > 0) {
 		ajax("do.php?act=ajax_areas","POST","value="+value+"&type="+type,function(return_text){

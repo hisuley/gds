@@ -88,7 +88,7 @@ class adminlp{
 	var $a_m_dbs_recover = "数据库恢复";
 	var $a_m_admin_set = "管理员设置";
 	var $a_m_admingroup_set = "管理员组管理";
-        var $a_m_brand_attr_management = "品牌属性管理";
+        var $a_m_brand_attr_management = "景区属性管理";
 	var $a_super_admin ="超级管理员";
 	var $a_linke_category="关联分类";
 
@@ -113,7 +113,7 @@ class adminlp{
 	var $a_edit_lose_repeat = "修改失败，请重试！";
 	var $a_del_lose_repeat = "删除失败，请重试！";
 	var $a_class_null = "分类名称不能为空！";
-	var $a_brand_null = "商品品牌名称不能为空！";
+	var $a_brand_null = "商品景区名称不能为空！";
 	var $a_asdposition_null = "广告位名称不能为空！";
 	var $a_asdname_null = "广告名称不能为空！";
 	var $a_adminnamenot_null = "管理员名称不能为空！";
@@ -209,20 +209,20 @@ class adminlp{
 	var $a_input_price = "价格";
 	var $a_flink_list = "友情链接列表";
 	var $a_flink_add = "添加友情链接";
-	var $a_brand_list = "品牌列表";
-	var $a_brand_add = "添加品牌";
+	var $a_brand_list = "景区列表";
+	var $a_brand_add = "添加景区";
 	var $a_flink_edit = "修改友情连接";
-	var $a_brand_edit = "修改品牌";
-	var $a_brand_name = "品牌名称";
-	var $a_brand_desc = "品牌介绍";
-        var $a_brand_attr_list = "品牌属性列表";
-        var $a_plselect_brand = "请先选择品牌";
-        var $a_add_brand_need = "您还没有添加品牌";
+	var $a_brand_edit = "修改景区";
+	var $a_brand_name = "景区名称";
+	var $a_brand_desc = "景区介绍";
+        var $a_brand_attr_list = "景区属性列表";
+        var $a_plselect_brand = "请先选择景区";
+        var $a_add_brand_need = "您还没有添加景区";
 	var $a_flink_name = "链接名称";
 	var $a_flink_desc = "链接介绍";
 	var $a_flink_siteurl = "友情连接网址";
 	var $a_brand_siteurl = "链接网址";
-	var $a_brand = "品牌";
+	var $a_brand = "景区";
 	var $a_flink = "链接";
 	var $a_sure_delbrand = "确定要删除这条记录吗？";
 	var $a_brand_name_notnone = "名称不能为空！";
@@ -233,7 +233,7 @@ class adminlp{
         var $a_travel_type_management = "旅游线路类型管理";
         var $a_travel_days_management = "旅游线路天数管理";
         var $a_travel_price_management = "旅游线路价位管理";
-        var $a_hotel_brand_management = "酒店品牌管理";
+        var $a_hotel_brand_management = "酒店景区管理";
         var $a_hotel_stars_management = "酒店星级管理";
         var $a_hotel_facilities_management = "酒店设施管理";
         var $a_hotel_landmark_management = "酒店地标管理";
@@ -242,7 +242,7 @@ class adminlp{
         var $a_scenic_ticket_management = "景点门票管理";
         var $a_scenic_ticket_sales_management = "景点门票促销管理";
         var $a_travel_attr_goods = "查看关联商品";
-        var $a_travel_attr_brand = "查看关联品牌";
+        var $a_travel_attr_brand = "查看关联景区";
 
 	var $a_category_add = "添加分类";
 	var $a_category_edit = "修改分类";
@@ -250,7 +250,7 @@ class adminlp{
 	var $a_category_name = "分类名称";
 	var $a_category_sort = "分类排序";
         var $a_category_seo = "分类seo";
-	var $a_category_and_brand = "关联品牌";
+	var $a_category_and_brand = "关联景区";
 	var $a_goods_num = "产品数量";
 	var $a_show_sort = "显示排序";
 	var $a_attr_set = "设置属性";
@@ -422,7 +422,7 @@ class adminlp{
     var $a_homepage_changefreq ="首页更新频率";
     var $a_category_changefreq="分类更新频率";
     var $a_activity_changefreq="活动更新频率";
-    var $a_brand_changefreq="品牌更新频率";
+    var $a_brand_changefreq="景区更新频率";
     var $a_shop_changefreq="店铺更新频率";
     var $a_goods_changefreq="商品更新频率";
     var $a_button_reset="重置";
@@ -998,8 +998,8 @@ class adminlp{
     var $a_edit_adLocation="编辑广告位";
     var $a_modify_title="修改标题";
     var $a_conn_error="关联分类出错";
-    var $a_add_brand="新增品牌";
-    var $a_del_brand="删除品牌";
+    var $a_add_brand="新增景区";
+    var $a_del_brand="删除景区";
     var $a_del_category="删除分类";
     var $a_edit_category="编辑分类";
     var $a_del_flink="删除友情链接";
@@ -1079,7 +1079,7 @@ class adminlp{
     var $a_return_navigation="返回导航列表";
     var $a_navigation_name="导航名称";
     var $a_goods_category="商品分类";
-    var $a_brand_area="品牌专区";
+    var $a_brand_area="景区专区";
     var $a_store_category="文章分类";
     var $a_submit2="确定";
     var $a_link_name_prompt="请输入导航名称";

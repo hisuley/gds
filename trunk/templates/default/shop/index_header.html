@@ -1,3 +1,90 @@
+<div class="box_os">
+  <div class="os_x"></div>
+    <div class="osqq">
+    <p><em>(工作日：9:00-18:30)</em></p>
+      <p><strong>在线QQ</strong></p>
+        <a target="_blank" href="http://wpa.qq.com/msgrd@v=3&uin=1792347823&site=qq&menu=yes"><p id="ico_onlineqq" class="qq"></p></a>
+        <p><strong>客服电话</strong><span>0773-00000000</span><span>010-00000000</span></p>
+        <p><strong>会员卡代理</strong><span>0773-000000-0000</span></p>
+    </div>
+</div>
+<div class="onlineService">
+  <p class="ico_os"></p>
+    <a class="ico_gt" href="javascript:" target="_self" title=""></a>
+</div>
+<script type="text/javascript">
+var $j = jQuery.noConflict();
+$j(document).ready(function(){
+  $j('.onlineService .ico_os').click(function()
+  {   
+    $j('.onlineService').hide();
+    $j('.box_os').show();   
+  });
+  $j('.os_x').click(function()
+  {
+    $j('.box_os').hide();
+    $j('.onlineService').show();
+  });
+  $boxOsFun = function(){var st=$j(document).scrollTop();if (!window.XMLHttpRequest) {$j('.box_os').css('top',st+44);$j('.onlineService').css('top',st+44);}};
+  $j(window).bind('scroll', $boxOsFun);
+  $boxOsFun();
+  
+  $j('.acbox .ico_pp').hover(function(){
+    $j(this).stop().animate({height:'52px'},'fast');
+    },function(){
+    $j(this).stop().animate({height:'33px'},'fast');
+    }
+  );
+  $j('.acbox .ico_gt').hover(function(){
+    $j(this).stop().animate({height:'52px'},'fast');
+    },function(){
+    $j(this).stop().animate({height:'33px'},'fast');
+    }
+  );
+  
+  $j('.onlineService .ico_pp').hover(function(){
+    $j(this).stop().animate({width:'87px'},'fast');
+    },function(){
+    $j(this).stop().animate({width:'39px'},'fast');
+    }
+  );
+  $j('.onlineService .ico_gt').hover(function(){
+    $j(this).stop().animate({width:'97px'},'fast');
+    },function(){
+    $j(this).stop().animate({width:'39px'},'fast');
+    }
+  );
+  
+  $j('.ico_gt').click(function(){
+    $j("html, body").animate({scrollTop:0}, 1);
+  })
+  
+  
+  //分辨率
+  if ( $j(window).width()<1200 || screen.width<1200) 
+    { 
+      $j('.hydp950,.w_950,.sdmain,.main').css('overflow','hidden');
+    $j('.top_bg').css({'overflow':'hidden','width':'950px','margin':'0 auto'});
+    $j('.db_bg2').addClass('db_bg2_s');
+    $j('.jstd_c .bg_l,.jstd_c .bg_r').css('display','none');
+    $j('#js_play .prev').css('left','0');
+    $j('#js_play .next').css('right','0');
+    $j('#videoplay .prev, #videoplay2 .prev').addClass('prev_s');
+    $j('#videoplay .next, #videoplay2 .next').addClass('next_s');
+    }else{
+      $j('.hydp950,.w_950,.sdmain,.main').removeAttr('style');
+    $j('.top_bg').removeAttr('style');
+    $j('.db_bg2').removeClass('db_bg2_s');
+    $j('.jstd_c .bg_l,.jstd_c .bg_r').removeAttr('style');
+    $j('#js_play .prev').removeAttr('style');
+    $j('#js_play .next').removeAttr('style');
+    $j('#videoplay .prev, #videoplay2 .prev').removeClass('prev_s');
+    $j('#videoplay .next, #videoplay2 .next').removeClass('next_s');
+    }
+
+});
+</script>
+
 <!-- 头部菜单 -->
 <div id="header" class="clearfix">
     <div class="site_nav clearfix">
