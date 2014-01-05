@@ -157,16 +157,25 @@
     </div>
     <!-- rightColumn -->
     <div id="rightColumn">
-    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
-        <div class="title">
-          <h2>{echo:lp{i_hot_label};/}</h2>
-        </div>
-        <div class="tags">
-        	{sta:foreach($tag_list as $value)[loop]}
-        	<a href="{echo:$value['url'];/}" style="color:{echo:$value['tag_color'];/};{sta:if($value['is_blod'])[exc]}font-weight:bold;{end:if/}">{echo:$value['tag_name'];/}</a>
-        	{end:foreach/}
-		</div>
-      </div>
+
+    	{sta:if($cat_id == 434)[exc]}
+    	<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+	        <div class="title">
+	          <h2>微博</h2>
+	        </div>
+	        <a href="http://weibo.com"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_64x64.png" /></a>
+	    </div>
+	    {end:if/}
+    	<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+	        <div class="title">
+	          <h2>{echo:lp{i_hot_label};/}</h2>
+	        </div>
+	        <div class="tags">
+	        	{sta:foreach($tag_list as $value)[loop]}
+	        	<a href="{echo:$value['url'];/}" style="color:{echo:$value['tag_color'];/};{sta:if($value['is_blod'])[exc]}font-weight:bold;{end:if/}">{echo:$value['tag_name'];/}</a>
+	        	{end:foreach/}
+			</div>
+	    </div>
        <div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
         <div class="title">
           <h2>{echo:lp{i_goods_commend};/}</h2>
