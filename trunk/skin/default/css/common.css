@@ -776,3 +776,25 @@ p.tip{ color:#666; line-height: 20px; padding: 5px; margin: 0; text-indent: 3px;
 .onlineService .ico_pp{ background-position:right -60px; border:1px solid #81b140; cursor:pointer; width:39px; height:37px; float:right; margin:0 0 1px 0; clear:both;}
 .box_os .osqq p span a{color:#557917;}
 
+/* Article Related */
+.artRelated {
+padding-top: 15px;
+margin: 10px 15px;
+border-top: 1px solid #E4E4E4;
+line-height: 20px;
+}
+.artRelated h3 {
+font-size: 16px;
+margin-bottom: 10px;
+}
+.artRelated ul{
+	padding:10px;
+}
+.artRelated ul li {
+float: left;
+padding-right: 25px;
+padding-bottom: 10px;
+}
+.artRelated ul li a{
+	color:#FF8B22;
+}
