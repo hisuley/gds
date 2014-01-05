@@ -88,4 +88,40 @@ function del_address(&$dbo,$table,$address_id) {
 	$sql = "delete from `$table` where address_id=$address_id";
 	return $dbo->exeUpdate($sql);
 }
+
+//会员等级
+function insert_user_level(&$dbo,$table,$insert_items){
+    $item_sql = get_insert_item($insert_items);
+    $sql = "insert into `$table` $item_sql ";
+    $dbo->exeUpdate($sql);
+    return mysql_insert_id();
+}
+
+function get_userlevel_info(&$dbo,$table,$level_id) {
+    $sql="select * from `$table` where level_id='$level_id'";
+    return $dbo->getRow($sql);
+}
+
+function update_userlevel_info(&$dbo,$table,$update_items,$level_id) {
+	$item_sql = get_update_item($update_items);
+	$sql = "update `$table` set $item_sql where level_id='$level_id'";
+	return $dbo->exeUpdate($sql);
+}
+
+function check_level_name(&$dbo,$table,$level_name,$level_id=0){
+    $sql = "SELECT COUNT(*) FROM `$table` WHERE level_name ='$level_name'";
+    if($level_id){
+        $sql .= " and level_id <> $level_id";
+    }
+    return $dbo->getRow($sql);
+}
+
+function get_userlevel_list(&$dbo,$table) {
+	$sql = "select * from `$table` order by level_id asc";
+	$user_level = $dbo->getRs($sql);
+	foreach($user_level as $value) {
+		$user_level[$value['level_id']] = $value;
+	}
+	return $user_level;
+}
 ?>

@@ -29,7 +29,7 @@ Last Updated:2009/06/10 xian.zhang
 color:#F67A06;
 }
 .toolbar #window.selected, .toolbar #window:hover { background:url(../images/part/icon_nowin2.gif) no-repeat left center; text-decoration:none; }
-#leftColumn #listItems { margin-top:-7px; }
+/*#leftColumn #listItems { margin-top:-7px; }*/
 #leftColumn #listItems .list_title { padding:7px 0 7px; background-color:#FCF2E7; border-bottom:1px solid #F77A07; color:#666; }
 #leftColumn #listItems.window_type .list_title { display:none }
 #leftColumn #listItems .list_title li { float:left; text-align:center; color:#000; }

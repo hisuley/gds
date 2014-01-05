@@ -17,15 +17,17 @@ if (!$right){
 $right_update=check_rights("notification_policy_update");
 //数据表定义区
 $t_notification_policy = $tablePreStr."notification_policy";
+$t_shop_categories = $tablePreStr."shop_categories";
 
 $policy_title = get_args('policy_title');
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
 /* 查询政策通知列表 */
-$sql = "select * from `$t_notification_policy` where 1=1";
+$sql = "select a.*,b.cat_name from `$t_notification_policy` as a left join `$t_shop_categories` as b on a.shop_cat_id=b.cat_id where 1=1";
 
 if($policy_title) {
 	//权限管理
@@ -33,12 +35,12 @@ if($policy_title) {
 	if(!$right){
 		header('location:m.php?app=error');
 	}
-	$sql .= " and policy_title like '%$policy_title%' ";
+	$sql .= " and a.policy_title like '%$policy_title%' ";
 }
-if($orderby) {
-	$sql .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql .= " order by $orderby $orderway";
 }else {
-        $sql .= " order by sort_order";
+        $sql .= " order by a.sort_order";
 }
 $result = $dbo->getRs($sql);
 
@@ -94,9 +96,10 @@ td span {color:red;}
 		<table class="list_table" style='font-size:12px;'>
 			<thead>
 			<tr style=" text-align:center;">
-				<th width="50px"><a href="m.php?app=notification_policy_list&orderby=notification_id">ID</a></th>
+				<th width="50px">ID <a href="m.php?app=notification_policy_list&orderby=a.policy_id&orderway=asc">↑</a><a href="m.php?app=notification_policy_list&orderby=a.policy_id&orderway=desc">↓</a></th>
 				<th align="left"><?php echo $a_langpackage->a_notification_policy_name; ?></th>
-				<th width="65px"><a href="m.php?app=notification_policy_list&orderby=sort_order"><?php echo $a_langpackage->a_show_sort; ?></a></th>
+                                <th width="125px"><?php echo $a_langpackage->a_suppliers_categorys; ?></th>
+				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=notification_policy_list&orderby=a.sort_order&orderway=asc">↑</a><a href="m.php?app=notification_policy_list&orderby=a.sort_order&orderway=desc">↓</a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
@@ -106,6 +109,7 @@ td span {color:red;}
 			<tr style=" text-align:center;">
 				<td><?php echo $value['policy_id'];?>.</td>
 				<td align="left"><?php echo $value['policy_title'];?></td>
+                                <td><?php echo $value['cat_name'];?></td>
                                 <td><div onclick="editnum(this,<?php echo $value['policy_id'];?>,'divorder<?php echo $value['policy_id'];?>','a.php?act=updateAjax','tablename=notification_policy&colname=sort_order&idname=policy_id&idvalue=<?php echo $value['policy_id'];?>&logcontent=<?php echo $a_langpackage->a_edit_category; ?>：&colvalue=',2);"><?php echo $value['sort_order'];?></div>
 				    <div style="display:none"></div>
 				</td>

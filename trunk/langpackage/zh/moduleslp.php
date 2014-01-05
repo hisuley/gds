@@ -261,7 +261,9 @@ class moduleslp{
 	var $m_guestbook_content = "留言内容";
 	var $m_suredel_guestbook = "确定要删除这条留言吗？";
 	var $m_other_contact = "其它联系";
-
+        var $m_user_money = "现金账户余额";
+        var $m_user_integral = "总积分";
+        var $m_user_integral_surplus = "剩余积分";
 	/* askprice */
 	var $m_askprice_list = "询价信息列表";
 	var $m_name = "姓名";
@@ -896,5 +898,10 @@ class moduleslp{
 	var $m_iconv_receiv="收款单编号,订单号,支付单号,商铺名称,支付方式,支付日期,收款人,收款日期,收款账户,收款金额,操作者 \n";
 	var $m_iconv_shipping = "发货单编号,订单号,支付单号,商铺名称,物流方式,物流公司,快递单号,发货日期,收货人,收货地址,收货人电话,操作人 \n";
 	var $m_shop_yes = "该商铺已存在";
+        
+        var $m_travel_number_repeat = "旅游线路编号已存在!";
+        
+        var $m_account_add = "充值记录";
+        var $m_account_minus = "消费记录";
 }
 ?>

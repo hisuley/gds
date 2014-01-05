@@ -25,6 +25,7 @@ if($row['locked']==1){
 	trigger_error($m_langpackage->m_user_locked);//非法操作
 }
 $user_info = get_user_info($dbo,$t_user_info,$user_id);
+$user_detail = get_user_info($dbo,$t_users,$user_id);
 // 用户生日
 if($user_info['user_birthday']) {
 	$Y = substr($user_info['user_birthday'],0,4);

@@ -21,6 +21,7 @@ $t_img_size=$tablePreStr."img_size";
 $t_transport_template = $tablePreStr."goods_transport";
 $t_word= $tablePreStr."word";
 $t_category = $tablePreStr."category";
+$t_attribute = $tablePreStr."attribute";
 set_session("goodsvercode","");
 //数据库操作
 $dbo=new dbex();
@@ -66,8 +67,15 @@ if($row){
 $image_size_id=short_check(get_args("image_size_id"));
 
 /* 属性处理 */
-$post_attr = get_args('attr');
-
+$post_attr['attr_values'] = get_args('attr');
+$post_attr['price'] = get_args('price');
+$sql="select attr_id from `$t_attribute` where attr_name='编号'";
+$attr_id = $dbo->getRow($sql);
+$sql = "select count(*) from `$t_goods_attr` where attr_values='".$post_attr['attr_values'][$attr_id['attr_id']]."' and attr_id ='".$attr_id['attr_id']."'";
+$result = $dbo->getRow($sql);
+if($result['count(*)']){
+    action_return(0,$m_langpackage->m_travel_number_repeat,'-1');
+}
 /* 图片上传处理 */
 $cupload = new upload();
 $cupload->set_dir("uploadfiles/goods/","{y}/{m}/{d}");

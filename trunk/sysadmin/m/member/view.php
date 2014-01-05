@@ -23,7 +23,7 @@ $t_areas = $tablePreStr."areas";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql="select a.user_id,a.user_email,a.user_name,a.user_passwd,a.user_ico,a.reg_time,a.last_login_time,a.last_ip,a.rank_id,a.user_money,b.user_truename,b.user_gender,b.user_mobile,b.user_telphone,b.user_country,b.user_province,b.user_city,user_district,b.user_zipcode,b.user_address,b.user_birthday,b.user_qq,b.user_msn,b.user_skype
+$sql="select a.user_id,a.user_email,a.user_name,a.user_passwd,a.user_ico,a.reg_time,a.last_login_time,a.last_ip,a.rank_id,a.user_money,a.user_integral,a.user_integral_surplus,b.user_truename,b.user_gender,b.user_mobile,b.user_telphone,b.user_country,b.user_province,b.user_city,user_district,b.user_zipcode,b.user_address,b.user_birthday,b.user_qq,b.user_msn,b.user_skype,b.user_notes
 from `$t_users` a left join `$t_user_info` b on a.user_id=b.user_id where a.user_id='$user_id'";
 $user_info = $dbo->getRow($sql);
 //$user_info = get_user_info($dbo,$t_users,$user_id);
@@ -286,10 +286,14 @@ td span {color:red;}
                 <table class="list_table" style="float:left; width:32%; margin-right:2%">
 		  <tbody>
 			<tr>
-                            <td><a href="m.php?app=order_alllist&user_id=<?php echo $user_info['user_id'];?>"><?php echo $a_langpackage->a_memeber_orderinfo;?></a></td><td></td>
+                            <td colspan="2"><a href="m.php?app=order_alllist&user_id=<?php echo $user_info['user_id'];?>"><?php echo $a_langpackage->a_memeber_orderinfo;?></a></td><td></td>
 			</tr>
 			<tr>
-				<td><a href="m.php?app=order_account&user_id=<?php echo $user_info['user_id'];?>"><?php echo $a_langpackage->a_memeber_account;?></a></td><td></td>
+				<td colspan="2"><a href="m.php?app=order_account&user_id=<?php echo $user_info['user_id'];?>"><?php echo $a_langpackage->a_memeber_account;?></a></td><td></td>
+			</tr>
+                        <tr>
+				<td valign="top"><?php echo $a_langpackage->a_words_beizhu; ?>：</td>
+                                <td><textarea name="user_notes" cols="35" rows="5"><?php echo $user_info['user_notes']; ?></textarea></td>
 			</tr>
 		  </tbody>
 		</table>

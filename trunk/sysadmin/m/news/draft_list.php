@@ -24,7 +24,7 @@ $t_article_cat = $tablePreStr."article_cat";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select * from `$t_article` where is_audit=1";
+$sql = "select * from `$t_article` where is_draft=1";
 if($cat_id) {
 	$sql .= " and cat_id='$cat_id' ";
 }
@@ -59,11 +59,11 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_recheck_list; ?></a></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_draft_list; ?></a></div>
         <hr />
         <div class="seachbox">
         <div class="content2">
-        	<form action="m.php?app=news_recheck_list" name="searchForm" method="get">
+        	<form action="m.php?app=news_draft_list" name="searchForm" method="get">
             	<table class="form-table">
 	            	<tbody>
 	            	<tr>
@@ -77,7 +77,7 @@ td span {color:red;}
 								<?php } ?>
 							</select>
 	                   	</td>
-	                   	<td><input type="hidden" name="app" value="news_recheck_list"><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" /></td>
+	                   	<td><input type="hidden" name="app" value="news_draft_list"><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" /></td>
 	                </tr>
                 </tbody>
             </table>
@@ -85,22 +85,22 @@ td span {color:red;}
         </div>
     </div>
 	<div class="infobox">
-	<h3><span class="left"><?php echo $a_langpackage->a_news_recheck_list; ?></span></h3>
+	<h3><span class="left"><?php echo $a_langpackage->a_news_draft_list; ?></span></h3>
     <div class="content2">
 		<form action="a.php?act=news_del" name="form1" id="form1" method="post">
 		<input type="hidden" id="show_right" value="<?php echo $right;?>">
 		<table class="list_table"  style="table-layout:fixed;">
         	<thead>
 			<tr style="text-align:center">
-				<th width="40px">ID <a href="m.php?app=news_recheck_list&orderby=article_id&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=article_id&orderway=desc">↓</a></th>
-				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_recheck_list&orderby=title&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=title&orderway=desc">↓</a></th>
-				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_recheck_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=cat_id&orderway=desc">↓</a></th>
+				<th width="40px">ID <a href="m.php?app=news_draft_list&orderby=article_id&orderway=asc">↑</a><a href="m.php?app=news_draft_list&orderby=article_id&orderway=desc">↓</a></th>
+				<th align="left" width="200px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_draft_list&orderby=title&orderway=asc">↑</a><a href="m.php?app=news_draft_list&orderby=title&orderway=desc">↓</a></th>
+				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_draft_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_draft_list&orderby=cat_id&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
 				<th width="160px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>
 				<th width="189px"><?php echo $a_langpackage->a_add_time; ?></th>
-                                <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_recheck_list&orderby=short_order&orderway=asc">↑</a><a href="m.php?app=news_recheck_list&orderby=short_order&orderway=desc">↓</a></th>
-				<th width="80px"><?php echo $a_langpackage->a_audit_operate; ?></th>
+                                <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_draft_list&orderby=short_order&orderway=asc">↑</a><a href="m.php?app=news_draft_list&orderby=short_order&orderway=desc">↓</a></th>
+                                <th width="40px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -132,19 +132,18 @@ td span {color:red;}
 				<td><?php echo $value['add_time'];?></td>
                                 <td><div onclick="edit(this,<?php echo $value['article_id'];?>,'divlink<?php echo $value['article_id'];?>','a.php?act=updateAjax','tablename=article&colname=short_order&idname=article_id&idvalue=<?php echo $value['article_id'];?>&logcontent=修改新闻标题排序&colvalue=',5);"><?php echo $value['short_order'];?></div>
 				<div style="displya:none";></div></td>
-				<td>
-					<a href="a.php?act=news_audit&audit=4&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_audit_true; ?></a><br />
-					<a href="m.php?app=news_audit_false&audit=3&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_audit_false; ?></a>
+                                <td>
+                                    <a href="a.php?act=news_audit&audit=0&draft=0&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_draft_sub; ?></a><br />
 				</td>
 			</tr>
 			<?php }?>
 			<?php } else { ?>
 			<tr>
-				<td colspan="8" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
+				<td colspan="9" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
 			</tr>
 			<?php } ?>
 			<tr>
-				<td colspan="8" class="center"><?php include("m/page.php"); ?></td>
+				<td colspan="9" class="center"><?php include("m/page.php"); ?></td>
 			</tr>
            </tbody>
 		</table>

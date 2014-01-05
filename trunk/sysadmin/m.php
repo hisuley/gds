@@ -109,6 +109,9 @@ $appArray = array(
     'member_rank_add'	=> 'm/member/rank_add.php',
     'member_view'       => 'm/member/view.php',
     'member_points'     => 'm/member/points.php',
+    'member_level_list' => 'm/member/level.php',
+    'member_level_add'  => 'm/member/level_add.php',
+    'member_level_edit' => 'm/member/level_edit.php',
 
 	/* 商品相关 */
 	'goods_attr_manage'		=> 'm/goods/attr_manage.php',
@@ -121,6 +124,7 @@ $appArray = array(
 	'goods_category_list'	=> 'm/goods/category_list.php',
 	'goods_list'			=> 'm/goods/list.php',
     'goods_edit'			=> 'm/goods/edit.php',
+    'travel_number'      => 'm/goods/travel_number.php',
     'travel_theme'      => 'm/goods/travel_theme.php',
     'travel_type'      => 'm/goods/travel_type.php',
     'travel_days'           => 'm/goods/travel_days.php',
@@ -166,11 +170,13 @@ $appArray = array(
 	'news_catlist'		=> 'm/news/cat_list.php',
 	'news_attr_manage'		=> 'm/news/attr_manage.php',
 	'news_source_list'                   => 'm/news/source_list.php',
-	'news_source_add'               => '/m/news/source_add.php',
-	'news_source_edit'               => '/m/news/source_edit.php',
+	'news_source_add'               => 'm/news/source_add.php',
+	'news_source_edit'               => 'm/news/source_edit.php',
 	'news_first_list'  => 'm/news/first_list.php',
 	'news_recheck_list'      => 'm/news/recheck_list.php',
+    'news_draft_list'      => 'm/news/draft_list.php',
 	'news_audit_false'    => 'm/news/audit_false.php',
+    'news_nocheck_list'     => 'm/news/nocheck_list.php',
 
 	/* 插件 */
 	'plugin_list'		=> 'm/plugin/pluginlist.php',

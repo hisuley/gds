@@ -80,11 +80,12 @@ function update_goods_attr(&$dbo,$table,$array,$goods_id) {
 	}
 	$i = 0;
 	foreach($array as $key=>$value) {
-		if(is_array($value)) {
-			$value = implode("\n",$value);
+		if(is_array($value['attr_values'])) {
+			$value['attr_values'] = implode("\n",$value['attr_values']);
+                        $value['price'] = implode("\n",$value['price']);
 		}
-		$sql = "update `$table` set attr_values='$value' where goods_id='$goods_id' and attr_id='$key'";
-		//echo $sql;
+		$sql = "update `$table` set attr_values='".$value['attr_values']."',price='".$value['price']."' where goods_id='$goods_id' and attr_id='$key'";
+                //echo $sql;exit;
 		if($dbo->exeUpdate($sql)){
 			$i++;
 		}
@@ -97,15 +98,42 @@ function insert_goods_attr(&$dbo,$table,$array,$goods_id) {
 		return false;
 	}
 	$dot = '';
-	$sql = "insert into `$table` (goods_id,attr_id,attr_values) values";
-	foreach($array as $key=>$value) {
-		if($value) {
-			if(is_array($value)) {
-				$value = implode("\n",$value);
-				$sql .= $dot . " ('$goods_id','$key','$value')";
+	$sql = "insert into `$table` (goods_id,attr_id,attr_values,price) values";
+        
+        foreach($array['price'] as $key => $val){
+        if(is_array($array['price'][$key])){
+                foreach ($array['price'][$key] as $k => $v){
+                        $array['price'][$key][$k] = intval($v);
+                        for($i=count($array['attr_values'][$key]),$j=count($array['price'][$key]); $i<=$j; $i++){
+                            unset($array['price'][$key][$i]);
+                        }
+                }
+            }else{
+                $array['price'][$key] = intval($val);
+            }
+            if(!empty($array['attr_values'][$key])){
+                $tarray[$key]['attr_values'] = $array['attr_values'][$key];
+                $tarray[$key]['price'] = $array['price'][$key];
+
+                unset($array['attr_values'][$key]);
+                unset($array['price'][$key]); 
+            }
+        }
+        foreach($array['attr_values'] as $key => $val){
+            if(!is_array($array['attr_values'][$key]) && !empty($array['attr_values'][$key])){
+                $tarray[$key]['attr_values'] = $array['attr_values'][$key];
+                $tarray[$key]['price'] = $array['price'][$key];
+            }
+        }                
+	foreach($tarray as $key=>$value) {
+		if($value) {    
+			if(is_array($value['attr_values'])) {
+				$attr_values = implode("\n",$value['attr_values']);
+                                $price = implode("\n",$value['price']);
+				$sql .= $dot . " ('$goods_id','$key','$attr_values','$price')";
 				$dot = ',';
 			} else {
-				$sql .= $dot . " ('$goods_id','$key','$value')";
+				$sql .= $dot . " ('$goods_id','$key','".$value['attr_values']."','".$value['price']."')";
 				$dot = ',';
 			}
 		}

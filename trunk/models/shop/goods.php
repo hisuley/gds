@@ -113,14 +113,17 @@ $attr_ids = array();
 $attr_status = false;
 if($goods_attr) {
 	foreach($goods_attr as $key=>$value) {
-		$attr[$value['attr_id']] = $value['attr_values'];
+                $attr[$value['attr_id']]['attr_id'] = $value['attr_id'];
+                $attr[$value['attr_id']]['attr_values'] = $value['attr_values'];
+                $attr[$value['attr_id']]['price'] = $value['price'];
 		$attr_ids[] = $value['attr_id'];
 	}
-	$sql = "SELECT attr_id,attr_name FROM $t_attribute WHERE attr_id IN (".implode(',',$attr_ids).")";
+	$sql = "SELECT attr_id,attr_name,price FROM $t_attribute WHERE attr_id IN (".implode(',',$attr_ids).")";
 	$attribute_result = $dbo->getRs($sql);
 	$attribute = array();
 	foreach($attribute_result as $value) {
-		$attribute[$value['attr_id']] = $value['attr_name'];
+		$attribute[$value['attr_id']]['attr_values'] = $value['attr_name'];
+                $attribute[$value['attr_id']]['price'] = $value['price'];
 	}
 	$attr_status = true;
 }

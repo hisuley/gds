@@ -14,17 +14,24 @@ $start_time = get_args('start_time');
 $end_time = get_args('end_time');
 $user_status = get_args('user_status');
 $user_rank_id = get_args('user_rank_id');
+$user_level_id = get_args('user_level_id');
+$user_truename = short_check(get_args('user_truename'));
+$user_address = short_check(get_args('user_address'));
+$user_notes = short_check(get_args('user_notes'));
+$user_mobile = get_args('user_mobile');
 
 //数据表定义区
 $t_users = $tablePreStr."users";
 $t_user_rank = $tablePreStr."user_rank";
+$t_user_level = $tablePreStr."user_level";
 $t_shop_info = $tablePreStr."shop_info";
+$t_users_info = $tablePreStr."user_info";
 
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select c.shop_name,u.* from $t_users as u left join $t_shop_info as c on u.user_id=c.user_id   where 1";
+$sql = "select c.shop_name,u.* from $t_users as u left join $t_shop_info as c on u.user_id=c.user_id left join $t_users_info as b on u.user_id=b.user_id   where 1";
 //判断/添加用户名查询条件
 if($name) {
 	//权限管理
@@ -85,13 +92,63 @@ if($user_status!="" && $user_status!=2) {
 		$sql .= " and u.locked = $user_status ";
 	}
 }
-
+//判断/添加联系人查询条件
+if($user_truename) {
+	//权限管理
+	$right=check_rights("user_search");
+	if(!$right){
+		header('Location: m.php?app=error');
+	}else{
+		$sql .= " and b.user_truename like '%$user_truename%' ";
+	}
+}
+//判断/添加地址查询条件
+if($user_address) {
+	//权限管理
+	$right=check_rights("user_search");
+	if(!$right){
+		header('Location: m.php?app=error');
+	}else{
+		$sql .= " and b.user_address like '%$user_address%' ";
+	}
+}
+//判断/添加备注查询条件
+if($user_notes) {
+	//权限管理
+	$right=check_rights("user_search");
+	if(!$right){
+		header('Location: m.php?app=error');
+	}else{
+		$sql .= " and b.user_notes like '%$user_notes%' ";
+	}
+}
+//判断/添加手机号查询条件
+if($user_mobile) {
+	//权限管理
+	$right=check_rights("user_search");
+	if(!$right){
+		header('Location: m.php?app=error');
+	}else{
+		$sql .= " and b.user_mobile like '%$user_mobile%' ";
+	}
+}
+//判断/添加等级查询条件
+if($user_level_id) {
+	//权限管理
+	$right=check_rights("user_search");
+	if(!$right){
+		header('Location: m.php?app=error');
+	}else{
+		$sql .= " and u.level_id = $user_level_id ";
+	}
+}
 $sql .= " order by u.user_id desc";
 
 $result = $dbo->fetch_page($sql,13);
 //print_r($result['result']);
 $userrank ="";
 $userrank = get_userrank_list($dbo,$t_user_rank);
+$userlevel = get_userlevel_list($dbo,$t_user_level);
 
 $right_array=array(
 	"user_search"    =>   "0",
@@ -150,8 +207,23 @@ td span { color:red; }
 							<tr>
 								<td></td>
 								<td > 创建时间： <input class="Wdate" type="text" name="start_time" id="start_time" onFocus="WdatePicker({isShowClear:false,readOnly:true})" value="<?php echo $start_time;?>" /><?php echo $a_langpackage->a_to;?> <input class="Wdate" type="text" name="end_time" id="end_time" onFocus="WdatePicker({isShowClear:false,readOnly:true})"  value="<?php echo $end_time;?>"/> 
-									&nbsp;&nbsp;<input type="hidden" name="app" value="member_list" /> <input type="submit" class="regular-button" value="<?php echo $a_langpackage->a_serach; ?>" /></td>
+									</td>
 							</tr>
+                                                        <tr><td></td>
+                                                            <td>联系人： <input type="text" class="small-text" name="user_truename" value="<?php echo $user_truename; ?>" style="width:100px" />
+                                                            手机号： <input type="text" class="small-text" name="user_mobile" value="<?php echo $user_mobile; ?>" style="width:100px" />
+                                                            地  址： <input type="text" class="small-text" name="user_address" value="<?php echo $user_address; ?>" style="width:100px" />
+                                                            用户等级： <select name='user_level_id'>
+										<option value ="0">选择等级</option>
+										<?php
+							foreach($userlevel as $value) {?>
+										<option value ="<?php echo $value['level_id'];?>" <?php if($user_level_id==$value['level_id']) echo "selected"?>><?php echo $value['level_name'];?></option>
+										<?php } ?>
+									</select>
+                                                            备  注： <input type="text" class="small-text" name="user_notes" value="<?php echo $user_notes; ?>" style="width:100px" />
+                                                            &nbsp;&nbsp;<input type="hidden" name="app" value="member_list" /> <input type="submit" class="regular-button" value="<?php echo $a_langpackage->a_serach; ?>" />
+                                                            </td>
+                                                        </tr>
 						</tbody>
 					</table>
 				</form>

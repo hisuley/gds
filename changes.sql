@@ -95,3 +95,26 @@ CREATE TABLE `imall_notification_policy` (
   `sort_order` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`policy_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+/* 商品属性表更改价格类型 */
+ALTER TABLE `gds`.`imall_goods_attr` CHANGE `price` `price` TEXT NULL;
+/* 文章分类表增加SEO字段 */
+ALTER TABLE `gds`.`imall_article_cat` ADD COLUMN `seo` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '分类搜索引擎优化' AFTER `cat_icon`; 
+/* 文章表增加草稿字段 */
+ALTER TABLE `gds`.`imall_article` ADD COLUMN `is_draft` TINYINT(1) DEFAULT 1 NOT NULL COMMENT '1是草稿,0不是草稿' AFTER `audit_note`; 
+/* 用户详情表增加备注字段 */
+ALTER TABLE `gds`.`imall_user_info` ADD COLUMN `user_notes` TEXT NULL COMMENT '备注' AFTER `user_skype`; 
+/* 会员等级表 */
+CREATE TABLE `imall_user_level` (
+  `level_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员等级ID',
+  `level_name` varchar(200) NOT NULL COMMENT '名称',
+  `level_created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `pointBegin` int(9) NOT NULL COMMENT '开始积分',
+  `pointEnd` int(9) NOT NULL COMMENT '结束积分',
+  `price_img` varchar(255) NOT NULL DEFAULT '' COMMENT '价格图片',
+  `head_img` varchar(255) NOT NULL DEFAULT '' COMMENT '头像图片',
+  PRIMARY KEY (`level_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+/* 会员表增加等级ID字段 */
+ALTER TABLE `gds`.`imall_users` ADD COLUMN `level_id` INT(10) DEFAULT 1 NOT NULL COMMENT '用户等级' AFTER `rank_id`; 
+/* 政策通知增加供应商分类字段 */
+ALTER TABLE `gds`.`imall_notification_policy` ADD COLUMN `shop_cat_id` INT(10) NOT NULL COMMENT '供应商分类ID' AFTER `sort_order`; 

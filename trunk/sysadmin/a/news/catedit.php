@@ -18,6 +18,7 @@ $post['cat_name'] = short_check(get_args('cat_name'));
 $post['parent_id'] = intval(get_args('parent_id'));
 $post['sort_order'] = intval(get_args('sort_order'));
 $post['cat_icon'] = short_check(get_args('cat_icon'));
+$post['seo'] = short_check(get_args('seo'));
 $cat_id = intval(get_args('cat_id'));
 
 if(empty($cat_id)) {
@@ -33,7 +34,7 @@ $t_admin_log = $tablePreStr."admin_log";
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
-$count = check_cat_name($dbo,$t_article_cat,$post['cat_name']);
+$count = check_cat_name($dbo,$t_article_cat,$post['cat_name'],$cat_id);
 if($count[0]) {
 	action_return(0,$a_langpackage->a_news_category_repeat,'-1');
 	exit;

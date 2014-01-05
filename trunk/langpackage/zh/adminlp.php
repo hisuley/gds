@@ -228,6 +228,7 @@ class adminlp{
 	var $a_brand_name_notnone = "名称不能为空！";
 	var $a_brand_site_url_error = "网站格式不正确！";
         
+        var $a_travel_number_management = "旅游线路编号管理";
         var $a_travel_theme_management = "旅游线路主题管理";
         var $a_travel_type_management = "旅游线路类型管理";
         var $a_travel_days_management = "旅游线路天数管理";
@@ -248,6 +249,7 @@ class adminlp{
 	var $a_category_list = "商品分类列表";
 	var $a_category_name = "分类名称";
 	var $a_category_sort = "分类排序";
+        var $a_category_seo = "分类seo";
 	var $a_category_and_brand = "关联品牌";
 	var $a_goods_num = "产品数量";
 	var $a_show_sort = "显示排序";
@@ -267,8 +269,13 @@ class adminlp{
 	var $a_batch_unlock = "批量解锁";
 
 	var $a_news_list = "新闻列表";
+        var $a_news_draft_list = "草稿新闻列表";
+        var $a_news_draft_save = "保存为草稿";
+        var $a_news_draft_sub = "提交初审";
+        var $a_news_draft_subs = "已提交初审";
         var $a_news_first_list = "初审新闻列表";
         var $a_news_recheck_list = "复审新闻列表";
+        var $a_news_nocheck_list = "未通过审核新闻列表";
         var $a_news_audit_true = "审核通过";
         var $a_news_audit_false = "审核不通过";
         var $a_news_first_audit_true = "初审新闻通过";
@@ -276,6 +283,7 @@ class adminlp{
         var $a_news_first_audit_false = "初审新闻不通过";
         var $a_news_recheck_audit_false = "复审新闻不通过";
         var $a_news_audit_note = "提交审核不通过备注";
+        var $a_news_retraction_log = "新闻撤稿";
 	var $a_news_add = "添加新闻";
 	var $a_news_edit = "新闻修改";
         var $a_news_attr_management = "新闻属性管理";
@@ -306,6 +314,8 @@ class adminlp{
 	var $a_use_news_links = "使用外链";
 	var $a_news_links_url = "链接地址";
 	var $a_news_isshow = "是否显示";
+        var $a_news_retraction = "撤稿";
+        var $a_news_retraction_suss = "撤稿成功";
 	var $a_show = "显示";
 	var $a_news_title_notnone = "标题不能为空！";
 	var $a_plsselectcategory = "请选择分类！";
@@ -442,12 +452,24 @@ class adminlp{
         var $a_memeber_birthday = "出生日期";
         var $a_memeber_integral = "总积分";
         var $a_memeber_integral_surplus = "剩余可用积分";
+        var $a_memeber_nonote = "备注不能为空!";
         var $a_memeber_money = "余额";
         var $a_memeber_address = "详细地址";
         var $a_memeber_zipcode = "邮政编码";
         var $a_memeber_orderinfo = "筛选该用户订单";
         var $a_memeber_account = "筛选该会员现金账户充值记录";
         var $a_memeber_ico = "用户头像";
+        /* memeber level */
+        var $a_m_user_level_list = "会员等级列表";
+        var $a_user_level_add = "添加会员等级";
+        var $a_user_level_edit = "修改会员等级";
+        var $a_user_level_new = "新增会员等级";
+        var $a_user_level_del = "删除会员等级";
+        var $a_user_level_name = "会员等级名称";
+        var $a_user_level_name_repeat = "会员等级名称已存在!";
+        var $a_user_level_points = "积分范围";
+        var $a_user_price_img = "价格图片";
+        var $a_user_head_img = "头像图片";
 	/* memeber reinfo*/
 	var $a_memeber_info_update = "会员基本信息修改";
 	var $a_normal = "正常";
@@ -558,6 +580,7 @@ class adminlp{
 	var $a_import_file_error="数据导入失败!";
 	var $a_export_file_error="数据导出失败!";
         var $a_goods_attr_repeat = "属性名称已存在!";
+        var $a_goods_attr_none = "请先在属性管理中的分类下添加此属性!";
 	/*shop request*/
 	var $a_status = "状态";
 	var $a_show_all = "全部显示";

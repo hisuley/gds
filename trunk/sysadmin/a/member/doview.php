@@ -45,6 +45,7 @@ $post['user_country'] = intval(get_args('country'));
 $post['user_province'] = intval(get_args('province'));
 $post['user_city'] = intval(get_args('city'));
 $post['user_district'] = intval(get_args('district'));
+$post['user_notes'] = short_check(get_args('user_notes'));
 
 $post2['email_check'] = intval(get_args('email_check'));
 $post2['locked'] = intval(get_args('locked_status'));
@@ -94,7 +95,7 @@ if($rs){
                         'amount' => -($rs['user_money'] - $post2['user_money']),
                         'add_time' => $nowtime,
                         'paid_time' => $nowtime,
-                        'admin_note' => '',
+                        'admin_note' => $post['user_notes'],
                         'user_note' => '',
                         'process_type' => 2,
                         'payment' => '',
@@ -109,7 +110,7 @@ if($rs){
                         'amount' => -($rs['user_money'] - $post2['user_money']),
                         'add_time' => $nowtime,
                         'paid_time' => $nowtime,
-                        'admin_note' => '',
+                        'admin_note' => $post['user_notes'],
                         'user_note' => '',
                         'process_type' => 0,
                         'payment' => '',
@@ -118,10 +119,21 @@ if($rs){
                 insert_account_info($dbo,$t_user_account,$array);
             }
         }
+        //修改用户积分时提醒备注
+        if($post2['user_integral']){
+            if($rs['user_integral'] != $post2['user_integral'] && empty($post['user_notes'])){
+                action_return(0,$a_langpackage->a_memeber_nonote,'-1');
+            }
+        }
+        if($post2['user_integral_surplus']){
+            if($rs['user_integral_surplus'] != $post2['user_integral_surplus'] && empty($post['user_notes'])){
+                action_return(0,$a_langpackage->a_memeber_nonote,'-1');
+            }
+        }
 }
 
 if(update_user_info($dbo,$t_users,$post2,$user_id) && update_user_info($dbo,$t_user_info,$post,$user_id)) {
-	admin_log($dbo,$t_admin_log,$sn = $a_langpackage->a_modify_user_info);//'修改用户信息');
+	admin_log($dbo,$t_admin_log,$sn = $a_langpackage->a_modify_user_info.":".$user_id);//'修改用户信息');
 	action_return(1,$a_langpackage->a_amend_suc,'m.php?app=member_view&id='.$user_id);
 } else {
 	action_return(0,$a_langpackage->a_amend_lose,'-1');

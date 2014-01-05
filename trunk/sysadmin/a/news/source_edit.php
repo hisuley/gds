@@ -31,7 +31,7 @@ dbtarget('w',$dbServs);
 $dbo=new dbex;
 
 /* 检测来源名称唯一 */
-$count = check_source_name($dbo,$t_article_source,$post['name']); 
+$count = check_source_name($dbo,$t_article_source,$post['name'],$source_id); 
 if($count[0]) {
 	action_return(0,$a_langpackage->a_news_source_repeat,'-1');
 	exit;

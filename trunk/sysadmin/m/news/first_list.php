@@ -9,6 +9,8 @@ $a_langpackage=new adminlp;
 //权限管理
 $right=check_rights("news_show");
 $cat_id = intval(get_args('id'));
+$orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 if ($cat_id){
 	if(!$right){
 		header('location:m.php?app=error');
@@ -26,7 +28,11 @@ $sql = "select * from `$t_article` where is_audit=0";
 if($cat_id) {
 	$sql .= " and cat_id='$cat_id' ";
 }
-$sql .= " order by add_time desc";
+if($orderby && $orderway) {
+	$sql .= " order by $orderby $orderway";
+}else {
+    $sql .= " order by add_time desc";
+}
 $result = $dbo->fetch_page($sql,13);
 $cat_info = get_news_cat_list($dbo,$t_article_cat);
 //新闻分类
@@ -42,6 +48,7 @@ $cat_dg = get_dg_category($cat_list);
 <link rel="stylesheet" type="text/css" href="skin/css/admin.css">
 <link rel="stylesheet" type="text/css" href="skin/css/main.css">
 <script type='text/javascript' src="skin/js/jy.js"></script>
+<?php  include("a/updateJsAjax.php");?>
 <style>
 td span {color:red;}
 .green {color:green;}
@@ -52,7 +59,7 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_first_list; ?></a></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_first_list; ?></a></div>
         <hr />
         <div class="seachbox">
         <div class="content2">
@@ -85,13 +92,14 @@ td span {color:red;}
 		<table class="list_table"  style="table-layout:fixed;">
         	<thead>
 			<tr style="text-align:center">
-				<th width="40px">ID</th>
-				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?></th>
-				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?></th>
+				<th width="40px">ID <a href="m.php?app=news_first_list&orderby=article_id&orderway=asc">↑</a><a href="m.php?app=news_first_list&orderby=article_id&orderway=desc">↓</a></th>
+				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_first_list&orderby=title&orderway=asc">↑</a><a href="m.php?app=news_first_list&orderby=title&orderway=desc">↓</a></th>
+				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_first_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_first_list&orderby=cat_id&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
-				<th width="300px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
+				<th width="160px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>
 				<th width="189px"><?php echo $a_langpackage->a_add_time; ?></th>
+                                <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_first_list&orderby=short_order&orderway=asc">↑</a><a href="m.php?app=news_first_list&orderby=short_order&orderway=desc">↓</a></th>
 				<th width="80px"><?php echo $a_langpackage->a_audit_operate; ?></th>
 			</tr>
 			</thead>
@@ -122,6 +130,8 @@ td span {color:red;}
 					<?php } ?>
 				</td>
 				<td><?php echo $value['add_time'];?></td>
+                                <td><div onclick="edit(this,<?php echo $value['article_id'];?>,'divlink<?php echo $value['article_id'];?>','a.php?act=updateAjax','tablename=article&colname=short_order&idname=article_id&idvalue=<?php echo $value['article_id'];?>&logcontent=修改新闻标题排序&colvalue=',5);"><?php echo $value['short_order'];?></div>
+				<div style="displya:none";></div></td>
 				<td>
 					<a href="a.php?act=news_audit&audit=1&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_audit_true; ?></a><br />
 					<a href="m.php?app=news_audit_false&audit=2&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_audit_false; ?></a>

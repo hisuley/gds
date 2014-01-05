@@ -10,6 +10,7 @@ $a_langpackage=new adminlp;
 
 //$cat_id = intval(get_args('id'));
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 //数据表定义区
 //$t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
@@ -22,8 +23,8 @@ $sql = "select * from `$t_article_cat` where 1 ";
 $result = $dbo->fetch_page($sql,13);
 /* 处理系统分类 */
 $sql_cat = "select * from `$t_article_cat`";
-if($orderby) {
-	$sql_cat .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql_cat .= " order by $orderby $orderway";
 } else {
     $sql_cat .= " order by cat_id asc,sort_order asc";
 }
@@ -42,6 +43,7 @@ require ("a/updateJsAjax.php");
 <link rel="stylesheet" type="text/css" href="skin/css/admin.css">
 <link rel="stylesheet" type="text/css" href="skin/css/main.css">
 <script type='text/javascript' src="skin/js/jy.js"></script>
+<?php  include("a/updateJsAjax.php");?>
 <style>
 td span {color:red;}
 .green {color:green;}
@@ -53,7 +55,7 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <?php echo $a_langpackage->a_news_category; ?></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <?php echo $a_langpackage->a_news_category; ?></div>
         <hr />
 	<div class="infobox">
 	<h3><span class="left"><?php echo $a_langpackage->a_news_category; ?></span> <span class="right" style="margin-right:15px;"><a href="m.php?app=news_catadd"><?php echo $a_langpackage->a_category_add; ?></a></span></h3>
@@ -64,10 +66,10 @@ td span {color:red;}
 		  <thead>
 			<tr style=" text-align:center">
 				<th width="30px"><input type="checkbox" onclick="checkall(this,'cat_id[]');" value='' /></th>
-				<th width="30px"><a href="m.php?app=news_catlist&orderby=cat_id">ID</a></th>
-				<th width="" align="left"><a href="m.php?app=news_catlist&orderby=cat_name"><?php echo $a_langpackage->a_category_name; ?></a></th>
+				<th width="60px">ID <a href="m.php?app=news_catlist&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_catlist&orderby=cat_id&orderway=desc">↓</a></th>
+				<th width="" align="left"><?php echo $a_langpackage->a_category_name; ?> <a href="m.php?app=news_catlist&orderby=cat_name&orderway=asc">↑</a><a href="m.php?app=news_catlist&orderby=cat_name&orderway=desc">↓</a></th>
 				<th width="80px"><?php echo $a_langpackage->a_type; ?></th>
-				<th width="60px"><a href="m.php?app=news_catlist&orderby=sort_order"><?php echo $a_langpackage->a_sort; ?></a></th>
+				<th width="60px"><?php echo $a_langpackage->a_sort; ?> <a href="m.php?app=news_catlist&orderby=sort_order&orderway=asc">↑</a><a href="m.php?app=news_catlist&orderby=sort_order&orderway=desc">↓</a></th>
 				<th width="60px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
@@ -85,7 +87,8 @@ td span {color:red;}
 				</div>
                                  </td>
 				<td width="80px"><?php if($value['parent_id']==-1){echo $a_langpackage->a_sys_type;}else{echo $a_langpackage->a_cus_type;}?></td>
-				<td width="60px"><?php echo $value['sort_order'];?></td>
+				<td width="60px"><div onclick="edit(this,<?php echo $value['cat_id'];?>,'divlink<?php echo $value['cat_id'];?>','a.php?act=updateAjax','tablename=article_cat&colname=sort_order&idname=cat_id&idvalue=<?php echo $value['cat_id'];?>&logcontent=修改新闻分类排序&colvalue=',5);"><?php echo $value['sort_order'];?></div>
+				<div style="displya:none";></div></td>
 				<td width="60px">
 					<a href="m.php?app=news_catedit&id=<?php echo $value['cat_id'];?>"><?php echo $a_langpackage->a_update; ?></a>
 					<?php if($value['parent_id']!=-1){?>

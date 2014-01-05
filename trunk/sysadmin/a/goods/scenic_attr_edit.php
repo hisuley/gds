@@ -22,7 +22,7 @@ $post['price'] = get_args('price');
 $brand_id = intval(get_args('brand_id'));
 $index = intval(get_args('index'));
 $attr_name = short_check(get_args('attr_values'));
-if(!$brand_id) {exit("-1");}
+if(!$brand_id) {exit("-4");}
 
 if(empty($attr_name)) { exit("-1"); }
 

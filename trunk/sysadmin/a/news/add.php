@@ -55,7 +55,12 @@ $file = $cupload->execute();
 			}
 		}		
 }
-
+$submit = get_args('submit');
+if($submit == $a_langpackage->a_news_draft_save){
+    $post['is_draft'] = 1;
+}elseif ($submit == $a_langpackage->a_news_add) {
+   $post['is_draft'] = 0;
+}
 /* 属性处理 */
 $post_attr = get_args('attr');
 

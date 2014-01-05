@@ -10,6 +10,7 @@ $a_langpackage=new adminlp;
 $right=check_rights("news_show");
 $cat_id = intval(get_args('id'));
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 $title = short_check(get_args('title'));
 if ($cat_id){
 	if(!$right){
@@ -24,15 +25,15 @@ $t_article_cat = $tablePreStr."article_cat";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select * from `$t_article` where 1=1";
+$sql = "select * from `$t_article` where is_audit=4";
 if($cat_id) {
 	$sql .= " and cat_id='$cat_id' ";
 }
 if($title) {
 	$sql .= " and title like '%$title%' ";
 }
-if($orderby) {
-	$sql .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql .= " order by $orderby $orderway";
 }else {
     $sql .= " order by add_time desc";
 }
@@ -51,6 +52,7 @@ $cat_dg = get_dg_category($cat_list);
 <link rel="stylesheet" type="text/css" href="skin/css/admin.css">
 <link rel="stylesheet" type="text/css" href="skin/css/main.css">
 <script type='text/javascript' src="skin/js/jy.js"></script>
+<?php  include("a/updateJsAjax.php");?>
 <style>
 td span {color:red;}
 .green {color:green;}
@@ -61,7 +63,7 @@ td span {color:red;}
 <div id="maincontent">
 <?php  include("messagebox.php");?>
 	<div class="wrap">
-	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_promotion_manage;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_list; ?></a></div>
+	<div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_content;?> &gt;&gt; <a href=""><?php echo $a_langpackage->a_news_list; ?></a></div>
         <hr />
     <div class="seachbox">
         <div class="content2">
@@ -96,13 +98,14 @@ td span {color:red;}
         	<thead>
 			<tr style="text-align:center">
 				<th width="20px"><input type="checkbox" onclick="checkall(this,'article_id[]');" value='' /></th>
-				<th width="40px"><a href="m.php?app=news_list&orderby=article_id">ID</a></th>
-				<th align="left" width="150px"><a href="m.php?app=news_list&orderby=title"><?php echo $a_langpackage->a_news_title; ?></a></th>
-				<th align="left" width="110px"><a href="m.php?app=news_list&orderby=cat_id"><?php echo $a_langpackage->a_news_category; ?></a></th>
+				<th width="40px">ID <a href="m.php?app=news_list&orderby=article_id&orderway=asc">↑</a><a href="m.php?app=news_list&orderby=article_id&orderway=desc">↓</a></th>
+				<th align="left" width="150px"><?php echo $a_langpackage->a_news_title; ?> <a href="m.php?app=news_list&orderby=title&orderway=asc">↑</a><a href="m.php?app=news_list&orderby=title&orderway=desc">↓</a></th>
+				<th align="left" width="110px"><?php echo $a_langpackage->a_news_category; ?> <a href="m.php?app=news_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=news_list&orderby=cat_id&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_news_alinks; ?></th>
-				<th width="300px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
+				<th width="250px" align="left"><?php echo $a_langpackage->a_news_links_url; ?></th>
 				<th width="36px"><?php echo $a_langpackage->a_show; ?></th>
 				<th width="189px"><?php echo $a_langpackage->a_add_time; ?></th>
+                                <th width="60px"><?php echo $a_langpackage->a_title_desc; ?> <a href="m.php?app=news_list&orderby=short_order&orderway=asc">↑</a><a href="m.php?app=news_list&orderby=short_order&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
@@ -134,24 +137,27 @@ td span {color:red;}
 					<?php } ?>
 				</td>
 				<td><?php echo $value['add_time'];?></td>
+                                <td><div onclick="edit(this,<?php echo $value['article_id'];?>,'divlink<?php echo $value['article_id'];?>','a.php?act=updateAjax','tablename=article&colname=short_order&idname=article_id&idvalue=<?php echo $value['article_id'];?>&logcontent=修改新闻标题排序&colvalue=',5);"><?php echo $value['short_order'];?></div>
+				<div style="displya:none";></div></td>
 				<td>
 					<a href="m.php?app=news_edit&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_update; ?></a><br />
-					<a href="a.php?act=news_del&id=<?php echo $value['article_id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_message_del; ?>');"><?php echo $a_langpackage->a_delete; ?></a>
+					<a href="a.php?act=news_del&id=<?php echo $value['article_id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_message_del; ?>');"><?php echo $a_langpackage->a_delete; ?></a><br />
+                                        <a href="a.php?act=news_audit&audit=5&draft=1&id=<?php echo $value['article_id'];?>"><?php echo $a_langpackage->a_news_retraction; ?></a>
 				</td>
 			</tr>
 			<?php }?>
 			<tr>
-				<td colspan="9">
+				<td colspan="10">
 					<span class="button-container"><input class="regular-button" type="submit" name=""  onclick="return delcheck();" value="<?php echo $a_langpackage->a_batch_del; ?>" /></span>
 				</td>
 			</tr>
 			<?php } else { ?>
 			<tr>
-				<td colspan="9" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
+				<td colspan="10" class="center"><?php echo $a_langpackage->a_nonews_list; ?>!</td>
 			</tr>
 			<?php } ?>
 			<tr>
-				<td colspan="9" class="center"><?php include("m/page.php"); ?></td>
+				<td colspan="10" class="center"><?php include("m/page.php"); ?></td>
 			</tr>
            </tbody>
 		</table>

@@ -23,7 +23,7 @@ $result = $dbo->getRs($sql);
 
 $rss = new RSS();
 foreach($result as $row){
-    $rss->AddItem($row['goods_name'],$baseUrl.'/goods.php?id='.$row['goods_id'],$row['goods_intro'],$row['add_time']);
+    $rss->AddItem($row['goods_name'],$baseUrl.'/goods.php?id='.$row['goods_id'],htmlspecialchars($row['goods_intro']),$row['add_time']);
 }
 
 $title = $i_langpackage->i_index." - ".$SYSINFO['sys_title'];

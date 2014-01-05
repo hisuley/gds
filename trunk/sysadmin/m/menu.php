@@ -22,6 +22,7 @@ $right_array=array(
     'tag_eidt'=>'0',
     'tag_del'=>'0',
     "user_browse"    =>   "0",
+    "user_level"     =>     "0",
     "user_rank_browse"    =>   "0",
     "member_points"     => "0",
     "add_user_rank_browse"    =>   "0",
@@ -50,6 +51,7 @@ $right_array=array(
     "brand_attr_manager" => "0",
     "attr_manager"    =>   "0",
     "groupbuy_list"    =>   "0",
+    "travel_number"     =>  "0",
     "travel_theme"        =>  "0",
     "travel_type"       =>  "0",
     "travel_days"       =>  "0",
@@ -169,6 +171,8 @@ $right_array=array(
     "news_source_list"  =>  "0",
     "news_first_list"   =>  "0",
     "news_recheck_list" =>  "0",
+    "news_draft_list" =>  "0",
+    "news_nocheck_list"  => "0",
 
     "template_mana"    =>   "0",
 
@@ -330,7 +334,10 @@ $plugin=$dbo->getRs($sql);
 	        	<li id="separator" class="separator"></li>
 			<?php if($right_array["user_browse"]){?>
 				<li id="user_browse" class="active" onclick="changeMenu(this);"><a href="m.php?app=member_list" target="main-frame"><?php echo $a_langpackage->a_memeber_list; ?></a></li>
-			<?php }?>
+            <?php }?>
+            <?php if($right_array["user_level"]){?>
+				<li id="user_level" class="" onclick="changeMenu(this);"><a href="m.php?app=member_level_list" target="main-frame"><?php echo $a_langpackage->a_m_user_level_list; ?></a></li>
+            <?php }?>
 			<?php if($right_array["user_rank_browse"]){?>
 				<li id="user_rank_browse" class="" onclick="changeMenu(this);"><a href="m.php?app=member_rank" target="main-frame"><?php echo $a_langpackage->a_m_member_level_set; ?></a></li>
             <?php }?>
@@ -409,6 +416,9 @@ $plugin=$dbo->getRs($sql);
 			<?php if($right_array["tag_list"]){?>
 					<li id="tag_list" class="" onclick="changeMenu(this);"><a href="m.php?app=tag_list" target="main-frame"><?php echo $a_langpackage->a_tags_manage; ?></a></li><!-- 标签集管理 -->
             <?php }?>
+            <?php if($right_array["travel_number"]){?>
+            <li id="travel_number" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_number" target="main-frame"><?php echo $a_langpackage->a_travel_number_management; ?></a></li><!-- 旅游线路编号管理 -->
+            <?php }?>
             <?php if($right_array["travel_theme"]){?>
             <li id="travel_theme" class="" onclick="changeMenu(this);"><a href="m.php?app=travel_theme" target="main-frame"><?php echo $a_langpackage->a_travel_theme_management; ?></a></li><!-- 旅游线路主题管理 -->
             <?php }?>
@@ -485,12 +495,18 @@ $plugin=$dbo->getRs($sql);
 			<?php if($right_array["news_list"]){?>
 				<li id="news_list" class="active" onclick="changeMenu(this);"><a href="m.php?app=news_list" target="main-frame"><?php echo $a_langpackage->a_news_list; ?></a></li>
             <?php }?>
+            <?php if($right_array["news_draft_list"]){?>
+				<li id="news_draft_list" class="" onclick="changeMenu(this);"><a href="m.php?app=news_draft_list" target="main-frame"><?php echo $a_langpackage->a_news_draft_list; ?></a></li>
+            <?php }?>
             <?php if($right_array["news_first_list"]){?>
 				<li id="news_first_list" class="" onclick="changeMenu(this);"><a href="m.php?app=news_first_list" target="main-frame"><?php echo $a_langpackage->a_news_first_list; ?></a></li>
             <?php }?>
             <?php if($right_array["news_recheck_list"]){?>
 				<li id="news_recheck_list" class="" onclick="changeMenu(this);"><a href="m.php?app=news_recheck_list" target="main-frame"><?php echo $a_langpackage->a_news_recheck_list; ?></a></li>
-			<?php }?>
+            <?php }?>
+            <?php if($right_array["news_nocheck_list"]){?>
+				<li id="news_nocheck_list" class="" onclick="changeMenu(this);"><a href="m.php?app=news_nocheck_list" target="main-frame"><?php echo $a_langpackage->a_news_nocheck_list; ?></a></li>
+            <?php }?>
 			<?php if($right_array["news_catlist"]){?>
 				<li id="news_catlist" class="" onclick="changeMenu(this);"><a href="m.php?app=news_catlist" target="main-frame"><?php echo $a_langpackage->a_news_category; ?></a></li>
 			<?php }?>

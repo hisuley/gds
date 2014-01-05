@@ -33,7 +33,7 @@ $t_admin_log = $tablePreStr."admin_log";
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
-$count = check_categories_name($dbo,$t_shop_categories,$post['cat_name']);
+$count = check_categories_name($dbo,$t_shop_categories,$post['cat_name'],$cat_id);
 if($count[0]) {
 	action_return(0,$a_langpackage->a_suppliers_categories_repeat,'-1');
 	exit;

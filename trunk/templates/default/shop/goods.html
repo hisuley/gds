@@ -15,6 +15,60 @@
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/izoom.js"></script>
 <script type="text/javascript">
+var attr_ids =  {echo: $attr_ids;/};
+var goodsAttr_value = new Array();
+var goodsAttr_name = new Array();
+var goodsAttr_price = new Array();
+        {sta:if($attr_status) {
+    foreach($attr as $key=>$value){
+        if($attribute[$key]['price']){
+            $value['attr_values'] = preg_replace("/[\r\n]+/",'|',$value['attr_values']);
+		if(substr($value['attr_values'],'-1') == '|') {
+			$value['attr_values'] = substr($value['attr_values'],'0','-1');
+		}
+                $value['price'] = preg_replace("/[\r\n]+/",'|',$value['price']);
+		if(substr($value['price'],'-1') == '|') {
+			$value['price'] = substr($value['price'],'0','-1');
+		}
+            echo "goodsAttr_value['".$value['attr_id']."'] = '".$value['attr_values']."'; \r\n";
+            echo "goodsAttr_name['".$value['attr_id']."'] = '".$attribute[$key]['attr_values']."'; \r\n";
+            echo "goodsAttr_price['".$value['attr_id']."'] = '".$value['price']."'; \r\n";
+         }
+    } if/}
+
+function changePrice(price){
+    var price_value = document.getElementById("price_value");
+    price_value.innerHTML = price;
+}
+
+function goods_attr_init(){
+    var cValue = str = '';
+     var attr_content = document.getElementById("attr_content_info");
+    attr_content.innerHTML = '';
+    var html =  '';
+    var temp = '';
+    for(var i=0; i<goodsAttr_name.length; i++) {
+            
+            if(goodsAttr_name[i] != undefined && goodsAttr_value[i] != undefined){ 
+                var regv = goodsAttr_value[i].replace(/[\r\n]/g,"|");
+                var optionValue = goodsAttr_value[i].split("|");
+                var optionPrice = goodsAttr_price[i].split("|");
+                
+                html += '<span>'+goodsAttr_name[i]+'：</span>';
+                for(var j=0; j<optionValue.length; j++){ 
+                    if(optionValue[j] != undefined){
+                         html +=  '<span onclick="changePrice('+optionPrice[j]+')">'+optionValue[j]+' </span>';
+                    }
+                }
+                html += '<br/>';
+            }
+    }
+    if(html){
+        attr_content.style.display = "";
+        attr_content.innerHTML = html;
+    }
+}
+
 window.onload = function(){
     magnifier.init({
                    cont : document.getElementById('magnifier'),
@@ -22,7 +76,9 @@ window.onload = function(){
                    mag : document.getElementById('mag'),
                    scale : 3
                    });
+     goods_attr_init();
 }
+
 function changeImage(obj){
 	var ia=obj.parentNode;
 	var rev=ia.rev;//中图
@@ -64,9 +120,9 @@ function changeImage(obj){
 						<a class="right_button" href="javascript:void(0);" onclick="img_next('list1_1');"></a> </div>
 				</div>
 				<div class="itemProperty">
-					<ul>
+					<ul id="attr_ul">
 						<li> <span>{echo:lp{s_goods_price};/}：</span> {sta: if($goodsinfo['goods_price']=='0.00') [exc]} <em class="price">{echo: lp{s_no_price};/}</em> {sta: } else[exc]}
-							{echo:lp{s_money_sign};/}<em class="price">{echo: $goodsinfo['goods_price'];/}</em> {echo: lp{s_yuan};/}
+							{echo:lp{s_money_sign};/}<em class="price" id="price_value">{echo: $goodsinfo['goods_price'];/}</em> {echo: lp{s_yuan};/}
 							{end:if/} </li>
 						<li> <span>{echo:lp{s_goods_transport};/}：</span>
 							{sta: if($goodsinfo['is_transport_template']=='1') [exc]} 
@@ -78,7 +134,9 @@ function changeImage(obj){
 							{sta: } else[exc]}
 							<span>{echo: $goodsinfo['transport_price'];/}</span>
 							{end:if/}
-							</li>
+							</li> 
+                                            <li id="attr_content_info" style="display:none;">
+                                                </li>
 						<li> <span>{echo:lp{s_goods_wtbuy};/}：</span> <span> <input type="text" size="4" value="1" maxvalue="1" minvalue="1" id='num' /> <input type="hidden" value="{echo:$goodsinfo['goods_number'];/}" id="goods_number" /> <input type="hidden" value="{echo:$shop_id;/}" id="shop_id" /> <input type="hidden" value="{echo:$USER['user_id'];/}" id="shop_user" /> <input type="hidden" value="{echo: $goodsinfo['favpv'];/}" id="favpv_num"> <label></label> </span> ({echo:lp{s_may_buy};/}{echo:$goodsinfo['goods_number'];/} {echo:lp{s_piece};/}) </li>
 						{sta: if($goodsinfo['goods_price']=='0.00') [exc]}
 						<li class="b_none clearfix"> <a class="btn_inquiry" href="inquiry.php?gid={echo: $goodsinfo['goods_id'];/}" title="{echo: lp{s_g_askprice};/}"></a> {sta: } else [exc]}
@@ -127,8 +185,12 @@ function changeImage(obj){
 						if($attr_status) {
 						$i = 0;
 						foreach($attr as $key=>$value)[loop]}
-						<td class="text_right">{echo: $attribute[$key];/}:</td>
-						<td class="text_left">{echo: $value;/}</td>
+                                                {sta:if($attribute[$key]['attr_values'] == '地图') [exc]}
+                                                <img src="http://api.map.baidu.com/staticimage?width=400&height=200&center={echo: $value['attr_values'];/}&markers={echo: $value['attr_values'];/}&zoom=14&markerStyles=s,A,0xff0000">
+                                                {sta: } else [exc]}
+						<td class="text_right">{echo: $attribute[$key]['attr_values'];/}:</td>
+						<td class="text_left">{echo: $value['attr_values'];/}</td>
+                                                {end:if/}
 						{sta:
 						if($i%2) {
 						echo "</tr>

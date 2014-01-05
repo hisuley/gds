@@ -12,6 +12,7 @@ $right=check_rights("news_source_show");
 $name = short_check(get_args('name'));
 $source_id = intval(get_args('source_id'));
 $orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 if ($source_id){
 	if(!$right){
 		header('location:m.php?app=error');
@@ -34,8 +35,8 @@ if($name) {
 		$sql .= " and name like '%$name%' ";
 	}
 }
-if($orderby) {
-	$sql .= " order by $orderby";
+if($orderby && $orderway) {
+	$sql .= " order by $orderby $orderway";
 }
 $result = $dbo->fetch_page($sql,13);
 ?>
@@ -86,8 +87,8 @@ td span {color:red;}
         	<thead>
 			<tr style="text-align:center">
 				<th width="10%"><input type="checkbox" onclick="checkall(this,'source_id[]');" value='' /></th>
-				<th width="20%" align="left"><a href="m.php?app=news_source_list&orderby=source_id">ID</a></th>
-				<th align="left" width="50%"><a href="m.php?app=news_source_list&orderby=name"><?php echo $a_langpackage->a_news_source_name; ?></a></th>
+				<th width="20%" align="left">ID <a href="m.php?app=news_source_list&orderby=source_id&orderway=asc">↑</a><a href="m.php?app=news_source_list&orderby=source_id&orderway=desc">↓</a></th>
+				<th align="left" width="50%"><?php echo $a_langpackage->a_news_source_name; ?> <a href="m.php?app=news_source_list&orderby=name&orderway=asc">↑</a><a href="m.php?app=news_source_list&orderby=name&orderway=desc">↓</a></th>
 				<th width="20%"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
