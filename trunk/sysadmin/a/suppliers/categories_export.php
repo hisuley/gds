@@ -51,7 +51,7 @@
 	    }//商品名称
 	   
 	  
-		$file_str .=$value['cat_id'].",".$cat_name.",".$value['parent_id'].",".$value['sort_order'].",".$value['shops_num']."\n";
+		$file_str .=$value['cat_id'].",".$cat_name.",".$value['parent_id'].",".$value['sort_order'].",".$value['shops_num'].",".$value['commission_ratio']."\n";
 	}
 	ob_end_clean();
 	echo $header_str;

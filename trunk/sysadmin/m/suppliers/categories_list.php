@@ -41,9 +41,13 @@ if($orderby && $orderway) {
 }else {
         $sql_category .= " order by sort_order asc,cat_id asc";
 }
-$result_category = $dbo->getRs($sql_category);
+if(!$cat_name){
+    $result_category = $dbo->getRs($sql_category);
 
-$category_dg = get_dg_category($result_category);
+    $category_dg = get_dg_category($result_category);
+}else{
+    $category_dg = $dbo->getRs($sql_category);
+}
 require ("a/updateJsAjax.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -105,6 +109,7 @@ td span {color:red;}
 				<th width="50px">ID <a href="m.php?app=suppliers_categories_list&orderby=cat_id&orderway=asc">↑</a><a href="m.php?app=suppliers_categories_list&orderby=cat_id&orderway=desc">↓</a></th>
 				<th align="left"><?php echo $a_langpackage->a_category_name; ?></th>
 				<th width="65px"><?php echo $a_langpackage->a_shop_num; ?></th>
+                                <th width="65px"><?php echo $a_langpackage->a_suppliers_commission_ratio; ?><a href="m.php?app=suppliers_categories_list&orderby=commission_ratio&orderway=asc">↑</a><a href="m.php?app=suppliers_categories_list&orderby=commission_ratio&orderway=desc">↓</a></th>
 				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=suppliers_categories_list&orderby=sort_order&orderway=asc">↑</a><a href="m.php?app=suppliers_categories_list&orderby=sort_order&orderway=desc">↓</a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
@@ -122,6 +127,7 @@ td span {color:red;}
 				</div>
 				</td>
 				<td><?php echo $value['shops_num'];?></td>
+                                <td><?php echo $value['commission_ratio'];?></td>
 				<td><div onclick="editnum(this,<?php echo $value['cat_id'];?>,'divorder<?php echo $value['cat_id'];?>','a.php?act=updateAjax','tablename=shop_categories&colname=sort_order&idname=cat_id&idvalue=<?php echo $value['cat_id'];?>&logcontent=<?php echo $a_langpackage->a_edit_category; ?>：&colvalue=',2);"><?php echo $value['sort_order'];?></div>
 				    <div style="display:none"></div>
 				</td>

@@ -24,6 +24,7 @@ function get_dg_category($array,$parentid=0,$level=0,$add=2) {
 				'parent_id' => $v['parent_id'],
 				'shops_num' => $v['shops_num'],
 				'sort_order' => $v['sort_order'],
+                                'commission_ratio' => $v['commission_ratio'],
 				'str_pad' => $str_pad
 			);
 			$temp = get_dg_category($array,$v['cat_id'],($level+$add));
@@ -47,6 +48,7 @@ function get_dg_category_select($array,$parentid=0,$level=0,$add=2) {
 				'parent_id' => $v['parent_id'],
 				'shops_num' => $v['shops_num'],
 				'sort_order' => $v['sort_order'],
+                                'commission_ratio' => $v['commission_ratio'],
 				'str_pad' => $str_pad
 			);
 			//$temp = get_dg_category($array,$v['cat_id'],($level+$add));

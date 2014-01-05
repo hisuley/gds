@@ -16,6 +16,7 @@ if(!$right){
 //数据表定义区
 $t_notification_policy = $tablePreStr."notification_policy";
 $t_shop_categories = $tablePreStr."shop_categories";
+$t_shop_request = $tablePreStr."shop_request";
 
 //读写分离定义方法
 $dbo = new dbex;
@@ -28,6 +29,9 @@ if(!$policy_id) {exit($a_langpackage->a_error);}
 $info = get_policy_row($dbo, $t_notification_policy, $policy_id);
 
 $cat_info = get_dg_category(get_shop_cat_list($dbo,$t_shop_categories));
+
+$sql = "SELECT user_id,company_name FROM `$t_shop_request`";
+$suppliers = $dbo->getRs($sql);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -61,6 +65,15 @@ td span {color:red;}
 					<option value="<?php echo $value['cat_id']; ?>" <?php if($value['cat_id']==$info['shop_cat_id']){ echo "selected";} ?> ><?php echo $value['str_pad'];?><?php echo $value['cat_name']; ?></option>
 					<?php }?>
 				</select> <span id="position_id_message">*</span></td>
+			</tr>
+                        <tr>
+				<td><?php echo $a_langpackage->a_suppliers; ?>：</td>
+				<td><select name="user_id">
+					<option value="0"><?php echo $a_langpackage->a_suppliers_select; ?></option>
+					<?php foreach($suppliers as $value) {?>
+					<option value="<?php echo $value['user_id']; ?>" <?php if($value['user_id']==$info['user_id']){ echo "selected";} ?> ><?php echo $value['company_name']; ?></option>
+					<?php }?>
+				</select></td>
 			</tr>
 			<tr>
 				<td width="100px"><?php echo $a_langpackage->a_notification_policy_name; ?>：</td>

@@ -519,7 +519,8 @@ class adminlp{
         var $a_suppliers_categories_export = "供应商分类导出";
 	var $a_suppliers_categories_import = "供应商分类导入";
         var $a_suppliers_categories_repeat = "供应商分类名称已存在!";
-        var $a_suppliers_iconv_str="供应商分类ID,供应商分类名称,父级分类ID,排序,供应商数量 \n";
+        var $a_suppliers_iconv_str="供应商分类ID,供应商分类名称,父级分类ID,排序,供应商数量,佣金比例 \n";
+        var $a_suppliers_commission_ratio = "佣金比例";
         var $a_suppliers_status = "供应商状态";
 	var $a_lock_suppliers = "锁定供应商";
         var $a_free_suppliers_mess1 = "供应商，该供应商下的商品同时下架！";
@@ -530,6 +531,8 @@ class adminlp{
         var $a_suppliers_legal_person_false = "请检查法人信息";
         var $a_suppliers_legal_person = "法人信息";
         var $a_suppliers_shop = "商铺信息";
+        var $a_suppliers = "供应商";
+        var $a_suppliers_select = "选择供应商";
         var $a_notification_policy_management = "政策通知管理";
         var $a_notification_policy_list = "政策通知列表";
         var $a_notification_policy_add = "添加政策通知";
