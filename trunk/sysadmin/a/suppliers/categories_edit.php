@@ -16,6 +16,7 @@ if(!$right){
 $post['cat_name'] = short_check(get_args('cat_name'));
 $post['parent_id'] = intval(get_args('parent_id'));
 $post['sort_order'] = intval(get_args('sort_order'));
+$post['commission_ratio'] = short_check(get_args('commission_ratio'));
 
 if(empty($post['cat_name'])) {
 	action_return(0,$a_langpackage->a_class_null,'-1');

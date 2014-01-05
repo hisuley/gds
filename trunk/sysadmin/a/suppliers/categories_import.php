@@ -40,6 +40,7 @@
 		$info['parent_id']=$str_arr[2];
 		$info['sort_order']=$str_arr[3];
 		$info['shops_num']=$str_arr[4];
+                $info['commission_ratio']=$str_arr[4];
 		insert_category_info($dbo,$shop_categories_table,$info);
 	}
 	$errstr= substr($errstr,0,-1);

@@ -33,7 +33,7 @@ function get_header_info($header_info){
 }
 /* 文章信息列表 */
 function get_article_list(&$dbo,$table,$cat_id,$page){
-	$sql = "SELECT * FROM `$table` WHERE is_show=1 and cat_id='$cat_id' order by add_time desc ";
+	$sql = "SELECT * FROM `$table` WHERE is_show=1 and is_audit = 4 and cat_id='$cat_id' order by add_time desc ";
 	return $dbo->fetch_page($sql,$page);
 }
 ?>

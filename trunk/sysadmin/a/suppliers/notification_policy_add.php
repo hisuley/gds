@@ -18,12 +18,9 @@ $post['policy_title'] = short_check(get_args('policy_title'));
 $post['policy_content'] = short_check(get_args('policy_content'));
 $post['sort_order'] = intval(get_args('sort_order'));
 $post['shop_cat_id'] = intval(get_args('shop_cat_id'));
+$post['user_id'] = intval(get_args('user_id'));
 if(empty($post['policy_title'])) {
 	action_return(0,$a_langpackage->a_news_title_notnone,'-1');
-	exit;
-}
-if(empty($post['shop_cat_id'])) {
-	action_return(0,$a_langpackage->a_plsselectcategory,'-1');
 	exit;
 }
 $nowtime = $ctime->long_time();
@@ -44,8 +41,12 @@ if($count[0]) {
 	exit;
 }
 $sql = "select a.user_id from `$t_shop_info` a left join `$t_shop_request` b on a.user_id=b.user_id where b.status=1";
-if($post['shop_cat_id'] && $post['shop_cat_id'] != -1){
-    $sql .= " and a.shop_categories=". $post['shop_cat_id'];
+if($post['user_id']){
+    $sql .= " and a.user_id=". $post['user_id'];
+}else{
+    if($post['shop_cat_id'] && $post['shop_cat_id'] != -1){
+        $sql .= " and a.shop_categories=". $post['shop_cat_id'];
+    }
 }
 $users = $dbo->getRs($sql);
 foreach($users as $val){

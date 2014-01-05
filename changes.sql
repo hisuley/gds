@@ -118,3 +118,7 @@ CREATE TABLE `imall_user_level` (
 ALTER TABLE `gds`.`imall_users` ADD COLUMN `level_id` INT(10) DEFAULT 1 NOT NULL COMMENT '用户等级' AFTER `rank_id`; 
 /* 政策通知增加供应商分类字段 */
 ALTER TABLE `gds`.`imall_notification_policy` ADD COLUMN `shop_cat_id` INT(10) NOT NULL COMMENT '供应商分类ID' AFTER `sort_order`; 
+/* 供应商分类表增加佣金比例字段 */
+ALTER TABLE `gds`.`imall_shop_categories` ADD COLUMN `commission_ratio` VARCHAR(20) DEFAULT '' NOT NULL COMMENT '佣金比例' AFTER `shops_num`; 
+/* 政策通知表增加供应商ID字段 */
+ALTER TABLE `gds`.`imall_notification_policy` ADD COLUMN `user_id` INT(10) DEFAULT 0 NOT NULL COMMENT '供应商ID' AFTER `shop_cat_id`; 

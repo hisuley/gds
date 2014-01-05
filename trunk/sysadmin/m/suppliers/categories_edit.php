@@ -26,7 +26,7 @@ if(!$cat_id) {exit($a_langpackage->a_error);}
 /* 处理系统分类 */
 $sql_category = "select * from `$t_shop_categories` order by sort_order asc,cat_id asc";
 $result_category = $dbo->getRs($sql_category);
-$category_dg = get_dg_category_select($result_category);
+$category_dg = get_dg_category($result_category);
 foreach($result_category as $v) {
 	if($v['cat_id']==$cat_id) {
 		$info = $v;
@@ -73,6 +73,10 @@ td span {color:red;}
 			<tr>
 				<td><?php echo $a_langpackage->a_category_sort; ?>：</td>
 				<td><input type="text" class="small-text" name="sort_order" value="<?php echo $info['sort_order']; ?>" style="width:60px;" /> <span>*</span></td>
+			</tr>
+                        <tr>
+				<td><?php echo $a_langpackage->a_suppliers_commission_ratio; ?>：</td>
+				<td><input class="small-text" type="text" name="commission_ratio" value="<?php echo $info['commission_ratio']; ?>" style="width:60px" /></td>
 			</tr>
 			<tr>
 				<input type="hidden" name="cat_id" value="<?php echo $cat_id; ?>">
