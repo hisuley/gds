@@ -799,13 +799,13 @@ padding-bottom: 10px;
 	color:#FF8B22;
 }
 .news-box ul li {
-float: none;
-padding-left: 10px;
-margin-top: 10px;
-border-left: 7px solid grey;
-line-height: 10px;
-margin-left: 5px;
-white-space: nowrap;
-width: 190px;
-overflow: hidden;
+	float: none;
+	padding-left: 10px;
+	margin-top: 10px;
+	border-left: 7px solid grey;
+	line-height: 13px;
+	margin-left: 5px;
+	white-space: nowrap;
+	width: 190px;
+	overflow: hidden;
 }
