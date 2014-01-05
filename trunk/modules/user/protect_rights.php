@@ -28,7 +28,7 @@ if(filemtime("templates/default/modules/user/protect_rights.html") > filemtime(_
 if(!$IWEB_SHOP_IN) {
 	die('Hacking attempt');
 }
-require("foundation/acheck_shop_creat.php");
+//require("foundation/acheck_shop_creat.php");
 require("foundation/module_order.php");
 require("foundation/module_goods.php");
 //语言包引入
@@ -106,16 +106,59 @@ if($row)
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
-
-<script type="text/javascript" src="servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
 <script type="text/javascript" src="servtools/xheditor/xheditor.min.js?v=1.0.0-final"></script>
+<script type="text/javascript">
+var introeditor;
+$(function(){
+	introeditor=$("#protect_content").xheditor({skin:'vista',tools:"Cut,Copy,Paste,Pastetext,Separator,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,Separator,Align,List,Outdent,Indent,Separator,Link,Unlink,Img,Table,Separator,Fullscreen,About"});
 
+});
+function checkeck(){
+	var protect_content1 = $.trim($("#protect_content").val());
+	if(protect_content1==""){
+		alert("维权内容不能为空！");
+		return false;
+	}
+}
+function introimage(id,imagepath){
+	var imagestr="<li id='imgli'><p class='photo'><img src="+imagepath+" width='100' height='100' /></p><p><a href='javascript:;'  onclick='return addIntroImg(this)' >插入</a><a href='javascript:;' name='"+id+"' onclick='return delIntroImg(this)'>删除</a></p></li>";
+	$("#introimage").append(imagestr);
+
+}
+function delIntroImg(obj){
+	if(!confirm('你真的要删除这张图片吗?')){
+       return;
+		}
+	var path=$(obj).parent().parent().children(".photo").children("img").attr("src");
+	var iid=$(obj).attr('name');
+    var param={
+          iid:iid,
+          path:path
+    	  };
+    $.post("do.php?act=del_goodsImage",param,function(data){
+        if(data=='1'){
+          		$(obj).parent().parent().remove();
+             }else{
+                alert('删除失败');
+              }
+        });
+}
+function addIntroImg(obj){
+    var li=$(obj).parent().parent().children(".photo").children("img").attr("src");
+    var str=li.substring(li.indexOf("uploadfiles"));
+	introeditor.appendHTML("<img src="+str+"/>");
+	return false;
+}
+</script>
 <script type="text/javascript" src="servtools/swfupload/swfupload.js"></script>
 <script type="text/javascript" src="servtools/swfupload/swfupload.queue.js"></script>
 <script type="text/javascript" src="servtools/swfupload/fileprogress.js"></script>
 <script type="text/javascript" src="servtools/swfupload/handlers.js"></script>
+
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
+
+
 <script type="text/javascript">
 		var swfu;
 
@@ -169,49 +212,7 @@ if($row)
 			window.addEventListener('load',winload,false);//firefox
 			}
 </script>
-<script type="text/javascript">
-var introeditor;
-$(function(){
-	introeditor=$("#protect_content").xheditor({skin:'vista',tools:"Cut,Copy,Paste,Pastetext,Separator,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,Separator,Align,List,Outdent,Indent,Separator,Link,Unlink,Img,Table,Separator,Fullscreen,About"});
 
-});
-function checkeck(){
-	var protect_content1 = $.trim($("#protect_content").val());
-	if(protect_content1==""){
-		alert("维权内容不能为空！");
-		return false;
-	}
-}
-function introimage(id,imagepath){
-	var imagestr="<li id='imgli'><p class='photo'><img src="+imagepath+" width='100' height='100' /></p><p><a href='javascript:;'  onclick='return addIntroImg(this)' >插入</a><a href='javascript:;' name='"+id+"' onclick='return delIntroImg(this)'>删除</a></p></li>";
-	$("#introimage").append(imagestr);
-
-}
-function delIntroImg(obj){
-	if(!confirm('你真的要删除这张图片吗?')){
-       return;
-		}
-	var path=$(obj).parent().parent().children(".photo").children("img").attr("src");
-	var iid=$(obj).attr('name');
-    var param={
-          iid:iid,
-          path:path
-    	  };
-    $.post("do.php?act=del_goodsImage",param,function(data){
-        if(data=='1'){
-          		$(obj).parent().parent().remove();
-             }else{
-                alert('删除失败');
-              }
-        });
-}
-function addIntroImg(obj){
-    var li=$(obj).parent().parent().children(".photo").children("img").attr("src");
-    var str=li.substring(li.indexOf("uploadfiles"));
-	introeditor.appendHTML("<img src="+str+"/>");
-	return false;
-}
-</script>
 <style type="text/css">
 .list .master{
 	background-color:#FFEFE8}

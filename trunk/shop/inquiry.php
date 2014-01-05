@@ -84,7 +84,7 @@ td{ height:22px; padding:5px; border-bottom:#ccc 1px dashed;}</style>
   <TR>
     <TD align=right width="22%"><?php echo $i_langpackage->i_send_to;?>：</TD>
     <TD width="78%"><span class="subtitle">
-		<a href="shop.php?shopid=2&app=index>"><?php echo $info['shop_name'];?></a>
+		<a href="shop.php?shopid=<?php echo $info['shop_id'];?>&app=index"><?php echo $info['shop_name'];?></a>
 		<input name="shop_id" type="hidden" value="<?php echo $info['shop_id'];?>" />
 		<input name="goods_id" type="hidden" value="<?php echo $info['goods_id'];?>" />
 		<input name="goods_name" type="hidden" value="<?php echo $info['goods_name'];?>" />
