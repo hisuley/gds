@@ -1,50 +1,81 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/parts.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
-<title>iWebMall</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
+  <link href="skin/{echo: $SYSINFO['templates'];/}/css/parts.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+  <title>景区列表</title>
 </head>
 <body>
-<!-- wrapper -->
-<div id="wrapper">
-{inc: include("shop/index_header.php");/}
-  <!-- contents -->
-	<div id="contents" class="clearfix" >
-		<div id="sub_channel">
-	      <ul class="clearfix">
-	      	<li>
-	          <h3><img src=" " alt="{echo:lp{i_index};/}"  onerror="this.src='skin/default/images/nopic.gif'"/></h3>
-        </li>
-        <li><a href="">{echo:lp{i_brand_list};/}</a></li>
-      </ul>
-    </div>
-    <div class="all_brand blank">
-    {sta: foreach($result['result'] as $value)[loop]}
-      <div class="goodsbox clearfix">
-        <h4><span><a href="{echo:$value['site_url'];/}">{echo:$value['brand_name'];/}</a></span>&nbsp;</h4>
-        <div class="imgbox"><a href="brand_info.php?brand_id={echo:$value['brand_id'];/}"><img alt=" " src="{echo:$value['brand_logo'];/}" width="110" height="42"  onerror="this.src='skin/default/images/nopic.gif'"/></a> </div>
-      <!--  <p class="phone"></p>-->
-        <p class="internet"><a href="{echo:$value['site_url'];/}">{echo:$value['site_url'];/}</a> </p>
+  <!-- wrapper -->
+  <div id="wrapper">
+    {inc: include("shop/index_header.php");/}
+    <!-- contents -->
+    <div id="contents" class="clearfix" >
+      <div class="SubCategoryBox mg12b">
+        <h3>景区筛选</h3>
+        <ul>
+          <li>
+            <span>级别：</span>
+            <!-- 用提取到属性值进行替换 -->
+            <a class="active">全部</a>
+            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">AAA</a>
+            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">AA</a>
+            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">A</a>
+          </li>
+          
+          <li>
+            <span>区域:</span>
+            <font class="active">全部</font>
+            <!-- 用提取到属性值进行替换 -->
+            <a title="七星区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E4%B8%83%E6%98%9F%E5%8C%BA">七星区</a>
+            <a title="象山区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E8%B1%A1%E5%B1%B1%E5%8C%BA">象山区</a>
+            <a title="秀峰区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E7%A7%80%E5%B3%B0%E5%8C%BA">秀峰区</a>
+            <a title="叠彩区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E5%8F%A0%E5%BD%A9%E5%8C%BA">叠彩区</a>
+          </li>
+          <li>
+            <span>类型:</span>
+            <font class="active">全部</font>
+            <!-- 用提取到属性值进行替换 -->
+            <a title="七星区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E4%B8%83%E6%98%9F%E5%8C%BA">古代遗迹</a>
+            <a title="象山区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E8%B1%A1%E5%B1%B1%E5%8C%BA">历史建筑</a>
+            <a title="秀峰区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E7%A7%80%E5%B3%B0%E5%8C%BA">自然风景名胜区</a>
+            <a title="叠彩区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E5%8F%A0%E5%BD%A9%E5%8C%BA">叠彩区</a>
+          </li>
+          <li><span>关键字：</span>无</li>
+        </ul>
       </div>
-     {end:foreach/}
-     </div>
-    <!-- /contents -->
-  </div>
+      <div class="all_brand blank">
+        {sta: foreach($result['result'] as $value)[loop]}
+        <div class="goodsbox clearfix">
+          <h4><span><a href="{echo:$value['site_url'];/}">{echo:$value['brand_name'];/}</a></span>&nbsp;</h4>
+          <div class="imgbox"><a href="brand_info.php?brand_id={echo:$value['brand_id'];/}"><img alt=" " src="{echo:$value['brand_logo'];/}" width="110" height="42"  onerror="this.src='skin/default/images/nopic.gif'"/></a> </div>
+          <!--  <p class="phone"></p>-->
+          <!-- 放介绍内容，截取32字符-->
+          <p class="intro">
+              {echo:substr($value['brand_desc'],0,64);/}
+          </p>
+          <p class="internet">
+            <a href="{echo:$value['site_url'];/}">{echo:$value['site_url'];/}</a> </p>
+        </div>
+        {end:foreach/}
+      </div>
+      <!-- /contents -->
+    </div>
 
 
-  <div class="pagenav clearfix">
-	{sta:if($result['countpage']>0)[exc]}
-	{inc: include("modules/page.php");/}
-    {sta: } else [exc]}
-    {echo:lp{i_no_product};/}！
-    {end:if/}
-  </div>
-{inc: require("shop/index_footer.php");/}
-  <!-- /wrapper -->
-</div>
+    <div class="pagenav clearfix">
+     {sta:if($result['countpage']>0)[exc]}
+     {inc: include("modules/page.php");/}
+     {sta: } else [exc]}
+     {echo:lp{i_no_product};/}！
+     {end:if/}
+   </div>
+   {inc: require("shop/index_footer.php");/}
+   <!-- /wrapper -->
+ </div>
 </body>
 <script language="JavaScript">
 <!--

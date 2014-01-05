@@ -171,7 +171,25 @@
         {end:foreach/}
     </div>
     <div class="content-common-box">
-      <div class="title"><h2><a href="news_list.php?id=17">桂林特产|购在桂林</a></h2><span><a href="news_list.php?id=17">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=17">桂林特产</a></h2><span><a href="news_list.php?id=17">更多&gt;&gt;</a></span></div>
+      {sta: foreach($techan_result['result'] as $v)[loop]}
+       {sta:if($v['thumb'] != '')[exc]}
+         <div class="item-box" style="margin-left:0px;">
+          <div class="images">
+            <a href="{echo: article_url($v['article_id']);/}"><img src="{echo:$v['thumb'];/}" /></a>
+          </div>
+          <div class="description">
+            <a href="{echo: article_url($v['article_id']);/}"><h3>{echo:sub_str($v['title'], 40);/}</h3></a>
+            <p class="intro">
+              {echo:sub_str(strip_tags($v['content']), 80);/}
+            </p>
+          </div>
+        </div>
+        {end:if/}
+        {end:foreach/}
+    </div>
+     <div class="content-common-box">
+      <div class="title"><h2><a href="news_list.php?id=18">购在桂林</a></h2><span><a href="news_list.php?id=18">更多&gt;&gt;</a></span></div>
       {sta: foreach($techan_result['result'] as $v)[loop]}
        {sta:if($v['thumb'] != '')[exc]}
          <div class="item-box" style="margin-left:0px;">
