@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>{echo: $header['title'];/}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="{echo: $header['keywords'];/}" />
-<meta name="description" content="{echo: $header['description'];/}" />
-<base href="{echo: $baseUrl;/}" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/article.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery.slides.js"></script>
+  <title>{echo: $header['title'];/}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="{echo: $header['keywords'];/}" />
+  <meta name="description" content="{echo: $header['description'];/}" />
+  <base href="{echo: $baseUrl;/}" />
+  <link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css" />
+  <link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
+  <link href="skin/{echo: $SYSINFO['templates'];/}/css/article.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+  <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery.slides.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -20,7 +20,7 @@
   <div id="contents" class="clearfix" >
   <div class="content-news-box">
     <div class="title">
-      <a href="#newest"><h2 class="active">最新资讯</h2></a>
+      <a href="#newest"><h2 class="active"><a href="news_list.php?id=11">最新资讯</h2></a></a>
     </div>
     <div class="content" id="newest">
       <div class="column-3">
@@ -54,7 +54,7 @@
   </div>
   <div class="column-3">
     <div class="content-common-box content-left-middle-box content-siver">
-      <div class="title"><h2>节庆活动</h2><span><a href="news_list.php?id=20">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=20">节庆活动</a></h2><span><a href="news_list.php?id=20">更多&gt;&gt;</a></span></div>
       <div class="content">
         <ul>
           {sta:foreach($holiday_result['result'] as $val)[loop]}
@@ -77,7 +77,7 @@
     </div>
     <div class="content-common-box content-left-middle-box content-siver">
       <div class="title">
-        <h2>桂林线路</h2>
+        <h2><a href="news_list.php?id=14">桂林线路</a></h2>
         <span><a href="news_list.php?id=14">更多&gt;&gt;</a></span>
       </div>
        {sta: foreach($line_result['result'] as $v)[loop]}
@@ -99,7 +99,7 @@
   </div>
   <div class="column-7">
     <div class="content-common-box">
-      <div class="title"><h2>桂林景点</h2><span><a href="news_list.php?id=12">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=12">桂林景点</a></h2><span><a href="news_list.php?id=12">更多&gt;&gt;</a></span></div>
       {sta: foreach($scenic_result['result'] as $v)[loop]}
        {sta:if($v['thumb'] != '')[exc]}
          <div class="item-box" style="margin-left:0px;">
@@ -117,7 +117,7 @@
         {end:foreach/}
     </div>
     <div class="content-common-box">
-      <div class="title"><h2>桂林酒店</h2><span><a href="news_list.php?id=13">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=13">桂林酒店</a></h2><span><a href="news_list.php?id=13">更多&gt;&gt;</a></span></div>
       {sta: foreach($hotel_result['result'] as $v)[loop]}
        {sta:if($v['thumb'] != '')[exc]}
          <div class="item-box" style="margin-left:0px;">
@@ -135,7 +135,7 @@
         {end:foreach/}
     </div>
     <div class="content-common-box">
-      <div class="title"><h2>桂林美食</h2><span><a href="news_list.php?id=15">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=15">桂林美食</a></h2><span><a href="news_list.php?id=15">更多&gt;&gt;</a></span></div>
       {sta: foreach($food_result['result'] as $v)[loop]}
        {sta:if($v['thumb'] != '')[exc]}
          <div class="item-box" style="margin-left:0px;">
@@ -153,7 +153,7 @@
         {end:foreach/}
     </div>
      <div class="content-common-box">
-      <div class="title"><h2>夜美桂林</h2><span><a href="news_list.php?id=19">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=19">夜美桂林</a></h2><span><a href="news_list.php?id=19">更多&gt;&gt;</a></span></div>
       {sta: foreach($night_result['result'] as $v)[loop]}
        {sta:if($v['thumb'] != '')[exc]}
          <div class="item-box" style="margin-left:0px;">
@@ -171,7 +171,7 @@
         {end:foreach/}
     </div>
     <div class="content-common-box">
-      <div class="title"><h2>桂林特产|购在桂林</h2><span><a href="news_list.php?id=17">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=17">桂林特产|购在桂林</a></h2><span><a href="news_list.php?id=17">更多&gt;&gt;</a></span></div>
       {sta: foreach($techan_result['result'] as $v)[loop]}
        {sta:if($v['thumb'] != '')[exc]}
          <div class="item-box" style="margin-left:0px;">
