@@ -19,7 +19,7 @@ class indexlp{
 	var $i_serach_ad = "高级搜索";
 	var $i_keywords = "关键字";
 	var $i_category = "分类";
-	var $i_brand = "品牌";
+	var $i_brand = "景区";
 	var $i_post = "提交";
 	var $i_store_list = "商家列表";
 	var $i_like_storelist = "相关店铺";
@@ -98,7 +98,7 @@ class indexlp{
 	var $i_noapprove_company = "未认证商家";
 	var $i_send_to = "发送至";
 	var $i_askprice_title = "询价标题";
-	var $i_select_products_by_brand ="按品牌选择商品";
+	var $i_select_products_by_brand ="按景区选择商品";
 
 	/* login */
 	var $i_au_register = "你还没有注册用户？";
@@ -236,7 +236,7 @@ class indexlp{
 	var $i_goodsheader_category = "商品分类";
 	var $i_new_goods = "新品速递";
 	var $i_promote_goods = "精品促销";
-	var $i_brand_sort = "品牌专区";
+	var $i_brand_sort = "景区专区";
 	var $i_links_list = "友情链接";
 	var $i_hotgoods_sort = "人气排行";
 	var $i_new_goodsb = "最新上架";
@@ -304,18 +304,18 @@ class indexlp{
 	var $i_shop_index="商城首页";
 	var $i_websit_navigation="网站导航";
 	var $i_search_keyword="请输入你要搜索的关键字";
-	var $i_brand_list="品牌列表";
+	var $i_brand_list="景区列表";
 	var $i_no_product="没有商品";
 	var $i_no_shop_1="没有店铺";
 	var $i_locus="所在地";
 	var $i_search_category="请选择分类";
-	var $i_search_brand="请选择品牌";
+	var $i_search_brand="请选择景区";
 	var $i_login_info="登录社区，你将得到以下服务";
 	var $i_no_shop="您访问的店铺不存在!";
 	var $i_href="系统将在<span id=\"skip\">3</span>秒钟返回...";
 	var $i_hand_index="如果浏览器没有自动调整，点击这里返回";
-	var $i_brand_detail="品牌详细页";
-	var $i_company_website="公司网站";
+	var $i_brand_detail="景区详细页";
+	var $i_company_website="网站";
 	var $i_category_filter="筛选分类";
 	var $i_all="全部";
 	var $i_description="描述";
@@ -336,7 +336,7 @@ class indexlp{
 	var $i_groupbuy_list="团购列表";
 	var $i_groupbuy_say="团购说明";
 	var $i_lay_out="团购展示";
-	var $i_brand_navigation="名优品牌导航";
+	var $i_brand_navigation="景区导航";
 	var $i_better_shop="优秀企业推荐";
 	var $i_groupbuy="团购";
 	var $i_integral="积分";
