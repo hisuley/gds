@@ -277,7 +277,7 @@ div#leftColumn>div#leftMian{border:none;}
 }
 .content-common-box .item-box{
 	float:left;
-	margin-left:15px;
+	margin-right:5px;
 	padding: 5px;
 	background-color: #F6F6F6;
 	box-shadow: 1px 1px 1px #CCC;
@@ -304,6 +304,9 @@ margin-top: 5px;
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 5px;
+    line-height:16px;
+    white-space: nowrap;
+    overflow: hidden;
 
 }
 .content-common-box .item-box .description .intro{
@@ -809,3 +812,32 @@ padding-bottom: 10px;
 	width: 190px;
 	overflow: hidden;
 }
+.column-7 .content-common-box{
+    width:675px;
+}
+
+ .bnb_introduce{padding:0 26px 15px 30px}
+.bnb_introduce .facilities_map{float:left;margin:0 16px 14px 0;display:inline;position:relative}
+.bnb_introduce .facilities_mapct{border:#d1cfc7 3px solid;position:relative;width:244px;height:134px;overflow:hidden;background:url(http://source.qunar.com/site/images/hotel/kezhan/facilities_nopic.jpg) no-repeat left top;cursor:pointer}
+.bnb_introduce .txt_info{line-height:22px;word-wrap:break-word;word-break:break-all}
+.bnb_introduce .no_facmap{text-align:center;color:#adadad;padding:40px 0 0 0;line-height:22px}
+.bnb_introduce .facilities_mapct .fac_tools{position:absolute;bottom:0;right:0;background-color:#d1cfc7;height:20px;_width:65px}
+.bnb_introduce .facilities_mapct .fac_tools ul{padding:3px 0 0 8px}
+.bnb_introduce .facilities_mapct .fac_tools ul li{float:left;margin-right:6px;display:inline}
+.bnb_introduce .facilities_mapct .fac_tools ul li .open_map{color:#fff;padding-left:27px;line-height:15px;display:block;background:url(http://source.qunar.com/site/images/hotel/kezhan/icon_sprise_v4.png) no-repeat 0 -326px}
+.facility_baseinfo{background:#fff;padding:3px 15px 12px 30px}
+.facility_baseinfo .telephoneinfo{float:left;width:220px;display:inline;margin-top:15px}
+.facility_baseinfo .telephoneinfo li{line-height:24px;height:24px}
+.facility_baseinfo .telephoneinfo li .gray_clr{color:#BBB}
+.facility_baseinfo .list{float:left;width:443px}
+.facility_baseinfo .list li{float:left;line-height:19px;height:19px;overflow:hidden;margin-top:15px}
+.facility_baseinfo .list li.c1{width:150px}
+.facility_baseinfo .list li.c2{width:156px}
+.facility_baseinfo .list li.c3{width:133px}
+.facility_baseinfo .list li.c4{width:100px}
+.facility_baseinfo .list li.c5{width:100px}
+.facility_baseinfo .list li span{float:left;display:inline-block;width:16px;height:16px;background:url(http://source.qunar.com/site/images/hotel/kezhan/icon_sprise_v4.png) no-repeat 0 -21px;margin-right:6px;margin-top:2px}
+.facility_baseinfo .list li span.unknown{background-position:0 -449px}
+.facility_baseinfo .list li span.provide{background-position:0 -368px}
+.facility_baseinfo .list li span.noprovide{background-position:0 -409px}
+.facility_baseinfo .map{float:right;width: 230px;height: 150px;float: right;}
