@@ -6,10 +6,11 @@
  * @version 1.0
  * @copyright 
  **/
-require 'pscws3.class.php';
+error_reporting(0);
+require(dirname(__FILE__). '/pscws3.class.php');
 function segmentString($string){
     $string = iconv('UTF-8', 'GBK', $string);
-    $pscws = new PSCWS3('./dict/dict.xdb');
+    $pscws = new PSCWS3(dirname(__FILE__) . '/dict/dict.xdb');
     $res = $pscws->segment($string);
     $res = array_map('convertCharset', $res);
     return $res;
@@ -19,9 +20,11 @@ function convertCharset($string){
 }
 function generateString($string){
     $res = segmentString($string);
-    $sql = ' WHERE 0';
+    $sql = ' ';
     foreach($res as $val){
         $sql .= " OR title LIKE %$val%";
     }
     return $sql;
 }
+$result = generateString($_GET['keywords']);
+echo empty($result) ? '' : $result;

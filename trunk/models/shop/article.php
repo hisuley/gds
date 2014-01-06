@@ -43,13 +43,16 @@ if($article_info['is_link'] && $article_info['link_url']) {
 	echo "<script>location.href = '".$article_info['link_url']."'</script>";
 	exit;
 }
+//@TODO 请检查为何失效，调用pscws_call.php的时候报错。
+//include('pscws23/pscws_call.php');
+//$segmentResult = generateString($article_info['title']);
+//$sql = "SELECT * FROM `$t_article` WHERE article_id NOT IN(".$article_info['article_id'].") AND (".$segmentResult.") LIMIT 10";
+$sql = "SELECT * FROM $t_article WHERE article_id NOT IN(".$article_info['article_id'].") LIMIT 10";
+$relatedArticle = $dbo->getRs($sql);
 
 $header = get_header_info($article_info);
 
 $sql = "SELECT article_id,title FROM $t_article WHERE  cat_id='8'";
 $left_article_list =$dbo->getRs($sql);
-require_once('../pscws23/pscws_call.php');
-$segmentResult = generateString($article_info['title']);
-$sql = "SELECT * FROM `$t_article` ".$segmentResult;
-$relatedArticle = $dbo->getRs($sql);
+
 ?>

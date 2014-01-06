@@ -1,17 +1,18 @@
 <?php
+error_reporting(0);
 /* ----------------------------------------------------------------------- *\
-   PHP°æ ¼òÒ×ÖĞÎÄ·Ö´Ê(SCWS 2/3) ×¨ÓÃ´Êµä²Ù×÷Àà
+   PHPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö´ï¿½(SCWS 2/3) ×¨ï¿½Ã´Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    -----------------------------------------------------------------------
-   ×÷Õß: ÂíÃ÷Á·(hightman) (MSN: MingL_Mar@msn.com) (php-QQÈº: 17708754)
-   ÍøÕ¾: http://www.ftphp.com/scws
-   Ê±¼ä: 2005/11/25 (update: 2006/03/06)
-   ĞŞ¶©: 2008/12/20
-   Ä¿µÄ: Ñ§Ï°ÑĞ¾¿½»Á÷ÓÃ, Ï£ÍûÓĞºÃµÄ½¨Òé¼°ÓÃÍ¾ÄÜ½øÒ»²½½»Á÷.
+   ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(hightman) (MSN: MingL_Mar@msn.com) (php-QQÈº: 17708754)
+   ï¿½ï¿½Õ¾: http://www.ftphp.com/scws
+   Ê±ï¿½ï¿½: 2005/11/25 (update: 2006/03/06)
+   ï¿½Ş¶ï¿½: 2008/12/20
+   Ä¿ï¿½ï¿½: Ñ§Ï°ï¿½Ğ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Ï£ï¿½ï¿½ï¿½ĞºÃµÄ½ï¿½ï¿½é¼°ï¿½ï¿½Í¾ï¿½Ü½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
    $Id: dict.class.php,v 1.1 2008/12/20 12:03:00 hightman Exp $
    -----------------------------------------------------------------------
-   ´ÊµäÀàµÄ¹¦ÄÜ: ¸ù¾İ¸ø³ö´Ê·µ»Ø´ÊÆµ. 
-   Ö§³Ö×Öµä¸ñÊ½: dba(cdb/gdbm):txt(eAccelerator):sqlite(sqlite):xdb(XTreeDB)
-   , ¸ù¾İºó×º×Ô¶¯Ê¶±ğ
+   ï¿½Êµï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½: ï¿½ï¿½İ¸ï¿½ï¿½ï¿½Ê·ï¿½ï¿½Ø´ï¿½Æµ. 
+   Ö§ï¿½ï¿½ï¿½Öµï¿½ï¿½Ê½: dba(cdb/gdbm):txt(eAccelerator):sqlite(sqlite):xdb(XTreeDB)
+   , ï¿½ï¿½İºï¿½×ºï¿½Ô¶ï¿½Ê¶ï¿½ï¿½
    $dict = new PSCWS23_Dict('dict.xdb');
    $dict->load($fpath);
    $dict->find();   
@@ -19,9 +20,9 @@
 \* ----------------------------------------------------------------------- */
 
 /**
- * ´Êµä²éÑ¯ËùÓÃµÄÀà¿â 
- * ->load($fpath) ¼ÓÔØ´Êµä(cdb/gdbm/sqlite/txt)
- * ->find($word)  ²é´Ê²¢·µ»Ø´ÊÆµ
+ * ï¿½Êµï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ 
+ * ->load($fpath) ï¿½ï¿½ï¿½Ø´Êµï¿½(cdb/gdbm/sqlite/txt)
+ * ->find($word)  ï¿½ï¿½Ê²ï¿½ï¿½ï¿½ï¿½Ø´ï¿½Æµ
  */
 class PSCWS23_Dict 
 {
@@ -31,7 +32,7 @@ class PSCWS23_Dict
 	var $query_times;
 	var $has_cache		= true;
 
-	// ¹¹Ôìº¯Êı, ´«ÈëÂ·¾¶¼ÓÔØ×Öµä
+	// ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½
 	function PSCWS23_Dict($fpath = '')
 	{
 		if ($this->has_cache)
@@ -48,14 +49,14 @@ class PSCWS23_Dict
 	function __construct($fpath = '') { $this->PSCWS23_Dict($fpath); }
 	function __destruct() { $this->unload(); }
 
-	// ¼ÓÔØ×Öµä (²ÎÊı: ´ÊµäÂ·¾¶)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ (ï¿½ï¿½ï¿½ï¿½: ï¿½Êµï¿½Â·ï¿½ï¿½)
 	function load($fpath)
 	{
-		// ÖØÔØ´Êµä
+		// ï¿½ï¿½ï¿½Ø´Êµï¿½
 		if ($this->_handler)
 			return $this->_handler->_load($fpath);
 
-		// ½¨Á¢´Êµä²Ù×÷¾ä±ú
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		$ext = strtolower(strrchr($fpath, '.'));
 		if ($ext == '.txt')
 		{
@@ -75,12 +76,12 @@ class PSCWS23_Dict
 		}
 	}
 
-	// ²éÑ¯´Ê²¢·µ»Ø´ÊÆµ (-1: not found)
+	// ï¿½ï¿½Ñ¯ï¿½Ê²ï¿½ï¿½ï¿½ï¿½Ø´ï¿½Æµ (-1: not found)
 	function find($word)
 	{
 		if (!$this->_handler)
 		{
-			trigger_error('ÇëÎñ±ØÔÚ²é´ÊÇ°¼ÓÔØ´Êµä', E_USER_WARNING);
+			trigger_error('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ø´Êµï¿½', E_USER_WARNING);
 			return -1;
 		}
 		
@@ -116,7 +117,7 @@ class PSCWS23_Dict
 			$this->_cache = array();
 	}
 
-	// Îö¹¹
+	// ï¿½ï¿½ï¿½ï¿½
 	function _my_Dictionary()
 	{
 		$this->unload();
@@ -124,21 +125,21 @@ class PSCWS23_Dict
 }
 
 /**
- * ¸÷ÖÖ¸ñÊ½²Ù×÷Àà  [_load:_find]
+ * ï¿½ï¿½ï¿½Ö¸ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  [_load:_find]
  */
 
-// »ùÓÚ XDB_R, ºó×ºÎª .xdb
+// ï¿½ï¿½ï¿½ï¿½ XDB_R, ï¿½ï¿½×ºÎª .xdb
 class xdb_Dictionary
 {
 	var $_dbh;
 	
 	function xdb_Dictionary($fpath = '')
 	{
-		// »·¾³¼ì²é
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (!require_once(dirname(__FILE__) . '/xdb_r.class.php'))
-			trigger_error('ÄúµÄ PHP »·¾³È±ÉÙ `xdb_r` ÀàÎÄ¼ş, Çë¼ì²é', E_USER_ERROR);
+			trigger_error('ï¿½ï¿½ï¿½ PHP ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ `xdb_r` ï¿½ï¿½ï¿½Ä¼ï¿½, ï¿½ï¿½ï¿½ï¿½', E_USER_ERROR);
 
-		// ³õÊ¼»¯²Ù×÷
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		$this->_dbh = false;
 		if ('' != $fpath)
 			$this->_load($fpath);
@@ -152,7 +153,7 @@ class xdb_Dictionary
 	{
 		$db = new XDB_R;
 		if (!$db->Open($fpath))
-			trigger_error("ÎŞ·¨´ò¿ªÀàĞÍÎª xdb Êı¾İÎÄ¼ş `$fpath`", E_USER_ERROR);
+			trigger_error("ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª xdb ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ `$fpath`", E_USER_ERROR);
 		else
 		{
 			$this->_dbh = $db;
@@ -172,7 +173,7 @@ class xdb_Dictionary
 	{
 		if (!$this->_dbh)
 		{
-			trigger_error('ÇëÎñÔÚ²é´ÊÇ°ÏÈ¼ÓÔØ´ÊµäÎÄ¼ş', E_USER_WARNING);
+			trigger_error('ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ç°ï¿½È¼ï¿½ï¿½Ø´Êµï¿½ï¿½Ä¼ï¿½', E_USER_WARNING);
 			return -1;
 		}
 		
@@ -180,18 +181,18 @@ class xdb_Dictionary
 	}
 }
 
-// »ùÓÚ DBA , Ö§³Ö cdb/gdbm µÈ
+// ï¿½ï¿½ï¿½ï¿½ DBA , Ö§ï¿½ï¿½ cdb/gdbm ï¿½ï¿½
 class dba_Dictionary
 {
 	var $_dbh;
 	
 	function dba_Dictionary($fpath = '')
 	{
-		// »·¾³¼ì²é
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (!extension_loaded('dba'))
-			trigger_error('ÄúµÄ PHP »·¾³È±ÉÙ `dba` À©Õ¹, ÇëÖØĞÂÅäÖÃ PHP', E_USER_ERROR);
+			trigger_error('ï¿½ï¿½ï¿½ PHP ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ `dba` ï¿½ï¿½Õ¹, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PHP', E_USER_ERROR);
 
-		// ³õÊ¼»¯²Ù×÷
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		$this->_dbh = false;
 		if ('' != $fpath)
 			$this->_load($fpath);
@@ -207,11 +208,11 @@ class dba_Dictionary
 		$type = ($ext ? strtolower(substr($ext, 1)) : 'gdbm');
 
 		if (!in_array($type, dba_handlers()))
-			trigger_error("ÄúµÄ dba À©Õ¹²»Ö§³Ö `$type` ÕâÒ»Êı¾İÀàĞÍ", E_USER_ERROR);
+			trigger_error("ï¿½ï¿½ï¿½ dba ï¿½ï¿½Õ¹ï¿½ï¿½Ö§ï¿½ï¿½ `$type` ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", E_USER_ERROR);
 
 		$this->_dbh = dba_popen($fpath, 'r', $type);
 		if (!$this->_dbh)
-			trigger_error("ÎŞ·¨´ò¿ªÀàĞÍÎª `$type` µÄ dba Êı¾İÎÄ¼ş `$fpath`", E_USER_ERROR);
+			trigger_error("ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª `$type` ï¿½ï¿½ dba ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ `$fpath`", E_USER_ERROR);
 	}
 
 	function _unload()
@@ -227,7 +228,7 @@ class dba_Dictionary
 	{
 		if (!$this->_dbh)
 		{
-			trigger_error('ÇëÎñÔÚ²é´ÊÇ°ÏÈ¼ÓÔØ´ÊµäÎÄ¼ş', E_USER_WARNING);
+			trigger_error('ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ç°ï¿½È¼ï¿½ï¿½Ø´Êµï¿½ï¿½Ä¼ï¿½', E_USER_WARNING);
 			return -1;
 		}
 		
@@ -235,7 +236,7 @@ class dba_Dictionary
 	}
 }
 
-// »ùÓÚ sqlite, ÒªÇóÓĞ sqlite À©Õ¹
+// ï¿½ï¿½ï¿½ï¿½ sqlite, Òªï¿½ï¿½ï¿½ï¿½ sqlite ï¿½ï¿½Õ¹
 // CREATE TABLE _wordlist (id INTEGER NOT NULL PRIMARY KEY, word CHAR(32), freq BIGINT);
 // CREATE UNIQUE INDEX _wordidx ON _wordlist (word);
 class sql_Dictionary
@@ -244,9 +245,9 @@ class sql_Dictionary
 
 	function sql_Dictionary($fpath = '')
 	{
-		// »·¾³¼ì²é
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (!extension_loaded('sqlite'))
-			trigger_error('ÄúµÄ PHP »·¾³È±ÉÙ `sqlite` À©Õ¹, ÇëÖØĞÂÅäÖÃ PHP', E_USER_ERROR);
+			trigger_error('ï¿½ï¿½ï¿½ PHP ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ `sqlite` ï¿½ï¿½Õ¹, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PHP', E_USER_ERROR);
 
 		$this->_dbh = false;
 		if ('' != $fpath)
@@ -261,7 +262,7 @@ class sql_Dictionary
 	{
 		$this->_dbh = sqlite_popen($fpath);
 		if (!$this->_dbh)
-			trigger_error("ÎŞ·¨´ò¿ª sqlite Êı¾İ¿âÎÄ¼ş `$fpath`", E_USER_ERROR);
+			trigger_error("ï¿½Ş·ï¿½ï¿½ï¿½ sqlite ï¿½ï¿½İ¿ï¿½ï¿½Ä¼ï¿½ `$fpath`", E_USER_ERROR);
 	}
 
 	function _unload($fpath)
@@ -294,8 +295,8 @@ class sql_Dictionary
 	}
 }
 
-// »ùÓÚ´¿ÎÄ±¾, [word\tfreq\r\n]
-// ×Ô¶¯¼ì²â eAccelerator µÄÀ©Õ¹ÔËÓÃ
+// ï¿½ï¿½ï¿½Ú´ï¿½ï¿½Ä±ï¿½, [word\tfreq\r\n]
+// ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ eAccelerator ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½
 define ('_EAKEY_DICT_',		'ea_dict');
 if (!defined('_WORD_ALONE_')) define ('_WORD_ALONE_', 0x4000000);
 if (!defined('_WORD_PART_')) define ('_WORD_PART_',	0x8000000);
@@ -321,7 +322,7 @@ class txt_Dictionary
 		if ('' == $fpath)
 			$fpath = $this->fpath;
 		
-		// ³¢ÊÔ´Ó ea ÖĞ¼ì²éÊı¾İ
+		// ï¿½ï¿½ï¿½Ô´ï¿½ ea ï¿½Ğ¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		$has_ea = extension_loaded('eAccelerator');
 		if ($has_ea)
 		{
@@ -334,7 +335,7 @@ class txt_Dictionary
 		if ($this->_wordlist)
 			return;
 		
-		// ÖØĞÂ¼ÓÔØ
+		// ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
 		$this->_wordlist = array();			
 		if ($fd = @fopen($fpath, 'r'))
 		{
@@ -349,7 +350,7 @@ class txt_Dictionary
 				$first = substr($word, 0, 2);
 				if (!isset($dict[$first])) $dict[$first] = array();
 					
-				// ´¦Àí´Ê
+				// ï¿½ï¿½ï¿½ï¿½ï¿½
 				$val = $dict[$first][$word];
 				if (!$val || !($val & _WORD_ALONE_))
 				{
@@ -361,7 +362,7 @@ class txt_Dictionary
 					$dict[$first][$word] = $val;
 				}
 					
-				// ´¦Àí´Ê¶Î
+				// ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½
 				$len = strlen($word);
 				while ($len > 4)
 				{
@@ -374,7 +375,7 @@ class txt_Dictionary
 			}				
 			fclose($fd);
 				
-			// ´æÈë»º´æ
+			// ï¿½ï¿½ï¿½ë»ºï¿½ï¿½
 			if ($has_ea)
 			{
 				eaccelerator_rm(_EAKEY_DICT_);
@@ -394,7 +395,7 @@ class txt_Dictionary
 	{
 		if (!$this->_wordlist)
 		{
-			trigger_error('ÇëÎñ±ØÔÚ²é´ÊÇ°¼ÓÔØ´ÊµäÎÄ¼ş', E_USER_WARNING);
+			trigger_error('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ø´Êµï¿½ï¿½Ä¼ï¿½', E_USER_WARNING);
 			return -1;
 		}
 
