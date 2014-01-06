@@ -36,4 +36,26 @@ function get_article_list(&$dbo,$table,$cat_id,$page){
 	$sql = "SELECT * FROM `$table` WHERE is_show=1 and is_audit = 4 and cat_id='$cat_id' order by add_time desc ";
 	return $dbo->fetch_page($sql,$page);
 }
+
+function get_dg_category($array,$parentid=0,$level=0,$add=2) {
+	$newarray = array();
+	$temp = array();
+	foreach($array as $v) {
+		if($v['parent_id'] == $parentid) {
+			$newarray[] = array(
+				'cat_id' => $v['cat_id'],
+				'cat_name' => $v['cat_name'],
+				'parent_id' => $v['parent_id'],
+				'sort_order' => $v['sort_order'],
+                                'cat_icon'  => $v['cat_icon'],
+                                'seo' => $v['seo']
+			);
+			$temp = get_dg_category($array,$v['cat_id'],($level+$add));
+			if($temp) {
+				$newarray = array_merge($newarray, $temp);
+			}
+		}
+	}
+	return $newarray;
+}
 ?>

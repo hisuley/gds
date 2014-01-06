@@ -24,6 +24,8 @@ $t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
 
 $cat_id = intval(get_args('id'));
+$keyword = short_check(get_args('keyword'));
+$in = short_check(get_args('in'));
 
 $sql = "SELECT * FROM `$t_article_cat` order by sort_order asc";
 $article_cat = $dbo->getRs($sql);
@@ -36,7 +38,19 @@ foreach ($article_cat as $val){
 		$cat_name=$val['cat_name'];
 	}
 }
-$result = get_article_list($dbo,$t_article,$cat_id,$SYSINFO['article_page']);
+$cat_dg = get_dg_category($article_cat,$cat_id);
+$sql = "SELECT * FROM `$t_article` WHERE is_show=1 and is_audit = 4 and cat_id='$cat_id'";
+if($keyword && $in){
+    if($in == 'title'){
+        $sql .= " AND title like '%$keyword%'";
+    } elseif ($in == 'content'){
+        $sql .= " AND content like '%$keyword%'";
+    } elseif ($in == 'both') {
+        $sql .= " AND content like '%$keyword%' AND title like '%$keyword%'";
+    }
+}
+$sql .= " order by add_time desc ";
+$result = $dbo->fetch_page($sql,$SYSINFO['article_page']);
 
 if(!$result) {
 	trigger_error($s_langpackage->s_no_message);

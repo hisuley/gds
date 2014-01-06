@@ -186,6 +186,7 @@ class indexlp{
 	var $i_down_article = "下一篇";
 	var $i_none_article = "没有了";
 	var $i_none_articles = "没有文章";
+        var $i_none_child_cat = "没有子分类";
 
 	var $i_question_see = "常见问题";
 	var $i_safe_compp = "安全交易";
