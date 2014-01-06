@@ -81,6 +81,7 @@ $actArray = array(
     'brand_attr_edit'		=> array('a/goods/brand_attr_edit.php'),
 	'brand_attr_del'		=> array('a/goods/brand_attr_del.php'),
 	'brand_attr_extend'		=> array('a/goods/brand_attr_extend.php'),
+    'brand_attr_list'       => array('a/goods/brand_attr_list.php'),
 	'goods_category_add'	=> array('a/goods/category_add.php','m.php?app=goods_category_list'),
 	'goods_category_edit'	=> array('a/goods/category_edit.php'),
 	'goods_category_del'	=> array('a/goods/category_del.php','m.php?app=goods_category_list'),

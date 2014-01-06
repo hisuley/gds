@@ -55,6 +55,7 @@ $night_result = get_article_list($dbo,$t_article,$night_id,$SYSINFO['article_pag
 $holiday_result = get_article_list($dbo,$t_article,$holiday_id,$SYSINFO['article_page']);
 $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['article_page']);
 
-
+$sql = "SELECT cat_id,cat_icon FROM `$t_article_cat`";
+$article_cat_icon = $dbo->getRs($sql);
 
 ?>

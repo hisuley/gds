@@ -19,30 +19,70 @@
         <ul>
           <li>
             <span>级别：</span>
-            <!-- 用提取到属性值进行替换 -->
-            <a class="active">全部</a>
-            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">AAA</a>
-            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">AA</a>
-            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">A</a>
+            {sta: foreach($rank_info as $key => $value)[loop]}
+                    {sta:if(get_args('rank'.$value['brand_attr_id'])) [exc]}
+                    <a href={echo:preg_replace("/&rank".$value['brand_attr_id']."=([^&]+)/","",$url_this);/}>{echo:lp{i_all};/}</a>
+                    {sta:}else[exc]}
+                    <font class="active">{echo:lp{i_all};/}</font>
+                    {end:if/}
+                    {sta: foreach($value['attr_values'] as $k => $v)[loop]}
+                    {sta:if(get_args('rank'.$value['brand_attr_id'])) [exc]}
+                    {sta:$url = preg_replace("/rank".$value['brand_attr_id']."=([^&]+)/","rank".$value['brand_attr_id']."=".urlencode($v),$url_this);/}
+                    {sta:}else [exc]}
+                    {sta:$url = $url_this."&rank".$value['brand_attr_id']."=".urlencode($v);/}
+                    {end:if/}
+                    {sta:if(get_args('rank'.$value['brand_attr_id'])==$v) [exc]}
+                    <a class="active" >{echo: $v;/}</a>
+                    {sta:}else[exc]}
+                    <a title="{echo: $v;/}" href="{echo:$url;/}">{echo: $v;/}</a>
+                    {end:if/}
+                    {end:foreach/}
+            {end:foreach/}
           </li>
           
           <li>
             <span>区域:</span>
-            <font class="active">全部</font>
-            <!-- 用提取到属性值进行替换 -->
-            <a title="七星区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E4%B8%83%E6%98%9F%E5%8C%BA">七星区</a>
-            <a title="象山区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E8%B1%A1%E5%B1%B1%E5%8C%BA">象山区</a>
-            <a title="秀峰区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E7%A7%80%E5%B3%B0%E5%8C%BA">秀峰区</a>
-            <a title="叠彩区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E5%8F%A0%E5%BD%A9%E5%8C%BA">叠彩区</a>
+            {sta: foreach($area_info as $key => $value)[loop]}
+                    {sta:if(get_args('area'.$value['brand_attr_id'])) [exc]}
+                    <a href={echo:preg_replace("/&area".$value['brand_attr_id']."=([^&]+)/","",$url_this);/}>{echo:lp{i_all};/}</a>
+                    {sta:}else[exc]}
+                    <font class="active">{echo:lp{i_all};/}</font>
+                    {end:if/}
+                    {sta: foreach($value['attr_values'] as $k => $v)[loop]}
+                    {sta:if(get_args('area'.$value['brand_attr_id'])) [exc]}
+                    {sta:$url = preg_replace("/area".$value['brand_attr_id']."=([^&]+)/","area".$value['brand_attr_id']."=".urlencode($v),$url_this);/}
+                    {sta:}else [exc]}
+                    {sta:$url = $url_this."&area".$value['brand_attr_id']."=".urlencode($v);/}
+                    {end:if/}
+                    {sta:if(get_args('area'.$value['brand_attr_id'])==$v) [exc]}
+                    <a class="active" >{echo: $v;/}</a>
+                    {sta:}else[exc]}
+                    <a title="{echo: $v;/}" href="{echo:$url;/}">{echo: $v;/}</a>
+                    {end:if/}
+                    {end:foreach/}
+            {end:foreach/}
           </li>
           <li>
             <span>类型:</span>
-            <font class="active">全部</font>
-            <!-- 用提取到属性值进行替换 -->
-            <a title="七星区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E4%B8%83%E6%98%9F%E5%8C%BA">古代遗迹</a>
-            <a title="象山区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E8%B1%A1%E5%B1%B1%E5%8C%BA">历史建筑</a>
-            <a title="秀峰区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E7%A7%80%E5%B3%B0%E5%8C%BA">自然风景名胜区</a>
-            <a title="叠彩区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E5%8F%A0%E5%BD%A9%E5%8C%BA">叠彩区</a>
+            {sta: foreach($type_info as $key => $value)[loop]}
+                    {sta:if(get_args('type'.$value['brand_attr_id'])) [exc]}
+                    <a href={echo:preg_replace("/&type".$value['brand_attr_id']."=([^&]+)/","",$url_this);/}>{echo:lp{i_all};/}</a>
+                    {sta:}else[exc]}
+                    <font class="active">{echo:lp{i_all};/}</font>
+                    {end:if/}
+                    {sta: foreach($value['attr_values'] as $k => $v)[loop]}
+                    {sta:if(get_args('type'.$value['brand_attr_id'])) [exc]}
+                    {sta:$url = preg_replace("/type".$value['brand_attr_id']."=([^&]+)/","type".$value['brand_attr_id']."=".urlencode($v),$url_this);/}
+                    {sta:}else [exc]}
+                    {sta:$url = $url_this."&type".$value['brand_attr_id']."=".urlencode($v);/}
+                    {end:if/}
+                    {sta:if(get_args('type'.$value['brand_attr_id'])==$v) [exc]}
+                    <a class="active" >{echo: $v;/}</a>
+                    {sta:}else[exc]}
+                    <a title="{echo: $v;/}" href="{echo:$url;/}">{echo: $v;/}</a>
+                    {end:if/}
+                    {end:foreach/}
+            {end:foreach/}
           </li>
           <li><span>关键字：</span>无</li>
         </ul>

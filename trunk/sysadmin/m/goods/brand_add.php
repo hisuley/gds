@@ -6,7 +6,7 @@ if(!$IWEB_SHOP_IN) {
 require("../foundation/module_category.php");
 require("../foundation/module_brand.php");
 $t_category = $tablePreStr."category";
-$t_brand = $tablePreStr."brand";
+$t_brand_attr = $tablePreStr."brand_attr";
 //引入语言包
 $a_langpackage=new adminlp;
 
@@ -50,6 +50,18 @@ td span {color:red;}
 			<tr>
 				<td width="63px;"><?php echo $a_langpackage->a_brand_name; ?>：</td>
 				<td><input class="small-text" type="text" name="brand_name" value="<?php echo $info['brand_name']; ?>" /> <span>*</span></td>
+			</tr>
+                        <tr>
+				<td width="63px;"><?php echo $a_langpackage->a_scenic_type; ?>：</td>
+				<td class="attr_class" id="attr_content_type"></td>
+			</tr>
+                        <tr>
+				<td width="63px;"><?php echo $a_langpackage->a_scenic_rank; ?>：</td>
+				<td class="attr_class" id="attr_content_rank"></td>
+			</tr>
+                        <tr>
+				<td width="63px;"><?php echo $a_langpackage->a_scenic_area; ?>：</td>
+				<td class="attr_class" id="attr_content_area"></td>
 			</tr>
 			<tr>
 				<td><?php echo $a_langpackage->a_brand_desc; ?>：</td>
@@ -156,6 +168,78 @@ function hideinput() {
 	var ucate_span = document.getElementById("ucate_span");
 	ucate_add.style.display = '';
 	ucate_span.style.display = 'none';
+}
+
+changeAttr('类型');
+changeAttr('级别');
+changeAttr('区域');
+function changeAttr(value) {
+	ajax("a.php?act=brand_attr_list","POST","v="+value,function(data){
+		changeAttrTr(data);
+	},'JSON');
+}
+
+function changeAttrTr(objvalue) {
+        var type ='';
+        if(objvalue.attr_name == '类型'){
+             type = 'type';
+        }else if(objvalue.attr_name == '级别'){
+             type = 'rank';
+        }else if(objvalue.attr_name == '区域'){
+             type = 'area';
+        }
+	var attr_content = document.getElementById("attr_content_"+type);
+	attr_content.innerHTML = '';
+	var html = '';
+	var temp = '';
+        temp = formatFormElement(objvalue.brand_attr_id,objvalue.input_type,objvalue.attr_name,objvalue.attr_values,type);
+        html += '<span>'+temp+'</span><div class="clear"></div></div>';
+		
+	attr_content.innerHTML = html;
+	
+}
+//属性input类型 0:TEXT,1:SELECT,2:radio,3:checkbox
+function formatFormElement(id,type,name,value,types) {
+	var optionValue;
+	var cValue = str = '';
+	//if(goodsAttr[id]) {
+	//cValue = goodsAttr[id];
+	//}
+	if(type==0) {
+		str = '<input type="text" name="' + types + '" value="'+cValue+'" maxlength="200" />';
+	} else if (type==1 && value!='') {
+		optionValue = value.split("\n");
+		str = '<select name="' + types + '">';
+		str += '<option value="0"><?php echo $a_langpackage->a_please_select; ?>'+name + '</option>';
+		for(var i=0; i<optionValue.length; i++) {
+			if(optionValue[i] == cValue) {
+				str += '<option value="'+optionValue[i]+'" selected>' + optionValue[i] + '</option>';
+			} else {
+				str += '<option value="'+optionValue[i]+'">' + optionValue[i] + '</option>';
+			}
+		}
+		str += '</select>';
+	} else if (type==2 && value!='') {
+		optionValue = value.split("\r\n");
+		for(var i=0; i<optionValue.length; i++) {
+			if(optionValue[i] == cValue) {
+				str += '<input type="radio" name="' + types + '" value="'+optionValue[i]+'" checked />' + optionValue[i] + ' ';
+			} else {
+				str += '<input type="radio" name="' + types + '" value="'+optionValue[i]+'" />' + optionValue[i] + ' ';
+			}
+		}
+	} else if (type==3 && value!='') {
+		var regv = cValue.replace(/[\r\n]/g,"|");
+		if(regv) {
+			var re = new RegExp("(("+regv+")|([^\r\n]+))[\r\n]*","g");
+		} else {
+			var re = new RegExp("((iwebshop)|([^\r\n]+))[\r\n]*","g");
+		}
+		var str = value.replace(re,"<input type='radio' name='" + types + "' value='$1' checked$3 />$1");
+	} else if (type==4){
+		 str = '<textarea name="' + types + '" id="attr_text_area" cols="65" rows="10">'+cValue+'</textarea>';
+	}
+	return str;
 }
 </script>
 </body>
