@@ -48,4 +48,8 @@ $header = get_header_info($article_info);
 
 $sql = "SELECT article_id,title FROM $t_article WHERE  cat_id='8'";
 $left_article_list =$dbo->getRs($sql);
+require_once('../pscws23/pscws_call.php');
+$segmentResult = generateString($article_info['title']);
+$sql = "SELECT * FROM `$t_article` ".$segmentResult;
+$relatedArticle = $dbo->getRs($sql);
 ?>

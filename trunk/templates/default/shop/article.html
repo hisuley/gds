@@ -82,19 +82,15 @@
       <div class="artTxt">
       	<p>{echo: $article_info['content'];/}</p>
       </div>
-      <!-- @TODO 将demo文字替换为实际内容 -->
+      <!-- FIXED -->
       <div class="artRelated">
         <h3>相关文章</h3>
         <ul>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
-          <li><a>阳朔西街探究</a></li>
+          {sta:if(!empty($relatedArticle))[exc]}
+            {sta:foreach($relatedArticle as $val)[loop]}
+                <li><a href="article.php?id={echo:$val['article_id'];/}">{echo:$val['title'];/}</a></li>
+            {end:foreach/}
+           {end:if/}
         </ul>
       </div>
   <div class="clearfix"></div>
