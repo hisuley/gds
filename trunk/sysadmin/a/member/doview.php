@@ -46,6 +46,26 @@ $post['user_province'] = intval(get_args('province'));
 $post['user_city'] = intval(get_args('city'));
 $post['user_district'] = intval(get_args('district'));
 $post['user_notes'] = short_check(get_args('user_notes'));
+/* 图片上传处理 */
+$cupload = new upload();
+$cupload->set_dir("../uploadfiles/member_ico/","{y}/{m}/{d}");
+$setthumb = array(
+	'width' => array($SYSINFO['width1'],$SYSINFO['width2']),
+	'height' => array($SYSINFO['height1'],$SYSINFO['height2']),
+	'name' => array('thumb','m')
+);
+$cupload->set_thumb($setthumb);
+$file = $cupload->execute();
+	if(count($file)) {
+		$insert_array = array();
+		foreach($file as $k=>$v) {
+			if($v['flag']==1) {
+				if(!empty($v['dir'])){
+					$post2['user_ico'] = str_replace('../', '', $v['dir']).$v['name'];
+				}
+			}
+		}		
+}
 
 $post2['email_check'] = intval(get_args('email_check'));
 $post2['locked'] = intval(get_args('locked_status'));
