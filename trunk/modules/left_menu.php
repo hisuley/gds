@@ -141,6 +141,8 @@ if(filemtime("templates/default/modules/left_menu.html") > filemtime(__file__) |
 				<li><a id="user_favorite" onclick="menu_style_change('user_favorite')" href="modules.php?app=user_favorite"><?php echo  $m_langpackage->m_my_favorite;?></a></li>
 				<li><a id="user_guestbook" onclick="menu_style_change('user_guestbook')" href="modules.php?app=user_guestbook"><?php echo  $m_langpackage->m_my_guestbook;?></a></li>
 				<li><a id="user_address" onclick="menu_style_change('user_address')" href="modules.php?app=user_address"><?php echo $m_langpackage->m_getgoods_address;?></a></li>
+                                <li><a id="user_account_add" onclick="menu_style_change('user_account_add')" href="modules.php?app=user_account_add"><?php echo $m_langpackage->m_account_add;?></a></li>
+                                <li><a id="user_account_minus" onclick="menu_style_change('user_account_minus')" href="modules.php?app=user_account_minus"><?php echo $m_langpackage->m_account_minus;?></a></li>
 			</ul>
 		</div>
 		<div class="menu_title"> <span class="put"><a href="javascript:;" hidefocus="true" title="<?php echo $m_langpackage->m_programa;?>"></a></span> <a class="menuicon" id="seller" href="javascript:;"><?php echo  $m_langpackage->m_seller;?></a> </div>

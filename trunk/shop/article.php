@@ -69,11 +69,17 @@ if($article_info['is_link'] && $article_info['link_url']) {
 	echo "<script>location.href = '".$article_info['link_url']."'</script>";
 	exit;
 }
-
+//@TODO 请检查为何失效
+//include('pscws23/pscws_call.php');
+//$segmentResult = generateString($article_info['title']);
+//$sql = "SELECT * FROM `$t_article` WHERE article_id NOT IN(".$article_info['article_id'].") AND (".$segmentResult.") LIMIT 10";
+$sql = "SELECT * FROM $t_article WHERE 1 AND ";
+$relatedArticle = $dbo->getRs($sql);
 $header = get_header_info($article_info);
 
 $sql = "SELECT article_id,title FROM $t_article WHERE  cat_id='8'";
 $left_article_list =$dbo->getRs($sql);
+
 ?><?php if($article_info['cat_id']==8 ) {?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -85,6 +91,7 @@ $left_article_list =$dbo->getRs($sql);
 <base href="<?php echo  $baseUrl;?>" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/about.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 </head>
 <body>
@@ -156,6 +163,19 @@ $left_article_list =$dbo->getRs($sql);
       </div>
       <div class="artTxt">
       	<p><?php echo  $article_info['content'];?></p>
+      </div>
+      <!-- FIXED -->
+      <div class="artRelated">
+        <h3>相关文章</h3>
+        <ul>
+          <?php if(!empty($relatedArticle)){?>
+            <?php foreach($relatedArticle as $val){?>
+                <li><a href="article.php?id=<?php echo $val['article_id'];?>"><?php echo $val['title'];?></a></li>
+            <?php }?>
+           <?php }?>
+        </ul>
+      </div>
+  <div class="clearfix"></div>
       </div>
       <div class="link">
        <p ><?php echo $i_langpackage->i_up_article;?>：<?php if(empty($up_article)){?> <?php echo $i_langpackage->i_none_article;?> <?php }?><a href="<?php echo article_url($up_article['article_id']);?>"><?php echo $up_article['title'];?></a><br/><?php echo $i_langpackage->i_down_article;?>：<?php if(empty($down_article)){?> <?php echo $i_langpackage->i_none_article;?> <?php }?><a href="<?php echo article_url($down_article['article_id']);?>"><?php echo $down_article['title'];?></a></p>

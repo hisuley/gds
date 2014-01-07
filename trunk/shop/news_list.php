@@ -82,6 +82,7 @@ $nav_selected=5;
 <base href="<?php echo  $baseUrl;?>" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
+<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/parts.css" type="text/css" rel="stylesheet" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/article.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
@@ -114,24 +115,71 @@ $nav_selected=5;
       </div>
     </div>
   <?php }else{ ;?>
-  <div class="filters">
-      
-  </div>
-  <div class="content-common-box">
-    <div class="title"><h2><?php echo $cat_name;?><h2></div>
-    <div class="content-news-box">
-      <ul class="artlist_txt" >
-        <?php if($result['result']){?>
-        <?php foreach($result['result'] as $val){?>
-            <li class="clearfix"><span class="right"><?php echo  $val['add_time'];?></span>
-            <a href="<?php echo article_list_url($val['cat_id']);?>">[<?php echo $cat_name;?>]</a>
-            <a class="ttls" href="<?php echo article_url($val['article_id']);?>"><font style="color:<?php echo  $val['tag_color'];?> "><?php echo  $val['title'];?></font></a></li>
-        <?php }?>
-        <?php }else{ ;?>
-        <?php echo $i_langpackage->i_none_articles;?>
-        <?php }?>
-        </ul>
+  <div id="leftColumn">
+    <!-- @TODO 完善搜索功能 -->
+    <div class="SubCategoryBox filters">
+        <h3>资讯-新闻搜索</h3>
+        <form method="get">
+          <input type="hidden" name="id" value="<?php echo $cat_id;?>">
+          <input type="text" name="keyword" value="" placeholder="请输入搜索关键词"> 
+          <select name="in">
+            <option value="title">标题</option>
+            <option value="content">内容</option>
+            <option value="both">标题和内容</option>
+          </select>
+          <input type="submit" value="搜索"/>
+        </form>
     </div>
+    <div class="content-common-box">
+      <div class="title"><h2><?php echo $cat_name;?><h2></div>
+      <div class="content-news-box">
+        <ul class="artlist_txt" >
+          <?php if($result['result']){?>
+          <?php foreach($result['result'] as $val){?>
+              <li class="clearfix"><span class="right"><?php echo  $val['add_time'];?></span>
+              <a href="<?php echo article_list_url($val['cat_id']);?>">[<?php echo $cat_name;?>]</a>
+              <a class="ttls" href="<?php echo article_url($val['article_id']);?>"><font style="color:<?php echo  $val['tag_color'];?> "><?php echo  $val['title'];?></font></a></li>
+          <?php }?>
+          <?php }else{ ;?>
+          <?php echo $i_langpackage->i_none_articles;?>
+          <?php }?>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div id="rightColumn">
+    <!-- @TODO 判断是否存在子分类，如果存在，则展示 -->
+    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+        <div class="title">
+          <h2>子分类</h2>
+        </div>
+        <div class="tags">
+            <a href="search.php?k=Test" style="color:;">最美桂林之阳朔</a>
+        </div>
+     </div>
+     <!-- 本分类下热门资讯 -->
+     <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box news-box">
+        <div class="title">
+          <h2>热门资讯</h2>
+        </div>
+        <ul>
+          <li>
+            <a href="">象山区政府助力旅游生根发芽</a>
+          </li>
+          <li>
+            <a href="">象山区政府助力旅游生根发芽</a>
+             </li>
+          <li>
+            <a href="">象山区政府助力旅游生根发芽</a>
+             </li>
+          <li>
+            <a href="">象山区政府助力旅游生根发芽</a>
+             </li>
+          <li>
+            <a href="">象山区政府助力旅游生根发芽</a>
+          </li>
+        </ul>
+     </div>
   </div>
   <?php }?>
 

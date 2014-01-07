@@ -51,6 +51,7 @@ if($row['locked']==1){
 	trigger_error($m_langpackage->m_user_locked);//非法操作
 }
 $user_info = get_user_info($dbo,$t_user_info,$user_id);
+$user_detail = get_user_info($dbo,$t_users,$user_id);
 // 用户生日
 if($user_info['user_birthday']) {
 	$Y = substr($user_info['user_birthday'],0,4);
@@ -104,6 +105,9 @@ td{text-align:left;}
 				<form action="do.php?act=user_profile" method="post" name="form_profile">
 					<table width="100%" style="border:0" cellspacing="0">
 						<tr><td class="textright" width="40%">Email：</td><td><?php echo  get_sess_user_email();?></td></tr>
+                                                <tr><td class="textright"><?php echo  $m_langpackage->m_user_integral;?>：</td><td><?php echo  $user_detail['user_integral'];?></td></tr>
+                                                <tr><td class="textright"><?php echo  $m_langpackage->m_user_integral_surplus;?>：</td><td><?php echo  $user_detail['user_integral_surplus'];?></td></tr>
+                                                <tr><td class="textright"><?php echo  $m_langpackage->m_user_money;?>：</td><td><?php echo  $user_detail['user_money'];?></td></tr>
 						<tr><td class="textright"><?php echo  $m_langpackage->m_truename;?>：</td><td><input type="text" name="user_truename" value="<?php echo  $user_info['user_truename'];?>" maxlength="12" /></td></tr>
 						<tr>
 							<td class="textright"><?php echo  $m_langpackage->m_birthday;?>：</td>

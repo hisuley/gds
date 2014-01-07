@@ -81,6 +81,7 @@ $result = get_myorder_info($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goo
 				<form action="modules.php?app=user_my_order" method="post">
 					<select name="state">
 						<option value='' <?php if($state=="") {echo 'selected'; }?>>全部</option>
+                                                <option value='0' <?php if($state=="1"){echo "selected";}?>>已取消订单</option>
 						<option value='1' <?php if($state=="1"){echo "selected";}?>>未确定</option>
 						<option value='2' <?php if($state=="2"){echo "selected";}?>>已确定</option>
 						<option value='3' <?php if($state=="3"){echo "selected";}?>>未支付</option>

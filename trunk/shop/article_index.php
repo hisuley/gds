@@ -86,17 +86,17 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><?php echo  $header['title'];?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="<?php echo  $header['keywords'];?>" />
-<meta name="description" content="<?php echo  $header['description'];?>" />
-<base href="<?php echo  $baseUrl;?>" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/article.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery.slides.js"></script>
+  <title><?php echo  $header['title'];?></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="<?php echo  $header['keywords'];?>" />
+  <meta name="description" content="<?php echo  $header['description'];?>" />
+  <base href="<?php echo  $baseUrl;?>" />
+  <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
+  <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
+  <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/article.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
+  <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery.slides.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -105,10 +105,7 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
   <div id="contents" class="clearfix" >
   <div class="content-news-box">
     <div class="title">
-      <a href="#newest"><h2 class="active">最新资讯</h2></a>
-      <a href="#travel"><h2>旅游资讯</h2></a>
-      <a href="#media"><h2>媒体关注</h2></a>
-      <a href="#know"><h2>游资先知</h2></a>
+      <a href="#newest"><h2 class="active"><a href="news_list.php?id=11">最新资讯</h2></a></a>
     </div>
     <div class="content" id="newest">
       <div class="column-3">
@@ -139,13 +136,10 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
     <div class="content"  style="display:none;" id="media">
       test3
     </div>
-    <div class="content"  style="display:none;" id="know">
-      test4
-    </div>
   </div>
   <div class="column-3">
     <div class="content-common-box content-left-middle-box content-siver">
-      <div class="title"><h2>节庆活动</h2></div>
+      <div class="title"><h2><a href="news_list.php?id=20">节庆活动</a></h2><span><a href="news_list.php?id=20">更多&gt;&gt;</a></span></div>
       <div class="content">
         <ul>
           <?php foreach($holiday_result['result'] as $val){?>
@@ -168,7 +162,8 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
     </div>
     <div class="content-common-box content-left-middle-box content-siver">
       <div class="title">
-        <h2>桂林线路</h2>
+        <h2><a href="news_list.php?id=14">桂林线路</a></h2>
+        <span><a href="news_list.php?id=14">更多&gt;&gt;</a></span>
       </div>
        <?php  foreach($line_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
@@ -189,7 +184,7 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
   </div>
   <div class="column-7">
     <div class="content-common-box">
-      <div class="title"><h2>桂林景点</h2></div>
+      <div class="title"><h2><a href="news_list.php?id=12">桂林景点</a></h2><span><a href="news_list.php?id=12">更多&gt;&gt;</a></span></div>
       <?php  foreach($scenic_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -207,7 +202,7 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
     </div>
     <div class="content-common-box">
-      <div class="title"><h2>桂林酒店</h2></div>
+      <div class="title"><h2><a href="news_list.php?id=13">桂林酒店</a></h2><span><a href="news_list.php?id=13">更多&gt;&gt;</a></span></div>
       <?php  foreach($hotel_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -225,7 +220,7 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
     </div>
     <div class="content-common-box">
-      <div class="title"><h2>桂林美食</h2></div>
+      <div class="title"><h2><a href="news_list.php?id=15">桂林美食</a></h2><span><a href="news_list.php?id=15">更多&gt;&gt;</a></span></div>
       <?php  foreach($food_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -242,8 +237,44 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
         <?php }?>
     </div>
+     <div class="content-common-box">
+      <div class="title"><h2><a href="news_list.php?id=19">夜美桂林</a></h2><span><a href="news_list.php?id=19">更多&gt;&gt;</a></span></div>
+      <?php  foreach($night_result['result'] as $v){?>
+       <?php if($v['thumb'] != ''){?>
+         <div class="item-box" style="margin-left:0px;">
+          <div class="images">
+            <a href="<?php echo  article_url($v['article_id']);?>"><img src="<?php echo $v['thumb'];?>" /></a>
+          </div>
+          <div class="description">
+            <a href="<?php echo  article_url($v['article_id']);?>"><h3><?php echo sub_str($v['title'], 40);?></h3></a>
+            <p class="intro">
+              <?php echo sub_str(strip_tags($v['content']), 80);?>
+            </p>
+          </div>
+        </div>
+        <?php }?>
+        <?php }?>
+    </div>
     <div class="content-common-box">
-      <div class="title"><h2>桂林特产|购在桂林</h2></div>
+      <div class="title"><h2><a href="news_list.php?id=17">桂林特产</a></h2><span><a href="news_list.php?id=17">更多&gt;&gt;</a></span></div>
+      <?php  foreach($techan_result['result'] as $v){?>
+       <?php if($v['thumb'] != ''){?>
+         <div class="item-box" style="margin-left:0px;">
+          <div class="images">
+            <a href="<?php echo  article_url($v['article_id']);?>"><img src="<?php echo $v['thumb'];?>" /></a>
+          </div>
+          <div class="description">
+            <a href="<?php echo  article_url($v['article_id']);?>"><h3><?php echo sub_str($v['title'], 40);?></h3></a>
+            <p class="intro">
+              <?php echo sub_str(strip_tags($v['content']), 80);?>
+            </p>
+          </div>
+        </div>
+        <?php }?>
+        <?php }?>
+    </div>
+     <div class="content-common-box">
+      <div class="title"><h2><a href="news_list.php?id=18">购在桂林</a></h2><span><a href="news_list.php?id=18">更多&gt;&gt;</a></span></div>
       <?php  foreach($techan_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">

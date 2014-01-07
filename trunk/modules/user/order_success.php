@@ -42,7 +42,9 @@ $t_order_info = $tablePreStr."order_info";
 $dbo=new dbex;
 //读写分离定义方法
 dbtarget('r',$dbServs);
-
+$sql = "select order_id from `$t_order_info` where payid='$payid'";
+$row = $dbo->getRow($sql);
+$order_id = $row['order_id'];
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -81,7 +83,7 @@ td span{color:red;}
 				<form action="do.php?act=user_order" method="post" name="form_profile">
 				<table width="100%" border="0" cellspacing="0">
 					<tr><td colspan="4"><?php echo  $m_langpackage->m_postsuccess_rempayid;?>: <?php echo  $payid;?></td></tr>
-					<tr><td colspan="4"><input class="submit" style="font-weight:normal" type="button" value="<?php echo  $m_langpackage->m_back_myorder;?>" onclick="a()" /></td></tr>
+					<tr><td colspan="4"><input class="submit" style="font-weight:normal" type="button" value="<?php echo  $m_langpackage->m_back_myorder;?>" onclick="a()" /> <a href="modules.php?app=user_payment_message&id=<?php echo  $order_id;?>"><input class="submit" style="font-weight:normal" type="button" value="<?php echo  $m_langpackage->m_pay;?>" /></a></td></tr>
 				</table>
 				</form>
         	</div>

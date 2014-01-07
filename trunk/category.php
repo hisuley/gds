@@ -286,209 +286,254 @@ if($result_category) {
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta name="keywords" content="<?php echo  $header['keywords'];?>" />
-<meta name="description" content="<?php echo  $header['description'];?>" />
-<base href="<?php echo  $baseUrl;?>" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/parts.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta name="keywords" content="<?php echo  $header['keywords'];?>" />
+	<meta name="description" content="<?php echo  $header['description'];?>" />
+	<base href="<?php echo  $baseUrl;?>" />
+	<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
+	<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
+	<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/parts.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="skin/<?php echo $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 
-<title><?php echo  $header['title'];?></title>
+	<title><?php echo  $header['title'];?></title>
 </head>
 <body>
-<!-- wrapper -->
-<div id="wrapper">
-  <!-- header -->
-  <?php  include("shop/index_header.php");?>
-  <!-- /header -->
-  <!-- contents -->
-  <div id="contents" class="clearfix" >
-    <!-- leftColumn -->
-    <div id="leftColumn">
-      <div class="SubCategoryBox mg12b">
-        <h3><?php echo $this_catinfo['cat_name'];?>-<?php echo $i_langpackage->i_shop_filter;?></h3>
-        <ul>
-          <li><span><?php echo $i_langpackage->i_brand;?>：</span>
-          	<?php foreach($brand_list as $value){?>
-          		<?php if(!empty($value['brand_name'])) {?>
-          		<?php if($brand_id==$value['brand_id']) {?>
-	                <a class="active" ><?php echo  $value['brand_name'];?></a>
-	            <?php }else{?>
-	                <a title="<?php echo  $value['brand_name'];?>" href="<?php echo $value['url'];?>"><?php echo  $value['brand_name'];?></a>
-	            <?php }?>
-	            <?php }?>
-          	<?php }?>
-          </li>
-          <!--<li> <span>价格：</span> <a class="active" href="">全部</a> <a href="">1-999</a> <a href="">999-4500</a> <a href="">4500-9999</a> <a href="">10000以上</a> </li>-->
-          <?php  foreach($attr_info as $key => $value){?>
-		    <li>
-		        <span><?php echo  $value['attr_name'];?>:</span>
-	                <?php if(get_args('attr'.$value['attr_id'])) {?>
-	                    <a href=<?php echo preg_replace("/&attr".$value['attr_id']."=([^&]+)/","",$url_this);?>><?php echo $i_langpackage->i_all;?></a>
-	                <?php }else{?>
-	                    <font class="active"><?php echo $i_langpackage->i_all;?></font>
-	                <?php }?>
-		        <?php  foreach($value['attr_values'] as $k => $v){?>
-		            <?php if(get_args('attr'.$value['attr_id'])) {?>
-		            <?php $url = preg_replace("/attr".$value['attr_id']."=([^&]+)/","attr".$value['attr_id']."=".urlencode($v),$url_this);?>
-		            <?php }else {?>
-		            <?php $url = $url_this."&attr".$value['attr_id']."=".urlencode($v);?>
-		            <?php }?>
-		            <?php if(get_args('attr'.$value['attr_id'])==$v) {?>
-		                <a class="active" ><?php echo  $v;?></a>
-		            <?php }else{?>
-		                <a title="<?php echo  $v;?>" href="<?php echo $url;?>"><?php echo  $v;?></a>
-		            <?php }?>
-	            <?php }?>
-		    </li>
-    	<?php }?>
-        <li><span><?php echo $i_langpackage->i_keywords;?>：</span><?php echo $kk;?></li>
-		</ul>
-      </div>
-      <div id="leftMian" class="content-common-box content-left-big-box">
-        <div class="title">
-          <h2><?php echo $i_langpackage->i_choice_good;?></h2>
-          <ul class="toolbar">
-            <a id="list" class="selected"  hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('list',this)"><?php echo $i_langpackage->i_list;?></a>
-            <a id="window" hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('window',this)"><?php echo $i_langpackage->i_show_window;?></a>
-          </ul>
-        </div>
-        <div id="listItems" class="c_m" style="<?php echo  $viewlist;?>; position:relative">
-          <ul class="list_title clearfix">
-            <li class="summary"><?php echo $i_langpackage->i_goods_infos;?></li>
-            <li class="price"><?php echo $i_langpackage->i_price;?></li>
-            <li class="address"><?php echo $i_langpackage->i_in_area;?></li>
-            <li class="operating"><?php echo $i_langpackage->i_handle;?></li>
-          </ul>
-          <ul class="list_view">
-         <?php foreach($goods_list as $k=>$v){?>
-            <li id="showli_<?php echo $v['goods_id'];?>" class="clearfix">
-              <div class="photo"><a target="_blank" href="<?php echo  goods_url($v['goods_id']);?>"><img onmouseout="hidebox(<?php echo $v['goods_id'];?>)" onmouseover="showbox(<?php echo $v['goods_id'];?>)" src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>"  width="<?php echo $SYSINFO['width1'];?>" height="<?php echo $SYSINFO['height1'];?>"  alt="<?php echo $v['goods_name'];?>"  onerror="this.src='skin/default/images/nopic.gif'" /></a></div>
-              <div class="smmery">
-                <h4><a href="<?php echo  goods_url($v['goods_id']);?>"><?php echo  sub_str($v['goods_name'],40);?></a></h4>
-                <p class="des">[<?php echo $i_langpackage->i_description;?>]<?php echo  sub_str($v['goods_name'],30);?></p>
-                <p class="shopinfo"><?php echo $i_langpackage->i_shop;?>:<a class="seller" href="<?php echo  shop_url($v['shop_id']);?>"><?php echo  $v['shop_name'];?></a> <?php echo  $v['rank_name'];?></p>
-              </div>
-              <div class="price"> <em><?php echo $i_langpackage->i_money_sign;?><?php echo  $v['goods_price']=='0.00' ? $i_langpackage->i_price_discuss : $v['goods_price'];?></em>
-                <p class="ship"><?php echo $i_langpackage->i_freight;?>：<?php echo $v['transport_price']>0?$v['transport_price']:$v['transport_template_price'];?></p>
-              </div>
-              <div class="address">
-                <p><?php echo  $areainfo[$v['shop_province']];?>.<?php echo  $areainfo[$v['shop_city']];?></p>
-              </div>
-              <div class="operating"> <a class="addfavorite" title="<?php echo $i_langpackage->i_collection;?>" href="javascript:addFavorite(<?php echo  $v['goods_id'];?>,<?php echo  $v['shop_id'];?>,<?php echo $USER['user_id']!=''?$USER['user_id']:'0';?>);"></a> 
-              <?php if($v['goods_price']=='0.00') {?>
-	               <a class="ask" title="<?php echo $i_langpackage->i_inquiry;?>" href="inquiry.php?gid=<?php echo  $v['goods_id'];?>"></a>
-	            <?php }else{?>
-	                <a class="itembuy" title="<?php echo $i_langpackage->i_buy;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a>
-	            <?php }?>
-               <a class="compare" title="对比" href="javascript:;" onclick="initFloatTips('<?php echo $v['goods_id'];?>','<?php echo sub_str($v['goods_name'],10);?>',1,'<?php echo $v['cat_id'];?>')"></a> </div>
-              <div style="display: none;" id="showbox_<?php echo $v['goods_id'];?>" class="showbox">
-				<div class="subbox"><img id="showimg_<?php echo $v['goods_id'];?>" src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" width="234" height="234" alt="<?php echo $i_langpackage->i_loading_img;?>"   onerror="this.src='skin/default/images/nopic.gif'"/></div>
-			  </div>
-            </li>
-             <?php }?>
-          </ul>
-        </div>
-        <!-- 橱窗 -->
-			<div id="windowItems" class="window_type" style="<?php echo  $viewwindow;?>">
-				<ul class="list_view">
-					<?php foreach($goods_list as $k=>$v){?>
-					<li id="showli_<?php echo $v['goods_id'];?>" class="clearfix">
-						<div class="photo"><a target="_blank" href="<?php echo  goods_url($v['goods_id']);?>"><img onmouseout="hidebox(<?php echo $v['goods_id'];?>)" onmouseover="showbox(<?php echo $v['goods_id'];?>)" src="<?php echo  $v['is_set_image'] ? str_replace('thumb_','',$v['goods_thumb']) : 'skin/default/images/nopic.gif';?>"  width="190" height="190"  alt="<?php echo $v['goods_name'];?>"   onerror="this.src='skin/default/images/nopic.gif'"/></a></div>
-						<div class="smmery">
-							<h4><a href="<?php echo  goods_url($v['goods_id']);?>"><?php echo  sub_str($v['goods_name'],40);?></a></h4>
-							<p class="des">[<?php echo $i_langpackage->i_description;?>]<?php echo  sub_str($v['goods_name'],30);?></p>
-							<p class="shopinfo"><?php echo $i_langpackage->i_shop;?>：<a class="seller" href="<?php echo  shop_url($v['shop_id']);?>"><?php echo  $v['shop_name'];?></a> <?php echo  $v['rank_name'];?></p>
-						</div>
-						<div class="price"> <em><?php echo $i_langpackage->i_money_sign;?><?php echo  $v['goods_price']=='0.00' ? $i_langpackage->i_price_discuss : $v['goods_price'];?></em>
-							<p class="ship"><?php echo $i_langpackage->i_freight;?>：<?php echo $v['transport_price']>0?$v['transport_price']:$v['transport_template_price'];?></p>
-						</div>
-						<div class="address">
-							<p><?php echo  $areainfo[$v['shop_province']];?>.<?php echo  $areainfo[$v['shop_city']];?></p>
-						</div>
-						<div class="operating">
-							<ul class="clearfix">
-								<li><a class="addfavorite" title="<?php echo $i_langpackage->i_collection;?>" href="javascript:addFavorite(<?php echo  $v['goods_id'];?>,<?php echo  $v['shop_id'];?>,<?php echo $USER['user_id']!=''?$USER['user_id']:'0';?>);"></a></li>
-								<?php if($v['goods_price']=='0.00') {?>
-					               <li><a class="ask" title="<?php echo $i_langpackage->i_inquiry;?>" href="inquiry.php?gid=<?php echo  $v['goods_id'];?>"></a></li>
-					            <?php }else{?>
-					                <li><a class="itembuy" title="<?php echo $i_langpackage->i_buy;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a></li>
-					            <?php }?>
-								<li><a class="compare" title="<?php echo $i_langpackage->i_contrast;?>" href="javascript:;" onclick="initFloatTips('<?php echo $v['goods_id'];?>','<?php echo sub_str($v['goods_name'],10);?>',1,'<?php echo $v['cat_id'];?>')"></a></li>
+	<!-- wrapper -->
+	<div id="wrapper">
+		<!-- header -->
+		<?php  include("shop/index_header.php");?>
+		<!-- /header -->
+		<!-- contents -->
+		<div id="contents" class="clearfix" >
+			<!-- leftColumn -->
+			<div id="leftColumn">
+				<div class="SubCategoryBox mg12b">
+					<h3><?php echo $this_catinfo['cat_name'];?>-<?php echo $i_langpackage->i_shop_filter;?></h3>
+					<ul>
+						<li><span><?php echo $i_langpackage->i_brand;?>：</span>
+							<?php foreach($brand_list as $value){?>
+							<?php if(!empty($value['brand_name'])) {?>
+							<?php if($brand_id==$value['brand_id']) {?>
+							<a class="active" ><?php echo  $value['brand_name'];?></a>
+							<?php }else{?>
+							<a title="<?php echo  $value['brand_name'];?>" href="<?php echo $value['url'];?>"><?php echo  $value['brand_name'];?></a>
+							<?php }?>
+							<?php }?>
+							<?php }?>
+						</li>
+						<!--<li> <span>价格：</span> <a class="active" href="">全部</a> <a href="">1-999</a> <a href="">999-4500</a> <a href="">4500-9999</a> <a href="">10000以上</a> </li>-->
+						<?php  foreach($attr_info as $key => $value){?>
+						<li>
+							<span><?php echo  $value['attr_name'];?>:</span>
+							<?php if(get_args('attr'.$value['attr_id'])) {?>
+							<a href=<?php echo preg_replace("/&attr".$value['attr_id']."=([^&]+)/","",$url_this);?>><?php echo $i_langpackage->i_all;?></a>
+							<?php }else{?>
+							<font class="active"><?php echo $i_langpackage->i_all;?></font>
+							<?php }?>
+							<?php  foreach($value['attr_values'] as $k => $v){?>
+							<?php if(get_args('attr'.$value['attr_id'])) {?>
+							<?php $url = preg_replace("/attr".$value['attr_id']."=([^&]+)/","attr".$value['attr_id']."=".urlencode($v),$url_this);?>
+							<?php }else {?>
+							<?php $url = $url_this."&attr".$value['attr_id']."=".urlencode($v);?>
+							<?php }?>
+							<?php if(get_args('attr'.$value['attr_id'])==$v) {?>
+							<a class="active" ><?php echo  $v;?></a>
+							<?php }else{?>
+							<a title="<?php echo  $v;?>" href="<?php echo $url;?>"><?php echo  $v;?></a>
+							<?php }?>
+							<?php }?>
+						</li>
+						<?php }?>
+						<li><span><?php echo $i_langpackage->i_keywords;?>：</span><?php echo $kk;?></li>
+					</ul>
+				</div>
+				<div id="leftMian" class="content-common-box content-left-big-box">
+					<div class="title">
+						<h2><?php echo $i_langpackage->i_choice_good;?></h2>
+						<ul class="toolbar">
+							<a id="list" class="selected"  hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('list',this)"><?php echo $i_langpackage->i_list;?></a>
+							<a id="window" hidefocus="true" href="javascript:void(0);" onclick="changeStyle2('window',this)"><?php echo $i_langpackage->i_show_window;?></a>
+						</ul>
+					</div>
+					<div id="listItems" class="c_m" style="<?php echo  $viewlist;?>; position:relative">
+						<ul class="list_title clearfix">
+							<li class="summary"><?php echo $i_langpackage->i_goods_infos;?></li>
+							<li class="price"><?php echo $i_langpackage->i_price;?></li>
+							<li class="address"><?php echo $i_langpackage->i_in_area;?></li>
+							<li class="operating"><?php echo $i_langpackage->i_handle;?></li>
+						</ul>
+						<ul class="list_view">
+							<?php foreach($goods_list as $k=>$v){?>
+							<li id="showli_<?php echo $v['goods_id'];?>" class="clearfix">
+								<div class="photo"><a target="_blank" href="<?php echo  goods_url($v['goods_id']);?>"><img onmouseout="hidebox(<?php echo $v['goods_id'];?>)" onmouseover="showbox(<?php echo $v['goods_id'];?>)" src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>"  width="<?php echo $SYSINFO['width1'];?>" height="<?php echo $SYSINFO['height1'];?>"  alt="<?php echo $v['goods_name'];?>"  onerror="this.src='skin/default/images/nopic.gif'" /></a></div>
+								<div class="smmery">
+									<h4><a href="<?php echo  goods_url($v['goods_id']);?>"><?php echo  sub_str($v['goods_name'],40);?></a></h4>
+									<p class="des">[<?php echo $i_langpackage->i_description;?>]<?php echo  sub_str($v['goods_name'],30);?></p>
+									<p class="shopinfo"><?php echo $i_langpackage->i_shop;?>:<a class="seller" href="<?php echo  shop_url($v['shop_id']);?>"><?php echo  $v['shop_name'];?></a> <?php echo  $v['rank_name'];?></p>
+								</div>
+								<div class="price"> <em><?php echo $i_langpackage->i_money_sign;?><?php echo  $v['goods_price']=='0.00' ? $i_langpackage->i_price_discuss : $v['goods_price'];?></em>
+									<p class="ship"><?php echo $i_langpackage->i_freight;?>：<?php echo $v['transport_price']>0?$v['transport_price']:$v['transport_template_price'];?></p>
+								</div>
+								<div class="address">
+									<p><?php echo  $areainfo[$v['shop_province']];?>.<?php echo  $areainfo[$v['shop_city']];?></p>
+								</div>
+								<div class="operating"> <a class="addfavorite" title="<?php echo $i_langpackage->i_collection;?>" href="javascript:addFavorite(<?php echo  $v['goods_id'];?>,<?php echo  $v['shop_id'];?>,<?php echo $USER['user_id']!=''?$USER['user_id']:'0';?>);"></a> 
+									<?php if($v['goods_price']=='0.00') {?>
+									<a class="ask" title="<?php echo $i_langpackage->i_inquiry;?>" href="inquiry.php?gid=<?php echo  $v['goods_id'];?>"></a>
+									<?php }else{?>
+									<a class="itembuy" title="<?php echo $i_langpackage->i_buy;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a>
+									<?php }?>
+									<a class="compare" title="对比" href="javascript:;" onclick="initFloatTips('<?php echo $v['goods_id'];?>','<?php echo sub_str($v['goods_name'],10);?>',1,'<?php echo $v['cat_id'];?>')"></a> </div>
+									<div style="display: none;" id="showbox_<?php echo $v['goods_id'];?>" class="showbox">
+										<div class="subbox"><img id="showimg_<?php echo $v['goods_id'];?>" src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" width="234" height="234" alt="<?php echo $i_langpackage->i_loading_img;?>"   onerror="this.src='skin/default/images/nopic.gif'"/></div>
+									</div>
+								</li>
+								<?php }?>
 							</ul>
 						</div>
-						<div style="display: none;" id="showbox_<?php echo $v['goods_id'];?>" class="showbox">
-							<div class="subbox"><img id="showimg_<?php echo $v['goods_id'];?>" src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" width="234" height="234" alt="<?php echo $i_langpackage->i_loading_img;?>"   onerror="this.src='skin/default/images/nopic.gif'"/></div>
+						<!-- 橱窗 -->
+						<div id="windowItems" class="window_type" style="<?php echo  $viewwindow;?>">
+							<ul class="list_view">
+								<?php foreach($goods_list as $k=>$v){?>
+								<li id="showli_<?php echo $v['goods_id'];?>" class="clearfix">
+									<div class="photo"><a target="_blank" href="<?php echo  goods_url($v['goods_id']);?>"><img onmouseout="hidebox(<?php echo $v['goods_id'];?>)" onmouseover="showbox(<?php echo $v['goods_id'];?>)" src="<?php echo  $v['is_set_image'] ? str_replace('thumb_','',$v['goods_thumb']) : 'skin/default/images/nopic.gif';?>"  width="190" height="190"  alt="<?php echo $v['goods_name'];?>"   onerror="this.src='skin/default/images/nopic.gif'"/></a></div>
+									<div class="smmery">
+										<h4><a href="<?php echo  goods_url($v['goods_id']);?>"><?php echo  sub_str($v['goods_name'],40);?></a></h4>
+										<p class="des">[<?php echo $i_langpackage->i_description;?>]<?php echo  sub_str($v['goods_name'],30);?></p>
+										<p class="shopinfo"><?php echo $i_langpackage->i_shop;?>：<a class="seller" href="<?php echo  shop_url($v['shop_id']);?>"><?php echo  $v['shop_name'];?></a> <?php echo  $v['rank_name'];?></p>
+									</div>
+									<div class="price"> <em><?php echo $i_langpackage->i_money_sign;?><?php echo  $v['goods_price']=='0.00' ? $i_langpackage->i_price_discuss : $v['goods_price'];?></em>
+										<p class="ship"><?php echo $i_langpackage->i_freight;?>：<?php echo $v['transport_price']>0?$v['transport_price']:$v['transport_template_price'];?></p>
+									</div>
+									<div class="address">
+										<p><?php echo  $areainfo[$v['shop_province']];?>.<?php echo  $areainfo[$v['shop_city']];?></p>
+									</div>
+									<div class="operating">
+										<ul class="clearfix">
+											<li><a class="addfavorite" title="<?php echo $i_langpackage->i_collection;?>" href="javascript:addFavorite(<?php echo  $v['goods_id'];?>,<?php echo  $v['shop_id'];?>,<?php echo $USER['user_id']!=''?$USER['user_id']:'0';?>);"></a></li>
+											<?php if($v['goods_price']=='0.00') {?>
+											<li><a class="ask" title="<?php echo $i_langpackage->i_inquiry;?>" href="inquiry.php?gid=<?php echo  $v['goods_id'];?>"></a></li>
+											<?php }else{?>
+											<li><a class="itembuy" title="<?php echo $i_langpackage->i_buy;?>" href="modules.php?app=user_order_adress&gid=<?php echo $v['goods_id'];?>&v=1"></a></li>
+											<?php }?>
+											<li><a class="compare" title="<?php echo $i_langpackage->i_contrast;?>" href="javascript:;" onclick="initFloatTips('<?php echo $v['goods_id'];?>','<?php echo sub_str($v['goods_name'],10);?>',1,'<?php echo $v['cat_id'];?>')"></a></li>
+										</ul>
+									</div>
+									<div style="display: none;" id="showbox_<?php echo $v['goods_id'];?>" class="showbox">
+										<div class="subbox"><img id="showimg_<?php echo $v['goods_id'];?>" src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" width="234" height="234" alt="<?php echo $i_langpackage->i_loading_img;?>"   onerror="this.src='skin/default/images/nopic.gif'"/></div>
+									</div>
+								</li>
+								<?php }?>
+							</ul>
+							<!-- 橱窗 -->
 						</div>
-					</li>
+						<div class="clearfix"></div>
+						<div class="pagenav clearfix">
+							<?php if($result['countpage']>0){?>
+							<?php  include("modules/page.php");?>
+							<?php  } else {?>
+							<?php echo $i_langpackage->i_no_product;?>！
+							<?php }?>
+						</div>
+					</div>
+					<!-- leftColumn -->
+				</div>
+				<!-- rightColumn -->
+				<div id="rightColumn">
+
+					<?php if($cat_id == 434){?>
+					<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+						<div class="title">
+							<h2>分享</h2>
+						</div>
+						<a href="http://weibo.com" style="
+						display: block;
+						margin-left: 10px;
+						"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_64x64.png" style="
+						margin-bottom: -20px;
+						margin-right: 10px;
+						">欢迎关注我们的微博</a>
+						<!-- @TODO 判断用户是否订阅 -->
+						<a href=".."  style="
+						display: block;
+						margin-left: 10px;
+						margin-top:30px;
+						">
+							<img src="skin/<?php echo  $SYSINFO['templates'];?>/images/rss.png" width="64" height="64"  style="
+						margin-bottom: -20px;
+						margin-right: 10px;
+						">
+							RSS订阅景区信息</a>
+					</div>
+					<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box news-box">
+						<div class="title">
+							<h2>评论</h2>
+						</div>
+						<ul>
+							<li>
+								<a href="goods.php?id=3224">价格不错，又实惠！</a>
+							</li>
+							<li>
+								<a href="goods.php?id=3224">价格不错，又实惠！</a>
+							</li>
+							<li>
+								<a href="goods.php?id=3224">价格不错，又实惠！</a>
+							</li>
+							<li>
+								<a href="goods.php?id=3224">价格不错，又实惠！</a>
+							</li>
+						</ul>
+					</div>
 					<?php }?>
-				</ul>
-				<!-- 橱窗 -->
+					<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+						<div class="title">
+							<h2><?php echo $i_langpackage->i_hot_label;?></h2>
+						</div>
+						<div class="tags">
+							<?php foreach($tag_list as $value){?>
+							<a href="<?php echo $value['url'];?>" style="color:<?php echo $value['tag_color'];?>;<?php if($value['is_blod']){?>font-weight:bold;<?php }?>"><?php echo $value['tag_name'];?></a>
+							<?php }?>
+						</div>
+					</div>
+					<div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
+						<div class="title">
+							<h2><?php echo $i_langpackage->i_goods_commend;?></h2>
+						</div>
+						<ul>
+							<?php foreach($goods_hot as $key => $v){?>
+							<li <?php if($key%2!=0){?> class="doublenum"<?php }?>>
+								<p class="photo"><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><img src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" alt="" width="58" height="58"  onerror="this.src='skin/default/images/nopic.gif'"/></a></p>
+								<h4><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><?php echo  sub_str($v['goods_name'],38);?></a></h4>
+								<p class="price"><?php echo $i_langpackage->i_money_sign;?><?php echo $v['goods_price'];?></p>
+							</li>
+							<?php }?>
+						</ul>
+					</div>
+					<div class="viewrecord bg_gary mg12b content-common-box content-right-middle-box">
+						<div class="title">
+							<h2><?php echo $i_langpackage->i_brower_register;?></h2>
+						</div>
+						<ul class="clearfix">
+							<?php foreach($goodshistory as $k=> $v){?>
+							<li <?php if($k%2!=0){?>class="lst"<?php }?>>
+								<p class="photo"><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><img src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" alt="" width="58" height="58"  onerror="this.src='skin/default/images/nopic.gif'"/></a></p>
+								<p class="price"><?php echo $i_langpackage->i_money_sign;?><?php echo $v['goods_price'];?></p>
+							</li>
+							<?php }?>
+						</ul>
+					</div>
+					<!-- /rightColumn -->
+				</div>
+				<!-- /contents -->
 			</div>
-        <div class="clearfix"></div>
-        <div class="pagenav clearfix">
-        	<?php if($result['countpage']>0){?>
-        	<?php  include("modules/page.php");?>
-            <?php  } else {?>
-            <?php echo $i_langpackage->i_no_product;?>！
-            <?php }?>
-          </div>
-      </div>
-      <!-- leftColumn -->
-    </div>
-    <!-- rightColumn -->
-    <div id="rightColumn">
-    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
-        <div class="title">
-          <h2><?php echo $i_langpackage->i_hot_label;?></h2>
-        </div>
-        <div class="tags">
-        	<?php foreach($tag_list as $value){?>
-        	<a href="<?php echo $value['url'];?>" style="color:<?php echo $value['tag_color'];?>;<?php if($value['is_blod']){?>font-weight:bold;<?php }?>"><?php echo $value['tag_name'];?></a>
-        	<?php }?>
+			<!-- footer -->
+			<?php  require("shop/index_footer.php");?>
+			<!-- /footer -->
 		</div>
-      </div>
-       <div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
-        <div class="title">
-          <h2><?php echo $i_langpackage->i_goods_commend;?></h2>
-        </div>
-        <ul>
-        <?php foreach($goods_hot as $key => $v){?>
-        	<li <?php if($key%2!=0){?> class="doublenum"<?php }?>>
-	         	 <p class="photo"><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><img src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" alt="" width="58" height="58"  onerror="this.src='skin/default/images/nopic.gif'"/></a></p>
-	           <h4><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><?php echo  sub_str($v['goods_name'],38);?></a></h4>
-	           <p class="price"><?php echo $i_langpackage->i_money_sign;?><?php echo $v['goods_price'];?></p>
-	         </li>
-         <?php }?>
-        </ul>
-        </div>
-        <div class="viewrecord bg_gary mg12b content-common-box content-right-middle-box">
-        <div class="title">
-          <h2><?php echo $i_langpackage->i_brower_register;?></h2>
-        </div>
-        <ul class="clearfix">
-        <?php foreach($goodshistory as $k=> $v){?>
-	    	<li <?php if($k%2!=0){?>class="lst"<?php }?>>
-	         	<p class="photo"><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><img src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" alt="" width="58" height="58"  onerror="this.src='skin/default/images/nopic.gif'"/></a></p>
-	          	<p class="price"><?php echo $i_langpackage->i_money_sign;?><?php echo $v['goods_price'];?></p>
-	       </li>
-         <?php }?>
-        </ul>
-        </div>
-    <!-- /rightColumn -->
-    </div>
-    <!-- /contents -->
-</div>
-  <!-- footer -->
- <?php  require("shop/index_footer.php");?>
-    <!-- /footer -->
-  </div>
-  <!-- /wrapper -->
-</div>
+		<!-- /wrapper -->
+	</div>
 </body>
 <div id="contrastbox" style="z-index:999;position:absolute;right:0;border:1px solid #ccc; background:#FFF; display:none; width:188px;">
 	<form action="modules.php?app=contrast" method="post" target="_blank" id="contrastform">
@@ -497,11 +542,11 @@ if($result_category) {
 		<input type="hidden" name="contrast_cid" id="contrast_cid" value="" />
 		<input type="hidden" name="contrast_goods_name" id="contrast_goods_name" value="" />
 		<div style="padding-bottom:12px;">
-  <h2 style="padding:6px 10px;display:block;background:url(skin/default/images/ttlm_01_bg.gif) repeat-x left top;font-size:14px;font-weight:bolder;color:#F77A07;border-bottom:1px solid #ccc"><?php echo $i_langpackage->i_contract_goods;?></h2> <a onclick="clearItems()" style="float:right; position:relative; top:-23px;right:10px" href="javascript:void(0);"><?php echo $i_langpackage->i_close;?></a>
-  <div id="contrast_goods_name_show"></div>
-  </div>
+			<h2 style="padding:6px 10px;display:block;background:url(skin/default/images/ttlm_01_bg.gif) repeat-x left top;font-size:14px;font-weight:bolder;color:#F77A07;border-bottom:1px solid #ccc"><?php echo $i_langpackage->i_contract_goods;?></h2> <a onclick="clearItems()" style="float:right; position:relative; top:-23px;right:10px" href="javascript:void(0);"><?php echo $i_langpackage->i_close;?></a>
+			<div id="contrast_goods_name_show"></div>
+		</div>
 		<!--<input type="submit" name="sub" value="对比" /> -->
-        <a onclick="document.getElementById('contrastform').submit();return false;" href="javascript:;" class="button_4" style=" position:relative;top:25px;display:block;margin-left:100px; width:76px;height:24px;"><img src="skin/default/images/icon_contrast.gif" alt="<?php echo $i_langpackage->i_start_compare;?>"   onerror="this.src='skin/default/images/nopic.gif'"/></a>
+		<a onclick="document.getElementById('contrastform').submit();return false;" href="javascript:;" class="button_4" style=" position:relative;top:25px;display:block;margin-left:100px; width:76px;height:24px;"><img src="skin/default/images/icon_contrast.gif" alt="<?php echo $i_langpackage->i_start_compare;?>"   onerror="this.src='skin/default/images/nopic.gif'"/></a>
 	</form>
 </div>
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
@@ -515,7 +560,7 @@ function clearItems(){
 }
 function delNow(linkitem){
 	linkitem.parentNode.parentNode.removeChild(linkitem.parentNode);
-	}
+}
 function showbox(id) {
 	document.getElementById("showbox_"+id).style.display = '';
 	var showimg = document.getElementById("showimg_"+id);
@@ -535,7 +580,7 @@ function addFavorite(id,sid,uid) {
 	if(uid=='0'){
 		alert("<?php echo  $i_langpackage->i_g_addfailed;?>");
 		return;
-		}
+	}
 	if (sid == uid){
 		alert('<?php echo $i_langpackage->i_mygoods_error;?>');
 	}else {

@@ -139,14 +139,17 @@ $attr_ids = array();
 $attr_status = false;
 if($goods_attr) {
 	foreach($goods_attr as $key=>$value) {
-		$attr[$value['attr_id']] = $value['attr_values'];
+                $attr[$value['attr_id']]['attr_id'] = $value['attr_id'];
+                $attr[$value['attr_id']]['attr_values'] = $value['attr_values'];
+                $attr[$value['attr_id']]['price'] = $value['price'];
 		$attr_ids[] = $value['attr_id'];
 	}
-	$sql = "SELECT attr_id,attr_name FROM $t_attribute WHERE attr_id IN (".implode(',',$attr_ids).")";
+	$sql = "SELECT attr_id,attr_name,price FROM $t_attribute WHERE attr_id IN (".implode(',',$attr_ids).")";
 	$attribute_result = $dbo->getRs($sql);
 	$attribute = array();
 	foreach($attribute_result as $value) {
-		$attribute[$value['attr_id']] = $value['attr_name'];
+		$attribute[$value['attr_id']]['attr_values'] = $value['attr_name'];
+                $attribute[$value['attr_id']]['price'] = $value['price'];
 	}
 	$attr_status = true;
 }
@@ -219,6 +222,60 @@ if($result_category) {
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/izoom.js"></script>
 <script type="text/javascript">
+var attr_ids =  <?php echo  $attr_ids;?>;
+var goodsAttr_value = new Array();
+var goodsAttr_name = new Array();
+var goodsAttr_price = new Array();
+        <?php if($attr_status) {
+    foreach($attr as $key=>$value){
+        if($attribute[$key]['price']){
+            $value['attr_values'] = preg_replace("/[\r\n]+/",'|',$value['attr_values']);
+		if(substr($value['attr_values'],'-1') == '|') {
+			$value['attr_values'] = substr($value['attr_values'],'0','-1');
+		}
+                $value['price'] = preg_replace("/[\r\n]+/",'|',$value['price']);
+		if(substr($value['price'],'-1') == '|') {
+			$value['price'] = substr($value['price'],'0','-1');
+		}
+            echo "goodsAttr_value['".$value['attr_id']."'] = '".$value['attr_values']."'; \r\n";
+            echo "goodsAttr_name['".$value['attr_id']."'] = '".$attribute[$key]['attr_values']."'; \r\n";
+            echo "goodsAttr_price['".$value['attr_id']."'] = '".$value['price']."'; \r\n";
+         }
+    } }?>
+
+function changePrice(price){
+    var price_value = document.getElementById("price_value");
+    price_value.innerHTML = price;
+}
+
+function goods_attr_init(){
+    var cValue = str = '';
+     var attr_content = document.getElementById("attr_content_info");
+    attr_content.innerHTML = '';
+    var html =  '';
+    var temp = '';
+    for(var i=0; i<goodsAttr_name.length; i++) {
+            
+            if(goodsAttr_name[i] != undefined && goodsAttr_value[i] != undefined){ 
+                var regv = goodsAttr_value[i].replace(/[\r\n]/g,"|");
+                var optionValue = goodsAttr_value[i].split("|");
+                var optionPrice = goodsAttr_price[i].split("|");
+                
+                html += '<span>'+goodsAttr_name[i]+'：</span>';
+                for(var j=0; j<optionValue.length; j++){ 
+                    if(optionValue[j] != undefined){
+                         html +=  '<span onclick="changePrice('+optionPrice[j]+')">'+optionValue[j]+' </span>';
+                    }
+                }
+                html += '<br/>';
+            }
+    }
+    if(html){
+        attr_content.style.display = "";
+        attr_content.innerHTML = html;
+    }
+}
+
 window.onload = function(){
     magnifier.init({
                    cont : document.getElementById('magnifier'),
@@ -226,7 +283,9 @@ window.onload = function(){
                    mag : document.getElementById('mag'),
                    scale : 3
                    });
+     goods_attr_init();
 }
+
 function changeImage(obj){
 	var ia=obj.parentNode;
 	var rev=ia.rev;//中图
@@ -268,9 +327,9 @@ function changeImage(obj){
 						<a class="right_button" href="javascript:void(0);" onclick="img_next('list1_1');"></a> </div>
 				</div>
 				<div class="itemProperty">
-					<ul>
+					<ul id="attr_ul">
 						<li> <span><?php echo $s_langpackage->s_goods_price;?>：</span> <?php  if($goodsinfo['goods_price']=='0.00') {?> <em class="price"><?php echo  $s_langpackage->s_no_price;?></em> <?php  } else{?>
-							<?php echo $s_langpackage->s_money_sign;?><em class="price"><?php echo  $goodsinfo['goods_price'];?></em> <?php echo  $s_langpackage->s_yuan;?>
+							<?php echo $s_langpackage->s_money_sign;?><em class="price" id="price_value"><?php echo  $goodsinfo['goods_price'];?></em> <?php echo  $s_langpackage->s_yuan;?>
 							<?php }?> </li>
 						<li> <span><?php echo $s_langpackage->s_goods_transport;?>：</span>
 							<?php  if($goodsinfo['is_transport_template']=='1') {?> 
@@ -282,7 +341,9 @@ function changeImage(obj){
 							<?php  } else{?>
 							<span><?php echo  $goodsinfo['transport_price'];?></span>
 							<?php }?>
-							</li>
+							</li> 
+                                            <li id="attr_content_info" style="display:none;">
+                                                </li>
 						<li> <span><?php echo $s_langpackage->s_goods_wtbuy;?>：</span> <span> <input type="text" size="4" value="1" maxvalue="1" minvalue="1" id='num' /> <input type="hidden" value="<?php echo $goodsinfo['goods_number'];?>" id="goods_number" /> <input type="hidden" value="<?php echo $shop_id;?>" id="shop_id" /> <input type="hidden" value="<?php echo $USER['user_id'];?>" id="shop_user" /> <input type="hidden" value="<?php echo  $goodsinfo['favpv'];?>" id="favpv_num"> <label></label> </span> (<?php echo $s_langpackage->s_may_buy;?><?php echo $goodsinfo['goods_number'];?> <?php echo $s_langpackage->s_piece;?>) </li>
 						<?php  if($goodsinfo['goods_price']=='0.00') {?>
 						<li class="b_none clearfix"> <a class="btn_inquiry" href="inquiry.php?gid=<?php echo  $goodsinfo['goods_id'];?>" title="<?php echo  $s_langpackage->s_g_askprice;?>"></a> <?php  } else {?>
@@ -331,8 +392,12 @@ function changeImage(obj){
 						if($attr_status) {
 						$i = 0;
 						foreach($attr as $key=>$value){?>
-						<td class="text_right"><?php echo  $attribute[$key];?>:</td>
-						<td class="text_left"><?php echo  $value;?></td>
+                                                <?php if($attribute[$key]['attr_values'] == '地图') {?>
+                                                <img src="http://api.map.baidu.com/staticimage?width=400&height=200&center=<?php echo  $value['attr_values'];?>&markers=<?php echo  $value['attr_values'];?>&zoom=14&markerStyles=s,A,0xff0000">
+                                                <?php  } else {?>
+						<td class="text_right"><?php echo  $attribute[$key]['attr_values'];?>:</td>
+						<td class="text_left"><?php echo  $value['attr_values'];?></td>
+                                                <?php }?>
 						<?php 
 						if($i%2) {
 						echo "</tr>

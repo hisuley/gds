@@ -21,6 +21,7 @@ var goodsAttr_name = new Array();
 var goodsAttr_price = new Array();
         {sta:if($attr_status) {
     foreach($attr as $key=>$value){
+        if(!empty($attribute[$key])){
         if($attribute[$key]['price']){
             $value['attr_values'] = preg_replace("/[\r\n]+/",'|',$value['attr_values']);
 		if(substr($value['attr_values'],'-1') == '|') {
@@ -34,6 +35,7 @@ var goodsAttr_price = new Array();
             echo "goodsAttr_name['".$value['attr_id']."'] = '".$attribute[$key]['attr_values']."'; \r\n";
             echo "goodsAttr_price['".$value['attr_id']."'] = '".$value['price']."'; \r\n";
          }
+        }
     } if/}
 
 function changePrice(price){
@@ -180,6 +182,7 @@ function changeImage(obj){
 				<li id="tab_content4" onclick="show_tabs('4');"><a href="javascript:;" >成交记录</a></li>
 			</ul>
 			<div class="pannel" id="tab1_content1">
+                <!--
 				<table cellspacing="0">
 					<tr> {sta:
 						if($attr_status) {
@@ -200,6 +203,39 @@ function changeImage(obj){
 						
 						} if/} </tr>
 				</table>
+                -->
+                <div class="facility_baseinfo clrfix">
+                    <ul class="telephoneinfo">
+                        {sta:
+                        if($attr_status) {
+                        foreach($attr as $key=>$value)[loop]}
+                        {sta:if($attribute[$key]['attr_values'] != '设施' && $attribute[$key]['attr_values'] != '基础服务' && $attribute[$key]['attr_values'] != '地图' && !empty($attribute[$key]['attr_values'])) {
+                            echo "<li>".$attribute[$key]['attr_values']."：".$value['attr_values']."</li>";
+                        }
+                        } if/}
+                    </ul>
+                    <ul class="list clr_after">
+                        {sta:
+                        if($attr_status) {
+                        foreach($attr as $key=>$value)[loop]}
+                            {sta:if($attribute[$key]['attr_values'] == '设施' || $attribute[$key]['attr_values'] == '基础服务') {
+                                $valueArr = explode(' ', $value['attr_values']);
+                                foreach($valueArr as $subVal){
+                                    echo '<li class="c1"><span class="provide" title="提供此服务"></span>'.$subVal.'</li>';
+                                }
+                            }
+                        } if/}
+                    </ul>
+                    {sta:
+                    if($attr_status) {
+                    foreach($attr as $key=>$value)[loop]}
+                    {sta:if($attribute[$key]['attr_values'] == '地图') [exc]}
+                    <img class="map" src="http://api.map.baidu.com/staticimage?width=230&height=150&center={echo: $value['attr_values'];/}&markers={echo: $value['attr_values'];/}&zoom=14&markerStyles=s,A,0xff0000">
+                    {sta: }
+                    } if/}
+                    <div class="clearfix"></div>
+                </div>
+
 				<p>{echo: $goodsinfo['goods_intro'];/}</p>
 			</div>
 			<div id="tab1_content2" class="pannel" style="display:none">
