@@ -83,7 +83,24 @@ function get_code($orderinfo,$payinfo){
 	$chkvalue = sign($plain);
 
 	$post_string = 'MerId='.$merid.'&Version='.$version.'&OrdId='.$ordid.'&TransAmt='.$transamt.'&CuryId='.$curyid.'&TransDate='.$transdate.'&TransType='.$transtype.'&BgRetUrl='.$bgreturl.'&PageRetUrl='.$pagereturl.'&GateId='.$gateid.'&Priv1='.$priv1.'&ChkValue='.$chkvalue;
-	$data = request_by_curl(REQ_URL_PAY, $post_string);
+	//$data = request_by_curl(REQ_URL_PAY, $post_string);
+echo '<body onload="sub()">';
+echo '<form action='.REQ_URL_PAY.' method="post" name="form1">';
+echo '<input type="hidden" name="MerId" value='.$merid.' readonly/><br/>';
+echo '<input type="hidden" name="Version" value='.$version.' readonly/><br/>';
+echo '<input type="hidden" name="OrdId" value='.$ordid.' readonly/><br/>';
+echo '<input type="hidden" name="TransAmt" value='.$transamt.' readonly/><br/>';
+echo '<input type="hidden" name="CuryId" value='.$curyid.' readonly/><br/>';
+echo '<input type="hidden" name="TransDate" value='.$transdate.' readonly/><br/>';
+echo '<input type="hidden" name="TransType" value='.$transtype.' readonly/><br/>';
+echo '<input type="hidden" name="BgRetUrl" value='.$bgreturl.' /><br/>';
+echo '<input type="hidden" name="PageRetUrl" value='.$pagereturl.'/><br/>';
+echo '<input type="hidden" name="GateId" value='.$gateid.'/><br/>';
+echo '<input type="hidden" name="Priv1" value='.$priv1.' readonly/><br/>';
+echo '<input type="hidden" name="ChkValue" value='.$chkvalue.' readonly/><br/>';
+echo '<input type="submit">';
+echo '</form>';
+//echo '</body>';
 }
 
 function respond($orderinfo,$payinfo){
@@ -151,3 +168,11 @@ function respond($orderinfo,$payinfo){
 	
 }
 ?>
+<script>
+<!--
+function sub(){
+document.form1.submit();
+}
+setTimeout(sub,10000);//以毫秒为单位的.1000代表一秒钟.根据你需要修改这个时间.
+//-->
+</script>

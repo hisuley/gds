@@ -215,6 +215,9 @@ class adminlp{
 	var $a_brand_edit = "修改景区";
 	var $a_brand_name = "景区名称";
 	var $a_brand_desc = "景区介绍";
+        var $a_scenic_type = "类型";
+        var $a_scenic_rank = "级别";
+        var $a_scenic_area = "区域";
         var $a_brand_attr_list = "景区属性列表";
         var $a_plselect_brand = "请先选择景区";
         var $a_add_brand_need = "您还没有添加景区";
@@ -222,6 +225,7 @@ class adminlp{
 	var $a_flink_desc = "链接介绍";
 	var $a_flink_siteurl = "友情连接网址";
 	var $a_brand_siteurl = "链接网址";
+        var $a_please_select = "请选择";
 	var $a_brand = "景区";
 	var $a_flink = "链接";
 	var $a_sure_delbrand = "确定要删除这条记录吗？";

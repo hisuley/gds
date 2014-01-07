@@ -122,3 +122,5 @@ ALTER TABLE `gds`.`imall_notification_policy` ADD COLUMN `shop_cat_id` INT(10) N
 ALTER TABLE `gds`.`imall_shop_categories` ADD COLUMN `commission_ratio` VARCHAR(20) DEFAULT '' NOT NULL COMMENT '佣金比例' AFTER `shops_num`; 
 /* 政策通知表增加供应商ID字段 */
 ALTER TABLE `gds`.`imall_notification_policy` ADD COLUMN `user_id` INT(10) DEFAULT 0 NOT NULL COMMENT '供应商ID' AFTER `shop_cat_id`; 
+/* 品牌表增加景区区域、类型、级别三个字段 */
+ALTER TABLE `gds`.`imall_brand` ADD COLUMN `brand_type` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '景区类型' AFTER `is_show`, ADD COLUMN `brand_rank` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '景区级别' AFTER `brand_type`, ADD COLUMN `brand_area` VARCHAR(255) DEFAULT '' NULL COMMENT '景区区域' AFTER `brand_rank`; 

@@ -59,6 +59,18 @@ td span {color:red;}
 				<td width="63px;"><?php echo $a_langpackage->a_brand_name; ?>：</td>
 				<td><input class="small-text" type="text" name="brand_name" value="<?php echo $info['brand_name']; ?>" /> <span>*</span></td>
 			</tr>
+                        <tr>
+				<td width="63px;"><?php echo $a_langpackage->a_scenic_type; ?>：</td>
+				<td><input class="small-text" type="text" name="type" value="<?php echo $info['brand_type']; ?>" /></td>
+			</tr>
+                        <tr>
+				<td width="63px;"><?php echo $a_langpackage->a_scenic_rank; ?>：</td>
+				<td><input class="small-text" type="text" name="rank" value="<?php echo $info['brand_rank']; ?>" /></td>
+			</tr>
+                        <tr>
+				<td width="63px;"><?php echo $a_langpackage->a_scenic_area; ?>：</td>
+				<td><input class="small-text" type="text" name="area" value="<?php echo $info['brand_area']; ?>" /></td>
+			</tr>
 			<tr>
 				<td><?php echo $a_langpackage->a_brand_desc; ?>：</td>
 				<td><textarea name="brand_desc" style="width:200px; height:50px;"><?php echo $info['brand_desc']; ?></textarea></td>

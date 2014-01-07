@@ -80,7 +80,16 @@
           <h2>子分类</h2>
         </div>
         <div class="tags">
-            <a href="search.php?k=Test" style="color:;">最美桂林之阳朔</a>
+            <ul class="artlist_txt" >
+            {sta:if($cat_dg)[exc]}
+            {sta:foreach($cat_dg as $val)[loop]}
+                <li class="clearfix">
+                <a class="ttls" href="{echo:article_list_url($val['cat_id']);/}">{echo: $val['cat_name'];/}</a></li>
+            {end:foreach/}
+            {end:}else{ ;/}
+            {echo:lp{i_none_child_cat};/}
+            {end:if/}
+            </ul>
         </div>
      </div>
      <!-- 本分类下热门资讯 -->

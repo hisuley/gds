@@ -20,7 +20,7 @@ $t_brand_attr = $tablePreStr."brand_attr";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where attr_name='类别'";
+$sql = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where attr_name='类型'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -63,7 +63,7 @@ td .inputtext{width:120px;}
 <script language="JavaScript">
 <!--
 var brand_id = "<?php echo $brand_id;?>";
-var attr_values = '类别';
+var attr_values = '类型';
 
 function attr_info_cancel(v) {
 	var deltr = document.getElementById("tr_"+v);

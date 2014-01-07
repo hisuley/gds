@@ -21,6 +21,9 @@ $post['brand_name'] = short_check(get_args('brand_name'));
 $post['brand_desc'] = long_check(get_args('brand_desc'));
 $post['site_url'] = short_check(get_args('site_url'));
 $post['is_show'] = intval(get_args('is_show'));
+$post['brand_type'] = short_check(get_args('type'));
+$post['brand_rank'] = short_check(get_args('rank'));
+$post['brand_area'] = short_check(get_args('area'));
 $id = intval(get_args('brand_id'));
 
 $brand_id = intval(get_args('brand_id'));

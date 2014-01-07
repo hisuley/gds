@@ -18,12 +18,19 @@ function segmentString($string){
 function convertCharset($string){
     return iconv('GBK', 'UTF-8', $string);
 }
-function generateString($string){
+function generateString($string,$id){
     $res = segmentString($string);
     $sql = ' ';
+    $i = 0;
     foreach($res as $val){
-        $sql .= " OR title LIKE %$val%";
+        if($i == 0){
+            $sql .= " article_id NOT IN(".$id.") AND title LIKE '%$val%'";
+            $i++;
+        }else {
+            $sql .= " OR article_id NOT IN(".$id.") AND title LIKE '%$val%'";
+        }
     }
+    
     return $sql;
 }
 $result = generateString($_GET['keywords']);

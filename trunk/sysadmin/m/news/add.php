@@ -264,7 +264,7 @@ function formatFormElement(id,type,name,value) {
 	} else if (type==1 && value!='') {
 		optionValue = value.split("\n");
 		str = '<select name="attr[' + id + ']">';
-		str += '<option value="0">{echo: lp{m_select_pl};/}' + name + '</option>';
+		str += '<option value="0"><?php echo $a_langpackage->a_please_select; ?>' + name + '</option>';
 		for(var i=0; i<optionValue.length; i++) {
 			if(optionValue[i] == cValue) {
 				str += '<option value="'+optionValue[i]+'" selected>' + optionValue[i] + '</option>';

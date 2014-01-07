@@ -41,11 +41,11 @@ td span{color:red;}
 					<tr><th colspan="2">{echo: lp{m_goods_name};/}</th><th>{echo: lp{m_goods_price};/}</th><th>{echo: lp{m_buy_num};/}</th></tr>
 					{sta:foreach($goods_info as $k=>$v)[loop]}
 					<tr><td class="name" colspan="2"><a href="{echo: goods_url($v['goods_id']);/}" target="_blank">{echo: $v['goods_name'];/}</a></td>
-					<td align="center">{echo: $v['goods_price'];/}{echo: lp{m_yuan};/}</td>
-					<td align="center"><input type="text" value="{echo: $buy_goods[$v['goods_id']];/}" name="order_num[]" style="width:30px"></td>
+					<td align="center"><span id="goods_price" style="color:black;font-weight:normal">{echo: $v['goods_price'];/}</span>{echo: lp{m_yuan};/}</td>
+					<td align="center"><input type="text" value="{echo: $buy_goods[$v['goods_id']];/}" name="order_num[]" style="width:30px" onblur="(changePrice(this))"></td>
 					<input type="hidden" value="{echo: $v['goods_id'];/}" name="goods_id[]" />
 					<input type="hidden" value="{echo: $v['goods_name'];/}" name="goods_name[]" />
-					<input type="hidden" value="{echo: $v['goods_price'];/}" name="goods_price[]" />
+					<input type="hidden" value="{echo: $v['goods_price'];/}" name="goods_price[]" id="one_good_price" />
 					<input type="hidden" value="{echo: $v['goods_price'] *$buy_goods[$v['goods_id']] ;/}" id="order_amount" name="order_amount[]" />
 					</tr>
 					{end:foreach/}
@@ -162,6 +162,12 @@ function inputTxt2(obj,act, initVal){
     obj.value='';
     //obj.style.color="#000000"
     }
+}
+function changePrice(obj){
+    var goodsPrice = document.getElementById("goods_price");
+    var goodsPriceInit = document.getElementById("one_good_price").value;
+    goodsPrice.innerHTML = '';
+    goodsPrice.innerHTML = goodsPriceInit * obj.value + '.00';
 }
 function compareDate(){
     var departDate = document.getElementById('departDateInput').value;

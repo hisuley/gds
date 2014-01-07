@@ -23,7 +23,7 @@ $t_areas = $tablePreStr."areas";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql="select a.user_id,a.user_email,a.user_name,a.user_passwd,a.user_ico,a.reg_time,a.last_login_time,a.last_ip,a.rank_id,a.user_money,a.user_integral,a.user_integral_surplus,b.user_truename,b.user_gender,b.user_mobile,b.user_telphone,b.user_country,b.user_province,b.user_city,user_district,b.user_zipcode,b.user_address,b.user_birthday,b.user_qq,b.user_msn,b.user_skype,b.user_notes
+$sql="select a.user_id,a.user_email,a.user_name,a.user_passwd,a.user_ico,a.reg_time,a.last_login_time,a.last_ip,a.email_check,a.rank_id,a.user_money,a.user_integral,a.user_integral_surplus,b.user_truename,b.user_gender,b.user_mobile,b.user_telphone,b.user_country,b.user_province,b.user_city,user_district,b.user_zipcode,b.user_address,b.user_birthday,b.user_qq,b.user_msn,b.user_skype,b.user_notes
 from `$t_users` a left join `$t_user_info` b on a.user_id=b.user_id where a.user_id='$user_id'";
 $user_info = $dbo->getRow($sql);
 //$user_info = get_user_info($dbo,$t_users,$user_id);
@@ -50,6 +50,14 @@ if($user_info['user_gender']==2) { $user_gender2='checked'; } else { $user_gende
 if($user_info['user_marry']==0) { $user_marry0='checked'; } else { $user_marry0=''; }
 if($user_info['user_marry']==1) { $user_marry1='checked'; } else { $user_marry1=''; }
 if($user_info['user_marry']==2) { $user_marry2='checked'; } else { $user_marry2=''; }
+
+if($user_info['user_ico']){
+$userico_arr = explode('/', $user_info['user_ico']);
+$userico_arr[count($userico_arr)-1] = "thumb_".$userico_arr[count($userico_arr)-1];
+$user_info['user_ico'] = $SYSINFO['web']."/".join("/",$userico_arr);
+}else{
+    $user_info['user_ico'] = $SYSINFO['web']."uploadfiles/member_ico/default.jpg";
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -72,7 +80,7 @@ td span {color:red;}
 	<div class="infobox">
 	<h3><span class="left"><?php echo $a_langpackage->a_memeber_view;?></span> <span class="right" style="margin-right:15px;"><a href="m.php?app=member_list" style="float: right;"><?php echo $a_langpackage->a_memeber_list;?></a></span></h3>
     <div class="content2"> 
-		<form action="a.php?act=member_doview" method="post">
+		<form action="a.php?act=member_doview" method="post" enctype="multipart/form-data">
 		<table class="list_table" style="float:left; width:32%; margin-right:2%">
 		  <tbody>
 			<tr>
@@ -290,6 +298,13 @@ td span {color:red;}
 			</tr>
 			<tr>
 				<td colspan="2"><a href="m.php?app=order_account&user_id=<?php echo $user_info['user_id'];?>"><?php echo $a_langpackage->a_memeber_account;?></a></td><td></td>
+			</tr>
+                        <tr>
+				<td valign="top"><?php echo $a_langpackage->a_memeber_ico; ?>：</td>
+                                <td><input type="file" name="attach[]" /></td>
+			</tr>
+                        <tr><td></td>
+                                <td><img src="<?php echo $user_info['user_ico']; ?>"></td>
 			</tr>
                         <tr>
 				<td valign="top"><?php echo $a_langpackage->a_words_beizhu; ?>：</td>
