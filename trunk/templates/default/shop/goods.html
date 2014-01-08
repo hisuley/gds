@@ -253,10 +253,9 @@ function changeImage(obj){
             <div id="tab1_content5" class="panel" style="display: none">
                 {sta:if($attr_status){
                     foreach($attr as $key=>$value){
-                        if($attribute[$key]['attr_values'] == '地图'){
+                        if($attribute[$key]['attr_values'] == '地址'){
                             $geoAddress = fopen('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=renderOption&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
                             $geoAddress = json_decode($geoAddress);
-
                         }
                     }
                 }
