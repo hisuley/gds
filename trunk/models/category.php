@@ -141,9 +141,6 @@ if($where){
 if ($brand_id>0) {
 	$sql.=" AND g.brand_id='$brand_id'";
 }
-if (!empty($keyword_string)){
-    $sql .= "AND g.goods_name LIKE '%".$keyword_string."%' ";
-}
 $k=short_check(get_args("k"));
 $kk=$k;
 //echo $k;
@@ -190,6 +187,10 @@ if($cat_id == ''){
 	$sql = "SELECT g.pv,g.is_set_image,g.brand_id,g.transport_price,g.transport_template_price,g.goods_thumb,g.goods_id,g.cat_id,g.goods_name,g.goods_price,g.goods_intro,g.shop_id,s.shop_id,s.shop_name,s.user_id,u.user_id,u.rank_id,ur.rank_id,ur.rank_name,
 			s.shop_province,s.shop_city	FROM `$t_goods` AS g WHERE g.is_on_sale=1 AND g.shop_id=s.shop_id AND s.user_id=u.user_id AND u.rank_id=ur.rank_id ";
 
+}
+
+if (!empty($keyword_string)){
+    $sql .= "AND g.goods_name LIKE '%".$keyword_string."%' ";
 }
 $result = $dbo->fetch_page($sql,$SYSINFO['product_page']);
 $goods_list=$result['result'];
