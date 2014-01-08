@@ -42,9 +42,33 @@
     </div>
   {end:}else{ ;/}
   <div id="leftColumn">
-    <!-- @TODO 完善搜索功能 -->
+    <!-- @TODO 完善搜索功能，修改完毕之后将这一段删除 -->
     <div class="SubCategoryBox filters">
         <h3>资讯-新闻搜索</h3>
+        <ul>
+            {sta: foreach($attr_info as $key => $value)[loop]}
+            <li>
+                <span>{echo: $value['attr_name'];/}:</span>
+                {sta:if(get_args('attr'.$value['attr_id'])) [exc]}
+                <a href={echo:preg_replace("/&attr".$value['attr_id']."=([^&]+)/","",$url_this);/}>{echo:lp{i_all};/}</a>
+                {sta:}else[exc]}
+                <font class="active">{echo:lp{i_all};/}</font>
+                {end:if/}
+                {sta: foreach($value['attr_values'] as $k => $v)[loop]}
+                {sta:if(get_args('attr'.$value['attr_id'])) [exc]}
+                {sta:$url = preg_replace("/attr".$value['attr_id']."=([^&]+)/","attr".$value['attr_id']."=".urlencode($v),$url_this);/}
+                {sta:}else [exc]}
+                {sta:$url = $url_this."&attr".$value['attr_id']."=".urlencode($v);/}
+                {end:if/}
+                {sta:if(get_args('attr'.$value['attr_id'])==$v) [exc]}
+                <a class="active" >{echo: $v;/}</a>
+                {sta:}else[exc]}
+                <a title="{echo: $v;/}" href="{echo:$url;/}">{echo: $v;/}</a>
+                {end:if/}
+                {end:foreach/}
+            </li>
+            {end:foreach/}
+        </ul>
         <form method="get">
           <input type="hidden" name="id" value="{echo:$cat_id;/}">
           <input type="text" name="keyword" value="" placeholder="请输入搜索关键词"> 
@@ -56,6 +80,7 @@
           <input type="submit" value="搜索"/>
         </form>
     </div>
+
     <div class="content-common-box">
       <div class="title"><h2>{echo:$cat_name;/}<h2></div>
       <div class="content-news-box">

@@ -22,11 +22,13 @@ $t_shop_category = $tablePreStr."shop_category";
 $t_goods = $tablePreStr."goods";
 $t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
-
+$t_attribute = $tablePreStr."attribute";
+$t_article_attr = $tablePreStr."article_attr";
 $cat_id = intval(get_args('id'));
 $keyword = short_check(get_args('keyword'));
 $in = short_check(get_args('in'));
-
+$attr_arr = get_args("attr");
+$url_this = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 $sql = "SELECT * FROM `$t_article_cat` order by sort_order asc";
 $article_cat = $dbo->getRs($sql);
 if(!$article_cat) {
@@ -38,6 +40,39 @@ foreach ($article_cat as $val){
 		$cat_name=$val['cat_name'];
 	}
 }
+
+/* 根据属性搜索 */
+if(isset($attr_arr)&&$attr_arr){
+    foreach ($attr_arr as $k=>$v){
+        $attr_arr[$k]=short_check($v);
+        $attr_id_arr[]="attr[".$k."]";
+    }
+}
+foreach($get_arr as $k=>$value){
+    if(substr($k,0,4) == 'attr'){
+        $num = substr($k,4,strlen($k));
+        $and .= "a".$num.".article_id and a".$num.".article_id=";
+        $where .= " and a".$num.".attr_values = '$value'";
+        $from .= "$t_article_attr as aa".$num.",";
+    }
+}
+if($where){
+    $sta_num = strpos($and,'and');
+    $end_num = strrpos($and,'and');
+    $and = substr($and,$sta_num,$end_num-$sta_num);
+    $sql = "select * from ".substr($from,0,-1)." where a".$num.".attr_values != ''".$where." ".$and." group by a".$num.".article_id";
+    $result = $dbo->getRs($sql);
+    $article_id = '';
+    foreach($result as $value){
+        $article_id .= $value['goods_id'].",";
+    }
+    if($article_id != ''){
+        $article_id = substr($article_id,0,-1);
+    }else{
+        $article_id = 0;
+    }
+}
+
 $cat_dg = get_dg_category($article_cat,$cat_id);
 $sql = "SELECT * FROM `$t_article` WHERE is_show=1 and is_audit = 4 and cat_id='$cat_id'";
 if($keyword && $in){
@@ -49,8 +84,25 @@ if($keyword && $in){
         $sql .= " AND content like '%$keyword%' AND title like '%$keyword%'";
     }
 }
+if(!empty($article_id)){
+    $sql .= " AND article_id IN ($article_id) ";
+}
 $sql .= " order by add_time desc ";
 $result = $dbo->fetch_page($sql,$SYSINFO['article_page']);
+$sql = "select * from $t_attribute where cat_id='$cat_id' and attr_type = 1 order by sort_order ";
+$attr_info = $dbo->getRs($sql);
+foreach($attr_info as $key => $value){
+    $values_after=str_replace(array("\r\n","\r","\n"),',',$value['attr_values']);
+    $attr_info[$key]['attr_values']=explode(',',$values_after);
+
+    foreach($attr_info[$key]['attr_values'] as $k => $va){
+        $va=trim($va);
+        $sql = "select count(*) AS attr_count from $t_article_attr AS aa, $t_article AS a where aa.attr_values='$va' and
+		a.article_id=aa.article_id ";
+        $articles_attr_info = $dbo->getRow($sql);
+        $attr_info[$key]['values_count'][$k]=$articles_attr_info["attr_count"];
+    }
+}
 
 if(!$result) {
 	trigger_error($s_langpackage->s_no_message);
