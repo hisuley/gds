@@ -58,6 +58,7 @@ if($result) {
 			$post['input_type'] = $value['input_type'];
 			$post['attr_values'] = $value['attr_values'];
 			$post['sort_order'] = $value['sort_order'];
+            $post['attr_type'] = 1;
 			if($new_attr_id = insert_attr_info($dbo,$t_attribute,$post)) {
 				$return_array[$key]['attr_id'] = $new_attr_id;
 				$return_array[$key]['cat_id'] = $cat_id;
@@ -65,6 +66,7 @@ if($result) {
 				$return_array[$key]['input_type'] = $value['input_type'];
 				$return_array[$key]['attr_values'] = $value['attr_values'];
 				$return_array[$key]['sort_order'] = $value['sort_order'];
+                $return_array[$key]['attr_type']  = 1;
 				$i++;
 			}
 		}
