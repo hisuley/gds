@@ -255,9 +255,9 @@ function changeImage(obj){
                 if($attr_status){
                     foreach($attr as $key=>$value){
                         if($attribute[$key]['attr_values'] == '地址'){
-                            //$geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=renderOption&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
-                            //echo print_r($geoAddress, true);
-                            //$geoAddress = json_decode($geoAddress);
+                            $geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=renderOption&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
+                            echo print_r($geoAddress, true);
+                            $geoAddress = json_decode($geoAddress);
                         }
                     }
                 if/}
@@ -477,6 +477,12 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="none";
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab_content5").className ="";
+            document.getElementById("tab_content6").className ="";
+            document.getElementById("tab_content7").className ="";
+            document.getElementById("tab1_content5").style.display ="none";
+            document.getElementById("tab1_content6").style.display ="none";
+            document.getElementById("tab1_content7").style.display ="none";
 		}
 		if (flg == '2'){
 			document.getElementById("tab_content1").className ="";
@@ -487,6 +493,12 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="block";
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab_content5").className ="";
+            document.getElementById("tab_content6").className ="";
+            document.getElementById("tab_content7").className ="";
+            document.getElementById("tab1_content5").style.display ="none";
+            document.getElementById("tab1_content6").style.display ="none";
+            document.getElementById("tab1_content7").style.display ="none";
 		}
 		if (flg == '3'){
 			document.getElementById("tab_content1").className ="";
@@ -497,6 +509,12 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="none";
 			document.getElementById("tab1_content3").style.display ="block";
 			document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab_content5").className ="";
+            document.getElementById("tab_content6").className ="";
+            document.getElementById("tab_content7").className ="";
+            document.getElementById("tab1_content5").style.display ="none";
+            document.getElementById("tab1_content6").style.display ="none";
+            document.getElementById("tab1_content7").style.display ="none";
 			get_goods_credit({echo:$goods_id;/},1);
 		}
 		if (flg == '4'){
@@ -508,8 +526,67 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="none";
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="block";
+            document.getElementById("tab_content5").className ="";
+            document.getElementById("tab_content6").className ="";
+            document.getElementById("tab_content7").className ="";
+            document.getElementById("tab1_content5").style.display ="none";
+            document.getElementById("tab1_content6").style.display ="none";
+            document.getElementById("tab1_content7").style.display ="none";
 			get_order_record({echo:$goods_id;/},1);
 		}
+
+        if (flg == '5'){
+            document.getElementById("tab_content1").className ="";
+            document.getElementById("tab_content2").className ="";
+            document.getElementById("tab_content3").className ="";
+            document.getElementById("tab_content4").className ="";
+            document.getElementById("tab1_content1").style.display ="none";
+            document.getElementById("tab1_content2").style.display ="none";
+            document.getElementById("tab1_content3").style.display ="none";
+            document.getElementById("tab1_content4").style.display ="block";
+            document.getElementById("tab_content5").className ="now";
+            document.getElementById("tab_content6").className ="";
+            document.getElementById("tab_content7").className ="";
+            document.getElementById("tab1_content5").style.display ="block";
+            document.getElementById("tab1_content6").style.display ="none";
+            document.getElementById("tab1_content7").style.display ="none";
+        }
+
+
+        if (flg == '6'){
+            document.getElementById("tab_content1").className ="";
+            document.getElementById("tab_content2").className ="";
+            document.getElementById("tab_content3").className ="";
+            document.getElementById("tab_content4").className ="";
+            document.getElementById("tab1_content1").style.display ="none";
+            document.getElementById("tab1_content2").style.display ="none";
+            document.getElementById("tab1_content3").style.display ="none";
+            document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab_content5").className ="";
+            document.getElementById("tab_content6").className ="now";
+            document.getElementById("tab_content7").className ="";
+            document.getElementById("tab1_content5").style.display ="none";
+            document.getElementById("tab1_content6").style.display ="block";
+            document.getElementById("tab1_content7").style.display ="none";
+        }
+
+        if (flg == '7'){
+            document.getElementById("tab_content1").className ="";
+            document.getElementById("tab_content2").className ="";
+            document.getElementById("tab_content3").className ="";
+            document.getElementById("tab_content4").className ="";
+            document.getElementById("tab1_content1").style.display ="none";
+            document.getElementById("tab1_content2").style.display ="none";
+            document.getElementById("tab1_content3").style.display ="none";
+            document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab_content5").className ="";
+            document.getElementById("tab_content6").className ="";
+            document.getElementById("tab_content7").className ="now";
+            document.getElementById("tab1_content5").style.display ="none";
+            document.getElementById("tab1_content6").style.display ="none";
+            document.getElementById("tab1_content7").style.display ="block";
+        }
+
 	}
 	String.prototype.Trim = function()
 	{ return this.replace(/(^\s*)|(\s*$)/g, ""); }

@@ -228,6 +228,7 @@ var goodsAttr_name = new Array();
 var goodsAttr_price = new Array();
         <?php if($attr_status) {
     foreach($attr as $key=>$value){
+        if(!empty($attribute[$key])){
         if($attribute[$key]['price']){
             $value['attr_values'] = preg_replace("/[\r\n]+/",'|',$value['attr_values']);
 		if(substr($value['attr_values'],'-1') == '|') {
@@ -241,6 +242,7 @@ var goodsAttr_price = new Array();
             echo "goodsAttr_name['".$value['attr_id']."'] = '".$attribute[$key]['attr_values']."'; \r\n";
             echo "goodsAttr_price['".$value['attr_id']."'] = '".$value['price']."'; \r\n";
          }
+        }
     } }?>
 
 function changePrice(price){
@@ -385,8 +387,12 @@ function changeImage(obj){
 				<li id="tab_content2" onclick="show_tabs('2');"><a href="javascript:;" ><?php echo $s_langpackage->s_wholesale;?></a></li>
 				<li id="tab_content3" onclick="show_tabs('3');"><a href="javascript:;" >商品评价</a></li>
 				<li id="tab_content4" onclick="show_tabs('4');"><a href="javascript:;" >成交记录</a></li>
+                <li id="tab_content5" onclick="show_tabs('5');"><a href="javascript:;" >附近酒店</a></li>
+                <li id="tab_content6" onclick="show_tabs('6');"><a href="javascript:;" >附近餐饮</a></li>
+                <li id="tab_content7" onclick="show_tabs('7');"><a href="javascript:;" >附近景点</a></li>
 			</ul>
 			<div class="pannel" id="tab1_content1">
+                <!--
 				<table cellspacing="0">
 					<tr> <?php 
 						if($attr_status) {
@@ -407,6 +413,41 @@ function changeImage(obj){
 						
 						} }?> </tr>
 				</table>
+                -->
+                <div class="facility_baseinfo clrfix">
+                    <ul class="telephoneinfo">
+                        <?php 
+                        if($attr_status) {
+                        foreach($attr as $key=>$value){?>
+                        <?php if($attribute[$key]['attr_values'] != '设施' && $attribute[$key]['attr_values'] != '基础服务' && $attribute[$key]['attr_values'] != '地图' && !empty($attribute[$key]['attr_values'])) {
+                            echo "<li>".$attribute[$key]['attr_values']."：".$value['attr_values']."</li>";
+                        }
+                        } }?>
+                    </ul>
+                    <ul class="list clr_after">
+                        <?php 
+                        if($attr_status) {
+                        foreach($attr as $key=>$value){?>
+                            <?php if($attribute[$key]['attr_values'] == '设施' || $attribute[$key]['attr_values'] == '基础服务') {
+                                $valueArr = explode("\n", $value['attr_values']);
+                                echo '<li class="c1">';
+                                foreach($valueArr as $subVal){
+                                    echo '<span class="provide" title="提供此服务"></span>'.$subVal;
+                                }
+                                echo '</li>';
+                            }
+                        } }?>
+                    </ul>
+                    <?php 
+                    if($attr_status) {
+                    foreach($attr as $key=>$value){?>
+                    <?php if($attribute[$key]['attr_values'] == '地图') {?>
+                    <img class="map" src="http://api.map.baidu.com/staticimage?width=230&height=150&center=<?php echo  $value['attr_values'];?>&markers=<?php echo  $value['attr_values'];?>&zoom=14&markerStyles=s,A,0xff0000">
+                    <?php  }
+                    } }?>
+                    <div class="clearfix"></div>
+                </div>
+
 				<p><?php echo  $goodsinfo['goods_intro'];?></p>
 			</div>
 			<div id="tab1_content2" class="pannel" style="display:none">
@@ -416,6 +457,31 @@ function changeImage(obj){
 			<div id="tab1_content3" class="pannel" style="display:none"> </div>
 			<!-- 商品成交记录 -->
 			<div id="tab1_content4" class="pannel" style="display:none"> </div>
+            <div id="tab1_content5" class="panel" style="display: none">
+                <?php if($attr_status){
+                    foreach($attr as $key=>$value){
+                        if($attribute[$key]['attr_values'] == '地址'){
+                            $geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=renderOption&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
+                            echo print_r($geoAddress, true);
+                            //$geoAddress = json_decode($geoAddress);
+                        }
+                    }
+                }
+                }?>
+                <?php if(!empty($geoAddress['location'])){?>
+                <script type="text/javascript">
+
+                    // 百度地图API功能
+                    var map = new BMap.Map("allmap");            // 创建Map实例
+                    map.centerAndZoom(new BMap.Point(<?php echo $geoAddress['location']['lng'];?>, <?php echo $geoAddress['location']['lat'];?>), 11);
+                    var local = new BMap.LocalSearch(map, {
+                        renderOptions:{map: map, autoViewport:true}
+                    });
+                    local.searchNearby("酒店", "旅馆", "饭店");
+                </script>
+                <?php }?>
+
+            </div>
 		</div>
 		<div id="goodTags">
 			<h3><?php echo $s_langpackage->s_goods_label;?></h3>
@@ -523,17 +589,31 @@ function changeImage(obj){
 			if (shop_id == user_id){
 				alert('<?php echo $s_langpackage->s_store_mygoods_error;?>');
 			}else{
-				ajax("do.php?act=goods_add_cart","POST","id="+id+"&num="+num.value,function(data){
-					if(data == 1) {
-						alert("<?php echo  $s_langpackage->s_g_addedcart;?>");
-					} else if(data == -1) {
-						alert("<?php echo  $s_langpackage->s_staycart;?>");
-					} else if(data == -2) {
-						alert("<?php echo  $s_langpackage->s_nomachgoods;?>");
-					} else {
-						alert("<?php echo  $s_langpackage->s_g_addfailed;?>");
-					}
-				});
+                var r = true;
+                <?php 
+                    if($attr_status) {
+                        foreach($attr as $key=>$value){?>
+                            <?php if($attribute[$key]['attr_values'] == '预订须知') {
+                               echo 'r = confirm("'.$value['attr_values'].'");';
+                            }
+                        }
+                    }?>
+                if(r){
+                    ajax("do.php?act=goods_add_cart","POST","id="+id+"&num="+num.value,function(data){
+                        if(data == 1) {
+                            alert("<?php echo  $s_langpackage->s_g_addedcart;?>");
+                        } else if(data == -1) {
+                            alert("<?php echo  $s_langpackage->s_staycart;?>");
+                        } else if(data == -2) {
+                            alert("<?php echo  $s_langpackage->s_nomachgoods;?>");
+                        } else {
+                            alert("<?php echo  $s_langpackage->s_g_addfailed;?>");
+                        }
+                    });
+
+                }
+
+
 			}
 		}
 		function gotoOrder(id) {
@@ -555,7 +635,18 @@ function changeImage(obj){
 				if(parseInt(value) > parseInt(goods_number)){
 					alert("<?php echo $s_langpackage->s_less_stock;?>");
 				}else {
-					location.href = "<?php echo  $baseUrl;?>modules.php?app=user_order_adress&gid="+id+"&v="+value;
+                    var r = true;
+                    <?php 
+                        if($attr_status) {
+                            foreach($attr as $key=>$value){?>
+                        <?php if($attribute[$key]['attr_values'] == '预订须知') {
+                            echo 'r = confirm("'.$value['attr_values'].'");';
+                        }
+                        }
+                        }?>
+                    if(r){
+					    location.href = "<?php echo  $baseUrl;?>modules.php?app=user_order_adress&gid="+id+"&v="+value;
+                    }
 				}
 			}
 		}
