@@ -83,7 +83,7 @@ td span {color:red;}
 							</select>
                             <?php echo $a_langpackage->a_news_sort_column; ?>:
                             <select name="orderby">
-                                <option value="id">ID</option>
+                                <option value="article_id">ID</option>
                                 <option value="title">标题</option>
                                 <option value="cat_id">类别</option>
                                 <option value="sort_order">排序</option>
