@@ -18,7 +18,13 @@ $payid = short_check(get_args('payid'));
 $pay_status = intval(get_args('pay_status'));
 $transport_status = intval(get_args('transport_status'));
 $pay_id = intval(get_args('pay_id'));
-$order_status = intval(get_args('order_status'));
+$tempCheck = get_args('order_status');
+if(empty($tempCheck)){
+    $order_status = '';
+}else{
+    $order_status = intval(get_args('order_status'));
+}
+
 $start_time = get_args('start_time');
 $end_time = get_args('end_time');
 $user_id = intval(get_args('user_id'));
@@ -35,6 +41,7 @@ if($payid) {
 		$sql .= " and a.payid like '%$payid%' ";
 	}
 }
+
 if($pay_status) {
 	if(!$right){
 		header('location:m.php?app=error');
