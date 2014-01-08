@@ -36,7 +36,7 @@ $promote_id = intval($_GET['id']);
 /* 数据库操作 */
 dbtarget('r',$dbServs);
 $dbo=new dbex();
-$sql = "select goods_id,is_enabled from `$t_shop_promote` where promote_id = $$promote_id";
+$sql = "select goods_id,is_enabled from `$t_shop_promote` where id = $promote_id";
 $promoteinfo = $dbo->getRow($sql);
 if($promoteinfo['is_enabled']==0){
 	throw_succes('0','该促销已经被锁定','0');
