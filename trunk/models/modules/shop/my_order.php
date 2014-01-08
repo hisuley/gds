@@ -22,6 +22,10 @@ $t_users = $tablePreStr."users";
 
 $group_id = intval(get_args('id'));
 $state = intval(get_args('state'));
+$order_id = intval(get_args('order_id'));
+$start_time = short_check(get_args('start_time'));
+$end_time = short_check(get_args('end_time'));
+
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 /* 商铺信息处理 */
@@ -33,10 +37,13 @@ if($row['locked']==1){
 	session_destroy();
 	trigger_error($m_langpackage->m_user_locked);//非法操作
 }
+
+
+
 if(empty($group_id)){
-	$result = get_myoder_list($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$shop_id,13,'shop',$state,$t_users);
+	$result = get_myoder_list_with_search($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$shop_id,13,'shop',$state,$t_users, $start_time, $end_time, $order_id);
 }else{
-	$result = get_myoder_list($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$group_id,13,'groupbuy',$state,$t_users);
+	$result = get_myoder_list_with_search($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$group_id,13,'groupbuy',$state,$t_users, $start_time, $end_time, $order_id);
 }
 $payment_info = get_payment_info($dbo,$t_payment);
 ?>

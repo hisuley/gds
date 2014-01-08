@@ -118,4 +118,66 @@ function get_myoder_list(&$dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_inf
 	return $list;
 }
 
+/* 收到的订单 */
+function get_myoder_list_with_search(&$dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$id,$page,$type,$state,$t_users, $start_time = '', $end_time = '', $order_id = ''){
+    $list=array();
+    if ($type =='shop'){
+        $str="";
+        if(is_numeric($order_id) && $order_id != 0) {
+            $str .= " and order_id = ".$order_id;
+        }
+        if(!empty($start_time)) {
+            $str .= " and order_time >= '$start_time' ";
+        }
+        if(!empty($end_time)) {
+              $str .= " and order_time  <= '$end_time' ";
+        }
+        if(!empty($state)){
+            switch ($state){
+                case 1:
+                    $str.=" and order_status=1 ";break;
+                case 2:
+                    $str.=" and order_status=2 ";break;
+                case 3:
+                    $str.=" and pay_status=0 ";break;
+                case 4:
+                    $str.=" and pay_status=1 ";break;
+                case 5:
+                    $str.=" and transport_status=0 ";break;
+                case 6:
+                    $str.=" and transport_status=1 ";break;
+                case 7:
+                    $str.=" and order_status=3 ";break;
+                case 8:
+                    $str.=" and transport_status=0 and pay_status=1 ";break;
+                case 9:
+                    $str.=" and order_status=3 and seller_reply='0' ";break;
+            }
+        }
+        $sql="SELECT * FROM $t_order_info WHERE shop_id='$id' ".$str." ORDER BY order_time DESC";
+        $list = $dbo->fetch_page($sql,$page);
+        foreach ($list['result'] as $k=>$v){
+            $sql = "select og.order_id,og.goods_id,b.goods_thumb,og.id,b.lock_flg,c.user_id,c.shop_name,b.goods_name,c.shop_id from  `$t_goods` as b, `$t_shop_info` as c,`$t_order_goods` AS og where og.order_id='{$v['order_id']}' and og.goods_id=b.goods_id and c.shop_id='{$v['shop_id']}'";
+            $rs = $dbo->getRs($sql);
+            $list['result'][$k]['order_goods']=$rs;
+            $sql = "SELECT user_name FROM  $t_users   WHERE user_id='{$v['user_id']}'";
+
+            $rs = $dbo->getRs($sql);
+            $list['result'][$k]['dname']=$rs[0];
+        }
+    }else if($type == 'groupbuy') {
+        $sql="SELECT * FROM $t_order_info WHERE group_id='$id'  ORDER BY order_time DESC";
+        $list = $dbo->fetch_page($sql,$page);
+        foreach ($list['result'] as $k=>$v){
+            $sql = "select og.order_id,og.goods_id,b.goods_thumb,og.id,b.lock_flg,c.user_id,c.shop_name,b.goods_name,c.shop_id from `$t_order_goods` as og, `$t_goods` as b, `$t_shop_info` as c where og.order_id='{$v['order_id']}' and og.goods_id=b.goods_id and c.shop_id='{$v['shop_id']}'";
+            $rs = $dbo->getRs($sql);
+            $list['result'][$k]['order_goods']=$rs;
+            $sql = "SELECT user_name FROM  $t_users   WHERE user_id='{$v['user_id']}'";
+            $rs = $dbo->getRs($sql);
+            $list['result'][$k]['dname']=$rs[0];
+        }
+    }
+    return $list;
+}
+
 ?>

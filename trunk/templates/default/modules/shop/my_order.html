@@ -10,6 +10,7 @@
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/userchangeStyle.js"></script>
+<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
 
 <style type="text/css">
 th{background:#EFEFEF}
@@ -33,11 +34,27 @@ td.img img{cursor:pointer}
         	<div class="right_top"></div>
             <div class="cont">
                 <div class="cont_title">
+                <hr/>
+                <div class="search">
+                   <form action="modules.php" method="get" name="search_form" style="float:left;">
+                   <p>
+                      订单号：<input class="txt" type="text" name="order_id" value="{echo:$order_id;/}">
+                      </p>
+                   <p>
+                      支付日期：<input class="Wdate" type="text" name="start_time" id="start_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$start_time;/}"> ~
+                                <input class="Wdate" type="text" name="end_time" id="end_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$end_time;/}">
+                                <input type="hidden" value="shop_my_order" name="app">
+                                <input type="submit" name="submit" value="搜索"></p>
+                        </form>
+                    </div>
                 <span class="tr_op">
 				<form action="modules.php?app=shop_my_order" method="post">
 					<select name="state">
 						<option value='' {sta:if($state=="") {echo 'selected'; if/}>全部</option>
-						<option value='1' {sta:if($state=="1"){echo "selected";if/}>未确定</option>
+                        <option value='0' {sta:if($state=="0"){echo "selected";if/}>已取消</option>
+
+						<option value='1' {sta:if($state=="1"){echo "selected";if/}>处理中</option>
+
 						<option value='2' {sta:if($state=="2"){echo "selected";if/}>已确定</option>
 						<option value='3' {sta:if($state=="3"){echo "selected";if/}>未支付</option>
 						<option value='4' {sta:if($state=="4"){echo "selected";if/}>已支付</option>
@@ -112,7 +129,7 @@ td.img img{cursor:pointer}
 										} else {
 											echo "<span class='red'>".lp{m_order_notransported}."</span><br />";
 										}
-									}	
+									}
 							}
 						if/}
 					</td>
@@ -146,7 +163,7 @@ td.img img{cursor:pointer}
 								{echo:lp{m_already_valuation};/}
 							{end:if/}
 							<!-- 订单评价 结束 -->
-							
+
 						{end: if/}
 					</td>
 					<!-- 合并  -->
@@ -159,7 +176,7 @@ td.img img{cursor:pointer}
 				<tr><td colspan="6" class="center">{echo: lp{m_nolist_record};/}</td></tr>
 				{end:if/}
 			</table>
-			
+
 			</div>
 			<div class="right_bottom"></div>
 			<div class="back_top"><a href="#"></a></div>
