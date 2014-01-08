@@ -128,5 +128,5 @@ ALTER TABLE `gds`.`imall_brand` ADD COLUMN `brand_type` VARCHAR(255) DEFAULT '' 
 
 
 /* 文章表增加副标题和发表日期 */
-ALTER TABLE `gds`.`imall_article` ADD COLUMN `sub_title` varchar(255) DEFAULT '' NOT NULL COMMENT '文章副标题' AFTER `title`;
-ALTER TABLE `gds`.`imall_article` ADD COLUMN `post_date` varchar(255) DEFAULT '' NOT NULL COMMENT '文章发表日期' AFTER `sub_title`;
+ALTER TABLE `imall_article` ADD COLUMN `sub_title` varchar(255) DEFAULT '' NOT NULL COMMENT '文章副标题' AFTER `title`;
+ALTER TABLE `imall_article` ADD COLUMN `post_date` varchar(255) DEFAULT '' NOT NULL COMMENT '文章发表日期' AFTER `sub_title`;
