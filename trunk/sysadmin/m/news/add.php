@@ -28,9 +28,11 @@ $cat_source = $dbo->getRs($sql);
 $news_info = array(
 	'cat_id'		=> 0,
 	'title'			=> '',
+    'sub_title'     => '',
+    'post_date'     => '',
 	'content'		=> '',
 	'is_link'		=> '',
-	'link_url'		=> 'http://',
+	'link_url'		=> '',
 	'is_show'		=> 1
 );
 ?>
@@ -84,6 +86,14 @@ $(function(){
 				<td><?php echo $a_langpackage->a_news_title; ?>：</td>
 				<td><input class="small-text" type="text" name="title" value="<?php echo $news_info['title']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
 			</tr>
+            <tr>
+                <td><?php echo $a_langpackage->a_news_sub_title; ?>：</td>
+                <td><input class="small-text" type="text" name="sub_title" value="<?php echo $news_info['sub_title']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
+            </tr>
+            <tr>
+                <td><?php echo $a_langpackage->a_news_post_date; ?>：</td>
+                <td><input class="small-text" type="text" name="post_date" value="<?php echo $news_info['post_date']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
+            </tr>
                         <tr>
 				<td><?php echo $a_langpackage->a_news_source; ?>：</td>
 				<td><select name="source_id">

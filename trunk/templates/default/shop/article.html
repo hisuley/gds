@@ -75,12 +75,13 @@
         </ul>
       <div class="artpan">
       <h4 class="artTitle"><font style="color:{echo: $article_info['tag_color'];/} ">{echo: $article_info['title'];/}</font></h4>
+         {sta:if(!empty($article_info['sub_title']))[exc]} <h5 class="artTitle"><font style="font-size:13px;font-weight:bold;">{echo: $article_info['sub_title'];/}</font></h5>{end:if/}
       <div class="artInfo">
         <span>{echo: lp{s_time};/}: {echo: substr($article_info['add_time'],0,10);/}</span>
 
       </div>
       <div class="artTxt">
-      	<p>{echo: $article_info['content'];/}</p>
+      	<p>{echo: str_replace('../uploadfiles', './uploadfiles', $article_info['content']);/}</p>
       </div>
       <div class="facility_baseinfo clrfix">
             <ul class="telephoneinfo">

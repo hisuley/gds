@@ -78,7 +78,7 @@ td span {color:red;}
                                     </span>
                             </td>
                         <td>
-                            <?php echo $a_langpackage->a_notification_policy_name;?>: <input type="text" class="small-text" name="cat_name" value="<?php echo $cat_name; ?>" style="width:100px" />
+                            <?php echo $a_langpackage->a_notification_policy_name;?>: <input type="text" class="small-text" name="policy_title" value="<?php echo $policy_title; ?>" style="width:100px" />
                               <input type="hidden" name="app" value="notification_policy_list" /><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" />
                         </td>
                     </tr>

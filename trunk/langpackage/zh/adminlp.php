@@ -288,6 +288,8 @@ class adminlp{
         var $a_news_recheck_audit_false = "复审新闻不通过";
         var $a_news_audit_note = "提交审核不通过备注";
         var $a_news_retraction_log = "新闻撤稿";
+    var $a_news_sort_column = "排序字段";
+    var $a_news_sort_type = "排序方法";
 	var $a_news_add = "添加新闻";
 	var $a_news_edit = "新闻修改";
         var $a_news_attr_management = "新闻属性管理";
@@ -299,6 +301,8 @@ class adminlp{
         var $a_news_category_repeat = "文章分类名称已存在";
         var $a_category_icon = "分类图标";
         var $a_news_attr = '新闻属性';
+    var $a_news_sub_title = '副标题';
+    var $a_news_post_date = "日期";
 	var $a_select_n_category = "选择分类";
 	var $a_select_news_category ="请选择新闻分类";
 	var $a_news_content = "新闻内容";
