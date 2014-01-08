@@ -18,7 +18,10 @@ $t_order_goods = $tablePreStr."order_goods";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 $state=intval(get_args('state'));
+$order_id = short_check(get_args('order_id'));
+$start_time = short_check(get_args('start_time'));
+$end_time = short_check(get_args('end_time'));
 $user_id = get_sess_user_id();
-$result = get_myorder_info($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goods,$user_id,$state,10);
+$result = get_myorder_info_with_search($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goods,$user_id,$state,10, $start_time, $end_time, $order_id);
 
 ?>
