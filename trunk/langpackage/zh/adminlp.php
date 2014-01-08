@@ -1203,6 +1203,7 @@ class adminlp{
 	var $a_goods_photo_request="商品快照";
 	
 	var $a_payment_cho="选择支付方式";
+    var $a_payment_id = "编号";
 	var $a_admin_can = "管理员给您取消了订单，订单号为:";
 	var $a_admin_pay = "管理员将您的订单状态改为支付，订单号为:";
 	var $a_admin_tran = "管理员将您的订单状态改为已发货，订单号为:";

@@ -3,6 +3,22 @@ if(!$IWEB_SHOP_IN) {
 	die('Hacking attempt');
 }
 
+function get_payment_info_with_order(&$dbo,$table,$orderby = 'pay_id', $orderway = 'desc', $enabled=0) {
+    $sql = "select * from `$table`";
+    if($enabled>0) {
+        $sql = $sql . " where enabled='$enabled' ";
+    }
+    if(!empty($orderby) && !empty($orderway)){
+        $sql .= " ORDER BY ".$orderby." ".$orderway
+    }
+    $array = $dbo->getRs($sql);
+    $payment = array();
+    foreach($array as $value) {
+        $payment[$value['pay_id']] = $value;
+    }
+    return $payment;
+}
+
 function get_payment_info(&$dbo,$table,$enabled=0) {
 	$sql = "select * from `$table`";
 	if($enabled>0) {

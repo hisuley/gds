@@ -9,11 +9,13 @@ $a_langpackage=new adminlp;
 //定义读操作
 dbtarget('r',$dbServs);
 $dbo=new dbex;
+$orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
 
 //数据表定义区
 $t_payment = $tablePreStr."payment";
 
-$payment = get_payment_info($dbo,$t_payment);
+$payment = get_payment_info_with_order($dbo,$t_payment,$orderby, $orderway);
 
 
 $pay_oper=check_rights("pay_oper");
@@ -45,18 +47,20 @@ td span {color:red;}
 		<table class="list_table">
 		 <thead>
 			<tr style="text-align:center;">
-				<th width="90px" align="left"><?php echo $a_langpackage->a_port_name;?></th>
+                <th width="30px"><?php echo $a_langpackage->a_payment_id; ?> <a href="m.php?app=order_payment&orderby=pay_id&orderway=asc">↑</a><a href="m.php?app=order_payment&orderby=pay_id&orderway=desc">↓</a></th>
+				<th width="90px" align="left"><?php echo $a_langpackage->a_port_name;?>  <a href="m.php?app=order_payment&orderby=pay_name&orderway=asc">↑</a><a href="m.php?app=order_payment&orderby=pay_name&orderway=desc">↓</a></th>
 				<th width="90px"><?php echo $a_langpackage->a_folder_name;?></th>
 				<th><?php echo $a_langpackage->a_describe;?></th>
 				<th width="85px"><?php echo $a_langpackage->a_writer;?></th>
 				<th style="width:40px;"><?php echo $a_langpackage->a_version;?></th>
-				<th style="width:70px;"><?php echo $a_langpackage->a_now_status;?></th>
+				<th style="width:70px;"><?php echo $a_langpackage->a_now_status;?>  <a href="m.php?app=order_payment&orderby=enabled&orderway=asc">↑</a><a href="m.php?app=order_payment&orderby=enabled&orderway=desc">↓</a></th>
 				<th style="width:40px;"><?php echo $a_langpackage->a_operate;?></th>
 			</tr>
 		  </thead>
 		  <tbody>
 		<?php foreach($payment as $value) { ?>
 			<tr style="text-align:center;">
+                <td><?php echo $value['pay_id']; ?></td>
 				<td align="left"><?php echo $value['pay_name'];?></td>
 				<td><?php echo $value['pay_code'];?></td>
 				<td><?php echo $value['pay_desc'];?></td>
