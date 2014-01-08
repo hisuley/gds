@@ -25,6 +25,7 @@ $dbo=new dbex();
 //定义文件表
 $t_user_info = $tablePreStr."user_info";
 $t_users = $tablePreStr."users";
+$t_user_point = $tablePreStr."user_point";
 $t_user_account = $tablePreStr."user_account";
 $t_admin_log = $tablePreStr."admin_log";
 $t_remind_info = $tablePreStr."remind_info";
@@ -78,6 +79,8 @@ $post2['user_integral'] = intval(get_args('user_integral'));
 $post2['user_integral_surplus'] = intval(get_args('user_integral_surplus'));
 $post2['user_money'] = intval(get_args('user_money'));
 $user_id = intval(get_args('user_id'));
+$amount_notes = short_check(get_args('amount_notes'));
+$point_notes = short_check(get_args('point_notes'));
 if(!$user_id) { trigger_error($a_langpackage->a_error);}
 
 //查询$t_users表中的数据，与原数据对比，如果修改了，则发送站内消息给用户
@@ -106,6 +109,19 @@ if($rs){
 			insert_remind_info($dbo,$t_remind_info,$array);
 		}
 	}
+        
+        //修改用户积分时提醒备注
+        if($post2['user_integral']){
+            if($rs['user_integral'] != $post2['user_integral'] && empty($point_notes)){
+                action_return(0,$a_langpackage->a_memeber_nonote_point,'-1');
+            }
+        }
+        //修改余额时提醒备注
+        if($post2['user_money']){
+            if($rs['user_money'] != $post2['user_money'] && empty($amount_notes)){
+                action_return(0,$a_langpackage->a_memeber_nonote_amount,'-1');
+            }
+        }
         //修改用户余额时更新现金账户表
         if(get_args('user_money')) {
             if($rs['user_money'] > $post2['user_money']){
@@ -115,8 +131,8 @@ if($rs){
                         'amount' => -($rs['user_money'] - $post2['user_money']),
                         'add_time' => $nowtime,
                         'paid_time' => $nowtime,
-                        'admin_note' => $post['user_notes'],
-                        'user_note' => '',
+                        'admin_note' => $amount_notes,
+                        'user_note' => $post['user_notes'],
                         'process_type' => 2,
                         'payment' => '',
                         'is_paid' => 1,
@@ -130,8 +146,8 @@ if($rs){
                         'amount' => -($rs['user_money'] - $post2['user_money']),
                         'add_time' => $nowtime,
                         'paid_time' => $nowtime,
-                        'admin_note' => $post['user_notes'],
-                        'user_note' => '',
+                        'admin_note' => $amount_notes,
+                        'user_note' => $post['user_notes'],
                         'process_type' => 0,
                         'payment' => '',
                         'is_paid' => 0,
@@ -139,15 +155,29 @@ if($rs){
                 insert_account_info($dbo,$t_user_account,$array);
             }
         }
-        //修改用户积分时提醒备注
-        if($post2['user_integral']){
-            if($rs['user_integral'] != $post2['user_integral'] && empty($post['user_notes'])){
-                action_return(0,$a_langpackage->a_memeber_nonote,'-1');
+        //修改用户总积分时更新积分表
+        if(get_args('user_integral')) {
+            if($rs['user_integral'] > $post2['user_integral']){
+                $array = array(
+                        'user_id' => $user_id,
+                        'admin_user' => $_SESSION['admin_name'],
+                        'point' => -($rs['user_integral'] - $post2['user_integral']),
+                        'add_time' => $nowtime,
+                        'admin_note' => $point_notes,
+                        'process_type' => 2,
+                );
+                insert_account_info($dbo,$t_user_point,$array);
             }
-        }
-        if($post2['user_integral_surplus']){
-            if($rs['user_integral_surplus'] != $post2['user_integral_surplus'] && empty($post['user_notes'])){
-                action_return(0,$a_langpackage->a_memeber_nonote,'-1');
+            if($rs['user_integral'] < $post2['user_integral']){
+                $array = array(
+                        'user_id' => $user_id,
+                        'admin_user' => $_SESSION['admin_name'],
+                        'point' => -($rs['user_integral'] - $post2['user_integral']),
+                        'add_time' => $nowtime,
+                        'admin_note' => $point_notes,
+                        'process_type' => 1,
+                );
+                insert_account_info($dbo,$t_user_point,$array);
             }
         }
 }

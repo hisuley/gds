@@ -82,13 +82,22 @@
 
     <div class="content-common-box">
       <div class="title"><h2>{echo:$cat_name;/}<h2></div>
-      <div class="content-news-box">
-        <ul class="artlist_txt" >
+      <div id="listItems" class="c_m" style="position:relative">
+        <ul class="list_view">
           {sta:if($result['result'])[exc]}
           {sta:foreach($result['result'] as $val)[loop]}
-              <li class="clearfix"><span class="right">{echo: $val['add_time'];/}</span>
-              <a href="{echo:article_list_url($val['cat_id']);/}">[{echo:$cat_name;/}]</a>
-              <a class="ttls" href="{echo:article_url($val['article_id']);/}"><font style="color:{echo: $val['tag_color'];/} ">{echo: $val['title'];/}</font></a></li>
+              <li class="clearfix">
+                    <div class="photo"><a target="_blank" href="{echo:article_url($val['article_id']);/}"><img onmouseout="hidebox({echo:$val['article_id'];/})" onmouseover="showbox({echo:$val['article_id'];/})" src="{echo: $val['thumb'] ? $val['thumb'] : 'skin/default/images/nopic.gif';/}"  width="{echo:$SYSINFO['width1'];/}" height="{echo:$SYSINFO['height1'];/}"  onerror="this.src='skin/default/images/nopic.gif'" /></a></div>
+                    <div>
+                    <span class="right">{echo: $val['add_time'];/}</span>
+                    <a href="{echo:article_list_url($val['cat_id']);/}">[{echo:$cat_name;/}]</a>
+                    <a class="ttls" href="{echo:article_url($val['article_id']);/}"><font style="color:{echo: $val['tag_color'];/} ">{echo: $val['title'];/}</font></a>
+                    <p class="des"><br>[{echo:lp{i_description};/}]{echo: sub_str(strip_tags($val['content']),80);/}</p>
+                    </div>
+                    <div style="display: none;" id="showbox_{echo:$val['article_id'];/}" class="showbox">
+                            <div class="subbox"><img id="showimg_{echo:$val['article_id'];/}" src="{echo: $val['thumb'] ? $val['thumb'] : 'skin/default/images/nopic.gif';/}" width="234" height="234" alt="{echo:lp{i_loading_img};/}"   onerror="this.src='skin/default/images/nopic.gif'"/></div>
+                    </div>
+              </li>
           {end:foreach/}
           {end:}else{ ;/}
           {echo:lp{i_none_articles};/}
@@ -149,3 +158,21 @@
 </div>
 </body>
 </html>
+<script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
+<script language="JavaScript">
+function showbox(id) {
+	document.getElementById("showbox_"+id).style.display = '';
+	var showimg = document.getElementById("showimg_"+id);
+	if(showimg.alt=='{echo:lp{i_loading_img};/}') {
+		ajax("do.php?act=goods_get_imgurl","POST","id="+id,function(data){
+			if(data) {
+				showimg.src = data;
+				showimg.alt = '';
+			}
+		});
+	}
+}
+function hidebox(id) {
+	document.getElementById("showbox_"+id).style.display = 'none';
+}
+</script>

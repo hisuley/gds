@@ -95,6 +95,9 @@ $actArray = array(
     'travel_attr_del'       => array('a/goods/travel_attr_del.php'),
     'scenic_attr_edit'      => array('a/goods/scenic_attr_edit.php'),
     'scenic_attr_del'       => array('a/goods/scenic_attr_del.php'),
+    'goods_promotions_add'	=> array('a/goods/promotions_add.php','m.php?app=goods_promotions_list'),
+	'goods_promotions_edit'	=> array('a/goods/promotions_edit.php'),
+	'goods_promotions_del'	=> array('a/goods/promotions_del.php','m.php?app=goods_promotions_list'),
 
 	'complaint_type_edit'	=> array('a/complaint/type_edit.php'),
 	'complaint_type_del'	=> array('a/complaint/type_del.php'),

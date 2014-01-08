@@ -18,13 +18,15 @@ $t_users = $tablePreStr."users";
 $t_user_info = $tablePreStr."user_info";
 $t_user_rank = $tablePreStr."user_rank";
 $t_areas = $tablePreStr."areas";
+$t_user_account = $tablePreStr."user_account";
+$t_user_point = $tablePreStr."user_point";
 
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql="select a.user_id,a.user_email,a.user_name,a.user_passwd,a.user_ico,a.reg_time,a.last_login_time,a.last_ip,a.email_check,a.rank_id,a.user_money,a.user_integral,a.user_integral_surplus,b.user_truename,b.user_gender,b.user_mobile,b.user_telphone,b.user_country,b.user_province,b.user_city,user_district,b.user_zipcode,b.user_address,b.user_birthday,b.user_qq,b.user_msn,b.user_skype,b.user_notes
-from `$t_users` a left join `$t_user_info` b on a.user_id=b.user_id where a.user_id='$user_id'";
+$sql="select a.user_id,a.user_email,a.user_name,a.user_passwd,a.user_ico,a.reg_time,a.last_login_time,a.last_ip,a.email_check,a.rank_id,a.user_money,a.user_integral,a.user_integral_surplus,b.user_truename,b.user_gender,b.user_mobile,b.user_telphone,b.user_country,b.user_province,b.user_city,user_district,b.user_zipcode,b.user_address,b.user_birthday,b.user_qq,b.user_msn,b.user_skype,b.user_notes,c.admin_note as amount_notes,d.admin_note as point_notes
+from `$t_users` a left join `$t_user_info` b on a.user_id=b.user_id left join `$t_user_account` c on a.user_id=c.user_id left join `$t_user_point` d on a.user_id=d.user_id where a.user_id='$user_id'";
 $user_info = $dbo->getRow($sql);
 //$user_info = get_user_info($dbo,$t_users,$user_id);
 
@@ -307,8 +309,16 @@ td span {color:red;}
                                 <td><img src="<?php echo $user_info['user_ico']; ?>"></td>
 			</tr>
                         <tr>
-				<td valign="top"><?php echo $a_langpackage->a_words_beizhu; ?>：</td>
-                                <td><textarea name="user_notes" cols="35" rows="5"><?php echo $user_info['user_notes']; ?></textarea></td>
+				<td align="right"><?php echo $a_langpackage->a_user_note; ?>：</td>
+                                <td><input type="text" class="small-text" name="user_notes" value="<?php echo $user_info['user_notes']; ?>" /></td>
+			</tr>
+                        <tr>
+                            <td align="right"><?php echo $a_langpackage->a_do_amount_note;?>：</td>
+                            <td><input class="small-text" type="text" name="amount_notes" values="<?php echo $user_info['amount_notes']; ?>" /> </td>
+			</tr>
+                        <tr>
+                            <td align="right"><?php echo $a_langpackage->a_do_point_note;?>：</td>
+                            <td><input class="small-text" type="text" name="point_notes" values="<?php echo $user_info['point_notes']; ?>" /> </td>
 			</tr>
 		  </tbody>
 		</table>

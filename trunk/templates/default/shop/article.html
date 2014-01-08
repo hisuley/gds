@@ -81,9 +81,9 @@
 
       </div>
       <div class="artTxt">
-      	<p>{echo: str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $article_info['content']);/}</p>
+      	<p>{echo: str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr [contentfulltext]);/}</p>
       </div>
-      <div class="facility_baseinfo clrfix">
+      <div class="facility_baseinfo clrfix"><span style="text-align:center;margin:0 auto;">{echo:$newArr [pages];/}</span>
             <ul class="telephoneinfo">
                 {sta:
                 if($attr_status) {

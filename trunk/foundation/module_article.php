@@ -58,4 +58,66 @@ function get_dg_category($array,$parentid=0,$level=0,$add=2) {
 	}
 	return $newarray;
 }
+function page_url($id, $page){
+        global $baseUrl;
+        $urlrules_arr = array('article.php?id={$id}', 'article.php?id={$id}&page={$page}');
+        if($page==1) {
+                $urlrule = $urlrules_arr[0];
+        } else {
+                $urlrule = isset($urlrules_arr[1]) ? $urlrules_arr[1] : $urlrules_arr[0];
+        }
+        $urls = str_replace(array('{$year}','{$month}','{$day}','{$catid}','{$id}','{$page}'),array($year,$month,$day,$catid,$id,$page),$urlrule);
+        $url_arr[0] = $url_arr[1] = $baseUrl.$urls;
+        return $url_arr;
+}
+function content_pages($num, $curr_page,$pageurls) {
+        $multipage = '';
+        $page = 11;
+        $offset = 4;
+        $pages = $num;
+        $from = $curr_page - $offset;
+        $to = $curr_page + $offset;
+        $more = 0;
+        if($page >= $pages) {
+                $from = 2;
+                $to = $pages-1;
+        } else {
+                if($from <= 1) {
+                        $to = $page-1;
+                        $from = 2;
+                } elseif($to >= $pages) {
+                        $from = $pages-($page-2);
+                        $to = $pages-1;
+                }
+                $more = 1;
+        }
+        if($curr_page>0) {
+                $perpage = $curr_page == 1 ? 1 : $curr_page-1;
+                $multipage .= '<a class="a1" href="'.$pageurls[$perpage][0].'">上一页</a>';
+                if($curr_page==1) {
+                        $multipage .= ' <span>1</span>';
+                } elseif($curr_page>6 && $more) {
+                        $multipage .= ' <a href="'.$pageurls[1][0].'">1</a>..';
+                } else {
+                        $multipage .= ' <a href="'.$pageurls[1][0].'">1</a>';
+                }
+        }
+        for($i = $from; $i <= $to; $i++) {
+                if($i != $curr_page) {
+                        $multipage .= ' <a href="'.$pageurls[$i][0].'">'.$i.'</a>';
+                } else {
+                        $multipage .= ' <span>'.$i.'</span>';
+                }
+        }
+        if($curr_page<$pages) {
+                if($curr_page<$pages-5 && $more) {
+                        $multipage .= ' ..<a href="'.$pageurls[$pages][0].'">'.$pages.'</a> <a class="a1" href="'.$pageurls[$curr_page+1][0].'">下一页</a>';
+                } else {
+                        $multipage .= ' <a href="'.$pageurls[$pages][0].'">'.$pages.'</a> <a class="a1" href="'.$pageurls[$curr_page+1][0].'">下一页</a>';
+                }
+        } elseif($curr_page==$pages) {
+                $multipage .= ' <span>'.$pages.'</span> <a class="a1" href="'.$pageurls[$curr_page][0].'">下一页</a>';
+        }
+        return $multipage;
+}
 ?>
