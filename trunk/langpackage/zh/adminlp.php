@@ -460,7 +460,8 @@ class adminlp{
         var $a_memeber_birthday = "出生日期";
         var $a_memeber_integral = "总积分";
         var $a_memeber_integral_surplus = "剩余可用积分";
-        var $a_memeber_nonote = "备注不能为空!";
+        var $a_memeber_nonote_amount = "修改余额备注不能为空!";
+        var $a_memeber_nonote_point = "修改积分备注不能为空!";
         var $a_memeber_money = "余额";
         var $a_memeber_address = "详细地址";
         var $a_memeber_zipcode = "邮政编码";
@@ -677,6 +678,8 @@ class adminlp{
         var $a_account_edittime = "记录更新时间";
         var $a_admin_note = "管理员备注";
         var $a_user_note = "用户备注";
+        var $a_do_amount_note = "修改余额备注";
+        var $a_do_point_note = "修改积分备注";
         var $a_process_type = "操作类型";
         var $a_account_ispaid = "是否付款";
 	/*news view */

@@ -102,7 +102,7 @@ ALTER TABLE `gds`.`imall_goods_attr` CHANGE `price` `price` TEXT NULL;
 ALTER TABLE `gds`.`imall_article_cat` ADD COLUMN `seo` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '分类搜索引擎优化' AFTER `cat_icon`; 
 /* 文章表增加草稿字段 */
 ALTER TABLE `gds`.`imall_article` ADD COLUMN `is_draft` TINYINT(1) DEFAULT 1 NOT NULL COMMENT '1是草稿,0不是草稿' AFTER `audit_note`; 
-/* 用户详情表增加备注字段 */
+/* 用户详情表增加用户备注字段 */
 ALTER TABLE `gds`.`imall_user_info` ADD COLUMN `user_notes` TEXT NULL COMMENT '备注' AFTER `user_skype`; 
 /* 会员等级表 */
 CREATE TABLE `imall_user_level` (
@@ -130,3 +130,16 @@ ALTER TABLE `gds`.`imall_brand` ADD COLUMN `brand_type` VARCHAR(255) DEFAULT '' 
 /* 文章表增加副标题和发表日期 */
 ALTER TABLE `imall_article` ADD COLUMN `sub_title` varchar(255) DEFAULT '' NOT NULL COMMENT '文章副标题' AFTER `title`;
 ALTER TABLE `imall_article` ADD COLUMN `post_date` varchar(255) DEFAULT '' NOT NULL COMMENT '文章发表日期' AFTER `sub_title`;
+
+/* 用户积分表 */
+CREATE TABLE `imall_user_point` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '积分表ID号',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `admin_user` varchar(255) NOT NULL COMMENT '操作该笔交易的管理员的用户名',
+  `point` int(10) NOT NULL COMMENT '积分的数目，正数为增加，负数为减少',
+  `add_time` datetime NOT NULL COMMENT '记录插入时间',
+  `admin_note` varchar(255) NOT NULL COMMENT '管理员的备注',
+  `process_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '操作类型:1为增加2为减少',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
