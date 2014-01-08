@@ -24,6 +24,13 @@
   	
 
     <div id="leftColumn">
+        <div class="SubCategoryBox mg12b">
+            <h3>团购列表-{echo:lp{i_shop_filter};/}</h3>
+            <form method="get">
+                <input type="text" name="k" value="{echo:$kk;/}" placeholder="请输入搜索关键词">
+                <input type="submit" value="搜索"/>
+            </form>
+        </div>
       <div id="leftMian" class="content-common-box content-left-big-box">
         <div class="title">
           <!--<span class="right"><a id="list" onclick="changeStyle2('list',this)" class="selected" href="javascript:void(0);" hidefocus="true">{echo:lp{i_list};/}</a><a id="window" onclick="changeStyle2('window',this)" href="javascript:void(0);" hidefocus="true">{echo:lp{i_show_window};/}</a></span> -->
