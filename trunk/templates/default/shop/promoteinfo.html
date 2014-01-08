@@ -89,7 +89,7 @@ function changeImage(obj){
                         <label>{echo: $promoteinfo['goods_price'];/}</label>
                         {echo: lp{s_yuan};/}</li>
                     <li><span>折扣:</span>
-                        <em class="price">{echo: inval(($promoteinfo['spec_price']/$promoteinfo['goods_price'])*100);/}折</em>
+                        <em class="price">{echo: intval(($promoteinfo['spec_price']/$promoteinfo['goods_price'])*100);/}折</em>
 		              </li>
 		            <li><span>
                         <a href="goods.php?id={echo:$promoteinfo['goods_id'];/}" style=" color:#F00">购买商品</a>
