@@ -72,7 +72,7 @@ td span {color:red;}
 	            	<tbody>
 	            	<tr>
                                 <td width="2px" style="padding:0 0 0 5px"><span style="margin:1px 0px 0px 0px; float:left; color: #000" > <img src="skin/images/icon_search.gif" border="0" alt="SEARCH" /> </span></td>
-	                   	<td width="600px">
+	                   	<td width="650px">
                                         <?php echo $a_langpackage->a_news_title; ?>： <input type="text" class="small-text" name="title" value="<?php echo $title; ?>" style="width:100px" /> 
 	                   		<?php echo $a_langpackage->a_news_category; ?>：
 	                   		<select name="id">
