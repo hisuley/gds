@@ -34,19 +34,7 @@ td.img img{cursor:pointer}
         	<div class="right_top"></div>
             <div class="cont">
                 <div class="cont_title">
-                <hr/>
-                <div class="search">
-                   <form action="modules.php" method="get" name="search_form" style="float:left;">
-                   <p>
-                      订单号：<input class="txt" type="text" name="order_id" value="{echo:$order_id;/}">
-                      </p>
-                   <p>
-                      支付日期：<input class="Wdate" type="text" name="start_time" id="start_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$start_time;/}"> ~
-                                <input class="Wdate" type="text" name="end_time" id="end_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$end_time;/}">
-                                <input type="hidden" value="shop_my_order" name="app">
-                                <input type="submit" name="submit" value="搜索"></p>
-                        </form>
-                    </div>
+
                 <span class="tr_op">
 				<form action="modules.php?app=shop_my_order" method="post">
 					<select name="state">
@@ -69,6 +57,18 @@ td.img img{cursor:pointer}
 				</span>
                 {echo:lp{m_recver_order};/}</div>
                 <hr />
+                <div class="search">
+                    <form action="modules.php" method="get" name="search_form" style="float:left;">
+                        <p>
+                            订单号：<input class="txt" type="text" name="order_id" value="{echo:$order_id;/}">
+                        </p>
+                        <p>
+                            支付日期：<input class="Wdate" type="text" name="start_time" id="start_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$start_time;/}"> ~
+                            <input class="Wdate" type="text" name="end_time" id="end_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$end_time;/}">
+                            <input type="hidden" value="shop_my_order" name="app">
+                            <input type="submit" name="submit" value="搜索"></p>
+                    </form>
+                </div>
 			<table width="100%" border="0" cellspacing="0">
 				<tr class="center"><th colspan="2">{echo: lp{m_order_goods_info};/}</th>
 					<th width="">{echo: lp{m_count};/}</th>
