@@ -59,7 +59,7 @@ if($pay_id) {
 		$sql .= " and a.pay_id='$pay_id' ";
 	}
 }
-if($order_status) {
+if($order_status != '99') {
 	if(!$right){
 		header('location:m.php?app=error');
 		exit;
@@ -144,10 +144,12 @@ td span {color:red;}
 						</select>
                     	<?php echo $a_langpackage->a_order_status;?>：
 						<select name="order_status">
-							<option value="0"><?php echo $a_langpackage->a_all;?></option>
+							<option value="99"><?php echo $a_langpackage->a_all;?></option>
 							<option value="1" <?php if($order_status==1){echo "selected";} ?> ><?php echo $a_langpackage->a_customer_order;?></option>
 							<option value="2" <?php if($order_status==2){echo "selected";} ?> ><?php echo $a_langpackage->a_shop_confirm_order;?></option>
 							<option value="3" <?php if($order_status==3){echo "selected";} ?> ><?php echo $a_langpackage->a_customer_confirm_goods;?></option>
+                            <option value="0" <?php if($order_status==0){echo "selected";} ?> ><?php echo  $a_langpackage->a_order_cancelled;?></option>
+
 						</select>
 						<?php echo $a_langpackage->a_pay;?><input type="checkbox" name="pay_status" value="1" <?php if($pay_status) echo "checked";?> />
 						<?php echo $a_langpackage->a_send_goods;?><input type="checkbox" name="transport_status" value="1" <?php if($transport_status) echo "checked";?> />
