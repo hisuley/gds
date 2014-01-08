@@ -31,7 +31,8 @@ if(get_sess_user_id()) {
 //当前可访问的应用工具
 $appArray = array(
 	'start'		=> 'shop/goods.php',
-	'groupbuyinfo' => 'shop/groupbuyinfo.php'
+	'groupbuyinfo' => 'shop/groupbuyinfo.php',
+    'promote' => 'shop/promoteinfo.php'
 );
 if(!isset($_GET['app'])){
 	$_GET['app']="start";

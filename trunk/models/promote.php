@@ -86,12 +86,6 @@ foreach($promotes_id as $key=>$val){
 }
 $promote_id=implode(',',$promote_id);
 
-$sql="update $t_promote set is_enabled ='0' where  start_time <= '$now_time' and '$now_time' <= end_time ";
-if($promote_id){
-	$sql.=" and id in($promote_id)";
-}
-$dbo->exeUpdate($sql);
-
 $promote_id=array();
 $sql="select id from $t_promote where is_enabled ='1'";
 $promotes_id = $dbo->getRs($sql);
@@ -102,7 +96,7 @@ $promote_id=implode(',',$promote_id);
 
 
 $sql = "SELECT b.*,g.* FROM `$t_promote` b left join `$t_goods` g on b.goods_id = g.goods_id";
-$sql .= " WHERE b.recommended = 0 and g.lock_flg =0 and b.is_enabled = '1'";
+$sql .= " WHERE g.lock_flg =0 and b.is_enabled = '1'";
 if(!empty($kk)){
     $sql .= " and (g.goods_name LIKE '%".trim($kk)."%' OR b.content LIKE '%".trim($kk)."%') ";
 }

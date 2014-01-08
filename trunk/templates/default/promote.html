@@ -42,17 +42,17 @@
               <tr>
                 <th class="proName">商品名称</th>
                 <th class="groupPic">促销价格</th>
-                <th class="timeLeft">剩余时间</th>
+                <th class="timeLeft">倒计时</th>
               </tr>
             {sta: if($result['result']) {
             foreach($result['result'] as $v)[loop]}
             <tr>
-              <td valign="middle" class="proName"><div class="photo"><a href="goods.php?id={echo: $v['goods_id'];/}&app=groupbuyinfo"><img src="{echo: $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';/}" width="95" height="95" alt="{echo: $v['goods_name'];/}"  onerror="this.src='skin/default/images/nopic.gif'"/></a> </div>
+              <td valign="middle" class="proName"><div class="photo"><a href="goods.php?id={echo: $v['id'];/}&app=promote"><img src="{echo: $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';/}" width="95" height="95" alt="{echo: $v['goods_name'];/}"  onerror="this.src='skin/default/images/nopic.gif'"/></a> </div>
                 <div class="proInfo">
-                  <h3 class="mg12b"><a href="goods.php?id={echo: $v['goods_id'];/}&app=groupbuyinfo">{echo: sub_str($v['goods_name'],22,false);/}</a></h3>
-                  <p>[{echo:lp{i_groupbuy_say};/}]{echo: $v['group_desc'];/}</p>
+                  <h3 class="mg12b"><a href="goods.php?id={echo: $v['id'];/}&app=promote">{echo: sub_str($v['goods_name'],22,false);/}</a></h3>
+                  <p>[促销说明]{echo: $v['content'];/}</p>
                 </div></td>
-              <td class="groupPic"><em class="pic">{echo:lp{i_money_sign};/}{echo: $v['spec_price'];/}{echo: lp{s_yan};/}</em></td>
+              <td class="groupPic"><em class="pic">{echo:lp{i_money_sign};/}{echo: $v['promote_price'];/}{echo: lp{s_yan};/}</em></td>
 
               <td class="timeleft">{echo: time_left(strtotime($v['end_time']));/}</td>
             </tr>
