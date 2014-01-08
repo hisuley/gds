@@ -9,7 +9,7 @@ function get_payment_info_with_order(&$dbo,$table,$orderby = 'pay_id', $orderway
         $sql = $sql . " where enabled='$enabled' ";
     }
     if(!empty($orderby) && !empty($orderway)){
-        $sql .= " ORDER BY ".$orderby." ".$orderway
+        $sql .= " ORDER BY ".$orderby." ".$orderway;
     }
     $array = $dbo->getRs($sql);
     $payment = array();
