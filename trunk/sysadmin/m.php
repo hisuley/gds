@@ -137,6 +137,9 @@ $appArray = array(
     'scenic_rank'           => 'm/goods/scenic_rank.php',
     'scenic_ticket'         => 'm/goods/scenic_ticket.php',
     'scenic_ticket_sales'   => 'm/goods/scenic_ticket_sales.php',
+    'goods_promotions_list' => 'm/goods/promotions_list.php',
+    'goods_promotions_add'  => 'm/goods/promotions_add.php',
+    'goods_promotions_edit' => 'm/goods/promotions_edit.php',
 
 	/* 订单 */
 	'order_alllist'			=> 'm/order/alllist.php',

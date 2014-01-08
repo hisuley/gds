@@ -74,6 +74,7 @@ class adminlp{
 	var $a_m_opayedrder_list = "已付款订单列表";
 	var $a_m_aboutgoods_management = "商品管理";
 	var $a_m_attr_management = "商品属性管理";
+        var $a_m_goods_promotions_management = "商品促销管理";
 	var $a_m_asd_management = "广告管理";
 	var $a_m_article_management = "文章管理";
 	var $a_m_UI_setting = "UI设置";
@@ -231,6 +232,27 @@ class adminlp{
 	var $a_sure_delbrand = "确定要删除这条记录吗？";
 	var $a_brand_name_notnone = "名称不能为空！";
 	var $a_brand_site_url_error = "网站格式不正确！";
+        
+        var $a_goods_promotions_list = "商品促销列表";
+        var $a_goods_promotions_name = "促销商品名称";
+        var $a_goods_promotions_start_time = "开始时间";
+        var $a_goods_promotions_end_time = "结束时间";
+        var $a_goods_promotions_time = "促销时间";
+        var $a_goods_promotions_price = "促销价格";
+        var $a_goods_promotions_price_edit = "修改促销价格";
+        var $a_goods_promotions_detail = "促销详情";
+        var $a_goods_promotions_add = "添加促销商品";
+        var $a_goods_promotions_edit = "修改促销商品";
+        var $a_goods_promotions_del = "删除促销商品";
+        var $a_goods_promotions_del_mess = "你确定要删除这个促销商品吗?";
+        var $a_goods_select = "选择商品";
+        var $a_promote_price_notnone = "促销价格不能为空";
+        var $a_inspire = "是否启用";
+        var $a_enable_yes = "启用";
+        var $a_enable_no = "不启用";
+        var $a_promote_start_time_notnone = "开始时间不能为空";
+        var $a_promote_end_time_notnone = "结束时间不能为空";
+        var $a_promote_time_false = "开始时间不能大于结束时间";
         
         var $a_travel_number_management = "旅游线路编号管理";
         var $a_travel_theme_management = "旅游线路主题管理";

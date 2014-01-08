@@ -143,3 +143,16 @@ CREATE TABLE `imall_user_point` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 
+/* 促销商品表 */
+CREATE TABLE `imall_goods_promotions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '促销ID',
+  `goods_id` int(10) NOT NULL COMMENT '商品ID',
+  `content` text COMMENT '促销详情',
+  `start_time` date NOT NULL COMMENT '促销开始时间',
+  `end_time` date NOT NULL COMMENT '促销结束时间',
+  `promote_price` decimal(8,2) DEFAULT '0.00' COMMENT '促销价格',
+  `is_enabled` tinyint(1) DEFAULT '0' COMMENT '是否启用:1是启用,0不启用',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
+
