@@ -86,7 +86,7 @@ td span {color:red;}
                                 <option value="article_id">ID</option>
                                 <option value="title">标题</option>
                                 <option value="cat_id">类别</option>
-                                <option value="sort_order">排序</option>
+                                <option value="add_time">时间</option>
                             </select>
 
                             <?php echo $a_langpackage->a_news_sort_type; ?>:
