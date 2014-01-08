@@ -69,6 +69,7 @@ $appArray = array(
 	'user_guestbook'	=> 'modules/user/guestbook.php',
         'user_account_add'	=> 'modules/user/account_add.php',
         'user_account_minus'	=> 'modules/user/account_minus.php',
+        'user_account_today'	=> 'modules/user/account_today.php',
 	'user_order'		=> 'modules/user/order.php',
 	'user_order_adress'		=> 'modules/user/order_adress.php',
 	'user_order_groupbuy' => 'modules/user/order_groupbuy.php',

@@ -18,7 +18,12 @@ $order_id = intval(get_args('id'));
 $post['pay_message'] = short_check(get_args('pay_message'));
 $post['pay_id'] = intval(get_args('pay_id'));
 $post['pay_name'] = short_check(get_args('pay_name'));
-$post['pay_status']=1;
+$post['pay_code'] = intval(get_args('pay_code'));
+if($post['pay_code'] == 'post'){
+    $post['pay_status']=0;
+}else{
+    $post['pay_status']=1;
+}
 $post['pay_time']=$nowtime;
 
 //数据库操作
