@@ -2,7 +2,8 @@
 SQLyog v10.2 
 MySQL - 5.5.34 : Database - gds
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -124,3 +125,7 @@ ALTER TABLE `gds`.`imall_shop_categories` ADD COLUMN `commission_ratio` VARCHAR(
 ALTER TABLE `gds`.`imall_notification_policy` ADD COLUMN `user_id` INT(10) DEFAULT 0 NOT NULL COMMENT '供应商ID' AFTER `shop_cat_id`; 
 /* 品牌表增加景区区域、类型、级别三个字段 */
 ALTER TABLE `gds`.`imall_brand` ADD COLUMN `brand_type` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '景区类型' AFTER `is_show`, ADD COLUMN `brand_rank` VARCHAR(255) DEFAULT '' NOT NULL COMMENT '景区级别' AFTER `brand_type`, ADD COLUMN `brand_area` VARCHAR(255) DEFAULT '' NULL COMMENT '景区区域' AFTER `brand_rank`; 
+
+
+/* 文章表增加副标题和发表日期 */
+ALTER TABLE `gds`.`imall_article` ADD COLUMN `source_id` INT(10) DEFAULT 0 NOT NULL COMMENT '文章来源ID' AFTER `short_order`;
