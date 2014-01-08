@@ -33,6 +33,25 @@ if(!$article_info) {
 	trigger_error($s_langpackage->s_no_news,E_USER_ERROR);
 }
 
+//手动分页
+$page = intval(get_args('page'));
+$page = max($page,1);
+$CONTENT_POS = strpos($article_info['content'], '<hr />');
+if($CONTENT_POS !== false) {
+        $contents = array_filter(explode('<hr />', $article_info['content']));
+        $pagenumber = count($contents);
+        for($i=1; $i<=$pagenumber; $i++) {
+                $pageurls[$i] = page_url($article_info['article_id'], $i);
+        }
+        //当不存在 [/page]时，则使用下面分页
+        $pages = content_pages($pagenumber,$page, $pageurls);
+
+        $newArr [pages] = $pages; //分页
+        $newArr [contentfulltext] = $contents[$page-1]; //正文
+}else{
+        $newArr [contentfulltext] = $article_info['content']; //正文
+}
+
 /* 新闻属性 */
 $sql = "SELECT * FROM $t_article_attr WHERE article_id='$article_id'";
 $article_attr = $dbo->getRs($sql);

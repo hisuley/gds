@@ -48,8 +48,8 @@ $news_attr = get_goods_attr($dbo,$t_article_attr,$article_id);
 .attr_class div span.right{display:block; width:350px; float:left; margin-left:5px; text-align:left;}
 .attr_class div span.right input {margin-left:5px;}
 </style>
-<script type="text/javascript" src="../servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
-<script type="text/javascript" src="skin/xheditor/xheditor.min.js?v=1.0.0-final"></script>
+<script type="text/javascript" src="skin/xheditor-1.1.14/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="skin/xheditor-1.1.14/xheditor-1.1.14-zh-cn.min.js"></script>
 <script language="JavaScript" src="../servtools/ajax_client/ajax.js"></script>
 <script type='text/javascript' src='../servtools/date/WdatePicker.js'></script>
 <script type="text/javascript">
@@ -132,7 +132,7 @@ $(function(){
 
 			<tr>
 				<td><?php echo $a_langpackage->a_news_content; ?>：</td>
-				<td><textarea name="content" id="content" cols="100" rows="15"><?php echo $news_info['content'];?></textarea>
+				<td><textarea name="content" id="content" class="xheditor" cols="100" rows="15"><?php echo $news_info['content'];?></textarea>
 				<iframe name="KindImageIframe" id="KindImageIframe" width="100%" height='30' align="top" allowTransparency="true" scrolling="no" src='m.php?app=upload_form' frameborder=0></iframe></td>
 			</tr>
 			<tr>
