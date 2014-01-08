@@ -29,6 +29,7 @@ $post['tag_color'] = get_args('tag_color');
 
 $post['admin_id'] = $_SESSION['admin_id'];
 $post['add_time'] = $ctime->long_time();
+$post['is_audit'] = 0;
 
 $article_id = intval(get_args('article_id'));
 
