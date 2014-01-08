@@ -81,7 +81,7 @@
 
       </div>
       <div class="artTxt">
-      	<p>{echo: str_replace('../uploadfiles', './uploadfiles', $article_info['content']);/}</p>
+      	<p>{echo: str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $article_info['content']);/}</p>
       </div>
       <div class="facility_baseinfo clrfix">
             <ul class="telephoneinfo">
