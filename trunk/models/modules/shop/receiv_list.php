@@ -20,6 +20,8 @@
 	$end_time = short_check(get_args('end_time'));
 	$user_name = short_check(get_args('user_name'));
 	$payid = short_check(get_args('payid'));
+    $orderby = short_check(get_args('orderby'));
+    $orderway = short_check(get_args('orderway'));
 
 	//数据表定义区
 	$t_receiv_list = $tablePreStr."receiv_list";
@@ -54,7 +56,11 @@
 	{
 		$sql .= " and receiv_date <= '$end_time'";
 	}
-	$sql .= " order by receiv_date desc";
+    if($orderby && $orderway) {
+        $sql .= " order by $orderby $orderway";
+    } else {
+        $sql .= " order by receiv_date desc;";
+    }
 	$result = $dbo->fetch_page($sql,10);
 
 ?>

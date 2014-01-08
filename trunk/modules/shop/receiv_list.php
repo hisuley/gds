@@ -30,7 +30,7 @@ if(filemtime("templates/default/modules/shop/receiv_list.html") > filemtime(__fi
 		-----------------------------------------
 		文件：receiv_list.php。
 		功能: 商铺收款单。
-		日期：2010-11-23
+		日期：2013-11-23
 		-----------------------------------------
 	*/
 	
