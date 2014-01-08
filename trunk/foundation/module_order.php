@@ -124,7 +124,7 @@ function get_myoder_list_with_search(&$dbo,$t_order_info,$t_order_goods,$t_goods
     if ($type =='shop'){
         $str="";
         if(is_numeric($order_id) && $order_id != 0) {
-            $str .= " and order_id = ".$order_id;
+            $str .= " and payid = ".$order_id;
         }
         if(!empty($start_time)) {
             $str .= " and order_time >= '$start_time' ";
