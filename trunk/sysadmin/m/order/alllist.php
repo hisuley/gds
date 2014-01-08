@@ -152,9 +152,9 @@ td span {color:red;}
                     	<?php echo $a_langpackage->a_order_status;?>：
 						<select name="order_status">
 							<option value="99"><?php echo $a_langpackage->a_all;?></option>
-							<option value="1" <?php if($order_status==1){echo "selected";} ?> ><?php echo $a_langpackage->a_customer_order;?></option>
-							<option value="2" <?php if($order_status==2){echo "selected";} ?> ><?php echo $a_langpackage->a_shop_confirm_order;?></option>
-							<option value="3" <?php if($order_status==3){echo "selected";} ?> ><?php echo $a_langpackage->a_customer_confirm_goods;?></option>
+							<option value="1" <?php if($order_status==1){echo "selected";} ?> >下单成功</option>
+							<option value="2" <?php if($order_status==2){echo "selected";} ?> >处理中</option>
+							<option value="3" <?php if($order_status==3){echo "selected";} ?> >已完成</option>
                             <option value="0" <?php if($order_status==0){echo "selected";} ?> ><?php echo  $a_langpackage->a_order_cancelled;?></option>
 
 						</select>
