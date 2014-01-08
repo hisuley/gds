@@ -50,7 +50,7 @@ function changeImage(obj){
 
     <div id="itemContents" class="clearfix">
       <div id="intro" >
-        <h3>{echo: $promoteinfo['group_name'];/} ({echo:lp{s_groupbuy};/})</h3>
+        <h3>{echo: $promoteinfo['goods_name'];/} (促销)</h3>
         <div class="box">
            	<div class="pro_pic" align="center">
              <img id="img1" alt="" src="{echo: isset($gallery[0]['img_url']) ? $gallery[0]['img_url'] : "skin/default/images/nopic_big.gif";/}" onerror="this.src='skin/default/images/nopic.gif'">
@@ -76,20 +76,18 @@ function changeImage(obj){
 		              <label>{echo: time_left(strtotime($promoteinfo['end_time']));/}</label>
 		            </li>
 
-		            <li><span>{echo: lp{i_one_num};/}:</span>
-		              <label id="one_num">{echo: $promoteinfo['one_num'];/}</label></li>
-		             <li><span>{echo:lp{i_all_num};/}:</span><label id="all_num">{echo: $promoteinfo['all_num'];/}</label></li>  
+
 		             
 		            <li><span>{echo:lp{s_groupbuy_old_price};/}:</span>{echo:lp{s_money_sign};/}
 		              <label>{echo: $promoteinfo['goods_price'];/}</label>
 		              {echo: lp{s_yuan};/}</li>
-		            <li><span>{echo:lp{s_groupbuy_price};/}:</span>{echo:lp{s_money_sign};/}
-		               <em class="price">{echo: $promoteinfo['spec_price'];/}</em>
+		            <li><span>促销价:</span>{echo:lp{s_money_sign};/}
+		               <em class="price">{echo: $promoteinfo['promote_price'];/}</em>
                     <li><span>{echo:lp{s_groupbuy_old_price};/}:</span>{echo:lp{s_money_sign};/}
                         <label>{echo: $promoteinfo['goods_price'];/}</label>
                         {echo: lp{s_yuan};/}</li>
                     <li><span>折扣:</span>
-                        <em class="price">{echo: intval(($promoteinfo['spec_price']/$promoteinfo['goods_price'])*100);/}折</em>
+                        <em class="price">{echo: intval(($promoteinfo['promote_price']/$promoteinfo['goods_price'])*100);/}折</em>
 		              </li>
 		            <li><span>
                         <a href="goods.php?id={echo:$promoteinfo['goods_id'];/}" style=" color:#F00">购买商品</a>
