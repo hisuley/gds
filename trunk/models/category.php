@@ -141,7 +141,13 @@ if($where){
 if ($brand_id>0) {
 	$sql.=" AND g.brand_id='$brand_id'";
 }
+
+if (!empty($keyword_string)){
+    $sql .= "AND g.goods_name LIKE '%".$keyword_string."%' ";
+}
+
 $k=short_check(get_args("k"));
+
 $kk=$k;
 //echo $k;
 
@@ -171,9 +177,7 @@ $kk=$k;
 	}else{
 		$kk='无';
 	}
-if (!empty($keyword_string)){
-    $sql .= "AND g.goods_name LIKE '%".$keyword_string."%' ";
-}
+
 if($_POST){
 	$order_name=$_POST['name'];
 	$order=$_POST['order'];
