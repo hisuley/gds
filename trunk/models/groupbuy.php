@@ -110,7 +110,7 @@ $dbo->exeUpdate($sql);
 $sql = "SELECT b.*,g.* FROM `$t_groupbuy` b left join `$t_goods` g on b.goods_id = g.goods_id";
 $sql .= " WHERE b.recommended = 0 and g.lock_flg =0 and b.group_condition ='0' and b.examine = '1'";
 if(!empty($kk)){
-    $sql .= " and g.goods_name LIKE '%".trim($kk)."%' ";
+    $sql .= " and (g.goods_name LIKE '%".trim($kk)."%' OR b.group_name LIKE '%".trim($kk)."%') ";
 }
 //$sql .= " and b.start_time <= '$now_time' and '$now_time' <= b.end_time";
 $result = $dbo->fetch_page($sql,$SYSINFO['product_page']);
