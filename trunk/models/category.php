@@ -35,7 +35,7 @@ if(get_sess_user_id()) {
 }
 $brand_id=get_args("brand_id");
 $attr_arr = get_args("attr");
-
+$keyword = short_check(get_args("keyword"));
 
 /* 定义文件表 */
 $t_shop_info = $tablePreStr."shop_info";
@@ -140,6 +140,9 @@ if($where){
 }
 if ($brand_id>0) {
 	$sql.=" AND g.brand_id='$brand_id'";
+}
+if (!empty($keyword)){
+    $sql .= "AND g.goods_name LIKE '%".$keyword."%' ";
 }
 $k=short_check(get_args("k"));
 $kk=$k;

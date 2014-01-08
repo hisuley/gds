@@ -63,6 +63,11 @@
 						{end:foreach/}
 						<li><span>{echo:lp{i_keywords};/}：</span>{echo:$kk;/}</li>
 					</ul>
+                    <form method="get">
+                        <input type="hidden" name="id" value="{echo:$cat_id;/}">
+                        <input type="text" name="keyword" value="{echo:$keyword;/}" placeholder="请输入搜索关键词">
+                        <input type="submit" value="搜索"/>
+                    </form>
 				</div>
 				<div id="leftMian" class="content-common-box content-left-big-box">
 					<div class="title">
