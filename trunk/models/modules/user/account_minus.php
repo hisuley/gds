@@ -9,7 +9,7 @@ $m_langpackage = new moduleslp;
 //获取Post数据
 $start_time = short_check(get_args('start_time'));
 $end_time = short_check(get_args('end_time'));
-
+$order_id = short_check(get_args('order_id'));
 //数据表定义区
 $t_user_account = $tablePreStr."user_account";
 $t_users = $tablePreStr."users";

@@ -39,6 +39,7 @@ p{
 			<div class="search">
 				<form action="modules.php" method="get" name="search_form" style="float:left;">
 					<p>
+                    订单编号：<input type="text" name="order_id"  value="{echo:$order_id;/}" />
 					消费日期：<input class="Wdate" type="text" name="start_time" id="start_time" onFocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$start_time;/}" /> ~
 					<input class="Wdate" type="text" name="end_time" id="end_time" onFocus="WdatePicker({isShowClear:false,readOnly:true})" value="{echo:$end_time;/}" />
 					<input type="hidden" value="user_account_minus" name="app" />

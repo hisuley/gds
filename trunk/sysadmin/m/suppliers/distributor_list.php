@@ -96,7 +96,7 @@ td span {color:red;}
 			<thead>
 			<tr style=" text-align:center;">
 				<th width="50px">ID <a href="m.php?app=distributor_list&orderby=distributor_id&orderway=asc">↑</a><a href="m.php?app=distributor_list&orderby=distributor_id&orderway=desc">↓</a></th>
-				<th align="left"><?php echo $a_langpackage->a_distributor_name; ?></th>
+				<th align="left"><?php echo $a_langpackage->a_distributor_name; ?> <a href="m.php?app=distributor_list&orderby=distributor_name&orderway=asc">↑</a><a href="m.php?app=distributor_list&orderby=distributor_name&orderway=desc">↓</a></th>
 				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=distributor_list&orderby=sort_order&orderway=asc">↑</a><a href="m.php?app=distributor_list&orderby=sort_order&orderway=desc">↓</a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
