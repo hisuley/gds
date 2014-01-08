@@ -20,6 +20,8 @@ $t_shop_category = $tablePreStr."shop_category";
 $t_goods = $tablePreStr."goods";
 $t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
+$t_attribute = $tablePreStr."attribute";
+$t_article_attr = $tablePreStr."article_attr";
 
 $sql = "SELECT * FROM `$t_article_cat` order by sort_order ";
 $article_cat = $dbo->getRs($sql);
@@ -29,6 +31,29 @@ if(!$article_cat) {
 $article_info = get_article_info($dbo,$t_article,$article_id);
 if(!$article_info) {
 	trigger_error($s_langpackage->s_no_news,E_USER_ERROR);
+}
+
+/* 新闻属性 */
+$sql = "SELECT * FROM $t_article_attr WHERE article_id='$article_id'";
+$article_attr = $dbo->getRs($sql);
+$attr = array();
+$attr_ids = array();
+$attr_status = false;
+if($article_attr) {
+	foreach($article_attr as $key=>$value) {
+                $attr[$value['attr_id']]['attr_id'] = $value['attr_id'];
+                $attr[$value['attr_id']]['attr_values'] = $value['attr_values'];
+                $attr[$value['attr_id']]['price'] = $value['price'];
+		$attr_ids[] = $value['attr_id'];
+	}
+	$sql = "SELECT attr_id,attr_name,input_type FROM $t_attribute WHERE attr_id IN (".implode(',',$attr_ids).")";
+	$attribute_result = $dbo->getRs($sql);
+	$attribute = array();
+	foreach($attribute_result as $value) {
+		$attribute[$value['attr_id']]['attr_values'] = $value['attr_name'];
+                $attribute[$value['attr_id']]['input_type'] = $value['input_type'];
+	}
+	$attr_status = true;
 }
 
 foreach ($article_cat as $val){

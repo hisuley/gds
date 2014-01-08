@@ -219,10 +219,12 @@ function changeImage(obj){
                         if($attr_status) {
                         foreach($attr as $key=>$value)[loop]}
                             {sta:if($attribute[$key]['attr_values'] == '设施' || $attribute[$key]['attr_values'] == '基础服务') {
-                                $valueArr = explode(' ', $value['attr_values']);
+                                $valueArr = explode("\n", $value['attr_values']);
+                                echo '<li class="c1">';
                                 foreach($valueArr as $subVal){
-                                    echo '<li class="c1"><span class="provide" title="提供此服务"></span>'.$subVal.'</li>';
+                                    echo '<span class="provide" title="提供此服务"></span>'.$subVal;
                                 }
+                                echo '</li>';
                             }
                         } if/}
                     </ul>

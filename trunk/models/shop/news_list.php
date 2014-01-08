@@ -48,11 +48,12 @@ if(isset($attr_arr)&&$attr_arr){
         $attr_id_arr[]="attr[".$k."]";
     }
 }
+$get_arr = $_GET;
 foreach($get_arr as $k=>$value){
     if(substr($k,0,4) == 'attr'){
         $num = substr($k,4,strlen($k));
-        $and .= "a".$num.".article_id and a".$num.".article_id=";
-        $where .= " and a".$num.".attr_values = '$value'";
+        $and .= "aa".$num.".article_id and aa".$num.".article_id=";
+        $where .= " and aa".$num.".attr_values = '$value'";
         $from .= "$t_article_attr as aa".$num.",";
     }
 }
@@ -60,21 +61,22 @@ if($where){
     $sta_num = strpos($and,'and');
     $end_num = strrpos($and,'and');
     $and = substr($and,$sta_num,$end_num-$sta_num);
-    $sql = "select * from ".substr($from,0,-1)." where a".$num.".attr_values != ''".$where." ".$and." group by a".$num.".article_id";
+    $sql = "select * from ".substr($from,0,-1)." where aa".$num.".attr_values != ''".$where." ".$and." group by aa".$num.".article_id";
     $result = $dbo->getRs($sql);
-    $article_id = '';
+    $news_id = '';
     foreach($result as $value){
-        $article_id .= $value['goods_id'].",";
+        $news_id .= $value['article_id'].",";
     }
-    if($article_id != ''){
-        $article_id = substr($article_id,0,-1);
+    if($news_id != ''){
+        $news_id = substr($news_id,0,-1);
     }else{
-        $article_id = 0;
+        $news_id = 0;
     }
+    $sql = "SELECT * FROM `$t_article` WHERE is_show=1 and is_audit = 4 and cat_id='$cat_id' AND article_id IN ($news_id) ";
+}else{
+    $sql = "SELECT * FROM `$t_article` WHERE is_show=1 and is_audit = 4 and cat_id='$cat_id'";
 }
 
-$cat_dg = get_dg_category($article_cat,$cat_id);
-$sql = "SELECT * FROM `$t_article` WHERE is_show=1 and is_audit = 4 and cat_id='$cat_id'";
 if($keyword && $in){
     if($in == 'title'){
         $sql .= " AND title like '%$keyword%'";
@@ -84,12 +86,13 @@ if($keyword && $in){
         $sql .= " AND content like '%$keyword%' AND title like '%$keyword%'";
     }
 }
-if(!empty($article_id)){
-    $sql .= " AND article_id IN ($article_id) ";
-}
 $sql .= " order by add_time desc ";
 $result = $dbo->fetch_page($sql,$SYSINFO['article_page']);
-$sql = "select * from $t_attribute where cat_id='$cat_id' and attr_type = 1 order by sort_order ";
+
+$cat_dg = get_dg_category($article_cat,$cat_id);    //子分类列表
+
+/* 展示属性 */
+$sql = "select * from $t_attribute where cat_id='$cat_id' and attr_type = 1 and input_type in(1,2,3) order by sort_order ";
 $attr_info = $dbo->getRs($sql);
 foreach($attr_info as $key => $value){
     $values_after=str_replace(array("\r\n","\r","\n"),',',$value['attr_values']);
