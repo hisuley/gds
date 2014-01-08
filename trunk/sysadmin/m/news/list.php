@@ -81,6 +81,19 @@ td span {color:red;}
 								<option value="<?php echo $value['cat_id']; ?>" <?php if($cat_id==$value['cat_id']){echo "selected";} ?> ><?php echo $value['str_pad'];?><?php echo $value['cat_name'];?></option>
 								<?php } ?>
 							</select>
+                            <?php echo $a_langpackage->a_news_sort_column; ?>:
+                            <select name="orderby">
+                                <option value="id">ID</option>
+                                <option value="title">标题</option>
+                                <option value="cat_id">类别</option>
+                                <option value="sort_order">排序</option>
+                            </select>
+
+                            <?php echo $a_langpackage->a_news_sort_type; ?>:
+                            <select name="orderway">
+                                <option value="desc">降序</option>
+                                <option value="asc">升序</option>
+                            </select>
 	                   	</td>
 	                   	<td><input type="hidden" name="app" value="news_list"><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" /></td>
 	                </tr>

@@ -288,6 +288,8 @@ class adminlp{
         var $a_news_recheck_audit_false = "复审新闻不通过";
         var $a_news_audit_note = "提交审核不通过备注";
         var $a_news_retraction_log = "新闻撤稿";
+    var $a_news_sort_column = "排序字段";
+    var $a_news_sort_type = "排序方法";
 	var $a_news_add = "添加新闻";
 	var $a_news_edit = "新闻修改";
         var $a_news_attr_management = "新闻属性管理";
