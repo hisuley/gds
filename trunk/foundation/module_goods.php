@@ -120,11 +120,11 @@ function insert_goods_attr(&$dbo,$table,$array,$goods_id) {
             }
         }
         foreach($array['attr_values'] as $key => $val){
-            if(!is_array($array['attr_values'][$key]) && !empty($array['attr_values'][$key])){
+            if(!is_array($array['price'][$key]) && !empty($array['attr_values'][$key])){
                 $tarray[$key]['attr_values'] = $array['attr_values'][$key];
                 $tarray[$key]['price'] = $array['price'][$key];
             }
-        }                
+        }   
 	foreach($tarray as $key=>$value) {
 		if($value) {    
 			if(is_array($value['attr_values'])) {

@@ -83,6 +83,25 @@
       <div class="artTxt">
       	<p>{echo: str_replace('../uploadfiles', './uploadfiles', $article_info['content']);/}</p>
       </div>
+      <div class="facility_baseinfo clrfix">
+            <ul class="telephoneinfo">
+                {sta:
+                if($attr_status) {
+                foreach($attr as $key=>$value)[loop]}
+                    {sta:if($attribute[$key]['input_type'] == 3 && !empty($attribute[$key]['attr_values'])) {
+                        $valueArr = explode("\n", $value['attr_values']);
+                        echo "<li>".$attribute[$key]['attr_values']."：";
+                        foreach($valueArr as $subVal){
+                            echo "<input type='checkbox' checked />".$subVal;
+                        }
+                        echo "</li>";
+                    } else {
+                        echo "<li>".$attribute[$key]['attr_values']."：".$value['attr_values']."</li>";
+                    }
+                } if/}
+            </ul>
+            <div class="clearfix"></div>
+        </div>
       <!-- FIXED -->
       <div class="artRelated">
         <h3>相关文章</h3>
