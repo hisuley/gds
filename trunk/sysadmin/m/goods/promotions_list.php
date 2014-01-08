@@ -137,7 +137,7 @@ td span {color:red;}
                                 <td><div onclick="editnum(this,<?php echo $value['id'];?>,'divorder<?php echo $value['id'];?>','a.php?act=updateAjax','tablename=goods_promotions&colname=promote_price&idname=id&idvalue=<?php echo $value['id'];?>&logcontent=<?php echo $a_langpackage->a_goods_promotions_price_edit; ?>：&colvalue=',8);"><?php echo $value['promote_price'];?></div>
 				    <div style="display:none"></div>
 				</td>
-                                <td><?php if($value['is_enabled']){ echo $a_langpackage->a_enable_yes; }else{echo $a_langpackage->a_enable_no;}?></td>
+                                <td><?php if($value['is_enabled']){ echo "<span class='green'>".$a_langpackage->a_enable_yes."</span>"; }else{echo "<span class='red'>".$a_langpackage->a_enable_no."</span>";}?></td>
 				<td>
 					<a href="m.php?app=goods_promotions_edit&id=<?php echo $value['id'];?>"><?php echo $a_langpackage->a_update; ?></a>
 					<a href="a.php?act=goods_promotions_del&id=<?php echo $value['id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_goods_promotions_del_mess; ?>');"><?php echo $a_langpackage->a_delete; ?></a>

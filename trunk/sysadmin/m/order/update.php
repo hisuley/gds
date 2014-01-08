@@ -30,6 +30,7 @@ $t_shop_info = $tablePreStr."shop_info";
 $t_areas = $tablePreStr."areas";
 $t_order_goods = $tablePreStr."order_goods";
 $t_goods = $tablePreStr."goods";
+$t_goods_promotions = $tablePreStr."goods_promotions";
 $t_good_photo = $tablePreStr."good_photo";
 $t_payment = $tablePreStr."payment";
 $t_shop_categories = $tablePreStr."shop_categories";
@@ -42,7 +43,13 @@ $areas = get_areas_kv($dbo,$t_areas);
 $shop_payment = get_shop_payment_info($dbo,$t_shop_payment,$info['shop_id']);
 $shop_info = get_shop_info($dbo,$t_shop_info,$info['shop_id']);
 $info['shop_name'] = $shop_info['shop_name'];
-
+foreach($info['order_goods'] as $val){
+    if($val['goods_id']){
+        $goods_id = $val['goods_id'];
+    }
+}
+$sql = "select id,promote_price from `$t_goods_promotions` where is_enabled=1 and goods_id = ".$goods_id;
+$goods_promotions = $dbo->getRow($sql);
 $sql = "select * from $t_payment where enabled=1";
 $payarr = $dbo->getRs($sql);
 $shop_categories_parent = get_categories_item_parentid($dbo,$t_shop_categories,0);
@@ -67,6 +74,7 @@ if(isset($shop_info['shop_categories'])){
 <title></title>
 <link rel="stylesheet" type="text/css" href="skin/css/admin.css">
 <link rel="stylesheet" type="text/css" href="skin/css/main.css">
+<?php  include("a/updateJsAjax.php");?>
 <style>
 td span { color:red; }
 .right { font-weight:bold; }
@@ -105,13 +113,14 @@ td span { color:red; }
 					<table class="list_table" >
 						<thead>
 							<tr>
-								<th colspan="4">&nbsp;&nbsp;<?php echo $a_langpackage->a_order_info;?></th>
+								<th colspan="5">&nbsp;&nbsp;<?php echo $a_langpackage->a_order_info;?></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr style="text-align:center;">
 								<td align="left" width="270px">&nbsp;&nbsp;<?php echo $a_langpackage->a_goods_name;?></td>
 								<td width="100px"><?php echo $a_langpackage->a_goods_price;?></td>
+                                                                <td width="100px"><?php echo $a_langpackage->a_goods_promotions_price;?></td>
 								<td width="80px"><?php echo $a_langpackage->a_order_num;?></td>
 								<td width="" align="left"><?php echo $a_langpackage->a_trans_price;?></td>
 							</tr>
@@ -121,6 +130,7 @@ td span { color:red; }
 							<tr style="text-align:center;">
 								<td align="left">&nbsp;&nbsp;<?php echo $v['goods_name'];?></a></td>
 								<td><?php echo $v['goods_price'];?><?php echo $a_langpackage->a_yuan;?></td>
+                                                                <?php if($goods_promotions['promote_price']){ ?><td><div onclick="edit(this,<?php echo $goods_promotions['id'];?>,'divlink<?php echo $goods_promotions['id'];?>','a.php?act=updateAjax','tablename=goods_promotions&colname=promote_price&idname=id&idvalue=<?php echo $goods_promotions['id'];?>&logcontent=修改促销商品价格：&colvalue=',8);"><?php echo $goods_promotions['promote_price'];?></div><div style="displya:none";></div></td><?php }else{ ?><td>无</td><?php } ?>
 								<td><?php echo $v['order_num'];?></td>
 								<td align="left"><?php echo $info['transport_price'];?><?php echo $a_langpackage->a_yuan;?></td>
 							</tr>
