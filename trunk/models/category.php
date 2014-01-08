@@ -171,6 +171,9 @@ $kk=$k;
 	}else{
 		$kk='无';
 	}
+if (!empty($keyword_string)){
+    $sql .= "AND g.goods_name LIKE '%".$keyword_string."%' ";
+}
 if($_POST){
 	$order_name=$_POST['name'];
 	$order=$_POST['order'];
@@ -189,9 +192,7 @@ if($cat_id == ''){
 
 }
 
-if (!empty($keyword_string)){
-    $sql .= "AND g.goods_name LIKE '%".$keyword_string."%' ";
-}
+
 $result = $dbo->fetch_page($sql,$SYSINFO['product_page']);
 $goods_list=$result['result'];
 unset($result['result']);
