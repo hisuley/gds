@@ -20,7 +20,7 @@ $transport_status = intval(get_args('transport_status'));
 $pay_id = intval(get_args('pay_id'));
 $tempCheck = get_args('order_status');
 if(empty($tempCheck)){
-    $order_status = '';
+    $order_status = 99;
 }else{
     $order_status = intval(get_args('order_status'));
 }
