@@ -32,8 +32,8 @@
 				<form action="modules.php?app=user_my_order" method="post">
 					<select name="state">
 						<option value='' {sta:if($state=="") {echo 'selected'; if/}>全部</option>
-                                                <option value='0' {sta:if($state=="1"){echo "selected";if/}>已取消订单</option>
-						<option value='1' {sta:if($state=="1"){echo "selected";if/}>未确定</option>
+                                                <option value='0' {sta:if($state=="0"){echo "selected";if/}>已取消订单</option>
+						<option value='1' {sta:if($state=="1"){echo "selected";if/}>处理中</option>
 						<option value='2' {sta:if($state=="2"){echo "selected";if/}>已确定</option>
 						<option value='3' {sta:if($state=="3"){echo "selected";if/}>未支付</option>
 						<option value='4' {sta:if($state=="4"){echo "selected";if/}>已支付</option>
