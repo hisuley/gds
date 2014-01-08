@@ -180,6 +180,9 @@ function changeImage(obj){
 				<li id="tab_content2" onclick="show_tabs('2');"><a href="javascript:;" >{echo:lp{s_wholesale};/}</a></li>
 				<li id="tab_content3" onclick="show_tabs('3');"><a href="javascript:;" >商品评价</a></li>
 				<li id="tab_content4" onclick="show_tabs('4');"><a href="javascript:;" >成交记录</a></li>
+                <li id="tab_content5" onclick="show_tabs('5');"><a href="javascript:;" >附近酒店</a></li>
+                <li id="tab_content6" onclick="show_tabs('6');"><a href="javascript:;" >附近餐饮</a></li>
+                <li id="tab_content7" onclick="show_tabs('7');"><a href="javascript:;" >附近景点</a></li>
 			</ul>
 			<div class="pannel" id="tab1_content1">
                 <!--
@@ -247,6 +250,30 @@ function changeImage(obj){
 			<div id="tab1_content3" class="pannel" style="display:none"> </div>
 			<!-- 商品成交记录 -->
 			<div id="tab1_content4" class="pannel" style="display:none"> </div>
+            <div id="tab1_content5" class="panel" style="display: none">
+                {sta:
+                    foreach($attr as $key=>$value){
+                        if($attribute[$key]['attr_values'] == '地图'){
+                            $geoAddress = fopen('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=renderOption&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
+                            $geoAddress = json_decode($geoAddress);
+
+                        }
+                    }
+                    /}
+                {sta:if(!empty($geoAddress['location']))[exc]}
+                <script type="text/javascript">
+
+                    // 百度地图API功能
+                    var map = new BMap.Map("allmap");            // 创建Map实例
+                    map.centerAndZoom(new BMap.Point({echo:$geoAddress['location']['lng'];/}, {echo:$geoAddress['location']['lat'];/}), 11);
+                    var local = new BMap.LocalSearch(map, {
+                        renderOptions:{map: map, autoViewport:true}
+                    });
+                    local.searchNearby("酒店", "旅馆", "饭店");
+                </script>
+                {end:if/}
+
+            </div>
 		</div>
 		<div id="goodTags">
 			<h3>{echo:lp{s_goods_label};/}</h3>
