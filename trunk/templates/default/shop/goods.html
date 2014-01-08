@@ -352,17 +352,31 @@ function changeImage(obj){
 			if (shop_id == user_id){
 				alert('{echo:lp{s_store_mygoods_error};/}');
 			}else{
-				ajax("do.php?act=goods_add_cart","POST","id="+id+"&num="+num.value,function(data){
-					if(data == 1) {
-						alert("{echo: lp{s_g_addedcart};/}");
-					} else if(data == -1) {
-						alert("{echo: lp{s_staycart};/}");
-					} else if(data == -2) {
-						alert("{echo: lp{s_nomachgoods};/}");
-					} else {
-						alert("{echo: lp{s_g_addfailed};/}");
-					}
-				});
+                var r = true;
+                {sta:
+                    if($attr_status) {
+                        foreach($attr as $key=>$value)[loop]}
+                            {sta:if($attribute[$key]['attr_values'] == '预订须知') {
+                               echo 'r = confirm("'.$value['attr_values'].'");';
+                            }
+                        }
+                    if/}
+                if(r){
+                    ajax("do.php?act=goods_add_cart","POST","id="+id+"&num="+num.value,function(data){
+                        if(data == 1) {
+                            alert("{echo: lp{s_g_addedcart};/}");
+                        } else if(data == -1) {
+                            alert("{echo: lp{s_staycart};/}");
+                        } else if(data == -2) {
+                            alert("{echo: lp{s_nomachgoods};/}");
+                        } else {
+                            alert("{echo: lp{s_g_addfailed};/}");
+                        }
+                    });
+
+                }
+
+
 			}
 		}
 		function gotoOrder(id) {
@@ -384,7 +398,18 @@ function changeImage(obj){
 				if(parseInt(value) > parseInt(goods_number)){
 					alert("{echo:lp{s_less_stock};/}");
 				}else {
-					location.href = "{echo: $baseUrl;/}modules.php?app=user_order_adress&gid="+id+"&v="+value;
+                    var r = true;
+                    {sta:
+                        if($attr_status) {
+                            foreach($attr as $key=>$value)[loop]}
+                        {sta:if($attribute[$key]['attr_values'] == '预订须知') {
+                            echo 'r = confirm("'.$value['attr_values'].'");';
+                        }
+                        }
+                        if/}
+                    if(r){
+					    location.href = "{echo: $baseUrl;/}modules.php?app=user_order_adress&gid="+id+"&v="+value;
+                    }
 				}
 			}
 		}
