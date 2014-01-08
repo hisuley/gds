@@ -22,7 +22,7 @@ $t_users = $tablePreStr."users";
 
 $group_id = intval(get_args('id'));
 $state = intval(get_args('state'));
-$order_id = intval(get_args('order_id'));
+$order_id = short_check(get_args('order_id'));
 $start_time = short_check(get_args('start_time'));
 $end_time = short_check(get_args('end_time'));
 
