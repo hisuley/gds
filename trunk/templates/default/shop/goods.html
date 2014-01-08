@@ -251,7 +251,7 @@ function changeImage(obj){
 			<!-- 商品成交记录 -->
 			<div id="tab1_content4" class="pannel" style="display:none"> </div>
             <div id="tab1_content5" class="panel" style="display: none">
-                {sta:
+                {sta:if($attr_status){
                     foreach($attr as $key=>$value){
                         if($attribute[$key]['attr_values'] == '地图'){
                             $geoAddress = fopen('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=renderOption&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
@@ -259,7 +259,8 @@ function changeImage(obj){
 
                         }
                     }
-                    /}
+                }
+                if/}
                 {sta:if(!empty($geoAddress['location']))[exc]}
                 <script type="text/javascript">
 
