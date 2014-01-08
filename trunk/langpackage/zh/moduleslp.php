@@ -903,5 +903,6 @@ class moduleslp{
         
         var $m_account_add = "充值记录";
         var $m_account_minus = "消费记录";
+        var $m_account_today = "现金账户今日明细";
 }
 ?>

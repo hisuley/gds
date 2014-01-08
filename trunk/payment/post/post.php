@@ -82,6 +82,7 @@ if(!$shop_pay)
 		</table>
 		<input type="hidden" name="pay_id" value="<?php echo $pay_id?>"/>
 		<input type="hidden" name="pay_name" value="<?php echo $pay['pay_name']?>"/>
+                <input type="hidden" name="pay_code" value="<?php echo $pay['pay_code']?>"/>
 		</form>
 	</div>
 	<div class="clear"></div>
