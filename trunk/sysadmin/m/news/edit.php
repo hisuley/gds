@@ -51,6 +51,7 @@ $news_attr = get_goods_attr($dbo,$t_article_attr,$article_id);
 <script type="text/javascript" src="../servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
 <script type="text/javascript" src="skin/xheditor/xheditor.min.js?v=1.0.0-final"></script>
 <script language="JavaScript" src="../servtools/ajax_client/ajax.js"></script>
+<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
 <script type="text/javascript">
 
 var introeditor;
@@ -90,7 +91,7 @@ $(function(){
             </tr>
             <tr>
                 <td><?php echo $a_langpackage->a_news_post_date; ?>：</td>
-                <td><input class="small-text" type="text" name="post_date" value="<?php echo $news_info['post_date']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
+                <td><input class="small-text" type="text" name="post_date" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});" value="<?php echo $news_info['post_date']; ?>" style="width:200px;" /> <span id="asd_name_message">*</span></td>
             </tr>
                         <tr>
 				<td><?php echo $a_langpackage->a_news_source; ?>：</td>
@@ -108,7 +109,8 @@ $(function(){
 			<tr>
 				<td><?php echo $a_langpackage->a_title_color; ?>：</td>
 				<td>
-					<input type="text" name="tag_color" style=" background-color:<?php echo $news_info['tag_color']?>;" value="<?php echo $news_info['tag_color']?>" onclick="coloropen(event)" id="inputcolor" />
+					<input type="text" name="tag_color" style=" background-color:<?php echo$a_amend_lose
+                    ['tag_color']?>;" value="<?php echo $news_info['tag_color']?>" onclick="coloropen(event)" id="inputcolor" />
 					<div id="colorpane" style="position:absolute;z-index:999;display:none;"></div>
 				</td>
 			</tr>
