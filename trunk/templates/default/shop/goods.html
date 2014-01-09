@@ -17,8 +17,8 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QjqqNhmWH1AwigvbgreLScYC"></script>
 <style type="text/css">
 #allmap{width: 100%;height: 100%;overflow: hidden;margin:0;}
-#l-hotel{width:68%;float:left;border-right:2px solid #bcbcbc;}
-#r-hotel{width:30%;float:left;}
+#l-hotel{height:100%;min-height:380px;width:68%;float:left;border-right:2px solid #bcbcbc;}
+#r-hotel{height:100%;min-height:300px;width:30%;float:left;}
 </style>
 <script type="text/javascript">
 var attr_ids =  {echo: $attr_ids;/};
@@ -186,9 +186,7 @@ function changeImage(obj){
 				<li id="tab_content2" onclick="show_tabs('2');"><a href="javascript:;" >{echo:lp{s_wholesale};/}</a></li>
 				<li id="tab_content3" onclick="show_tabs('3');"><a href="javascript:;" >商品评价</a></li>
 				<li id="tab_content4" onclick="show_tabs('4');"><a href="javascript:;" >成交记录</a></li>
-                <li id="tab_content5" onclick="show_tabs('5');"><a href="javascript:;" >附近酒店</a></li>
-                <li id="tab_content6" onclick="show_tabs('6');"><a href="javascript:;" >附近餐饮</a></li>
-                <li id="tab_content7" onclick="show_tabs('7');"><a href="javascript:;" >附近景点</a></li>
+                <li style="width:150px" id="tab_content5" onclick="show_tabs('5');"><a href="javascript:;" >附近酒店餐饮娱乐</a></li>
 			</ul>
 			<div class="pannel" id="tab1_content1">
                 <!--
@@ -229,11 +227,13 @@ function changeImage(obj){
                         foreach($attr as $key=>$value)[loop]}
                             {sta:if($attribute[$key]['attr_values'] == '设施' || $attribute[$key]['attr_values'] == '基础服务') {
                                 $valueArr = explode("\n", $value['attr_values']);
-                                echo '<li class="c1">';
+
                                 foreach($valueArr as $subVal){
+                                    echo '<li class="c1">';
                                     echo '<span class="provide" title="提供此服务"></span>'.$subVal;
+                                    echo '</li>';
                                 }
-                                echo '</li>';
+
                             }
                         } if/}
                     </ul>
@@ -280,17 +280,16 @@ function changeImage(obj){
                 if/}
                 {sta:if(!empty($geoAddress['result']['location']))[exc]}
                 <script type="text/javascript">
-                        document.getElementById('tab1_content5').style.display = "block";
+
                         // 百度地图API功能
                         var map = new BMap.Map("l-hotel");            // 创建Map实例
                         map.centerAndZoom(new BMap.Point({echo:$geoAddress['result']['location']['lng'];/}, {echo:$geoAddress['result']['location']['lat'];/}), 11);
-                        var myKeys = ["酒店", "旅馆", "饭店"];
+                        var myKeys = ["酒店", "餐饮", "娱乐", "KTV", "饭店"];
                         var local = new BMap.LocalSearch(map, {
-                            renderOptions:{map: map, panel:"r-hotel"}
+                            renderOptions:{map: map, panel:"r-hotel",pageCapacity:1},
+                            pageCapacity:1,
                         });
-                        local.setPageCapacity(15);
                         local.searchInBounds(myKeys, map.getBounds());
-                        document.getElementById('tab1_content5').style.display = "none";
 
                 </script>
                 {end:if/}
@@ -500,11 +499,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="none";
             document.getElementById("tab_content5").className ="";
-            document.getElementById("tab_content6").className ="";
-            document.getElementById("tab_content7").className ="";
             document.getElementById("tab1_content5").style.display ="none";
-            document.getElementById("tab1_content6").style.display ="none";
-            document.getElementById("tab1_content7").style.display ="none";
 		}
 		if (flg == '2'){
 			document.getElementById("tab_content1").className ="";
@@ -516,11 +511,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="none";
             document.getElementById("tab_content5").className ="";
-            document.getElementById("tab_content6").className ="";
-            document.getElementById("tab_content7").className ="";
             document.getElementById("tab1_content5").style.display ="none";
-            document.getElementById("tab1_content6").style.display ="none";
-            document.getElementById("tab1_content7").style.display ="none";
 		}
 		if (flg == '3'){
 			document.getElementById("tab_content1").className ="";
@@ -532,11 +523,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content3").style.display ="block";
 			document.getElementById("tab1_content4").style.display ="none";
             document.getElementById("tab_content5").className ="";
-            document.getElementById("tab_content6").className ="";
-            document.getElementById("tab_content7").className ="";
             document.getElementById("tab1_content5").style.display ="none";
-            document.getElementById("tab1_content6").style.display ="none";
-            document.getElementById("tab1_content7").style.display ="none";
 			get_goods_credit({echo:$goods_id;/},1);
 		}
 		if (flg == '4'){
@@ -549,11 +536,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="block";
             document.getElementById("tab_content5").className ="";
-            document.getElementById("tab_content6").className ="";
-            document.getElementById("tab_content7").className ="";
             document.getElementById("tab1_content5").style.display ="none";
-            document.getElementById("tab1_content6").style.display ="none";
-            document.getElementById("tab1_content7").style.display ="none";
 			get_order_record({echo:$goods_id;/},1);
 		}
 
@@ -567,47 +550,8 @@ function changeImage(obj){
             document.getElementById("tab1_content3").style.display ="none";
             document.getElementById("tab1_content4").style.display ="block";
             document.getElementById("tab_content5").className ="now";
-            document.getElementById("tab_content6").className ="";
-            document.getElementById("tab_content7").className ="";
             document.getElementById("tab1_content5").style.display ="block";
-            document.getElementById("tab1_content6").style.display ="none";
-            document.getElementById("tab1_content7").style.display ="none";
             makeMaps('hotel');
-        }
-
-
-        if (flg == '6'){
-            document.getElementById("tab_content1").className ="";
-            document.getElementById("tab_content2").className ="";
-            document.getElementById("tab_content3").className ="";
-            document.getElementById("tab_content4").className ="";
-            document.getElementById("tab1_content1").style.display ="none";
-            document.getElementById("tab1_content2").style.display ="none";
-            document.getElementById("tab1_content3").style.display ="none";
-            document.getElementById("tab1_content4").style.display ="none";
-            document.getElementById("tab_content5").className ="";
-            document.getElementById("tab_content6").className ="now";
-            document.getElementById("tab_content7").className ="";
-            document.getElementById("tab1_content5").style.display ="none";
-            document.getElementById("tab1_content6").style.display ="block";
-            document.getElementById("tab1_content7").style.display ="none";
-        }
-
-        if (flg == '7'){
-            document.getElementById("tab_content1").className ="";
-            document.getElementById("tab_content2").className ="";
-            document.getElementById("tab_content3").className ="";
-            document.getElementById("tab_content4").className ="";
-            document.getElementById("tab1_content1").style.display ="none";
-            document.getElementById("tab1_content2").style.display ="none";
-            document.getElementById("tab1_content3").style.display ="none";
-            document.getElementById("tab1_content4").style.display ="none";
-            document.getElementById("tab_content5").className ="";
-            document.getElementById("tab_content6").className ="";
-            document.getElementById("tab_content7").className ="now";
-            document.getElementById("tab1_content5").style.display ="none";
-            document.getElementById("tab1_content6").style.display ="none";
-            document.getElementById("tab1_content7").style.display ="block";
         }
 
 	}
@@ -671,8 +615,11 @@ function changeImage(obj){
 					if(scredit=='-1'){
 						buyer_credit="{echo:lp{s_credit_bad};/}";
 					}
-					
-					credit+='<tr><td align="center">'+buyer_credit+'</td><td style="text-align:left">'+result[$i].buyer_evaluate+'</td><td><span class="c_gray">'+result[$i].buyer_evaltime+'</span></td><td>'+result[$i].user_name+'</td></tr>';
+                    if(result[$i].buyer_evaluate == null){
+                        result[$i].buyer_evaluate = '该买家太懒了，没有填写评价内容。';
+                    }
+
+					credit+='<tr><td align="center">'+buyer_credit+'</td><td style="text-align:left">'+result[$i].seller_evaluate+'</td><td><span class="c_gray">'+result[$i].seller_evaltime+'</span></td><td>'+result[$i].user_name+'</td></tr>';
 				}
 			obj_credit.innerHTML = "<table class=\"tab_com\" width=\"100%\"><tr>"+
 					"<th width=\"15%\" >评价等级</th>"+
@@ -702,7 +649,7 @@ function changeImage(obj){
 			var result = data.result;
 			var record='';
 			for($i=0;$i<result.length;$i++){
-				record+='<tr><td>'+result[$i].user_name+'</td><td style="text-align:left"><a href="{echo:goods_url($goods_id);/}">'+result[$i].goods_name+'</a></td><td>'+result[$i].goods_price+'</td><td>'+result[$i].order_num+'</td><td>'+result[$i].shipping_time+'</td><td>成交</td></tr>';
+				record+='<tr><td>'+result[$i].user_name+'</td><td style="text-align:left"><a href="{echo:goods_url($goods_id);/}">'+result[$i].goods_name+'</a></td><td>'+result[$i].goods_price+'</td><td>'+result[$i].order_num+'</td><td>'+result[$i].order_time+'</td><td>成交</td></tr>';
 			}
 			obj_record.innerHTML = "<table class=\"tab_record\" width=\"100%\"><tr><th width=\"10%\">买家</th><th width=\"45%\"  style=\"text-align:left\">商品名称</th><th width=\"10%\">出价记录</th><th width=\"10%\">数量</th><th width=\"15%\">成交时间</th><th width=\"10%\">状态</th></tr>"+record+pagehtml+"</table>";
 		}else{

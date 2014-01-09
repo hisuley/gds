@@ -57,6 +57,14 @@
 <link href="skin/{echo: $SYSINFO['templates'];/}/css/article.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
 </head>
+{sta:if($cat_name == '美食' || $cat_name == '桂林美食')[exc]}
+<style>
+div.artTxt img{float:right;clear:both;}
+div.artTxt div.left{float:left;width:50%;margin-right:3%}
+div.artTxt div.right{float:left;width:46%;}
+div.artTxt div.right img{max-width: 100%}
+</style>
+{end:if/}
 <body>
 <div id="wrapper">
 	{inc: require("shop/index_header.php");/}
@@ -81,7 +89,20 @@
 
       </div>
       <div class="artTxt">
-      	<p>{echo: str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr [contentfulltext]);/}</p>
+         {sta:
+         if($cat_name == '桂林美食'){
+            $content = str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr['contentfulltext']);
+            preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i',$content,$images );
+            $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', ' ', $content);
+            echo "<div class='left'>".$content."</div>";
+            echo "<div class='right'>";
+            foreach($images[0] as $v){
+                echo $v;
+            }
+            echo "</div>";
+         }else{
+      	    echo "<p>".str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr['contentfulltext'])."</p>";
+         if/}
       </div>
       <div class="facility_baseinfo clrfix"><span style="text-align:center;margin:0 auto;">{echo:$newArr [pages];/}</span>
             <ul class="telephoneinfo">

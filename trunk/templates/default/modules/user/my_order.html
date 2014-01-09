@@ -78,11 +78,11 @@
 				foreach($result['result'] as $v) [loop]}
           <!-- order01 -->
           <tr class="orderInfo">
-            <td colspan="6">{echo:lp{m_order_group};/}：{echo:$v['payid'];/}</td>
+            <td colspan="6">{echo:lp{m_order_group};/}：<a href="modules.php?app=user_order_view&order_id={echo: $v['order_id'];/}">{echo:$v['payid'];/}</a></td>
           </tr>
           {sta:$num =count($v['order_goods']); foreach($v['order_goods'] as $k=> $goods)[loop]}
           <tr>
-            <td><img src="{echo:$goods['goods_thumb'];/}" alt="{echo:$goods['goods_name'];/}" width="80" width="80" onerror="this.src='skin/default/images/nopic.gif'"/></td>
+            <td><a href="modules.php?app=user_order_view&order_id={echo: $v['order_id'];/}"><img src="{echo:$goods['goods_thumb'];/}" alt="{echo:$goods['goods_name'];/}" width="80" width="80" onerror="this.src='skin/default/images/nopic.gif'"/></a></td>
             <td><a href="modules.php?app=user_photo_view&id={echo:$goods['id'];/}&path=user_my_order" target="_blank" >{echo:$goods['goods_name'];/}</a></td>
             <!-- 合并  -->
             {sta:if($k==0)[exc]}

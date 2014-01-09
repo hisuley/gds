@@ -155,4 +155,5 @@ CREATE TABLE `imall_goods_promotions` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 
+ALTER TABLE imall_order_info ADD is_barcode_read tinyint(1) COMMENT '二维码是否已经被阅读' DEFAULT 0;
 

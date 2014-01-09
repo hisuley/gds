@@ -44,7 +44,7 @@ td span{color:red;}
                         <td class="name" colspan="2">
                             <a href="{echo: goods_url($v['goods_id']);/}" target="_blank"><img src="{echo: $v['is_set_image'] ? str_replace('thumb_','',$v['goods_thumb']) : 'skin/default/images/nopic.gif';/}"  width="40" height="40"  alt="{echo:$v['goods_name'];/}"   onerror="this.src='skin/default/images/nopic.gif'"/>{echo: $v['goods_name'];/}</a></td>
 					<td align="center"><span id="goods_price" style="color:black;font-weight:normal">{echo: $v['goods_price'];/}</span>{echo: lp{m_yuan};/}</td>
-					<td align="center"><input type="text" value="{echo: $buy_goods[$v['goods_id']];/}" name="order_num[]" style="width:30px" onblur="(changePrice(this))"></td>
+					<td align="center"><input type="text" value="{echo: $buy_goods[$v['goods_id']];/}" name="order_num[]" style="width:30px" onblur="(changePrice(this))" onkeyup="(changePrice(this))"></td>
 					<input type="hidden" value="{echo: $v['goods_id'];/}" name="goods_id[]" />
 					<input type="hidden" value="{echo: $v['goods_name'];/}" name="goods_name[]" />
 					<input type="hidden" value="{echo: $v['goods_price'];/}" name="goods_price[]" id="one_good_price" />
@@ -169,7 +169,10 @@ function changePrice(obj){
     var goodsPrice = document.getElementById("goods_price");
     var goodsPriceInit = document.getElementById("one_good_price").value;
     goodsPrice.innerHTML = '';
-    goodsPrice.innerHTML = goodsPriceInit * obj.value + '.00';
+    var goodsNumber = parseInt(obj.value);
+    if(goodsNumber == '' || goodsNumber == null)
+        goodsNumber = 0;
+    goodsPrice.innerHTML = goodsPriceInit * goodsNumber + '.00';
 }
 function compareDate(){
     var departDate = document.getElementById('departDateInput').value;
@@ -285,7 +288,21 @@ function checkform(){
         alert('预订日期没有填写完整！');
         return false;
     }
+    var checkinPerson = document.getElementsByName('checkin_person')[0];
+    if(checkinPerson.value == '' || parseInt(checkinPerson.value) == 0 ){
+        alert('预订人数不能为空或者0！');
+        return false;
+    }
+    var contactPerson = document.getElementsByName('contact_person')[0];
+    var contactMobile = document.getElementsByName('contact_mobile')[0];
+    if(contactPerson.value == '' || contactMobile.value == '' ){
+        alert('请填写完整预订人信息！');
+        return false;
+    }
+
     {end:if/}
+
+
 
 
 

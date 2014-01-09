@@ -189,6 +189,7 @@ td span {color:red;}
 				<th width="120px"><?php echo $a_langpackage->a_order_num;?>/<?php echo $a_langpackage->a_order_count;?></th>
 				<th width="115px"><?php echo $a_langpackage->a_gather_mode;?>/<?php echo $a_langpackage->a_order_time;?></th>
 				<th width="60px"><?php echo $a_langpackage->a_status;?></th>
+                <th width="60px">二维码</th>
 				<th width="45px"><?php echo $a_langpackage->a_operate;?></th>
 			</tr>
 			</thead>
@@ -237,11 +238,23 @@ td span {color:red;}
 				
 				?>
 				</td>
+                <td>
+                    <?php
+                    if($value['is_barcode_read'] == 1){
+                        echo "已扫描";
+                    }else{
+                        echo "未扫描";
+                    }
+                    ?>
+                </td>
 				<td>
 					<?php if($value['order_status']!=0 && $value['order_status']!=3) {?>
 						<a href="m.php?app=order_update&id=<?php echo $value['order_id'];?>"><?php echo $a_langpackage->a_update;?></a><br />
 					<?php }?>
-					<a href="m.php?app=order_view&id=<?php echo $value['order_id'];?>"><?php echo $a_langpackage->a_look;?></a>
+					<a href="m.php?app=order_view&id=<?php echo $value['order_id'];?>"><?php echo $a_langpackage->a_look;?>
+                    <br />
+                    <a target="_blank" href="<?php echo $SYSINFO['web'];?>/do.php?act=user_getbarcode&order_id=<?php echo $value['order_id']; ?>">二维码
+                    </a>
 				</td>
 			</tr>
 			<?php }} else { ?>

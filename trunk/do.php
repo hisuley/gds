@@ -40,6 +40,8 @@ $actArray = array(
 	'user_order_checkget'	=> array('action/user/order_checkget.action.php','modules.php?app=user_my_order'),
 	'user_address_add'	=> array('action/user/address_add.action.php','modules.php?app=user_address'),
 	'user_address_del'	=> array('action/user/address_del.action.php','modules.php?app=user_address'),
+    'user_readbarcode'	=> array('action/user/readbarcode.action.php','modules.php?app=readbarcode'),
+    'user_getbarcode'	=> array('action/user/getbarcode.action.php','modules.php?app=getbarcode'),
 	'user_remind_upd'	=> array('action/user/remind_upd.action.php'),
 	'user_remind_info'	=> array('action/user/remind_info.action.php'),
 	'user_pay_message'	=> array('action/user/pay_message.action.php'),
@@ -180,7 +182,7 @@ if(in_array($actId,$ajaxCheckArray)) {
 	}
 }
 
-$notCheckLoginArray = array('csv_img','del_goodsImage','checkcode','login','logout','register','ajax_areas','shop_guestbook','user_check_username','user_check_useremail','forgot','goods_get_imgurl','goods_add_favorite','shop_appraise','goods_add_groupbuy','goods_exit_groupbuy','get_transport_price','gettransportprice','goods_add_cart','user_cart_del','send_email','chanage_email','refresh_shop','get_goods_credit','get_order_record','goods_movepk');
+$notCheckLoginArray = array('csv_img','del_goodsImage','checkcode','login','logout','register','ajax_areas','shop_guestbook','user_check_username','user_check_useremail','forgot','goods_get_imgurl','goods_add_favorite','shop_appraise','goods_add_groupbuy','goods_exit_groupbuy','get_transport_price','gettransportprice','goods_add_cart','user_cart_del','send_email','chanage_email','refresh_shop','get_goods_credit','get_order_record','goods_movepk', 'user_readbarcode', 'user_getbarcode');
 if(!in_array($actId,$notCheckLoginArray)) {
 	/* 判断用户是否登陆 */
 	if(!$user_id) { exit('请先<a href="login.php">登陆</a>！'); }

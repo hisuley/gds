@@ -210,7 +210,7 @@ class moduleslp{
 	var $m_transport_template_second="每超过一件需要增加运费：";
 	var $m_shure="确定";
 	var $m_eidt_transport_template="修改运费模板";
-	var $m_goods_brand="商品品牌";
+	var $m_goods_brand="商品所属景区";
 
 	/* password */
 	var $m_find_password = "找回密码";

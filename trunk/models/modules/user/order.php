@@ -118,7 +118,9 @@ foreach ($buy_goods as $k=>$v){
 }
 if(!$goods_info) { exit($m_langpackage->m_handle_err); }
 //是否是酒店或者景点分类下的商品, 酒店ID：433，景点ID：434
-$cid_arr = get_category_cid($dbo,$t_category,$goods_info[0]['cat_id']);$grogshop_flag=in_array(433,$cid_arr);$scenic_flag=in_array(434,$cid_arr);
+$cid_arr = get_category_cid($dbo,$t_category,$goods_info[0]['cat_id']);
+$grogshop_flag=in_array(433,$cid_arr);
+$scenic_flag=in_array(434,$cid_arr);
 $shop_id=get_sess_shop_id();
 if($shop_id == $goods_info[0]['shop_id']) {
 	set_sess_err_msg($m_langpackage->m_dontbuy_youself);

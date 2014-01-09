@@ -46,10 +46,10 @@ if($CONTENT_POS !== false) {
         //当不存在 [/page]时，则使用下面分页
         $pages = content_pages($pagenumber,$page, $pageurls);
 
-        $newArr [pages] = $pages; //分页
-        $newArr [contentfulltext] = $contents[$page-1]; //正文
+        $newArr['pages'] = $pages; //分页
+        $newArr['contentfulltext'] = $contents[$page-1]; //正文
 }else{
-        $newArr [contentfulltext] = $article_info['content']; //正文
+        $newArr['contentfulltext'] = $article_info['content']; //正文
 }
 
 /* 新闻属性 */
