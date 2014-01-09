@@ -260,12 +260,12 @@ function changeImage(obj){
                             $geoAddress = str_replace('showMap&&showMap', '', $geoAddress);
                             $geoAddress = str_replace('(','', $geoAddress);
                             $geoAddress = str_replace(')','', $geoAddress);
-                            echo print_r(json_decode($geoAddress), true);
-                            $geoAddress = json_decode($geoAddress);
+                            echo print_r($geoAddress, true);
+                            //$geoAddress = json_decode($geoAddress);
                         }
                     }
                 if/}
-                {sta:if(!empty($geoAddress['result']['location']))[exc]}
+                {sta:if(!empty($geoAddress['location']))[exc]}
                 <script type="text/javascript">
                     // 百度地图API功能
                     var map = new BMap.Map("allmap");            // 创建Map实例
