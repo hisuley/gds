@@ -99,7 +99,7 @@ td span {color:red;}
 <script>
 function checkform() {
     var goods_id = document.getElementsByName('goods_id')[0];
-    if(goods_id.value == ''){
+    if(goods_id.value == '' || goods_id.value == 0){
         ShowMessageBox("请选择商品！",'0');
         return false;
     }

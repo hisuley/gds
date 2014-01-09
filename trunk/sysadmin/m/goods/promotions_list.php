@@ -122,8 +122,9 @@ td span {color:red;}
                                 <th width="125px"><?php echo $a_langpackage->a_goods_promotions_start_time; ?></th>
                                 <th width="125px"><?php echo $a_langpackage->a_goods_promotions_end_time; ?></th>
 				<th width="65px"><?php echo $a_langpackage->a_goods_promotions_price; ?> <a href="m.php?app=goods_promotions_list&orderby=a.promote_price&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.promote_price&orderway=desc">↓</a></th>
-                                <th width="40px"><?php echo $a_langpackage->a_status; ?></th>
-				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
+                                <th width="40px">启用</th>
+				                <th width="40px">状态</th>
+                <th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -137,7 +138,28 @@ td span {color:red;}
                                 <td><div onclick="editnum(this,<?php echo $value['id'];?>,'divorder<?php echo $value['id'];?>','a.php?act=updateAjax','tablename=goods_promotions&colname=promote_price&idname=id&idvalue=<?php echo $value['id'];?>&logcontent=<?php echo $a_langpackage->a_goods_promotions_price_edit; ?>：&colvalue=',8);"><?php echo $value['promote_price'];?></div>
 				    <div style="display:none"></div>
 				</td>
-                                <td><?php if($value['is_enabled']){ echo "<span class='green'>".$a_langpackage->a_enable_yes."</span>"; }else{echo "<span class='red'>".$a_langpackage->a_enable_no."</span>";}?></td>
+                                <td><?php
+
+                                    if($value['is_enabled'])
+                                    {
+                                        echo "<span class='green'>".$a_langpackage->a_enable_yes."</span>";
+                                    }else{
+                                        echo "<span class='red'>".$a_langpackage->a_enable_no."</span>";
+                                    }?></td>
+                    <td>
+                        <?php
+                        $start_time = strtotime($value['start_time']);
+                        $end_time = strtotime($value['end_time']);
+                        $now_time = strtotime('now');
+                        if($start_time > $now_time){
+                            echo "未开始";
+                        }elseif($start_time <= $now_time && $end_time >= $now_time){
+                            echo "应用中";
+                        }elseif($end_time < $now_time){
+                            echo "已过期";
+                        }
+                        ?>
+                    </td>
 				<td>
 					<a href="m.php?app=goods_promotions_edit&id=<?php echo $value['id'];?>"><?php echo $a_langpackage->a_update; ?></a>
 					<a href="a.php?act=goods_promotions_del&id=<?php echo $value['id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_goods_promotions_del_mess; ?>');"><?php echo $a_langpackage->a_delete; ?></a>

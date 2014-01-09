@@ -128,7 +128,15 @@ foreach($get_arr as $k=>$value){
 	if(substr($k,0,4) == 'attr'){
 		$num = substr($k,4,strlen($k));
 		$and .= "g".$num.".goods_id and g".$num.".goods_id=";
-		$where .= " and g".$num.".attr_values = '$value'";
+        $sql_attr_type = "SELECT input_type FROM $t_attribute WHERE attr_id = ".$num;
+        $result = $dbo->getCol($sql_attr_type);
+        $result = !empty($result[0]) ? $result[0] : 0;
+        if($result == 3){
+            $where .= " and g".$num.".attr_values LIKE '%$value%'";
+        }else{
+            $where .= " and g".$num.".attr_values = '$value'";
+        }
+
 		$from .= "$t_goods_attr as g".$num.",";
 	}
 }

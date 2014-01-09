@@ -40,6 +40,7 @@
 						</li>
 						<!--<li> <span>价格：</span> <a class="active" href="">全部</a> <a href="">1-999</a> <a href="">999-4500</a> <a href="">4500-9999</a> <a href="">10000以上</a> </li>-->
 						{sta: foreach($attr_info as $key => $value)[loop]}
+                        {sta: if(($value['input_type'] == 1 || $value['input_type'] == 2 || $value['input_type'] == 3) AND !empty($value['attr_values']))[exc]}
 						<li>
 							<span>{echo: $value['attr_name'];/}:</span>
 							{sta:if(get_args('attr'.$value['attr_id'])) [exc]}
@@ -60,7 +61,9 @@
 							{end:if/}
 							{end:foreach/}
 						</li>
+                        {end:if/}
 						{end:foreach/}
+
 						<li><span>{echo:lp{i_keywords};/}：</span>{echo:$kk;/}</li>
 					</ul>
                     <form method="get">

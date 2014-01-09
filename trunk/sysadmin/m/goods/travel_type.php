@@ -34,6 +34,41 @@ foreach($result as $row){
         }
     }
 }
+function customSortById($a, $b){
+    if($a['index'] == $b['index']){
+        return 0;
+    }
+    return ($a['index'] > $b['index']) ? -1 :1;
+}
+function customSortByName($a, $b){
+    if($a['attr_values'] == $b['attr_values']){
+        return 0;
+    }
+    return ($a['attr_values'] > $b['attr_values']) ? -1 :1;
+}
+$orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
+if(!empty($orderby)){
+    switch($orderby){
+        case 'id':
+            uksort($attr_info, 'customSortById');
+            if($orderway == 'asc'){
+                $attr_info = array_reverse($attr_info);
+            }
+            break;
+        case 'name':
+            uksort($attr_info, 'customSortByName');
+            if($orderway == 'asc'){
+                $attr_info = array_reverse($attr_info);
+            }
+            break;
+        case 'enabled':
+            if($orderway == 'asc'){
+                $attr_info = array_reverse($attr_info);
+            }
+            break;
+    }
+}
 $right_array=array(
 	"attr_add"    =>   "0",
     "attr_append"    =>   "0",
@@ -287,12 +322,13 @@ function attr_goods_list(v) {
 		<table class="content" id="attr_table">
 			<tbody id="attr_tbody">
 			<tr>
-				<th width="60px">ID</th>
-				<th width="100px"><?php echo $a_langpackage->a_attr_name; ?></th>
+				<th width="60px">ID <a href="m.php?app=travel_type&orderby=id&orderway=asc">↑</a><a href="m.php?app=travel_type&orderby=id&orderway=desc">↓</a></th>
+				<th width="100px"><?php echo $a_langpackage->a_attr_name; ?> <a href="m.php?app=travel_type&orderby=name&orderway=asc">↑</a><a href="m.php?app=travel_type&orderby=name&orderway=desc">↓</a></th>
 				<th width="300px"><?php echo $a_langpackage->a_input_type; ?></th>
 				<th width="200px"><?php echo $a_langpackage->a_input_selectable; ?></th>
 				<th width="60px"><?php echo $a_langpackage->a_input_price; ?></th>
 				<th width="60px" align="center"><?php echo $a_langpackage->a_sort; ?></th>
+                <th width="60px" align="center">启用 <a href="m.php?app=travel_type&orderby=enabled&orderway=asc">↑</a><a href="m.php?app=travel_type&orderby=enabled&orderway=desc">↓</a></th>
 				<th width="175px" align="center"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			<tr id="tr_0" style="display:none; background:#F7C331;">
@@ -307,6 +343,7 @@ function attr_goods_list(v) {
 				<td width="200px"><input type="checkbox" class="small-text" name="selectable[0]" value="0" style="width:25px;" maxlength="1" /></td>
 				<td width="60px"><input type="checkbox" class="small-text" name="price[0]" value="1" style="width:25px;" /></td>
 				<td width="60px" align="center"><input type="text" class="small-text" name="sort_order[0]" value="0" style="width:25px;" maxlength="3" /></td>
+                <td width="60px" align="center">启用</td>
 
 				<td width="175px" align="center">
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[0]" onclick="attr_info_save(0);" />
@@ -317,7 +354,7 @@ function attr_goods_list(v) {
 			<?php if($attr_info) {
 			foreach($attr_info as $value) { ?>
 			<tr id="tr_<?php echo $value['index'];?>">
-				<td width="60px"><?php echo $value['attr_id'];?>.</td>
+				<td width="60px"><?php echo $value['index'];?>.</td>
 				<td width="100px"><input type="text" class="small-text" style="width:50px;" name="attr_name[<?php echo $value['index'];?>]" value="<?php echo $value['attr_values'];?>" class="inputtext"></td>
 				<td width="300px">
 				<?php $i=0;
@@ -328,7 +365,7 @@ function attr_goods_list(v) {
 					<td width="200px"><input type="checkbox" class="small-text" name="selectable[<?php echo $value['index'];?>]" value="1" style="width:25px;" <?php  if($value['selectable']){echo "checked";}?> /></td>
 				<td width="60px"><input type="checkbox" class="small-text" name="price[<?php echo $value['index'];?>]" value="1" style="width:25px;" <?php  if($value['price']){echo "checked";}?> /></td>
 				<td width="60px" align="center"><input type="text" class="small-text" class="small-text" name="sort_order[<?php echo $value['index'];?>]" value="<?php echo $value['sort_order'];?>" style="width:25px;" maxlength="3" /></td>
-			
+                <td width="60px" align="center">启用</td>
 				<td width="175px" align="center">
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[<?php echo $value['index'];?>]" onclick="attr_info_save(<?php echo $value['index'];?>);" />
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn[<?php echo $value['index'];?>]" onclick="attr_info_del(<?php echo $value['index'];?>)">

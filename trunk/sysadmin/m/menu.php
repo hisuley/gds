@@ -450,14 +450,9 @@ $plugin=$dbo->getRs($sql);
             <?php if($right_array["scenic_rank"]){?>
 					<li id="scenic_rank" class="" onclick="changeMenu(this);"><a href="m.php?app=scenic_rank" target="main-frame"><?php echo $a_langpackage->a_scenic_rank_management; ?></a></li><!-- 景点级别管理 -->
 			<?php }?>
-            <?php if($right_array["scenic_ticket"]){?>
-					<li id="scenic_ticket" class="" onclick="changeMenu(this);"><a href="m.php?app=scenic_ticket" target="main-frame"><?php echo $a_langpackage->a_scenic_ticket_management; ?></a></li><!-- 景点门票管理 -->
-            <?php }?>
+
             <?php if($right_array["goods_promotions"]){?>
 					<li id="goods_promotions" class="" onclick="changeMenu(this);"><a href="m.php?app=goods_promotions_list" target="main-frame"><?php echo $a_langpackage->a_m_goods_promotions_management; ?></a></li><!-- 商品促销管理 -->
-			<?php }?>
-            <?php if($right_array["scenic_ticket_sales"]){?>
-					<li id="scenic_ticket_sales" class="" onclick="changeMenu(this);"><a href="m.php?app=scenic_ticket_sales" target="main-frame"><?php echo $a_langpackage->a_scenic_ticket_sales_management; ?></a></li><!-- 景点门票促销管理 -->
 			<?php }?>
             </ul>
        <?php }?>

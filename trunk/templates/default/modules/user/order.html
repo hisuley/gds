@@ -170,9 +170,10 @@ function changePrice(obj){
     var goodsPriceInit = document.getElementById("one_good_price").value;
     goodsPrice.innerHTML = '';
     var goodsNumber = parseInt(obj.value);
-    if(goodsNumber == '' || goodsNumber == null)
+    if(goodsNumber == '' || goodsNumber == null || goodsNumber == 0)
         goodsNumber = 0;
     goodsPrice.innerHTML = goodsPriceInit * goodsNumber + '.00';
+    var realpriceSecondCheck = document.getElementById("order_amount").value = goodsPriceInit * goodsNumber;
 }
 function compareDate(){
     var departDate = document.getElementById('departDateInput').value;
@@ -238,6 +239,11 @@ function show(id) {
 
 
 function checkform(){
+    var realpriceCheck = document.getElementById('order_amount');
+    if(realpriceCheck.value == 0 || realpriceCheck.value == ''){
+        alert('商品数量不能为空！');
+        return false;
+    }
 	var to_user_name = document.getElementsByName('to_user_name')[0];
 	if(to_user_name.value==''){
 		alert('{echo:lp{m_pl_getgoods_name};/}');
