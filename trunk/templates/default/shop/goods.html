@@ -289,7 +289,7 @@ function changeImage(obj){
 			</div>
 		</div>
 		<div id="sellrecom" class="bg_gary content-common-box">
-			<div class="title"><h2>{echo:lp{s_seller_commend};/}</h2></div>
+			<div class="title"><h2>其他</h2>  <span><a href="category.php?id={echo:$goodsinfo['cat_id'];/}&brand_id={echo:$goodsinfo['brand_id'];/}">更多&gt;&gt;</a></div>
 			<ul class="list_125 clearfix">
 				{sta:if($best_goods) {
 				foreach($best_goods as $value)[loop]}
