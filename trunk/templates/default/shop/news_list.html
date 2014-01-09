@@ -178,7 +178,44 @@
 </body>
 </html>
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
-<script language="JavaScript">
+<style>
+    /* Prevents slides from flashing */
+    #slides {
+        display:none;
+    }
+    .slidesjs-navigation{display:none}
+    .slidesjs-pagination{display:none}
+</style>
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    $(function(){
+        $("#slides").slidesjs({
+            width: 240,
+            height: 240,
+            play: {
+                active: false,
+                auto: true,
+                interval: 4000,
+                swap: true
+            },
+            navigation: {
+                active: false,
+                // [boolean] Generates next and previous buttons.
+                // You can set to false and use your own buttons.
+                // User defined buttons must have the following:
+                // previous button: class="slidesjs-previous slidesjs-navigation"
+                // next button: class="slidesjs-next slidesjs-navigation"
+                effect: "slide"
+                // [string] Can be either "slide" or "fade".
+            },
+            pagination: {
+                active: false
+            }
+        });
+    });
+</script>
+
+    <script language="JavaScript">
 function showbox(id) {
 	document.getElementById("showbox_"+id).style.display = '';
 	var showimg = document.getElementById("showimg_"+id);
