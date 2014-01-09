@@ -111,7 +111,7 @@ if(!empty($goods_id_box)){
     $sql_comment .= " AND goods_id IN(".$goods_id_box.") ";
 }
 $sql_comment .= " ORDER by add_time DESC";
-$goods_comments = $db->getRs($sql_comment);
+$goods_comments = $dbo->getRs($sql_comment);
 $areainfo = get_areas_kv($dbo,$t_areas);
 /* 产品处理 */
 $sql_best = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND is_best=1 and lock_flg=0 order by pv desc limit 5";
