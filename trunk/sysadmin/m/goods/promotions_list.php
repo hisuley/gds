@@ -95,7 +95,7 @@ td span {color:red;}
                                     </span>
                             </td>
                         <td>
-                            <?php echo $a_langpackage->a_goods_promotions_name;?>: <input type="text" class="small-text" name="policy_title" value="<?php echo $policy_title; ?>" style="width:100px" />
+                            <?php echo $a_langpackage->a_goods_promotions_name;?>: <input type="text" class="small-text" name="goods_name" value="<?php echo $goods_name; ?>" style="width:100px" />
                              <?php echo $a_langpackage->a_goods_promotions_time;?>：
                             <input class="Wdate" type="text" name="start_time" id="start_time" onFocus="WdatePicker({isShowClear:false,readOnly:true})" value="<?php echo $start_time;?>" /> <?php echo $a_langpackage->a_to;?>
 
@@ -119,8 +119,8 @@ td span {color:red;}
 			<tr style=" text-align:center;">
 				<th width="50px">ID <a href="m.php?app=goods_promotions_list&orderby=a.id&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.id&orderway=desc">↓</a></th>
 				<th align="left"><?php echo $a_langpackage->a_goods_name; ?></th>
-                                <th width="125px"><?php echo $a_langpackage->a_goods_promotions_start_time; ?></th>
-                                <th width="125px"><?php echo $a_langpackage->a_goods_promotions_end_time; ?></th>
+                                <th width="125px"><?php echo $a_langpackage->a_goods_promotions_start_time; ?> <a href="m.php?app=goods_promotions_list&orderby=a.start_time&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.start_time&orderway=desc">↓</a></th>
+                                <th width="125px"><?php echo $a_langpackage->a_goods_promotions_end_time; ?> <a href="m.php?app=goods_promotions_list&orderby=a.end_time&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.end_time&orderway=desc">↓</a></th>
 				<th width="65px"><?php echo $a_langpackage->a_goods_promotions_price; ?> <a href="m.php?app=goods_promotions_list&orderby=a.promote_price&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.promote_price&orderway=desc">↓</a></th>
                                 <th width="40px">启用</th>
 				                <th width="40px">状态</th>

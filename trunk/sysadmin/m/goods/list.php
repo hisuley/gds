@@ -101,7 +101,7 @@ if ($index){
 		header('location:m.php?app=error');
 		exit;
 	}else {
-		$sql = "SELECT * FROM `$t_goods` a,`$t_goods_attr` b WHERE a.`goods_id`=b.`goods_id` AND b.`attr_values`='$attr_values'";
+		$sql = "SELECT * FROM `$t_goods` a,`$t_goods_attr` b WHERE a.`goods_id`=b.`goods_id` AND b.attr_id = $index AND b.`attr_values` LIKE '%$attr_values%' ";
 	}
 }
 

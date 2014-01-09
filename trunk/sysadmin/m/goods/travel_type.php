@@ -30,7 +30,7 @@ foreach($result as $row){
         for($i=0, $j=count($tmp); $i<$j; $i++){
             $attr_info[$i] = $row;
             $attr_info[$i]['attr_values'] = $tmp[$i];
-            $attr_info[$i]['index'] = $i+1;
+            $attr_info[$i]['index'] = $i+1;$attr_info[$i]['attr_id'] = $row['attr_id'];
         }
     }
 }
@@ -298,10 +298,10 @@ function attr_info_extend(v) {
 	}
 }
 
-function attr_goods_list(v) {
+function attr_goods_list(v, r) {
     var index = v;
     var attr_values = document.getElementsByName("attr_name["+index+"]")[0].value;
-    window.location.href = "m.php?app=goods_list&index="+index+"&attr_name="+attr_values;
+    window.location.href = "m.php?app=goods_list&index="+r+"&attr_name="+attr_values;
 }
 //-->
 </script>
@@ -369,7 +369,7 @@ function attr_goods_list(v) {
 				<td width="175px" align="center">
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_save; ?>" name="btn[<?php echo $value['index'];?>]" onclick="attr_info_save(<?php echo $value['index'];?>);" />
 					<input type="button" class="regular-button" value="<?php echo $a_langpackage->a_delete; ?>" name="delbtn[<?php echo $value['index'];?>]" onclick="attr_info_del(<?php echo $value['index'];?>)">
-                                        <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_goods; ?>" onclick="attr_goods_list(<?php echo $value['index'];?>);" />   
+                                        <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_travel_attr_goods; ?>" onclick="attr_goods_list(<?php echo $value['index'];?>, <?php echo $value['attr_id']; ?>);" />
 				</td>
 			</tr>
 			<?php }} else { ?>
