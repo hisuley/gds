@@ -38,11 +38,13 @@ td span{color:red;}
      <li style="padding-right:0">{echo:lp{m_u_third};/}:<br />{echo:lp{m_accomplish};/}</li>
      </ul>
      </div>
-     
+
 		<form action="modules.php?app=user_order&gid={echo:implode(',',$goods_id);/}&v={echo:implode(',',$order_num);/}" method="post" name="for{echo: lp{m_profile};/}" onsubmit="return checkform();">
 
-
-		<table width="100%" class="form_table">
+        <div style="width:100px;height:320px;float:left;margin-right:10px">
+            <script language="JavaScript" src="uploadfiles/asd/10.js"></script>
+        </div>
+		<table width="80%" class="form_table" style="float:left;">
 			<tr class="center"><th colspan="7">{echo:lp{m_getgoods_addresslist};/}</th></tr>
 			{sta:if(empty($address_rs))[exc]}
 				<tr><td class="center" colspan="7">{echo:lp{m_dontsave_getgoods_addresslist};/}</td></tr>
