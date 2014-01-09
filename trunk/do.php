@@ -47,6 +47,7 @@ $actArray = array(
 	'user_remind_upd'	=> array('action/user/remind_upd.action.php'),
 	'user_remind_info'	=> array('action/user/remind_info.action.php'),
 	'user_pay_message'	=> array('action/user/pay_message.action.php'),
+    'user_rss'	=> array('action/user/rss.action.php'),
 	'user_complaint_add'	=> array('action/user/complaint_add.action.php'),
 	'get_back_money'	=> array('action/user/get_back_money.action.php'),
 	//申请退款

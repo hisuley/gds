@@ -318,7 +318,7 @@ function attr_goods_list(v, r) {
                 <div class="oprate" style="line-height:50px;"><span style="float:left;margin-left:25px;">
                     <input type="button" class="regular-button" value="<?php echo $a_langpackage->a_attr_add; ?>" onclick="attr_info_add()" />&nbsp;&nbsp;</span>&nbsp;&nbsp;
 
-                </div>
+                </div>cha
                 <table class="content" id="attr_table">
                     <tbody id="attr_tbody">
                     <tr>

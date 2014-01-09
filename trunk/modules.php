@@ -84,6 +84,7 @@ $appArray = array(
 	'user_group'	=> 'modules/user/group.php',
 	'user_complaint'	=> 'modules/user/complaint.php',
 	'user_plugin'	=> 'modules/user/plugin.php',
+    'user_rss'	=> 'modules/user/rss.php',
 	//维权
 	'user_protect_rights'	=> 'modules/user/protect_rights.php',
 

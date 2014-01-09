@@ -264,6 +264,21 @@ if(filemtime("templates/default/modules/left_menu.html") > filemtime(__file__) |
 				<li><a href="do.php?act=logout"><?php echo  $m_langpackage->m_logout;?></a></li>
 			</ul>
 		</div>
+        <div class="menu_title"> <span class="put"><a href="javascript:;" hidefocus="true" title="我的订阅"></a></span> <a class="menuicon" name="my_rss" id="option" href="javascript:;">我的订阅</a> </div>
+        <div class="menu_li">
+            <ul>
+                <li><a id="user_profile" onclick="menu_style_change('user_profile')" href="modules.php?app=rss_list">订阅列表</a></li>
+                <?php if($my_shop_info_num>0){?>
+                    <li><a id="user_remind" onclick="menu_style_change('user_remind')" href="modules.php?app=user_remind"><?php echo  $m_langpackage->m_remind_setting;?></a></li>
+                    <li><a id="user_remind_info" onclick="menu_style_change('user_remind_info')" href="modules.php?app=user_remind_info"><?php echo  $m_langpackage->m_my_remind;?></a></li>
+                <?php }?>
+                <?php if($im_enable){?>
+                    <li><a href="modules.php?app=user_ico"><?php echo  $m_langpackage->m_userico_setting;?></a></li>
+                <?php }?>
+                <li><a id="user_passwd" onclick="menu_style_change('user_passwd')" href="modules.php?app=user_passwd"><?php echo  $m_langpackage->m_edit_password;?></a></li>
+                <li><a href="do.php?act=logout"><?php echo  $m_langpackage->m_logout;?></a></li>
+            </ul>
+        </div>
 		<!-- plugins !-->
 		<div id="user_menu_buttun"> <?php echo isset($plugins['user_menu_buttun'])?show_plugins($plugins['user_menu_buttun']):'';?> </div>
 		<!-- plugins !-->

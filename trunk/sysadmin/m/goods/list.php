@@ -8,12 +8,15 @@ $a_langpackage=new adminlp;
 
 //数据表定义区
 $t_goods = $tablePreStr."goods";
+$t_category = $tablePreStr."category";
 $t_goods_attr = $tablePreStr."goods_attr";
 
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
+$allCat_sql = "SELECT cat_id,cat_name FROM `$t_category` WHERE parent_id = '' OR parent_id IS NULL";
+$allCat = $dbo->getRs($allCat_sql);
 $name = short_check(get_args('name'));
 $best = intval(get_args('best'));
 $new = intval(get_args('new'));
@@ -94,7 +97,20 @@ if ($shop_id){
 	}
 }
 
-$sql .= " order by add_time desc;";
+$cat_id = intval(get_args('cat_id'));
+if ($cat_id){
+    $subCat_sql = "SELECT cat_id FROM $t_category WHERE parent_id = ".$cat_id;
+    $subCat = $dbo->getCol($subCat_sql);
+    if(empty($subCat)){
+        $subCat[0] = $cat_id;
+    }else{
+        array_push($subCat, $cat_id);
+    }
+    $sql .= " and cat_id IN('".implode(',', $subCat)."') ";
+}
+
+
+
 
 if ($index){
 	if(!$right){
@@ -103,6 +119,14 @@ if ($index){
 	}else {
 		$sql = "SELECT * FROM `$t_goods` a,`$t_goods_attr` b WHERE a.`goods_id`=b.`goods_id` AND b.attr_id = $index AND b.`attr_values` LIKE '%$attr_values%' ";
 	}
+}
+
+$orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
+if(!empty($orderby) && !empty($orderway)){
+    $sql .= " order by ".$orderby." ".$orderway.";";
+}else{
+    $sql .= " order by add_time desc;";
 }
 
 $result = $dbo->fetch_page($sql,13);
@@ -181,6 +205,18 @@ td img {cursor:pointer;}
 						<td width="50px">
 							<?php echo $a_langpackage->a_promote; ?><input type="checkbox" name="promote" value="1" <?php if($promote) echo "checked";?> />
 						</td>-->
+                        <td width="120px">
+                            <select name="cat_id" id="">
+                                <option value="">全部</option>
+                                <?php foreach($allCat as $val){
+                                    echo "<option value='".$val['cat_id']."'";
+                                    if($val['cat_id'] == $cat_id){
+                                        echo " checked";
+                                    }
+                                    echo ">".$val['cat_name']."</option>";
+                                }?>
+                            </select>
+                        </td>
 						<td width="80px">
 							<?php echo $a_langpackage->a_admin_promote; ?><input type="checkbox" name="admin_promote" value="1" <?php if($admin_promote) echo "checked";?> />
 						</td>
@@ -205,9 +241,9 @@ td img {cursor:pointer;}
 		  <thead>
 			<tr style="text-align: center;">
 				<th width="2px"><input type="checkbox" onclick="checkall(this,'goods_id[]');" value='' /></th>
-				<th width="20px">ID</th>
-				<th align="left" width=""><?php echo $a_langpackage->a_goods_name; ?></th>
-				<th width="80px"><?php echo $a_langpackage->a_goods_price; ?></th>
+				<th width="40px">ID <a href="m.php?app=goods_list&orderby=goods_id&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=goods_id&orderway=desc">↓</a></th>
+				<th align="left" width=""><?php echo $a_langpackage->a_goods_name; ?> <a href="m.php?app=goods_list&orderby=goods_name&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=goods_name&orderway=desc">↓</a></th>
+				<th width="80px"><?php echo $a_langpackage->a_goods_price; ?> <a href="m.php?app=goods_list&orderby=goods_price&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=goods_price&orderway=desc">↓</a></th>
 				<th width="60px"><?php echo $a_langpackage->a_transport_price; ?></th>
 				<th width="60px"><?php echo $a_langpackage->a_goods_number; ?></th>
 				<th width="35px"><?php echo $a_langpackage->a_on_sale; ?></th>
@@ -217,8 +253,8 @@ td img {cursor:pointer;}
 				<th width="35px"><?php echo $a_langpackage->a_hot; ?></th>
 				<th width="35px"><?php echo $a_langpackage->a_promote; ?></th>-->
 				<th width="35px"><?php echo $a_langpackage->a_admin_promote; ?></th>
-				<th width="45px"><?php echo $a_langpackage->a_goods_pv; ?></th>
-				<th width="90px"><?php echo $a_langpackage->a_add_time; ?></th>
+				<th width="45px"><?php echo $a_langpackage->a_goods_pv; ?> <a href="m.php?app=goods_list&orderby=pv&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=pv&orderway=desc">↓</a></th>
+				<th width="90px"><?php echo $a_langpackage->a_add_time; ?>  <a href="m.php?app=goods_list&orderby=add_time&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=add_time&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

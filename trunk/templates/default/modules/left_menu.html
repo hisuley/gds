@@ -140,6 +140,12 @@
 				<li><a href="do.php?act=logout">{echo: lp{m_logout};/}</a></li>
 			</ul>
 		</div>
+        <div class="menu_title"> <span class="put"><a href="javascript:;" hidefocus="true" title="我的订阅"></a></span> <a class="menuicon" name="my_rss" id="option" href="javascript:;">我的订阅</a> </div>
+        <div class="menu_li">
+            <ul>
+                <li><a id="user_profile" onclick="menu_style_change('user_profile')" href="modules.php?app=user_rss">订阅列表</a></li>
+            </ul>
+        </div>
 		<!-- plugins !-->
 		<div id="user_menu_buttun"> {echo:isset($plugins['user_menu_buttun'])?show_plugins($plugins['user_menu_buttun']):'';/} </div>
 		<!-- plugins !-->
