@@ -11,7 +11,9 @@
 	<link href="skin/{echo: $SYSINFO['templates'];/}/css/parts.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
-
+    {sta:if($this_catinfo['cat_name'] == '攻略分享' || $this_catinfo['cat_name'] == '攻略')[exc]}
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery.slides.js"></script>
+    {end:if/}
 	<title>{echo: $header['title'];/}</title>
 </head>
 <body>
@@ -162,6 +164,20 @@
 				</div>
 				<!-- rightColumn -->
 				<div id="rightColumn">
+                    {sta:if($this_catinfo['cat_name'] == '攻略分享' || $this_catinfo['cat_name'] == '攻略')[exc]}
+                    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+                        <div class="title">
+                            <h2>图片</h2>
+                        </div>
+                        <div id="slides">
+                            {sta:foreach($goods_list as $k->$v)[loop]}
+                            {sta:if($v['goods_thumb'] != '')[exc]}
+                            <img src="{echo:$v['goods_thumb'];/}">
+                            {end:if/}
+                            {end:foreach/}
+                        </div>
+                    </div>
+                    {end:if/}
                     <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
                         <div class="title">
                             <h2>广告</h2>
