@@ -90,7 +90,7 @@ td.img img{cursor:pointer}
 <body>
 <?php  require("shop/index_header.php");?>
 <div class="site_map">
-	  您当前的位置是：<a href="index.php">iweb Mall</a>/<a href="modules.php">个人中心</a>/&nbsp;&nbsp;来自卖家的评价	</div>
+	  您当前的位置是：<a href="index.php">网站</a>/<a href="modules.php">个人中心</a>/&nbsp;&nbsp;来自卖家的评价	</div>
 <div class="clear"></div>
 
     	<?php  require("modules/left_menu.php");?>

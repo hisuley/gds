@@ -9,7 +9,7 @@ class adminlp{
 
 	var $a_yuan = "元";
 	var $a_mana_center = "管理中心";
-	var $a_footer = "版權所有 © 2005-2009 美景假期開放式技術實驗室，並保留所有權利。";
+	var $a_footer = "版權所有 © 2005-2009 桂林旅游营销系统開放式技術實驗室，並保留所有權利。";
 	var $a_error = "非法操作!";
 	var $a_operate = "操作";
 	var $a_serach = "搜索";
@@ -614,10 +614,10 @@ class adminlp{
 
 	var $a_countjs_code = "流量統計代碼";
 	var $a_setting_message1 = "您設置的<web根目錄設置>項與程序檢測的路徑不同，這樣會導致您的圖片，樣式找不到真實地址！您確定還要修改麼？";
-	var $a_setting_message2 = "（網站標題，顯示在頁面的左上角。如：iweb Mall）";
-	var $a_setting_message3 = "（便於引擎查找，當輸入多個時，用“，”或者“|”分隔。如：mall|iweb）";
-	var $a_setting_message4 = "（網站的重點描述信息，讓訪客清楚了解網站概要。如：iweb Mall）";
-	var $a_setting_message5 = "（網站所屬的版權。如：Copyright©2009 www.jmlvyou.com）";
+	var $a_setting_message2 = "（網站標題，顯示在頁面的左上角。如：GDS）";
+	var $a_setting_message3 = "（便於引擎查找，當輸入多個時，用“，”或者“|”分隔。如：GDS|Guilin）";
+	var $a_setting_message4 = "（網站的重點描述信息，讓訪客清楚了解網站概要。如：GDS）";
+	var $a_setting_message5 = "（網站所屬的版權。如：Copyright©2009 www.guilin.com）";
 	var $a_setting_message6 = "（信息產業部所頒發的備案信息。如：京ICP備09092256號 ）";
 	var $a_setting_message7 = "（用戶註冊時所需要同意的服務條款。支持html代碼格式:&lt;br /&gt;換行；&lt;b&gt;加粗）";
 	var $a_setting_message8 = "（定義本繫統的session前綴，默認：iweb_）";
@@ -872,7 +872,7 @@ class toollp{
 	var $t_tool_pro_1="1，\"工具箱列表\" 列出了目前繫統内所有可用的工具箱組件，其路徑在後台目錄(sysadmin)->toolsBox目錄下。";
 	var $t_tool_pro_2="2，您可以通過 \"下載工具箱\" 操作，來獲取最新的工具箱組件；您也可以通過 \"工具箱管理\" 來卸載不需要的工具箱組件。";
 	var $t_tool_pro_3="3，只要您遵循我們的組件規範，您也可以自己編寫工具箱組件，詳情請參考我們開發手冊。";
-	var $t_tool_pro_4="4，下載最新的模板需要產品授權，詳情請登陸我們的官方主站：http://www.jmlvyou.com";
+	var $t_tool_pro_4="4，下載最新的模板需要產品授權，詳情請登陸我們的官方主站：http://www.guilin.com";
 	var $t_download_none="您的繫統當前沒有可下載的工具箱";
 	var $t_get_false="獲取最新的遠程工具箱列表失敗，請您稍後再試";
 	var $t_loading="正在下載，請稍等...";
@@ -895,13 +895,13 @@ class toollp{
 	var $t_download="下載";
 	var $t_download_pro_1="1，當前列出了您的繫統中沒有集成的工具組件，點擊 \"下載\" 即可把他們下載到後台目錄(sysadmin)->toolsBox目錄中，並在 \"工具箱列表\" 中使用。";
 	var $t_download_pro_2="2，工具組件的編號是唯一的，如果您的繫統中沒有列表中的某個工具，卻又下載不了，請您修改後台目錄(sysadmin)->toolsBox目錄中的 \"tool.xml\" 文件。";
-	var $t_download_pro_3="3，下載最新的模板需要產品授權，詳情請登陸我們的官方主站：http://www.jmlvyou.com";
+	var $t_download_pro_3="3，下載最新的模板需要產品授權，詳情請登陸我們的官方主站：http://www.guilin.com";
 	var $t_tool_manage="工具管理";
 	var $t_ask_unset="您確定要卸載此工具麼？";
 	var $t_unset="卸載";
 	var $t_manage_pro_1="1，當前列出您繫統中集成的工具箱組件，點擊 \"卸載\" 即可把不需要的組件從繫統中卸載掉。";
 	var $t_manage_pro_2="2，工具箱組件存放在後台目錄(sysadmin)->toolsBox目錄中，詳情請參考開發手冊。";
-	var $t_manage_pro_3="3，下載最新的模板需要產品授權，詳情請登陸我們的官方主站：http://www.jmlvyou.com";
+	var $t_manage_pro_3="3，下載最新的模板需要產品授權，詳情請登陸我們的官方主站：http://www.guilin.com";
 	var $t_code_wrong="工具編號發生錯誤！";
 	var $t_unload_sucess="卸載成功";
 	var $t_unload_false="卸載失敗，請檢查工具配置文件";
@@ -956,7 +956,7 @@ class uilp{
 	var $u_prompt_4="4、如果您需要應用新的網站模板方案，請點擊應用模板，但是其目錄結構一定要與根目錄結構像匹配；";
 	var $u_prompt_5="5、應用模板操作會把當前的風格樣式替換成所選擇的方案，替換時要謹慎；";
 	var $u_prompt_6="6、如果替換時發生錯誤可以進入站點UI恢復——>恢復模板，進行恢復；";
-	var $u_footer="版權所有 © 2005-2009 美景假期開放式技術實驗室，並保留所有權利。";
+	var $u_footer="版權所有 © 2005-2009 桂林旅游营销系统開放式技術實驗室，並保留所有權利。";
 
 	var $u_tempfile_list="模板文件列表";
 	var $u_template_list="模板列表";

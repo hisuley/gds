@@ -199,7 +199,7 @@ $kk=$k;
 //		$id_row=$dbo->getRow($k_sql);
 
 	}else{
-		$kk='无';
+		$kk='';
 	}
 
 if($_POST){

@@ -63,12 +63,16 @@
 						</li>
                         {end:if/}
 						{end:foreach/}
-
-						<li><span>{echo:lp{i_keywords};/}：</span>{echo:$kk;/}</li>
 					</ul>
                     <form method="get">
+                        {sta: foreach($get_arr as $k => $value){
+                            if(substr($k,0,4) == 'attr'){
+                                $num = substr($k,4,strlen($k));
+                                echo '<input type="hidden" name="attr'.$num.'" value="'.$value.'">';
+                             }
+                        foreach/}
                         <input type="hidden" name="id" value="{echo:$cat_id;/}">
-                        <input type="text" name="k" value="{echo:$kk;/}" placeholder="请输入搜索关键词">
+                        <input type="text" name="k" value="{echo:$kk;/}" onclick="javascript:if(this.value == '无' || this.value == '请输入搜索关键词'){this.value = '';}" placeholder="请输入搜索关键词">
                         <input type="submit" value="搜索"/>
                     </form>
 				</div>

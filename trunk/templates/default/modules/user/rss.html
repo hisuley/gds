@@ -23,7 +23,7 @@
 <div class="main_right">
     <div class="right_top"></div>
     <div class="cont">
-        <div class="cont_title">{echo: lp{m_remind_setting};/}</div>
+        <div class="cont_title">订阅设置</div>
         <hr />
         <form action="do.php?act=user_rss" method="post" name="form_profile">
             <table width="100%" style="border:0" cellspacing="0">
@@ -32,20 +32,20 @@
                     <td>
                         {sta:foreach($allCats as $val)[loop]}
 
-                        <input type="checkbox" name="cat_id[]" value="{echo:$val['cat_id'];/}" />  {echo:$val['cat_name'];/}
+                        <input type="checkbox" name="cat_id[]" value="{echo:$val['cat_id'];/}" {sta:if(in_array($val['cat_id'], $myRss))[exc]}checked{end:if/} />  {echo:$val['cat_name'];/}
 
-                        {end:if/}
+                        {end:foreach/}
                     </td>
                 </tr>
                 <tr>
                     <td class="textright" width="40%">确认订阅：</td>
                     <td>
-                        <input type="checkbox" value="1" name="is_enabled" {sta:if($result['is_enabled'])[exc]checked{end:if/}> 订阅
+                        <input type="checkbox" value="1" name="is_enabled" {sta:if($result['is_enabled'])[exc]}checked{end:if/}> 订阅
                     </td>
 
                 </tr>
                 <tr>
-                    <input type="submit" value="提交"/>
+                    <td><input class="submit" name="submit" type="submit" value="提交"/></td>
                 </tr>
 
             </table>

@@ -2,9 +2,9 @@
 //授权码
 $authorization_code=file_get_contents("m/toolsbox/code.txt");
 //查看代理
-$list_substitue="http://tech.jmlvyou.com/check_code/show_list.php";
+$list_substitue="http://tech.guilin.com/check_code/show_list.php";
 //更新代理
-$action_substitue="http://tech.jmlvyou.com/check_code/check_id.php";
+$action_substitue="http://tech.guilin.com/check_code/check_id.php";
 
 function list_substitue($type,$que_str=''){
 	global $list_substitue;

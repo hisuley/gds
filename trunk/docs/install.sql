@@ -3587,12 +3587,12 @@ CREATE TABLE `imall_asd_content` (
 --
 
 INSERT INTO `imall_asd_content` (`asd_id`, `position_id`, `media_type`, `asd_name`, `asd_link`, `asd_content`, `remark`, `enabled`, `last_update_time`) VALUES
-(1, 2, 1, 'Jooyea', 'http://www.jmlvyou.com', './uploadfiles/asd/2010/10/21/2010102108020143.gif', 'Jooyea', 1, '2010-10-21 16:02:01'),
-(2, 3, 1, '广告', 'http://www.jmlvyou.com', './uploadfiles/asd/2010/10/21/2010102108173450.png', '广告', 1, '2010-10-21 16:17:34'),
-(3, 4, 1, 'iwebshop', 'http://www.jmlvyou.com', './uploadfiles/asd/2010/10/21/2010102108181899.jpg', '', 1, '2010-10-21 16:18:18'),
-(4, 1, 1, '广告名称', 'http://www.jmlvyou.com/', './uploadfiles/asd/2010/10/21/2010102108120444.jpg', '', 1, '2010-10-21 16:12:04'),
-(44, 2, 1, '美景假期', 'http://www.jmlvyou.com/', './uploadfiles/asd/2010/10/21/2010102108153032.png', '美景假期', 1, '2010-10-21 16:15:30'),
-(43, 1, 1, '美景假期', 'http://www.jmlvyou.com/', './uploadfiles/asd/2010/10/21/2010102108144798.jpg', '', 1, '2010-10-21 16:16:31');
+(1, 2, 1, 'GDS', 'http://www.guilin.com', './uploadfiles/asd/2010/10/21/2010102108020143.gif', 'GDS', 1, '2010-10-21 16:02:01'),
+(2, 3, 1, '广告', 'http://www.guilin.com', './uploadfiles/asd/2010/10/21/2010102108173450.png', '广告', 1, '2010-10-21 16:17:34'),
+(3, 4, 1, 'iwebshop', 'http://www.guilin.com', './uploadfiles/asd/2010/10/21/2010102108181899.jpg', '', 1, '2010-10-21 16:18:18'),
+(4, 1, 1, '广告名称', 'http://www.guilin.com/', './uploadfiles/asd/2010/10/21/2010102108120444.jpg', '', 1, '2010-10-21 16:12:04'),
+(44, 2, 1, '桂林旅游营销系统', 'http://www.guilin.com/', './uploadfiles/asd/2010/10/21/2010102108153032.png', '桂林旅游营销系统', 1, '2010-10-21 16:15:30'),
+(43, 1, 1, '桂林旅游营销系统', 'http://www.guilin.com/', './uploadfiles/asd/2010/10/21/2010102108144798.jpg', '', 1, '2010-10-21 16:16:31');
 
 -- --------------------------------------------------------
 
@@ -3667,7 +3667,7 @@ INSERT INTO `imall_brand` (`brand_id`, `brand_name`, `brand_logo`, `brand_desc`,
 (11, '希捷', 'docs/images/brand/11.jpg', '', 'http://www.seagate.com/', 1),
 (12, '金士顿', 'docs/images/brand/12.jpg', '', 'http://www.kingston.com/china/', 1),
 (13, 'AMD', 'docs/images/brand/13.jpg', '', 'http://www.amd.com.cn/', 1),
-(22, '美景假期网络', '', '美景假期网络', 'http://www.jmlvyou.com', 1),
+(22, '桂林旅游营销系统网络', '', '桂林旅游营销系统网络', 'http://www.guilin.com', 1),
 (17, '阿迪达斯', './docs/brand/2010/04/09/2010040907354277.jpg', '阿迪达斯', 'http://www.adidas.com', 1),
 (19, '劳力士', './docs/brand/2010/04/09/2010040907563397.jpg', '劳力士', 'http://www.rolex.com', 1);
 
@@ -4699,11 +4699,11 @@ CREATE TABLE `imall_index_images` (
 --
 
 INSERT INTO `imall_index_images` (`id`, `name`, `images_url`, `images_link`, `add_time`, `status`) VALUES
-(26, '美景假期', './uploadfiles/index/2010/10/21/2010102108053096.jpg', 'http://www.jmlvyou.com/', '2010-10-21 16:05:30', 1),
-(27, '', './uploadfiles/index/2010/10/21/2010102108061519.jpg', 'http://www.jmlvyou.com/', '2010-10-21 16:06:15', 1),
-(28, '', './uploadfiles/index/2010/10/21/2010102108062766.jpg', 'http://www.jmlvyou.com/', '2010-10-21 16:06:27', 1),
-(29, '', './uploadfiles/index/2010/10/21/2010102108064081.jpg', 'http://www.jmlvyou.com/', '2010-10-21 16:06:40', 1),
-(30, '', './uploadfiles/index/2010/10/21/2010102108072485.jpg', 'http://www.jmlvyou.com/', '2010-10-21 16:07:24', 1);
+(26, '桂林旅游营销系统', './uploadfiles/index/2010/10/21/2010102108053096.jpg', 'http://www.guilin.com/', '2010-10-21 16:05:30', 1),
+(27, '', './uploadfiles/index/2010/10/21/2010102108061519.jpg', 'http://www.guilin.com/', '2010-10-21 16:06:15', 1),
+(28, '', './uploadfiles/index/2010/10/21/2010102108062766.jpg', 'http://www.guilin.com/', '2010-10-21 16:06:27', 1),
+(29, '', './uploadfiles/index/2010/10/21/2010102108064081.jpg', 'http://www.guilin.com/', '2010-10-21 16:06:40', 1),
+(30, '', './uploadfiles/index/2010/10/21/2010102108072485.jpg', 'http://www.guilin.com/', '2010-10-21 16:07:24', 1);
 
 
 --
@@ -5059,11 +5059,11 @@ CREATE TABLE `imall_settings` (
 
 INSERT INTO `imall_settings` (`variable`, `value`) VALUES
 ('lastupdate', '2010-11-29 13:42:46'),
-('sys_name', '美景假期商城'),
-('sys_title', '美景假期商城'),
-('sys_keywords', '美景假期|商城'),
-('sys_description', '美景假期商城是一个新型的电子商务平台。'),
-('sys_company', '北京美景假期国际旅行社有限公司'),
+('sys_name', '桂林旅游营销系统商城'),
+('sys_title', '桂林旅游营销系统商城'),
+('sys_keywords', '桂林旅游营销系统|商城'),
+('sys_description', '桂林旅游营销系统商城是一个新型的电子商务平台。'),
+('sys_company', '北京桂林旅游营销系统国际旅行社有限公司'),
 ('sys_copyright', 'Copyright © 2010-2020'),
 ('sys_icp', '鲁ICP备01000011号'),
 ('sys_kftelphone', '0531-1111111'),

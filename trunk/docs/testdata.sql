@@ -328,12 +328,12 @@ INSERT INTO `imall_transport` (`tranid`, `tran_name`, `ifopen`, `content`, `tran
 --
 
 INSERT INTO `imall_users` (`user_id`, `user_email`, `user_name`, `user_passwd`, `user_question`, `user_answer`, `user_ico`, `reg_time`, `last_login_time`, `last_ip`, `email_check`, `email_check_code`, `forgot_check_code`, `rank_id`, `locked`) VALUES
-(1, 'zhangsan@jmlvyou.com', 'zhangsan', '613e14fd8459bd696ed30940e90d7647', NULL, NULL, '', '2010-11-29 10:06:15', '2010-11-29 11:57:25', '192.168.1.65', 1, '428bbf7e94758e40cf49c197f2965e44', NULL, 2, 0),
+(1, 'zhangsan@guilin.com', 'zhangsan', '613e14fd8459bd696ed30940e90d7647', NULL, NULL, '', '2010-11-29 10:06:15', '2010-11-29 11:57:25', '192.168.1.65', 1, '428bbf7e94758e40cf49c197f2965e44', NULL, 2, 0),
 (2, '111@22.com', '海信专卖店', '96e79218965eb72c92a549dd5a330112', NULL, NULL, '', '2010-11-29 10:07:45', '2010-11-29 13:13:20', '192.168.2.99', 1, '78465c6166afa56193ba68c763fb812e', NULL, 2, 0),
 (3, '222@22.com', '花朵儿', '96e79218965eb72c92a549dd5a330112', NULL, NULL, '', '2010-11-29 10:50:19', '2010-11-29 13:31:15', '192.168.2.99', 1, '23cfee668799af648ec6ca8892b50a96', NULL, 2, 0),
-(4, 'lisi@jmlvyou.com', 'lisi', '613e14fd8459bd696ed30940e90d7647', NULL, NULL, '', '2010-11-29 11:01:10', '2010-11-29 12:03:07', '192.168.2.65', 1, '56ae3768e14189331d143d8f46f2442a', NULL, 2, 0),
+(4, 'lisi@guilin.com', 'lisi', '613e14fd8459bd696ed30940e90d7647', NULL, NULL, '', '2010-11-29 11:01:10', '2010-11-29 12:03:07', '192.168.2.65', 1, '56ae3768e14189331d143d8f46f2442a', NULL, 2, 0),
 (5, '333@as2.fg', '玉友珠宝', '96e79218965eb72c92a549dd5a330112', NULL, NULL, '', '2010-11-29 11:22:59', '2010-11-29 13:22:03', '192.168.2.99', 1, 'eba8d161615b3af95afe426ec5a2e930', NULL, 2, 0),
-(6, 'wangwu@jmlvyou.com', 'wangwu', '613e14fd8459bd696ed30940e90d7647', NULL, NULL, '', '2010-11-29 11:29:12', NULL, NULL, 1, '24ec15f9902b887d59b476bbb72bf9ba', NULL, 2, 0),
+(6, 'wangwu@guilin.com', 'wangwu', '613e14fd8459bd696ed30940e90d7647', NULL, NULL, '', '2010-11-29 11:29:12', NULL, NULL, 1, '24ec15f9902b887d59b476bbb72bf9ba', NULL, 2, 0),
 (7, '454@sdf.dfg', '名表行', '96e79218965eb72c92a549dd5a330112', NULL, NULL, '', '2010-11-29 11:33:57', NULL, NULL, 1, 'f58c01dd61006ecf208e02b40c3699ae', NULL, 2, 0);
 
 

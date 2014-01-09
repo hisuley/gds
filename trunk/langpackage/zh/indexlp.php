@@ -125,7 +125,7 @@ class indexlp{
 	var $i_reg_username = "会员用户名";
 	var $i_reg_unameinfo = "由4-16位数字、英文字母或中文组成(一个中文2位)";
 	var $i_reg_email = "Email帐号";
-	var $i_reg_emailinfo = "如：shop@jmlvyou.com";
+	var $i_reg_emailinfo = "如：shop@guilin.com";
 	var $i_reg_passwd = "设置密码";
 	var $i_reg_passwdinfo = "数字或英文，6-16位";
 	var $i_reg_repasswd = "确认密码";

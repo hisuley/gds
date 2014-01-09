@@ -50,7 +50,7 @@ if($operation=='savebackup'){
 //	$format='m_d';
 	$time_custom=$time->custom('m_d_H_i');
 
-	$bak="/* iweb_mall Backup SQL File \n Version: ".$SYSINFO['version']." \n Time: ".$time_long."\n iweb_mall: http://www.jmlvyou.com*/\n\n\n\n";
+	$bak="/* iweb_mall Backup SQL File \n Version: ".$SYSINFO['version']." \n Time: ".$time_long."\n iweb_mall: http://www.guilin.com*/\n\n\n\n";
 
 	$writedata=bakupdata($dbo,$tabledb,$start);
 

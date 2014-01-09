@@ -603,10 +603,10 @@ $testdata	= isset($_POST['testdata']) ? trim($_POST['testdata']) : 0;
 	<?php
 	/* 生成 asd js */
 	@mkdir("../uploadfiles/asd/");
-	@file_put_contents("../uploadfiles/asd/1.js","document.write('<a href=\"http://www.jmlvyou.com\"><img src=\"docs/images/asd/2010/1.jpg\" width=\"960\" height=\"90\" alt=\"iwebshop\"></a>');");
-	@file_put_contents("../uploadfiles/asd/3.js","document.write('<a href=\"http://www.jmlvyou.com\"><img src=\"docs/images/asd/2010/3.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
-	@file_put_contents("../uploadfiles/asd/2.js","document.write('<a href=\"http://www.jmlvyou.com\"><img src=\"docs/images/asd/2010/2.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
-	@file_put_contents("../uploadfiles/asd/4.js","document.write('<a href=\"http://www.jmlvyou.com\"><img src=\"docs/images/asd/2010/4.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
+	@file_put_contents("../uploadfiles/asd/1.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/1.jpg\" width=\"960\" height=\"90\" alt=\"iwebshop\"></a>');");
+	@file_put_contents("../uploadfiles/asd/3.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/3.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
+	@file_put_contents("../uploadfiles/asd/2.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/2.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
+	@file_put_contents("../uploadfiles/asd/4.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/4.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
 	//文件锁
 	file_put_contents('../cache/install.lock',"");
 	?>

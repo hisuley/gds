@@ -1,7 +1,7 @@
 /* iweb_mall Backup SQL File 
  Version: v1.2 
  Time: 2013-12-09 16:11:34
- iweb_mall: http://www.jmlvyou.com*/
+ iweb_mall: http://www.guilin.com*/
 
 
 
@@ -3626,10 +3626,10 @@ INSERT INTO imall_article VALUES('28','5','欢迎大家使用GDS','<BR>欢迎大
 INSERT INTO imall_article VALUES('29','3','更新公告','<BR>更新公告','','1','2010-04-10 10:46:32','0','http://','0','0','','');
 INSERT INTO imall_article VALUES('30','3','发布公告','<BR>发布公告','','1','2010-04-10 10:46:07','0','http://','1','0','','');
 INSERT INTO imall_article VALUES('31','3','新版发布','新版发布','','1','2010-04-10 10:46:44','0','http://','1','0','','');
-INSERT INTO imall_article VALUES('32','3','试运营公告','试运营公告~~~','','1','2013-11-27 11:43:04','0','http://www.jmlvyou.com','0','0','rgb(0, 51, 255)','0');
+INSERT INTO imall_article VALUES('32','3','试运营公告','试运营公告~~~','','1','2013-11-27 11:43:04','0','http://www.guilin.com','0','0','rgb(0, 51, 255)','0');
 INSERT INTO imall_article VALUES('33','2','小店铺如何团购卖商品','小店铺如何团购卖商品','','1','2010-08-30 16:08:20','0','http://','1','1','rgb(0, 255, 0)','1');
 INSERT INTO imall_article VALUES('34','2','店铺信用评价体系','店铺信用评价体系','','1','2010-06-28 15:50:32','0','http://','1','0','#990000','1');
-INSERT INTO imall_article VALUES('35','1','测试','测试<br />','','1','2013-11-27 11:42:45','0','http://www.jmlvyou.com','1','1','rgb(0, 204, 255)','0');
+INSERT INTO imall_article VALUES('35','1','测试','测试<br />','','1','2013-11-27 11:42:45','0','http://www.guilin.com','1','1','rgb(0, 204, 255)','0');
 
 DROP TABLE IF EXISTS imall_article_cat;
 CREATE TABLE `imall_article_cat` (
@@ -3679,7 +3679,7 @@ CREATE TABLE `imall_asd_content` (
   KEY `enabled` (`enabled`)
 ) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
-INSERT INTO imall_asd_content VALUES('3','4','1','金米旅游','http://www.jmlvyou.com','./uploadfiles/asd/2010/10/21/2010102108181899.jpg','','1','2013-11-27 12:47:59');
+INSERT INTO imall_asd_content VALUES('3','4','1','五星网络','http://www.guilin.com','./uploadfiles/asd/2010/10/21/2010102108181899.jpg','','1','2013-11-27 12:47:59');
 
 DROP TABLE IF EXISTS imall_asd_position;
 CREATE TABLE `imall_asd_position` (
@@ -4298,9 +4298,13 @@ CREATE TABLE `imall_payment` (
   PRIMARY KEY (`pay_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-INSERT INTO imall_payment VALUES('1','支付宝纯担保','alipay','支付宝(接口网站：www.alipay.com) 是国内先进的网上支付平台，无预付/年费，单笔费率1.5%，无流量限制。 <a href=\"https://www.alipay.com/himalayas/product_info.htm\" style=\"color:red;font-weight:bold;\" target=\"_blank\">立即在线申请</a>','桂林旅游局','1.0','partner|合作伙伴\nsecurity_code|安全检验码\nseller_email|卖家支付宝帐户','1');
-INSERT INTO imall_payment VALUES('2','财付通即时到帐','tenpay','财付通（www.tenpay.com） - 本即时到账接口无需预付费，任何订单金额均即时到达您的账户，只收单笔 1% 手续费。<a href=\"http://union.tenpay.com/mch/mch_register_b2c.shtml\" style=\"color:red; font-weight:bold;\" target=\"_blank\">立即在线申请</a>','桂林旅游局','1.0','bargainor_id|财付通商户号\nkey|财付通密钥','1');
-INSERT INTO imall_payment VALUES('3','财付通中介担保','tenpay2','财付通（www.tenpay.com） - 腾讯旗下在线支付平台，通过国家权威安全认证，支持各大银行网上支付，免支付手续费。','桂林旅游局','1.0','bargainor_id|财付通商户号\nkey|财付通密钥','1');
+INSERT INTO imall_payment VALUES('1','支付宝纯担保','alipay','支付宝(接口网站：www.alipay.com) 是国内先进的网上支付平台，无预付/年费，单笔费率1.5%，无流量限制。 <a href=\"https://www.alipay.com/himalayas/product_info.htm\" style=\"color:red;font-weight:bold;\" target=\"_blank\">立即在线申请</a>','桂林旅游局','1.0','partner|合作伙伴
+\nsecurity_code|安全检验码
+\nseller_email|卖家支付宝帐户','1');
+INSERT INTO imall_payment VALUES('2','财付通即时到帐','tenpay','财付通（www.tenpay.com） - 本即时到账接口无需预付费，任何订单金额均即时到达您的账户，只收单笔 1% 手续费。<a href=\"http://union.tenpay.com/mch/mch_register_b2c.shtml\" style=\"color:red; font-weight:bold;\" target=\"_blank\">立即在线申请</a>','桂林旅游局','1.0','bargainor_id|财付通商户号
+\nkey|财付通密钥','1');
+INSERT INTO imall_payment VALUES('3','财付通中介担保','tenpay2','财付通（www.tenpay.com） - 腾讯旗下在线支付平台，通过国家权威安全认证，支持各大银行网上支付，免支付手续费。','桂林旅游局','1.0','bargainor_id|财付通商户号
+\nkey|财付通密钥','1');
 INSERT INTO imall_payment VALUES('4','邮局汇款','post','收款人信息: 姓名 ***; 地址:***; 邮编 ***','桂林旅游局','1.0','','1');
 INSERT INTO imall_payment VALUES('5','银行汇款','bank','收款人信息：银行 ***； 帐号 ***； 姓名 ***；','桂林旅游局','1.0','','1');
 
@@ -4837,7 +4841,7 @@ CREATE TABLE `imall_users` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO imall_users VALUES('1','dearsuley@gmail.com','suley','52626352b494ce2e4571526fbb362d0a','','','','2013-11-27 11:47:16','2013-12-09 15:59:42','::1','1','45116a145afa8e60382c24ab14cdfece','','4','0');
-INSERT INTO imall_users VALUES('2','luzhang@jmlvyou.com','luzhang','52626352b494ce2e4571526fbb362d0a','','','','2013-11-28 14:59:08','','','1','9b6858d4775ade9d5071028576502ca2','','1','0');
+INSERT INTO imall_users VALUES('2','luzhang@guilin.com','luzhang','52626352b494ce2e4571526fbb362d0a','','','','2013-11-28 14:59:08','','','1','9b6858d4775ade9d5071028576502ca2','','1','0');
 
 DROP TABLE IF EXISTS imall_word;
 CREATE TABLE `imall_word` (

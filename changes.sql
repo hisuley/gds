@@ -158,3 +158,5 @@ CREATE TABLE `imall_goods_promotions` (
 ALTER TABLE imall_order_info ADD is_barcode_read tinyint(1) COMMENT '二维码是否已经被阅读' DEFAULT 0;
 
 CREATE TABLE imall_user_rss(rss_id int primary key auto_increment, user_id int not null, cat_id text not null, is_enabled tinyint(1) not null);
+
+ALTER TABLE imall_goods_promotions ADD type char(255) default '促销' COMMENT '促销类型：促销/秒杀'

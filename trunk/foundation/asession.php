@@ -3,7 +3,7 @@ if(!$IWEB_SHOP_IN){
 	die('Hacking attempt');
 }
 /*
-	第三个参数写域名。比如：.jmlvyou.com
+	锟斤拷锟斤拷锟斤拷锟斤拷锟叫达拷锟斤拷锟斤拷锟界：.guilin.com
 */
 session_set_cookie_params(0,'/',"");
 session_start();

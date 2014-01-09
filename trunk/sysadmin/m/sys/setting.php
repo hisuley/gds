@@ -228,7 +228,7 @@ function goto_smtptest() {
 			</tr>
 			<tr>
 				<th><?php echo $a_langpackage->a_IM_is_open;?>：</th>
-				<td><select name='sysinfo[im_enable]'><option value='true' <?php if ($SYSINFO['im_enable']=='true') echo 'selected';?>><?php echo $a_langpackage->a_open;?></option><option value='false' <?php if ($SYSINFO['im_enable']=='false') echo 'selected';?>><?php echo $a_langpackage->a_close;?></option></select><?php echo $a_langpackage->a_setting_message18;?><A href="http://www.jmlvyou.com/downloads.html" target=_blank><?php echo $a_langpackage->a_setting_message19;?></A>）</td>
+				<td><select name='sysinfo[im_enable]'><option value='true' <?php if ($SYSINFO['im_enable']=='true') echo 'selected';?>><?php echo $a_langpackage->a_open;?></option><option value='false' <?php if ($SYSINFO['im_enable']=='false') echo 'selected';?>><?php echo $a_langpackage->a_close;?></option></select><?php echo $a_langpackage->a_setting_message18;?><A href="http://www.guilin.com/downloads.html" target=_blank><?php echo $a_langpackage->a_setting_message19;?></A>）</td>
 			</tr>
 			<tr>
 				<th><?php echo $a_langpackage->a_site_close;?>：</th>
