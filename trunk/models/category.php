@@ -50,6 +50,7 @@ $t_brand_category = $tablePreStr."brand_category";
 $t_user_rank = $tablePreStr."user_rank";
 $t_tag = $tablePreStr."tag";
 $t_article = $tablePreStr."article";
+$t_comment = $tablePreStr."goods_comment";
 $viewlist="display:block";
 $viewwindow="display:none";
 
