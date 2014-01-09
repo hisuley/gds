@@ -98,6 +98,11 @@ td span {color:red;}
 </div>
 <script>
 function checkform() {
+    var goods_id = document.getElementsByName('goods_id')[0];
+    if(goods_id.value == ''){
+        ShowMessageBox("请选择商品！",'0');
+        return false;
+    }
 	var promote_price = document.getElementsByName('promote_price')[0];
 	if(promote_price.value=='') {
 		ShowMessageBox("<?php echo $a_langpackage->a_promote_price_notnone; ?>",'0');

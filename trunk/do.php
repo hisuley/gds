@@ -26,6 +26,8 @@ $actArray = array(
 	'set_username'		=> array('action/set_username.php','index.php'),
 	'send_email'		=>array('action/send_email.php'),
 	'chanage_email'		=>array('action/chanage_email.php'),
+    //send mms
+    'mms'               => array('action/ajax/mms.action.php'),
 
 	// user
 	'user_profile'		=> array('action/user/profile.action.php','modules.php?app=user_profile'),
@@ -182,7 +184,7 @@ if(in_array($actId,$ajaxCheckArray)) {
 	}
 }
 
-$notCheckLoginArray = array('csv_img','del_goodsImage','checkcode','login','logout','register','ajax_areas','shop_guestbook','user_check_username','user_check_useremail','forgot','goods_get_imgurl','goods_add_favorite','shop_appraise','goods_add_groupbuy','goods_exit_groupbuy','get_transport_price','gettransportprice','goods_add_cart','user_cart_del','send_email','chanage_email','refresh_shop','get_goods_credit','get_order_record','goods_movepk', 'user_readbarcode', 'user_getbarcode');
+$notCheckLoginArray = array('csv_img','del_goodsImage','checkcode','login','logout','register','ajax_areas','shop_guestbook','user_check_username','user_check_useremail','forgot','goods_get_imgurl','goods_add_favorite','shop_appraise','goods_add_groupbuy','goods_exit_groupbuy','get_transport_price','gettransportprice','goods_add_cart','user_cart_del','send_email','chanage_email','refresh_shop','get_goods_credit','get_order_record','goods_movepk', 'user_readbarcode', 'user_getbarcode', 'mms');
 if(!in_array($actId,$notCheckLoginArray)) {
 	/* 判断用户是否登陆 */
 	if(!$user_id) { exit('请先<a href="login.php">登陆</a>！'); }
