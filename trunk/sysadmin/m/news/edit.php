@@ -242,7 +242,7 @@ function checkForm() {
 	return true;
 }
 function AddContentImg(ImgName,classId){
-	introeditor.appendHTML("<img src=../"+ImgName+"/><br>");
+	introeditor.appendHTML("<img src=../"+ImgName+"><br>");
 }
 function changeAttr(value) {
 	ajax("a.php?act=news_attr_list","POST","v="+value,function(data){
