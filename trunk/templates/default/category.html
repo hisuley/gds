@@ -192,18 +192,11 @@
 							<h2>评论</h2>
 						</div>
 						<ul>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
+                            {sta:foreach($goods_comments as $key => $v)[loop]}
+                            <li>
+                                <a href="goods.php?id={echo:$v['goods_id'];/}">{echo:$v['content'];/}</a>
+                            </li>
+                            {end:foreach/}
 						</ul>
 					</div>
 					{end:if/}

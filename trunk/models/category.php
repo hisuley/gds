@@ -102,6 +102,15 @@ if($this_catinfo['cat_name'] == '景区' || $this_catinfo['cat_name'] == '景点
     $jingqu_sql_gonglue = "SELECT * FROM $t_article WHERE id = 21 LIMIT 5";
     $jingqu_gonglue = $dbo->getRs($jingqu_sql_gonglue);
 }
+$get_goods_id = "SELECT id FROM $t_goods WHERE is_on_sale = 1 AND cat_id = ".$cat_id." AND  lock_flg=0 order by pv desc limit 5";
+$goods_id_box = $dbo->getRs($get_goods_id);
+$goods_id_box = implode(',', $goods_id_box);
+$sql_comment = "SELECT * FROM $t_comment where 1";
+if(!empty($goods_id_box)){
+    $sql_comment .= " AND goods_id IN(".$goods_id_box.") ";
+}
+$sql_comment .= " ORDER by add_time DESC";
+$goods_comments = $db->getRs($sql_comment);
 $areainfo = get_areas_kv($dbo,$t_areas);
 /* 产品处理 */
 $sql_best = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND is_best=1 and lock_flg=0 order by pv desc limit 5";
