@@ -116,10 +116,11 @@
               <h2>图片</h2>
           </div>
           <div id="slides">
+
               {sta:if($result['result'])[exc]}
                   {sta:foreach($result['result'] as $val)[loop]}
                   {sta:if($val['thumb'] != '')[exc]}
-                  <img src="{echo:$val['thumb'];/}">
+                  <a href="article.php?id={echo:$val['article_id'];/}"><img src="{echo:$val['thumb'];/}"></a>
                   {end:if/}
                   {end:foreach/}
               {end:if/}
