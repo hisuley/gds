@@ -96,6 +96,10 @@ if(isset($attr_arr)&&$attr_arr){
 		$attr_id_arr[]="attr[".$k."]";
 	}
 }
+if($this_catinfo['cat_name'] == '景区' || $this_catinfo['cat_name'] == '景点'){
+    $jingqu_sql_hot = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND cat_id = ".$cat_id." AND  lock_flg=0 order by pv desc limit 5";
+    $jingqu_goods_hot = $dbo->getRs($jingqu_sql_hot);
+}
 $areainfo = get_areas_kv($dbo,$t_areas);
 /* 产品处理 */
 $sql_best = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND is_best=1 and lock_flg=0 order by pv desc limit 5";

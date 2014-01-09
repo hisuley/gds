@@ -276,6 +276,17 @@ function checkform(){
 		return false;
 	}
 
+    {sta:if($grogshop_flag==true)[exc]}
+    var checkinDate = document.getElementsByName('checkinDate')[0];
+    var checkoutDate = document.getElementsByName('checkoutDate')[0];
+    if(checkinDate.value == '' || checkoutDate.value == '' || checkinDate.value == '请选择入住日期' || checkoutDate.value == '请选择入住日期'){
+        alert('预订日期没有填写完整！');
+        return false;
+    }
+    {end:if/}
+
+
+
 	var textareac = document.getElementById("textareac");
 	if(textareac.value.length>300){
 		alert("{echo:lp{s_work_count_error};/}");
@@ -302,6 +313,8 @@ function checkform(){
 	}else {
 		return true;
 	}
+
+
 
 
 }

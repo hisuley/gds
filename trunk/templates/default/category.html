@@ -217,6 +217,22 @@
 							{end:foreach/}
 						</div>
 					</div>
+                    {sta:if($this_catinfo['cat_name'] == '景区' || $this_catinfo['cat_name'] == '景点'){ ?>
+                    <div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
+                        <div class="title">
+                            <h2>热门景点</h2>
+                        </div>
+                        <ul>
+                            {sta:foreach($jingqu_goods_hot as $key => $v)[loop]}
+                            <li {sta:if($key%2!=0)[loop]} class="doublenum"{end:if/}>
+                            <p class="photo"><a href="{echo: goods_url($v['goods_id']);/}" target="_blank"><img src="{echo: $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';/}" alt="" width="58" height="58"  onerror="this.src='skin/default/images/nopic.gif'"/></a></p>
+                            <h4><a href="{echo: goods_url($v['goods_id']);/}" target="_blank">{echo: sub_str($v['goods_name'],38);/}</a></h4>
+                            <p class="price">{echo:lp{i_money_sign};/}{echo:$v['goods_price'];/}</p>
+                            </li>
+                            {end:foreach/}
+                        </ul>
+                    </div>
+                    {end:if/}
 					<div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
 						<div class="title">
 							<h2>{echo:lp{i_goods_commend};/}</h2>
