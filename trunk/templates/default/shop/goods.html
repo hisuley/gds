@@ -278,7 +278,7 @@ function changeImage(obj){
                 <script type="text/javascript">
                     // 百度地图API功能
                     var map = new BMap.Map("l-map");            // 创建Map实例
-                    map.centerAndZoom(new BMap.Point({echo:$geoAddress['result']['location']['lng'];/}, {echo:$geoAddress['result']['location']['lat'];/}), 12);
+                    map.centerAndZoom(new BMap.Point({echo:$geoAddress['result']['location']['lng'];/}, {echo:$geoAddress['result']['location']['lat'];/}), 11);
                     var myKeys = ["酒店", "旅馆", "饭店"];
                     var local = new BMap.LocalSearch(map, {
                         renderOptions:{map: map, panel:"r-result"}
