@@ -103,8 +103,8 @@ if($this_catinfo['cat_name'] == '景区' || $this_catinfo['cat_name'] == '景点
     $jingqu_sql_gonglue = "SELECT * FROM $t_article WHERE cat_id = 21 LIMIT 5";
     $jingqu_gonglue = $dbo->getRs($jingqu_sql_gonglue);
 }
-$get_goods_id = "SELECT id FROM $t_goods WHERE is_on_sale = 1 AND cat_id = ".$cat_id." AND  lock_flg=0 order by pv desc limit 5";
-$goods_id_box = $dbo->getRs($get_goods_id);
+$get_goods_id = "SELECT goods_id FROM $t_goods WHERE is_on_sale = 1 AND cat_id = ".$cat_id." AND  lock_flg=0 order by pv desc limit 5";
+$goods_id_box = $dbo->getCol($get_goods_id);
 $goods_id_box = implode(',', $goods_id_box);
 $sql_comment = "SELECT * FROM $t_comment where 1";
 if(!empty($goods_id_box)){
