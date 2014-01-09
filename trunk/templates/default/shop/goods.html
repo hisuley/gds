@@ -15,6 +15,11 @@
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/izoom.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QjqqNhmWH1AwigvbgreLScYC"></script>
+<style type="text/css">
+#allmap{width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-map{height:100%;width:68%;float:left;border-right:2px solid #bcbcbc;}
+#r-result{height:100%;width:30%;float:left;}
+</style>
 <script type="text/javascript">
 var attr_ids =  {echo: $attr_ids;/};
 var goodsAttr_value = new Array();
@@ -252,7 +257,8 @@ function changeImage(obj){
 			<!-- 商品成交记录 -->
 			<div id="tab1_content4" class="pannel" style="display:none"> </div>
             <div id="tab1_content5" class="pannel" style="display: none">
-                <div id="allmap" style="width:100%;height:500px;"></div>
+                <div id="l-map"></div>
+                <div id="r-result"></div>
                 {sta:
                 if($attr_status){
                     foreach($attr as $key=>$value){
@@ -271,12 +277,14 @@ function changeImage(obj){
                 {sta:if(!empty($geoAddress['result']['location']))[exc]}
                 <script type="text/javascript">
                     // 百度地图API功能
-                    var map = new BMap.Map("allmap");            // 创建Map实例
+                    var map = new BMap.Map("l-map");            // 创建Map实例
                     map.centerAndZoom(new BMap.Point({echo:$geoAddress['result']['location']['lng'];/}, {echo:$geoAddress['result']['location']['lat'];/}), 12);
+                    var myKeys = ["酒店", "旅馆", "饭店"];
                     var local = new BMap.LocalSearch(map, {
-                        renderOptions:{map: map}
+                        renderOptions:{map: map, panel:"r-result"}
                     });
-                    local.searchNearby("酒店", "旅馆", "饭店");
+                    local.setPageCapacity(15);
+                    local.searchInBounds(myKeys, map.getBounds());
                 </script>
                 {end:if/}
 
