@@ -272,9 +272,9 @@ function changeImage(obj){
                 <script type="text/javascript">
                     // 百度地图API功能
                     var map = new BMap.Map("allmap");            // 创建Map实例
-                    map.centerAndZoom(new BMap.Point({echo:$geoAddress['result']['location']['lng'];/}, {echo:$geoAddress['result']['location']['lat'];/}), 13);
+                    map.centerAndZoom(new BMap.Point({echo:$geoAddress['result']['location']['lng'];/}, {echo:$geoAddress['result']['location']['lat'];/}), 12);
                     var local = new BMap.LocalSearch(map, {
-                        renderOptions:{map: map, autoViewport:true}
+                        renderOptions:{map: map}
                     });
                     local.searchNearby("酒店", "旅馆", "饭店");
                 </script>
