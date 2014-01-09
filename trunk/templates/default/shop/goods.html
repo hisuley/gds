@@ -261,7 +261,7 @@ function changeImage(obj){
                             $geoAddress = str_replace('(','', $geoAddress);
                             $geoAddress = str_replace(')','', $geoAddress);
                             echo print_r($geoAddress, true);
-                            $geoAddress = json_decode($geoAddress);
+                            $geoAddress = json_decode($geoAddress, true);
                             echo print_r($geoAddress, true);
                         }
                     }
