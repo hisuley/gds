@@ -257,6 +257,7 @@ function changeImage(obj){
                         if($attribute[$key]['attr_values'] == '地址'){
                             echo $value['attr_values'];
                             $geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=showMap&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
+                            $geoAddress = str_replace('showMap&&showMap', '', $geoAddress);
                             echo print_r($geoAddress, true);
                             $geoAddress = json_decode($geoAddress);
                         }
