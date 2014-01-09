@@ -12,6 +12,9 @@
 <link href="skin/{echo: $SYSINFO['templates'];/}/css/article.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+    {sta:if($cat_name == '攻略分享' || $cat_name == '攻略')[exc]}
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery.slides.js"></script>
+    {end:if/}
 </head>
 <body>
 <div id="wrapper">
@@ -107,6 +110,22 @@
     </div>
   </div>
   <div id="rightColumn">
+     {sta:if($cat_name == '攻略分享' || $cat_name == '攻略')[exc]}
+      <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+          <div class="title">
+              <h2>图片</h2>
+          </div>
+          <div id="slides">
+              {sta:if($result['result'])[exc]}
+                  {sta:foreach($result['result'] as $val)[loop]}
+                  {sta:if($val['thumb'] != '')[exc]}
+                  <img src="{echo:$val['thumb'];/}">
+                  {end:if/}
+                  {end:foreach/}
+              {end:if/}
+          </div>
+      </div>
+      {end:if/}
     <!-- @TODO 判断是否存在子分类，如果存在，则展示 -->
     <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
         <div class="title">
