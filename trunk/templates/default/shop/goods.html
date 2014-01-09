@@ -17,8 +17,8 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QjqqNhmWH1AwigvbgreLScYC"></script>
 <style type="text/css">
 #allmap{width: 100%;height: 100%;overflow: hidden;margin:0;}
-#l-hotel{height:500px;width:68%;float:left;border-right:2px solid #bcbcbc;}
-#r-hotel{height:500px;width:30%;float:left;}
+#l-hotel{width:68%;float:left;border-right:2px solid #bcbcbc;}
+#r-hotel{width:30%;float:left;}
 </style>
 <script type="text/javascript">
 var attr_ids =  {echo: $attr_ids;/};
@@ -256,9 +256,13 @@ function changeImage(obj){
 			<div id="tab1_content3" class="pannel" style="display:none"> </div>
 			<!-- 商品成交记录 -->
 			<div id="tab1_content4" class="pannel" style="display:none"> </div>
-            <div id="tab1_content5" class="pannel" style="display: none">
-                <div id="l-hotel"></div>
-                <div id="r-hotel"></div>
+            <div id="tab1_content5" class="pannel">
+                <div id="allmap">
+                    <div id="l-hotel"></div>
+                    <div id="r-hotel"></div>
+                    <div class="clearfix"></div>
+                </div>
+
                 {sta:
                 if($attr_status){
                     foreach($attr as $key=>$value){
@@ -276,7 +280,7 @@ function changeImage(obj){
                 if/}
                 {sta:if(!empty($geoAddress['result']['location']))[exc]}
                 <script type="text/javascript">
-                    function makeMaps(map_id){
+                        document.getElementById('tab1_content5').style.display = "block";
                         // 百度地图API功能
                         var map = new BMap.Map("l-hotel");            // 创建Map实例
                         map.centerAndZoom(new BMap.Point({echo:$geoAddress['result']['location']['lng'];/}, {echo:$geoAddress['result']['location']['lat'];/}), 11);
@@ -286,7 +290,7 @@ function changeImage(obj){
                         });
                         local.setPageCapacity(15);
                         local.searchInBounds(myKeys, map.getBounds());
-                    }
+                        document.getElementById('tab1_content5').style.display = "none";
 
                 </script>
                 {end:if/}
