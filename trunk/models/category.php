@@ -49,7 +49,7 @@ $t_brand = $tablePreStr."brand";
 $t_brand_category = $tablePreStr."brand_category";
 $t_user_rank = $tablePreStr."user_rank";
 $t_tag = $tablePreStr."tag";
-
+$t_article = $tablePreStr."article";
 $viewlist="display:block";
 $viewwindow="display:none";
 
@@ -99,6 +99,8 @@ if(isset($attr_arr)&&$attr_arr){
 if($this_catinfo['cat_name'] == '景区' || $this_catinfo['cat_name'] == '景点'){
     $jingqu_sql_hot = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND cat_id = ".$cat_id." AND  lock_flg=0 order by pv desc limit 5";
     $jingqu_goods_hot = $dbo->getRs($jingqu_sql_hot);
+    $jingqu_sql_gonglue = "SELECT * FROM $t_article WHERE id = 21 LIMIT 5";
+    $jingqu_gonglue = $dbo->getRs($jingqu_sql_gonglue);
 }
 $areainfo = get_areas_kv($dbo,$t_areas);
 /* 产品处理 */

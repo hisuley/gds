@@ -232,6 +232,20 @@
                             {end:foreach/}
                         </ul>
                     </div>
+                    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box news-box">
+                        <div class="title">
+                            <h2>景点攻略</h2>
+                        </div>
+
+                        <ul>
+                            {sta:foreach($jingqu_gonglue as $key => $v)[loop]}
+                            <li>
+                                <a href="article.php?id={echo:$v['article_id'];/}">{echo:$v['title'];/}</a>
+                            </li>
+                            {end:foreach/}
+
+                        </ul>
+                    </div>
                     {end:if/}
 					<div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
 						<div class="title">
