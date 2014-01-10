@@ -101,6 +101,26 @@ if($t=="seller"){
 			}
 		}
 	}
+}elseif($t=="today"){
+    $start_time = date('Y-m-d 00:00:00', strtotime('now'));
+    $end_time = date('Y-m-d 23:59:59', strtotime('now'));
+    $sql="select a.*,b.goods_name,b.goods_price,c.user_name from $t_credit as a,$t_goods as b,$t_user as c where a.seller=$user_id and b.goods_id=a.goods_id and c.user_id=a.buyer and a.buyer_evaltime between  '$start_time' and '$end_time'";
+    //print_r($sql);
+    $result=$dbo->fetch_page($sql,10);
+    if(!empty($result['result'])){
+        foreach($result['result'] as $key=>$val){
+            if(empty($val['buyer_evaltime'])){
+                unset($result['result'][$key]);
+            }else{
+                $result['result'][$key]['people']=$val['buyer'];
+                $result['result'][$key]['credit']=$val['buyer_credit'];
+                $result['result'][$key]['evaluate']=$val['buyer_evaluate'];
+                $result['result'][$key]['evaltime']=$val['buyer_evaltime'];
+                $result['result'][$key]['explanation']=$val['buyer_explanation'];
+                $result['result'][$key]['exptime']=$val['buyer_exptime'];
+            }
+        }
+    }
 }
 //echo $sql;
 //print_r($result);

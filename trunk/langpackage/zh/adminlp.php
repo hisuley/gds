@@ -262,6 +262,7 @@ class adminlp{
         var $a_hotel_brand_management = "酒店品牌管理";
         var $a_hotel_stars_management = "酒店星级管理";
         var $a_hotel_facilities_management = "酒店设施管理";
+        var $a_hotel_facilties_management = "酒店设施管理";
         var $a_hotel_landmark_management = "酒店地标管理";
         var $a_scenic_type_management = "景点类别管理";
         var $a_scenic_rank_management = "景点级别管理";

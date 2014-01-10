@@ -163,3 +163,7 @@ ALTER TABLE imall_goods_promotions ADD type char(255) default '促销' COMMENT '
 
 ALTER TABLE imall_goods_promotions ADD shop_id int COMMENT '促销由商家发起，经过审核'
 ALTER TABLE imall_goods_promotions ADD is_lock tinyint(1) DEFAULT 1 COMMENT '促销默认被锁定'
+
+INSERT INTO imall_payment(pay_name, pay_code, pay_desc, author, version, config, enabled) VALUES('积分支付', 'credit', '使用积分兑换商品', '桂林旅游局', '1.0', '', 1);
+
+INSERT INTO imall_settings(variable, value) VALUES('credit_withdraw', '0.01');

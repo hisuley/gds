@@ -92,7 +92,23 @@ td span{color:red;}
 						<td>{echo:$user_info['email'];/}</td></tr>
 					<tr><td></td><td><span>{echo: lp{m_sureaddress_rcgoods};/}</span></td></tr>
 				</table>
-				
+
+                <hr />
+                <table width="100%" style="border:0" cellspacing="0">
+                    <tr>
+                        <th align="left" width="200">&nbsp;&nbsp;选择支付方式</th><th align="right"></th>
+                    </tr>
+                    <tr><td class="textright">{echo: lp{m_payment_cho};/}：</td><td class="textleft">
+
+                        {sta:foreach($payment_shop_info as $value)[loop]}
+                        {sta:if(isset($payment[$value['pay_id']]))[loop]}
+                        <input type="radio" name="pay_id" value="{echo:$value['pay_id'];/}" />{echo:$payment[$value['pay_id']]['pay_name'];/}
+                        <img src="plugins/{echo:$payment[$value['pay_id']]['pay_code'];/}/logo.gif" height="30" onerror="this.src='skin/default/images/nopic.gif'"/></a> <br /><br />
+                        {end:if/}
+                        {end:foreach/}
+                    </td></tr>
+                </table>
+
 
 				<table width="100%" border="0" cellspacing="0">
 					<tr>
@@ -123,7 +139,7 @@ td span{color:red;}
                                         {end:if/}
                                         {sta:if($scenic_flag==true)[exc]}
                                         <tr><td class="textright">{echo: lp{m_order_checkin_time};/}：</td>
-						<td><input class="column-10" type="text" id="departDateInput" name="travelDate" onblur="inputTxt2(this,'set', '请选择旅行日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择旅行日期');compareDate();"  value="请选择旅行日期" />　<span>*</span></td></tr>
+						<td><input class="column-10" type="text" id="departDateInput" name="travelDate" onblur="inputTxt2(this,'set', '请选择旅行日期');"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择旅行日期');"  value="请选择旅行日期" />　<span>*</span></td></tr>
                                          {end:if/}
                                          <tr><td class="textright" valign="top">{echo: lp{m_order_message};/}：</td><td><textarea name="message" style="width:280px;height:60px" id="textareac" onkeyup="this.value=this.value.slice(0,300);"></textarea></td></tr>
 					<tr><td colspan="2" align="center">
@@ -137,14 +153,11 @@ td span{color:red;}
 					<input type="hidden" name="province" value="{echo:$user_info['user_province'];/}" />
 					<input type="hidden" name="city" value="{echo:$user_info['user_city'];/}" />
 					<input type="hidden" name="district" value="{echo:$user_info['user_district'];/}" />
-					<input type="hidden" name="pay_id" value="{echo: $payment_info['pay_id'];/}" />
-					<input type="hidden" name="pay_name" value="{echo: $payment[$payment_info['pay_id']]['pay_name'];/}" />
 					<input type="hidden" name="real_transport_money" id="real_transport_money" value="0" />
 					<input type="button" onclick="javacript:history.go(-1);" name="submit" class="submit" value="{echo:lp{m_change_address};/}" />
 					<input type="submit" name="submit" class="submit" onclick="do_transports()" value="{echo: lp{m_post_order};/}" /></td></tr>
 				</table>
-
-			</form>
+            </form>
         </div>
     </div>
 <div class="clear"></div>
@@ -177,10 +190,12 @@ function changePrice(obj){
 }
 function compareDate(){
     var departDate = document.getElementById('departDateInput').value;
-    var departDateArray = departDate.split("-");
-
+    if(typeof(departDate) === null){
+        return 0;
+    }
     var arriveDate = document.getElementById('arriveDateInput').value;
     var arriveDateArray = arriveDate.split("-");
+    var departDateArray = departDate.split("-");
     var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
     var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
     if(departDate > arriveDate){
@@ -274,11 +289,33 @@ function checkform(){
 		return false;
 	}
 
+    {sta:if($scenic_flag==true)[exc]}
+    var travelDate = document.getElementsByName('travelDate')[0];
+    if(travelDate.value==''){
+        alert('请选择旅行日期！');
+        return false;
+    }
+    {end:if/}
+
 	var zipcode = document.getElementsByName('zipcode')[0];
 	if(zipcode.value==''){
 		alert('{echo:lp{m_pl_getgoods_zipcode};/}');
 		return false;
 	}
+    var radios = document.getElementsByName('pay_id');
+    var radios_check = true;
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+            // do whatever you want with the checked radio
+            radios_check = false;
+            // only one radio can be logically checked, don't check the rest
+            break;
+        }
+    }
+    if(radios_check){
+        alert('请选择支付方式！');
+        return false;
+    }
 
 	var email = document.getElementsByName('email')[0];
 	var user_email_reg = /^[0-9a-zA-Z_\-\.]+@[0-9a-zA-Z_\-]+(\.[0-9a-zA-Z_\-]+)*$/;

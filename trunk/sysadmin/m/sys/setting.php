@@ -113,6 +113,10 @@ function goto_smtptest() {
 					<th><?php echo $a_langpackage->a_mall_key;?>：</th>
 					<td><input class="small-text" type="text" name="sysinfo[sys_keywords]" value="<?php echo $SYSINFO['sys_keywords']; ?>" style="width:300px;" /><?php echo $a_langpackage->a_setting_message3;?></td>
 				</tr>
+                <tr>
+                    <th>积分兑换比率：</th>
+                    <td><input class="small-text" type="text" name="sysinfo[credit_withdraw]" value="<?php echo $SYSINFO['credit_withdraw']; ?>" style="width:300px;" />（如0.01代表100积分:1元RMB）</td>
+                </tr>
 				<tr>
 					<th><?php echo $a_langpackage->a_mall_descibe;?>：</th>
 					<td><textarea name="sysinfo[sys_description]" style="width:350px; height:80px;"><?php echo $SYSINFO['sys_description']; ?></textarea><?php echo $a_langpackage->a_setting_message4;?></td>

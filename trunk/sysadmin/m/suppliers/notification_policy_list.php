@@ -35,7 +35,7 @@ if($policy_title) {
 	if(!$right){
 		header('location:m.php?app=error');
 	}
-	$sql .= " and a.policy_title like '%$policy_title%' ";
+	$sql .= " and (a.policy_title like '%$policy_title%' or a.policy_content like '%$policy_title%')";
 }
 if($orderby && $orderway) {
 	$sql .= " order by $orderby $orderway";
@@ -78,7 +78,7 @@ td span {color:red;}
                                     </span>
                             </td>
                         <td>
-                            <?php echo $a_langpackage->a_notification_policy_name;?>: <input type="text" class="small-text" name="policy_title" value="<?php echo $policy_title; ?>" style="width:100px" />
+                           政策通知搜索: <input type="text" class="small-text" name="policy_title" value="<?php echo $policy_title; ?>" style="width:100px" />
                               <input type="hidden" name="app" value="notification_policy_list" /><input class="regular-button" type="submit" value="<?php echo $a_langpackage->a_serach;?>" />
                         </td>
                     </tr>
@@ -97,8 +97,10 @@ td span {color:red;}
 			<thead>
 			<tr style=" text-align:center;">
 				<th width="50px">ID <a href="m.php?app=notification_policy_list&orderby=a.policy_id&orderway=asc">↑</a><a href="m.php?app=notification_policy_list&orderby=a.policy_id&orderway=desc">↓</a></th>
-				<th align="left"><?php echo $a_langpackage->a_notification_policy_name; ?></th>
-                                <th width="125px"><?php echo $a_langpackage->a_suppliers_categorys; ?></th>
+				<th align="left" width="100px"><?php echo $a_langpackage->a_notification_policy_name; ?></th>
+                <th width="200px">内容</th>
+                                <th width="45px"><?php echo $a_langpackage->a_suppliers_categorys; ?></th>
+
 				<th width="65px"><?php echo $a_langpackage->a_show_sort; ?> <a href="m.php?app=notification_policy_list&orderby=a.sort_order&orderway=asc">↑</a><a href="m.php?app=notification_policy_list&orderby=a.sort_order&orderway=desc">↓</a></th>
 				<th width="115px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
@@ -109,6 +111,7 @@ td span {color:red;}
 			<tr style=" text-align:center;">
 				<td><?php echo $value['policy_id'];?>.</td>
 				<td align="left"><?php echo $value['policy_title'];?></td>
+                <td><?php echo $value['policy_content'];?></td>
                                 <td><?php echo $value['cat_name'];?></td>
                                 <td><div onclick="editnum(this,<?php echo $value['policy_id'];?>,'divorder<?php echo $value['policy_id'];?>','a.php?act=updateAjax','tablename=notification_policy&colname=sort_order&idname=policy_id&idvalue=<?php echo $value['policy_id'];?>&logcontent=<?php echo $a_langpackage->a_edit_category; ?>：&colvalue=',2);"><?php echo $value['sort_order'];?></div>
 				    <div style="display:none"></div>

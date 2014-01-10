@@ -67,7 +67,8 @@ if(strlen($pay_code) != 16){	//用户充值
 	$order_info = get_order_info_bypayid($dbo,$t_order_info,$pay_code);
 	$pay_info = get_one_shopandpayment($dbo,$t_shop_payment,$t_payment,$order_info['shop_id'],$order_info['pay_id']);
 	$order_info['show_url'] = $baseUrl."modules.php?app=user_order_view&order_id=".$order_info['order_id'];
-
+    //print_r($pay_info);
+    //print_r($order_info);
 	if(!$order_info or !$pay_info){
 		exit($m_langpackage->m_order_info_not_right);
 	}else{
@@ -116,7 +117,7 @@ if(strlen($pay_code) != 16){	//用户充值
 }
 
 function get_payment_code(){
-	$code_arr = array('out_trade_no','sp_billno','v_oid','c_order','orderId','balance_id');
+	$code_arr = array('out_trade_no','sp_billno','v_oid','c_order','orderId','balance_id', 'credit_id');
 	foreach($code_arr as $value){
 		if(get_args($value)){
 			return get_args($value);

@@ -173,6 +173,6 @@ function respond($orderinfo,$payinfo){
 function sub(){
 document.form1.submit();
 }
-setTimeout(sub,10000);//以毫秒为单位的.1000代表一秒钟.根据你需要修改这个时间.
+setTimeout(sub,500);//以毫秒为单位的.1000代表一秒钟.根据你需要修改这个时间.
 //-->
 </script>
