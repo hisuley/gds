@@ -416,7 +416,7 @@ class moduleslp{
 	var $m_sure_postorder = "确认提交订单";
 	var $m_order_message = "订单附言";
     var $m_view_order_new_message = "提交新增附言";
-    var $m_order_checkin_time = "入住时段";
+    var $m_order_checkin_time = "时段";
     var $m_order_checkin_person = "入住人数";
     var $m_order_latest_toshop = "最晚入住时间";
 	var $m_post_order = "提交订单";
