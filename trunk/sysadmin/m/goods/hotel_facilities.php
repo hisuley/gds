@@ -29,6 +29,7 @@ foreach($result as $row){
     if(!empty($tmp)){
         for($i=0, $j=count($tmp); $i<$j; $i++){
             $attr_info[$i] = $row;
+
             $attr_info[$i]['attr_values'] = $tmp[$i];
             $attr_info[$i]['index'] = $i+1;$attr_info[$i]['attr_id'] = $row['attr_id'];
         }

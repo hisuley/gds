@@ -117,7 +117,7 @@ if ($index){
 		header('location:m.php?app=error');
 		exit;
 	}else {
-		$sql = "SELECT * FROM `$t_goods` a,`$t_goods_attr` b WHERE a.`goods_id`=b.`goods_id` AND b.attr_id = $index AND b.`attr_values` LIKE '%$attr_values%' ";
+		$sql = "SELECT * FROM `$t_goods` as a,`$t_goods_attr` as b WHERE a.`goods_id`=b.`goods_id` AND b.`attr_values` LIKE '%$attr_values%' ";
 	}
 }
 
@@ -125,7 +125,7 @@ $orderby = short_check(get_args('orderby'));
 $orderway = short_check(get_args('orderway'));
 if(!empty($orderby) && !empty($orderway)){
     $sql .= " order by ".$orderby." ".$orderway.";";
-}else{
+}elseif(empty($index)){
     $sql .= " order by add_time desc;";
 }
 
