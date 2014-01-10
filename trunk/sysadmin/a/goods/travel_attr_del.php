@@ -13,6 +13,7 @@ if(!$right){
 $index = intval(get_args('index'));
 $cat_id = intval(get_args('cat_id'));
 $attr_name = short_check(get_args('attr_values'));
+$attr_id = intval(get_args(('attr_id')));
 if(!$index) {
 	exit("-1");
 }
@@ -24,7 +25,10 @@ $t_attribute = $tablePreStr."attribute";
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  cat_id=".$cat_id." and attr_name='$attr_name'";
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='$attr_name'";
+if(!empty($attr_id)){
+    $sql .= " and attr_id = $attr_id";
+}
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -33,13 +37,19 @@ foreach($result as $row){
             unset($tmp[$index-1]);
     }
 }
+
 $post['attr_values'] = join("\n", $tmp);
-if($tmp){
+if(!empty($tmp)){
     $item_sql = get_update_item($post);
     $sql_travel = "update `$t_attribute` set $item_sql where cat_id=".$cat_id." and attr_name='$attr_name'";
     }else{
     $sql_travel = "delete from `$t_attribute` where cat_id=".$cat_id." and attr_name='$attr_name'";
 }
+
+if(!empty($attr_id)){
+    $sql_travel .= " and attr_id = $attr_id";
+}
+
 if($dbo->exeUpdate($sql_travel)) {
         echo "1";
 } else {

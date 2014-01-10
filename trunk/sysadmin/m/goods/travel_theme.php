@@ -20,7 +20,7 @@ $t_attribute = $tablePreStr."attribute";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  attr_name='主题' AND cat_id = 435";
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_id = 40";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -30,7 +30,8 @@ foreach($result as $row){
         for($i=0, $j=count($tmp); $i<$j; $i++){
             $attr_info[$i] = $row;
             $attr_info[$i]['attr_values'] = $tmp[$i];
-            $attr_info[$i]['index'] = $i+1;$attr_info[$i]['attr_id'] = $row['attr_id'];
+            $attr_info[$i]['index'] = $i+1;
+            $attr_info[$i]['attr_id'] = $row['attr_id'];
         }
     }
 }
@@ -98,7 +99,8 @@ foreach($right_array as $key => $value){
 <script language="JavaScript">
 <!--
 var cat_id = "<?php echo $cat_id;?>";
-var attr_values = '类型';
+var attr_values = '主题';
+var attr_id = 40;
 
 function attr_info_cancel(v) {
     var deltr = document.getElementById("tr_"+v);
@@ -241,7 +243,7 @@ function add_new_attr_info(data,attr_name,input_type,attr_values, selectable, pr
 function attr_info_del(v) {
     if(confirm('<?php echo $a_langpackage->a_attr_suredel; ?>')) {
         if(v) {
-            ajax("a.php?act=travel_attr_del","POST","index="+v+"&cat_id="+cat_id+"&attr_values="+attr_values,function(data){
+            ajax("a.php?act=travel_attr_del","POST","index="+v+"&cat_id="+cat_id+"&attr_values="+attr_values+"&attr_id="+attr_id,function(data){
                 if(data=='-2') {
                     ShowMessageBox("<?php echo $a_langpackage->a_privilege_mess;?>",'m.php?app=error');
                     location.href="m.php?app=error";

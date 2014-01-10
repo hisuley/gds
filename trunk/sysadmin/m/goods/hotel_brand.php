@@ -98,7 +98,7 @@ foreach($right_array as $key => $value){
 <script language="JavaScript">
 <!--
 var cat_id = "<?php echo $cat_id;?>";
-var attr_values = '类型';
+var attr_values = '品牌';
 
 function attr_info_cancel(v) {
     var deltr = document.getElementById("tr_"+v);
