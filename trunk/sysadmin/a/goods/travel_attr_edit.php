@@ -33,7 +33,7 @@ $t_attribute = $tablePreStr."attribute";
 dbtarget('w',$dbServs);
 $dbo=new dbex;
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id." and attr_name='$attr_name'";
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  cat_id=".$cat_id." and attr_name='$attr_name'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){

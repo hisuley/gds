@@ -259,7 +259,7 @@ class adminlp{
         var $a_travel_type_management = "旅游线路类型管理";
         var $a_travel_days_management = "旅游线路天数管理";
         var $a_travel_price_management = "旅游线路价位管理";
-        var $a_hotel_brand_management = "酒店景区管理";
+        var $a_hotel_brand_management = "酒店品牌管理";
         var $a_hotel_stars_management = "酒店星级管理";
         var $a_hotel_facilities_management = "酒店设施管理";
         var $a_hotel_landmark_management = "酒店地标管理";

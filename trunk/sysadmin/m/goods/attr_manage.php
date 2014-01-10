@@ -44,7 +44,7 @@ if($cat_id) {
 		}
 	}
 	if($cat_info) {
-		$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where cat_id=".$cat_id;
+		$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  cat_id=".$cat_id;
 		$attr_info = $dbo->getRs($sql);
 		$parent_id = $cat_info['parent_id'];
 	}

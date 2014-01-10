@@ -20,7 +20,7 @@ $t_attribute = $tablePreStr."attribute";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_name='类别'";
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  attr_name='类别'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
