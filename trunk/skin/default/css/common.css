@@ -841,3 +841,15 @@ padding-bottom: 10px;
 .facility_baseinfo .list li span.provide{background-position:0 -368px}
 .facility_baseinfo .list li span.noprovide{background-position:0 -409px}
 .facility_baseinfo .map{float:right;width: 230px;height: 150px;float: right;}
+
+.main_right table a.submit_button {
+    background: #F77A07;
+    border: 0;
+    padding: 4px 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    color:white;
+    text-decoration: none;
+    padding-bottom: 6px;
+    padding-top: 4px;
+}

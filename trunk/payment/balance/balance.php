@@ -39,6 +39,7 @@ function respond($orderinfo,$payinfo){
 			if($dbo->exeUpdate($sql)){
 				return 1;
 			}else{
+                print_r($sql);
 				return 0;
 			}
 		}else{
