@@ -151,21 +151,12 @@
           <h2>热门资讯</h2>
         </div>
         <ul>
+            {sta:foreach($hot_news as $v)[loop]}
+
           <li>
-            <a href="">象山区政府助力旅游生根发芽</a>
+            <a href="article.php?id={echo:$v['article_id'];/}">{echo:sub_str($v['title'], 40);/}</a>
           </li>
-          <li>
-            <a href="">象山区政府助力旅游生根发芽</a>
-             </li>
-          <li>
-            <a href="">象山区政府助力旅游生根发芽</a>
-             </li>
-          <li>
-            <a href="">象山区政府助力旅游生根发芽</a>
-             </li>
-          <li>
-            <a href="">象山区政府助力旅游生根发芽</a>
-          </li>
+            {end:foreach/}
         </ul>
      </div>
   </div>

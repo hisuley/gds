@@ -110,7 +110,7 @@ foreach($attr_info as $key => $value){
 if(!$result) {
 	trigger_error($s_langpackage->s_no_message);
 }
-
+$hot_news = get_hot_news($dbo, $t_article, $cat_id);
 $header = get_header_info($cat_name);
 
 /*导航位置*/

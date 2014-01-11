@@ -9,7 +9,7 @@ function get_article_info(&$dbo,$table,$article_id){
 }
 
 function get_hot_news(&$dbo, $table, $cat_id){
-    $sql = "SELECT * FROM `$table` WHERE cat_id = $cat_id AND is_audit = 1 AND is_draft = 0 AND is_show = 1 ORDER BY add_time";
+    $sql = "SELECT * FROM `$table` WHERE cat_id = $cat_id AND is_show = 1 ORDER BY add_time";
     $result = $dbo->getRs($sql);
     return $result;
 }
