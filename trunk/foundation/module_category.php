@@ -15,6 +15,16 @@ function get_category_cid(&$dbo,$table,$cat_id){
     }
     return $cat_tmp;
 }
+
+function get_top_category(&$dbo, $table){
+    $sql = "SELECT * FROM `$table` WHERE parent_id IS NULL OR parent_id = ''";
+    $result = $dbo->getRs($sql);
+    $tempIds = array();
+    foreach($result as $v){
+        array_push($tempIds, $v['cat_id']);
+    }
+    return $tempIds;
+}
 function get_sub_under(&$dbo, $table, $cat_id){
     $sql = "select * from `$table` where parent_id = ".$cat_id;
     $result = $dbo->getRs($sql);

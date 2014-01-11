@@ -7,6 +7,12 @@ function get_article_info(&$dbo,$table,$article_id){
 	$sql = "SELECT * FROM `$table` WHERE is_show=1 and article_id='$article_id'";
 	return $dbo->getRow($sql);
 }
+
+function get_hot_news(&$dbo, $table, $cat_id){
+    $sql = "SELECT * FROM `$table` WHERE cat_id = $cat_id AND is_audit = 1 AND is_draft = 0 AND is_show = 1 ORDER BY add_time";
+    $result = $dbo->getRs($sql);
+    return $result;
+}
 /* 文章信息翻页 */
 function get_flip_info(&$dbo,$table,$article_id,$type){
 	if ($type == 'up'){
