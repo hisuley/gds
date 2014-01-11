@@ -3,6 +3,7 @@ if(!$IWEB_SHOP_IN) {
 	die('Hacking attempt');
 }
 require_once("../foundation/module_attr.php");
+require_once("../foundation/module_category.php");
 $a_langpackage=new adminlp;
 //权限管理
 $right=check_rights("travel_attr_edit");
@@ -28,12 +29,12 @@ if(empty($attr_name)) { exit("-1"); }
 
 //数据表定义区
 $t_attribute = $tablePreStr."attribute";
-
+$t_category = $tablePreStr."category";
 //定义写操作
 dbtarget('w',$dbServs);
 $dbo=new dbex;
-
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  cat_id=".$cat_id." and attr_name='$attr_name'";
+$cat_ids = get_sub_under($dbo, $t_category, $cat_id);
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  cat_id IN(".implode(',',$cat_ids).") and attr_name='$attr_name'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -50,7 +51,7 @@ foreach($result as $row){
 if(count($tmp) == count(array_unique($tmp))){
     $post['attr_values'] = join("\n", $tmp);
     $item_sql = get_update_item($post);
-    $sql_travel = "update `$t_attribute` set $item_sql where cat_id=".$cat_id." and attr_name='$attr_name'";
+    $sql_travel = "update `$t_attribute` set $item_sql where cat_id IN(".implode(',',$cat_ids).") and attr_name='$attr_name'";
     if($dbo->exeUpdate($sql_travel)) {
             echo "1";
     } else {

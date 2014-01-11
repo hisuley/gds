@@ -3,6 +3,8 @@ if(!$IWEB_SHOP_IN) {
     die('Hacking attempt');
 }
 
+
+require_once("../foundation/module_category.php");
 $a_langpackage=new adminlp;
 
 $inputtype_arr = array(
@@ -15,12 +17,12 @@ $inputtype_arr = array(
 
 //数据表定义区
 $t_attribute = $tablePreStr."attribute";
-
+$t_category = $tablePreStr."category";
 //读写分离定义方法
 $dbo = new dbex;
 dbtarget('r',$dbServs);
-
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_id = 40";
+$cat_ids = get_top_category($dbo, $t_category);
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_name = '主题' AND cat_id IN(".implode(',', $cat_ids).")";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
