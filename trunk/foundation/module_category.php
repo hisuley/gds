@@ -15,6 +15,19 @@ function get_category_cid(&$dbo,$table,$cat_id){
     }
     return $cat_tmp;
 }
+function get_sub_under(&$dbo, $table, $cat_id){
+    $sql = "select * from `$table` where parent_id = ".$cat_id;
+    $result = $dbo->getRs($sql);
+    $tempIds = array();
+    if(!empty($result)){
+        foreach($result as $v){
+            $subIds = get_sub_under($dbo, $table, $v['cat_id']);
+            $tempIds = array_merge($tempIds, $subIds);
+        }
+    }
+    array_push($tempIds, $cat_id);
+    return $tempIds;
+}
 
 function get_category_info(&$dbo,$table) {
 	$sql = "select * from `$table` order by sort_order asc, cat_id asc";
