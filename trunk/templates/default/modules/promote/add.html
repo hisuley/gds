@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>{echo: lp{m_u_center};/}</title>
+<title>添加促销信息 - {echo: lp{m_u_center};/}</title>
 <link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/modules.css">
 <link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/layout.css">
 <link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/style.css">
@@ -16,10 +16,10 @@
 </style>
 
 </head>
-<body onload="menu_style_change('groupbuy_list');changeMenu();">
+<body onload="menu_style_change('promote_list');changeMenu();">
 	{inc: require("shop/index_header.php");/}
 	<div class="site_map">
-	  {echo:lp{m_current_position};/}<A href="index.php">{echo:$SYSINFO['sys_name'];/}</A>/<a href="modules.php">{echo:lp{m_u_center};/}</a>/&nbsp;&nbsp;{echo:lp{m_add_groupbuy};/}
+	  {echo:lp{m_current_position};/}<A href="index.php">{echo:$SYSINFO['sys_name'];/}</A>/<a href="modules.php">{echo:lp{m_u_center};/}</a>/&nbsp;&nbsp;{echo:lp{m_add_promote};/}
 	</div>
     <div class="clear"></div>
     	{inc: require("modules/left_menu.php");/}
@@ -28,16 +28,16 @@
         <div class="main_right">
         	<div class="right_top"></div>
             <div class="cont">
-                <div class="cont_title"><span class="tr_op"><a href="modules.php?app=groupbuy_list">
-			{echo:lp{m_group_list};/}</a></span>{echo:lp{m_add_groupbuy};/}</div>
+                <div class="cont_title"><span class="tr_op"><a href="modules.php?app=promote_list">
+			{echo:lp{m_promote_list};/}</a></span>{echo:lp{m_add_promote};/}</div>
                 <hr />
 
-				<form action="do.php?act=groupbuy_add" method="post" name="from1" enctype="multipart/form-data">
+				<form action="do.php?act=promote_add" method="post" name="from1" onsubmit="return checkform();" enctype="multipart/form-data">
 				<table width="100%"  style="border:0;" cellspacing="0">
-					<tr>
-						<td class="textright" width="20%">{echo:lp{m_group_name};/}：</td>
-						<td align="left"><input type="text" name="groupbuy_name" value="" style="width:350px;" maxlength="200" /> <span class="red">*</span></td>
-					</tr>
+                    <tr>
+                        <td class="textright" width="20%"></td>
+                        <td align="left"></td>
+                    </tr>
 					<tr style="line-height:18px;">
 						<td class="textright">{echo:lp{m_sta_time};/}：</td>
 						<td align="left">
@@ -48,8 +48,8 @@
 						 <span class="red">*</span></td>
 					</tr>
 					<tr>
-						<td class="textright">{echo:lp{m_group_shows};/}：</td>
-						<td align="left"><textarea name="groupbuy_explain" style="width:350px; height:80px;"></textarea> </td>
+						<td class="textright">{echo:lp{m_promote_content};/}：</td>
+						<td align="left"><textarea name="content" style="width:350px; height:80px;"></textarea> </td>
 					</tr>
 					<tr>
 						<td class="textright" valign="top">{echo:lp{m_select_products};/}：</td>
@@ -85,24 +85,22 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="textright">{echo:lp{m_group_number};/}：</td>
-						<td align="left"><input type="text" name="min_quantity" value="" style="width:150px;" maxlength="200" /> <span class="red">*</span></td>
+						<td class="textright">{echo:lp{m_promote_price};/}：</td>
+						<td align="left"><input type="text" name="promote_price" value="" style="width:150px;" maxlength="200" /> <span class="red">*</span></td>
 					</tr>
 					<tr>
-						<td class="textright">{echo:lp{m_group_price};/}：</td>
-						<td align="left"><input type="text" name="spec_price" value="" style="width:150px;" maxlength="200" /> <span class="red">*</span></td>
-					</tr>
-					<tr>
-						<td class="textright">{echo:lp{m_group_one_num};/}：</td>
-						<td align="left"><input type="text" name="one_num" id="one_num" value="0" style="width:50px;" maxlength="5" /> <span class="red">*</span>{echo:lp{m_group_no_purchase};/}</td>
-					</tr>
-					<tr>
-						<td class="textright">{echo:lp{m_group_all_num};/}：</td>
-						<td align="left"><input type="text" name="all_num" id="all_num" value="0" style="width:50px;" maxlength="5" /> <span class="red">*</span>{echo:lp{m_group_purchase};/}</td>
+						<td class="textright">{echo:lp{m_promote_type};/}：</td>
+						<td align="left">
+                            <select name="type" id="promote_type">
+                                <option value="促销">促销</option>
+                                <option value="秒杀">秒杀</option>
+                            </select>
+                            <span class="red">*</span>
+                        </td>
 					</tr>
 					<tr>
 						<td class="textright" style="border:0"></td>
-						<td style="border:0"><input class="submit" type="button" name="" onclick="checknum();" value="{echo:lp{m_group_submit};/}"  /> </td>
+						<td style="border:0"><input class="submit" type="submit" name=""  value="{echo:lp{m_group_submit};/}"  /> </td>
 					</tr>
 				</table>
 				</form>
@@ -112,7 +110,7 @@
 		</div>
 		{sta:}else{
 		echo "<script language='JavaScript'> alert('您所发布的团购数已超出限制，请升级店铺级别或结束已有团购！'); 
-											location.href='modules.php?app=groupbuy_list';
+											location.href='modules.php?app=promote_list';
 				</script>";
 		};/}
 		
@@ -168,47 +166,16 @@ function select_goods_id(obj){
 	document.getElementById("goods_select").style.display="none";
 }
 function checknum(){
-	var one_num=document.getElementById("one_num").value;
-	var all_num=document.getElementById("all_num").value;
-	var goods_id = document.getElementsByName('goods_id')[0].value;
-	one_num = parseInt(one_num);
-    all_num = parseInt(all_num);
-    if(checkform()){
-        if(all_num==0){
-            ajax("do.php?act=check_num","POST","goods_id="+goods_id+"&num="+one_num,function(data){
-                     if(data=='0'){
-                         alert("单人限购数不能大于总限购数或库存数");
-                         return false;
-                      }else{
-                        document.from1.submit();
-                          }
-                });
-        }else{
-          if(one_num>all_num){
-                alert('单人限购数不能大于总限购数');
-                return false;
-          }
-          ajax("do.php?act=check_num","POST","goods_id="+goods_id+"&num="+all_num,function(data){
-              if(data=='0'){
-                  alert("总限购数不能大于库存数");
-                  return false;
-               }else{
-            	   document.from1.submit();
-                   }
-         });
-         
-        }
-        
-    }
-    return false;
+
+    return true;
 	
 }
 function checkform(){
-    var groupbuy_name = document.getElementsByName('groupbuy_name')[0];
+    var promote_name = document.getElementsByName('promote_name')[0];
     var cday = new Date();
     var cdate=cday.getFullYear()+"-"+(cday.getMonth()+1)+"-"+cday.getDate();
-    if(groupbuy_name.value==''){
-        alert('{echo:lp{m_group_no_name};/}');
+    if(promote_name.value==''){
+        alert('{echo:lp{m_promote_no_name};/}');
         return false;
     }
     var start_time = document.getElementsByName('start_time')[0];
@@ -245,26 +212,13 @@ function checkform(){
         alert('{echo:lp{m_products_no_name};/}');
         return false;
     }
-    var min_quantity = document.getElementsByName('min_quantity')[0];
-    if(min_quantity.value==''){
-        alert('{echo:lp{m_group_no_number};/}');
+
+    var promote_price = document.getElementsByName('promote_price')[0];
+    if(promote_price.value==''){
+        alert('{echo:lp{m_promote_no_price};/}');
         return false;
     }
-    var spec_price = document.getElementsByName('spec_price')[0];
-    if(spec_price.value==''){
-        alert('{echo:lp{m_group_no_price};/}');
-        return false;
-    }
-	var one_num = document.getElementsByName('one_num')[0];
-    if(one_num.value==''){
-        alert('{echo:lp{m_group_no_one_num};/}');
-        return false;
-    }
-    var all_num = document.getElementsByName('all_num')[0];
-    if(all_num.value==''){
-        alert('{echo:lp{m_group_no_all_num};/}');
-        return false;
-    }
+
     return true;
 }
 

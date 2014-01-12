@@ -130,6 +130,7 @@ $actArray = array(
 	'goods_number_edit'	=> array('action/goods/number_edit.action.php'),
 	'goods_price_edit'	=> array('action/goods/price_edit.action.php'),
 	'goods_attr_list'	=> array('action/goods/attr_list.action.php'),
+    'goods_attr_check'	=> array('action/goods/attr_check.action.php'),
 	'goods_gallery_drop'=> array('action/goods/gallery_drop.action.php'),
 	'shop_honor_drop'	=> array('action/shop/honor_drop.action.php'),
 	'user_check_username'	=> array('action/user/check_username.action.php'),
@@ -151,6 +152,14 @@ $actArray = array(
 	'get_transport_price'		=>array('action/shop/get_transport_price.php'),
 	'groupbuy_end'		=>array('action/groupbuy/end.action.php'),
 	'groupbuy_del'		=>array('action/groupbuy/del.action.php'),
+
+    //Promote
+    'promote_selectgoods' 	=> array('action/promote/select_goods_list.action.php'),
+    'promote_add'		=>array('action/promote/add.action.php','modules.php?app=promote_list'),
+    'promote_release'		=>array('action/promote/release.action.php'),
+    'promote_end'		=>array('action/promote/end.action.php'),
+    'promote_del'		=>array('action/promote/del.action.php'),
+
 	//获取商品的评价
 	'get_goods_credit'		=>array('action/goods/goods_credit.php'),
 	//获取商品的成交记录

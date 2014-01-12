@@ -60,7 +60,7 @@ class indexlp{
 	var $i_language_ch = "语言选择";
 	var $i_group_buy_small_shops = "小商铺如何团购卖商品？";
 	var $i_credit_evaluation_system = "店铺信用评价体系";
-
+    var $i_promote_lock = "促销被锁定";
 	/* search brand category */
 	var $i_s_result = "搜索结果";
 	var $i_s_kindseach = "全部商品分类导航";

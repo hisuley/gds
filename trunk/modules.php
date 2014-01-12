@@ -148,7 +148,11 @@ $appArray = array(
 	'groupbuy_add'		=> 'modules/groupbuy/add.php',
 	'groupbuy_login'		=> 'modules/groupbuy/login.php',
 
-	'reg'				=> 'modules/reg/register.php',
+    'promote_list'		=> 'modules/promote/list.php',
+    'promote_add'		=> 'modules/promote/add.php',
+    'promote_login'		=> 'modules/promote/login.php',
+
+    'reg'				=> 'modules/reg/register.php',
 	'reg2'				=> 'modules/reg/register2.php',
 	'reg3'				=> 'modules/reg/register3.php',
 	'forgot'			=> 'modules/reg/forgot.php',

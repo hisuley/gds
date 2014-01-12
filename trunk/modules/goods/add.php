@@ -116,7 +116,7 @@ set_session("goodsvercode",md5(rand(10000,999999)));
 .search input {color:#444;}
 .clear {clear:both;}
 td{text-align:left;}
-#bgdiv { background-color:#333; position:absolute; width:965px; left:230px; top:130px; opacity:0.4; filter:alpha(opacity=40); height:1313px; z-index:960}
+#bgdiv { background-color:#333; position:absolute; width:100%; left:0px; top:0px; opacity:0.4; filter:alpha(opacity=40); height:100%; z-index:960}
 #category_select { width:680px; z-index:961; position:absolute; filter:alpha(opacity=95); left:400px; top:350px; background-color:#fff; height:270px}
 .category_title_1 {background:#FFE1C2; color:#F67A06; padding-left:10px; line-height:25px; font-weight:bold; font-size:14px;}
 .category_title_1 span {float:right; padding-right:5px; cursor:pointer;}
@@ -126,9 +126,9 @@ td{text-align:left;}
 .ulselect li.select {background:#F6A248; color:#fff;}
 .category_com {height:30px; padding-bottom:10px; line-height:30px; text-align:center;}
 .attr_class { background:#FFF2E6; }
-.attr_class div.div {border:2px solid #fff; padding:3px;}
+.attr_class div.div {border:2px solid #fff; padding:3px;float:left;width:auto;}
 .attr_class div span.left{display:block; width:auto; float:left; margin-left:10px; text-align:right; _line-height:24px;}
-.attr_class div span.right{display:block; width:350px; float:left; margin-left:5px; text-align:left;}
+.attr_class div span.right{display:block; width:auto; float:left; margin-left:5px; text-align:left;}
 .attr_class div span.right input {margin-left:5px;}
 
 #picspan {width:82px; height:82px; padding:1px; border:1px solid #efefef; line-height:80px; text-align:center; display:inline-block; overflow:hidden; float:right;}

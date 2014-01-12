@@ -1094,7 +1094,7 @@ class adminlp{
     var $a_money_sign="￥";
     var $a_complate="已完成";
     var $a_no_auditing="未审核";
-    var $a_pass_auditing="取消锁定";
+    var $a_pass_auditing="审核通过";
     var $a_cancel_auditing="锁定";
     var $a_fact_pay="实付款";
     var $a_should_pay="应付款";

@@ -95,8 +95,8 @@ foreach($promotes_id as $key=>$val){
 $promote_id=implode(',',$promote_id);
 
 
-$sql = "SELECT b.*,g.* FROM `$t_promote` b left join `$t_goods` g on b.goods_id = g.goods_id";
-$sql .= " WHERE g.lock_flg =0 and b.is_enabled = '1'";
+$sql = "SELECT b.*,g.* FROM `$t_promote` as b left join `$t_goods` as g on b.goods_id = g.goods_id";
+$sql .= " WHERE b.is_lock = '0' and b.is_enabled = '1'";
 if(!empty($kk)){
     $sql .= " and (g.goods_name LIKE '%".trim($kk)."%' OR b.content LIKE '%".trim($kk)."%') ";
 }

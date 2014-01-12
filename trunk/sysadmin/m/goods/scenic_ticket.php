@@ -313,7 +313,7 @@ function attr_goods_list(v, r) {
 <div id="maincontent">
     <?php  include("messagebox.php");?>
     <div class="wrap">
-        <div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_travel_type_management; ?></div>
+        <div class="crumbs"><?php echo $a_langpackage->a_location; ?> &gt;&gt; <?php echo $a_langpackage->a_m_aboutgoods_management;?> &gt;&gt; <?php echo $a_langpackage->a_scenic_ticket_management; ?></div>
         <hr />
         <div class="infobox">
             <h3><?php echo $a_langpackage->a_attr_list; ?></h3>
@@ -325,13 +325,13 @@ function attr_goods_list(v, r) {
                 <table class="content" id="attr_table">
                     <tbody id="attr_tbody">
                     <tr>
-                        <th width="60px">ID <a href="m.php?app=travel_type&orderby=id&orderway=asc">↑</a><a href="m.php?app=travel_type&orderby=id&orderway=desc">↓</a></th>
-                        <th width="100px"><?php echo $a_langpackage->a_attr_name; ?> <a href="m.php?app=travel_type&orderby=name&orderway=asc">↑</a><a href="m.php?app=travel_type&orderby=name&orderway=desc">↓</a></th>
+                        <th width="60px">ID <a href="m.php?app=scenic_ticket&orderby=id&orderway=asc">↑</a><a href="m.php?app=scenic_ticket&orderby=id&orderway=desc">↓</a></th>
+                        <th width="100px"><?php echo $a_langpackage->a_attr_name; ?> <a href="m.php?app=scenic_ticket&orderby=name&orderway=asc">↑</a><a href="m.php?app=scenic_ticket&orderby=name&orderway=desc">↓</a></th>
                         <th width="300px"><?php echo $a_langpackage->a_input_type; ?></th>
                         <th width="200px"><?php echo $a_langpackage->a_input_selectable; ?></th>
                         <th width="60px"><?php echo $a_langpackage->a_input_price; ?></th>
                         <th width="60px" align="center"><?php echo $a_langpackage->a_sort; ?></th>
-                        <th width="60px" align="center">启用 <a href="m.php?app=travel_type&orderby=enabled&orderway=asc">↑</a><a href="m.php?app=travel_type&orderby=enabled&orderway=desc">↓</a></th>
+                        <th width="60px" align="center">启用 <a href="m.php?app=scenic_ticket&orderby=enabled&orderway=asc">↑</a><a href="m.php?app=scenic_ticket&orderby=enabled&orderway=desc">↓</a></th>
                         <th width="175px" align="center"><?php echo $a_langpackage->a_operate; ?></th>
                     </tr>
                     <tr id="tr_0" style="display:none; background:#F7C331;">

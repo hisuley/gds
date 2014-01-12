@@ -160,3 +160,6 @@ ALTER TABLE imall_order_info ADD is_barcode_read tinyint(1) COMMENT '二维码�
 CREATE TABLE imall_user_rss(rss_id int primary key auto_increment, user_id int not null, cat_id text not null, is_enabled tinyint(1) not null);
 
 ALTER TABLE imall_goods_promotions ADD type char(255) default '促销' COMMENT '促销类型：促销/秒杀'
+
+ALTER TABLE imall_goods_promotions ADD shop_id int COMMENT '促销由商家发起，经过审核'
+ALTER TABLE imall_goods_promotions ADD is_lock tinyint(1) DEFAULT 1 COMMENT '促销默认被锁定'

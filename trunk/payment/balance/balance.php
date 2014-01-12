@@ -22,7 +22,16 @@ function respond($orderinfo,$payinfo){
 	$r_pass		= $payment_info['key'];
 	$r_srcstr = MD5($r_pass);
 	global $tablePreStr;
+    $t_order_info = $tablePreStr."order_info";
 	$userid=get_sess_user_id();
+    //print_r($r_srcstr."  <br />".$srcstr);
+    dbtarget('r',$dbServs);
+    $dbo=new dbex();
+    $check_order = "SELECT * FROM `$t_order_info` WHERE `order_id` = ".$orderinfo['order_id'];
+    $check_order_result = $dbo->getRow($check_order);
+    if($check_order_result['pay_status'] == 1){
+        return 0;
+    }
 	if($r_srcstr == $srcstr){
 	if($userid) {
 		dbtarget('r',$dbServs);
@@ -31,11 +40,13 @@ function respond($orderinfo,$payinfo){
 		$t_users = $tablePreStr."users";
 		$sql_users = "select user_money from `$t_users` where `user_id` =".$orderinfo['user_id']." limit 1";
 		$user_info = $dbo->getRow($sql_users);
+       // print_r($user_info);
 		if($userid==$orderinfo['user_id'] && $user_info['user_money']>=$orderinfo['order_amount']){
 			$result=$user_info['user_money']-$orderinfo['order_amount'];
 			dbtarget('w',$dbServs);
 			$dbo=new dbex();
 			$sql="UPDATE `$t_users` SET `user_money` = ".$result." WHERE `user_id` =".$orderinfo['user_id']." LIMIT 1";
+            //print_r($sql);
 			if($dbo->exeUpdate($sql)){
 				return 1;
 			}else{

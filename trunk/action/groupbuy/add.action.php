@@ -29,7 +29,7 @@ $post['all_num'] = intval(get_args('all_num'));
 $post['min_quantity'] = intval(get_args('min_quantity'));
 $post['spec_price'] = floatval(get_args('spec_price'));
 $post['shop_id']=$shop_id;
-
+$post['examine']=0;
 //数据库操作
 dbtarget('w',$dbServs);
 $dbo=new dbex();

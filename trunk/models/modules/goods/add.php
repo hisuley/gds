@@ -16,6 +16,8 @@ $i_langpackage=new indexlp;
  }
 //数据表定义区
 $t_goods = $tablePreStr."goods";
+$t_attribute = $tablePreStr."attribute";
+$t_goods_attr = $tablePreStr."goods_attr";
 $t_category = $tablePreStr."category";
 $t_shop_category = $tablePreStr."shop_category";
 $t_shop_payment = $tablePreStr."shop_payment";
@@ -69,6 +71,14 @@ foreach ($result['result'] as $v){
 }
 if($imagelistid){
 	$imagelistid=substr($imagelistid,0,strlen($imagelistid)-1);
+}
+
+$cat_ids = get_top_category($dbo, $t_category);
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_name = '编号' AND cat_id IN(".implode(',', $cat_ids).")";
+$result = $dbo->getRs($sql);
+$arrIds = array();
+foreach($result as $v){
+    array_push($arrIds, $v['attr_id']);
 }
 
 set_session("goodsvercode",md5(rand(10000,999999)));

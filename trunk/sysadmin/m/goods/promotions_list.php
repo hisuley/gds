@@ -18,7 +18,8 @@ $right_update=check_rights("promotions_update");
 //数据表定义区
 $t_goods_promotions = $tablePreStr."goods_promotions";
 $t_goods = $tablePreStr."goods";
-
+$t_shop_info = $tablePreStr."shop_info";
+//获取参数
 $goods_name = get_args('goods_name');
 $start_time = get_args('start_time');
 $end_time = get_args('end_time');
@@ -29,7 +30,7 @@ $dbo = new dbex;
 dbtarget('r',$dbServs);
 
 /* 查询促销商品列表 */
-$sql = "select a.*,b.goods_name from `$t_goods_promotions` as a left join `$t_goods` as b on a.goods_id=b.goods_id where 1=1";
+$sql = "select a.*,b.goods_name,s.shop_name from `$t_goods_promotions` as a left join `$t_goods` as b on a.goods_id=b.goods_id left join $t_shop_info as s on s.shop_id = a.shop_id  where 1=1";
 
 if($goods_name) {
 	//权限管理
@@ -119,6 +120,7 @@ td span {color:red;}
 			<tr style=" text-align:center;">
 				<th width="50px">ID <a href="m.php?app=goods_promotions_list&orderby=a.id&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.id&orderway=desc">↓</a></th>
 				<th align="left"><?php echo $a_langpackage->a_goods_name; ?></th>
+                <th width="50px">企业 <a href="m.php?app=goods_promotions_list&orderby=a.shop_id&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.shop_id&orderway=desc">↓</a></th>
                                 <th width="125px"><?php echo $a_langpackage->a_goods_promotions_start_time; ?> <a href="m.php?app=goods_promotions_list&orderby=a.start_time&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.start_time&orderway=desc">↓</a></th>
                                 <th width="125px"><?php echo $a_langpackage->a_goods_promotions_end_time; ?> <a href="m.php?app=goods_promotions_list&orderby=a.end_time&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.end_time&orderway=desc">↓</a></th>
 				<th width="65px"><?php echo $a_langpackage->a_goods_promotions_price; ?> <a href="m.php?app=goods_promotions_list&orderby=a.promote_price&orderway=asc">↑</a><a href="m.php?app=goods_promotions_list&orderby=a.promote_price&orderway=desc">↓</a></th>
@@ -134,6 +136,7 @@ td span {color:red;}
 			<tr style=" text-align:center;">
 				<td><?php echo $value['id'];?>.</td>
 				<td align="left"><?php echo $value['goods_name'];?></td>
+                <td><?php echo $value['shop_name'];?></td>
                                 <td><?php echo $value['start_time'];?></td>
                                 <td><?php echo $value['end_time'];?></td>
                                 <td><?php echo $value['type'];?></td>
@@ -144,26 +147,39 @@ td span {color:red;}
 
                                     if($value['is_enabled'])
                                     {
-                                        echo "<span class='green'>".$a_langpackage->a_enable_yes."</span>";
+                                        echo "<span class='green'>商家已".$a_langpackage->a_enable_yes."</span>";
                                     }else{
-                                        echo "<span class='red'>".$a_langpackage->a_enable_no."</span>";
-                                    }?></td>
+                                        echo "<span class='red'>商家".$a_langpackage->a_enable_no."</span>";
+                                    }
+                                  ?>
+                                </td>
                     <td>
                         <?php
-                        $start_time = strtotime($value['start_time']);
-                        $end_time = strtotime($value['end_time']);
-                        $now_time = strtotime('now');
-                        if($start_time > $now_time){
-                            echo "未开始";
-                        }elseif($start_time <= $now_time && $end_time >= $now_time){
-                            echo "应用中";
-                        }elseif($end_time < $now_time){
-                            echo "已过期";
+                        if($value['is_lock']){
+                            echo "<span class='red'>未审核</span>";
+                        }else{
+                            echo "<span class='green'>已审核</span><br />";
+                            $start_time = strtotime($value['start_time']);
+                            $end_time = strtotime($value['end_time']);
+                            $now_time = strtotime('now');
+                            if($start_time > $now_time){
+                                echo "未开始";
+                            }elseif($start_time <= $now_time && $end_time >= $now_time){
+                                echo "应用中";
+                            }elseif($end_time < $now_time){
+                                echo "已过期";
+                            }
                         }
+
                         ?>
                     </td>
 				<td>
-					<a href="m.php?app=goods_promotions_edit&id=<?php echo $value['id'];?>"><?php echo $a_langpackage->a_update; ?></a>
+                    <?php
+                        if($value['is_lock'] == 1){ ?>
+                            <a href="a.php?act=promotions_audit&id=<?php echo $value['id'];?>">审核</a>
+                        <?php }
+                    ?>
+					<a href="m.php?app=goods_promotions_edit&id=<?php echo $value['id'];?>">修改</a>
 					<a href="a.php?act=goods_promotions_del&id=<?php echo $value['id'];?>" onclick="return confirm('<?php echo $a_langpackage->a_goods_promotions_del_mess; ?>');"><?php echo $a_langpackage->a_delete; ?></a>
 				</td>
 			</tr>

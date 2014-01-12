@@ -73,7 +73,13 @@ class moduleslp{
 	var $m_my_groupbuy ="我的团购";
 	var $m_groupbuy_list ="团购管理";
 	var $m_add_groupbuy ="添加新团购";
+    var $m_my_promote ="我的促销";
+    var $m_promote_list ="促销管理";
+    var $m_add_promote ="添加促销";
 	var $m_shop_intro_no_back = "添加成功";
+    var $m_promote_content = "促销内容";
+    var $m_promote_price = "促销价格";
+    var $m_promote_type = "促销类型";
 	//user
 	var $m_collect_num= "收藏人气";
 	var $m_ico_set = "头像设置";
@@ -402,6 +408,16 @@ class moduleslp{
 	var $m_my_group_buy_orders ="我的团购订单";
 	var $m_shop_close = "商铺已关闭，无法上架";
 	var $m_shop_pass = "商铺正在审核中";
+
+    /* Promotion */
+    /*团购*/
+    var $m_promote_name = "促销名称";
+    var $m_promote_no_name = '没有促销名称';
+    var $m_promote_status = "促销状态";
+    var $m_promote_no_price = "缺少促销价格";
+    var $m_not_audit = "未审核";
+    var $m_audit = "已审核";
+    var $m_is_not_enabled = '未启用';
 
 	/* order */
 	var $m_buy_num = "购买数量";
