@@ -12,13 +12,11 @@ $t_category = $tablePreStr."category";
 $t_goods = $tablePreStr."goods";
 $t_remind_info = $tablePreStr."remind_info";
 
-//递归格式化子分类ID
 function join_child_cat($sub_category){
      foreach ($sub_category as $v){
-        if($v['cat_id'])
+        if($v['cat_id']){
             $sub_catid .= $v['cat_id'].',';
-        if(is_array($v))
-            $sub_catid .= join_child_cat($v);
+        }
     }
    
     return $sub_catid;
@@ -29,9 +27,11 @@ function get_sub_category_recursion(&$dbo,$table,$cat_id) {
         $result = $dbo->getRsassoc($sql);
         foreach($result as $val){
             if($val['cat_id']){
-                $result[]=get_sub_category_recursion($dbo, $table, $val['cat_id']);
+                $sub_cat=get_sub_category_recursion($dbo, $table, $val['cat_id']);
             }
+            $result = array_merge($result, $sub_cat);
         }
+        
         return $result;
 }
 
@@ -45,11 +45,11 @@ foreach($result as $key=>$val){
     if($val['cat_id']){
         $sub_category = get_sub_category_recursion($dbo, $t_category, $val['cat_id']);
     }
-  
+    
     $sub_cat = join_child_cat($sub_category);
     
     $cat_id = trim($val['cat_id'].','.$sub_cat,',');
-    
+
     //查询商品
     $sql = "select goods_id,goods_name,goods_intro,add_time from `$t_goods` where is_on_sale=1 and cat_id in($cat_id) order by add_time desc";
     $result = $dbo->getRs($sql);
