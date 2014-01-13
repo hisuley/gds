@@ -136,10 +136,11 @@ div.artTxt div.right img{max-width: 100%}
         </ul>
       </div>
   <div class="clearfix"></div>
+          <div class="link">
+              <p >{echo:lp{i_up_article};/}：{sta:if(empty($up_article))[exc]} {echo:lp{i_none_article};/} {end:if/}<a href="{echo:article_url($up_article['article_id']);/}">{echo:$up_article['title'];/}</a><br/>{echo:lp{i_down_article};/}：{sta:if(empty($down_article))[exc]} {echo:lp{i_none_article};/} {end:if/}<a href="{echo:article_url($down_article['article_id']);/}">{echo:$down_article['title'];/}</a></p>
+          </div>
       </div>
-      <div class="link">
-       <p >{echo:lp{i_up_article};/}：{sta:if(empty($up_article))[exc]} {echo:lp{i_none_article};/} {end:if/}<a href="{echo:article_url($up_article['article_id']);/}">{echo:$up_article['title'];/}</a><br/>{echo:lp{i_down_article};/}：{sta:if(empty($down_article))[exc]} {echo:lp{i_none_article};/} {end:if/}<a href="{echo:article_url($down_article['article_id']);/}">{echo:$down_article['title'];/}</a></p>
-      </div>
+
       </div>
       <!--  contents  -->
     </div>
