@@ -1,6 +1,6 @@
 <?php
-if(!$IWEB_SHOP_IN) {
-	die('Hacking attempt');
+if (!$IWEB_SHOP_IN) {
+    die('Hacking attempt');
 }
 
 /* 默认配置系统信息 */
@@ -45,9 +45,9 @@ $SYSINFO['sys_logo'] = '';
 $SYSINFO['sys_domain'] = '0';
 $SYSINFO['sys_smtptest'] = '';
 $SYSINFO['version'] = 'v1.2';
-$SYSINFO['verifycode'] = 'a:4:{i:1;s:1:"0";i:2;s:1:"1";i:3;s:1:"1";i:4;s:1:"0";}'; 
+$SYSINFO['verifycode'] = 'a:4:{i:1;s:1:"0";i:2;s:1:"1";i:3;s:1:"1";i:4;s:1:"0";}';
 $SYSINFO['site_domain'] = '.dms.com';
-if(file_exists($webRoot."/cache/setting.php")) {
-	include($webRoot."/cache/setting.php");
+if (file_exists($webRoot . "/cache/setting.php")) {
+    include($webRoot . "/cache/setting.php");
 }
 ?>

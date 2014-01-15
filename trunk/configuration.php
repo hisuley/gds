@@ -1,21 +1,21 @@
 <?php
 /* Iweb产品配置文件 */
-if(!$IWEB_SHOP_IN) {
-	die("Hacking attempt");
+if (!$IWEB_SHOP_IN) {
+    die("Hacking attempt");
 }
 
-ini_set("date.timezone","UTC");
+ini_set("date.timezone", "UTC");
 
 //站点配置
-$webRoot = str_replace("\\","/",dirname(__FILE__))."/";
+$webRoot = str_replace("\\", "/", dirname(__FILE__)) . "/";
 $adminEmail = 'admin@admin.com';
 
 //缓存更新延时设置,单位为秒
-$cache_update_delay_time="0";
+$cache_update_delay_time = "0";
 
 //语言包参数，目前参数值zh,en
 $langPackagePara = 'zh';
-$langPackageBasePath = 'langpackage/'.$langPackagePara.'/';
+$langPackageBasePath = 'langpackage/' . $langPackagePara . '/';
 
 //支持库配置
 $baseLibsPath = 'dms_mini_lib/';

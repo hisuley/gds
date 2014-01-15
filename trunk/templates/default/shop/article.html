@@ -2,44 +2,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>{echo: $header['title'];/}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="{echo: $header['keywords'];/}" />
-<meta name="description" content="{echo: $header['description'];/}" />
-<base href="{echo: $baseUrl;/}" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/about.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+    <title>{echo: $header['title'];/}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="{echo: $header['keywords'];/}"/>
+    <meta name="description" content="{echo: $header['description'];/}"/>
+    <base href="{echo: $baseUrl;/}"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/about.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
 </head>
 <body>
 <!-- wrapper -->
 <div id="wrapper">
-  {inc: require("shop/index_header.php");/}
-  <!-- contents -->
-  <div id="contents" class="clearfix" ><div id="pkz"> {echo:lp{s_this_location};/}<a href="index.php">{echo:lp{i_index};/}</a>> {echo: $article_info['title'];/}</div>
-    <div class="top"><img src="skin/{echo: $SYSINFO['templates'];/}/images/about/about_img_top.jpg" alt="{echo:lp{s_mall_intro};/}"  width="960" height="160" />
+    {inc: require("shop/index_header.php");/}
+    <!-- contents -->
+    <div id="contents" class="clearfix">
+        <div id="pkz"> {echo:lp{s_this_location};/}<a href="index.php">{echo:lp{i_index};/}</a>> {echo:
+            $article_info['title'];/}
+        </div>
+        <div class="top"><img src="skin/{echo: $SYSINFO['templates'];/}/images/about/about_img_top.jpg"
+                              alt="{echo:lp{s_mall_intro};/}" width="960" height="160"/>
+        </div>
+        <div id="aboutContents" class="clearfix">
+            <div id="leftColumn">
+                <h3 class="ttlm_aboutMall">{echo:lp{s_mall_intro2};/}</h3>
+                <ul class="list_about">
+                    {sta:foreach($left_article_list as $value)[loop]}
+                    <li
+                    {sta:if($value['article_id']==$article_info['article_id'])[exc]}class="now"{end:if/} ><a
+                        href="article.php?id={echo:$value['article_id'];/}"
+                    {sta:if($value['article_id']==$article_info['article_id'])[exc]}class="now"{end:if/}>{echo:sub_str($value['title'],10);/}</a></li>
+                    {end:foreach/}
+                </ul>
+            </div>
+            <div id="rightColumn">
+                <p><img class="float_l" src="images/about/about_img_01.jpg" alt="" width="220" height="177"/></p>
+                {echo:$article_info['content'];/}
+            </div>
+        </div>
+        <!-- /contents -->
     </div>
-    <div id="aboutContents" class="clearfix">
-    	<div id="leftColumn">
-       <h3 class="ttlm_aboutMall">{echo:lp{s_mall_intro2};/}</h3>
-       <ul class="list_about">
-       {sta:foreach($left_article_list as $value)[loop]}
-       <li {sta:if($value['article_id']==$article_info['article_id'])[exc]}class="now"{end:if/} ><a href="article.php?id={echo:$value['article_id'];/}" {sta:if($value['article_id']==$article_info['article_id'])[exc]}class="now"{end:if/}>{echo:sub_str($value['title'],10);/}</a></li>
-       {end:foreach/}
-       </ul>
-     </div>
-     <div id="rightColumn">
-     <p><img class="float_l" src="images/about/about_img_01.jpg" alt="" width="220" height="177" /></p>
-     {echo:$article_info['content'];/}
-     </div>
-    </div><!-- /contents -->
-  </div>
-  <!-- footer -->
-  {inc: require("shop/index_footer.php");/}
+    <!-- footer -->
+    {inc: require("shop/index_footer.php");/}
     <!-- /footer -->
-  </div>
-  <!-- /wrapper -->
+</div>
+<!-- /wrapper -->
 </div>
 </body>
 <!-- InstanceEnd -->
@@ -48,104 +56,145 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>{echo: $header['title'];/}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="{echo: $header['keywords'];/}" />
-<meta name="description" content="{echo: $header['description'];/}" />
-<base href="{echo: $baseUrl;/}" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/article.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+    <title>{echo: $header['title'];/}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="{echo: $header['keywords'];/}"/>
+    <meta name="description" content="{echo: $header['description'];/}"/>
+    <base href="{echo: $baseUrl;/}"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/article.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
 </head>
 {sta:if($cat_name == '美食' || $cat_name == '桂林美食')[exc]}
 <style>
-div.artTxt img{float:right;clear:both;}
-div.artTxt div.left{float:left;width:50%;margin-right:3%}
-div.artTxt div.right{float:left;width:46%;}
-div.artTxt div.right img{max-width: 100%}
+    div.artTxt img {
+        float: right;
+        clear: both;
+    }
+
+    div.artTxt div.left {
+        float: left;
+        width: 50%;
+        margin-right: 3%
+    }
+
+    div.artTxt div.right {
+        float: left;
+        width: 46%;
+    }
+
+    div.artTxt div.right img {
+        max-width: 100%
+    }
 </style>
 {end:if/}
 <body>
 <div id="wrapper">
-	{inc: require("shop/index_header.php");/}
-<!--search end -->
-  <!-- contents -->
-  <div id="contents" class="clearfix" >
-<div id="pkz"> {echo:lp{i_location};/}：<a href="index.php">{echo:lp{i_index};/}</a> > <a href="{echo:article_list_url($article_info['cat_id']);/}">{echo:$cat_name;/}</a> > {echo: $article_info['title'];/} </div>
-    <div id="mall_banner"  class="mg12b"><script language="JavaScript" src="uploadfiles/asd/5.js"></script></div>
-    <!--  contents  -->
-    <h3 class="ttlm_infoContents">{echo:lp{s_message_center};/}</h3>
-    <div id="artContents" class=" clearfix">
-        <ul class="artlist_ttlm">
-        {sta:foreach($article_cat as $val)[loop]}
-            <li {sta:if($val['cat_id']==$article_info['cat_id'])[exc]}class="now"{end:if/}><a href="{echo:article_list_url($val['cat_id']);/}">{echo:$val['cat_name'];/}</a></li>
-        {end:foreach/}
-        </ul>
-      <div class="artpan">
-      <h4 class="artTitle"><font style="color:{echo: $article_info['tag_color'];/} ">{echo: $article_info['title'];/}</font></h4>
-         {sta:if(!empty($article_info['sub_title']))[exc]} <h5 class="artTitle"><font style="font-size:13px;font-weight:bold;">{echo: $article_info['sub_title'];/}</font></h5>{end:if/}
-      <div class="artInfo">
-        <span>{echo: lp{s_time};/}: {echo: substr($article_info['add_time'],0,10);/}</span>
-
-      </div>
-      <div class="artTxt">
-         {sta:
-         if($cat_name == '桂林美食'){
-            $content = str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr['contentfulltext']);
-            preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i',$content,$images );
-            $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', ' ', $content);
-            echo "<div class='left'>".$content."</div>";
-            echo "<div class='right'>";
-            foreach($images[0] as $v){
-                echo $v;
-            }
-            echo "</div>";
-         }else{
-      	    echo "<p>".str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr['contentfulltext'])."</p>";
-         if/}
-      </div>
-      <div class="facility_baseinfo clrfix"><span style="text-align:center;margin:0 auto;">{echo:$newArr [pages];/}</span>
-            <ul class="telephoneinfo">
-                {sta:
-                if($attr_status) {
-                foreach($attr as $key=>$value)[loop]}
-                    {sta:if($attribute[$key]['input_type'] == 3 && !empty($attribute[$key]['attr_values'])) {
-                        $valueArr = explode("\n", $value['attr_values']);
-                        echo "<li>".$attribute[$key]['attr_values']."：";
-                        foreach($valueArr as $subVal){
-                            echo "<input type='checkbox' checked />".$subVal;
-                        }
-                        echo "</li>";
-                    } else {
-                        echo "<li>".$attribute[$key]['attr_values']."：".$value['attr_values']."</li>";
-                    }
-                } if/}
-            </ul>
-            <div class="clearfix"></div>
+    {inc: require("shop/index_header.php");/}
+    <!--search end -->
+    <!-- contents -->
+    <div id="contents" class="clearfix">
+        <div id="pkz"> {echo:lp{i_location};/}：<a href="index.php">{echo:lp{i_index};/}</a> > <a
+                href="{echo:article_list_url($article_info['cat_id']);/}">{echo:$cat_name;/}</a> > {echo:
+            $article_info['title'];/}
         </div>
-      <!-- FIXED -->
-      <div class="artRelated">
-        <h3>相关文章</h3>
-        <ul>
-          {sta:if(!empty($relatedArticle))[exc]}
-            {sta:foreach($relatedArticle as $val)[loop]}
-                <li><a href="article.php?id={echo:$val['article_id'];/}">{echo:$val['title'];/}</a></li>
-            {end:foreach/}
-           {end:if/}
-        </ul>
-      </div>
-  <div class="clearfix"></div>
-          <div class="link">
-              <p >{echo:lp{i_up_article};/}：{sta:if(empty($up_article))[exc]} {echo:lp{i_none_article};/} {end:if/}<a href="{echo:article_url($up_article['article_id']);/}">{echo:$up_article['title'];/}</a><br/>{echo:lp{i_down_article};/}：{sta:if(empty($down_article))[exc]} {echo:lp{i_none_article};/} {end:if/}<a href="{echo:article_url($down_article['article_id']);/}">{echo:$down_article['title'];/}</a></p>
-          </div>
-      </div>
+        <div id="mall_banner" class="mg12b">
+            <script language="JavaScript" src="uploadfiles/asd/5.js"></script>
+        </div>
+        <!--  contents  -->
+        <h3 class="ttlm_infoContents">{echo:lp{s_message_center};/}</h3>
 
-      </div>
-      <!--  contents  -->
+        <div id="artContents" class=" clearfix">
+            <ul class="artlist_ttlm">
+                {sta:foreach($article_cat as $val)[loop]}
+                <li
+                {sta:if($val['cat_id']==$article_info['cat_id'])[exc]}class="now"{end:if/}><a
+                    href="{echo:article_list_url($val['cat_id']);/}">{echo:$val['cat_name'];/}</a></li>
+                {end:foreach/}
+            </ul>
+            <div class="artpan">
+                <h4 class="artTitle"><font style="color:{echo: $article_info['tag_color'];/} ">{echo:
+                    $article_info['title'];/}</font></h4>
+                {sta:if(!empty($article_info['sub_title']))[exc]} <h5 class="artTitle"><font
+                    style="font-size:13px;font-weight:bold;">{echo: $article_info['sub_title'];/}</font></h5>{end:if/}
+                <div class="artInfo">
+                    <span>{echo: lp{s_time};/}: {echo: substr($article_info['add_time'],0,10);/}</span>
+
+                </div>
+                <div class="artTxt">
+                    {sta:
+                    if($cat_name == '桂林美食'){
+                    $content = str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles',
+                    $newArr['contentfulltext']);
+                    preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i',$content,$images );
+                    $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', ' ', $content);
+                    echo "
+                    <div class='left'>".$content."</div>
+                    ";
+                    echo "
+                    <div class='right'>";
+                        foreach($images[0] as $v){
+                        echo $v;
+                        }
+                        echo "
+                    </div>
+                    ";
+                    }else{
+                    echo "<p>".str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles',
+                    $newArr['contentfulltext'])."</p>";
+                    if/}
+                </div>
+                <div class="facility_baseinfo clrfix"><span style="text-align:center;margin:0 auto;">{echo:$newArr [pages];/}</span>
+                    <ul class="telephoneinfo">
+                        {sta:
+                        if($attr_status) {
+                        foreach($attr as $key=>$value)[loop]}
+                        {sta:if($attribute[$key]['input_type'] == 3 && !empty($attribute[$key]['attr_values'])) {
+                        $valueArr = explode("\n", $value['attr_values']);
+                        echo "
+                        <li>".$attribute[$key]['attr_values']."：";
+                            foreach($valueArr as $subVal){
+                            echo "<input type='checkbox' checked/>".$subVal;
+                            }
+                            echo "
+                        </li>
+                        ";
+                        } else {
+                        echo "
+                        <li>".$attribute[$key]['attr_values']."：".$value['attr_values']."</li>
+                        ";
+                        }
+                        } if/}
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- FIXED -->
+                <div class="artRelated">
+                    <h3>相关文章</h3>
+                    <ul>
+                        {sta:if(!empty($relatedArticle))[exc]}
+                        {sta:foreach($relatedArticle as $val)[loop]}
+                        <li><a href="article.php?id={echo:$val['article_id'];/}">{echo:$val['title'];/}</a></li>
+                        {end:foreach/}
+                        {end:if/}
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <div class="link">
+                    <p>{echo:lp{i_up_article};/}：{sta:if(empty($up_article))[exc]} {echo:lp{i_none_article};/} {end:if/}<a
+                            href="{echo:article_url($up_article['article_id']);/}">{echo:$up_article['title'];/}</a><br/>{echo:lp{i_down_article};/}：{sta:if(empty($down_article))[exc]}
+                        {echo:lp{i_none_article};/} {end:if/}<a
+                                href="{echo:article_url($down_article['article_id']);/}">{echo:$down_article['title'];/}</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!--  contents  -->
     </div>
     <!-- /contents -->
-  </div>
+</div>
 
 <!-- main end -->
 {inc: require("shop/index_footer.php");/}

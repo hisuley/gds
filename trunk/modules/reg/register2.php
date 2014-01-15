@@ -16,34 +16,35 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
-if(filemtime("templates/default/modules/reg/register2.html") > filemtime(__file__) || (file_exists("models/modules/reg/register2.php") && filemtime("models/modules/reg/register2.php") > filemtime(__file__)) ) {
-	tpl_engine("default","modules/reg/register2.html",1);
-	include(__file__);
+if (filemtime("templates/default/modules/reg/register2.html") > filemtime(__file__) || (file_exists("models/modules/reg/register2.php") && filemtime("models/modules/reg/register2.php") > filemtime(__file__))) {
+    tpl_engine("default", "modules/reg/register2.html", 1);
+    include(__file__);
 } else {
-/* debug模式运行生成代码 结束 */
-?><?php
-if(!$IWEB_SHOP_IN) {
-	trigger_error('Hacking attempt');
-}
+    /* debug模式运行生成代码 结束 */
+    ?><?php
+    if (!$IWEB_SHOP_IN) {
+        trigger_error('Hacking attempt');
+    }
 
 //引入语言包
-$i_langpackage=new indexlp;
+    $i_langpackage = new indexlp;
 
-require_once("foundation/asystem_info.php");
+    require_once("foundation/asystem_info.php");
 //require_once("foundation/fsession.php");
-$user_id=get_sess_user_id();
-$email_check=get_sess_email_check();
+    $user_id = get_sess_user_id();
+    $email_check = get_sess_email_check();
 
 
-if(!$user_id) {
-	echo '<script language="JavaScript">location.href="modules.php?app=reg"</script>';
-	exit;
-}
-if($email_check) {
-	echo '<script language="JavaScript">location.href="modules.php"</script>';
-	exit;
-}
-?><?php } ?>
+    if (!$user_id) {
+        echo '<script language="JavaScript">location.href="modules.php?app=reg"</script>';
+        exit;
+    }
+    if ($email_check) {
+        echo '<script language="JavaScript">location.href="modules.php"</script>';
+        exit;
+    }
+    ?><?php
+} ?>

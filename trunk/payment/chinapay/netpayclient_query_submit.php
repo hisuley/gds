@@ -1,131 +1,135 @@
 <?php
-	header('Content-type: text/html; charset=gbk');
-	include_once("netpayclient_config.php");
+header('Content-type: text/html; charset=gbk');
+include_once("netpayclient_config.php");
 ?>
-<title>µ¥±Ê²éÑ¯</title>
-<h1>µ¥±Ê²éÑ¯</h1>
+    <title>ï¿½ï¿½ï¿½Ê²ï¿½Ñ¯</title>
+    <h1>ï¿½ï¿½ï¿½Ê²ï¿½Ñ¯</h1>
 <?php
-	//¼ÓÔØ netpayclient ×é¼þ
-	include_once("netpayclient.php");
-	//¼ÓÔØ CURL º¯Êý¿â£¬¸Ã¿âÓÉ chinapay Ìá¹©£¬·½±ãÄúÊ¹ÓÃ curl ·¢ËÍ HTTP ÇëÇó
-	include_once("lib_curl.php");
-	
-	//µ¼ÈëË½Ô¿ÎÄ¼þ, ·µ»ØÖµ¼´ÎªÄúµÄÉÌ»§ºÅ£¬³¤¶È15Î»
-	$merid = buildKey(PRI_KEY);
-	if(!$merid) {
-		echo "µ¼ÈëË½Ô¿ÎÄ¼þÊ§°Ü£¡";
-		exit;
-	}
-	
-	//ÐèÒª²éÑ¯µÄ¶©µ¥ºÅ£¬16Î»³¤
-	$ordid = $_REQUEST["ordid"];
-	//¶©µ¥ÈÕÆÚ£¬8Î»³¤
-	$transdate = $_REQUEST["transdate"];
-	
-	if($transdate=='') $transdate = date('Ymd');
-	
+//ï¿½ï¿½ï¿½ï¿½ netpayclient ï¿½ï¿½ï¿½
+include_once("netpayclient.php");
+//ï¿½ï¿½ï¿½ï¿½ CURL ï¿½ï¿½ï¿½ï¿½â£¬ï¿½Ã¿ï¿½ï¿½ï¿½ chinapay ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ curl ï¿½ï¿½ï¿½ï¿½ HTTP ï¿½ï¿½ï¿½ï¿½
+include_once("lib_curl.php");
+
+//ï¿½ï¿½ï¿½ï¿½Ë½Ô¿ï¿½Ä¼ï¿½, ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ì»ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½15Î»
+$merid = buildKey(PRI_KEY);
+if (!$merid) {
+    echo "ï¿½ï¿½ï¿½ï¿½Ë½Ô¿ï¿½Ä¼ï¿½Ê§ï¿½Ü£ï¿½";
+    exit;
+}
+
+//ï¿½ï¿½Òªï¿½ï¿½Ñ¯ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Å£ï¿½16Î»ï¿½ï¿½
+$ordid = $_REQUEST["ordid"];
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½8Î»ï¿½ï¿½
+$transdate = $_REQUEST["transdate"];
+
+if ($transdate == '') $transdate = date('Ymd');
+
 ?>
-<form action="" method="get">
-<label>¶©µ¥ÈÕÆÚ</label><br/>
-<input type="text" name="transdate" value="<?php echo $transdate; ?>"><br/>
-<label>¶©µ¥ºÅ</label><br/>
-<input type="text" name="ordid" value="<?php echo $ordid; ?>"><br/>
-<input type="submit" value="²éÑ¯">
-</form>
+    <form action="" method="get">
+        <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+        <input type="text" name="transdate" value="<?php echo $transdate; ?>"><br/>
+        <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+        <input type="text" name="ordid" value="<?php echo $ordid; ?>"><br/>
+        <input type="submit" value="ï¿½ï¿½Ñ¯">
+    </form>
 <?
-	if(($ordid!='')&&($transdate!='')){
-		//½»Ò×ÀàÐÍ£¬¹Ì¶¨ÎªÖ§¸¶½»Ò× 0001
-		$transtype = "0001";
-		//½Ó¿Ú°æ±¾ºÅ£¬µ¥±Ê²éÑ¯£¬¹Ì¶¨Îª 20060831£¬±ØÌî
-		$version = "20060831";
-		//±¸×¢£¬×î³¤60Î»£¬¿ÉÑ¡
-		$resv = "memo";
-		
-		//°´´ÎÐò×éºÏ±¨ÎÄÐÅÏ¢Îª´ýÇ©Ãû´®
-		$plain = $merid . $transdate . $ordid . $transtype;
-		//Éú³ÉÇ©ÃûÖµ£¬±ØÌî
-		$chkvalue = sign($plain);
-		if (!$chkvalue) {
-			echo "Ç©ÃûÊ§°Ü£¡";
-			exit;
-		}
-		
-		$http = HttpInit();
-		$post_data = "MerId=$merid&TransType=$transtype&OrdId=$ordid&TransDate=$transdate&Version=$version&Resv=$resv&ChkValue=$chkvalue";
-		$output = HttpPost($http, $post_data, REQ_URL_QRY);
-		
-		if($output){
-			$output = trim(strip_tags($output));
-			
-			echo "<h2>²éÑ¯·µ»Ø</h2>";
-			echo htmlspecialchars($output) . "<br/>";
-			echo "=================================<br/>";
-			//¿ªÊ¼½âÎöÊý¾Ý
-			$datas = explode("&",$output);
-			$extracted_data = array();
-			foreach($datas as $data){
-				echo "$data<br/>";
-				$name_value = explode('=',$data);
-				if(count($name_value)==2){
-					$extracted_data[$name_value[0]] = $name_value[1];
-				}
-			}
-			
-			echo "=================================<br/>";
-			
-			$resp_code = $extracted_data["ResponseCode"];
-			if($resp_code == '0'){
-				$merid = $extracted_data["merid"]; 
-				$orderno = $extracted_data["orderno"];
-				$amount = $extracted_data["amount"];
-				$currencycode = $extracted_data["currencycode"];
-				$transdate = $extracted_data["transdate"];
-				$transtype = $extracted_data["transtype"];
-				$status = $extracted_data["status"];
-				$checkvalue = $extracted_data["checkvalue"];
-				
-				$gateid = $extracted_data["GateId"];
-				$priv1 = $extracted_data["Priv1"];
-			} else {
-				$message = $extracted_data["Message"];
-			}
-			
-			switch($resp_code){
-								
-				case '111': echo "<h3>$message</h3>"; 
-										echo "<h4>ÇëÈ·ÈÏÄãÊÇ·ñÉêÇë¿ªÍ¨ÁË´ËÒµÎñ£¬²¢Ìá¹©ÁËÕýÈ·µÄ¹«ÍøIPµØÖ·</h4>";
-										break;
-				case '307': echo "<h3>$message</h3>"; 
-										echo "<h4>ÄúÌîÐ´µÄ¶©µ¥ºÅ»ò¶©µ¥ÈÕÆÚÓÐÎó£¬Î´ÄÜ²éÑ¯µ½¸Ã±Ê¶©µ¥</h4>";
-										break;
-				case '0'  : echo "<h3>²éÑ¯ÇëÇó·¢ËÍ³É¹¦</h3>";
-				
-										//¿ªÊ¼ÑéÖ¤Ç©Ãû£¬Ê×ÏÈµ¼Èë¹«Ô¿ÎÄ¼þ
-										$flag = buildKey(PUB_KEY);
-										if(!$flag) {
-											echo "µ¼Èë¹«Ô¿ÎÄ¼þÊ§°Ü£¡";
-										} else {
-											$flag = verifyTransResponse($merid, $orderno, $amount, $currencycode, $transdate, $transtype, $status, $checkvalue);
-											if($flag) {
-												//ÑéÖ¤Ç©Ãû³É¹¦£¬
-												echo "<h4>ÑéÖ¤Ç©Ãû³É¹¦</h4>";
-												//Çë°ÑÄú×Ô¼ºÐèÒª´¦ÀíµÄÂß¼­Ð´ÔÚÕâÀï
-												
-											} else {
-												echo "<h4>ÑéÖ¤Ç©ÃûÊ§°Ü£¡</h4>";
-											}
-										}
-										break;
-				default   : echo "<h3>²éÑ¯ÇëÇó·¢ËÍÊ§°Ü</h3>";
-										echo "<h4>Çë²éÔÄ½Ó¿ÚÎÄµµ¸½Â¼ÒÔÈ·¶¨¾ßÌå´íÎóÔ­Òò£¡</h4>";
-										break;
-				
-			}
-		} else {
-			echo "<h3>HTTP ÇëÇóÊ§°Ü£¡</h3>";
-		}
-		HttpDone($http);
-	} else {
-		echo "<h3>ÇëÌîÐ´¶©µ¥ÈÕÆÚºÍ¶©µ¥ºÅ</h3>";
-	}
+if (($ordid != '') && ($transdate != '')) {
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ì¶ï¿½ÎªÖ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0001
+    $transtype = "0001";
+    //ï¿½Ó¿Ú°æ±¾ï¿½Å£ï¿½ï¿½ï¿½ï¿½Ê²ï¿½Ñ¯ï¿½ï¿½ï¿½Ì¶ï¿½Îª 20060831ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    $version = "20060831";
+    //ï¿½ï¿½×¢ï¿½ï¿½ï¿½î³¤60Î»ï¿½ï¿½ï¿½ï¿½Ñ¡
+    $resv = "memo";
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Îªï¿½ï¿½Ç©ï¿½ï¿½
+    $plain = $merid . $transdate . $ordid . $transtype;
+    //ï¿½ï¿½ï¿½Ç©ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    $chkvalue = sign($plain);
+    if (!$chkvalue) {
+        echo "Ç©ï¿½ï¿½Ê§ï¿½Ü£ï¿½";
+        exit;
+    }
+
+    $http = HttpInit();
+    $post_data = "MerId=$merid&TransType=$transtype&OrdId=$ordid&TransDate=$transdate&Version=$version&Resv=$resv&ChkValue=$chkvalue";
+    $output = HttpPost($http, $post_data, REQ_URL_QRY);
+
+    if ($output) {
+        $output = trim(strip_tags($output));
+
+        echo "<h2>ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½</h2>";
+        echo htmlspecialchars($output) . "<br/>";
+        echo "=================================<br/>";
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        $datas = explode("&", $output);
+        $extracted_data = array();
+        foreach ($datas as $data) {
+            echo "$data<br/>";
+            $name_value = explode('=', $data);
+            if (count($name_value) == 2) {
+                $extracted_data[$name_value[0]] = $name_value[1];
+            }
+        }
+
+        echo "=================================<br/>";
+
+        $resp_code = $extracted_data["ResponseCode"];
+        if ($resp_code == '0') {
+            $merid = $extracted_data["merid"];
+            $orderno = $extracted_data["orderno"];
+            $amount = $extracted_data["amount"];
+            $currencycode = $extracted_data["currencycode"];
+            $transdate = $extracted_data["transdate"];
+            $transtype = $extracted_data["transtype"];
+            $status = $extracted_data["status"];
+            $checkvalue = $extracted_data["checkvalue"];
+
+            $gateid = $extracted_data["GateId"];
+            $priv1 = $extracted_data["Priv1"];
+        } else {
+            $message = $extracted_data["Message"];
+        }
+
+        switch ($resp_code) {
+
+            case '111':
+                echo "<h3>$message</h3>";
+                echo "<h4>ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ë¿ªÍ¨ï¿½Ë´ï¿½Òµï¿½ñ£¬²ï¿½ï¿½á¹©ï¿½ï¿½ï¿½ï¿½È·ï¿½Ä¹ï¿½ï¿½ï¿½IPï¿½ï¿½Ö·</h4>";
+                break;
+            case '307':
+                echo "<h3>$message</h3>";
+                echo "<h4>ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Å»ò¶©µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½Ü²ï¿½Ñ¯ï¿½ï¿½ï¿½Ã±Ê¶ï¿½ï¿½ï¿½</h4>";
+                break;
+            case '0'  :
+                echo "<h3>ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Í³É¹ï¿½</h3>";
+
+                //ï¿½ï¿½Ê¼ï¿½ï¿½Ö¤Ç©ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½
+                $flag = buildKey(PUB_KEY);
+                if (!$flag) {
+                    echo "ï¿½ï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½Ê§ï¿½Ü£ï¿½";
+                } else {
+                    $flag = verifyTransResponse($merid, $orderno, $amount, $currencycode, $transdate, $transtype, $status, $checkvalue);
+                    if ($flag) {
+                        //ï¿½ï¿½Ö¤Ç©ï¿½ï¿½É¹ï¿½ï¿½ï¿½
+                        echo "<h4>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½É¹ï¿½</h4>";
+                        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+                    } else {
+                        echo "<h4>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½Ê§ï¿½Ü£ï¿½</h4>";
+                    }
+                }
+                break;
+            default   :
+                echo "<h3>ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½</h3>";
+                echo "<h4>ï¿½ï¿½ï¿½ï¿½Ä½Ó¿ï¿½ï¿½Äµï¿½ï¿½ï¿½Â¼ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½</h4>";
+                break;
+
+        }
+    } else {
+        echo "<h3>HTTP ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½</h3>";
+    }
+    HttpDone($http);
+} else {
+    echo "<h3>ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÚºÍ¶ï¿½ï¿½ï¿½ï¿½ï¿½</h3>";
+}
 ?>

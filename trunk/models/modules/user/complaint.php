@@ -1,35 +1,35 @@
 <?php
-if(!$IWEB_SHOP_IN) {
-	die('Hacking attempt');
+if (!$IWEB_SHOP_IN) {
+    die('Hacking attempt');
 }
 require("foundation/module_complaint.php");
 
 //引入语言包
-$m_langpackage=new moduleslp;
-$i_langpackage=new indexlp;
+$m_langpackage = new moduleslp;
+$i_langpackage = new indexlp;
 
 //数据表定义区
-$t_order_info = $tablePreStr."order_info";
-$t_shop_info = $tablePreStr."shop_info";
-$t_complaint_type = $tablePreStr."complaint_type";
-$t_order_goods = $tablePreStr."order_goods";
-$t_complaints = $tablePreStr."complaints";
+$t_order_info = $tablePreStr . "order_info";
+$t_shop_info = $tablePreStr . "shop_info";
+$t_complaint_type = $tablePreStr . "complaint_type";
+$t_order_goods = $tablePreStr . "order_goods";
+$t_complaints = $tablePreStr . "complaints";
 
 //变量定义区
-$order_id=intval(get_args('order_id'));
+$order_id = intval(get_args('order_id'));
 
-$dbo=new dbex;
+$dbo = new dbex;
 //读写分离定义方法
-dbtarget('r',$dbServs);
+dbtarget('r', $dbServs);
 $sql = "select user_id from $t_complaints where user_id=$user_id and order_id='$order_id'";
-$row=$dbo->getRow($sql);
-if($row){
-	trigger_error('您已经投诉过该商品，请不要重复投诉！');
+$row = $dbo->getRow($sql);
+if ($row) {
+    trigger_error('您已经投诉过该商品，请不要重复投诉！');
 }
 $sql = "select a.order_id,a.payid,a.shop_id,og.goods_id,og.goods_name,a.order_amount,a.order_time,a.order_status,a.pay_status,a.transport_status,a.seller_reply,a.group_id,c.user_id,c.shop_name from `$t_order_info` as a, `$t_shop_info` as c,`$t_order_goods` as og where a.order_id=og.order_id and a.shop_id=c.shop_id and a.order_id='$order_id' ";
-$order_rs=$dbo->getRow($sql);
+$order_rs = $dbo->getRow($sql);
 
-$complaints_title=get_complaint_type_all($dbo,"*",$t_complaint_type);
+$complaints_title = get_complaint_type_all($dbo, "*", $t_complaint_type);
 
 //$complaints_title=array(
 //	'1'=>'成交不卖',

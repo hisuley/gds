@@ -4,11 +4,7 @@ Name: import.css
 Date Created:2013/11/24 mo
 Last Updated:2013/11/24 mo
 ----------------------------------------*/
-
-
 /*import common CSS
 ----------------------------------------*/
-
-
 @import url("reset.css");
 @import url("common.css");

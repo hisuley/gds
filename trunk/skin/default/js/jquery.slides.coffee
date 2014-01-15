@@ -28,55 +28,55 @@
   pluginName = "slidesjs"
   defaults =
     width: 940
-      # Set the default width of the slideshow.
+  # Set the default width of the slideshow.
     height: 528
-      # Set the default height of the slideshow.
+  # Set the default height of the slideshow.
     start: 1
-      # Set the first slide in the slideshow.
+  # Set the first slide in the slideshow.
     navigation:
-      # Next and previous button settings.
+    # Next and previous button settings.
       active: true
-        # [boolean] Create next and previous buttons.
-        # You can set to false and use your own next/prev buttons.
-        # User defined next/prev buttons must have the following:
-        # previous: class="slidesjs-previous slidesjs-navigation"
-        # next: class="slidesjs-next slidesjs-navigation"
+    # [boolean] Create next and previous buttons.
+    # You can set to false and use your own next/prev buttons.
+    # User defined next/prev buttons must have the following:
+    # previous: class="slidesjs-previous slidesjs-navigation"
+    # next: class="slidesjs-next slidesjs-navigation"
       effect: "slide"
-        # [string] Can be either "slide" or "fade".
+  # [string] Can be either "slide" or "fade".
     pagination:
-        # Pagination settings
+    # Pagination settings
       active: true
-        # [boolean] Create pagination items.
-        # You cannot use your own pagination.
+    # [boolean] Create pagination items.
+    # You cannot use your own pagination.
       effect: "slide"
-        # [string] Can be either "slide" or "fade".
+  # [string] Can be either "slide" or "fade".
     play:
-        # Play and stop button setting.
+    # Play and stop button setting.
       active: false
-        # [boolean] Create the play and stop buttons.
-        # You cannot use your own pagination.
+    # [boolean] Create the play and stop buttons.
+    # You cannot use your own pagination.
       effect: "slide"
-        # [string] Can be either "slide" or "fade".
+    # [string] Can be either "slide" or "fade".
       interval: 5000
-        # [number] Time spent on each slide in milliseconds.
+    # [number] Time spent on each slide in milliseconds.
       auto: false
-        # [boolean] Start playing the slideshow on load
+    # [boolean] Start playing the slideshow on load
       swap: true
-        # [boolean] show/hide stop and play buttons
+    # [boolean] show/hide stop and play buttons
       pauseOnHover: false
-        # [boolean] pause a playing slideshow on hover
+    # [boolean] pause a playing slideshow on hover
       restartDelay: 2500
-        # [number] restart delay on an inactive slideshow
+  # [number] restart delay on an inactive slideshow
     effect:
       slide:
-        # Slide effect settings.
+      # Slide effect settings.
         speed: 500
-          # [number] Speed in milliseconds of the slide animation.
+    # [number] Speed in milliseconds of the slide animation.
       fade:
         speed: 300
-          # [number] Speed in milliseconds of the fade animation.
+      # [number] Speed in milliseconds of the fade animation.
         crossfade: true
-          # [boolean] Cross-fade the transition
+  # [boolean] Cross-fade the transition
     callback:
       loaded: () ->
         # [function] Called when slides is loaded
@@ -112,7 +112,8 @@
     $element.css overflow: "hidden"
 
     # Create container
-    $element.slidesContainer = $element.children().not(".slidesjs-navigation", $element).wrapAll("<div class='slidesjs-container'>", $element).parent().css
+    $element.slidesContainer = $element.children().not(".slidesjs-navigation",
+      $element).wrapAll("<div class='slidesjs-container'>", $element).parent().css
       overflow: "hidden"
       position: "relative"
 
@@ -124,24 +125,24 @@
     # Setup control div
     $(".slidesjs-control", $element)
     .css
-      position: "relative"
-      left: 0
+        position: "relative"
+        left: 0
 
     # Setup slides
     $(".slidesjs-control", $element)
     .children()
     .addClass("slidesjs-slide")
     .css
-      position: "absolute"
-      top: 0
-      left: 0
-      width: "100%"
-      zIndex: 0
-      display: "none"
-      webkitBackfaceVisibility: "hidden"
+        position: "absolute"
+        top: 0
+        left: 0
+        width: "100%"
+        zIndex: 0
+        display: "none"
+        webkitBackfaceVisibility: "hidden"
 
     # Assign an index to each slide
-    $.each( $(".slidesjs-control", $element).children(), (i) ->
+    $.each($(".slidesjs-control", $element).children(), (i) ->
       $slide = $(this)
       $slide.attr("slidesjs-index", i)
     )
@@ -174,7 +175,7 @@
     .children(":eq(" + @data.current + ")")
     .eq(0)
     .fadeIn 0, ->
-      $(this).css zIndex: 10
+        $(this).css zIndex: 10
 
     if @options.navigation.active
       # Create next/prev buttons
@@ -255,7 +256,7 @@
           # Stop play
           @stop(true)
           # Goto to selected slide
-          @goto( ($(e.currentTarget).attr("data-slidesjs-item") * 1) + 1 )
+          @goto(($(e.currentTarget).attr("data-slidesjs-item") * 1) + 1)
       )
 
     # Bind update on browser resize
@@ -420,38 +421,38 @@
     if slidesControl.position().left > @options.width * 0.5 || slidesControl.position().left > @options.width * 0.1 && (Number(new Date()) - @data.touchtimer < 250)
       $.data this, "direction", "previous"
       @_slide()
-    # Slide has been dragged to the left, goto next slide
+      # Slide has been dragged to the left, goto next slide
     else if slidesControl.position().left < -(@options.width * 0.5) || slidesControl.position().left < -(@options.width * 0.1) && (Number(new Date()) - @data.touchtimer < 250)
       $.data this, "direction", "next"
       @_slide()
     else
       # Slide has not been dragged far enough, animate back to 0 and reset
-        # Get the browser's vendor prefix
-        prefix = @data.vendorPrefix
+      # Get the browser's vendor prefix
+      prefix = @data.vendorPrefix
 
-        # Create CSS3 styles based on vendor prefix
-        transform = prefix + "Transform"
-        duration = prefix + "TransitionDuration"
-        timing = prefix + "TransitionTimingFunction"
+      # Create CSS3 styles based on vendor prefix
+      transform = prefix + "Transform"
+      duration = prefix + "TransitionDuration"
+      timing = prefix + "TransitionTimingFunction"
 
-        # Set CSS3 styles
-        slidesControl[0].style[transform] = "translateX(0px)"
-        slidesControl[0].style[duration] = @options.effect.slide.speed * 0.85 + "ms"
+      # Set CSS3 styles
+      slidesControl[0].style[transform] = "translateX(0px)"
+      slidesControl[0].style[duration] = @options.effect.slide.speed * 0.85 + "ms"
 
     # Rest slideshow
     slidesControl.on "transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd", =>
-        # Get the browser's vendor prefix
-        prefix = @data.vendorPrefix
+      # Get the browser's vendor prefix
+      prefix = @data.vendorPrefix
 
-        # Create CSS3 styles based on vendor prefix
-        transform = prefix + "Transform"
-        duration = prefix + "TransitionDuration"
-        timing = prefix + "TransitionTimingFunction"
+      # Create CSS3 styles based on vendor prefix
+      transform = prefix + "Transform"
+      duration = prefix + "TransitionDuration"
+      timing = prefix + "TransitionTimingFunction"
 
-        # Set CSS3 styles
-        slidesControl[0].style[transform] = ""
-        slidesControl[0].style[duration] = ""
-        slidesControl[0].style[timing] = ""
+      # Set CSS3 styles
+      slidesControl[0].style[transform] = ""
+      slidesControl[0].style[duration] = ""
+      slidesControl[0].style[timing] = ""
 
     # Stop event from bubbling up
     e.stopPropagation()
@@ -516,26 +517,26 @@
         # Stop/pause slideshow on mouse enter
         slidesContainer.bind "mouseenter", =>
           clearTimeout @data.restartDelay
-					$.data this, "restartDelay", null
-          @stop()
+    $.data this, "restartDelay", null
+    @stop()
 
-        # Play slideshow on mouse leave
-        slidesContainer.bind "mouseleave", =>
-          if @options.play.restartDelay
-            $.data this, "restartDelay", setTimeout ( =>
-              @play(true)
-            ), @options.play.restartDelay
-          else
-            @play()
+    # Play slideshow on mouse leave
+    slidesContainer.bind "mouseleave", =>
+      if @options.play.restartDelay
+        $.data this, "restartDelay", setTimeout ( =>
+          @play(true)
+        ), @options.play.restartDelay
+      else
+        @play()
 
-      $.data this, "playing", true
+    $.data this, "playing", true
 
-      # Add "slidesjs-playing" class to "slidesjs-play" button
-      $(".slidesjs-play", $element).addClass("slidesjs-playing")
+    # Add "slidesjs-playing" class to "slidesjs-play" button
+    $(".slidesjs-play", $element).addClass("slidesjs-playing")
 
-      if @options.play.swap
-        $(".slidesjs-play", $element).hide()
-        $(".slidesjs-stop", $element).show()
+    if @options.play.swap
+      $(".slidesjs-play", $element).hide()
+      $(".slidesjs-stop", $element).show()
 
   # @stop()
   # Stops a playing slideshow
@@ -677,7 +678,7 @@
 
             # End of the animation, call complete callback
             @options.callback.complete(next + 1)
-          )
+        )
 
   # @_fade()
   # Fading and cross fading
@@ -735,40 +736,40 @@
         slidesControl.children(":eq(" + next + ")")
         .stop()
         .fadeIn @options.effect.fade.speed, (=>
-          # Reset slides
-          slidesControl.children(":eq(" + next + ")").css zIndex: 0
+            # Reset slides
+            slidesControl.children(":eq(" + next + ")").css zIndex: 0
 
-          # Set animating to false
-          $.data this, "animating", false
+            # Set animating to false
+            $.data this, "animating", false
 
-          # Set the new slide to the current
-          $.data this, "current", next
+            # Set the new slide to the current
+            $.data this, "current", next
 
-          # End of the animation, call complete callback
-          @options.callback.complete(next + 1)
-        )
+            # End of the animation, call complete callback
+            @options.callback.complete(next + 1)
+          )
       else
         # Fade to next slide
         slidesControl.children(":eq(" + currentSlide + ")")
         .stop()
         .fadeOut @options.effect.fade.speed, (=>
-          # Reset slides
-          slidesControl.children(":eq(" + next + ")")
-          .stop()
-          .fadeIn @options.effect.fade.speed, (=>
             # Reset slides
-            slidesControl.children(":eq(" + next + ")").css zIndex: 10
+            slidesControl.children(":eq(" + next + ")")
+            .stop()
+            .fadeIn @options.effect.fade.speed, (=>
+                # Reset slides
+                slidesControl.children(":eq(" + next + ")").css zIndex: 10
+              )
+
+            # Set animating to false
+            $.data this, "animating", false
+
+            # Set the new slide to the current
+            $.data this, "current", next
+
+            # End of the animation, call complete callback
+            @options.callback.complete(next + 1)
           )
-
-          # Set animating to false
-          $.data this, "animating", false
-
-          # Set the new slide to the current
-          $.data this, "current", next
-
-          # End of the animation, call complete callback
-          @options.callback.complete(next + 1)
-        )
 
   # @_getVendorPrefix()
   # Check if the browser supports CSS3 Transitions
@@ -791,6 +792,4 @@
   $.fn[pluginName] = (options) ->
     @each ->
       if !$.data(@, "plugin_#{pluginName}")
-        $.data(@, "plugin_#{pluginName}", new Plugin(@, options))
-
-)(jQuery, window, document)
+        $.data(@, "plugin_#{pluginName}", new Plugin(@, options)))(jQuery, window, document)
