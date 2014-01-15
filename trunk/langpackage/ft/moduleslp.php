@@ -424,7 +424,7 @@ class moduleslp{
 	var $m_shipping_type = "發貨運輸類型";
 	var $m_alipay_tradeno = "支付寶訂單號";
 
-	var $m_welcome_ucenter = "歡迎您來到<span class=\"highlight\">IwebMall</span>用戶管理中心！";
+	var $m_welcome_ucenter = "歡迎您來到<span class=\"highlight\">dms</span>用戶管理中心！";
 	var $m_bubuser_info = "買家信息";
 	var $m_babuser_info = "賣家信息";
 	var $m_deal_order = "成交的訂單";

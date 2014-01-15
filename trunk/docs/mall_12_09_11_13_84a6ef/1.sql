@@ -1,7 +1,7 @@
-/* iweb_mall Backup SQL File 
+/* dms  Backup SQL File
  Version: v1.2 
  Time: 2013-12-09 11:13:34
- iweb_mall: http://www.guilin.com*/
+ dms system: http://www.guilin.com*/
 
 
 
@@ -4288,7 +4288,7 @@ CREATE TABLE `imall_payment` (
   `pay_name` varchar(255) NOT NULL DEFAULT '' COMMENT '支付类型名称',
   `pay_code` varchar(255) NOT NULL COMMENT '文件夹名代码',
   `pay_desc` text COMMENT '描述',
-  `author` varchar(200) NOT NULL DEFAULT 'IWEB TEAM' COMMENT '作者',
+  `author` varchar(200) NOT NULL DEFAULT 'DMS TEAM' COMMENT '作者',
   `version` varchar(20) NOT NULL DEFAULT '1.0' COMMENT '版本',
   `config` text COMMENT '配置信息',
   `enabled` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否开启：0关闭，1开启',

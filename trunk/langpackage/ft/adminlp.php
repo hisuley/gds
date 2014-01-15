@@ -620,7 +620,7 @@ class adminlp{
 	var $a_setting_message5 = "（網站所屬的版權。如：Copyright©2009 www.guilin.com）";
 	var $a_setting_message6 = "（信息產業部所頒發的備案信息。如：京ICP備09092256號 ）";
 	var $a_setting_message7 = "（用戶註冊時所需要同意的服務條款。支持html代碼格式:&lt;br /&gt;換行；&lt;b&gt;加粗）";
-	var $a_setting_message8 = "（定義本繫統的session前綴，默認：iweb_）";
+	var $a_setting_message8 = "（定義本繫統的session前綴，默認：dms_）";
 	var $a_setting_message9 = "（根據網站的“langpackage/”目錄下的語言包文件來更換網站的默認語言。默認：zh）";
 	var $a_setting_message10 = "（程序檢測訪問地址,點擊自動設置根目錄：";
 	var $a_setting_message11 = "點擊設置完整地址";
@@ -630,7 +630,7 @@ class adminlp{
 	var $a_setting_message15 = "（產品列表頁面每頁的顯示數設置）";
 	var $a_setting_message16 = "（文章列表頁面每頁的顯示數設置）";
 	var $a_setting_message17 = "（開啟重寫時會使前台所有頁面靜態化，更容易被搜索引擎挖掘，提高被收錄的機率。）<br />（開啟簡單重寫：服務器無需Rewrite模塊的支持）<br />（開啟復雜重寫：服務器需要對Rewrite模塊的支持，需要把docs/目錄下的.htaccess放到您的網站根目錄下。）";
-	var $a_setting_message18 = "（IM開啟需要iwebIM產品的支持，源碼可到官方主站";
+	var $a_setting_message18 = "（IM需要第三方支持，请下载相关程序）";
 	var $a_setting_message19 = " 下載";
 	var $a_setting_message20 = "（關閉網站，此時任何人都無法訪問站點内容。默認：打開）";
 	var $a_setting_message21 = "（如果您需要增加流量統計代碼，請把它放到這裡。）";
@@ -968,11 +968,11 @@ class uilp{
 	var $u_list_back="返回列表";
 	var $u_clew_inf="提示信息";
 	var $u_temp_save="當前模板保存在 <font color='red'>./templates/{temp}</font>目錄";
-	var $u_do_flow="iweb_shop 模板制作與標簽設置的基本流程：";
+	var $u_do_flow="DMS 模板制作與標簽設置的基本流程：";
 	var $u_flow_1="1、通過Deamweaver、Fireworks、Flash 和 Photoshop 等軟件設計好 html 頁面；";
 	var $u_flow_2="2、根據頁面布局插入標簽，標簽的具體規則請參考手冊；";
-	var $u_flow_3="3、在 ./templates 目錄下建立一個新的模板目錄，然後把做好的 html 頁面按照 iweb_sns 模板命名規則命名並存放到模板目錄；";
-	var $u_flow_4="4、登錄iweb_shop後台，進入“模板管理”，把自己新建的模板方案設置為使用方案；";
+	var $u_flow_3="3、在 ./templates 目錄下建立一個新的模板目錄，然後把做好的 html 頁面按照 DMS 模板命名規則命名並存放到模板目錄；";
+	var $u_flow_4="4、登錄DMS後台，進入“模板管理”，把自己新建的模板方案設置為使用方案；";
 	var $u_flow_5="5、編譯後即可看到頁面效果；";
 	var $u_flow_6="6，模板方案的目錄結構一定要與網站的根目錄結構相同，請參考templates/default下的目錄結構；";
 	var $u_file_no="沒有選擇方案！";
@@ -1030,14 +1030,14 @@ class pluginslp{
 	var $pl_isset="已安裝";
 	var $pl_unload="卸載";
 	var $pl_next_step="下一步";
-	var $pl_guide="IWebSNS插件向導";
+	var $pl_guide="DMS插件向導";
 	var $pl_install_info="插件安裝說明";
 	var $pl_install_worning="插件分為官方插件和第三方插件兩種，由第三方開發的插件請確定安全性後再安裝，或者下載官方推薦的插件。";
 	var $pl_sure="確 定";
 	var $pl_unload_info="插件卸載說明";
 	var $pl_unload_remind="插件卸載後不會影響繫統的運行，請放心卸載！";
 	var $pl_update="更 新";
-	var $pl_manage_str="IWebSNS插件管理";
+	var $pl_manage_str="DMS插件管理";
 	var $pl_manage="插件管理";
 	var $pl_set_update="對插件進行設置更新";
 	var $pl_worning="警告：插件刪除後，不能修復，您確定刪除此插件嗎？";
@@ -1055,7 +1055,7 @@ class pluginslp{
 	var $pl_inspire="是否啟用";
 	var $pl_inspire_info="啟用是指，插件是否生效。";
 
-	var $pl_plugin_wizard ="IWebMall插件安裝向導";
+	var $pl_plugin_wizard ="dms插件安裝向導";
 	var $pl_plugin_info_notall ="插件配制信息不全，不具備安裝條件！";
 	var $pl_app_application ="APP應用";
 	var $pl_widget_plugin ="Widget插件";

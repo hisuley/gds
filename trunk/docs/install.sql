@@ -1651,8 +1651,8 @@ INSERT INTO `imall_areas` (`area_id`, `parent_id`, `area_name`, `area_type`) VAL
 (2006, 236, '新干县', 3),
 (2007, 236, '永丰县', 3),
 (2008, 236, '泰和县', 3),
-(2009, 236, '遂川县', 3),
-(2010, 236, '万安县', 3),
+(2013, 236, '遂川县', 3),
+(2013, 236, '万安县', 3),
 (2011, 236, '永新县', 3),
 (2012, 237, '珠山区', 3),
 (2013, 237, '昌江区', 3),
@@ -3500,39 +3500,39 @@ CREATE TABLE `imall_article` (
 --
 
 INSERT INTO `imall_article` (`article_id`, `cat_id`, `title`, `content`, `thumb`, `admin_id`, `add_time`, `is_link`, `link_url`, `is_show`, `is_blod`, `tag_color`, `short_order`) VALUES
-(1, 1, '关于我们', '关于我们', '', 1, '2009-10-22 15:50:53', 0, 'http://', 1, 0, NULL, NULL),
-(2, 1, '常见问题', '常见问题', '', 1, '2009-10-22 15:52:11', 0, 'http://', 1, 0, NULL, NULL),
-(3, 1, '安全交易', '安全交易', '', 1, '2009-10-22 15:52:21', 0, 'http://', 1, 0, NULL, NULL),
-(4, 1, '购买流程', '购买流程', '', 1, '2009-10-22 15:52:30', 0, 'http://', 1, 0, NULL, NULL),
-(5, 1, '如何付款', '如何付款', '', 1, '2009-10-22 15:52:45', 0, 'http://', 1, 0, NULL, NULL),
-(6, 1, '联系我们', '联系我们', '', 1, '2009-10-22 15:52:56', 0, 'http://', 1, 0, NULL, NULL),
-(7, 1, '合作提案', '合作提案', '', 1, '2009-10-22 15:53:06', 0, 'http://', 1, 0, NULL, NULL),
-(8, 1, '网站地图', '网站地图', '', 1, '2009-10-22 16:51:54', 0, 'http://', 1, 0, NULL, NULL),
-(11, 2, '免费注册', '免费注册', '', 1, '2009-10-23 08:29:33', 0, 'http://', 1, 0, NULL, NULL),
-(12, 2, '开通帐户', '开通帐户', '', 1, '2009-10-23 08:29:48', 0, 'http://', 1, 0, NULL, NULL),
-(13, 2, '如何购买', '如何购买', '', 1, '2009-10-23 08:29:59', 0, 'http://', 1, 0, NULL, NULL),
-(14, 2, '购物车', '购物车', '', 1, '2009-10-23 08:30:37', 0, 'http://', 1, 0, NULL, NULL),
-(15, 2, '我买到的宝贝', '我买到的宝贝', '', 1, '2009-10-23 08:30:49', 0, 'http://', 1, 0, NULL, NULL),
-(16, 2, '聚合性商城特色', '聚合性商城特色', '', 1, '2009-10-23 08:31:00', 0, 'http://', 1, 0, NULL, NULL),
-(17, 2, '商品配送规则', '商品配送规则 ', '', 1, '2009-10-23 08:31:12', 0, 'http://', 1, 0, NULL, NULL),
-(18, 2, '搜索帮助', '搜索帮助', '', 1, '2009-10-23 09:28:32', 0, 'http://', 1, 0, NULL, NULL),
-(19, 3, '最新公告！', '最新公告！', '', 1, '2009-12-23 14:55:49', 0, 'http://', 1, 0, NULL, NULL),
-(20, 3, 'iwebMALL即将上线', 'iwebMALL即将上线iwebMALL即将上线', '', 1, '2009-12-23 14:57:55', 0, 'http://', 1, 0, NULL, NULL),
-(21, 3, 'iwebMALL0.6测试版上线了~~~', 'iwebMALL0.6测试版上线了~~~', '', 1, '2009-12-23 15:06:50', 0, 'http://', 1, 0, NULL, NULL),
-(22, 3, 'iwebSNS0.9已发布~', 'iwebSNS0.9已发布~', '', 1, '2009-12-23 14:58:40', 0, 'http://', 1, 0, NULL, NULL),
-(23, 6, '怎么购买？', '怎么购买？<BR>', '', 1, '2010-04-10 10:42:57', 0, 'http://', 1, 0, NULL, NULL),
-(24, 6, '费用贵不贵？', '<BR>费用贵不贵？', '', 1, '2010-04-10 10:43:15', 0, 'http://', 1, 0, NULL, NULL),
-(25, 6, '付款不发货怎么办？', '<BR>付款不发货怎么办？', '', 1, '2010-04-10 10:43:40', 0, 'http://', 1, 0, NULL, NULL),
-(26, 7, '如何推广？', '<BR>如何推广？', '', 1, '2010-04-10 10:44:18', 0, 'http://', 1, 0, NULL, NULL),
-(27, 7, '怎么才能提高流量！', '怎么才能提高流量！<BR>', '', 1, '2010-04-10 10:44:46', 0, 'http://', 1, 0, NULL, NULL),
-(28, 5, '欢迎大家使用iwebMall', '<BR>欢迎大家使用iwebMall', '', 1, '2010-04-10 10:45:25', 0, 'http://', 1, 0, NULL, NULL),
-(29, 3, '更新公告', '<BR>更新公告', '', 1, '2010-04-10 10:46:32', 0, 'http://', 0, 0, NULL, NULL),
-(30, 3, '发布公告', '<BR>发布公告', '', 1, '2010-04-10 10:46:07', 0, 'http://', 1, 0, NULL, NULL),
-(31, 3, '新版发布', '新版发布', '', 1, '2010-04-10 10:46:44', 0, 'http://', 1, 0, NULL, NULL),
-(32, 3, '试运营公告', '试运营公告~~~', '', 1, '2010-08-31 16:01:57', 0, 'http://www.jooyu.com', 0, 0, 'rgb(0, 51, 255)', 0),
-(33, 2, '小店铺如何团购卖商品', '小店铺如何团购卖商品', '', 1, '2010-08-30 16:08:20', 0, 'http://', 1, 1, 'rgb(0, 255, 0)', 1),
-(34, 2, '店铺信用评价体系', '店铺信用评价体系', '', 1, '2010-06-28 15:50:32', 0, 'http://', 1, 0, '#990000', 1),
-(35, 1, '测试', '测试<br />', '', 1, '2010-08-31 16:02:51', 0, 'http://www.jooyu.com', 1, 1, 'rgb(0, 204, 255)', 0);
+(1, 1, '关于我们', '关于我们', '', 1, '2013-10-22 15:50:53', 0, 'http://', 1, 0, NULL, NULL),
+(2, 1, '常见问题', '常见问题', '', 1, '2013-10-22 15:52:11', 0, 'http://', 1, 0, NULL, NULL),
+(3, 1, '安全交易', '安全交易', '', 1, '2013-10-22 15:52:21', 0, 'http://', 1, 0, NULL, NULL),
+(4, 1, '购买流程', '购买流程', '', 1, '2013-10-22 15:52:30', 0, 'http://', 1, 0, NULL, NULL),
+(5, 1, '如何付款', '如何付款', '', 1, '2013-10-22 15:52:45', 0, 'http://', 1, 0, NULL, NULL),
+(6, 1, '联系我们', '联系我们', '', 1, '2013-10-22 15:52:56', 0, 'http://', 1, 0, NULL, NULL),
+(7, 1, '合作提案', '合作提案', '', 1, '2013-10-22 15:53:06', 0, 'http://', 1, 0, NULL, NULL),
+(8, 1, '网站地图', '网站地图', '', 1, '2013-10-22 16:51:54', 0, 'http://', 1, 0, NULL, NULL),
+(11, 2, '免费注册', '免费注册', '', 1, '2013-10-23 08:29:33', 0, 'http://', 1, 0, NULL, NULL),
+(12, 2, '开通帐户', '开通帐户', '', 1, '2013-10-23 08:29:48', 0, 'http://', 1, 0, NULL, NULL),
+(13, 2, '如何购买', '如何购买', '', 1, '2013-10-23 08:29:59', 0, 'http://', 1, 0, NULL, NULL),
+(14, 2, '购物车', '购物车', '', 1, '2013-10-23 08:30:37', 0, 'http://', 1, 0, NULL, NULL),
+(15, 2, '我买到的宝贝', '我买到的宝贝', '', 1, '2013-10-23 08:30:49', 0, 'http://', 1, 0, NULL, NULL),
+(16, 2, '聚合性商城特色', '聚合性商城特色', '', 1, '2013-10-23 08:31:00', 0, 'http://', 1, 0, NULL, NULL),
+(17, 2, '商品配送规则', '商品配送规则 ', '', 1, '2013-10-23 08:31:12', 0, 'http://', 1, 0, NULL, NULL),
+(18, 2, '搜索帮助', '搜索帮助', '', 1, '2013-10-23 09:28:32', 0, 'http://', 1, 0, NULL, NULL),
+(19, 3, '最新公告！', '最新公告！', '', 1, '2013-12-23 14:55:49', 0, 'http://', 1, 0, NULL, NULL),
+(20, 3, 'dms即将上线', 'dms即将上线dms即将上线', '', 1, '2013-12-23 14:57:55', 0, 'http://', 1, 0, NULL, NULL),
+(21, 3, 'dms0.6测试版上线了~~~', 'dms0.6测试版上线了~~~', '', 1, '2013-12-23 15:06:50', 0, 'http://', 1, 0, NULL, NULL),
+(22, 3, 'dms1.0已发布~', 'dms2.0已发布~', '', 1, '2013-12-23 14:58:40', 0, 'http://', 1, 0, NULL, NULL),
+(23, 6, '怎么购买？', '怎么购买？<BR>', '', 1, '2013-04-10 10:42:57', 0, 'http://', 1, 0, NULL, NULL),
+(24, 6, '费用贵不贵？', '<BR>费用贵不贵？', '', 1, '2013-04-10 10:43:15', 0, 'http://', 1, 0, NULL, NULL),
+(25, 6, '付款不发货怎么办？', '<BR>付款不发货怎么办？', '', 1, '2013-04-10 10:43:40', 0, 'http://', 1, 0, NULL, NULL),
+(26, 7, '如何推广？', '<BR>如何推广？', '', 1, '2013-04-10 10:44:18', 0, 'http://', 1, 0, NULL, NULL),
+(27, 7, '怎么才能提高流量！', '怎么才能提高流量！<BR>', '', 1, '2013-04-10 10:44:46', 0, 'http://', 1, 0, NULL, NULL),
+(28, 5, '欢迎大家使用dms', '<BR>欢迎大家使用dms', '', 1, '2013-04-10 10:45:25', 0, 'http://', 1, 0, NULL, NULL),
+(29, 3, '更新公告', '<BR>更新公告', '', 1, '2013-04-10 10:46:32', 0, 'http://', 0, 0, NULL, NULL),
+(30, 3, '发布公告', '<BR>发布公告', '', 1, '2013-04-10 10:46:07', 0, 'http://', 1, 0, NULL, NULL),
+(31, 3, '新版发布', '新版发布', '', 1, '2013-04-10 10:46:44', 0, 'http://', 1, 0, NULL, NULL),
+(32, 3, '试运营公告', '试运营公告~~~', '', 1, '2013-08-31 16:01:57', 0, 'http://www.jooyu.com', 0, 0, 'rgb(0, 51, 255)', 0),
+(33, 2, '小店铺如何团购卖商品', '小店铺如何团购卖商品', '', 1, '2013-08-30 16:08:20', 0, 'http://', 1, 1, 'rgb(0, 255, 0)', 1),
+(34, 2, '店铺信用评价体系', '店铺信用评价体系', '', 1, '2013-06-28 15:50:32', 0, 'http://', 1, 0, '#990000', 1),
+(35, 1, '测试', '测试<br />', '', 1, '2013-08-31 16:02:51', 0, 'http://www.jooyu.com', 1, 1, 'rgb(0, 204, 255)', 0);
 
 -- --------------------------------------------------------
 
@@ -3587,12 +3587,12 @@ CREATE TABLE `imall_asd_content` (
 --
 
 INSERT INTO `imall_asd_content` (`asd_id`, `position_id`, `media_type`, `asd_name`, `asd_link`, `asd_content`, `remark`, `enabled`, `last_update_time`) VALUES
-(1, 2, 1, 'GDS', 'http://www.guilin.com', './uploadfiles/asd/2010/10/21/2010102108020143.gif', 'GDS', 1, '2010-10-21 16:02:01'),
-(2, 3, 1, '广告', 'http://www.guilin.com', './uploadfiles/asd/2010/10/21/2010102108173450.png', '广告', 1, '2010-10-21 16:17:34'),
-(3, 4, 1, 'iwebshop', 'http://www.guilin.com', './uploadfiles/asd/2010/10/21/2010102108181899.jpg', '', 1, '2010-10-21 16:18:18'),
-(4, 1, 1, '广告名称', 'http://www.guilin.com/', './uploadfiles/asd/2010/10/21/2010102108120444.jpg', '', 1, '2010-10-21 16:12:04'),
-(44, 2, 1, '桂林旅游营销系统', 'http://www.guilin.com/', './uploadfiles/asd/2010/10/21/2010102108153032.png', '桂林旅游营销系统', 1, '2010-10-21 16:15:30'),
-(43, 1, 1, '桂林旅游营销系统', 'http://www.guilin.com/', './uploadfiles/asd/2010/10/21/2010102108144798.jpg', '', 1, '2010-10-21 16:16:31');
+(1, 2, 1, 'GDS', 'http://www.guilin.com', './uploadfiles/asd/2013/10/21/2013102108020143.gif', 'GDS', 1, '2013-10-21 16:02:01'),
+(2, 3, 1, '广告', 'http://www.guilin.com', './uploadfiles/asd/2013/10/21/2013102108173450.png', '广告', 1, '2013-10-21 16:17:34'),
+(3, 4, 1, 'iwebshop', 'http://www.guilin.com', './uploadfiles/asd/2013/10/21/2013102108181899.jpg', '', 1, '2013-10-21 16:18:18'),
+(4, 1, 1, '广告名称', 'http://www.guilin.com/', './uploadfiles/asd/2013/10/21/2013102108120444.jpg', '', 1, '2013-10-21 16:12:04'),
+(44, 2, 1, '桂林旅游营销系统', 'http://www.guilin.com/', './uploadfiles/asd/2013/10/21/2013102108153032.png', '桂林旅游营销系统', 1, '2013-10-21 16:15:30'),
+(43, 1, 1, '桂林旅游营销系统', 'http://www.guilin.com/', './uploadfiles/asd/2013/10/21/2013102108144798.jpg', '', 1, '2013-10-21 16:16:31');
 
 -- --------------------------------------------------------
 
@@ -3668,8 +3668,8 @@ INSERT INTO `imall_brand` (`brand_id`, `brand_name`, `brand_logo`, `brand_desc`,
 (12, '金士顿', 'docs/images/brand/12.jpg', '', 'http://www.kingston.com/china/', 1),
 (13, 'AMD', 'docs/images/brand/13.jpg', '', 'http://www.amd.com.cn/', 1),
 (22, '桂林旅游营销系统网络', '', '桂林旅游营销系统网络', 'http://www.guilin.com', 1),
-(17, '阿迪达斯', './docs/brand/2010/04/09/2010040907354277.jpg', '阿迪达斯', 'http://www.adidas.com', 1),
-(19, '劳力士', './docs/brand/2010/04/09/2010040907563397.jpg', '劳力士', 'http://www.rolex.com', 1);
+(17, '阿迪达斯', './docs/brand/2013/04/09/2013040907354277.jpg', '阿迪达斯', 'http://www.adidas.com', 1),
+(19, '劳力士', './docs/brand/2013/04/09/2013040907563397.jpg', '劳力士', 'http://www.rolex.com', 1);
 
 -- --------------------------------------------------------
 
@@ -4699,11 +4699,11 @@ CREATE TABLE `imall_index_images` (
 --
 
 INSERT INTO `imall_index_images` (`id`, `name`, `images_url`, `images_link`, `add_time`, `status`) VALUES
-(26, '桂林旅游营销系统', './uploadfiles/index/2010/10/21/2010102108053096.jpg', 'http://www.guilin.com/', '2010-10-21 16:05:30', 1),
-(27, '', './uploadfiles/index/2010/10/21/2010102108061519.jpg', 'http://www.guilin.com/', '2010-10-21 16:06:15', 1),
-(28, '', './uploadfiles/index/2010/10/21/2010102108062766.jpg', 'http://www.guilin.com/', '2010-10-21 16:06:27', 1),
-(29, '', './uploadfiles/index/2010/10/21/2010102108064081.jpg', 'http://www.guilin.com/', '2010-10-21 16:06:40', 1),
-(30, '', './uploadfiles/index/2010/10/21/2010102108072485.jpg', 'http://www.guilin.com/', '2010-10-21 16:07:24', 1);
+(26, '桂林旅游营销系统', './uploadfiles/index/2013/10/21/2013102108053096.jpg', 'http://www.guilin.com/', '2013-10-21 16:05:30', 1),
+(27, '', './uploadfiles/index/2013/10/21/2013102108061519.jpg', 'http://www.guilin.com/', '2013-10-21 16:06:15', 1),
+(28, '', './uploadfiles/index/2013/10/21/2013102108062766.jpg', 'http://www.guilin.com/', '2013-10-21 16:06:27', 1),
+(29, '', './uploadfiles/index/2013/10/21/2013102108064081.jpg', 'http://www.guilin.com/', '2013-10-21 16:06:40', 1),
+(30, '', './uploadfiles/index/2013/10/21/2013102108072485.jpg', 'http://www.guilin.com/', '2013-10-21 16:07:24', 1);
 
 
 --
@@ -4724,11 +4724,11 @@ CREATE TABLE `imall_integral` (
 --
 
 INSERT INTO `imall_integral` (`int_id`, `int_min`, `int_max`, `int_grade`, `int_img`) VALUES
-(8, '101', '200', 4, './uploadfiles/credit/2010/10/29/2010102902393768.jpg'),
-(3, '0', '10', 1, './uploadfiles/credit/2010/10/29/2010102902363466.jpg'),
-(7, '51', '100', 3, './uploadfiles/credit/2010/10/29/2010102902392293.jpg'),
-(6, '11', '50', 2, './uploadfiles/credit/2010/10/29/2010102902370553.jpg'),
-(9, '201', '400', 5, './uploadfiles/credit/2010/10/29/2010102902401215.jpg');
+(8, '101', '200', 4, './uploadfiles/credit/2013/10/29/2013102902393768.jpg'),
+(3, '0', '10', 1, './uploadfiles/credit/2013/10/29/2013102902363466.jpg'),
+(7, '51', '100', 3, './uploadfiles/credit/2013/10/29/2013102902392293.jpg'),
+(6, '11', '50', 2, './uploadfiles/credit/2013/10/29/2013102902370553.jpg'),
+(9, '201', '400', 5, './uploadfiles/credit/2013/10/29/2013102902401215.jpg');
 
 --
 -- 表的结构 `imall_keywords_count`
@@ -4764,8 +4764,8 @@ CREATE TABLE `imall_mailtpl` (
 --
 
 INSERT INTO `imall_mailtpl` (`tpl_id`, `tpl_name`, `tpl_title`, `tpl_content`, `last_modify`) VALUES
-(1, '找回密码邮件模板', '来自{site_name}的密码找回邮件', '{user_name}您好！<br><br>您已经进行了密码重置的操作，请点击以下链接(或者复制到您的浏览器):<br><br><a href="{forgot_check_code_url}" target="_blank">{forgot_check_code_url}</a><br><br>以确认您的新密码重置操作！1<br><br>{send_date} <br><br>（此邮件由系统自动产生，请勿回复。）<br>', '2010-08-30 11:21:05'),
-(2, '帐号激活邮件模版', '来自{site_name}的帐号激活邮件', '亲爱的{user_name}，欢迎您成为{site_name}的一员，现在开始商城之旅。<BR>激活你的帐号请<A href="{baseUrl}modules.php?app=reg3&amp;uid={user_id}&amp;ucode={email_check_code}" target=_blank>点击这里</A>， 如果无法点击，请将下列地址复制到地址栏进行激活。<BR>{baseUrl}modules.php?app=reg3&amp;uid={user_id}&amp;ucode={email_check_code}<BR>感谢对{site_name}的支持，再次希望您在{site_name}完成交易！<BR><BR>( 这是系统自动产生的邮件，请勿回复。) <BR>', '2010-04-23 10:32:50');
+(1, '找回密码邮件模板', '来自{site_name}的密码找回邮件', '{user_name}您好！<br><br>您已经进行了密码重置的操作，请点击以下链接(或者复制到您的浏览器):<br><br><a href="{forgot_check_code_url}" target="_blank">{forgot_check_code_url}</a><br><br>以确认您的新密码重置操作！1<br><br>{send_date} <br><br>（此邮件由系统自动产生，请勿回复。）<br>', '2013-08-30 11:21:05'),
+(2, '帐号激活邮件模版', '来自{site_name}的帐号激活邮件', '亲爱的{user_name}，欢迎您成为{site_name}的一员，现在开始商城之旅。<BR>激活你的帐号请<A href="{baseUrl}modules.php?app=reg3&amp;uid={user_id}&amp;ucode={email_check_code}" target=_blank>点击这里</A>， 如果无法点击，请将下列地址复制到地址栏进行激活。<BR>{baseUrl}modules.php?app=reg3&amp;uid={user_id}&amp;ucode={email_check_code}<BR>感谢对{site_name}的支持，再次希望您在{site_name}完成交易！<BR><BR>( 这是系统自动产生的邮件，请勿回复。) <BR>', '2013-04-23 10:32:50');
 
 
 --
@@ -5058,15 +5058,15 @@ CREATE TABLE `imall_settings` (
 --
 
 INSERT INTO `imall_settings` (`variable`, `value`) VALUES
-('lastupdate', '2010-11-29 13:42:46'),
+('lastupdate', '2013-11-29 13:42:46'),
 ('sys_name', '桂林旅游营销系统商城'),
 ('sys_title', '桂林旅游营销系统商城'),
 ('sys_keywords', '桂林旅游营销系统|商城'),
 ('sys_description', '桂林旅游营销系统商城是一个新型的电子商务平台。'),
 ('sys_company', '北京桂林旅游营销系统国际旅行社有限公司'),
-('sys_copyright', 'Copyright © 2010-2020'),
-('sys_icp', '鲁ICP备01000011号'),
-('sys_kftelphone', '0531-1111111'),
+('sys_copyright', 'Copyright © 2013-2020'),
+('sys_icp', '桂ICP备01000011号'),
+('sys_kftelphone', '0773-1111111'),
 ('sys_kfqq', ''),
 ('sys_smtpserver', ''),
 ('sys_smtpserverport', '25'),
@@ -5076,7 +5076,7 @@ INSERT INTO `imall_settings` (`variable`, `value`) VALUES
 ('sys_registerinfo', '您是否同意这些条款？'),
 ('templates', 'default'),
 ('page', '10'),
-('session', 'iweb_'),
+('session', 'dms_'),
 ('lp', 'zh'),
 ('web', 'http://localhost/mall/'),
 ('url_r', '2'),
@@ -5089,7 +5089,7 @@ INSERT INTO `imall_settings` (`variable`, `value`) VALUES
 ('height2', '300'),
 ('width2', '300'),
 ('im_enable', 'false'),
-('sys_countjs', '<script src=" http://s4.cnzz.com/stat.php?id=2150173&web_id=2150173" language="JavaScript"></script>'),
+('sys_countjs', '<script src="" language="JavaScript"></script>'),
 ('email_send', 'false'),
 ('timezone', '8'),
 ('offline', 'true'),
@@ -5099,9 +5099,9 @@ INSERT INTO `imall_settings` (`variable`, `value`) VALUES
 ('sys_logo', ''),
 ('template_mode', 'debug'),
 ('sys_domain', '0'),
-('site_domain', '.iwebmall.com'),
+('site_domain', '.dms.com'),
 ('verifycode', 'a:4:{i:1;s:1:"0";i:2;s:1:"1";i:3;s:1:"1";i:4;s:1:"0";}'),
-('site_domian', '.iwebmall.com');
+('site_domian', '.dms.com');
 
 
 --

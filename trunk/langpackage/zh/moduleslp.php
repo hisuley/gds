@@ -502,7 +502,7 @@ class moduleslp{
 	var $m_alipay_tradeno = "支付订单号";
 	var $m_ask_service = "申请客服介入";
 
-	var $m_welcome_ucenter = "欢迎您来到<span class=\"highlight\">IwebMall</span>用户管理中心！";
+	var $m_welcome_ucenter = "欢迎您来到<span class=\"highlight\">dms</span>用户管理中心！";
 	var $m_bubuser_info = "买家信息";
 	var $m_babuser_info = "卖家信息";
 	var $m_deal_order = "成交的订单";

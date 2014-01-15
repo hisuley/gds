@@ -885,13 +885,13 @@ class adminlp{
 
 	var $a_countjs_code = "流量统计代码";
 	var $a_setting_message1 = "您设置的<web根目录设置>项与程序检测的路径不同，这样会导致您的图片，样式找不到真实地址！您确定还要修改么？";
-	var $a_setting_message2 = "（网站标题，显示在页面的左上角。如：桂林GDS）";
-	var $a_setting_message3 = "（便于引擎查找，当输入多个时，用“，”或者“|”分隔。如：mall|iweb）";
+	var $a_setting_message2 = "（网站标题，显示在页面的左上角。如：桂林DMS）";
+	var $a_setting_message3 = "（便于引擎查找，当输入多个时，用“，”或者“|”分隔。如：DMS|桂林）";
 	var $a_setting_message4 = "（网站的重点描述信息，让访客清楚了解网站概要。如：桂林旅游目的地信息系统）";
 	var $a_setting_message5 = "（网站所属的版权。如：Copyright©2013 ）";
 	var $a_setting_message6 = "（信息产业部所颁发的备案信息。如：京ICP备09092256号 ）";
 	var $a_setting_message7 = "（用户注册时所需要同意的服务条款。支持html代码格式:&lt;br /&gt;换行；&lt;b&gt;加粗）";
-	var $a_setting_message8 = "（定义本系统的session前缀，默认：iweb_）";
+	var $a_setting_message8 = "（定义本系统的session前缀，默认：dms_）";
 	var $a_setting_message9 = "（根据网站的“langpackage/”目录下的语言包文件来更换网站的默认语言。默认：zh）";
 	var $a_setting_message10 = "（程序检测访问地址,点击自动设置根目录：";
 	var $a_setting_message11 = "点击设置完整地址";
@@ -901,7 +901,7 @@ class adminlp{
 	var $a_setting_message15 = "（产品列表页面每页的显示数设置）";
 	var $a_setting_message16 = "（文章列表页面每页的显示数设置）";
 	var $a_setting_message17 = "（开启重写时会使前台所有页面静态化，更容易被搜索引擎挖掘，提高被收录的机率。）<br />（开启简单重写：服务器无需Rewrite模块的支持）<br />（开启复杂重写：服务器需要对Rewrite模块的支持，需要把docs/目录下的.htaccess放到您的网站根目录下。）";
-	var $a_setting_message18 = "（IM开启需要iwebIM产品的支持，源码可到官方主站";
+	var $a_setting_message18 = "（IM开启需要TQ(tq.cn)支持，源码可到官方主站";
 	var $a_setting_message19 = " 下载";
 	var $a_setting_message20 = "（关闭网站，此时任何人都无法访问站点内容。默认：打开）";
 	var $a_setting_message21 = "（如果您需要增加流量统计代码，请把它放到这里。）";
@@ -1369,11 +1369,11 @@ class uilp{
 	var $u_list_back="返回列表";
 	var $u_clew_inf="提示信息";
 	var $u_temp_save="当前模板保存在 <font color='red'>./templates/{temp}</font>目录";
-	var $u_do_flow="iweb_shop 模板制作与标签设置的基本流程：";
+	var $u_do_flow="dms 模板制作与标签设置的基本流程：";
 	var $u_flow_1="1、通过Deamweaver、Fireworks、Flash 和 Photoshop 等软件设计好 html 页面；";
 	var $u_flow_2="2、根据页面布局插入标签，标签的具体规则请参考手册；";
-	var $u_flow_3="3、在 ./templates 目录下建立一个新的模板目录，然后把做好的 html 页面按照 iweb_sns 模板命名规则命名并存放到模板目录；";
-	var $u_flow_4="4、登录iweb_shop后台，进入“模板管理”，把自己新建的模板方案设置为使用方案；";
+	var $u_flow_3="3、在 ./templates 目录下建立一个新的模板目录，然后把做好的 html 页面按照 dms 模板命名规则命名并存放到模板目录；";
+	var $u_flow_4="4、登录dms后台，进入“模板管理”，把自己新建的模板方案设置为使用方案；";
 	var $u_flow_5="5、编译后即可看到页面效果；";
 	var $u_flow_6="6，模板方案的目录结构一定要与网站的根目录结构相同，请参考templates/default下的目录结构；";
 	var $u_file_no="没有选择方案！";
@@ -1431,14 +1431,14 @@ class pluginslp{
 	var $pl_isset="已安装";
 	var $pl_unload="卸载";
 	var $pl_next_step="下一步";
-	var $pl_guide="IWebSNS插件向导";
+	var $pl_guide="Dms插件向导";
 	var $pl_install_info="插件安装说明";
 	var $pl_install_worning="插件分为官方插件和第三方插件两种，由第三方开发的插件请确定安全性后再安装，或者下载官方推荐的插件。";
 	var $pl_sure="确 定";
 	var $pl_unload_info="插件卸载说明";
 	var $pl_unload_remind="插件卸载后不会影响系统的运行，请放心卸载！";
 	var $pl_update="更 新";
-	var $pl_manage_str="IWebSNS插件管理";
+	var $pl_manage_str="DMS插件管理";
 	var $pl_manage="插件管理";
 	var $pl_set_update="对插件进行设置更新";
 	var $pl_worning="警告：插件删除后，不能修复，您确定删除此插件吗？";
@@ -1456,7 +1456,7 @@ class pluginslp{
 	var $pl_inspire="是否启用";
 	var $pl_inspire_info="启用是指，插件是否生效。";
 
-	var $pl_plugin_wizard ="IWebMall插件安装向导";
+	var $pl_plugin_wizard ="dms插件安装向导";
 	var $pl_plugin_info_notall ="插件配制信息不全，不具备安装条件！";
 	var $pl_app_application ="APP应用";
 	var $pl_widget_plugin ="Widget插件";

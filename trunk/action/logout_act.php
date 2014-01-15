@@ -2,7 +2,7 @@
 $userid=get_sess_user_id();
 //会员退出
 session_destroy();
-unset_cookie('iweb_login');
+unset_cookie('dms_login');
 
 if($_SERVER['HTTP_REFERER']){
 	$url=$_SERVER['HTTP_REFERER'];

@@ -1,7 +1,7 @@
 <?php
 	$user_id = get_sess_user_id();
 	if(!$user_id){
-		$iweb_shop=get_cookie('iweb_login');
+		$iweb_shop=get_cookie('dms_login');
 		if($iweb_shop){
 			$iweb_shop=explode('|',$iweb_shop);
 			$cuser_name = $iweb_shop[0];

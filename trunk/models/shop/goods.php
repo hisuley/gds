@@ -59,8 +59,8 @@ $dbo=new dbex();
 /*
  * 将游览的商品id放入cookie中，防刷新
  */
-if(get_cookie('visitIwebMallGoods')){
-	$remotegoods=explode(",",get_cookie('visitIwebMallGoods'));
+if(get_cookie('visitdmsGoods')){
+	$remotegoods=explode(",",get_cookie('visitdmsGoods'));
 	$i=true;
 	foreach ($remotegoods as $v){
 		if($v==$goods_id){
@@ -68,14 +68,14 @@ if(get_cookie('visitIwebMallGoods')){
 		}
 	}
 	if($i){
-		set_cookie('visitIwebMallGoods',get_cookie('visitIwebMallGoods').",".$goods_id,3600*24);
+		set_cookie('visitdmsGoods',get_cookie('visitdmsGoods').",".$goods_id,3600*24);
 		$sql = "update $t_goods set pv=pv+1 where goods_id='$goods_id'";
 	    $dbo->exeUpdate($sql);
 	}
 
 }else{
 	$remoteip=GetIP();
-	set_cookie('visitIwebMallGoods',$remoteip.','.$goods_id,3600*24);
+	set_cookie('visitdmsGoods',$remoteip.','.$goods_id,3600*24);
 	$sql = "update $t_goods set pv=pv+1 where goods_id='$goods_id'";
 	$dbo->exeUpdate($sql);
 }

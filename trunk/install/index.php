@@ -6,9 +6,9 @@ require("../foundation/fstring.php");
 
 $lockfile = '../cache/install.lock';
 if(file_exists($lockfile)) {
-	echo '警告!您已经安装过iweb_shop&mall<br>
+	echo '警告!您已经安装过DMS<br>
 		为了保证数据安全，请立即手动删除 install 文件夹<br>
-		如果您想重新安装iweb_shop&mall，请删除 cache/install.lock 文件，再运行安装文件';
+		如果您想重新安装DMS，请删除 cache/install.lock 文件，再运行安装文件';
 	exit;
 }
 
@@ -68,11 +68,11 @@ if ( empty($PHP_SELF) ){
 }
 
 if ( version_compare( '5.0', phpversion(), '>' ) ) {
-	die( '您的服务器运行的 PHP 版本是' . phpversion() . ' 但 iweb_shop&mall 要求至少 5.0。' );
+	die( '您的服务器运行的 PHP 版本是' . phpversion() . ' 但DMS 要求至少 5.0。' );
 }
 
 if ( !extension_loaded('mysql')){
-	die( '您的 PHP 安装看起来缺少 MySQL 数据库部分，这对 iweb_shop&mall 来说是必须的。' );
+	die( '您的 PHP 安装看起来缺少 MySQL 数据库部分，这对 DMS 来说是必须的。' );
 }
 
 require_once(iPATH.'install/common.php');
@@ -96,7 +96,7 @@ $step = isset($_POST['step']) ? $_POST['step'] : '1';
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>iweb_shop&mall - 安装向导</title>
+<title>DMS - 安装向导</title>
 <link href="css/install.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -266,7 +266,7 @@ if ($step == '1') {
 	    'swfupload.php',
 		'brand_info.php',
 		'brand_list.php',
-		'iweb_mini_lib/conf/dbconf.php'
+		'dms_mini_lib/conf/dbconf.php'
 	);
 	if($fp=@fopen(iPATH.'test.txt',"wb")){
 		$state=$correct;
@@ -378,7 +378,7 @@ if ($step == '1') {
               <tr><th colspan="3"></th></tr>
               <tr>
                 <td>数据库名称</td>
-                <td><input type="text" class="setup_input" name="dbname" value="iwebmall" /></td>
+                <td><input type="text" class="setup_input" name="dbname" value="dms" /></td>
                 <input name="create" type="hidden" id="create" value="1"/>
                 <td class="lightcolor">如果不存在，则自动被创建</td>
               </tr>
@@ -398,7 +398,7 @@ if ($step == '1') {
               <tr>
                 <td>数据表前缀</td>
                 <td><input type="text" class="setup_input" name="tablepre" value="imall_" /></td>
-                <td class="lightcolor">同一数据库安装多个iWeb产品时可改变默认前缀 </td>
+                <td class="lightcolor">同一数据库安装多个DMS产品时可改变默认前缀 </td>
               </tr>
               <tr><th colspan="3"></th></tr><tr><th colspan="3"></th></tr>
   			</table>
@@ -480,7 +480,7 @@ if ($step == '1') {
 ?>
 <div class="data_create">
     <?php
-		$dbconffile=iPATH.'iweb_mini_lib/conf/dbconf.php';
+		$dbconffile=iPATH.'dms/conf/dbconf.php';
 		if(is_writeable($dbconffile)) {
 
 			$dbhost 	= trim($_POST['dbhost']);
@@ -596,14 +596,14 @@ $testdata	= isset($_POST['testdata']) ? trim($_POST['testdata']) : 0;
 	</p>
 		<div class="data_create">
        		<ul>
-            	<li>恭喜，iWebMALL安装程序已经顺利执行完毕！</li>
+            	<li>恭喜，DMS安装程序已经顺利执行完毕！</li>
             	<li>为了您的数据安全，请尽快删除整个 install 目录</li>
             </ul>
        </div>
 	<?php
 	/* 生成 asd js */
 	@mkdir("../uploadfiles/asd/");
-	@file_put_contents("../uploadfiles/asd/1.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/1.jpg\" width=\"960\" height=\"90\" alt=\"iwebshop\"></a>');");
+	@file_put_contents("../uploadfiles/asd/1.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/1.jpg\" width=\"960\" height=\"90\" alt=\"dms\"></a>');");
 	@file_put_contents("../uploadfiles/asd/3.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/3.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
 	@file_put_contents("../uploadfiles/asd/2.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/2.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");
 	@file_put_contents("../uploadfiles/asd/4.js","document.write('<a href=\"http://www.guilin.com\"><img src=\"docs/images/asd/2010/4.jpg\" width=\"200\" height=\"120\" alt=\"广告\"></a>');");

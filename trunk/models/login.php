@@ -29,7 +29,7 @@ $url = get_args('url');
 if($url){
 	$_SERVER['HTTP_REFERER']=urldecode($url);
 }
-$iweb_shop=get_cookie('iweb_login');
+$iweb_shop=get_cookie('dms_login');
 $outuserid=get_args('outuserid')?get_args('outuserid'):'0';
 /*导航位置*/
 $nav_selected=1;

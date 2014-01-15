@@ -71,7 +71,7 @@ if($user_info['email_check']!='1'){
 
 	//设置cookie---------------------------------------------------------
 	$name = $user_email;
-	set_cookie('iweb_login',$name);
+	set_cookie('dms_login',$name);
 
 	set_sess_user_name($user_info['user_name']);
 	set_sess_user_id($user_info['user_id']);
@@ -129,7 +129,7 @@ if($user_info['email_check']!='1'){
 
 	if($user_info['email_check']) {
 		if($im_enable) {
-			echo "<script language='JavaScript'>location.href='iwebim.php'</script>";
+			echo "<script language='JavaScript'>location.href='tq.php'</script>";
 		} else {
 			if($url){
 				header('Location: ' . $url);
