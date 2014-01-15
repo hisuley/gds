@@ -901,7 +901,7 @@ class adminlp{
 	var $a_setting_message15 = "（产品列表页面每页的显示数设置）";
 	var $a_setting_message16 = "（文章列表页面每页的显示数设置）";
 	var $a_setting_message17 = "（开启重写时会使前台所有页面静态化，更容易被搜索引擎挖掘，提高被收录的机率。）<br />（开启简单重写：服务器无需Rewrite模块的支持）<br />（开启复杂重写：服务器需要对Rewrite模块的支持，需要把docs/目录下的.htaccess放到您的网站根目录下。）";
-	var $a_setting_message18 = "（IM开启需要iwebIM产品的支持，源码可到官方主站";
+	var $a_setting_message18 = "（IM开启需要TQ产品的支持，源码可到官方主站";
 	var $a_setting_message19 = " 下载";
 	var $a_setting_message20 = "（关闭网站，此时任何人都无法访问站点内容。默认：打开）";
 	var $a_setting_message21 = "（如果您需要增加流量统计代码，请把它放到这里。）";
