@@ -1,13 +1,13 @@
 <?php
 if(!$IWEB_SHOP_IN) {die('Hacking attempt');} 
 $SYSINFO['sys_name'] = '桂林旅游网'; 
-$SYSINFO['sys_title'] = 'Guillin GDS'; 
+$SYSINFO['sys_title'] = 'Guillin DMS';
 $SYSINFO['sys_keywords'] = 'Guilin'; 
 $SYSINFO['sys_description'] = 'Gulin'; 
 $SYSINFO['sys_company'] = '桂林旅游局'; 
 $SYSINFO['sys_copyright'] = 'Copyright © 2013'; 
-$SYSINFO['sys_icp'] = '京ICP备09092256号 '; 
-$SYSINFO['sys_kftelphone'] = '0531-'; 
+$SYSINFO['sys_icp'] = '京ICP备09092256号 ';
+$SYSINFO['sys_kftelphone'] = '0773-';
 $SYSINFO['sys_kfqq'] = ''; 
 $SYSINFO['sys_smtpserver'] = 'mail.qq.com'; 
 $SYSINFO['sys_smtpserverport'] = '25'; 
