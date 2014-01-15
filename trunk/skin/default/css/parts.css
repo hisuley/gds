@@ -25,7 +25,7 @@ Last Updated:2013/12/10 mo
 .toolbar #window { background:url(../images/part/icon_nowin.gif) no-repeat left center }
 .toolbar #list:link, .toolbar #list:visited, .toolbar #window:link, .toolbar #window:visited { color:#333333; }
 .toolbar #list.selected, .toolbar #list:hover { text-decoration:none; background:url(../images/part/icon_sellist.gif) no-repeat left center; }
-.toolbar #list:hover, .toolbar #list.:active, .toolbar #window:hover, .toolbar #window:active {
+.toolbar #list:hover, .toolbar #list:active, .toolbar #window:hover, .toolbar #window:active {
 color:#F67A06;
 }
 .toolbar #window.selected, .toolbar #window:hover { background:url(../images/part/icon_nowin2.gif) no-repeat left center; text-decoration:none; }
