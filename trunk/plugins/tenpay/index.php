@@ -5,28 +5,32 @@
 header("content-type:text/html;charset=utf-8");
 $IWEB_SHOP_IN = true;
 
-require_once ("classes/PayRequestHandler.class.php");
+require_once("classes/PayRequestHandler.class.php");
 require("../../configuration.php");
 require("includes.php");
 require("../../foundation/module_order.php");
 
 // 连接数据库 初始操作
 $dbo = new dbex;
-dbtarget('r',$dbServs);
+dbtarget('r', $dbServs);
 $order_id = intval($_GET['id']);
 $pay_id = intval($_GET['pay_id']);
 
-if(!$order_id && !$pay_id) {exit("Error");}
+if (!$order_id && !$pay_id) {
+    exit("Error");
+}
 
-$t_order_info = $tablePreStr."order_info";
-$t_shop_payment = $tablePreStr."shop_payment";
+$t_order_info = $tablePreStr . "order_info";
+$t_shop_payment = $tablePreStr . "shop_payment";
 
 // 获取订单信息
-$orderinfo = get_order_info($dbo,$t_order_info,$order_id);
-if(!$orderinfo) {exit("非法操作");}
+$orderinfo = get_order_info($dbo, $t_order_info, $order_id);
+if (!$orderinfo) {
+    exit("非法操作");
+}
 
 // 获取支付配置信息
-$sql = "SELECT * FROM $t_shop_payment WHERE shop_id='".$orderinfo['shop_id']."' and pay_id=$pay_id";
+$sql = "SELECT * FROM $t_shop_payment WHERE shop_id='" . $orderinfo['shop_id'] . "' and pay_id=$pay_id";
 $row = $dbo->getRow($sql);
 $payment_info = unserialize($row['pay_config']);
 
@@ -37,7 +41,7 @@ $bargainor_id = $payment_info['bargainor_id'];
 $key = $payment_info['key'];
 
 /* 返回处理地址 */
-$return_url = $baseUrl."plugins/tenpay/return_url.php";
+$return_url = $baseUrl . "plugins/tenpay/return_url.php";
 
 //date_default_timezone_set(PRC);
 $strDate = date("Ymd");
@@ -56,7 +60,7 @@ $sp_billno = $orderinfo['payid'];
 $transaction_id = $bargainor_id . $strDate . $strReq;
 
 /* 商品价格（包含运费），以分为单位 */
-$total_fee = $orderinfo['order_amount']*100;
+$total_fee = $orderinfo['order_amount'] * 100;
 
 /* 商品名称 */
 //$transaction_id=$orderinfo['payid'];
@@ -70,13 +74,13 @@ $reqHandler->setKey($key);
 //----------------------------------------
 //设置支付参数
 //----------------------------------------
-$reqHandler->setParameter("bargainor_id", $bargainor_id);			//商户号
-$reqHandler->setParameter("sp_billno", $sp_billno);					//商户订单号
-$reqHandler->setParameter("transaction_id", $transaction_id);		//财付通交易单号
-$reqHandler->setParameter("total_fee", $total_fee);					//商品总金额,以分为单位
-$reqHandler->setParameter("return_url", $return_url);				//返回处理地址
-$reqHandler->setParameter("desc", "订单号：" . $transaction_id);	    //商品名称
-$reqHandler->setParameter("cs", "utf8");	    					//编码参数
+$reqHandler->setParameter("bargainor_id", $bargainor_id); //商户号
+$reqHandler->setParameter("sp_billno", $sp_billno); //商户订单号
+$reqHandler->setParameter("transaction_id", $transaction_id); //财付通交易单号
+$reqHandler->setParameter("total_fee", $total_fee); //商品总金额,以分为单位
+$reqHandler->setParameter("return_url", $return_url); //返回处理地址
+$reqHandler->setParameter("desc", "订单号：" . $transaction_id); //商品名称
+$reqHandler->setParameter("cs", "utf8"); //编码参数
 
 //用户ip,测试环境时不要加这个ip参数，正式环境再加此参数
 //$reqHandler->setParameter("spbill_create_ip", $_SERVER['REMOTE_ADDR']);

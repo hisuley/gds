@@ -1,25 +1,25 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title></title>
 
-<link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body onLoad="javascript:document.E_FORM.submit()">
-<!--以下信息为标准的 HTML 格式 + ASP 语言 拼凑而成的 网银在线 支付接口标准演示页面 无需修改-->
+<!--锟斤拷锟斤拷锟斤拷息为锟斤拷准锟斤拷 HTML 锟斤拷式 + ASP 锟斤拷锟斤拷 拼锟秸讹拷傻锟� 锟斤拷锟斤拷锟斤拷锟斤拷 支锟斤拷锟接口憋拷准锟斤拷示页锟斤拷 锟斤拷锟斤拷锟睫革拷-->
 <form method="post" name="E_FORM" action="https://Pay3.chinabank.com.cn/PayGate">
-	<input type="hidden" name="v_mid"         value="<?php echo $v_mid;?>">
-	<input type="hidden" name="v_oid"         value="<?php echo $v_oid;?>">
-	<input type="hidden" name="v_amount"      value="<?php echo $v_amount;?>">
-	<input type="hidden" name="v_moneytype"   value="<?php echo $v_moneytype;?>">
-	<input type="hidden" name="v_url"         value="<?php echo $v_url;?>">
-	<input type="hidden" name="v_md5info"     value="<?php echo $v_md5info;?>">
- 
- <!--以下几项项为网上支付完成后，随支付反馈信息一同传给信息接收页 -->	
-	
-	<input type="hidden" name="remark1"       value="<?php echo $remark1;?>">
-	<input type="hidden" name="remark2"       value="<?php echo $remark2;?>">
+    <input type="hidden" name="v_mid" value="<?php echo $v_mid; ?>">
+    <input type="hidden" name="v_oid" value="<?php echo $v_oid; ?>">
+    <input type="hidden" name="v_amount" value="<?php echo $v_amount; ?>">
+    <input type="hidden" name="v_moneytype" value="<?php echo $v_moneytype; ?>">
+    <input type="hidden" name="v_url" value="<?php echo $v_url; ?>">
+    <input type="hidden" name="v_md5info" value="<?php echo $v_md5info; ?>">
+
+    <!--锟斤拷锟铰硷拷锟斤拷锟斤拷为锟斤拷锟斤拷支锟斤拷锟斤拷珊锟斤拷锟街э拷锟斤拷锟斤拷锟斤拷锟较⒁煌拷锟斤拷锟斤拷锟较拷锟斤拷锟揭� -->
+
+    <input type="hidden" name="remark1" value="<?php echo $remark1; ?>">
+    <input type="hidden" name="remark2" value="<?php echo $remark2; ?>">
 </form>
 
 </body>

@@ -16,60 +16,62 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
 if(filemtime("templates/default/modules/shop/create_notice.html") > filemtime(__file__) || (file_exists("models/modules/shop/create_notice.php") && filemtime("models/modules/shop/create_notice.php") > filemtime(__file__)) ) {
-	tpl_engine("default","modules/shop/create_notice.html",1);
-	include(__file__);
+    tpl_engine("default", "modules/shop/create_notice.html", 1);
+    include(__file__);
 } else {
 /* debug模式运行生成代码 结束 */
 ?><?php
-if(!$IWEB_SHOP_IN) {
-	trigger_error('Hacking attempt');
+if (!$IWEB_SHOP_IN) {
+    trigger_error('Hacking attempt');
 }
 //引入语言包
-$m_langpackage=new moduleslp;
-$i_langpackage=new indexlp;
-if(isset($user_privilege[1])&&!$user_privilege[1]) {
-	set_sess_err_msg($m_langpackage->m_error_createshop);
-	echo '<script language="JavaScript">location.href="modules.php?app=message"</script>';
-	exit;
+$m_langpackage = new moduleslp;
+$i_langpackage = new indexlp;
+if (isset($user_privilege[1]) && !$user_privilege[1]) {
+    set_sess_err_msg($m_langpackage->m_error_createshop);
+    echo '<script language="JavaScript">location.href="modules.php?app=message"</script>';
+    exit;
 }
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title><?php echo  $m_langpackage->m_u_center;?></title>
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/style.css">
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
-<script type="text/javaScript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title><?php echo $m_langpackage->m_u_center; ?></title>
+    <link rel="stylesheet" type="text/css" href="skin/<?php echo $SYSINFO['templates']; ?>/css/modules.css">
+    <link rel="stylesheet" type="text/css" href="skin/<?php echo $SYSINFO['templates']; ?>/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="skin/<?php echo $SYSINFO['templates']; ?>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="skin/<?php echo $SYSINFO['templates']; ?>/css/common.css">
+    <script type="text/javaScript" src="skin/<?php echo $SYSINFO['templates']; ?>/js/jquery-1.8.0.min.js"></script>
 
-<script type="text/javaScript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
-<style type="text/css">
+    <script type="text/javaScript" src="skin/<?php echo $SYSINFO['templates']; ?>/js/changeStyle.js"></script>
+    <style type="text/css">
 
-</style>
+    </style>
 </head>
 <body onload="menu_style_change('shop_create');changeMenu();">
-	<?php  require("shop/index_header.php");?>
-    <div class="clear"></div>
-    <div class="apart">
-    	<?php  require("modules/left_menu.php");?>
-      <div class="main_right">
-        	<div class="right_top"></div>
-            <div class="cont">
-                <div class="cont_title"><?php echo  $m_langpackage->m_create_request;?></div>
-                <hr />
-				<div style="line-height:50px; font-size:14px; text-align:center;"><?php echo  $m_langpackage->m_createshop_now;?></div>
-        	</div>
-			<div class="right_bottom"></div>
-			<div class="back_top"><a href="#"></a></div>
-   	 </div>
+<?php require("shop/index_header.php"); ?>
+<div class="clear"></div>
+<div class="apart">
+    <?php require("modules/left_menu.php"); ?>
+    <div class="main_right">
+        <div class="right_top"></div>
+        <div class="cont">
+            <div class="cont_title"><?php echo $m_langpackage->m_create_request; ?></div>
+            <hr/>
+            <div
+                style="line-height:50px; font-size:14px; text-align:center;"><?php echo $m_langpackage->m_createshop_now; ?></div>
+        </div>
+        <div class="right_bottom"></div>
+        <div class="back_top"><a href="#"></a></div>
     </div>
-    <div class="clear"></div>
-    <?php  require("shop/index_footer.php");?>
+</div>
+<div class="clear"></div>
+<?php require("shop/index_footer.php"); ?>
 </body>
 </html>
 <?php } ?>

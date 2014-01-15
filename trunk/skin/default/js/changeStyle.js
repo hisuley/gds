@@ -1,144 +1,148 @@
 var $ = function (id) {
-	return "string" == typeof id ? document.getElementById(id) : id;
+    return "string" == typeof id ? document.getElementById(id) : id;
 }
 function promote_change(obj) {
-	var parent_node = obj.parentNode;
-	var elements = parent_node.children;
-	for(var i=0; i<elements.length; i++) {
-		elements[i].className = '';
-	}
-	obj.className = "selected";
+    var parent_node = obj.parentNode;
+    var elements = parent_node.children;
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].className = '';
+    }
+    obj.className = "selected";
 }
-function nTabs(tabObj,obj){
-	var tabList = $(tabObj).getElementsByTagName('li');
-	for(i=0;i<tabList.length;i++){
-	   if(tabList[i].id == obj.id)
-	   {
-		    $(tabObj+"_title"+i).className = "active"; 
-		    $(tabObj+"_content"+i).style.display = "";
-	   }else{
-	   		$(tabObj+"_title"+i).className = ""; 
-			$(tabObj+"_content"+i).style.display = "none";
-	   }
-	} 
+function nTabs(tabObj, obj) {
+    var tabList = $(tabObj).getElementsByTagName('li');
+    for (i = 0; i < tabList.length; i++) {
+        if (tabList[i].id == obj.id) {
+            $(tabObj + "_title" + i).className = "active";
+            $(tabObj + "_content" + i).style.display = "";
+        } else {
+            $(tabObj + "_title" + i).className = "";
+            $(tabObj + "_content" + i).style.display = "none";
+        }
+    }
 }
-function changeMenu(){
-	var allElements = document.getElementsByTagName('ul');
-	for(i=0;i<allElements.length;i++){
-		if(allElements[i].className == 'mainnav'){
-			var childElements = allElements[i].getElementsByTagName('li');
-			for(var j=0;j<childElements.length;j++){
-				childElements[0].style.left= -3 + 'px';
-				childElements[j].onclick = changeStyle;
-			}
-		}
-	}
+function changeMenu() {
+    var allElements = document.getElementsByTagName('ul');
+    for (i = 0; i < allElements.length; i++) {
+        if (allElements[i].className == 'mainnav') {
+            var childElements = allElements[i].getElementsByTagName('li');
+            for (var j = 0; j < childElements.length; j++) {
+                childElements[0].style.left = -3 + 'px';
+                childElements[j].onclick = changeStyle;
+            }
+        }
+    }
 }
-function changeStyle(){
-	var tagList = this.parentNode;
-	var tagOptions = tagList.getElementsByTagName("li");
-	for(i=0;i<tagOptions.length;i++){
-		if(tagOptions[i].className.indexOf('active')>=0){
-			tagOptions[i].className = '';
-		}
-	}
-	this.className = 'active';
+function changeStyle() {
+    var tagList = this.parentNode;
+    var tagOptions = tagList.getElementsByTagName("li");
+    for (i = 0; i < tagOptions.length; i++) {
+        if (tagOptions[i].className.indexOf('active') >= 0) {
+            tagOptions[i].className = '';
+        }
+    }
+    this.className = 'active';
 }
-function changeStyle2(classname,obj){
-	  var tagList = obj.parentNode;
-	  var tagOptions = tagList.getElementsByTagName('a');
-	  for(i=0;i<tagOptions.length;i++){
-		//  if(tagOptions[i].className.indexOf('selected')>=0){
-			  tagOptions[i].className = "";
-		  //}
-	  }
-	  obj.className = 'selected';
-	  var list = document.getElementById('listItems');
-	  if(classname=='list'){
-		  list.className = '';
-			document.getElementById("listItems").style.display="block";
-			document.getElementById("windowItems").style.display="none";
-			document.cookie="goodsListClass=listItems";
-	  }else{
-			
-			document.getElementById("listItems").style.display="none";
-			document.getElementById("windowItems").style.display="block";
-			document.cookie="goodsListClass=windowItems";
-	  }
+function changeStyle2(classname, obj) {
+    var tagList = obj.parentNode;
+    var tagOptions = tagList.getElementsByTagName('a');
+    for (i = 0; i < tagOptions.length; i++) {
+        //  if(tagOptions[i].className.indexOf('selected')>=0){
+        tagOptions[i].className = "";
+        //}
+    }
+    obj.className = 'selected';
+    var list = document.getElementById('listItems');
+    if (classname == 'list') {
+        list.className = '';
+        document.getElementById("listItems").style.display = "block";
+        document.getElementById("windowItems").style.display = "none";
+        document.cookie = "goodsListClass=listItems";
+    } else {
+
+        document.getElementById("listItems").style.display = "none";
+        document.getElementById("windowItems").style.display = "block";
+        document.cookie = "goodsListClass=windowItems";
+    }
 }
 
 
-
-function hidden(){
-	if($('category')){
-		$('category').onmouseover = function (){
-			$('category_box').style.display = "block";
-		}
-		$('category').onmouseout = function (){
-			$('category_box').style.display = "none";
-		}
-	}
+function hidden() {
+    if ($('category')) {
+        $('category').onmouseover = function () {
+            $('category_box').style.display = "block";
+        }
+        $('category').onmouseout = function () {
+            $('category_box').style.display = "none";
+        }
+    }
 }
 //显示容器内容
-	function show_obj(obj){
-		$(obj).style.display='';
-	}
+function show_obj(obj) {
+    $(obj).style.display = '';
+}
 
 //隐藏容器内容
-	function hidden_obj(obj){
-		$(obj).style.display='none';
-	}
+function hidden_obj(obj) {
+    $(obj).style.display = 'none';
+}
 //显示、隐藏样式
-function show(obj){
-	$(obj).style.display = ($(obj).style.display == 'none')?'block':'none'
+function show(obj) {
+    $(obj).style.display = ($(obj).style.display == 'none') ? 'block' : 'none'
 }
 
-function setHidden(obj){
-	if($(obj+'_c').value=='') {
-		$(obj).style.display='none'; 
-	}
+function setHidden(obj) {
+    if ($(obj + '_c').value == '') {
+        $(obj).style.display = 'none';
+    }
 }
-function setShow(obj){
-	$(obj).style.display = ($(obj).style.display == 'none')?'block':'none'
-	readyBlur(obj);
+function setShow(obj) {
+    $(obj).style.display = ($(obj).style.display == 'none') ? 'block' : 'none'
+    readyBlur(obj);
 }
-function readyBlur(obj){
-	$(obj+'_c').focus();
+function readyBlur(obj) {
+    $(obj + '_c').focus();
 }
 
 var timeout;
-function setOnShowPara(obj){
-	$(obj+'_c').value='1';
-	clearTimeout(timeout);
+function setOnShowPara(obj) {
+    $(obj + '_c').value = '1';
+    clearTimeout(timeout);
 }
-function setHiddenPara(obj){
-	$(obj+'_c').value=''; 
+function setHiddenPara(obj) {
+    $(obj + '_c').value = '';
 }
-	
-function timerSetHidden(obj,t_time){
-	setHiddenPara(obj);
-	timeout = setTimeout("setHidden('"+obj+"')",t_time);
+
+function timerSetHidden(obj, t_time) {
+    setHiddenPara(obj);
+    timeout = setTimeout("setHidden('" + obj + "')", t_time);
 }
-function inputTxt(obj,act){
-	var str="请输入你要搜索的关键字";
-	if(obj.value==''&&act=='set')
-	{
-		obj.value=str;
-		obj.style.color="#cccccc"
-	}
-	if(obj.value==str&&act=='clean')
-	{
-		obj.value='';
-		obj.style.color="#000000"
-	}
+function inputTxt(obj, act) {
+    var str = "请输入你要搜索的关键字";
+    if (obj.value == '' && act == 'set') {
+        obj.value = str;
+        obj.style.color = "#cccccc"
+    }
+    if (obj.value == str && act == 'clean') {
+        obj.value = '';
+        obj.style.color = "#000000"
+    }
 }
 
 window.onload = changeMenu;
 window.onload = hidden;
 
-function addLoadEvent(func){
-	var oldonload=window.onload;
-	if(typeof window.onload!="function"){window.onload=func;}else{window.onload=function(){oldonload();func();}};
+function addLoadEvent(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != "function") {
+        window.onload = func;
+    } else {
+        window.onload = function () {
+            oldonload();
+            func();
+        }
+    }
+    ;
 }
 addLoadEvent(changeMenu);
 addLoadEvent(hidden);
@@ -165,7 +169,7 @@ var Vcity = {};
  * */
 Vcity._m = {
     /* 选择元素 */
-    $:function (arg, context) {
+    $: function (arg, context) {
         var tagAll, n, eles = [], i, sub = arg.substring(1);
         context = context || document;
         if (typeof arg == 'string') {
@@ -190,64 +194,64 @@ Vcity._m = {
     },
 
     /* 绑定事件 */
-    on:function (node, type, handler) {
+    on: function (node, type, handler) {
         node.addEventListener ? node.addEventListener(type, handler, false) : node.attachEvent('on' + type, handler);
     },
 
     /* 获取事件 */
-    getEvent:function(event){
+    getEvent: function (event) {
         return event || window.event;
     },
 
     /* 获取事件目标 */
-    getTarget:function(event){
+    getTarget: function (event) {
         return event.target || event.srcElement;
     },
 
     /* 获取元素位置 */
-    getPos:function (node) {
+    getPos: function (node) {
         var scrollx = document.documentElement.scrollLeft || document.body.scrollLeft,
             scrollt = document.documentElement.scrollTop || document.body.scrollTop;
         var pos = node.getBoundingClientRect();
-        return {top:pos.top + scrollt, right:pos.right + scrollx, bottom:pos.bottom + scrollt, left:pos.left + scrollx }
+        return {top: pos.top + scrollt, right: pos.right + scrollx, bottom: pos.bottom + scrollt, left: pos.left + scrollx }
     },
 
     /* 添加样式名 */
-    addClass:function (c, node) {
-        if(!node)return;
-        node.className = Vcity._m.hasClass(c,node) ? node.className : node.className + ' ' + c ;
+    addClass: function (c, node) {
+        if (!node)return;
+        node.className = Vcity._m.hasClass(c, node) ? node.className : node.className + ' ' + c;
     },
 
     /* 移除样式名 */
-    removeClass:function (c, node) {
+    removeClass: function (c, node) {
         var reg = new RegExp("(^|\\s+)" + c + "(\\s+|$)", "g");
-        if(!Vcity._m.hasClass(c,node))return;
+        if (!Vcity._m.hasClass(c, node))return;
         node.className = reg.test(node.className) ? node.className.replace(reg, '') : node.className;
     },
 
     /* 是否含有CLASS */
-    hasClass:function (c, node) {
-        if(!node || !node.className)return false;
-        return node.className.indexOf(c)>-1;
+    hasClass: function (c, node) {
+        if (!node || !node.className)return false;
+        return node.className.indexOf(c) > -1;
     },
 
     /* 阻止冒泡 */
-    stopPropagation:function (event) {
+    stopPropagation: function (event) {
         event = event || window.event;
         event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true;
     },
     /* 去除两端空格 */
-    trim:function (str) {
-        return str.replace(/^\s+|\s+$/g,'');
+    trim: function (str) {
+        return str.replace(/^\s+|\s+$/g, '');
     }
 };
 
 /* 所有城市数据,可以按照格式自行添加（北京|beijing|bj），前16条为热门城市 */
 
-Vcity.allCity = ['北京|beijing|bj','上海|shanghai|sh', '重庆|chongqing|cq',  '深圳|shenzhen|sz', '广州|guangzhou|gz', '杭州|hangzhou|hz',
-    '南京|nanjing|nj', '苏州|shuzhou|sz', '天津|tianjin|tj', '成都|chengdu|cd', '南昌|nanchang|nc', '三亚|sanya|sy','青岛|qingdao|qd',
-    '厦门|xiamen|xm', '西安|xian|xa','长沙|changsha|cs','合肥|hefei|hf','西藏|xizang|xz', '内蒙古|neimenggu|nmg', '安庆|anqing|aq', '阿泰勒|ataile|atl', '安康|ankang|ak',
-    '阿克苏|akesu|aks', '包头|baotou|bt', '北海|beihai|bh', '百色|baise|bs','保山|baoshan|bs', '长治|changzhi|cz', '长春|changchun|cc', '常州|changzhou|cz', '昌都|changdu|cd',
+Vcity.allCity = ['北京|beijing|bj', '上海|shanghai|sh', '重庆|chongqing|cq', '深圳|shenzhen|sz', '广州|guangzhou|gz', '杭州|hangzhou|hz',
+    '南京|nanjing|nj', '苏州|shuzhou|sz', '天津|tianjin|tj', '成都|chengdu|cd', '南昌|nanchang|nc', '三亚|sanya|sy', '青岛|qingdao|qd',
+    '厦门|xiamen|xm', '西安|xian|xa', '长沙|changsha|cs', '合肥|hefei|hf', '西藏|xizang|xz', '内蒙古|neimenggu|nmg', '安庆|anqing|aq', '阿泰勒|ataile|atl', '安康|ankang|ak',
+    '阿克苏|akesu|aks', '包头|baotou|bt', '北海|beihai|bh', '百色|baise|bs', '保山|baoshan|bs', '长治|changzhi|cz', '长春|changchun|cc', '常州|changzhou|cz', '昌都|changdu|cd',
     '朝阳|chaoyang|cy', '常德|changde|cd', '长白山|changbaishan|cbs', '赤峰|chifeng|cf', '大同|datong|dt', '大连|dalian|dl', '达县|daxian|dx', '东营|dongying|dy', '大庆|daqing|dq', '丹东|dandong|dd',
     '大理|dali|dl', '敦煌|dunhuang|dh', '鄂尔多斯|eerduosi|eeds', '恩施|enshi|es', '福州|fuzhou|fz', '阜阳|fuyang|fy', '贵阳|guiyang|gy',
     '广元|guangyuan|gy', '格尔木|geermu|gem', '呼和浩特|huhehaote|hhht', '哈密|hami|hm',
@@ -259,9 +263,9 @@ Vcity.allCity = ['北京|beijing|bj','上海|shanghai|sh', '重庆|chongqing|cq'
     '连成|liancheng|lc', '拉萨|lasa|ls', '临沧|lincang|lc', '临沂|linyi|ly', '芒市|mangshi|ms', '牡丹江|mudanjiang|mdj', '满洲里|manzhouli|mzl', '绵阳|mianyang|my',
     '梅县|meixian|mx', '漠河|mohe|mh', '南充|nanchong|nc', '南宁|nanning|nn', '南阳|nanyang|ny', '南通|nantong|nt', '那拉提|nalati|nlt',
     '宁波|ningbo|nb', '攀枝花|panzhihua|pzh', '衢州|quzhou|qz', '秦皇岛|qinhuangdao|qhd', '庆阳|qingyang|qy', '齐齐哈尔|qiqihaer|qqhe',
-    '石家庄|shijiazhuang|sjz',  '沈阳|shenyang|sy', '思茅|simao|sm', '铜仁|tongren|tr', '塔城|tacheng|tc', '腾冲|tengchong|tc', '台州|taizhou|tz',
+    '石家庄|shijiazhuang|sjz', '沈阳|shenyang|sy', '思茅|simao|sm', '铜仁|tongren|tr', '塔城|tacheng|tc', '腾冲|tengchong|tc', '台州|taizhou|tz',
     '通辽|tongliao|tl', '太原|taiyuan|ty', '威海|weihai|wh', '梧州|wuzhou|wz', '文山|wenshan|ws', '无锡|wuxi|wx', '潍坊|weifang|wf', '武夷山|wuyishan|wys', '乌兰浩特|wulanhaote|wlht',
-    '温州|wenzhou|wz', '乌鲁木齐|wulumuqi|wlmq', '万州|wanzhou|wz', '乌海|wuhai|wh', '兴义|xingyi|xy', '西昌|xichang|xc',  '襄樊|xiangfan|xf',
+    '温州|wenzhou|wz', '乌鲁木齐|wulumuqi|wlmq', '万州|wanzhou|wz', '乌海|wuhai|wh', '兴义|xingyi|xy', '西昌|xichang|xc', '襄樊|xiangfan|xf',
     '西宁|xining|xn', '锡林浩特|xilinhaote|xlht', '西双版纳|xishuangbanna|xsbn', '徐州|xuzhou|xz', '义乌|yiwu|yw', '永州|yongzhou|yz', '榆林|yulin|yl', '延安|yanan|ya', '运城|yuncheng|yc',
     '烟台|yantai|yt', '银川|yinchuan|yc', '宜昌|yichang|yc', '宜宾|yibin|yb', '盐城|yancheng|yc', '延吉|yanji|yj', '玉树|yushu|ys', '伊宁|yining|yn', '珠海|zhuhai|zh', '昭通|zhaotong|zt',
     '张家界|zhangjiajie|zjj', '舟山|zhoushan|zs', '郑州|zhengzhou|zz', '中卫|zhongwei|zw', '芷江|zhijiang|zj', '湛江|zhanjiang|zj'];
@@ -281,7 +285,7 @@ Vcity.regExChiese = /([\u4E00-\u9FA5\uf900-\ufa2d]+)/;
         regEx = Vcity.regEx,
         reg2 = /^[a-h]$/i, reg3 = /^[i-p]$/i, reg4 = /^[q-z]$/i;
     if (!Vcity.oCity) {
-        Vcity.oCity = {hot:{},ABCDEFGH:{}, IJKLMNOP:{}, QRSTUVWXYZ:{}};
+        Vcity.oCity = {hot: {}, ABCDEFGH: {}, IJKLMNOP: {}, QRSTUVWXYZ: {}};
         //console.log(citys.length);
         for (var i = 0, n = citys.length; i < n; i++) {
             match = regEx.exec(citys[i]);
@@ -297,8 +301,8 @@ Vcity.regExChiese = /([\u4E00-\u9FA5\uf900-\ufa2d]+)/;
                 Vcity.oCity.QRSTUVWXYZ[letter].push(match[1]);
             }
             /* 热门城市 前16条 */
-            if(i<16){
-                if(!Vcity.oCity.hot['hot']) Vcity.oCity.hot['hot'] = [];
+            if (i < 16) {
+                if (!Vcity.oCity.hot['hot']) Vcity.oCity.hot['hot'] = [];
                 Vcity.oCity.hot['hot'].push(match[1]);
             }
         }
@@ -326,13 +330,13 @@ Vcity.CitySelector = function () {
 
 Vcity.CitySelector.prototype = {
 
-    constructor:Vcity.CitySelector,
+    constructor: Vcity.CitySelector,
 
     /* 初始化 */
 
-    initialize :function (options) {
+    initialize: function (options) {
         var input = options.input;
-        this.input = Vcity._m.$('#'+ input);
+        this.input = Vcity._m.$('#' + input);
         this.inputEvent();
     },
 
@@ -341,13 +345,13 @@ Vcity.CitySelector.prototype = {
      * 创建城市BOX HTML 框架
      * */
 
-    createWarp:function(){
+    createWarp: function () {
         var inputPos = Vcity._m.getPos(this.input);
         var div = this.rootDiv = document.createElement('div');
         var that = this;
 
         // 设置DIV阻止冒泡
-        Vcity._m.on(this.rootDiv,'click',function(event){
+        Vcity._m.on(this.rootDiv, 'click', function (event) {
             Vcity._m.stopPropagation(event);
         });
 
@@ -355,11 +359,11 @@ Vcity.CitySelector.prototype = {
         Vcity._m.on(document, 'click', function (event) {
             event = Vcity._m.getEvent(event);
             var target = Vcity._m.getTarget(event);
-            if(target == that.input) return false;
+            if (target == that.input) return false;
             //console.log(target.className);
             if (that.cityBox)Vcity._m.addClass('hide', that.cityBox);
             if (that.ul)Vcity._m.addClass('hide', that.ul);
-            if(that.myIframe)Vcity._m.addClass('hide',that.myIframe);
+            if (that.myIframe)Vcity._m.addClass('hide', that.myIframe);
         });
         div.className = 'citySelector';
         div.style.position = 'absolute';
@@ -370,8 +374,8 @@ Vcity.CitySelector.prototype = {
         // 判断是否IE6，如果是IE6需要添加iframe才能遮住SELECT框
         var isIe = (document.all) ? true : false;
         var isIE6 = this.isIE6 = isIe && !window.XMLHttpRequest;
-        if(isIE6){
-            var myIframe = this.myIframe =  document.createElement('iframe');
+        if (isIE6) {
+            var myIframe = this.myIframe = document.createElement('iframe');
             myIframe.frameborder = '0';
             myIframe.src = 'about:blank';
             myIframe.style.position = 'absolute';
@@ -383,7 +387,7 @@ Vcity.CitySelector.prototype = {
         childdiv.className = 'cityBox';
         childdiv.id = 'cityBox';
         childdiv.innerHTML = Vcity._template.join('');
-        var hotCity = this.hotCity =  document.createElement('div');
+        var hotCity = this.hotCity = document.createElement('div');
         hotCity.className = 'hotCity';
         childdiv.appendChild(hotCity);
         div.appendChild(childdiv);
@@ -396,26 +400,26 @@ Vcity.CitySelector.prototype = {
      * {HOT:{hot:[]},ABCDEFGH:{a:[1,2,3],b:[1,2,3]},IJKLMNOP:{},QRSTUVWXYZ:{}}
      **/
 
-    createHotCity:function(){
-        var odiv,odl,odt,odd,odda=[],str,key,ckey,sortKey,regEx = Vcity.regEx,
+    createHotCity: function () {
+        var odiv, odl, odt, odd, odda = [], str, key, ckey, sortKey, regEx = Vcity.regEx,
             oCity = Vcity.oCity;
-        for(key in oCity){
+        for (key in oCity) {
             odiv = this[key] = document.createElement('div');
             // 先设置全部隐藏hide
             odiv.className = key + ' ' + 'cityTab hide';
-            sortKey=[];
-            for(ckey in oCity[key]){
+            sortKey = [];
+            for (ckey in oCity[key]) {
                 sortKey.push(ckey);
                 // ckey按照ABCDEDG顺序排序
                 sortKey.sort();
             }
-            for(var j=0,k = sortKey.length;j<k;j++){
+            for (var j = 0, k = sortKey.length; j < k; j++) {
                 odl = document.createElement('dl');
                 odt = document.createElement('dt');
                 odd = document.createElement('dd');
-                odt.innerHTML = sortKey[j] == 'hot'?'&nbsp;':sortKey[j];
+                odt.innerHTML = sortKey[j] == 'hot' ? '&nbsp;' : sortKey[j];
                 odda = [];
-                for(var i=0,n=oCity[key][sortKey[j]].length;i<n;i++){
+                for (var i = 0, n = oCity[key][sortKey[j]].length; i < n; i++) {
                     str = '<a href="javascript:">' + oCity[key][sortKey[j]][i] + '</a>';
                     odda.push(str);
                 }
@@ -426,7 +430,7 @@ Vcity.CitySelector.prototype = {
             }
 
             // 移除热门城市的隐藏CSS
-            Vcity._m.removeClass('hide',this.hot);
+            Vcity._m.removeClass('hide', this.hot);
             this.hotCity.appendChild(odiv);
         }
         document.body.appendChild(this.rootDiv);
@@ -442,19 +446,19 @@ Vcity.CitySelector.prototype = {
      *  @ tabChange
      * */
 
-    tabChange:function(){
-        var lis = Vcity._m.$('li',this.cityBox);
-        var divs = Vcity._m.$('div',this.hotCity);
+    tabChange: function () {
+        var lis = Vcity._m.$('li', this.cityBox);
+        var divs = Vcity._m.$('div', this.hotCity);
         var that = this;
-        for(var i=0,n=lis.length;i<n;i++){
+        for (var i = 0, n = lis.length; i < n; i++) {
             lis[i].index = i;
-            lis[i].onclick = function(){
-                for(var j=0;j<n;j++){
-                    Vcity._m.removeClass('on',lis[j]);
-                    Vcity._m.addClass('hide',divs[j]);
+            lis[i].onclick = function () {
+                for (var j = 0; j < n; j++) {
+                    Vcity._m.removeClass('on', lis[j]);
+                    Vcity._m.addClass('hide', divs[j]);
                 }
-                Vcity._m.addClass('on',this);
-                Vcity._m.removeClass('hide',divs[this.index]);
+                Vcity._m.addClass('on', this);
+                Vcity._m.removeClass('hide', divs[this.index]);
                 /* IE6 改变TAB的时候 改变Iframe 大小*/
                 that.changeIframe();
             };
@@ -466,15 +470,15 @@ Vcity.CitySelector.prototype = {
      *  @linkEvent
      * */
 
-    linkEvent:function(){
-        var links = Vcity._m.$('a',this.hotCity);
+    linkEvent: function () {
+        var links = Vcity._m.$('a', this.hotCity);
         var that = this;
-        for(var i=0,n=links.length;i<n;i++){
-            links[i].onclick = function(){
+        for (var i = 0, n = links.length; i < n; i++) {
+            links[i].onclick = function () {
                 that.input.value = this.innerHTML;
-                Vcity._m.addClass('hide',that.cityBox);
+                Vcity._m.addClass('hide', that.cityBox);
                 /* 点击城市名的时候隐藏myIframe */
-                Vcity._m.addClass('hide',that.myIframe);
+                Vcity._m.addClass('hide', that.myIframe);
             }
         }
     },
@@ -484,43 +488,43 @@ Vcity.CitySelector.prototype = {
      * @inputEvent
      * */
 
-    inputEvent:function(){
+    inputEvent: function () {
         var that = this;
-        Vcity._m.on(this.input,'click',function(event){
+        Vcity._m.on(this.input, 'click', function (event) {
             event = event || window.event;
-            if(!that.cityBox){
+            if (!that.cityBox) {
                 that.createWarp();
-            }else if(!!that.cityBox && Vcity._m.hasClass('hide',that.cityBox)){
+            } else if (!!that.cityBox && Vcity._m.hasClass('hide', that.cityBox)) {
                 // slideul 不存在或者 slideul存在但是是隐藏的时候 两者不能共存
-                if(!that.ul || (that.ul && Vcity._m.hasClass('hide',that.ul))){
-                    Vcity._m.removeClass('hide',that.cityBox);
+                if (!that.ul || (that.ul && Vcity._m.hasClass('hide', that.ul))) {
+                    Vcity._m.removeClass('hide', that.cityBox);
 
                     /* IE6 移除iframe 的hide 样式 */
                     //alert('click');
-                    Vcity._m.removeClass('hide',that.myIframe);
+                    Vcity._m.removeClass('hide', that.myIframe);
                     that.changeIframe();
                 }
             }
         });
-        Vcity._m.on(this.input,'focus',function(){
+        Vcity._m.on(this.input, 'focus', function () {
             that.input.select();
-            if(that.input.value == '请输入城市名称') that.input.value = '';
+            if (that.input.value == '请输入城市名称') that.input.value = '';
         });
-        Vcity._m.on(this.input,'blur',function(){
-            if(that.input.value == '') that.input.value = '请输入城市名称';
+        Vcity._m.on(this.input, 'blur', function () {
+            if (that.input.value == '') that.input.value = '请输入城市名称';
         });
-        Vcity._m.on(this.input,'keyup',function(event){
+        Vcity._m.on(this.input, 'keyup', function (event) {
             event = event || window.event;
             var keycode = event.keyCode;
-            Vcity._m.addClass('hide',that.cityBox);
+            Vcity._m.addClass('hide', that.cityBox);
             that.createUl();
 
             /* 移除iframe 的hide 样式 */
-            Vcity._m.removeClass('hide',that.myIframe);
+            Vcity._m.removeClass('hide', that.myIframe);
 
             // 下拉菜单显示的时候捕捉按键事件
-            if(that.ul && !Vcity._m.hasClass('hide',that.ul) && !that.isEmpty){
-                that.KeyboardEvent(event,keycode);
+            if (that.ul && !Vcity._m.hasClass('hide', that.ul) && !that.isEmpty) {
+                that.KeyboardEvent(event, keycode);
             }
         });
     },
@@ -530,7 +534,7 @@ Vcity.CitySelector.prototype = {
      * @ createUl
      * */
 
-    createUl:function () {
+    createUl: function () {
         //console.log('createUL');
         var str;
         var value = Vcity._m.trim(this.input.value);
@@ -574,19 +578,19 @@ Vcity.CitySelector.prototype = {
 
             // 绑定Li事件
             this.liEvent();
-        }else{
-            Vcity._m.addClass('hide',this.ul);
-            Vcity._m.removeClass('hide',this.cityBox);
+        } else {
+            Vcity._m.addClass('hide', this.ul);
+            Vcity._m.removeClass('hide', this.cityBox);
 
-            Vcity._m.removeClass('hide',this.myIframe);
+            Vcity._m.removeClass('hide', this.myIframe);
 
             this.changeIframe();
         }
     },
 
     /* IE6的改变遮罩SELECT 的 IFRAME尺寸大小 */
-    changeIframe:function(){
-        if(!this.isIE6)return;
+    changeIframe: function () {
+        if (!this.isIE6)return;
         this.myIframe.style.width = this.rootDiv.offsetWidth + 'px';
         this.myIframe.style.height = this.rootDiv.offsetHeight + 'px';
     },
@@ -596,37 +600,37 @@ Vcity.CitySelector.prototype = {
      * @ KeyboardEvent
      * */
 
-    KeyboardEvent:function(event,keycode){
-        var lis = Vcity._m.$('li',this.ul);
+    KeyboardEvent: function (event, keycode) {
+        var lis = Vcity._m.$('li', this.ul);
         var len = lis.length;
-        switch(keycode){
+        switch (keycode) {
             case 40: //向下箭头↓
                 this.count++;
-                if(this.count > len-1) this.count = 0;
-                for(var i=0;i<len;i++){
-                    Vcity._m.removeClass('on',lis[i]);
+                if (this.count > len - 1) this.count = 0;
+                for (var i = 0; i < len; i++) {
+                    Vcity._m.removeClass('on', lis[i]);
                 }
-                Vcity._m.addClass('on',lis[this.count]);
+                Vcity._m.addClass('on', lis[this.count]);
                 break;
             case 38: //向上箭头↑
                 this.count--;
-                if(this.count<0) this.count = len-1;
-                for(i=0;i<len;i++){
-                    Vcity._m.removeClass('on',lis[i]);
+                if (this.count < 0) this.count = len - 1;
+                for (i = 0; i < len; i++) {
+                    Vcity._m.removeClass('on', lis[i]);
                 }
-                Vcity._m.addClass('on',lis[this.count]);
+                Vcity._m.addClass('on', lis[this.count]);
                 break;
             case 13: // enter键
-                if(Vcity.regExChiese.exec(lis[this.count].innerHTML)[0] == '桂林'){
+                if (Vcity.regExChiese.exec(lis[this.count].innerHTML)[0] == '桂林') {
                     alert('出发城市不允许选择桂林');
-                }else{
+                } else {
                     this.input.value = Vcity.regExChiese.exec(lis[this.count].innerHTML)[0];
-                    Vcity._m.addClass('hide',this.ul);
-                    Vcity._m.addClass('hide',this.ul);
+                    Vcity._m.addClass('hide', this.ul);
+                    Vcity._m.addClass('hide', this.ul);
                     /* IE6 */
-                    Vcity._m.addClass('hide',this.myIframe);
+                    Vcity._m.addClass('hide', this.myIframe);
                 }
-               
+
                 break;
             default:
                 break;
@@ -638,51 +642,51 @@ Vcity.CitySelector.prototype = {
      * @ liEvent
      * */
 
-    liEvent:function(){
+    liEvent: function () {
         var that = this;
-        var lis = Vcity._m.$('li',this.ul);
-        for(var i = 0,n = lis.length;i < n;i++){
-            Vcity._m.on(lis[i],'click',function(event){
+        var lis = Vcity._m.$('li', this.ul);
+        for (var i = 0, n = lis.length; i < n; i++) {
+            Vcity._m.on(lis[i], 'click', function (event) {
                 event = Vcity._m.getEvent(event);
                 var target = Vcity._m.getTarget(event);
-                if(target.nodeName.toUpperCase() !== "LI") target = target.parentNode;
-                if(target.nodeName.toUpperCase() !== "LI") return;
-                if(Vcity.regExChiese.exec(target.innerHTML)[0] == '桂林'){
+                if (target.nodeName.toUpperCase() !== "LI") target = target.parentNode;
+                if (target.nodeName.toUpperCase() !== "LI") return;
+                if (Vcity.regExChiese.exec(target.innerHTML)[0] == '桂林') {
                     alert('出发城市不允许选择桂林');
-                }else{
+                } else {
                     that.input.value = Vcity.regExChiese.exec(target.innerHTML)[0];
-                    Vcity._m.addClass('hide',that.ul);
+                    Vcity._m.addClass('hide', that.ul);
                     /* IE6 下拉菜单点击事件 */
-                    Vcity._m.addClass('hide',that.myIframe);
+                    Vcity._m.addClass('hide', that.myIframe);
                 }
             });
-            Vcity._m.on(lis[i],'mouseover',function(event){
+            Vcity._m.on(lis[i], 'mouseover', function (event) {
                 event = Vcity._m.getEvent(event);
                 var target = Vcity._m.getTarget(event);
-                if(target.nodeName.toUpperCase() !== "LI") target = target.parentNode;
-                if(target.nodeName.toUpperCase() !== "LI") return;
-                Vcity._m.addClass('on',target);
+                if (target.nodeName.toUpperCase() !== "LI") target = target.parentNode;
+                if (target.nodeName.toUpperCase() !== "LI") return;
+                Vcity._m.addClass('on', target);
             });
-            Vcity._m.on(lis[i],'mouseout',function(event){
+            Vcity._m.on(lis[i], 'mouseout', function (event) {
                 event = Vcity._m.getEvent(event);
                 var target = Vcity._m.getTarget(event);
-                if(target.nodeName.toUpperCase() !== "LI") target = target.parentNode;
-                if(target.nodeName.toUpperCase() !== "LI") return;
-                Vcity._m.removeClass('on',target);
+                if (target.nodeName.toUpperCase() !== "LI") target = target.parentNode;
+                if (target.nodeName.toUpperCase() !== "LI") return;
+                Vcity._m.removeClass('on', target);
             })
         }
     }
 };
 
-function checkTicketForm(obj){
-	if(obj['DepartCity'].value == '' || obj['DepartCity'].value == '请输入城市名称'){
-		alert('请选择出发城市！');
-		return false;
-	}
-	if(obj['DepartDate'].value == '' || obj['DepartDate'].value == '请选择出发日期'){
-		alert('请选择出发时间！');
-		return false;
-	}
-	return true;
+function checkTicketForm(obj) {
+    if (obj['DepartCity'].value == '' || obj['DepartCity'].value == '请输入城市名称') {
+        alert('请选择出发城市！');
+        return false;
+    }
+    if (obj['DepartDate'].value == '' || obj['DepartDate'].value == '请选择出发日期') {
+        alert('请选择出发时间！');
+        return false;
+    }
+    return true;
 }
 

@@ -17,9 +17,9 @@
  *                         H-可以识别已损失30%的数据
  * @param int $margin 生成的二维码离图片边框的距离
  */
-function generateQRfromGoogle($chl,$widhtHeight ='150',$EC_level='L',$margin='0')
+function generateQRfromGoogle($chl, $widhtHeight = '150', $EC_level = 'L', $margin = '0')
 {
     $chl = urlencode($chl);
-    return '<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight.'&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'" alt="QR code" widhtHeight="'.$widhtHeight.'" widhtHeight="'.$widhtHeight.'"/>';
+    return '<img src="http://chart.apis.google.com/chart?chs=' . $widhtHeight . 'x' . $widhtHeight . '&cht=qr&chld=' . $EC_level . '|' . $margin . '&chl=' . $chl . '" alt="QR code" widhtHeight="' . $widhtHeight . '" widhtHeight="' . $widhtHeight . '"/>';
 
 }

@@ -1,17 +1,17 @@
 <?php
-if(!$IWEB_SHOP_IN) {
-	die('Hacking attempt');
+if (!$IWEB_SHOP_IN) {
+    die('Hacking attempt');
 }
 require_once("../foundation/module_news.php");
 require_once("../foundation/module_admin_logs.php");
 //语言包引入
-$a_langpackage=new adminlp;
-$dbo=new dbex;
+$a_langpackage = new adminlp;
+$dbo = new dbex;
 
 //权限管理
-$right=check_rights("news_edit");
-if(!$right){
-	action_return(0,$a_langpackage->a_privilege_mess,'m.php?app=error');
+$right = check_rights("news_edit");
+if (!$right) {
+    action_return(0, $a_langpackage->a_privilege_mess, 'm.php?app=error');
 }
 $ctime = new time_class;
 
@@ -35,96 +35,98 @@ $post['is_audit'] = 0;
 
 $article_id = intval(get_args('article_id'));
 
-if(!$article_id) {
-	action_return(0,$a_langpackage->a_error,'-1');
-	exit;
+if (!$article_id) {
+    action_return(0, $a_langpackage->a_error, '-1');
+    exit;
 }
 
-if(empty($post['title'])) {
-	action_return(0,$a_langpackage->a_title_null,'-1');
-	exit;
+if (empty($post['title'])) {
+    action_return(0, $a_langpackage->a_title_null, '-1');
+    exit;
 }
 /* 图片上传处理 */
 $cupload = new upload();
-$cupload->set_dir("../uploadfiles/news/","{y}/{m}/{d}");
+$cupload->set_dir("../uploadfiles/news/", "{y}/{m}/{d}");
 $setthumb = array(
-	'width' => array($SYSINFO['width1'],$SYSINFO['width2']),
-	'height' => array($SYSINFO['height1'],$SYSINFO['height2']),
-	'name' => array('thumb','m')
+    'width' => array($SYSINFO['width1'], $SYSINFO['width2']),
+    'height' => array($SYSINFO['height1'], $SYSINFO['height2']),
+    'name' => array('thumb', 'm')
 );
 $cupload->set_thumb($setthumb);
 $file = $cupload->execute();
-	if(count($file)) {
-		$insert_array = array();
-		foreach($file as $k=>$v) {
-			if($v['flag']==1) {
-				if(!empty($v['dir'])){
-					$post['thumb'] = str_replace('../', '', $v['dir']).$v['name'];
-				}
-			}
-		}		
+if (count($file)) {
+    $insert_array = array();
+    foreach ($file as $k => $v) {
+        if ($v['flag'] == 1) {
+            if (!empty($v['dir'])) {
+                $post['thumb'] = str_replace('../', '', $v['dir']) . $v['name'];
+            }
+        }
+    }
 }
 
 //数据表定义区
-$t_article = $tablePreStr."article";
-$t_admin_log = $tablePreStr."admin_log";
-$t_article_attr = $tablePreStr."article_attr";
+$t_article = $tablePreStr . "article";
+$t_admin_log = $tablePreStr . "admin_log";
+$t_article_attr = $tablePreStr . "article_attr";
 
 //数据库操作
-dbtarget('r',$dbServs);
+dbtarget('r', $dbServs);
 
-$news_attr = get_goods_attr($dbo,$t_article_attr,$article_id);
+$news_attr = get_goods_attr($dbo, $t_article_attr, $article_id);
 $have_attr = array();
-if($news_attr) {
-	foreach($news_attr as $v) {
-		$have_attr[$v['attr_id']] = $v['attr_values'];
-	}
+if ($news_attr) {
+    foreach ($news_attr as $v) {
+        $have_attr[$v['attr_id']] = $v['attr_values'];
+    }
 }
 
 $post_attr = get_args('attr');
-$filterAttr = filterAttr($have_attr,$post_attr);
+$filterAttr = filterAttr($have_attr, $post_attr);
 
-$count = check_news_name($dbo,$t_article,$post['title'],$article_id);
-if($count[0]) {
-	action_return(0,$a_langpackage->a_news_title_repeat,'-1');
-	exit;
+$count = check_news_name($dbo, $t_article, $post['title'], $article_id);
+if ($count[0]) {
+    action_return(0, $a_langpackage->a_news_title_repeat, '-1');
+    exit;
 }
 //定义写操作
-dbtarget('w',$dbServs);
+dbtarget('w', $dbServs);
 
-if(update_news_info($dbo,$t_article,$post,$article_id)) {
-        if(isset($filterAttr['insert'])) {
-		insert_news_attr($dbo,$t_article_attr,$filterAttr['insert'],$article_id);
-	}
+if (update_news_info($dbo, $t_article, $post, $article_id)) {
+    if (isset($filterAttr['insert'])) {
+        insert_news_attr($dbo, $t_article_attr, $filterAttr['insert'], $article_id);
+    }
 
-	if(isset($filterAttr['update'])) {
-		update_news_attr($dbo,$t_article_attr,$filterAttr['update'],$article_id);
-	}
+    if (isset($filterAttr['update'])) {
+        update_news_attr($dbo, $t_article_attr, $filterAttr['update'], $article_id);
+    }
 
-	if(isset($filterAttr['delete'])) {
-		delete_news_attr($dbo,$t_article_attr,$filterAttr['delete'],$article_id);
-	}
-	admin_log($dbo,$t_admin_log,$a_langpackage->a_modify_uml."：$article_id");
-	action_return(1,$a_langpackage->a_amend_suc,'m.php?app=news_edit&id='.$article_id);
+    if (isset($filterAttr['delete'])) {
+        delete_news_attr($dbo, $t_article_attr, $filterAttr['delete'], $article_id);
+    }
+    admin_log($dbo, $t_admin_log, $a_langpackage->a_modify_uml . "：$article_id");
+    action_return(1, $a_langpackage->a_amend_suc, 'm.php?app=news_edit&id=' . $article_id);
 } else {
-	action_return(0,$a_langpackage->a_amend_lose,'-1');
+    action_return(0, $a_langpackage->a_amend_lose, '-1');
 }
 
 // 通过现有的属性与提交上来的属性进行比较
 // 取得 需要更新，删除，添加的属性
-function filterAttr($haveArray,$postArray) {
-	$array = array();
-	foreach($haveArray as $key=>$value) {
-		if($postArray[$key]) {
-			if($postArray[$key] != $value) {
-				$array['update'][$key] = $postArray[$key];
-			}
-			unset($postArray[$key]);
-		} else {
-			$array['delete'][$key] = $value;
-		}
-	}
-	$array['insert'] = $postArray;
-	return $array;
+function filterAttr($haveArray, $postArray)
+{
+    $array = array();
+    foreach ($haveArray as $key => $value) {
+        if ($postArray[$key]) {
+            if ($postArray[$key] != $value) {
+                $array['update'][$key] = $postArray[$key];
+            }
+            unset($postArray[$key]);
+        } else {
+            $array['delete'][$key] = $value;
+        }
+    }
+    $array['insert'] = $postArray;
+    return $array;
 }
+
 ?>

@@ -16,22 +16,22 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
 if(filemtime("templates/default/modules/user/plugin.html") > filemtime(__file__) || (file_exists("models/modules/user/plugin.php") && filemtime("models/modules/user/plugin.php") > filemtime(__file__)) ) {
-	tpl_engine("default","modules/user/plugin.html",1);
-	include(__file__);
+    tpl_engine("default", "modules/user/plugin.html", 1);
+    include(__file__);
 } else {
 /* debug模式运行生成代码 结束 */
 ?><?php
-if(!$IWEB_SHOP_IN) {
-	die('Hacking attempt');
+if (!$IWEB_SHOP_IN) {
+    die('Hacking attempt');
 }
 
 //引入语言包
-$m_langpackage=new moduleslp;
-$i_langpackage=new indexlp;
+$m_langpackage = new moduleslp;
+$i_langpackage = new indexlp;
 
 //数据表定义区
 
@@ -39,36 +39,40 @@ $i_langpackage=new indexlp;
 
 //读写分离定义方法
 
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title><?php echo  $m_langpackage->m_u_center;?></title>
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/modules.css">
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
-<link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/layout.css">
-<style type="text/css">
-th{background:#EFEFEF}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title><?php echo $m_langpackage->m_u_center; ?></title>
+    <link rel="stylesheet" type="text/css" href="skin/<?php echo $SYSINFO['templates']; ?>/css/modules.css">
+    <link rel="stylesheet" type="text/css" href="skin/<?php echo $SYSINFO['templates']; ?>/css/common.css">
+    <link rel="stylesheet" type="text/css" href="skin/<?php echo $SYSINFO['templates']; ?>/css/layout.css">
+    <style type="text/css">
+        th {
+            background: #EFEFEF
+        }
 
-</style>
+    </style>
 </head>
 <body>
 <div class="container">
-	<?php  require("modules/header.php");?>
+    <?php require("modules/header.php"); ?>
     <div class="clear"></div>
     <div class="apart">
-    	<?php  require("modules/left_menu.php");?>
+        <?php require("modules/left_menu.php"); ?>
         <div class="bigpart">
-		<!-- plugins !-->
-		<div id="user_right">
-			<?php echo isset($plugins['user_right'])?show_plugins($plugins['user_right']):'';?>
-		</div>
-		<!-- plugins !-->
+            <!-- plugins !-->
+            <div id="user_right">
+                <?php echo isset($plugins['user_right']) ? show_plugins($plugins['user_right']) : ''; ?>
+            </div>
+            <!-- plugins !-->
         </div>
     </div>
     <div class="clear"></div>
-    <?php  require("modules/footer.php");?>
-</div><?php  require("modules/footer.php");?></div>
+    <?php require("modules/footer.php"); ?>
+</div>
+<?php require("modules/footer.php"); ?></div>
 
 </body>
 </html><?php } ?>

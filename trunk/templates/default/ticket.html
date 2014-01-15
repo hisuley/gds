@@ -1,197 +1,215 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta name="keywords" content="机票预订" />
-<meta name="description" content="机票预订" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/parts.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
-<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
-<title>机票购买</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <meta name="keywords" content="机票预订"/>
+    <meta name="description" content="机票预订"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/parts.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/changeStyle.js"></script>
+    <script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
+    <title>机票购买</title>
 </head>
 <body>
 <!-- wrapper -->
 <div id="wrapper">
-  <!-- header -->
-  {inc: include("shop/index_header.php");/}
-  <!-- /header -->
-  <!-- contents -->
-  <div id="contents" class="clearfix" >
-    <!-- leftColumn -->
-    <div id="leftColumn" style="width:960px;">
-      <div class="content-common-box">
-        <div class="title">
-          <h2>机票预订</h2>
-        </div>
-        <div class="content" style="height:70px;">
-	    <script type="text/javascript">
-        function inputTxt2(obj,act, initVal){
-          var str = initVal;
-          if(obj.value==''&&act=='set')
-          {
-            obj.value=str;
-            //obj.style.color="#cccccc"
-          }
-          if(obj.value==str&&act=='clean')
-          {
-            obj.value='';
-            //obj.style.color="#000000"
-          }
-        }
-        function compareDate(){
-        	var departDate = document.getElementById('departDateInput').value;
-        	var departDateArray = departDate.split("-");
+    <!-- header -->
+    {inc: include("shop/index_header.php");/}
+    <!-- /header -->
+    <!-- contents -->
+    <div id="contents" class="clearfix">
+        <!-- leftColumn -->
+        <div id="leftColumn" style="width:960px;">
+            <div class="content-common-box">
+                <div class="title">
+                    <h2>机票预订</h2>
+                </div>
+                <div class="content" style="height:70px;">
+                    <script type="text/javascript">
+                        function inputTxt2(obj, act, initVal) {
+                            var str = initVal;
+                            if (obj.value == '' && act == 'set') {
+                                obj.value = str;
+                                //obj.style.color="#cccccc"
+                            }
+                            if (obj.value == str && act == 'clean') {
+                                obj.value = '';
+                                //obj.style.color="#000000"
+                            }
+                        }
+                        function compareDate() {
+                            var departDate = document.getElementById('departDateInput').value;
+                            var departDateArray = departDate.split("-");
 
-        	var arriveDate = document.getElementById('arriveDateInput').value;
-        	var arriveDateArray = arriveDate.split("-");
-        	var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
-        	var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
-        	if(departDate > arriveDate){
-        		document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
-        	}
-        }
-        function compareCity(){
-        	/*
-        	var obj = document.getElementById("startCity");
-        	if(obj.value == '桂林'){
-        		alert('不能选择相同的城市！');
-        		obj.value = '';
-        	}
-        	*/
-        }
-        if(!+[1,]){
-        	var isIE = true;
-        }else{
-        	var isIE = false;
-        }
-        window.onload=function(){
-	        if (isIE) {
-			 	document.getElementById("startCity").onpropertychange = compareCity();
-			 } else // 需要用addEventListener来注册事件
-			 {
-				document.getElementById("startCity").addEventListener("input",
-			   	compareCity, false);
-			}
-		}
-        </script>
-            <form class="pretty-form ticket-form" method="POST" action="ticket.php" onsubmit="return checkTicketForm(this);">
-              
-              <div class="column-1">
-                <div class="radio-group">
-                  <input type="radio" name="SearchType" value="S" id="singleRadio" checked/>
-                  <label for="singleRadio">单程</label>
-                </div>
+                            var arriveDate = document.getElementById('arriveDateInput').value;
+                            var arriveDateArray = arriveDate.split("-");
+                            var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
+                            var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
+                            if (departDate > arriveDate) {
+                                document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
+                            }
+                        }
+                        function compareCity() {
+                            /*
+                             var obj = document.getElementById("startCity");
+                             if(obj.value == '桂林'){
+                             alert('不能选择相同的城市！');
+                             obj.value = '';
+                             }
+                             */
+                        }
+                        if (!+[1, ]) {
+                            var isIE = true;
+                        } else {
+                            var isIE = false;
+                        }
+                        window.onload = function () {
+                            if (isIE) {
+                                document.getElementById("startCity").onpropertychange = compareCity();
+                            } else // 需要用addEventListener来注册事件
+                            {
+                                document.getElementById("startCity").addEventListener("input",
+                                        compareCity, false);
+                            }
+                        }
+                    </script>
+                    <form class="pretty-form ticket-form" method="POST" action="ticket.php"
+                          onsubmit="return checkTicketForm(this);">
 
-                <div class="radio-group">
-                  <input type="radio" name="SearchType" value="D" id="doubleRadio"/>
-                  <label for="doubleRadio">双程</label>
+                        <div class="column-1">
+                            <div class="radio-group">
+                                <input type="radio" name="SearchType" value="S" id="singleRadio" checked/>
+                                <label for="singleRadio">单程</label>
+                            </div>
+
+                            <div class="radio-group">
+                                <input type="radio" name="SearchType" value="D" id="doubleRadio"/>
+                                <label for="doubleRadio">双程</label>
+                            </div>
+                        </div>
+                        <div class="column-3">
+                            <div class="column-2">
+                                <label for="none">城市：</label>
+                            </div>
+                            <div class="column-8">
+                                <input class="column-10 cityinput" style="background-position:200px 3px;" id="startCity"
+                                       type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');"
+                                       onfocus="inputTxt2(this,'clean', '请输入城市名称');" onchange="compareCity();"
+                                       onpropertychange="compareCity()" oninput="compareCity()" value="请输入城市名称">
+                                <input class="column-10 cityinput" id="endCity" style="background-position:200px 3px;"
+                                       type="text" name="ArriveCity" value="桂林" readonly/>
+                            </div>
+                        </div>
+                        <div class="column-1" style="height:1px;width:5%;"></div>
+                        <div class="column-3">
+                            <div class="column-2">
+                                <label for="none">日期：</label>
+                            </div>
+                            <div class="column-8">
+                                <input class="column-10" type="text" id="departDateInput" name="DepartDate"
+                                       onblur="inputTxt2(this,'set', '请选择出发日期');compareDate();"
+                                       onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');compareDate();"
+                                       value="请选择出发日期"/>
+                                <input class="column-10" type="text" id="arriveDateInput" name="ArriveDate"
+                                       onblur="inputTxt2(this,'set', '请选择回程日期');"
+                                       onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');"
+                                       value="请选择回程日期"/>
+                            </div>
+                        </div>
+                        <div class="column-2">
+                            <input style="width:70px" type="submit" class="common-button" value="搜索"/>
+                        </div>
+                        <script type="text/javascript">
+                            var startCity = new Vcity.CitySelector({input: 'startCity'});
+                        </script>
+                    </form>
                 </div>
-              </div>
-              <div class="column-3">
-                <div class="column-2">
-                  <label for="none">城市：</label>
+            </div>
+            <div id="leftMian" class="content-common-box">
+                <div class="title">
+                    <h2>{echo:lp{i_choice_good};/}</h2>
                 </div>
-                <div class="column-8">
-                  <input class="column-10 cityinput" style="background-position:200px 3px;" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" onchange="compareCity();" onpropertychange="compareCity()" oninput="compareCity()" value="请输入城市名称" >
-                  <input class="column-10 cityinput" id="endCity"  style="background-position:200px 3px;"  type="text" name="ArriveCity" value="桂林" readonly/>
-                </div>
-              </div>
-              <div class="column-1" style="height:1px;width:5%;"></div>
-              <div class="column-3">
-                <div class="column-2">
-                  <label for="none">日期：</label>
-                </div>
-                <div class="column-8">
-                  <input class="column-10" type="text" id="departDateInput" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');compareDate();"  value="请选择出发日期" />
-                  <input class="column-10" type="text" id="arriveDateInput" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');" value="请选择回程日期" />
-                </div>
-              </div>
-              <div class="column-2">
-                <input style="width:70px" type="submit" class="common-button"  value="搜索"/>
-              </div>
-              <script type="text/javascript">
-              var startCity = new Vcity.CitySelector({input:'startCity'});
-              </script>
-            </form>
-        </div>
-      </div>
-      <div id="leftMian" class="content-common-box">
-        <div class="title">
-          <h2>{echo:lp{i_choice_good};/}</h2>
-        </div>
-        <div id="listItems" class="c_m search_box" style="position:relative">
-          <ul class="list_view">
-         {sta:if(!empty($ticket_list))[exc]}
-         {sta:foreach($ticket_list as $v)[loop]}
-            <li id="showli_{echo:(string)$v->AirlineCode;/}" class="clearfix" style="padding:0px;">
-            	<table class="search_table_header">
-				    <tbody><tr>
-				        <td class="logo">
-				            <div class="clearfix">
-				                <span class="pubFlights_{echo:strtolower((string)$v->AirlineCode);/} flight_logo">{echo:translateAirline((string)$v->AirlineCode);/}</span>
-				                <strong>{echo:(string)$v->Flight;/}</strong></div>
-				            <div class="low_text">
+                <div id="listItems" class="c_m search_box" style="position:relative">
+                    <ul class="list_view">
+                        {sta:if(!empty($ticket_list))[exc]}
+                        {sta:foreach($ticket_list as $v)[loop]}
+                        <li id="showli_{echo:(string)$v->AirlineCode;/}" class="clearfix" style="padding:0px;">
+                            <table class="search_table_header">
+                                <tbody>
+                                <tr>
+                                    <td class="logo">
+                                        <div class="clearfix">
+                                            <span class="pubFlights_{echo:strtolower((string)$v->AirlineCode);/} flight_logo">{echo:translateAirline((string)$v->AirlineCode);/}</span>
+                                            <strong>{echo:(string)$v->Flight;/}</strong></div>
+                                        <div class="low_text">
 
 				    <span class="model">计划机型：<span>{echo:translateCraft((string)$v->CraftType);/}</span>
 				    </span>
-				            </div>
-				        </td>
-				        <td class="right">
-				            <div>
-				                <strong class="time">{echo:date('H:i',strtotime((string)$v->TakeOffTime));/}</strong></div>
-				            <div>
-				                {echo:translateAirport((string)$v->DPortCode);/}</div>
-				        </td>
-				        <td class="center">
-				                <div class="arrow">
-				                </div>
-				        </td>
-				        <td class="left">
-				            <div>
-				                <strong class="time">{echo:date('H:i',strtotime((string)$v->ArriveTime));/}</strong>
-				            </div>
-				            <div>
-				                {echo:translateAirport((string)$v->APortCode);/}</div>
-				        </td>
-				        <td>
-				            <div class="low_text">
-				                <label>燃油+机建：</label>{echo:(string)$v->AdultOilFee;/}元+{echo:(string)$v->AdultTax;/}元</div>
-				            <div class="low_text">
-				                    <label>历史准点率：</label>97%</div>
-				        </td>
-				        <td class="price" style="padding-top:0px;">
-				            <span class="base_price02 flightLowestPrice"><dfn>¥</dfn>{echo:intval((string)$v->StandardPrice);/}</span><i>起</i>
-				        </td>
-				        <td class="special">
-				        	<a class="itembuy common-button" title="{echo:lp{i_buy};/}" style="width:60px;" href="">购买</a>
-				        </td>
-				    </tr>
-				</tbody></table>
-            </li>
-             {end:foreach/}
-             {end:if/}
-          </ul>
+                                        </div>
+                                    </td>
+                                    <td class="right">
+                                        <div>
+                                            <strong class="time">{echo:date('H:i',strtotime((string)$v->TakeOffTime));/}</strong>
+                                        </div>
+                                        <div>
+                                            {echo:translateAirport((string)$v->DPortCode);/}
+                                        </div>
+                                    </td>
+                                    <td class="center">
+                                        <div class="arrow">
+                                        </div>
+                                    </td>
+                                    <td class="left">
+                                        <div>
+                                            <strong class="time">{echo:date('H:i',strtotime((string)$v->ArriveTime));/}</strong>
+                                        </div>
+                                        <div>
+                                            {echo:translateAirport((string)$v->APortCode);/}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="low_text">
+                                            <label>燃油+机建：</label>{echo:(string)$v->AdultOilFee;/}元+{echo:(string)$v->AdultTax;/}元
+                                        </div>
+                                        <div class="low_text">
+                                            <label>历史准点率：</label>97%
+                                        </div>
+                                    </td>
+                                    <td class="price" style="padding-top:0px;">
+                                        <span class="base_price02 flightLowestPrice"><dfn>¥</dfn>{echo:intval((string)$v->StandardPrice);/}</span><i>起</i>
+                                    </td>
+                                    <td class="special">
+                                        <a class="itembuy common-button" title="{echo:lp{i_buy};/}" style="width:60px;"
+                                           href="">购买</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        {end:foreach/}
+                        {end:if/}
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- leftColumn -->
         </div>
-        <div class="clearfix"></div>
-      </div>
-      <!-- leftColumn -->
+        <!-- rightColumn -->
+        <div id="rightColumn">
+
+            <!-- /rightColumn -->
+        </div>
+        <!-- /contents -->
     </div>
-    <!-- rightColumn -->
-    <div id="rightColumn">
-   
-    <!-- /rightColumn -->
-    </div>
-    <!-- /contents -->
-</div>
-  <!-- footer -->
- {inc: require("shop/index_footer.php");/}
+    <!-- footer -->
+    {inc: require("shop/index_footer.php");/}
     <!-- /footer -->
-  </div>
-  <!-- /wrapper -->
+</div>
+<!-- /wrapper -->
 </div>
 </body>
 </html>

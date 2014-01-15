@@ -1,356 +1,347 @@
 <?php
 /* ----------------------------------------------------------------------- *\
-   PHP-¼òÒ×ÖÐÎÄ·Ö´Ê (SCWS) ver 3.1/2.1 (ÊµÀýÑÝÊ¾)
+   PHP-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö´ï¿½ (SCWS) ver 3.1/2.1 (Êµï¿½ï¿½ï¿½ï¿½Ê¾)
    
-   (v2) »ùÓÚ´ÊÆµ´ÊµäÖðµãËÑË÷×î³¤´Ê,
-   (v3) Ë«Ïò¸ù¾Ý´ÊÆµÈ¡½Ï¸ßÖ®·Ö·¨
+   (v2) ï¿½ï¿½ï¿½Ú´ï¿½Æµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î³¤ï¿½ï¿½,
+   (v3) Ë«ï¿½ï¿½ï¿½Ý´ï¿½ÆµÈ¡ï¿½Ï¸ï¿½Ö®ï¿½Ö·ï¿½
 
-   ÕâÁ½¸ö°æ±¾µÄÓÃ·¨¼° API Ò»ÖÂ.
+   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ API Ò»ï¿½ï¿½.
    $Id: demo.php,v 1.2 2008/12/20 12:18:15 hightman Exp $
 
    -----------------------------------------------------------------------
-   ×÷Õß: ÂíÃ÷Á·(hightman) (MSN: MingL_Mar@msn.com) (php-QQÈº: 17708754)
-   ÍøÕ¾: http://www.ftphp.com/scws
-   Ê±¼ä: 2006/03/05
-   ÐÞ¶©: 2008/12/20
-   Ä¿µÄ: Ñ§Ï°ÑÐ¾¿½»Á÷ÓÃ, Ï£ÍûÓÐºÃµÄ½¨Òé¼°ÓÃÍ¾Ï£ÍûÄÜ½øÒ»²½½»Á÷.
+   ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(hightman) (MSN: MingL_Mar@msn.com) (php-QQÈº: 17708754)
+   ï¿½ï¿½Õ¾: http://www.ftphp.com/scws
+   Ê±ï¿½ï¿½: 2006/03/05
+   ï¿½Þ¶ï¿½: 2008/12/20
+   Ä¿ï¿½ï¿½: Ñ§Ï°ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Ï£ï¿½ï¿½ï¿½ÐºÃµÄ½ï¿½ï¿½é¼°ï¿½ï¿½Í¾Ï£ï¿½ï¿½ï¿½Ü½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
    -----------------------------------------------------------------------
-   »·¾³: PHP 4.1.0¼°¸ü¸ß°æ±¾º¬ PHP5 (±àÒë½¨Òé --enable-dba --with-[cdb|gdbm])
+   ï¿½ï¿½ï¿½ï¿½: PHP 4.1.0ï¿½ï¿½ï¿½ï¿½ß°æ±¾ï¿½ï¿½ PHP5 (ï¿½ï¿½ï¿½ë½¨ï¿½ï¿½ --enable-dba --with-[cdb|gdbm])
 \* ----------------------------------------------------------------------- */
 
 /**
- * ²é¿´Ô´ÂëµÄ²ÎÊý <*.php?source>
+ * ï¿½é¿´Ô´ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ <*.php?source>
  */
 
 $stag = 'source';
 $slen = strlen($stag);
-if (isset($_SERVER['QUERY_STRING']) 
-	&& !strncmp($_SERVER['QUERY_STRING'], $stag, $slen))
-{
-	$qlen = strlen($_SERVER['QUERY_STRING']);	
-	$files = array('pscws2', 'pscws3', 'dict', 'xdb_r');
-	$file = ($qlen > $slen && $qlen < ($slen + count($files))) ? $files[$qlen-$slen] . '.class.php' : __FILE__;
-	highlight_file($file);
-	exit(0);
+if (isset($_SERVER['QUERY_STRING'])
+    && !strncmp($_SERVER['QUERY_STRING'], $stag, $slen)
+) {
+    $qlen = strlen($_SERVER['QUERY_STRING']);
+    $files = array('pscws2', 'pscws3', 'dict', 'xdb_r');
+    $file = ($qlen > $slen && $qlen < ($slen + count($files))) ? $files[$qlen - $slen] . '.class.php' : __FILE__;
+    highlight_file($file);
+    exit(0);
 }
 
 /**
- * ÊµÀý¿ªÊ¼
+ * Êµï¿½ï¿½Ê¼
  */
 
-// ³¢ÊÔ¼ÆËãÊµÁÐÔËËãÊ±¼ä
+// ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 function get_microtime()
 {
-	list($usec, $sec) = explode(' ', microtime()); 
-	return ((float)$usec + (float)$sec); 
+    list($usec, $sec) = explode(' ', microtime());
+    return ((float)$usec + (float)$sec);
 }
+
 $time_start = get_microtime();
 
-// ·Ö´Ê½á¹ûÖ®»Øµ÷º¯Êý (param: ·ÖºÃµÄ´Ê×é³ÉµÄÊý×é)
+// ï¿½Ö´Ê½ï¿½ï¿½Ö®ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ (param: ï¿½ÖºÃµÄ´ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½)
 function words_cb($ar)
 {
-	foreach ($ar as $tmp)
-	{
-		if ($tmp == "\n")
-		{
-			echo $tmp;
-			continue;
-		}
-		echo $tmp . ' ';
-	}
-	flush();
+    foreach ($ar as $tmp) {
+        if ($tmp == "\n") {
+            echo $tmp;
+            continue;
+        }
+        echo $tmp . ' ';
+    }
+    flush();
 }
 
-// ÊµÀý»¯Ç°µÄ²ÎÊýÖ¸¶¨Óë¶ÁÈ¡
-$dict = 'dict/dict.xdb';	// Ä¬ÈÏ²ÉÓÃ xdb (²»ÐèÆäËüÈÎºÎÒÀÀµ)
-$mydata  = NULL;	// ´ýÇÐÊý¾Ý
-$version = 3;		// ²ÉÓÃ°æ±¾
-$autodis = false;	// ÊÇ·ñÊ¶±ðÃû×Ö
-$ignore  = false;	// ÊÇ·ñºöÂÔ±êµã
-$debug   = false;	// ÊÇ·ñÎª³ý´íÄ£Ê½
-$stats	 = false;	// ÊÇ·ñ²é¿´Í³¼Æ½á¹û
-$is_cli  = (php_sapi_name() == 'cli');	// ÊÇ·ñÎª cli ÔËÐÐ»·¾³
+// Êµï¿½ï¿½Ç°ï¿½Ä²ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½È¡
+$dict = 'dict/dict.xdb'; // Ä¬ï¿½Ï²ï¿½ï¿½ï¿½ xdb (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½)
+$mydata = NULL; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$version = 3; // ï¿½ï¿½ï¿½Ã°æ±¾
+$autodis = false; // ï¿½Ç·ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$ignore = false; // ï¿½Ç·ï¿½ï¿½ï¿½Ô±ï¿½ï¿½
+$debug = false; // ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½Ä£Ê½
+$stats = false; // ï¿½Ç·ï¿½é¿´Í³ï¿½Æ½ï¿½ï¿½
+$is_cli = (php_sapi_name() == 'cli'); // ï¿½Ç·ï¿½Îª cli ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½
 $sample_text = <<<__EOF__
-³Â¿­¸è²¢²»ÊÇ¡¶ÎÞ¼«¡·µÄÎ¨Ò»Öø×÷È¨ÈË£¬Ò»²¿µçÓ°µÄÕûÌå°æÈ¨¹éµçÓ°ÖÆÆ¬³§ËùÓÐ¡£
+ï¿½Â¿ï¿½ï¿½è²¢ï¿½ï¿½ï¿½Ç¡ï¿½ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½Î¨Ò»ï¿½ï¿½ï¿½ï¿½È¨ï¿½Ë£ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ó°ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½
 
-Ò»²¿µçÓ°µÄ×÷Õß°üÀ¨µ¼ÑÝ¡¢ÉãÓ°¡¢±à¾çµÈ´´×÷ÈËÔ±£¬ÕâÐ©´´×÷ÈËÔ±¶ÔËûÃÇµÄ´´×÷ÊÇÓÐ°æÈ¨µÄ¡£²»¾­¹ýÖÆÆ¬ÈËÊÚÈ¨£¬ÆäËûÈË²»ÄÜ¶ÔµçÓ°×ö¿½±´¡¢·¢ÐÐ¡¢·´Ó³£¬²»ÄÜÍ¨¹ýÍøÂçÀ´´«²¥£¬¼È²»ÄÜ°ÑµçÓ°¸Ä±à³ÉÐ¡Ëµ¡¢Á¬»·»­µÈÆäËûÒÕÊõÐÎÊ½·¢±í£¬Ò²²»ÄÜ°ÑÒ»²¿¼¸¸öÐ¡Ê±²ÅÄÜ·ÅÍêµÄµçÓ°¸Ä±à³É°ë¸öÐ¡Ê±¾ÍÄÜ·ÅÍêµÄ¶ÌÆ¬¡£
+Ò»ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ÇµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½È¨ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½Ü¶Ôµï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½Ü°Ñµï¿½Ó°ï¿½Ä±ï¿½ï¿½Ð¡Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½?Ò²ï¿½ï¿½ï¿½Ü°ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Ê±ï¿½ï¿½ï¿½Ü·ï¿½ï¿½ï¿½Äµï¿½Ó°ï¿½Ä±ï¿½É°ï¿½ï¿½Ð¡Ê±ï¿½ï¿½ï¿½Ü·ï¿½ï¿½ï¿½Ä¶ï¿½Æ¬ï¿½ï¿½
 
-Öø×÷È¨ºÍ°æÈ¨ÔÚÎÒ¹úÊÇÍ¬Ò»¸ö¸ÅÄî£¬ÊÇ·¨ÂÉ¸³Óè×÷Æ·´´×÷ÕßµÄ×¨ÓÐÈ¨Àû¡£ËùÎ½×¨ÓÐÈ¨Àû¾ÍÊÇÃ»ÓÐ¾­¹ýÈ¨ÀûÈËÐí¿ÉÓÖ²»ÊÇ·¨ÂÉ¹æ¶¨µÄÀýÍâ£¬ÒªÊ¹ÓÃÕâ¸ö×÷Æ·£¬¾Í±ØÐë¾­¹ý×÷ÕßÊÚÈ¨£¬Ã»ÓÐÊÚÈ¨¾ÍÊÇÇÖÈ¨¡£
+ï¿½ï¿½ï¿½ï¿½È¨ï¿½Í°ï¿½È¨ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½Ç·ï¿½ï¿½É¸ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½×¨ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½Î½×¨ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¾ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½Ç·ï¿½ï¿½É¹æ¶¨ï¿½ï¿½ï¿½ï¿½ï¿½â£¬ÒªÊ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Í±ï¿½ï¿½ë¾­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½
 __EOF__;
 
-// ¸ù¾Ý²»Í¬°æ±¾µÄ»·¾³¶ÁÈ¡²ÎÊýÉèÖÃ
-if ($is_cli)
-{
-	$argc = $_SERVER['argc'];
-	for ($i = 1; $i < $argc; $i++)
-	{
-		$optarg = $_SERVER['argv'][$i];
-		if (!strncmp($optarg, "--", 2))
-		{
-			$cmp = substr($optarg, 2);
-			if (!strcasecmp($cmp, "help"))
-			{
-				$mydata = NULL;
-				break;
-			}
-			else if (!strcasecmp($cmp, "autodis"))
-				$autodis = true;
-			else if (!strcasecmp($cmp, "ignore"))
-				$ignore = true;
-			else if (!strcasecmp($cmp, "v2"))
-				$version = 2;
-			else if (!strcasecmp($cmp, "debug"))
-				$debug = true;
-			else if (!strcasecmp($cmp, "stats"))
-				$stats = true;
-			else if (!strcasecmp($cmp, "dict"))
-			{
-				$i++;
-				$dict = $_SERVER['argv'][$i];
-			}
-		}
-		else if (is_null($mydata))
-		{
-			if (is_file($optarg)) $mydata = @file_get_contents($optarg);
-			else $mydata = trim($optarg);
-		}
-	}
-}
-else
-{
-	// ²¿·Ö²ÎÊýÑ¡Ïî
-	$checked_ignore = $checked_autodis = $checked_v2 = '';
-	
-	// ÊÇ·ñÖ¸¶¨ÓÐµÚ 2 °æ
-	if (isset($_REQUEST['version']) && $_REQUEST['version'] == 2)
-	{
-		$version = 2;
-		$checked_v2 = ' selected';
-	}
+// ï¿½ï¿½Ý²ï¿½Í¬ï¿½æ±¾ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+if ($is_cli) {
+    $argc = $_SERVER['argc'];
+    for ($i = 1; $i < $argc; $i++) {
+        $optarg = $_SERVER['argv'][$i];
+        if (!strncmp($optarg, "--", 2)) {
+            $cmp = substr($optarg, 2);
+            if (!strcasecmp($cmp, "help")) {
+                $mydata = NULL;
+                break;
+            } else if (!strcasecmp($cmp, "autodis"))
+                $autodis = true;
+            else if (!strcasecmp($cmp, "ignore"))
+                $ignore = true;
+            else if (!strcasecmp($cmp, "v2"))
+                $version = 2;
+            else if (!strcasecmp($cmp, "debug"))
+                $debug = true;
+            else if (!strcasecmp($cmp, "stats"))
+                $stats = true;
+            else if (!strcasecmp($cmp, "dict")) {
+                $i++;
+                $dict = $_SERVER['argv'][$i];
+            }
+        } else if (is_null($mydata)) {
+            if (is_file($optarg)) $mydata = @file_get_contents($optarg);
+            else $mydata = trim($optarg);
+        }
+    }
+} else {
+    // ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+    $checked_ignore = $checked_autodis = $checked_v2 = '';
 
-	// ÊÇ·ñÖ¸¶¨Ò»¸ö´Êµä¸ñÊ½
-	$selected_gdbm = $selected_text = $selected_sqlite = '';
-	if (isset($_REQUEST['dict']))
-	{
-		if ($_REQUEST['dict'] == 'gdbm')
-		{
-			$dict = 'dict/dict.gdbm';
-			$selected_gdbm = ' selected';
-		}
-		else if ($_REQUEST['dict'] == 'text')
-		{
-			$dict = 'dict/dict.txt';
-			$selected_text = ' selected';
-		}
-		else if ($_REQUEST['dict'] == 'sqlite')
-		{
-			$dict = 'dict/dict.sqlite';
-			$selected_sqlite = ' selected';
-		}
-		else if ($_REQUEST['dict'] == 'cdb')
-		{
-			$dict = 'dict/dict.cdb';
-			$selected_cdb = ' selected';
-		}
-		else
-		{
-			$_REQUEST['dict'] = 'xdb';
-		}
-	}
+    // ï¿½Ç·ï¿½Ö¸ï¿½ï¿½ï¿½Ðµï¿½ 2 ï¿½ï¿½
+    if (isset($_REQUEST['version']) && $_REQUEST['version'] == 2) {
+        $version = 2;
+        $checked_v2 = ' selected';
+    }
 
-	// ÊÇ·ñ¿ªÆôÈËÃûÊ¶±ð (È±Ê¡¹Ø±Õ)
-	if (isset($_REQUEST['autodis']) && !strcmp($_REQUEST['autodis'], 'yes'))
-	{
-		$autodis = true;
-		$checked_autodis = ' checked';
-	}
+    // ï¿½Ç·ï¿½Ö¸ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Êµï¿½ï¿½Ê½
+    $selected_gdbm = $selected_text = $selected_sqlite = '';
+    if (isset($_REQUEST['dict'])) {
+        if ($_REQUEST['dict'] == 'gdbm') {
+            $dict = 'dict/dict.gdbm';
+            $selected_gdbm = ' selected';
+        } else if ($_REQUEST['dict'] == 'text') {
+            $dict = 'dict/dict.txt';
+            $selected_text = ' selected';
+        } else if ($_REQUEST['dict'] == 'sqlite') {
+            $dict = 'dict/dict.sqlite';
+            $selected_sqlite = ' selected';
+        } else if ($_REQUEST['dict'] == 'cdb') {
+            $dict = 'dict/dict.cdb';
+            $selected_cdb = ' selected';
+        } else {
+            $_REQUEST['dict'] = 'xdb';
+        }
+    }
 
-	// ÊÇ·ñÇå³ý±êµã·ûºÅ
-	if (isset($_REQUEST['ignore']) && !strcmp($_REQUEST['ignore'], 'yes'))
-	{
-		$ignore = true;
-		$checked_ignore = ' checked';
-	}
+    // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ (È±Ê¡ï¿½Ø±ï¿½)
+    if (isset($_REQUEST['autodis']) && !strcmp($_REQUEST['autodis'], 'yes')) {
+        $autodis = true;
+        $checked_autodis = ' checked';
+    }
 
-	// ÊÇ·ñ¿ªÆôdebug
-	if (isset($_REQUEST['debug']) && !strcmp($_REQUEST['debug'], 'yes'))
-	{
-		$debug = true;
-		$checked_debug = ' checked';
-	}
+    // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    if (isset($_REQUEST['ignore']) && !strcmp($_REQUEST['ignore'], 'yes')) {
+        $ignore = true;
+        $checked_ignore = ' checked';
+    }
 
-	// ÊÇ·ñ¿´Í³¼Æ±í
-	if (isset($_REQUEST['stats']) && !strcmp($_REQUEST['stats'], 'yes'))
-	{
-		$stats = true;
-		$checked_stats = ' checked';
-	}
+    // ï¿½Ç·ï¿½ï¿½ï¿½debug
+    if (isset($_REQUEST['debug']) && !strcmp($_REQUEST['debug'], 'yes')) {
+        $debug = true;
+        $checked_debug = ' checked';
+    }
 
-	// ÇÐ·ÖÊý¾Ý
-	if (!isset($_REQUEST['mydata']) || empty($_REQUEST['mydata']))
-	{
-		$mydata = $sample_text;
-	}
-	else
-	{
-		$mydata = & $_REQUEST['mydata'];
-		if (get_magic_quotes_gpc())
-			$mydata = stripslashes($mydata);
-	}
+    // ï¿½Ç·ï¿½Í³ï¿½Æ±ï¿½
+    if (isset($_REQUEST['stats']) && !strcmp($_REQUEST['stats'], 'yes')) {
+        $stats = true;
+        $checked_stats = ' checked';
+    }
+
+    // ï¿½Ð·ï¿½ï¿½ï¿½ï¿½
+    if (!isset($_REQUEST['mydata']) || empty($_REQUEST['mydata'])) {
+        $mydata = $sample_text;
+    } else {
+        $mydata = & $_REQUEST['mydata'];
+        if (get_magic_quotes_gpc())
+            $mydata = stripslashes($mydata);
+    }
 }
 
-// Çå³ý×îºóµÄ \r\n\t
-if (!is_null($mydata)) 
-	$mydata = trim($mydata);
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ \r\n\t
+if (!is_null($mydata))
+    $mydata = trim($mydata);
 
-// ÊµÀý»¯·Ö´Ê¶ÔÏñ(mydata·Ç¿Õ)
+// Êµï¿½ï¿½Ö´Ê¶ï¿½ï¿½ï¿½(mydataï¿½Ç¿ï¿½)
 $object = 'PSCWS' . $version;
-require (strtolower($object) . '.class.php');
-	
+require(strtolower($object) . '.class.php');
+
 $cws = new $object($dict);
 $cws->set_ignore_mark($ignore);
 $cws->set_autodis($autodis);
 $cws->set_debug($debug);
-// hightman.060330: Ç¿ÐÐ¿ªÆôÍ³¼Æ
+// hightman.060330: Ç¿ï¿½Ð¿ï¿½ï¿½ï¿½Í³ï¿½ï¿½
 $cws->set_statistics($stats);
 
 ?>
 <?php if (!$is_cli) { ?>
 <html>
 <head>
-<title>PHP ¼òÒ×ÖÐÎÄ·Ö´Ê(SCWS) µÚ<?php echo $version; ?>°æÔÚÏßÑÝÊ¾ (by hightman)</title>
-<meta http-equiv="Content-type" content="text/html; charset=gbk">
-<style type="text/css">
-<!--
-td, body	{ background-color: #efefef; font-family: tahoma; font-size: 14px; }
-.demotx		{ font-size: 12px; width: 100%; height: 100px; }
-small		{ font-size: 12px; }
-//-->
-</style>
+    <title>PHP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö´ï¿½(SCWS) ï¿½ï¿½<?php echo $version; ?>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ (by hightman)</title>
+    <meta http-equiv="Content-type" content="text/html; charset=gbk">
+    <style type="text/css">
+        <!--
+        td, body {
+            background-color: #efefef;
+            font-family: tahoma;
+            font-size: 14px;
+        }
+
+        .demotx {
+            font-size: 12px;
+            width: 100%;
+            height: 100px;
+        }
+
+        small {
+            font-size: 12px;
+        }
+
+        /
+        /
+        -->
+    </style>
 </head>
 <body>
 <h3>
-  <font color=red>PHP ¼òÒ×ÖÐÎÄ·Ö´Ê(SCWS)</font>
-  <font color=blue>µÚ<?php echo $version; ?>°æ</font> - ÔÚÏßÑÝÊ¾ (by hightman)
-</h3>  
-»ù±¾¹¦ÄÜ: (v2)¸ù¾Ý´ÊÆµ´Êµä½øÐÐÕýÏò»úÐµ·Ö´Ê, (v3)Ë«Ïò¸ù¾Ý´ÊÆµÈ¡½Ï¸ßÖ®·Ö·¨, ÖÐÍâÈËÃûÖÇÄÜ±æÈÏ (´Êµä¸ñÊ½: xdb/gdbm/cdb/sqlite/textµÈ)
-<hr />
+    <font color=red>PHP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö´ï¿½(SCWS)</font>
+    <font color=blue>ï¿½ï¿½<?php echo $version; ?>ï¿½ï¿½</font> - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ (by hightman)
+</h3>
+ï¿½ï¿½ï¿½ï¿½: (v2)ï¿½ï¿½Ý´ï¿½Æµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ö´ï¿½, (v3)Ë«ï¿½ï¿½ï¿½Ý´ï¿½ÆµÈ¡ï¿½Ï¸ï¿½Ö®ï¿½Ö·ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü±ï¿½ï¿½ï¿½ (ï¿½Êµï¿½ï¿½Ê½: xdb/gdbm/cdb/sqlite/textï¿½ï¿½)
+<hr/>
 
 <table width=100% border=0>
-  <tr>
-    <form method=post>
-	<td width=100%>
-	  <strong>ÇëÊäÈëÎÄ×Öµã»÷Ìá½»³¢ÊÔ·Ö´Ê: </strong> <br />
-	  <textarea name=mydata cols=60 rows=8 class=demotx><?php echo $mydata; ?></textarea>
-	  <small>
-	    <input type=checkbox name=autodis value="yes"<?php echo $checked_autodis;?>> ÖÇÄÜÊ¶±ðÈËÃû
-		&nbsp;
-		<input type=checkbox name=ignore value="yes"<?php echo $checked_ignore;?>> Çå³ý±êµã·ûºÅ
-		&nbsp;
-		<input type=checkbox name=stats value="yes"<?php echo $checked_stats;?>> <font color=red>Í³¼Æ½á¹û</font>
-		&nbsp;
-		<input type=checkbox name=debug value="yes"<?php echo $checked_debug;?>> debug
-		&nbsp;
-		<br />
-		´Êµä¸ñÊ½: 
-		<select name=dict size=1>		
-		<option value=xdb>XDB</option>
-		<option value=cdb<?php echo $selected_cdb;?>>CDB</option>
-		<option value=gdbm<?php echo $selected_gdbm; ?>>GDBM</option>
-		<option value=text<?php echo $selected_text; ?>>Text</option>
-		<option value=sqlite<?php echo $selected_sqlite; ?>>SQLite2.x</option>
-		</select>
-		&nbsp;
-		³¢ÊÔ²ÉÓÃµÚ
-		<select name=version size=1 style="color: red; font-weight: bold;">
-		  <option value=3>3</option>
-		  <option value=2<?php echo $checked_v2;?>>2</option>
-		</select>
-		°æ·Ö´ÊËã·¨
-		&nbsp;&nbsp;
-	  </small>
-	  <input type=submit>
-	  </td>
-	  </form>
-	</tr>
-	<tr>
-	  <td><hr /></td>
-	</tr>
-	<tr>
-	  <td width=100%>
-	    <strong>·Ö´Ê½á¹û(Ô­ÎÄ×Ü³¤¶È <?php echo strlen($mydata); ?> ×Ö·û) </strong>
-		<br />
-		<textarea cols=60 rows=8 class=demotx readonly style="color:#888888;">
-<?php } else { ?>
-_____________________________________________________________________
+    <tr>
+        <form method=post>
+            <td width=100%>
+                <strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½á½»ï¿½ï¿½ï¿½Ô·Ö´ï¿½: </strong> <br/>
+                <textarea name=mydata cols=60 rows=8 class=demotx><?php echo $mydata; ?></textarea>
+                <small>
+                    <input type=checkbox name=autodis value="yes"<?php echo $checked_autodis; ?>> ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    &nbsp;
+                    <input type=checkbox name=ignore value="yes"<?php echo $checked_ignore; ?>> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    &nbsp;
+                    <input type=checkbox name=stats value="yes"<?php echo $checked_stats; ?>> <font
+                        color=red>Í³ï¿½Æ½ï¿½ï¿½</font>
+                    &nbsp;
+                    <input type=checkbox name=debug value="yes"<?php echo $checked_debug; ?>> debug
+                    &nbsp;
+                    <br/>
+                    ï¿½Êµï¿½ï¿½Ê½:
+                    <select name=dict size=1>
+                        <option value=xdb>XDB</option>
+                        <option value=cdb<?php echo $selected_cdb; ?>>CDB</option>
+                        <option value=gdbm<?php echo $selected_gdbm; ?>>GDBM</option>
+                        <option value=text<?php echo $selected_text; ?>>Text</option>
+                        <option value=sqlite<?php echo $selected_sqlite; ?>>SQLite2.x</option>
+                    </select>
+                    &nbsp;
+                    ï¿½ï¿½ï¿½Ô²ï¿½ï¿½Ãµï¿½
+                    <select name=version size=1 style="color: red; font-weight: bold;">
+                        <option value=3>3</option>
+                        <option value=2<?php echo $checked_v2; ?>>2</option>
+                    </select>
+                    ï¿½ï¿½Ö´ï¿½ï¿½ã·¨
+                    &nbsp;&nbsp;
+                </small>
+                <input type=submit>
+            </td>
+        </form>
+    </tr>
+    <tr>
+        <td>
+            <hr/>
+        </td>
+    </tr>
+    <tr>
+        <td width=100%>
+            <strong>ï¿½Ö´Ê½ï¿½ï¿½(Ô­ï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½ <?php echo strlen($mydata); ?> ï¿½Ö·ï¿½) </strong>
+            <br/>
+            <textarea cols=60 rows=8 class=demotx readonly style="color:#888888;">
+                <?php } else { ?>
+                _____________________________________________________________________
 
-PHP¼òÒ×ÖÐÎÄ·Ö´Ê³ÌÐò(SCWS) - µÚ<?php echo $version; ?>°æ - by hightman
-_____________________________________________________________________
-1.»ùÓÚ´ÊÆµ´ÊµäÖðµãËÑË÷×î³¤´Ê(v2), Ë«Ïò¸ù¾Ý´ÊÆµÈ¡½Ï¸ßÖ®·Ö·¨(v3)
-2.ÓÃ·¨: <?php echo $_SERVER['argv'][0]; ?> [Ñ¡Ïî] <string|file>
-3.Ñ¡Ïî: --autodis    ´ò¿ªÈËÃûÊ¶±ð
-        --ignore     Çå³ý½á¹ûÖÐµÄ±êµã·ûºÅ
-        --v2         Ê¹ÓÃµÚ2°æ·Ö´ÊËã·¨(È±Ê¡µÚ3°æ)
-        --stats      ·ÖÎöÍ³¼Æ·Ö´Ê½á¹û 
-        --dict <file>Ö±½ÓÖ¸¶¨´ÊµäÎÄ¼þ, ºó×º(.xdb|.cdb|.gdbm|.txt|.sqlite)
-        --help       ÏÔÊ¾±¾Ò³°ïÖúÎÄ¼þ
-4.½á¹û: Ö±½ÓÊä³ö·Ö´Ê½á¹û, ´ÊÖ®¼äÒÔ¿Õ¸ñ·Ö¸ô
-_____________________________________________________________________
+                PHPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö´Ê³ï¿½ï¿½ï¿½(SCWS) - ï¿½ï¿½<?php echo $version; ?>ï¿½ï¿½ - by hightman
+                _____________________________________________________________________
+                1.ï¿½ï¿½ï¿½Ú´ï¿½Æµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î³¤ï¿½ï¿½(v2), Ë«ï¿½ï¿½ï¿½Ý´ï¿½ÆµÈ¡ï¿½Ï¸ï¿½Ö®ï¿½Ö·ï¿½(v3)
+                2.ï¿½Ã·ï¿½: <?php echo $_SERVER['argv'][0]; ?> [Ñ¡ï¿½ï¿½]
+                <string
+                |file>
+                3.Ñ¡ï¿½ï¿½: --autodis ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+                --ignore ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ±ï¿½ï¿½ï¿½ï¿½
+                --v2 Ê¹ï¿½Ãµï¿½2ï¿½ï¿½Ö´ï¿½ï¿½ã·¨(È±Ê¡ï¿½ï¿½3ï¿½ï¿½)
+                --stats ï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ·Ö´Ê½ï¿½ï¿½
+                --dict
+                <file>Ö±ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Êµï¿½ï¿½Ä¼ï¿½, ï¿½ï¿½×º(.xdb|.cdb|.gdbm|.txt|.sqlite)
+                    --help ï¿½ï¿½Ê¾ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+                    4.ï¿½ï¿½ï¿½: Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ê½ï¿½ï¿½, ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Ô¿Õ¸ï¿½Ö¸ï¿½
+                    _____________________________________________________________________
 
-<?php } ?>
-<?php
-// Ö´ÐÐÇÐ·Ö, ·Ö´Ê½á¹ûÊý×éÖ´ÐÐ words_cb()
-$cws->segment($mydata, 'words_cb');
+                    <?php } ?>
+                    <?php
+                    // Ö´ï¿½ï¿½ï¿½Ð·ï¿½, ï¿½Ö´Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ words_cb()
+                    $cws->segment($mydata, 'words_cb');
 
-// ÇÐ·ÖÊ±¼äÍ³¼Æ
-$time_end = get_microtime();
-$time = $time_end - $time_start;
+                    // ï¿½Ð·ï¿½Ê±ï¿½ï¿½Í³ï¿½ï¿½
+                    $time_end = get_microtime();
+                    $time = $time_end - $time_start;
 
-// hightman.060330: ·Ö´Ê½á¹û±¨±í
-$stat_string  = '';
-if ($stats)
-{
-	$stat_string .= sprintf("%-16s  %-8s  %s\n", '×Ö»ò´Ê', '´ÎÊý', '³öÏÖÎ»ÖÃ');
-	$stat_string .= str_repeat('-', 70) . "\n";
-	
-	$list = &$cws->get_statistics();
-	$word_num = 0;
-	foreach ($list as $k => $v)
-	{
-		$stat_string .= sprintf("%-16s  %-8d  %s\n", $k, $v['times'], implode(', ',$v['poses']));
-		$word_num += $v['times'];
-	}
+                    // hightman.060330: ï¿½Ö´Ê½ï¿½ï¿½ï¿½
+                    $stat_string = '';
+                    if ($stats) {
+                        $stat_string .= sprintf("%-16s  %-8s  %s\n", 'ï¿½Ö»ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½');
+                        $stat_string .= str_repeat('-', 70) . "\n";
 
-	$stat_string .= str_repeat('-', 70) . "\n";
-	$stat_string .= sprintf("ºÏ¼Æ:%4d ´Ê      %-8d\n", count($list), $word_num);
-}
+                        $list = & $cws->get_statistics();
+                        $word_num = 0;
+                        foreach ($list as $k => $v) {
+                            $stat_string .= sprintf("%-16s  %-8d  %s\n", $k, $v['times'], implode(', ', $v['poses']));
+                            $word_num += $v['times'];
+                        }
 
-// ÒÔÏÂÏÔÊ¾½á¹û
-?>
-<?php if (!$is_cli) { ?>
-	  </textarea>		
-	  <small>
-	    ·Ö´ÊºÄÊ±: <?php echo $time; ?>Ãë, 
-		´Êµä: <?php echo $dict; ?>, ²éÑ¯´ÎÊý: <?php echo $cws->_dict->query_times; ?>´Î
-	  </small>
-	</td>
-  </tr>
+                        $stat_string .= str_repeat('-', 70) . "\n";
+                        $stat_string .= sprintf("ï¿½Ï¼ï¿½:%4d ï¿½ï¿½      %-8d\n", count($list), $word_num);
+                    }
+
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+                    ?>
+                    <?php if (!$is_cli) { ?>
+            </textarea>
+            <small>
+                ï¿½Ö´Êºï¿½Ê±: <?php echo $time; ?>ï¿½ï¿½,
+                ï¿½Êµï¿½: <?php echo $dict; ?>, ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½: <?php echo $cws->_dict->query_times; ?>ï¿½ï¿½
+            </small>
+        </td>
+    </tr>
 </table>
-<hr />
+<hr/>
 <pre>
 <?php echo $stat_string; ?>
 </pre>
-<hr />
+<hr/>
 <small>
-  ×¢: ±¾³ÌÐò´úÂë¼°Ïà¹Ø´ÊµäÃâ·Ñ¿ª·ÅÏÂÔØ, ¹©ÑÐ¾¿Ñ§Ï°½»Á÷.
-  ²Î¼ûÍøÒ³ <a href=http://www.ftphp.com/scws target=_blank>http://www.ftphp.com/scws</a>
-  »òÖ±½Ó <a href="?source" target="_blank">²é¿´Ô´Âë</a>
+    ×¢: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¼°ï¿½ï¿½Ø´Êµï¿½ï¿½ï¿½Ñ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ð¾ï¿½Ñ§Ï°ï¿½ï¿½ï¿½ï¿½.
+    ï¿½Î¼ï¿½ï¿½ï¿½Ò³ <a href=http://www.ftphp.com/scws target=_blank>http://www.ftphp.com/scws</a>
+    ï¿½ï¿½Ö±ï¿½ï¿½ <a href="?source" target="_blank">ï¿½é¿´Ô´ï¿½ï¿½</a>
 </small>
 </body>
 </html>
 <?php } else if (!empty($mydata)) { ?>
 
-_____________________________________________________________________
-×Ü³¤: <?php echo strlen($mydata); ?>×Ö·û, ºÄÊ±: <?php echo $time; ?>Ãë, ²é´Ê´ÎÊý: <?php echo $cws->_dict->query_times; ?>´Î, ´Êµä: <?php echo $dict; ?>
+    _____________________________________________________________________
+    ï¿½Ü³ï¿½: <?php echo strlen($mydata); ?>ï¿½Ö·ï¿½, ï¿½ï¿½Ê±: <?php echo $time; ?>ï¿½ï¿½, ï¿½ï¿½Ê´ï¿½ï¿½ï¿½: <?php echo $cws->_dict->query_times; ?>ï¿½ï¿½, ï¿½Êµï¿½: <?php echo $dict; ?>
 
-<?php echo $stat_string; } ?>
+    <?php echo $stat_string;
+} ?>

@@ -1,32 +1,38 @@
 <script language="javascript" type="text/javascript">
-function SetCookie (name, value) {
-	var today = new Date();
-	var expires = new Date();
-	expires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 365);
-	document.cookie = name + "=" + escape(value) + "; expires=" + expires.toGMTString();
-}
+    function SetCookie(name, value) {
+        var today = new Date();
+        var expires = new Date();
+        expires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 365);
+        document.cookie = name + "=" + escape(value) + "; expires=" + expires.toGMTString();
+    }
 </script>
 
 <div style="clear:both"></div>
 <div id="flink">
-	<h2>友情链接</h2>
-	<div style="margin:auto;">
-		<ul>
-			<li><a href="#">百度</a></li>
-			<li><a href="#">谷歌</a></li>
-			<li><a href="#">桂林政府</a></li>
-			<li><a href="#">国家旅游局</a></li>
-			<li><a href="#">桂林旅游网</a></li>
-			<li style="clear:both;float:none;width:0px"></li>
-		</ul>
-	</div>
-	<div style="clear:both"></div>
+    <h2>友情链接</h2>
+
+    <div style="margin:auto;">
+        <ul>
+            <li><a href="#">百度</a></li>
+            <li><a href="#">谷歌</a></li>
+            <li><a href="#">桂林政府</a></li>
+            <li><a href="#">国家旅游局</a></li>
+            <li><a href="#">桂林旅游网</a></li>
+            <li style="clear:both;float:none;width:0px"></li>
+        </ul>
+    </div>
+    <div style="clear:both"></div>
 </div>
 <div id="footer" class="clearfix">
-  <p class="link_bar">
-    <!-- {echo:lp{i_language_ch};/}：{echo: show_back_lp($langpackage);/} 
-    {echo:lp{i_language_ch};/}{echo: show_back_lp($langpackage);/}-->
-    <a href="{echo: article_url(2);/}">{echo:lp{i_question_see};/}</a>|<a href="{echo: article_url(3);/}">{echo:lp{i_safe_compp};/}</a>|<a href="{echo: article_url(4);/}">{echo:lp{i_process_of_purchase};/}</a>|<a href="{echo: article_url(5);/}">{echo:lp{i_howto_pay};/}</a>|<a href="{echo: article_url(6);/}">{echo:lp{i_contact_us};/}</a>|<a href="{echo: article_url(7);/}">{echo:lp{i_make_a_proposal};/}</a>|<a href="{echo: article_url(8);/}">{echo:lp{i_site_map};/}</a></p>
-  <p>由<a href="http://www.guilin.com">{echo: $SYSINFO['sys_company'];/}</a>制作维护</p>
-  {echo: $SYSINFO['sys_copyright'];/} {echo: $SYSINFO['sys_icp'];/} {echo: $SYSINFO['sys_countjs'];/} </div>
+    <p class="link_bar">
+        <!-- {echo:lp{i_language_ch};/}：{echo: show_back_lp($langpackage);/}
+        {echo:lp{i_language_ch};/}{echo: show_back_lp($langpackage);/}-->
+        <a href="{echo: article_url(2);/}">{echo:lp{i_question_see};/}</a>|<a href="{echo: article_url(3);/}">{echo:lp{i_safe_compp};/}</a>|<a
+            href="{echo: article_url(4);/}">{echo:lp{i_process_of_purchase};/}</a>|<a href="{echo: article_url(5);/}">{echo:lp{i_howto_pay};/}</a>|<a
+            href="{echo: article_url(6);/}">{echo:lp{i_contact_us};/}</a>|<a href="{echo: article_url(7);/}">{echo:lp{i_make_a_proposal};/}</a>|<a
+            href="{echo: article_url(8);/}">{echo:lp{i_site_map};/}</a></p>
+
+    <p>由<a href="http://www.guilin.com">{echo: $SYSINFO['sys_company'];/}</a>制作维护</p>
+    {echo: $SYSINFO['sys_copyright'];/} {echo: $SYSINFO['sys_icp'];/} {echo: $SYSINFO['sys_countjs'];/}
+</div>
 

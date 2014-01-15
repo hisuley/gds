@@ -12,70 +12,70 @@ require("foundation/module_brand.php");
 // require("foundation/fcustom_domain.php");
 /* 用户信息处理 */
 //require 'foundation/alogin_cookie.php';
-if(get_sess_user_id()) {
-	$USER['login'] = 1;
-	$USER['user_name'] = get_sess_user_name();
-	$USER['user_id'] = get_sess_user_id();
-	$USER['user_email'] = get_sess_user_email();
-	$USER['shop_id'] = get_sess_shop_id();
+if (get_sess_user_id()) {
+    $USER['login'] = 1;
+    $USER['user_name'] = get_sess_user_name();
+    $USER['user_id'] = get_sess_user_id();
+    $USER['user_email'] = get_sess_user_email();
+    $USER['shop_id'] = get_sess_shop_id();
 } else {
-	$USER['login'] = 0;
-	$USER['user_name'] = '';
-	$USER['user_id'] = '';
-	$USER['user_email'] = '';
-	$USER['shop_id'] = '';
+    $USER['login'] = 0;
+    $USER['user_name'] = '';
+    $USER['user_id'] = '';
+    $USER['user_email'] = '';
+    $USER['shop_id'] = '';
 }
 
 //引入语言包
-$i_langpackage=new indexlp;
+$i_langpackage = new indexlp;
 
-$header['title'] = $i_langpackage->i_index." - ".$SYSINFO['sys_title'];
+$header['title'] = $i_langpackage->i_index . " - " . $SYSINFO['sys_title'];
 $header['keywords'] = $SYSINFO['sys_keywords'];
 $header['description'] = $SYSINFO['sys_description'];
 
 /* 定义文件表 */
-$t_shop_info = $tablePreStr."shop_info";
-$t_category = $tablePreStr."category";
-$t_goods = $tablePreStr."goods";
-$t_index_images = $tablePreStr."index_images";
-$t_brand = $tablePreStr."brand";
-$t_article = $tablePreStr."article";
-$t_users = $tablePreStr."users";
-$t_flink= $tablePreStr."flink";
-$t_tag = $tablePreStr."tag";
-$t_nav = $tablePreStr."nav";
-$t_shop_request = $tablePreStr."shop_request";
+$t_shop_info = $tablePreStr . "shop_info";
+$t_category = $tablePreStr . "category";
+$t_goods = $tablePreStr . "goods";
+$t_index_images = $tablePreStr . "index_images";
+$t_brand = $tablePreStr . "brand";
+$t_article = $tablePreStr . "article";
+$t_users = $tablePreStr . "users";
+$t_flink = $tablePreStr . "flink";
+$t_tag = $tablePreStr . "tag";
+$t_nav = $tablePreStr . "nav";
+$t_shop_request = $tablePreStr . "shop_request";
 /* 数据库操作 */
-dbtarget('r',$dbServs);
-$dbo=new dbex();
+dbtarget('r', $dbServs);
+$dbo = new dbex();
 
 /* 处理系统分类 */
 $sql_category = "select * from `$t_category` order by sort_order asc,cat_id asc,sort_order asc";
 $result_category = $dbo->getRs($sql_category);
 
 $CATEGORY = array();
-if($result_category) {
-	foreach($result_category as $v) {
-		$CATEGORY[$v['parent_id']][$v['cat_id']] = $v;
+if ($result_category) {
+    foreach ($result_category as $v) {
+        $CATEGORY[$v['parent_id']][$v['cat_id']] = $v;
 
-	}
+    }
 }
 
 /* 轮显图片 */
 $sql_images = "select * from `$t_index_images` where `status`=1 order by id asc limit 6";
 $images_info = $dbo->getRs($sql_images);
 
-if($images_info) {
-	$images_order = '""';
-	$images_array = '';
-	$i = 1;
-	foreach($images_info as $images) {
-		$images_order .= ',"'.$i.'"';
-		$images_array .= "imgLink[$i] = '$images[images_link]'; \n";
-		$images_array .= "imgUrl[$i] = '$images[images_url]'; \n";
-		$images_array .= "imgText[$i] = '$images[name]'; \n";
-		$i++;
-	}
+if ($images_info) {
+    $images_order = '""';
+    $images_array = '';
+    $i = 1;
+    foreach ($images_info as $images) {
+        $images_order .= ',"' . $i . '"';
+        $images_array .= "imgLink[$i] = '$images[images_link]'; \n";
+        $images_array .= "imgUrl[$i] = '$images[images_url]'; \n";
+        $images_array .= "imgText[$i] = '$images[name]'; \n";
+        $i++;
+    }
 
 }
 
@@ -88,12 +88,12 @@ $sql_flink = "select * from $t_flink where is_show=1 and brand_logo!='' ORDER BY
 
 
 $goods_promote = $dbo->getRs($sql_promote);
-$goods_hot = get_hot_goods($dbo,$t_goods,8);
-$brand_rs = get_brand_list($dbo,$t_brand,8);
+$goods_hot = get_hot_goods($dbo, $t_goods, 8);
+$brand_rs = get_brand_list($dbo, $t_brand, 8);
 $notice = $dbo->getRs($sql_notice);
 $maller = $dbo->getRs($sql_maller);
 $seller = $dbo->getRs($sql_seller);
-$tag_list = get_tag_list($dbo,$t_tag,20);
+$tag_list = get_tag_list($dbo, $t_tag, 20);
 
 /* 获取首页商品 */
 $hotel_id = 433;
@@ -116,6 +116,6 @@ $sql_shop = "SELECT a.*,b.user_name FROM $t_shop_info as a,$t_users as b,$t_shop
 $shop_info = $dbo->getRs($sql_shop);
 
 /*导航位置*/
-$nav_selected=1;
-$nav_list = get_nav_list($t_nav,$dbo);
+$nav_selected = 1;
+$nav_list = get_nav_list($t_nav, $dbo);
 ?>

@@ -1,196 +1,268 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>{echo: lp{m_u_center};/}</title>
-<link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/modules.css">
-<link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/layout.css">
-<link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/style.css">
-<link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/common.css">
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/userchangeStyle.js"></script>
-<script language="JavaScript" type="text/javascript" src="servtools/NewDialog/Dialog.js"></script>
-<link href="servtools/NewDialog/skin/default.css" rel="stylesheet" />
-<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
-<style type="text/css">
-th{background:#EFEFEF}
-td span{color:red;}
-</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{echo: lp{m_u_center};/}</title>
+    <link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/modules.css">
+    <link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/style.css">
+    <link rel="stylesheet" type="text/css" href="skin/{echo: $SYSINFO['templates'];/}/css/common.css">
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="skin/{echo: $SYSINFO['templates'];/}/js/userchangeStyle.js"></script>
+    <script language="JavaScript" type="text/javascript" src="servtools/NewDialog/Dialog.js"></script>
+    <link href="servtools/NewDialog/skin/default.css" rel="stylesheet"/>
+    <script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
+    <style type="text/css">
+        th {
+            background: #EFEFEF
+        }
+
+        td span {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 {inc: require("shop/index_header.php");/}
-	<div class="site_map">
-	  {echo:lp{m_current_position};/}<A href="index.php">{echo:$SYSINFO['sys_name'];/}</A>/<a href="modules.php">{echo:lp{m_u_center};/}</a>/&nbsp;&nbsp;{echo: lp{m_my_order};/}
-	</div>
-    <div class="clear"></div>
-	{inc: require("modules/left_menu.php");/}
-    <div class="main_right">
-		<div class="right_top"></div>
-		<div class="cont">
-            <div class="title_uc"><h3>{echo: lp{m_my_order};/}</h3></div><hr />
-             <div id="stepTip" class="clearfix">
-			     <ul class="list_step1 clearfix">
-			     <li>{echo: lp{m_u_first};/}:<br />{echo: lp{m_ordernow_add};/}</li>
-			     <li class="now">{echo: lp{m_u_secound};/}:<br />{echo: lp{m_sure_ordernow};/}</li>
-			     <li style="padding-right:0">{echo: lp{m_u_third};/}:<br />{echo: lp{m_accomplish};/}</li>
-			     </ul>
-             </div>
-			<form action="do.php?act=user_order" method="post" name="for{echo: lp{m_profile};/}" onsubmit="return checkform();">
-				<table width="100%" border="0" cellspacing="0">
-					<input type="hidden" value="{echo: $goods_info[0]['shop_id'];/}" name="sshop_id" />
-					<tr><th colspan="2">{echo: lp{m_goods_name};/}</th><th>{echo: lp{m_goods_price};/}</th><th>{echo: lp{m_buy_num};/}</th></tr>
-					{sta:foreach($goods_info as $k=>$v)[loop]}
-					<tr>
-                        <td class="name" colspan="2">
-                            <a href="{echo: goods_url($v['goods_id']);/}" target="_blank"><img src="{echo: $v['is_set_image'] ? str_replace('thumb_','',$v['goods_thumb']) : 'skin/default/images/nopic.gif';/}"  width="40" height="40"  alt="{echo:$v['goods_name'];/}"   onerror="this.src='skin/default/images/nopic.gif'"/>{echo: $v['goods_name'];/}</a></td>
-					<td align="center"><span id="goods_price" style="color:black;font-weight:normal">{echo: $v['goods_price'];/}</span>{echo: lp{m_yuan};/}</td>
-					<td align="center"><input type="text" value="{echo: $buy_goods[$v['goods_id']];/}" name="order_num[]" style="width:30px" onblur="(changePrice(this))" onkeyup="(changePrice(this))"></td>
-					<input type="hidden" value="{echo: $v['goods_id'];/}" name="goods_id[]" />
-					<input type="hidden" value="{echo: $v['goods_name'];/}" name="goods_name[]" />
-					<input type="hidden" value="{echo: $v['goods_price'];/}" name="goods_price[]" id="one_good_price" />
-					<input type="hidden" value="{echo: $v['goods_price'] *$buy_goods[$v['goods_id']] ;/}" id="order_amount" name="order_amount[]" />
-					</tr>
-					{end:foreach/}
-				</table>
-				<table id="transport_type" width="100%" border="0" cellspacing="0">
-					<tr>
-						<tr class="center"><th colspan="7" align="left">{echo:lp{m_transport_price};/}</th></tr>
-					</tr>
-					<tr>
-						<td colspan="7">
-							<div id="transport_box">
-								{echo:$transport_type_str;/}
-							</div>
-						</td>
-					</tr>
-				</table>
-				
-				<table id="oldAddress" width="100%" border="0" cellspacing="0">
-					<tr>
-						<th align="left" width="200">&nbsp;&nbsp;{echo: lp{m_order_getsting};/}</th><th align="right"><span onclick="clearaddress();"></span></th>
-					</tr>
-					<tr><td class="textright">{echo: lp{m_contact};/}：</td>
-						<td align="left">{echo: $user_info['to_user_name'];/}</td></tr>
-					<tr>
-						<td class="textright">{echo: lp{m_stayarea};/}：</td>
-						<td>
-							  {echo:$areas_info[0][$user_info['user_country']]['area_name'];/}
-                              {echo:$areas_info[1][$user_info['user_province']]['area_name'];/}
-                              {echo:$areas_info[2][$user_info['user_city']]['area_name'];/}
-                              {echo:$areas_info[3][$user_info['user_district']]['area_name'];/}
-						</td>
-					</tr>
-					<tr><td class="textright">{echo: lp{m_address};/}：</td>
-					<td>{echo: $user_info['full_address'];/}</td></tr>
-					<tr><td class="textright">{echo: lp{m_zipcode};/}：</td>
-					<td>{echo: $user_info['zipcode'];/}</td></tr>
-					<tr><td class="textright">{echo: lp{m_mobile};/}：</td>
-						<td>{echo: $user_info['mobile'];/}</td></tr>
-					<tr><td class="textright">{echo: lp{m_telphone};/}：</td>
-						<td>{echo: $user_info['telphone'];/}</td></tr>
-					<tr><td class="textright">{echo: lp{m_email};/}：</td>
-						<td>{echo:$user_info['email'];/}</td></tr>
-					<tr><td></td><td><span>{echo: lp{m_sureaddress_rcgoods};/}</span></td></tr>
-				</table>
+<div class="site_map">
+    {echo:lp{m_current_position};/}<A href="index.php">{echo:$SYSINFO['sys_name'];/}</A>/<a href="modules.php">{echo:lp{m_u_center};/}</a>/&nbsp;&nbsp;{echo:
+    lp{m_my_order};/}
+</div>
+<div class="clear"></div>
+{inc: require("modules/left_menu.php");/}
+<div class="main_right">
+    <div class="right_top"></div>
+    <div class="cont">
+        <div class="title_uc"><h3>{echo: lp{m_my_order};/}</h3></div>
+        <hr/>
+        <div id="stepTip" class="clearfix">
+            <ul class="list_step1 clearfix">
+                <li>{echo: lp{m_u_first};/}:<br/>{echo: lp{m_ordernow_add};/}</li>
+                <li class="now">{echo: lp{m_u_secound};/}:<br/>{echo: lp{m_sure_ordernow};/}</li>
+                <li style="padding-right:0">{echo: lp{m_u_third};/}:<br/>{echo: lp{m_accomplish};/}</li>
+            </ul>
+        </div>
+        <form action="do.php?act=user_order" method="post" name="for{echo: lp{m_profile};/}"
+              onsubmit="return checkform();">
+            <table width="100%" border="0" cellspacing="0">
+                <input type="hidden" value="{echo: $goods_info[0]['shop_id'];/}" name="sshop_id"/>
+                <tr>
+                    <th colspan="2">{echo: lp{m_goods_name};/}</th>
+                    <th>{echo: lp{m_goods_price};/}</th>
+                    <th>{echo: lp{m_buy_num};/}</th>
+                </tr>
+                {sta:foreach($goods_info as $k=>$v)[loop]}
+                <tr>
+                    <td class="name" colspan="2">
+                        <a href="{echo: goods_url($v['goods_id']);/}" target="_blank"><img
+                                src="{echo: $v['is_set_image'] ? str_replace('thumb_','',$v['goods_thumb']) : 'skin/default/images/nopic.gif';/}"
+                                width="40" height="40" alt="{echo:$v['goods_name'];/}"
+                                onerror="this.src='skin/default/images/nopic.gif'"/>{echo: $v['goods_name'];/}</a></td>
+                    <td align="center"><span id="goods_price" style="color:black;font-weight:normal">{echo: $v['goods_price'];/}</span>{echo:
+                        lp{m_yuan};/}
+                    </td>
+                    <td align="center"><input type="text" value="{echo: $buy_goods[$v['goods_id']];/}"
+                                              name="order_num[]" style="width:30px" onblur="(changePrice(this))"
+                                              onkeyup="(changePrice(this))"></td>
+                    <input type="hidden" value="{echo: $v['goods_id'];/}" name="goods_id[]"/>
+                    <input type="hidden" value="{echo: $v['goods_name'];/}" name="goods_name[]"/>
+                    <input type="hidden" value="{echo: $v['goods_price'];/}" name="goods_price[]" id="one_good_price"/>
+                    <input type="hidden" value="{echo: $v['goods_price'] *$buy_goods[$v['goods_id']] ;/}"
+                           id="order_amount" name="order_amount[]"/>
+                </tr>
+                {end:foreach/}
+            </table>
+            <table id="transport_type" width="100%" border="0" cellspacing="0">
+                <tr>
+                <tr class="center">
+                    <th colspan="7" align="left">{echo:lp{m_transport_price};/}</th>
+                </tr>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <div id="transport_box">
+                            {echo:$transport_type_str;/}
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
-                <hr />
-                <table width="100%" style="border:0" cellspacing="0">
-                    <tr>
-                        <th align="left" width="200">&nbsp;&nbsp;选择支付方式</th><th align="right"></th>
-                    </tr>
-                    <tr><td class="textright">{echo: lp{m_payment_cho};/}：</td><td class="textleft">
+            <table id="oldAddress" width="100%" border="0" cellspacing="0">
+                <tr>
+                    <th align="left" width="200">&nbsp;&nbsp;{echo: lp{m_order_getsting};/}</th>
+                    <th align="right"><span onclick="clearaddress();"></span></th>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_contact};/}：</td>
+                    <td align="left">{echo: $user_info['to_user_name'];/}</td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_stayarea};/}：</td>
+                    <td>
+                        {echo:$areas_info[0][$user_info['user_country']]['area_name'];/}
+                        {echo:$areas_info[1][$user_info['user_province']]['area_name'];/}
+                        {echo:$areas_info[2][$user_info['user_city']]['area_name'];/}
+                        {echo:$areas_info[3][$user_info['user_district']]['area_name'];/}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_address};/}：</td>
+                    <td>{echo: $user_info['full_address'];/}</td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_zipcode};/}：</td>
+                    <td>{echo: $user_info['zipcode'];/}</td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_mobile};/}：</td>
+                    <td>{echo: $user_info['mobile'];/}</td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_telphone};/}：</td>
+                    <td>{echo: $user_info['telphone'];/}</td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_email};/}：</td>
+                    <td>{echo:$user_info['email'];/}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span>{echo: lp{m_sureaddress_rcgoods};/}</span></td>
+                </tr>
+            </table>
+
+            <hr/>
+            <table width="100%" style="border:0" cellspacing="0">
+                <tr>
+                    <th align="left" width="200">&nbsp;&nbsp;选择支付方式</th>
+                    <th align="right"></th>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_payment_cho};/}：</td>
+                    <td class="textleft">
 
                         {sta:foreach($payment_shop_info as $value)[loop]}
                         {sta:if(isset($payment[$value['pay_id']]))[loop]}
-                        <input type="radio" name="pay_id" value="{echo:$value['pay_id'];/}" />{echo:$payment[$value['pay_id']]['pay_name'];/}
-                        <img src="plugins/{echo:$payment[$value['pay_id']]['pay_code'];/}/logo.gif" height="30" onerror="this.src='skin/default/images/nopic.gif'"/></a> <br /><br />
+                        <input type="radio" name="pay_id" value="{echo:$value['pay_id'];/}"/>{echo:$payment[$value['pay_id']]['pay_name'];/}
+                        <img src="plugins/{echo:$payment[$value['pay_id']]['pay_code'];/}/logo.gif" height="30"
+                             onerror="this.src='skin/default/images/nopic.gif'"/></a> <br/><br/>
                         {end:if/}
                         {end:foreach/}
-                    </td></tr>
-                </table>
+                    </td>
+                </tr>
+            </table>
 
 
-				<table width="100%" border="0" cellspacing="0">
-					<tr>
-						<th width="200" align="left">&nbsp;&nbsp;{echo: lp{m_sure_postorder};/}</th><th></th>
-					</tr>
-                                        {sta:if($grogshop_flag==true)[exc]}
-                                        <tr><td class="textright">{echo: lp{m_order_checkin_time};/}：</td>
-						<td><input class="column-10" type="text" id="departDateInput" name="checkinDate" onblur="inputTxt2(this,'set', '请选择入住日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择入住日期');compareDate();"  value="请选择入住日期" />
-                  <input class="column-10" type="text" id="arriveDateInput" name="checkoutDate" onblur="inputTxt2(this,'set', '请选择离店日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择离店日期');" value="请选择离店日期" />　<span>*</span></td></tr>
-                                        <tr><td class="textright">{echo: lp{m_order_checkin_person};/}：</td>
-						<td><input type="text" name="checkin_person" />　<span>*</span></td></tr>
-                                        <tr><td class="textright">{echo: lp{m_order_latest_toshop};/}：</td>
-                                            <td><select name="latest_toshop">
-                                                    <option value="12:00">12:00</option>
-                                                    <option value="14:00">14:00</option>
-                                                    <option value="16:00">16:00</option>
-                                                    <option value="18:00" selected>18:00</option>
-                                                    <option value="20:00">20:00</option>
-                                                    <option value="22:00">22:00</option>
-                                                    <option value="23:59">23:59</option>
-                                                    <option value="次日2:00">次日2:00</option>
-                                                    <option value="次日6:00">次日6:00</option>
-                                                </select>　<span>*</span></td></tr>
-                                        <tr><td class="textright">{echo: lp{m_contact};/}：</td>
-						<td><input type="text" name="contact_person" />　<span>*</span></td></tr>
-                                        <tr><td class="textright">{echo: lp{m_request_mobile};/}：</td>
-						<td><input type="text" name="contact_mobile" />　<span>*</span></td></tr>
-                                        {end:if/}
-                                        {sta:if($scenic_flag==true)[exc]}
-                                        <tr><td class="textright">{echo: lp{m_order_checkin_time};/}：</td>
-						<td><input class="column-10" type="text" id="departDateInput" name="travelDate" onblur="inputTxt2(this,'set', '请选择旅行日期');"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择旅行日期');"  value="请选择旅行日期" />　<span>*</span></td></tr>
-                                         {end:if/}
-                                         <tr><td class="textright" valign="top">{echo: lp{m_order_message};/}：</td><td><textarea name="message" style="width:280px;height:60px" id="textareac" onkeyup="this.value=this.value.slice(0,300);"></textarea></td></tr>
-					<tr><td colspan="2" align="center">
-					<input type="hidden" name="to_user_name" value="{echo: $user_info['to_user_name'];/}" />
-					<input type="hidden" name="full_address" value="{echo: $user_info['full_address'];/}" />
-					<input type="hidden" name="zipcode" value="{echo: $user_info['zipcode'];/}" />
-					<input type="hidden" name="mobile" value="{echo: $user_info['mobile'];/}" />
-					<input type="hidden" name="telphone" value="{echo: $user_info['telphone'];/}" />
-					<input type="hidden" name="email" value="{echo: $user_info['email'];/}" />
-					<input type="hidden" name="country" value="{echo:$user_info['user_country'];/}" />
-					<input type="hidden" name="province" value="{echo:$user_info['user_province'];/}" />
-					<input type="hidden" name="city" value="{echo:$user_info['user_city'];/}" />
-					<input type="hidden" name="district" value="{echo:$user_info['user_district'];/}" />
-					<input type="hidden" name="real_transport_money" id="real_transport_money" value="0" />
-					<input type="button" onclick="javacript:history.go(-1);" name="submit" class="submit" value="{echo:lp{m_change_address};/}" />
-					<input type="submit" name="submit" class="submit" onclick="do_transports()" value="{echo: lp{m_post_order};/}" /></td></tr>
-				</table>
-            </form>
-        </div>
+            <table width="100%" border="0" cellspacing="0">
+                <tr>
+                    <th width="200" align="left">&nbsp;&nbsp;{echo: lp{m_sure_postorder};/}</th>
+                    <th></th>
+                </tr>
+                {sta:if($grogshop_flag==true)[exc]}
+                <tr>
+                    <td class="textright">{echo: lp{m_order_checkin_time};/}：</td>
+                    <td><input class="column-10" type="text" id="departDateInput" name="checkinDate"
+                               onblur="inputTxt2(this,'set', '请选择入住日期');compareDate();"
+                               onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择入住日期');compareDate();"
+                               value="请选择入住日期"/>
+                        <input class="column-10" type="text" id="arriveDateInput" name="checkoutDate"
+                               onblur="inputTxt2(this,'set', '请选择离店日期');"
+                               onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择离店日期');"
+                               value="请选择离店日期"/>　<span>*</span></td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_order_checkin_person};/}：</td>
+                    <td><input type="text" name="checkin_person"/>　<span>*</span></td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_order_latest_toshop};/}：</td>
+                    <td><select name="latest_toshop">
+                        <option value="12:00">12:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="18:00" selected>18:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:59">23:59</option>
+                        <option value="次日2:00">次日2:00</option>
+                        <option value="次日6:00">次日6:00</option>
+                    </select>　<span>*</span></td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_contact};/}：</td>
+                    <td><input type="text" name="contact_person"/>　<span>*</span></td>
+                </tr>
+                <tr>
+                    <td class="textright">{echo: lp{m_request_mobile};/}：</td>
+                    <td><input type="text" name="contact_mobile"/>　<span>*</span></td>
+                </tr>
+                {end:if/}
+                {sta:if($scenic_flag==true)[exc]}
+                <tr>
+                    <td class="textright">{echo: lp{m_order_checkin_time};/}：</td>
+                    <td><input class="column-10" type="text" id="departDateInput" name="travelDate"
+                               onblur="inputTxt2(this,'set', '请选择旅行日期');"
+                               onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择旅行日期');"
+                               value="请选择旅行日期"/>　<span>*</span></td>
+                </tr>
+                {end:if/}
+                <tr>
+                    <td class="textright" valign="top">{echo: lp{m_order_message};/}：</td>
+                    <td><textarea name="message" style="width:280px;height:60px" id="textareac"
+                                  onkeyup="this.value=this.value.slice(0,300);"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="hidden" name="to_user_name" value="{echo: $user_info['to_user_name'];/}"/>
+                        <input type="hidden" name="full_address" value="{echo: $user_info['full_address'];/}"/>
+                        <input type="hidden" name="zipcode" value="{echo: $user_info['zipcode'];/}"/>
+                        <input type="hidden" name="mobile" value="{echo: $user_info['mobile'];/}"/>
+                        <input type="hidden" name="telphone" value="{echo: $user_info['telphone'];/}"/>
+                        <input type="hidden" name="email" value="{echo: $user_info['email'];/}"/>
+                        <input type="hidden" name="country" value="{echo:$user_info['user_country'];/}"/>
+                        <input type="hidden" name="province" value="{echo:$user_info['user_province'];/}"/>
+                        <input type="hidden" name="city" value="{echo:$user_info['user_city'];/}"/>
+                        <input type="hidden" name="district" value="{echo:$user_info['user_district'];/}"/>
+                        <input type="hidden" name="real_transport_money" id="real_transport_money" value="0"/>
+                        <input type="button" onclick="javacript:history.go(-1);" name="submit" class="submit"
+                               value="{echo:lp{m_change_address};/}"/>
+                        <input type="submit" name="submit" class="submit" onclick="do_transports()"
+                               value="{echo: lp{m_post_order};/}"/></td>
+                </tr>
+            </table>
+        </form>
     </div>
+</div>
 <div class="clear"></div>
 {inc: require("shop/index_footer.php");/}
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
 <script language="JavaScript">
 <!--
-function inputTxt2(obj,act, initVal){
+function inputTxt2(obj, act, initVal) {
     var str = initVal;
-    if(obj.value==''&&act=='set')
-    {
-    obj.value=str;
-    //obj.style.color="#cccccc"
+    if (obj.value == '' && act == 'set') {
+        obj.value = str;
+        //obj.style.color="#cccccc"
     }
-    if(obj.value==str&&act=='clean')
-    {
-    obj.value='';
-    //obj.style.color="#000000"
+    if (obj.value == str && act == 'clean') {
+        obj.value = '';
+        //obj.style.color="#000000"
     }
 }
-function changePrice(obj){
+function changePrice(obj) {
     var goodsPrice = document.getElementById("goods_price");
     var goodsPriceInit = document.getElementById("one_good_price").value;
     goodsPrice.innerHTML = '';
     var goodsNumber = parseInt(obj.value);
-    if(goodsNumber == '' || goodsNumber == null || goodsNumber == 0)
+    if (goodsNumber == '' || goodsNumber == null || goodsNumber == 0)
         goodsNumber = 0;
     goodsPrice.innerHTML = goodsPriceInit * goodsNumber + '.00';
     var realpriceSecondCheck = document.getElementById("order_amount").value = goodsPriceInit * goodsNumber;
 }
-function compareDate(){
+function compareDate() {
     var departDate = document.getElementById('departDateInput').value;
-    if(typeof(departDate) === null){
+    if (typeof(departDate) === null) {
         return 0;
     }
     var arriveDate = document.getElementById('arriveDateInput').value;
@@ -198,110 +270,114 @@ function compareDate(){
     var departDateArray = departDate.split("-");
     var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
     var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
-    if(departDate > arriveDate){
-    document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
+    if (departDate > arriveDate) {
+        document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
     }
 }
-function areachanged(value,type){
-	if(value > 0) {
-		ajax("do.php?act=ajax_areas","POST","value="+value+"&type="+type,function(return_text){
-			var return_text = return_text.replace(/[\n\r]/g,"");
-			if(return_text==""){
+function areachanged(value, type) {
+    if (value > 0) {
+        ajax("do.php?act=ajax_areas", "POST", "value=" + value + "&type=" + type, function (return_text) {
+            var return_text = return_text.replace(/[\n\r]/g, "");
+            if (return_text == "") {
 //				alert("");
-			} else {
-				if(type==0) {
-					document.getElementById("user_province").innerHTML = return_text;
-					show("user_province");
-					hide("user_city");
-					hide("user_district");
-				} else if(type==1) {
-					document.getElementById("user_city").innerHTML = return_text;
-					show("user_city");
-					hide("user_district");
-				} else if(type==2) {
-					document.getElementById("user_district").innerHTML = return_text;
-					show("user_district");
-				}
-			}
-			var obj = document.getElementsByName('transporttype');
-			for(i=0;i<obj.length;i++){
-				if(obj[i].checked){
-					var transporttype_value=obj[i].value;
-				}
-			}
+            } else {
+                if (type == 0) {
+                    document.getElementById("user_province").innerHTML = return_text;
+                    show("user_province");
+                    hide("user_city");
+                    hide("user_district");
+                } else if (type == 1) {
+                    document.getElementById("user_city").innerHTML = return_text;
+                    show("user_city");
+                    hide("user_district");
+                } else if (type == 2) {
+                    document.getElementById("user_district").innerHTML = return_text;
+                    show("user_district");
+                }
+            }
+            var obj = document.getElementsByName('transporttype');
+            for (i = 0; i < obj.length; i++) {
+                if (obj[i].checked) {
+                    var transporttype_value = obj[i].value;
+                }
+            }
 //			getallpay(transporttype_value);
-		});
-	} else {
-		if(type==2) {
-			hide("user_district");
-		} else if(type==1) {
-			hide("user_district");
-			hide("user_city");
-		} else if(type==0) {
-			hide("user_district");
-			hide("user_city");
-			hide("user_province");
-		}
-	}
+        });
+    } else {
+        if (type == 2) {
+            hide("user_district");
+        } else if (type == 1) {
+            hide("user_district");
+            hide("user_city");
+        } else if (type == 0) {
+            hide("user_district");
+            hide("user_city");
+            hide("user_province");
+        }
+    }
 }
 function hide(id) {
-	document.getElementById(id).style.display = 'none';
+    document.getElementById(id).style.display = 'none';
 }
 
 function show(id) {
-	document.getElementById(id).style.display = '';
+    document.getElementById(id).style.display = '';
 }
 
 
-function checkform(){
+function checkform() {
     var realpriceCheck = document.getElementById('order_amount');
-    if(realpriceCheck.value == 0 || realpriceCheck.value == ''){
+    if (realpriceCheck.value == 0 || realpriceCheck.value == '') {
         alert('商品数量不能为空！');
         return false;
     }
-	var to_user_name = document.getElementsByName('to_user_name')[0];
-	if(to_user_name.value==''){
-		alert('{echo:lp{m_pl_getgoods_name};/}');
-		return false;
-	}
+    var to_user_name = document.getElementsByName('to_user_name')[0];
+    if (to_user_name.value == '') {
+        alert('{echo:lp{m_pl_getgoods_name};/}');
+        return false;
+    }
 
-	var province = document.getElementsByName('province')[0];
-	if(province.value==0){
-		alert('{echo:lp{m_pl_getgoods_province};/}');
-		return false;
-	}
+    var province = document.getElementsByName('province')[0];
+    if (province.value == 0) {
+        alert('{echo:lp{m_pl_getgoods_province};/}');
+        return false;
+    }
 
-	var city = document.getElementsByName('city')[0];
-	if(city.value==0){
-		alert('{echo:lp{m_pl_getgoods_city};/}');
-		return false;
-	}
+    var city = document.getElementsByName('city')[0];
+    if (city.value == 0) {
+        alert('{echo:lp{m_pl_getgoods_city};/}');
+        return false;
+    }
 
-	var district = document.getElementsByName('district')[0];
-	if(district.value==0){
-		alert('{echo:lp{m_pl_getgoods_district};/}');
-		return false;
-	}
+    var district = document.getElementsByName('district')[0];
+    if (district.value == 0) {
+        alert('{echo:lp{m_pl_getgoods_district};/}');
+        return false;
+    }
 
-	var full_address = document.getElementsByName('full_address')[0];
-	if(full_address.value==''){
-		alert('{echo:lp{m_pl_getgoods_address};/}');
-		return false;
-	}
+    var full_address = document.getElementsByName('full_address')[0];
+    if (full_address.value == '') {
+        alert('{echo:lp{m_pl_getgoods_address};/}');
+        return false;
+    }
 
-    {sta:if($scenic_flag==true)[exc]}
+    {
+        sta:if ($scenic_flag == true)[exc]
+    }
     var travelDate = document.getElementsByName('travelDate')[0];
-    if(travelDate.value==''){
+    if (travelDate.value == '') {
         alert('请选择旅行日期！');
         return false;
     }
-    {end:if/}
+    {
+        end:if/
+    }
 
-	var zipcode = document.getElementsByName('zipcode')[0];
-	if(zipcode.value==''){
-		alert('{echo:lp{m_pl_getgoods_zipcode};/}');
-		return false;
-	}
+    var zipcode = document.getElementsByName('zipcode')[0];
+    if (zipcode.value == '') {
+        alert('{echo:lp{m_pl_getgoods_zipcode};/}');
+        return false;
+    }
     var radios = document.getElementsByName('pay_id');
     var radios_check = true;
     for (var i = 0, length = radios.length; i < length; i++) {
@@ -312,115 +388,114 @@ function checkform(){
             break;
         }
     }
-    if(radios_check){
+    if (radios_check) {
         alert('请选择支付方式！');
         return false;
     }
 
-	var email = document.getElementsByName('email')[0];
-	var user_email_reg = /^[0-9a-zA-Z_\-\.]+@[0-9a-zA-Z_\-]+(\.[0-9a-zA-Z_\-]+)*$/;
-	if(!email.value=='' && !user_email_reg.test(email.value)){
-		alert('{echo:lp{m_email_type_notine};/}');
-		return false;
-	}
+    var email = document.getElementsByName('email')[0];
+    var user_email_reg = /^[0-9a-zA-Z_\-\.]+@[0-9a-zA-Z_\-]+(\.[0-9a-zA-Z_\-]+)*$/;
+    if (!email.value == '' && !user_email_reg.test(email.value)) {
+        alert('{echo:lp{m_email_type_notine};/}');
+        return false;
+    }
 
-    {sta:if($grogshop_flag==true)[exc]}
+    {
+        sta:if ($grogshop_flag == true)[exc]
+    }
     var checkinDate = document.getElementsByName('checkinDate')[0];
     var checkoutDate = document.getElementsByName('checkoutDate')[0];
-    if(checkinDate.value == '' || checkoutDate.value == '' || checkinDate.value == '请选择入住日期' || checkoutDate.value == '请选择入住日期'){
+    if (checkinDate.value == '' || checkoutDate.value == '' || checkinDate.value == '请选择入住日期' || checkoutDate.value == '请选择入住日期') {
         alert('预订日期没有填写完整！');
         return false;
     }
     var checkinPerson = document.getElementsByName('checkin_person')[0];
-    if(checkinPerson.value == '' || parseInt(checkinPerson.value) == 0 ){
+    if (checkinPerson.value == '' || parseInt(checkinPerson.value) == 0) {
         alert('预订人数不能为空或者0！');
         return false;
     }
     var contactPerson = document.getElementsByName('contact_person')[0];
     var contactMobile = document.getElementsByName('contact_mobile')[0];
-    if(contactPerson.value == '' || contactMobile.value == '' ){
+    if (contactPerson.value == '' || contactMobile.value == '') {
         alert('请填写完整预订人信息！');
         return false;
     }
 
-    {end:if/}
+    {
+        end:if/
+    }
 
 
+    var textareac = document.getElementById("textareac");
+    if (textareac.value.length > 300) {
+        alert("{echo:lp{s_work_count_error};/}");
+        textareac.focus();
+        return false;
+    }
+    return true;
 
+    var user_mobile = document.getElementsByName('mobile')[0];
+    var user_mobile_reg = new RegExp("[0-9-]{5,15}");
 
+    var user_telphone = document.getElementsByName('telphone')[0];
+    var user_telphone_reg = new RegExp("[0-9-]{5,15}");
 
-	var textareac = document.getElementById("textareac");
-	if(textareac.value.length>300){
-		alert("{echo:lp{s_work_count_error};/}");
-		textareac.focus();
-		return false;
-	}
-	return true;
-
-	var user_mobile = document.getElementsByName('mobile')[0];
-	var user_mobile_reg = new RegExp("[0-9-]{5,15}");
-
-	var user_telphone = document.getElementsByName('telphone')[0];
-	var user_telphone_reg = new RegExp("[0-9-]{5,15}");
-
-	if(user_mobile.value=='' && user_telphone.value=='') {
-		alert('{echo:lp{m_sorry_p_mselectone};/}');
-		return false;
-	} else if(!user_mobile.value=='' && !user_mobile_reg.test(user_mobile.value)) {
-		alert('{echo:lp{m_sorry_mobiletype};/}');
-		return false;
-	} else if(!user_telphone.value=='' && !user_telphone_reg.test(user_telphone.value)) {
-		alert('{echo:lp{m_sorry_phonetype};/}');
-		return false;
-	}else {
-		return true;
-	}
-
-
+    if (user_mobile.value == '' && user_telphone.value == '') {
+        alert('{echo:lp{m_sorry_p_mselectone};/}');
+        return false;
+    } else if (!user_mobile.value == '' && !user_mobile_reg.test(user_mobile.value)) {
+        alert('{echo:lp{m_sorry_mobiletype};/}');
+        return false;
+    } else if (!user_telphone.value == '' && !user_telphone_reg.test(user_telphone.value)) {
+        alert('{echo:lp{m_sorry_phonetype};/}');
+        return false;
+    } else {
+        return true;
+    }
 
 
 }
-function do_transports(){
-	var transports = document.getElementsByName('transport_type')[0];
-	for(i=0;i<transports.length;i++){
-		if(transports[i].selected){
-			var val=transports[i].value;
-		}
-	}
-	change_transport(val);
-	return true;
+function do_transports() {
+    var transports = document.getElementsByName('transport_type')[0];
+    for (i = 0; i < transports.length; i++) {
+        if (transports[i].selected) {
+            var val = transports[i].value;
+        }
+    }
+    change_transport(val);
+    return true;
 }
-function changeurl(v){
-	var re = /&address_id=[0-9]+/g;
-	location.href = location.href.replace(re,'')+'&address_id='+v;
+function changeurl(v) {
+    var re = /&address_id=[0-9]+/g;
+    location.href = location.href.replace(re, '') + '&address_id=' + v;
 }
 
 function clearaddress() {
 //	areachanged(1,0);
-	var to_user_name = document.getElementsByName('to_user_name')[0];
-	to_user_name.value="";
-	var full_address = document.getElementsByName('full_address')[0];
-	full_address.value="";
-	var zipcode = document.getElementsByName('zipcode')[0];
-	zipcode.value="";
-	var mobile = document.getElementsByName('mobile')[0];
-	mobile.value="";
-	var telphone = document.getElementsByName('telphone')[0];
-	telphone.value="";
-	var email = document.getElementsByName('email')[0];
-	email.value="";
-	var user_country = document.getElementsByName('country')[0];
-	for(i=0;i<user_country.length;i++){
-		if(user_country[i].value==0){
-			user_country[i].selected=true;
-		}
-	}
-	hide("user_province");
-	hide("user_city");
-	hide("user_district");
+    var to_user_name = document.getElementsByName('to_user_name')[0];
+    to_user_name.value = "";
+    var full_address = document.getElementsByName('full_address')[0];
+    full_address.value = "";
+    var zipcode = document.getElementsByName('zipcode')[0];
+    zipcode.value = "";
+    var mobile = document.getElementsByName('mobile')[0];
+    mobile.value = "";
+    var telphone = document.getElementsByName('telphone')[0];
+    telphone.value = "";
+    var email = document.getElementsByName('email')[0];
+    email.value = "";
+    var user_country = document.getElementsByName('country')[0];
+    for (i = 0; i < user_country.length; i++) {
+        if (user_country[i].value == 0) {
+            user_country[i].selected = true;
+        }
+    }
+    hide("user_province");
+    hide("user_city");
+    hide("user_district");
 }
-function change_transport(val){
-	document.getElementById('real_transport_money').value=val;
+function change_transport(val) {
+    document.getElementById('real_transport_money').value = val;
 }
 //-->
 </script>

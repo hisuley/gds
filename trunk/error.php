@@ -16,12 +16,12 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
 if(filemtime("templates/default/error.html") > filemtime(__file__) || (file_exists("models/error.php") && filemtime("models/error.php") > filemtime(__file__)) ) {
-	tpl_engine("default","error.html",1);
-	include(__file__);
+    tpl_engine("default", "error.html", 1);
+    include(__file__);
 } else {
 /* debug模式运行生成代码 结束 */
 ?><?php
@@ -33,73 +33,77 @@ require("configuration.php");
 require("includes.php");
 
 /* 用户信息处理 */
-if(get_sess_user_id()) {
-	$USER['login'] = 1;
-	$USER['user_name'] = get_sess_user_name();
-	$USER['user_id'] = get_sess_user_id();
-	$USER['user_email'] = get_sess_user_email();
-	$USER['shop_id'] = get_sess_shop_id();
+if (get_sess_user_id()) {
+    $USER['login'] = 1;
+    $USER['user_name'] = get_sess_user_name();
+    $USER['user_id'] = get_sess_user_id();
+    $USER['user_email'] = get_sess_user_email();
+    $USER['shop_id'] = get_sess_shop_id();
 } else {
-	$USER['login'] = 0;
-	$USER['user_name'] = '';
-	$USER['user_id'] = '';
-	$USER['user_email'] = '';
-	$USER['shop_id'] = '';
+    $USER['login'] = 0;
+    $USER['user_name'] = '';
+    $USER['user_id'] = '';
+    $USER['user_email'] = '';
+    $USER['shop_id'] = '';
 }
 
-$i_langpackage=new indexlp;
-$errstr=get_args("errstr");
-$errno=get_args("paths");
-$errorarray=explode("-",$errstr);
-if(!$errorarray){
-	$errorarray[0]=$i_langpackage->i_page_error;
+$i_langpackage = new indexlp;
+$errstr = get_args("errstr");
+$errno = get_args("paths");
+$errorarray = explode("-", $errstr);
+if (!$errorarray) {
+    $errorarray[0] = $i_langpackage->i_page_error;
 }
-if(!$errorarray[1]){
-	$errorarray[1]=$baseUrl;
+if (!$errorarray[1]) {
+    $errorarray[1] = $baseUrl;
 }
 
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><?php echo $i_langpackage->i_member_login;?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta  http-equiv="Refresh" content="3;url=<?php echo $errorarray[1];?>" />
-<base href="<?php echo  $baseUrl;?>" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/index.css" rel="stylesheet" type="text/css" />
-<link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" rel="stylesheet" type="text/css" />
+    <title><?php echo $i_langpackage->i_member_login; ?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="Refresh" content="3;url=<?php echo $errorarray[1]; ?>"/>
+    <base href="<?php echo $baseUrl; ?>"/>
+    <link href="skin/<?php echo $SYSINFO['templates']; ?>/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="skin/<?php echo $SYSINFO['templates']; ?>/css/import.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
-<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/area.js"></script>
-<script type='text/javascript' src='./servtools/md5.js'></script>
+    <script type="text/javascript" src="skin/<?php echo $SYSINFO['templates']; ?>/js/changeStyle.js"></script>
+    <script type="text/javascript" src="skin/<?php echo $SYSINFO['templates']; ?>/js/area.js"></script>
+    <script type='text/javascript' src='./servtools/md5.js'></script>
 </head>
-<?php if($errno) {?>
-<body onload= "javascript:setTimeout( 'window.close() ',3000);">
-<?php  } else {?>
+<?php if ($errno) { ?>
+<body onload="javascript:setTimeout( 'window.close() ',3000);">
+<?php } else { ?>
 <body>
-<?php }?>
+<?php } ?>
 <div id="wrapper">
-<?php  include("shop/index_header.php");?>
+    <?php include("shop/index_header.php"); ?>
 
-<div class="error_box">
+    <div class="error_box">
 
-  <p><?php echo $errorarray[0];?></p>
-  
-  <p><?php echo $i_langpackage->i_href;?></p>
-  <p><a title="<?php echo $i_langpackage->i_hand_index;?>" href="<?php echo $errorarray[1];?>"><?php echo $i_langpackage->i_hand_index;?>&gt;&gt;</a></p>
-</div><!-- main end -->
-<?php  require("shop/index_footer.php");?>
-<!--footer end-->
+        <p><?php echo $errorarray[0]; ?></p>
+
+        <p><?php echo $i_langpackage->i_href; ?></p>
+
+        <p><a title="<?php echo $i_langpackage->i_hand_index; ?>"
+              href="<?php echo $errorarray[1]; ?>"><?php echo $i_langpackage->i_hand_index; ?>&gt;&gt;</a></p>
+    </div>
+    <!-- main end -->
+    <?php require("shop/index_footer.php"); ?>
+    <!--footer end-->
 </div>
 <script type='text/javascript'>
-function countDown(secs,surl){
-	if($('skip')){
-	  $("skip").innerHTML=secs;
-	  --secs > 0 ? setTimeout("countDown("+secs+",'"+surl+"')",1000):location.href=surl;
-	}
-}
-countDown(5,'<?php echo $siteDomain;?><?php echo $indexFile;?>');
+    function countDown(secs, surl) {
+        if ($('skip')) {
+            $("skip").innerHTML = secs;
+            --secs > 0 ? setTimeout("countDown(" + secs + ",'" + surl + "')", 1000) : location.href = surl;
+        }
+    }
+    countDown(5, '<?php echo $siteDomain;?><?php echo $indexFile;?>');
 </script>
 </body>
 </html>
