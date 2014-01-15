@@ -76,7 +76,7 @@ class indexlp{
 	var $i_low_height = "低->高";
 	var $i_height_low = "高->低";
 	var $i_search_pv = "人气";
-	var $i_web_rrr = "已经过压缩机商城网的认证";
+	var $i_web_rrr = "已经经过商城网的认证";
 	var $i_price_discuss = "面议";
 	var $i_loading_bigimage = "正在加载清晰图片";
 	var $i_cate_result = "分类结果";
@@ -85,7 +85,7 @@ class indexlp{
 	var $i_choice_sort = "按分类选择商品";
 	var $i_choice_good = "您选择的所有商品";
 	var $i_list = "列表";
-	var $i_show_window = "橱窗";
+	var $i_show_window = "图片";
 	var $i_handle = "具体操作";
 	var $i_particular = "详细";
 	var $i_buy = "购买";
@@ -172,14 +172,14 @@ class indexlp{
 	var $i_find_goods = "查找商品";
 	var $i_member_login = "会员登录";
 	var $i_notice_title = "提示信息";
-	var $i_welcome_iwebshop = "欢迎您登录{iweb_mall}多用户商城系统";
+	var $i_welcome_iwebshop = "欢迎您登录{iweb_mall}";
 	var $i_remembe_me = "记住我（请不要在公共计算机上使用此项）";
-	var $i_login_info_first = "便宜有好货！超过1000万件商品任您选。";
+	var $i_login_info_first = "桂林旅游，精彩线路，一网尽览。";
 	var $i_noshop_account_clickhere = "如果你已拥有{iweb_mall}账户<br />请点击";
 	var $i_pls_info_safe_msg = "请认真、仔细地填写下以信息，严肃的商业信息有助于您获得别人的信任。";
-	var $i_login_info_sec = "买卖更安心！支付宝交易超安全。";
+	var $i_login_info_sec = "支持银联、支付宝交易。";
 	var $i_login_info_the = "轻松赚钱交商友。";
-	var $i_login_info_foru = "超人气社区！精彩活动每一天。";
+	var $i_login_info_foru = "获得第一手旅游资讯。";
 	var $i_iwantget_price = "我要询价";
 	var $i_article_list = "文章分类";
 	var $i_up_article = "上一篇";
