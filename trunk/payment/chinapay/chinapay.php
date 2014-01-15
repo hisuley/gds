@@ -52,7 +52,7 @@ function get_code($orderinfo,$payinfo){
 		exit;
 	}
 	
-	$ordid = "00" . date('YmdHis');
+	$ordid = $orderinfo['payid'];
 	$transamt = formatamount($orderinfo['order_amount']);
 	//»õ±Ò´úÂë£¬3Î»£¬¾³ÄÚÉÌ»§¹Ì¶¨Îª156£¬±íÊ¾ÈËÃñ±Ò£¬±ØÌî
 	$curyid = "156";
@@ -63,9 +63,9 @@ function get_code($orderinfo,$payinfo){
 	//½Ó¿Ú°æ±¾ºÅ£¬¾³ÄÚÖ§¸¶Îª 20070129£¬±ØÌî
 	$version = "20070129";
 	//Ò³Ãæ·µ»ØµØÖ·(Äú·þÎñÆ÷ÉÏ¿É·ÃÎÊµÄURL)£¬×î³¤80Î»£¬µ±ÓÃ»§Íê³ÉÖ§¸¶ºó£¬ÒøÐÐÒ³Ãæ»á×Ô¶¯Ìø×ªµ½¸ÃÒ³Ãæ£¬²¢POST¶©µ¥½á¹ûÐÅÏ¢£¬¿ÉÑ¡
-	$pagereturl = $baseUrl."payrespond.php";;
+	$pagereturl = $baseUrl."payrespond.php?is_chinapay=1&pay_id=".$ordid;
 	//ºóÌ¨·µ»ØµØÖ·(Äú·þÎñÆ÷ÉÏ¿É·ÃÎÊµÄURL)£¬×î³¤80Î»£¬µ±ÓÃ»§Íê³ÉÖ§¸¶ºó£¬ÎÒ·½·þÎñÆ÷»áPOST¶©µ¥½á¹ûÐÅÏ¢µ½¸ÃÒ³Ãæ£¬±ØÌî
-	$bgreturl = $baseUrl."payrespond.php";;
+	$bgreturl = $baseUrl."payrespond.php?is_chinapay=1&pay_id=".$ordid;
 	
 	/************************
 	Ò³Ãæ·µ»ØµØÖ·ºÍºóÌ¨·µ»ØµØÖ·µÄÇø±ð£º

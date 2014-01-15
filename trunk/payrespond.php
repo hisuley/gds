@@ -21,10 +21,24 @@ $m_langpackage=new moduleslp;
 $t_shop_payment=$tablePreStr."shop_payment";
 $t_order_info=$tablePreStr."order_info";
 $t_payment=$tablePreStr."payment";
+$t_receiv_info = $tablePreStr."receiv_list";
 
 
-
-
+$check_cnpay = intval(get_args('is_chinapay'));
+if($check_cnpay == 1){
+    $pay_id = get_args('pay_id');
+    $pay_id = str_replace('/', '', $pay_id);
+    if(!empty($pay_id)){
+        $dbo=new dbex;
+        dbtarget('w',$dbServs);
+        //print_r($pay_id);
+        $sql = "UPDATE `$t_order_info` SET pay_status = 1, pay_time = '".date('Y-m-d H:i:s')."' WHERE payid = ".$pay_id;
+        $dbo->exeUpdate($sql);
+        $sql = "INSERT INTO `$t_receiv_info`('order_id', 'pay_id', 'shop_id', 'payment_type', 'receiver', 'receiv_date', 'receiv_account', 'receiv_money', 'operator') VALUES(".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].")";
+    }
+    echo "支付成功！<a href='modules.php?app=user_my_order'>返回</a>";
+    exit();
+}
 //取得返回的订单号
 $pay_code = get_payment_code();
 if(!$pay_code){

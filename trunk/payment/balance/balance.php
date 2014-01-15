@@ -38,6 +38,7 @@ function respond($orderinfo,$payinfo){
 		$dbo=new dbex();
 		/* 处理系统分类 */
 		$t_users = $tablePreStr."users";
+        $t_user_account = $tablePreStr."user_account";
 		$sql_users = "select user_money from `$t_users` where `user_id` =".$orderinfo['user_id']." limit 1";
 		$user_info = $dbo->getRow($sql_users);
        // print_r($user_info);
@@ -48,6 +49,8 @@ function respond($orderinfo,$payinfo){
 			$sql="UPDATE `$t_users` SET `user_money` = ".$result." WHERE `user_id` =".$orderinfo['user_id']." LIMIT 1";
             //print_r($sql);
 			if($dbo->exeUpdate($sql)){
+               $sql = "INSERT INTO `$t_user_account`(user_id, admin_user, amount, add_time, paid_time, admin_note, user_note, process_type, payment, is_paid) VALUES($userid, 'admin', '-".$orderinfo['order_amount']."', '".date('Y-m-d H:i:s')."',  '".date('Y-m-d H:i:s')."', '消费减款', '消费减款', '2', '现金账户', 1)";
+                $dbo->exeUpdate($sql);
 				return 1;
 			}else{
                 print_r($sql);

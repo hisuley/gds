@@ -661,15 +661,22 @@ function changeAttrTr(objvalue) {
 	attr_content.innerHTML = html;
 }
 
+    String.prototype.trim=function()
+    {
+        return this.replace(/(^\s*)|(\s*$)/g,'');
+    }
+
 //属性input类型 0:TEXT,1:SELECT,2:radio,3:checkbox
 function formatFormElement(id,type,name,value,price) {
 	var optionValue;
-	var cValue =cPrice = str = '';
+	var cValue = cPrice = str = '';
 	if(goodsAttr[id]) {
 		cValue = goodsAttr[id];
-                cPrice = goodsAttr_price[id];
+        cPrice = goodsAttr_price[id];
 	}
-	if(type==0) {
+    var goodsTempValue = cValue.toLowerCase().trim();
+
+    if(type==0) {
 		str = '<input type="text" name="attr[' + id + ']" value="'+cValue+'" maxlength="200" />';
                 if(price == 1){
                     price0 = name; 
@@ -680,7 +687,8 @@ function formatFormElement(id,type,name,value,price) {
 		str = '<select name="attr[' + id + ']">';
 		str += '<option value="0">{echo: lp{m_select_pl};/}' + name + '</option>';
 		for(var i=0; i<optionValue.length; i++) {
-			if(optionValue[i] == cValue) {
+            var optionTempValue = optionValue[i].toLowerCase().trim();
+			if(optionTempValue == goodsTempValue) {
 				str += '<option value="'+optionValue[i]+'" selected>' + optionValue[i] + '</option>';
 			} else {
 				str += '<option value="'+optionValue[i]+'">' + optionValue[i] + '</option>';

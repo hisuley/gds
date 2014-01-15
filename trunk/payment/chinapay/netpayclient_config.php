@@ -11,7 +11,10 @@ define("PUB_KEY", "PgPubk.key");
 	//Ö§¸¶ÇëÇóµØÖ·(²âÊÔ)
 	//define("REQ_URL_PAY","http://payment-test.ChinaPay.com/pay/TransGet");
 	//Ö§¸¶ÇëÇóµØÖ·(Éú²ú)
-define("REQ_URL_PAY","https://payment.ChinaPay.com/pay/TransGet");
+
+define("REQ_URL_PAY","http://payment.ChinaPay.com/pay/TransGet");
+
+//define("REQ_URL_PAY","http://payment-test.ChinaPay.com/pay/TransGet");
 
 	//²éÑ¯ÇëÇóµØÖ·(²âÊÔ)
 	//define("REQ_URL_QRY","http://payment-test.chinapay.com/QueryWeb/processQuery.jsp");

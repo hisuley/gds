@@ -142,7 +142,14 @@ if($user_level_id) {
 		$sql .= " and u.level_id = $user_level_id ";
 	}
 }
-$sql .= " order by u.user_id desc";
+$orderby = short_check(get_args('orderby'));
+$orderway = short_check(get_args('orderway'));
+if(!empty($orderway) && !empty($orderby)){
+    $sql .= " order by ".$orderby." ".$orderway;
+}else{
+    $sql .= " order by u.user_id desc";
+}
+
 
 $result = $dbo->fetch_page($sql,13);
 //print_r($result['result']);
@@ -237,11 +244,11 @@ td span { color:red; }
 						<thead>
 							<tr style="text-align:center;">
 								<th width="2x"><input type="checkbox" onclick="checkall(this,'user_id[]');" value='' /></th>
-								<th width="160px" align="left"><?php echo $a_langpackage->a_memeber_name; ?>/<?php echo $a_langpackage->a_memeber_email; ?></th>
-								<th width="275px"><?php echo $a_langpackage->a_register_time; ?> / <?php echo $a_langpackage->a_last_login_time; ?></th>
-								<th width="110px"><?php echo $a_langpackage->a_last_login_IP; ?></th>
-								<th width="276px"><?php echo $a_langpackage->a_email_check; ?>/<?php echo $a_langpackage->a_user_rank; ?></th>
-								<th width="45px"><?php echo $a_langpackage->a_status; ?></th>
+								<th width="160px" align="left"><?php echo $a_langpackage->a_memeber_name; ?>/<?php echo $a_langpackage->a_memeber_email; ?> <a href="m.php?app=member_list&orderby=user_name&orderway=asc">↑</a><a href="m.php?app=member_list&orderby=user_name&orderway=desc">↓</a></th>
+								<th width="275px"><?php echo $a_langpackage->a_register_time; ?> / <?php echo $a_langpackage->a_last_login_time; ?> <a href="m.php?app=member_list&orderby=last_login_time&orderway=asc">↑</a><a href="m.php?app=member_list&orderby=last_login_time&orderway=desc">↓</a></th>
+								<th width="110px"><?php echo $a_langpackage->a_last_login_IP; ?> <a href="m.php?app=member_list&orderby=last_ip&orderway=asc">↑</a><a href="m.php?app=member_list&orderby=last_ip&orderway=desc">↓</a></th>
+								<th width="276px"><?php echo $a_langpackage->a_email_check; ?>  / <?php echo $a_langpackage->a_user_rank; ?> <a href="m.php?app=member_list&orderby=rank_id&orderway=asc">↑</a><a href="m.php?app=member_list&orderby=rank_id&orderway=desc">↓</a></th>
+								<th width="45px"><?php echo $a_langpackage->a_status; ?></a> <a href="m.php?app=member_list&orderby=u.locked&orderway=asc">↑</a><a href="m.php?app=member_list&orderby=u.locked&orderway=desc">↓</a></th>
 								<th width="80px"><?php echo $a_langpackage->a_operate; ?></th>
 							</tr>
 						</thead>
