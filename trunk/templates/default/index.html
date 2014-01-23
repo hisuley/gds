@@ -1,318 +1,377 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<title>{echo: $header['title'];/}</title>
-<meta name="keywords" content="{echo: $header['keywords'];/}" />
-<meta name="description" content="{echo: $header['description'];/}" />
-<base href="{echo: $baseUrl;/}" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css" />
-<link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet" />
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
-<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/changeStyle.js"></script>
-<script src="skin/{echo:$SYSINFO['templates'];/}/js/slide.js" type="text/javascript"></script>
-<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>{echo: $header['title'];/}</title>
+    <meta name="keywords" content="{echo: $header['keywords'];/}"/>
+    <meta name="description" content="{echo: $header['description'];/}"/>
+    <base href="{echo: $baseUrl;/}"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="skin/{echo: $SYSINFO['templates'];/}/css/import.css" type="text/css" rel="stylesheet"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="skin/{echo:$SYSINFO['templates'];/}/js/changeStyle.js"></script>
+    <script src="skin/{echo:$SYSINFO['templates'];/}/js/slide.js" type="text/javascript"></script>
+    <script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
 </head>
 <body>
 <div id="wrapper">
 {inc: include("shop/index_header.php");/}
-  <!-- contents -->
-  <div id="contents" >
-    <!-- leftColumn-->
-    <div id="leftColumn">
-      
-      <div class="left_top">
-		<div class="slide_container" id="idTransformView">
-			  <ul class="slider" id="idSlider">
-			  {sta: foreach($images_info as  $key =>$value)[loop]}
-				<li><a href="{echo:$value['images_link'];/}" target="_blank"><img src="{echo: $value['images_url'];/}" width="664" height="400" alt="" onerror="this.src='skin/default/images/nopic.gif'"/></a></li>
-			  {end:foreach/}
-			 </ul>
-			 <ul class="slide_num2" id="idNum2">
-				 {sta:foreach($images_info as $key =>$value)[loop]}
-				 <li>{echo:intval($key+1);/}</li>
-				 {end:foreach/}
-			 </ul>
-        	
+<!-- contents -->
+<div id="contents">
+<!-- leftColumn-->
+<div id="leftColumn">
+
+    <div class="left_top">
+        <div class="slide_container" id="idTransformView">
+            <ul class="slider" id="idSlider">
+                {sta: foreach($images_info as $key =>$value)[loop]}
+                <li><a href="{echo:$value['images_link'];/}" target="_blank"><img src="{echo: $value['images_url'];/}"
+                                                                                  width="664" height="400" alt=""
+                                                                                  onerror="this.src='skin/default/images/nopic.gif'"/></a>
+                </li>
+                {end:foreach/}
+            </ul>
+            <ul class="slide_num2" id="idNum2">
+                {sta:foreach($images_info as $key =>$value)[loop]}
+                <li>{echo:intval($key+1);/}</li>
+                {end:foreach/}
+            </ul>
+
         </div>
- 
+
         <ul class="list_adv clearfix">
-          <li><script language="JavaScript" src="uploadfiles/asd/1.js"></script></li>
-          <li><script language="JavaScript" src="uploadfiles/asd/2.js"></script></li>
-          <li><script language="JavaScript" src="uploadfiles/asd/3.js"></script></li>
-          <li class="lst"><script language="JavaScript" src="uploadfiles/asd/4.js"></script></li>
+            <li>
+                <script language="JavaScript" src="uploadfiles/asd/1.js"></script>
+            </li>
+            <li>
+                <script language="JavaScript" src="uploadfiles/asd/2.js"></script>
+            </li>
+            <li>
+                <script language="JavaScript" src="uploadfiles/asd/3.js"></script>
+            </li>
+            <li class="lst">
+                <script language="JavaScript" src="uploadfiles/asd/4.js"></script>
+            </li>
         </ul>
-      </div>
-       <div class="content-common-box content-left-big-box content-blue">
+    </div>
+    <div class="content-common-box content-left-big-box content-blue">
         <div class="title">
-          <h2>景区预订</h2>
+            <h2>景区预订</h2>
 
         </div>
         {sta: foreach($goods_scenic as $key=>$v)[loop]}
-         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
-          <div class="images">
-            <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
-          </div>
-          <div class="description">
-            <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
-            </p>
-            <span class="price">￥{echo:$v['goods_price'];/}</span>
-          </div>
+        <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
+            <div class="images">
+                <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}"/></a>
+            </div>
+            <div class="description">
+                <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span
+                        class="stars">✮</span></h3></a>
+
+                <p class="intro">
+                    {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
+                </p>
+                <span class="price">￥{echo:$v['goods_price'];/}</span>
+            </div>
         </div>
         {end:foreach/}
-      </div>
+    </div>
 
-      <div class="content-common-box content-left-big-box content-orange">
+    <div class="content-common-box content-left-big-box content-orange">
         <div class="title">
-          <h2>酒店预订</h2>
+            <h2>酒店预订</h2>
 
         </div>
-       {sta: foreach($goods_hotel as $key=>$v)[loop]}
-         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
-          <div class="images">
-            <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
-          </div>
-          <div class="description">
-            <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
-            </p>
-            <span class="price">￥{echo:$v['goods_price'];/}</span>
-          </div>
+        {sta: foreach($goods_hotel as $key=>$v)[loop]}
+        <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
+            <div class="images">
+                <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}"/></a>
+            </div>
+            <div class="description">
+                <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span
+                        class="stars">✮</span></h3></a>
+
+                <p class="intro">
+                    {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
+                </p>
+                <span class="price">￥{echo:$v['goods_price'];/}</span>
+            </div>
         </div>
         {end:foreach/}
-      </div>
-      <div class="content-common-box content-left-big-box">
+    </div>
+    <div class="content-common-box content-left-big-box">
         <div class="title">
-          <h2>机票预订</h2>
+            <h2>机票预订</h2>
         </div>
         <div class="content" style="height:70px;">
-        <script type="text/javascript">
-        function inputTxt2(obj,act, initVal){
-          var str = initVal;
-          if(obj.value==''&&act=='set')
-          {
-            obj.value=str;
-            //obj.style.color="#cccccc"
-          }
-          if(obj.value==str&&act=='clean')
-          {
-            obj.value='';
-            //obj.style.color="#000000"
-          }
-        }
-        function compareDate(){
-          var departDate = document.getElementById('departDateInput').value;
-          var departDateArray = departDate.split("-");
+            <script type="text/javascript">
+                function inputTxt2(obj, act, initVal) {
+                    var str = initVal;
+                    if (obj.value == '' && act == 'set') {
+                        obj.value = str;
+                        //obj.style.color="#cccccc"
+                    }
+                    if (obj.value == str && act == 'clean') {
+                        obj.value = '';
+                        //obj.style.color="#000000"
+                    }
+                }
+                function compareDate() {
+                    var departDate = document.getElementById('departDateInput').value;
+                    var departDateArray = departDate.split("-");
 
-          var arriveDate = document.getElementById('arriveDateInput').value;
-          var arriveDateArray = arriveDate.split("-");
-          var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
-          var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
-          if(departDate > arriveDate){
-            document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
-          }
-        }
-        </script>
-            <form class="pretty-form ticket-form" method="POST" action="ticket.php" onsubmit="return checkTicketForm(this);">
-              
-              <div class="column-1">
-                <div class="radio-group">
-                  <input type="radio" name="SearchType" value="S" id="singleRadio" checked/>
-                  <label for="singleRadio">单程</label>
-                </div>
+                    var arriveDate = document.getElementById('arriveDateInput').value;
+                    var arriveDateArray = arriveDate.split("-");
+                    var departDate = new Date(departDateArray[0], departDateArray[1], departDateArray[2]);
+                    var arriveDate = new Date(arriveDateArray[0], arriveDateArray[1], arriveDateArray[2]);
+                    if (departDate > arriveDate) {
+                        document.getElementById('arriveDateInput').value = departDate = document.getElementById('departDateInput').value;
+                    }
+                }
+            </script>
+            <form class="pretty-form ticket-form" method="POST" action="ticket.php"
+                  onsubmit="return checkTicketForm(this);">
 
-                <div class="radio-group">
-                  <input type="radio" name="SearchType" value="D" id="doubleRadio"/>
-                  <label for="doubleRadio">双程</label>
+                <div class="column-1">
+                    <div class="radio-group">
+                        <input type="radio" name="SearchType" value="S" id="singleRadio" checked/>
+                        <label for="singleRadio">单程</label>
+                    </div>
+
+                    <div class="radio-group">
+                        <input type="radio" name="SearchType" value="D" id="doubleRadio"/>
+                        <label for="doubleRadio">双程</label>
+                    </div>
                 </div>
-              </div>
-              <div class="column-3">
+                <div class="column-3">
+                    <div class="column-2">
+                        <label for="none">城市：</label>
+                    </div>
+                    <div class="column-8">
+                        <input class="column-10 cityinput" id="startCity" type="text" name="DepartCity"
+                               onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');"
+                               value="请输入城市名称">
+                        <input class="column-10 cityinput" id="endCity" type="text" name="ArriveCity" value="桂林"
+                               readonly/>
+                    </div>
+                </div>
+                <div class="column-1" style="height:1px;width:5%;"></div>
+                <div class="column-3">
+                    <div class="column-2">
+                        <label for="none">日期：</label>
+                    </div>
+                    <div class="column-8">
+                        <input class="column-10" type="text" id="departDateInput" name="DepartDate"
+                               onblur="inputTxt2(this,'set', '请选择出发日期');compareDate();"
+                               onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');compareDate();"
+                               value="请选择出发日期"/>
+                        <input class="column-10" type="text" id="arriveDateInput" name="ArriveDate"
+                               onblur="inputTxt2(this,'set', '请选择回程日期');"
+                               onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');"
+                               value="请选择回程日期"/>
+                    </div>
+                </div>
                 <div class="column-2">
-                  <label for="none">城市：</label>
+                    <input style="width:70px" type="submit" class="common-button" value="搜索"/>
                 </div>
-                <div class="column-8">
-                  <input class="column-10 cityinput" id="startCity" type="text" name="DepartCity" onblur="inputTxt2(this,'set', '请输入城市名称');" onfocus="inputTxt2(this,'clean', '请输入城市名称');" value="请输入城市名称" >
-                  <input class="column-10 cityinput" id="endCity"  type="text" name="ArriveCity" value="桂林" readonly/>
-                </div>
-              </div>
-              <div class="column-1" style="height:1px;width:5%;"></div>
-              <div class="column-3">
-                <div class="column-2">
-                  <label for="none">日期：</label>
-                </div>
-                 <div class="column-8">
-                  <input class="column-10" type="text" id="departDateInput" name="DepartDate" onblur="inputTxt2(this,'set', '请选择出发日期');compareDate();"  onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:'%y-%M-{%d}'});inputTxt2(this,'clean', '请选择出发日期');compareDate();"  value="请选择出发日期" />
-                  <input class="column-10" type="text" id="arriveDateInput" name="ArriveDate" onblur="inputTxt2(this,'set', '请选择回程日期');" onFocus="WdatePicker({isShowClear:false,readOnly:true,minDate:document.getElementById('departDateInput').value});inputTxt2(this,'clean', '请选择回程日期');" value="请选择回程日期" />
-                </div>
-              </div>
-              <div class="column-2">
-                <input style="width:70px" type="submit" class="common-button"  value="搜索"/>
-              </div>
-              <script type="text/javascript">
-              var startCity = new Vcity.CitySelector({input:'startCity'});
-              </script>
+                <script type="text/javascript">
+                    var startCity = new Vcity.CitySelector({input: 'startCity'});
+                </script>
             </form>
         </div>
-      </div>
-      <div class="content-common-box content-left-big-box content-orange">
+    </div>
+    <div class="content-common-box content-left-big-box content-orange">
         <div class="title">
-          <h2>会议预订</h2>
+            <h2>会议预订</h2>
         </div>
         {sta: foreach($goods_meeting as $key=>$v)[loop]}
-         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
-          <div class="images">
-            <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
-          </div>
-          <div class="description">
-            <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
-            </p>
-            <span class="price">￥{echo:$v['goods_price'];/}</span>
-          </div>
+        <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
+            <div class="images">
+                <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}"/></a>
+            </div>
+            <div class="description">
+                <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span
+                        class="stars">✮</span></h3></a>
+
+                <p class="intro">
+                    {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
+                </p>
+                <span class="price">￥{echo:$v['goods_price'];/}</span>
+            </div>
         </div>
         {end:foreach/}
-      </div>
-      
-     
-
-      <div class="content-common-box content-left-big-box content-blue">
-        <div class="title">
-          <h2>线路预订</h2>
-
-        </div>
-       {sta: foreach($goods_line as $key=>$v)[loop]}
-         <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
-          <div class="images">
-            <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}" /></a>
-          </div>
-          <div class="description">
-            <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span class="stars">✮</span></h3></a>
-            <p class="intro">
-              {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
-            </p>
-            <span class="price">￥{echo:$v['goods_price'];/}</span>
-          </div>
-        </div>
-        {end:foreach/}
-      </div>
-      <!-- /leftColumn -->
     </div>
-    <!-- rightColumn -->
-    <div id="rightColumn">
-      <div class="slide-nav">
-        <ul id="idNum">
-         {sta:foreach($images_info as $key =>$value)[loop]}
-         <li><a href="{echo:$value['images_link'];/}">{echo:$value['name'];/}</a><b>{echo:$value['images_desc'];/}</b></li>
-         {end:foreach/}
-         <script type="text/javascript">slide(400);</script>
-       </ul>
-      </div>
-      <div class="help_guest clearfix">
-      	{sta: if($USER['user_id'])[exc]}
-			<a title="{echo:lp{i_u_start};/}" href="{echo: article_url(11);/}">
-	      		<span class="g_help">{echo:lp{i_u_start};/}</span>
-	      	</a>
 
-	    {sta:}else [exc]}
-	      	<a title="{echo:lp{i_register_free};/}" href="modules.php?app=reg">
-	      		<span class="g_regist" >{echo:lp{i_register_free};/}</span>
-	      	</a>
-	      	<a title="{echo:lp{i_login};/}" href="login.php">
-	      		<span class="g_login">{echo:lp{i_login};/}</span>
-	      	</a>
-	    {end:if/}
-      	<a title="{echo:lp{i_free_open};/}" href="modules.php?app=shop_info">
-      		<span class="g_opedshop">{echo:lp{i_free_open};/}</span>
-      	</a>
-      </div>
-      <div class="rules">
-        <ul>
-          <li><a class="groupbuy" href="article.php?id=33">{echo: $i_langpackage->i_group_buy_small_shops;/}</a></li>
-          <li><a class="credit" href="article.php?id=34">{echo: $i_langpackage->i_credit_evaluation_system;/}</a></li>
-        </ul>
-      </div>
-      <div class="user_service mg12b">
-        	<div class="top"><div class="line"></div><ul id="tab0"><li id="tab0_title0" class="active" onmouseover="nTabs('tab0',this);"><a href="" hidefocus="true">{echo:lp{i_ammall};/}</a></li><li id="tab0_title1" onmouseover="nTabs('tab0',this);"><a href="" hidefocus="true">{echo:lp{i_amsell};/}</a></li></ul></div>
-            <div id="tab0_content0" class="content">
-            	<ul>
-                  	 {sta: foreach($maller as $key =>$value)[loop]}
-               			<li><a href="article.php?id={echo:$value['article_id'];/}">{echo: $value['title'];/}</a></li>
-               		 {end:foreach/}
-                </ul>
+
+    <div class="content-common-box content-left-big-box content-blue">
+        <div class="title">
+            <h2>线路预订</h2>
+
+        </div>
+        {sta: foreach($goods_line as $key=>$v)[loop]}
+        <div class="item-box" style="{sta:if($key%3 == 0)[exc]}margin-left:0px;{end:if/}">
+            <div class="images">
+                <a href="{echo: goods_url($v['goods_id']);/}"><img src="{echo:$v['goods_thumb'];/}"/></a>
             </div>
-            <div id="tab0_content1" class="content" style="display:none">
-            	<ul>
-                	 {sta: foreach($seller as $key =>$value)[loop]}
-               			<li><a href="article.php?id={echo:$value['article_id'];/}">{echo: $value['title'];/}</a></li>
-            	   {end:foreach/}
-                </ul>
+            <div class="description">
+                <a href="{echo: goods_url($v['goods_id']);/}"><h3>{echo:sub_str($v['goods_name'], 30);/}<span
+                        class="stars">✮</span></h3></a>
+
+                <p class="intro">
+                    {echo:sub_str(strip_tags($v['goods_intro']), 40);/}
+                </p>
+                <span class="price">￥{echo:$v['goods_price'];/}</span>
             </div>
         </div>
-      <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+        {end:foreach/}
+    </div>
+    <!-- /leftColumn -->
+</div>
+<!-- rightColumn -->
+<div id="rightColumn">
+    <div class="slide-nav">
+        <ul id="idNum">
+            {sta:foreach($images_info as $key =>$value)[loop]}
+            <li>
+                <a href="{echo:$value['images_link'];/}">{echo:$value['name'];/}</a><b>{echo:$value['images_desc'];/}</b>
+            </li>
+            {end:foreach/}
+            <script type="text/javascript">slide(400);</script>
+        </ul>
+    </div>
+    <div class="help_guest clearfix">
+        {sta: if($USER['user_id'])[exc]}
+        <a title="{echo:lp{i_u_start};/}" href="{echo: article_url(11);/}">
+            <span class="g_help">{echo:lp{i_u_start};/}</span>
+        </a>
+
+        {sta:}else [exc]}
+        <a title="{echo:lp{i_register_free};/}" href="modules.php?app=reg">
+            <span class="g_regist">{echo:lp{i_register_free};/}</span>
+        </a>
+        <a title="{echo:lp{i_login};/}" href="login.php">
+            <span class="g_login">{echo:lp{i_login};/}</span>
+        </a>
+        {end:if/}
+        <a title="{echo:lp{i_free_open};/}" href="modules.php?app=shop_info">
+            <span class="g_opedshop">{echo:lp{i_free_open};/}</span>
+        </a>
+    </div>
+    <div class="rules">
+        <ul>
+            <li><a class="groupbuy" href="article.php?id=33">{echo: $i_langpackage->i_group_buy_small_shops;/}</a></li>
+            <li><a class="credit" href="article.php?id=34">{echo: $i_langpackage->i_credit_evaluation_system;/}</a></li>
+        </ul>
+    </div>
+    <div class="user_service mg12b">
+        <div class="top">
+            <div class="line"></div>
+            <ul id="tab0">
+                <li id="tab0_title0" class="active" onmouseover="nTabs('tab0',this);"><a href="" hidefocus="true">{echo:lp{i_ammall};/}</a>
+                </li>
+                <li id="tab0_title1" onmouseover="nTabs('tab0',this);"><a href=""
+                                                                          hidefocus="true">{echo:lp{i_amsell};/}</a>
+                </li>
+            </ul>
+        </div>
+        <div id="tab0_content0" class="content">
+            <ul>
+                {sta: foreach($maller as $key =>$value)[loop]}
+                <li><a href="article.php?id={echo:$value['article_id'];/}">{echo: $value['title'];/}</a></li>
+                {end:foreach/}
+            </ul>
+        </div>
+        <div id="tab0_content1" class="content" style="display:none">
+            <ul>
+                {sta: foreach($seller as $key =>$value)[loop]}
+                <li><a href="article.php?id={echo:$value['article_id'];/}">{echo: $value['title'];/}</a></li>
+                {end:foreach/}
+            </ul>
+        </div>
+    </div>
+    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
         <div class="title"><h2>{echo:lp{i_hot_label};/}</h2></div>
         <div class="tags">
-        	{sta:foreach($tag_list as $value)[loop]}
-        	<a href="{echo:$value['url'];/}" style="color:{echo:$value['tag_color'];/};{sta:if($value['is_blod'])[exc]}font-weight:800;{end:if/}">{echo:$value['tag_name'];/}</a>
-        	{end:foreach/}
-		</div>
-      </div>
-      <div class="popularity bg_gary mg12b content-common-box content-right-middle-box">
+            {sta:foreach($tag_list as $value)[loop]}
+            <a href="{echo:$value['url'];/}"
+               style="color:{echo:$value['tag_color'];/};{sta:if($value['is_blod'])[exc]}font-weight:800;{end:if/}">{echo:$value['tag_name'];/}</a>
+            {end:foreach/}
+        </div>
+    </div>
+    <div class="popularity bg_gary mg12b content-common-box content-right-middle-box">
         <div class="title"><h2>{echo: $i_langpackage->i_goodsheader_category;/}</h2></div>
         <div class="content">
-          <ul id="promote_goods" class="cls">
-        {sta:$i=1;/}
-		{sta:  foreach($goods_hot as $value)[loop]}
-        <li onmouseover="promote_change(this)" {sta:if($i==1)[exc]} class="selected"{end:if/} >
-        <span class="num">{echo:$i;/}</span><a title="{echo: $value['goods_name'];/}" target="_blank" href="{echo: goods_url($value['goods_id']);/}"><img src="{echo: $value['is_set_image'] ? $value['goods_thumb'] : 'skin/default/images/nopic.gif';/}" height="60" width="60" onerror="this.src='skin/default/images/nopic.gif'">{echo: sub_str($value['goods_name'],20,false);/}</a><div class="price clearfix">
-        <label><b>{echo:lp{i_money_sign};/}{echo:$value['goods_price'];/}{echo:lp{i_yan};/}</b></label></div>
-        </li>
-        {sta:$i++;/}
-		{end:foreach/}
-        </ul>
+            <ul id="promote_goods" class="cls">
+                {sta:$i=1;/}
+                {sta: foreach($goods_hot as $value)[loop]}
+                <li onmouseover="promote_change(this)"
+                {sta:if($i==1)[exc]} class="selected"{end:if/} >
+                <span class="num">{echo:$i;/}</span><a title="{echo: $value['goods_name'];/}" target="_blank"
+                                                       href="{echo: goods_url($value['goods_id']);/}"><img
+                    src="{echo: $value['is_set_image'] ? $value['goods_thumb'] : 'skin/default/images/nopic.gif';/}"
+                    height="60" width="60" onerror="this.src='skin/default/images/nopic.gif'">{echo:
+                sub_str($value['goods_name'],20,false);/}</a>
+
+                <div class="price clearfix">
+                    <label><b>{echo:lp{i_money_sign};/}{echo:$value['goods_price'];/}{echo:lp{i_yan};/}</b></label>
+                </div>
+                </li>
+                {sta:$i++;/}
+                {end:foreach/}
+            </ul>
         </div>
-      </div>
-      <div class="shopLogo bg_gary content-common-box content-right-middle-box">
+    </div>
+    <div class="shopLogo bg_gary content-common-box content-right-middle-box">
         <div class="title"><h2>景区导航</h2></div>
         <ul class="list_logos clearfix">
-        {sta: foreach($brand_rs as $value)[loop]}
-          <li ><a href="brand_info.php?brand_id={echo:$value['brand_id'];/}"><img src="{echo:$value['brand_logo'];/}" alt="{echo:$value['brand_name'];/}"  width="110" height="42"  onerror="this.src='skin/default/images/no_page.jpg'"/></a></li>
-        {end:foreach/}
+            {sta: foreach($brand_rs as $value)[loop]}
+            <li><a href="brand_info.php?brand_id={echo:$value['brand_id'];/}"><img src="{echo:$value['brand_logo'];/}"
+                                                                                   alt="{echo:$value['brand_name'];/}"
+                                                                                   width="110" height="42"
+                                                                                   onerror="this.src='skin/default/images/no_page.jpg'"/></a>
+            </li>
+            {end:foreach/}
         </ul>
-      </div>
-      <!-- /rightColumn -->
     </div>
-    <div style="clear:both"></div>
-    <div class="shopRecom bg content-common-box">
-      <div class="title"><h2>{echo:lp{i_better_shop};/}</h2></div>
-      <ul class="clearfix">
-      {sta: foreach($shop_info as $value)[loop]}
+    <!-- /rightColumn -->
+</div>
+<div style="clear:both"></div>
+<div class="shopRecom bg content-common-box">
+    <div class="title"><h2>{echo:lp{i_better_shop};/}</h2></div>
+    <ul class="clearfix">
+        {sta: foreach($shop_info as $value)[loop]}
         <li>
-          <p class="pic"><a href="{echo: shop_url($value['shop_id'],'index',$value['shop_domain']);/}"><img src="{echo: $value['shop_logo'] ? $value['shop_logo'] : 'skin/default/images/shop_nologo.gif';/}" alt="{echo: $value['shop_name'];/}" width="112" height="55" onerror="this.src='skin/default/images/shop_nologo.gif'"/></a></p>
-          <p class="shopname"><a href="{echo: shop_url($value['shop_id'],'index',$value['shop_domain']);/}">{echo: $value['shop_name'];/}</a></p>
-          <p class="shopower">{echo: $i_langpackage->i_seller;/}：<a href="{echo: shop_url($value['shop_id'],'index');/}" >{echo: $value['user_name'];/}</a></p>
+            <p class="pic"><a href="{echo: shop_url($value['shop_id'],'index',$value['shop_domain']);/}"><img
+                    src="{echo: $value['shop_logo'] ? $value['shop_logo'] : 'skin/default/images/shop_nologo.gif';/}"
+                    alt="{echo: $value['shop_name'];/}" width="112" height="55"
+                    onerror="this.src='skin/default/images/shop_nologo.gif'"/></a></p>
+
+            <p class="shopname"><a href="{echo: shop_url($value['shop_id'],'index',$value['shop_domain']);/}">{echo:
+                $value['shop_name'];/}</a></p>
+
+            <p class="shopower">{echo: $i_langpackage->i_seller;/}：<a
+                    href="{echo: shop_url($value['shop_id'],'index');/}">{echo: $value['user_name'];/}</a></p>
         </li>
-      {end:foreach/}
-      </ul>
-    </div>
-    <!-- /contents -->
+        {end:foreach/}
+    </ul>
+</div>
+<!-- /contents -->
 </div>
 {inc: require("shop/index_footer.php");/}
 </div>
 </body>
 <script language="JavaScript" src="servtools/ajax_client/ajax.js"></script>
 <script language="JavaScript">
-<!--
+    <!--
 
 
-var d = new Date();
-var t = d.getTime();
-ajax("crons.php","POST","t="+t,function(data){});
-//-->
+    var d = new Date();
+    var t = d.getTime();
+    ajax("crons.php", "POST", "t=" + t, function (data) {
+    });
+    //-->
 </script>
 </html>

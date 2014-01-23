@@ -16,13 +16,14 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
-if(filemtime("templates/default/shop/menu.html") > filemtime(__file__) || (file_exists("models/shop/menu.php") && filemtime("models/shop/menu.php") > filemtime(__file__)) ) {
-	tpl_engine("default","shop/menu.html",1);
-	include(__file__);
+if (filemtime("templates/default/shop/menu.html") > filemtime(__file__) || (file_exists("models/shop/menu.php") && filemtime("models/shop/menu.php") > filemtime(__file__))) {
+    tpl_engine("default", "shop/menu.html", 1);
+    include(__file__);
 } else {
+<<<<<<< HEAD
 /* debug模式运行生成代码 结束 */
 ?><?php
 if(!$IWEB_SHOP_IN) {
@@ -46,3 +47,41 @@ $app = short_check(get_args('app'));
 	<!-- plugins !-->
 	</ul>
 	</div><?php } ?>
+=======
+    /* debug模式运行生成代码 结束 */
+    ?><?php
+    if (!$IWEB_SHOP_IN) {
+        trigger_error('Hacking attempt');
+    }
+    $app = short_check(get_args('app'));
+    ?>
+    <div class="shop_nav">
+    <ul>
+        <li <?php if ($app == 'index') { ?>class="on"<?php } ?>><a
+                href="<?php echo shop_url($shop_id, 'index', $custom_domain); ?>"
+                hideFocus=true><?php echo $s_langpackage->s_shop_indexs; ?></a></li>
+        <li <?php if ($app == 'credit') { ?>class="on"<?php } ?>><a
+                href="<?php echo shop_url($shop_id, 'credit', $custom_domain); ?>"
+                hideFocus=true><?php echo $s_langpackage->s_shop_credit; ?></a></li>
+        <li <?php if ($app == 'intro') { ?>class="on"<?php } ?>><a
+                href="<?php echo shop_url($shop_id, 'intro', $custom_domain); ?>"
+                hideFocus=true><?php echo $s_langpackage->s_shop_intro; ?></a></li>
+        <li <?php if ($app == 'products') { ?>class="on"<?php } ?>><a
+                href="<?php echo shop_url($shop_id, 'products', $custom_domain); ?>"
+                hideFocus=true><?php echo $s_langpackage->s_products; ?></a></li>
+        <li <?php if ($app == 'groupbuy') { ?>class="on"<?php } ?>><a
+                href="<?php echo shop_url($shop_id, 'groupbuy', $custom_domain); ?>"
+                hideFocus=true><?php echo $s_langpackage->s_shop_groupbuy; ?></a></li>
+        <?php if ($SYSINFO['map'] == 'true' && ($SHOP['map_x'] != 0 || $SHOP['map_y'] != 0)) { ?>
+            <li <?php if ($app == 'map') { ?>class="on"<?php } ?>><a
+                    href="<?php echo shop_url($shop_id, 'map', $custom_domain); ?>"
+                    hideFocus=true><?php echo $s_langpackage->s_shop_seat; ?></a></li>
+        <?php } ?>
+        <!-- plugins !-->
+        <div id="shop_menu_buttun">
+            <?php echo isset($plugins['shop_menu_buttun']) ? show_plugins($plugins['shop_menu_buttun']) : ''; ?>
+        </div>
+        <!-- plugins !-->
+    </ul>
+    </div><?php } ?>
+>>>>>>> remotes/origin/master

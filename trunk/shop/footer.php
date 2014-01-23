@@ -16,13 +16,14 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
-if(filemtime("templates/default/shop/footer.html") > filemtime(__file__) || (file_exists("models/shop/footer.php") && filemtime("models/shop/footer.php") > filemtime(__file__)) ) {
-	tpl_engine("default","shop/footer.html",1);
-	include(__file__);
+if (filemtime("templates/default/shop/footer.html") > filemtime(__file__) || (file_exists("models/shop/footer.php") && filemtime("models/shop/footer.php") > filemtime(__file__))) {
+    tpl_engine("default", "shop/footer.html", 1);
+    include(__file__);
 } else {
+<<<<<<< HEAD
 /* debug模式运行生成代码 结束 */
 ?><?php
 if(!$IWEB_SHOP_IN) {
@@ -32,3 +33,26 @@ require_once("foundation/asystem_info.php");
 ?><div class="footer top10 clear"><a href="<?php echo  article_url(2);?>"><?php echo $s_langpackage->s_question_see;?></a>|<a href="<?php echo  article_url(3);?>"><?php echo $s_langpackage->s_safe_compp;?></a>|<a href="<?php echo  article_url(4);?>"><?php echo $s_langpackage->s_process_of_purchase;?></a>|<a href="<?php echo  article_url(5);?>"><?php echo $s_langpackage->s_howto_pay;?></a>|<a href="<?php echo  article_url(6);?>"><?php echo $s_langpackage->s_contact_us;?></a>|<a href="<?php echo  article_url(7);?>"><?php echo $s_langpackage->s_make_a_proposal;?></a>|<a href="<?php echo  article_url(8);?>"><?php echo $s_langpackage->s_site_map;?></a></div>
 <div class="copyright" style="border-top-style: solid;border-top-color:#DEDEDE;border-top-width:1px;padding-top:5px;"><p>Powered by <a href="http://" style="font-weight:bold;">DMS <?php echo  $SYSINFO['version'];?></a> <?php echo  $SYSINFO['sys_company'];?></p><?php echo  $SYSINFO['sys_copyright'];?> <?php echo  $SYSINFO['sys_icp'];?> <?php echo  $SYSINFO['sys_countjs'];?>
 </div><?php } ?>
+=======
+    /* debug模式运行生成代码 结束 */
+    ?><?php
+    if (!$IWEB_SHOP_IN) {
+        trigger_error('Hacking attempt');
+    }
+    require_once("foundation/asystem_info.php");
+    ?>
+    <div class="footer top10 clear"><a
+        href="<?php echo article_url(2); ?>"><?php echo $s_langpackage->s_question_see; ?></a>|<a
+        href="<?php echo article_url(3); ?>"><?php echo $s_langpackage->s_safe_compp; ?></a>|<a
+        href="<?php echo article_url(4); ?>"><?php echo $s_langpackage->s_process_of_purchase; ?></a>|<a
+        href="<?php echo article_url(5); ?>"><?php echo $s_langpackage->s_howto_pay; ?></a>|<a
+        href="<?php echo article_url(6); ?>"><?php echo $s_langpackage->s_contact_us; ?></a>|<a
+        href="<?php echo article_url(7); ?>"><?php echo $s_langpackage->s_make_a_proposal; ?></a>|<a
+        href="<?php echo article_url(8); ?>"><?php echo $s_langpackage->s_site_map; ?></a></div>
+    <div class="copyright"
+         style="border-top-style: solid;border-top-color:#DEDEDE;border-top-width:1px;padding-top:5px;"><p>Powered by <a
+        href="http://"
+        style="font-weight:bold;">DMS <?php echo $SYSINFO['version']; ?></a> <?php echo $SYSINFO['sys_company']; ?>
+    </p><?php echo $SYSINFO['sys_copyright']; ?> <?php echo $SYSINFO['sys_icp']; ?> <?php echo $SYSINFO['sys_countjs']; ?>
+    </div><?php } ?>
+>>>>>>> remotes/origin/master

@@ -10,9 +10,9 @@
 require("foundation/nusoap/nusoap.php");
 require('foundation/module_category.php');
 
-dbtarget('r',$dbServs);
-$dbo=new dbex();
-$table = $tablePreStr."category";
+dbtarget('r', $dbServs);
+$dbo = new dbex();
+$table = $tablePreStr . "category";
 $result = get_sub_under($dbo, $table, '433');
 print_r($result);
 

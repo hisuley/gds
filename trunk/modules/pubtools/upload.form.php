@@ -16,14 +16,15 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
 if(filemtime("templates/default/modules/pubtools/upload.form.html") > filemtime(__file__) || (file_exists("models/modules/pubtools/upload.form.php") && filemtime("models/modules/pubtools/upload.form.php") > filemtime(__file__)) ) {
-	tpl_engine("default","modules/pubtools/upload.form.html",1);
-	include(__file__);
+    tpl_engine("default", "modules/pubtools/upload.form.html", 1);
+    include(__file__);
 } else {
 /* debug模式运行生成代码 结束 */
+<<<<<<< HEAD
 ?><?php
 if(!$IWEB_SHOP_IN) {
 	trigger_error('Hacking attempt');
@@ -47,4 +48,36 @@ body {margin:0;padding:0;background-color:transparent; font-size:12px;}
          <?php echo  $m_langpackage->m_upload_tolimit;?>
     </form>
     </body>
+=======
+?><?php
+if (!$IWEB_SHOP_IN) {
+    trigger_error('Hacking attempt');
+}
+
+//引入语言包
+$m_langpackage = new moduleslp;
+$i_langpackage = new indexlp;
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<form name="upload" method="post" action="do.php?act=upload_act" enctype="multipart/form-data" style="margin:0">
+    <input type="file" name="attach[]"/> 
+    <input type="submit" name="submit" value=" <?php echo $m_langpackage->m_image_upload; ?> "/>
+     <?php echo $m_langpackage->m_upload_tolimit; ?>
+</form>
+</body>
+>>>>>>> remotes/origin/master
 </html><?php } ?>

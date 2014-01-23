@@ -1,155 +1,158 @@
 <?php
-	header('Content-type: text/html; charset=gbk');
-	include_once("netpayclient_config.php");
+header('Content-type: text/html; charset=gbk');
+include_once("netpayclient_config.php");
 ?>
-<title>µ¥±ÊÍË¿î</title>
-<h1>µ¥±ÊÍË¿î</h1>
+    <title>ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½</title>
+    <h1>ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½</h1>
 <?php
-	//¼ÓÔØ netpayclient ×é¼þ
-	include_once("netpayclient.php");
-	//¼ÓÔØ CURL º¯Êý¿â£¬¸Ã¿âÓÉ chinapay Ìá¹©£¬·½±ãÄúÊ¹ÓÃ curl ·¢ËÍ HTTP ÇëÇó
-	include_once("lib_curl.php");
-	
-	//µ¼ÈëË½Ô¿ÎÄ¼þ, ·µ»ØÖµ¼´ÎªÄúµÄÉÌ»§ºÅ£¬³¤¶È15Î»
-	$merid = buildKey(PRI_KEY);
-	if(!$merid) {
-		echo "µ¼ÈëË½Ô¿ÎÄ¼þÊ§°Ü£¡";
-		exit;
-	}
-	
-	//ÐèÒª²éÑ¯µÄ¶©µ¥ºÅ£¬16Î»³¤£¬±ØÌî
-	$ordid = $_REQUEST["ordid"];
-	//¶©µ¥ÈÕÆÚ£¬8Î»³¤£¬±ØÌî
-	$transdate = $_REQUEST["transdate"];
-	//ÍË¿î½ð¶î£¬±ØÐëÐ¡ÓÚÔ­Ê¼½»Ò×½ð¶î£¬12Î»³¤£¬²»×ã×ó²¹0£¬±ØÌî
-	$refundamount = $_REQUEST["refundamount"];
-	//½»Ò×ÀàÐÍ£¬4Î»³¤£¬´Ë´¦±íÊ¾ÍË¿î·½Ê½ 0002 ÎªÈ«¶îÍË¿î£¬0102 Îª²¿·ÖÍË¿î£¬±ØÌî
-	$transtype = $_REQUEST["transtype"];
-	//±¸×¢£¬ÍË¿îÊ±ÓÃ×÷ÍË¿îÁ÷Ë®ºÅ£¬Ò»ÌìÄÚ²»¿ÉÖØ¸´£¬×î³¤40Î»£¬±ØÌî£¬´Ë´¦Ê¹ÓÃµ±Ç°Ê±¼ä´Á½öÓÃ×÷ÑÝÊ¾
-	$priv1 = date('YmdHis');
-	
-	if($transdate=='') $transdate = date('Ymd');
-	
-	if($refundamount=='') $refundamount = padstr('1',12);
-	
-	if($transtype=='') $transtype = '0002';
-	
+//ï¿½ï¿½ï¿½ï¿½ netpayclient ï¿½ï¿½ï¿½
+include_once("netpayclient.php");
+//ï¿½ï¿½ï¿½ï¿½ CURL ï¿½ï¿½ï¿½ï¿½â£¬ï¿½Ã¿ï¿½ï¿½ï¿½ chinapay ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ curl ï¿½ï¿½ï¿½ï¿½ HTTP ï¿½ï¿½ï¿½ï¿½
+include_once("lib_curl.php");
+
+//ï¿½ï¿½ï¿½ï¿½Ë½Ô¿ï¿½Ä¼ï¿½, ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ì»ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½15Î»
+$merid = buildKey(PRI_KEY);
+if (!$merid) {
+    echo "ï¿½ï¿½ï¿½ï¿½Ë½Ô¿ï¿½Ä¼ï¿½Ê§ï¿½Ü£ï¿½";
+    exit;
+}
+
+//ï¿½ï¿½Òªï¿½ï¿½Ñ¯ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Å£ï¿½16Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$ordid = $_REQUEST["ordid"];
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½8Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$transdate = $_REQUEST["transdate"];
+//ï¿½Ë¿ï¿½ï¿½î£¬ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½×½ï¿½î£¬12Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$refundamount = $_REQUEST["refundamount"];
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½4Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½Ê¾ï¿½Ë¿î·½Ê½ 0002 ÎªÈ«ï¿½ï¿½ï¿½Ë¿î£¬0102 Îªï¿½ï¿½ï¿½ï¿½ï¿½Ë¿î£¬ï¿½ï¿½ï¿½ï¿½
+$transtype = $_REQUEST["transtype"];
+//ï¿½ï¿½×¢ï¿½ï¿½ï¿½Ë¿ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½Ë®ï¿½Å£ï¿½Ò»ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½î³¤40Î»ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½Ë´ï¿½Ê¹ï¿½Ãµï¿½Ç°Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
+$priv1 = date('YmdHis');
+
+if ($transdate == '') $transdate = date('Ymd');
+
+if ($refundamount == '') $refundamount = padstr('1', 12);
+
+if ($transtype == '') $transtype = '0002';
+
 ?>
-<form action="" method="get">
-<label>ÍË¿îÁ÷Ë®</label><br/>
-<input type="text" name="priv1" value="<?php echo $priv1; ?>"><br/>
-<label>¶©µ¥ÈÕÆÚ</label><br/>
-<input type="text" name="transdate" value="<?php echo $transdate; ?>"><br/>
-<label>¶©µ¥ºÅ</label><br/>
-<input type="text" name="ordid" value="<?php echo $ordid; ?>"><br/>
-<label>ÍË¿î½ð¶î</label><br/>
-<input type="text" name="refundamount" value="<?php echo $refundamount; ?>"><br/>
-<label>ÍË¿î·½Ê½</label><br/>
-<select name="transtype">
-<option value="0002">Ê×´ÎÈ«¶îÍË¿î</option>
-<option value="0012">¶þ´ÎÈ«¶îÍË¿î</option>
-<option value="0102">Ê×´Î²¿·ÖÍË¿î</option>
-<option value="0112">¶þ´Î²¿·ÖÍË¿î</option>
-</select>
-<input type="submit" value="ÍË¿î">
-</form>
+    <form action="" method="get">
+        <label>ï¿½Ë¿ï¿½ï¿½ï¿½Ë®</label><br/>
+        <input type="text" name="priv1" value="<?php echo $priv1; ?>"><br/>
+        <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+        <input type="text" name="transdate" value="<?php echo $transdate; ?>"><br/>
+        <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+        <input type="text" name="ordid" value="<?php echo $ordid; ?>"><br/>
+        <label>ï¿½Ë¿ï¿½ï¿½ï¿½</label><br/>
+        <input type="text" name="refundamount" value="<?php echo $refundamount; ?>"><br/>
+        <label>ï¿½Ë¿î·½Ê½</label><br/>
+        <select name="transtype">
+            <option value="0002">ï¿½×´ï¿½È«ï¿½ï¿½ï¿½Ë¿ï¿½</option>
+            <option value="0012">ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½Ë¿ï¿½</option>
+            <option value="0102">ï¿½×´Î²ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½</option>
+            <option value="0112">ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½</option>
+        </select>
+        <input type="submit" value="ï¿½Ë¿ï¿½">
+    </form>
 <?
-	if(($ordid!='')&&($transdate!='')&&($refundamount!='')){
-		//½Ó¿Ú°æ±¾ºÅ£¬µ¥±ÊÍË¿î£¬¹Ì¶¨Îª 20070129£¬±ØÌî
-		$version = "20070129";
-		//ÍË¿î·µ»ØµØÖ·£¬ÍË¿îÌá½»ºóÐè¾­¹ýÈË¹¤ÉóºË´¦Àí£¬²¢ÔÚT+2ÈÕºóÍê³É£¬´ËÊ±ÎÒ·½·þÎñÆ÷½«POSTÍË¿î½á¹ûµ½¸ÃµØÖ·
-		$returnurl = "$site_url/netpayclient_refund_feedback.php";
-		
-		//°´´ÎÐò×éºÏ±¨ÎÄÐÅÏ¢Îª´ýÇ©Ãû´®
-		$plain = $merid . $transdate . $transtype . $ordid . $refundamount . $priv1;
-		//Éú³ÉÇ©ÃûÖµ£¬±ØÌî
-		$chkvalue = sign($plain);
-		if (!$chkvalue) {
-			echo "Ç©ÃûÊ§°Ü£¡";
-			exit;
-		}
-		
-		//Éú²ú»·¾³Ìá½»µØÖ·Îª ,¸ü»»Éú²úÃÜÔ¿ºóÇë×¢ÒâÐÞ¸Ä
-		
-		$http = HttpInit();
-		$post_data = "MerID=$merid&TransType=$transtype&OrderId=$ordid&RefundAmount=$refundamount&TransDate=$transdate&Version=$version&ReturnURL=$returnurl&Priv1=$priv1&ChkValue=$chkvalue";
-		$output = HttpPost($http, $post_data, REQ_URL_REF);
-		
-		if($output){
-			$output = trim(strip_tags($output));
-			
-			echo "<h2>ÍË¿î·µ»Ø</h2>";
-			echo htmlspecialchars($output) . "<br/>";
-			echo "=================================<br/>";
-			//¿ªÊ¼½âÎöÊý¾Ý
-			$datas = explode("&",$output);
-			$extracted_data = array();
-			foreach($datas as $data){
-				echo "$data<br/>";
-				$name_value = explode('=',$data);
-				if(count($name_value)==2){
-					$extracted_data[$name_value[0]] = $name_value[1];
-				}
-			}
-			
-			echo "=================================<br/>";
-			
-			$resp_code = $extracted_data["ResponseCode"];
-			if($resp_code == '0'){
-				$merid = $extracted_data["MerID"]; 
-				$orderno = $extracted_data["OrderId"];
-				$refundamount = $extracted_data["RefundAmout"];
-				$currencycode = $extracted_data["currencycode"];
-				$processdate = $extracted_data["ProcessDate"];
-				$sendtime = $extracted_data["SendTime"];
-				$transtype = $extracted_data["TransType"];
-				$status = $extracted_data["Status"];
-				$checkvalue = $extracted_data["CheckValue"];
-				$priv1 = $extracted_data["Priv1"];
-			} else {
-				$message = $extracted_data["Message"];
-			}
-			
-			switch($resp_code){
-								
-				case '111': echo "<h3>$message</h3>"; 
-										echo "<h4>ÇëÈ·ÈÏÄãÊÇ·ñÉêÇë¿ªÍ¨ÁË´ËÒµÎñ£¬²¢Ìá¹©ÁËÕýÈ·µÄ¹«ÍøIPµØÖ·</h4>";
-										break;
-				case '0'  : echo "<h3>ÍË¿îÇëÇó·¢ËÍ³É¹¦</h3>";
-				
-										//¿ªÊ¼ÑéÖ¤Ç©Ãû£¬Ê×ÏÈµ¼Èë¹«Ô¿ÎÄ¼þ
-										$flag = buildKey(PUB_KEY);
-										if(!$flag) {
-											echo "µ¼Èë¹«Ô¿ÎÄ¼þÊ§°Ü£¡";
-										} else {
-											$plain = $merid . $processdate . $transtype . $orderno . $refundamount . $status . $priv1;
-											$flag = verify($plain, $checkvalue);
-											if($flag) {
-												//ÑéÖ¤Ç©Ãû³É¹¦£¬
-												echo "<h4>ÑéÖ¤Ç©Ãû³É¹¦</h4>";
-												if ($status == '1'){
-													//chinapay ½ÓÊÕÍË¿îÇëÇó³É¹¦£¬½øÈëÈË¹¤ÉóºË½×¶Î
-													echo "<h3>ÍË¿îÌá½»³É¹¦</h3>";
-													//Çë°ÑÄú×Ô¼ºÐèÒª´¦ÀíµÄÂß¼­Ð´ÔÚÕâÀï
-													
-													
-												}
-												
-											} else {
-												echo "<h4>ÑéÖ¤Ç©ÃûÊ§°Ü£¡</h4>";
-											}
-										}
-										break;
-				default   : echo "<h3>ÍË¿îÇëÇó·¢ËÍÊ§°Ü</h3>";
-										echo "<h4>Çë²éÔÄ½Ó¿ÚÎÄµµ¸½Â¼ÒÔÈ·¶¨¾ßÌå´íÎóÔ­Òò£¡</h4>";
-										break;
-				
-			}
-		} else {
-			echo "<h3>HTTP ÇëÇóÊ§°Ü£¡</h3>";
-		}
-		HttpDone($http);
-	} else {
-		echo "<h3>ÇëÌîÐ´¶©µ¥ºÅ£¬ÍË¿î½ð¶îµÈ±ØÌîÏî</h3>";
-	}
+if (($ordid != '') && ($transdate != '') && ($refundamount != '')) {
+    //ï¿½Ó¿Ú°æ±¾ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿î£¬ï¿½Ì¶ï¿½Îª 20070129ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    $version = "20070129";
+    //ï¿½Ë¿î·µï¿½Øµï¿½Ö·ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½á½»ï¿½ï¿½ï¿½è¾­ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½Ë´ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½T+2ï¿½Õºï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½Ê±ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½POSTï¿½Ë¿ï¿½ï¿½ï¿½Ãµï¿½Ö·
+    $returnurl = "$site_url/netpayclient_refund_feedback.php";
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Îªï¿½ï¿½Ç©ï¿½ï¿½
+    $plain = $merid . $transdate . $transtype . $ordid . $refundamount . $priv1;
+    //ï¿½ï¿½ï¿½Ç©ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    $chkvalue = sign($plain);
+    if (!$chkvalue) {
+        echo "Ç©ï¿½ï¿½Ê§ï¿½Ü£ï¿½";
+        exit;
+    }
+
+    //ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ö·Îª ,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½Þ¸ï¿½
+
+    $http = HttpInit();
+    $post_data = "MerID=$merid&TransType=$transtype&OrderId=$ordid&RefundAmount=$refundamount&TransDate=$transdate&Version=$version&ReturnURL=$returnurl&Priv1=$priv1&ChkValue=$chkvalue";
+    $output = HttpPost($http, $post_data, REQ_URL_REF);
+
+    if ($output) {
+        $output = trim(strip_tags($output));
+
+        echo "<h2>ï¿½Ë¿î·µï¿½ï¿½</h2>";
+        echo htmlspecialchars($output) . "<br/>";
+        echo "=================================<br/>";
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        $datas = explode("&", $output);
+        $extracted_data = array();
+        foreach ($datas as $data) {
+            echo "$data<br/>";
+            $name_value = explode('=', $data);
+            if (count($name_value) == 2) {
+                $extracted_data[$name_value[0]] = $name_value[1];
+            }
+        }
+
+        echo "=================================<br/>";
+
+        $resp_code = $extracted_data["ResponseCode"];
+        if ($resp_code == '0') {
+            $merid = $extracted_data["MerID"];
+            $orderno = $extracted_data["OrderId"];
+            $refundamount = $extracted_data["RefundAmout"];
+            $currencycode = $extracted_data["currencycode"];
+            $processdate = $extracted_data["ProcessDate"];
+            $sendtime = $extracted_data["SendTime"];
+            $transtype = $extracted_data["TransType"];
+            $status = $extracted_data["Status"];
+            $checkvalue = $extracted_data["CheckValue"];
+            $priv1 = $extracted_data["Priv1"];
+        } else {
+            $message = $extracted_data["Message"];
+        }
+
+        switch ($resp_code) {
+
+            case '111':
+                echo "<h3>$message</h3>";
+                echo "<h4>ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ë¿ªÍ¨ï¿½Ë´ï¿½Òµï¿½ñ£¬²ï¿½ï¿½á¹©ï¿½ï¿½ï¿½ï¿½È·ï¿½Ä¹ï¿½ï¿½ï¿½IPï¿½ï¿½Ö·</h4>";
+                break;
+            case '0'  :
+                echo "<h3>ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³É¹ï¿½</h3>";
+
+                //ï¿½ï¿½Ê¼ï¿½ï¿½Ö¤Ç©ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½
+                $flag = buildKey(PUB_KEY);
+                if (!$flag) {
+                    echo "ï¿½ï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½Ê§ï¿½Ü£ï¿½";
+                } else {
+                    $plain = $merid . $processdate . $transtype . $orderno . $refundamount . $status . $priv1;
+                    $flag = verify($plain, $checkvalue);
+                    if ($flag) {
+                        //ï¿½ï¿½Ö¤Ç©ï¿½ï¿½É¹ï¿½ï¿½ï¿½
+                        echo "<h4>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½É¹ï¿½</h4>";
+                        if ($status == '1') {
+                            //chinapay ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½Ë½×¶ï¿½
+                            echo "<h3>ï¿½Ë¿ï¿½ï¿½á½»ï¿½É¹ï¿½</h3>";
+                            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+
+                        }
+
+                    } else {
+                        echo "<h4>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½Ê§ï¿½Ü£ï¿½</h4>";
+                    }
+                }
+                break;
+            default   :
+                echo "<h3>ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½</h3>";
+                echo "<h4>ï¿½ï¿½ï¿½ï¿½Ä½Ó¿ï¿½ï¿½Äµï¿½ï¿½ï¿½Â¼ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½</h4>";
+                break;
+
+        }
+    } else {
+        echo "<h3>HTTP ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½</h3>";
+    }
+    HttpDone($http);
+} else {
+    echo "<h3>ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Å£ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ï¿½</h3>";
+}
 ?>

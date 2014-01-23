@@ -1,677 +1,633 @@
 <?php
 /* ----------------------------------------------------------------------- *\
-   PHP°æ ¼òÒ×ÖÐÎÄ·Ö´Ê(SCWS) ver 2.1 (½öÕë¶Ô GBK±àÂëÉè¼Æ)
+   PHPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö´ï¿½(SCWS) ver 2.1 (ï¿½ï¿½ï¿½ï¿½ï¿½ GBKï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 
-   »ùÓÚ´ÊÆµ´ÊµäµÄÕýÏò×î´óÆ¥Åä·¨ (N¼¶´ÊÆµÏûáª, º¬ÈËÃû, Êý×ÖÄê´ú×Ô¶¯Ê¶±ð)
-   ´Êµä¸ù¾ÝÍøÉÏµÄ×ÊÁÏ×÷½øÒ»²½´¦Àí, Ìá¹© gdbm/cdb 2ÖÖ¸ñÊ½
+   ï¿½ï¿½ï¿½Ú´ï¿½Æµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ä·¨ (Nï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ê¶ï¿½ï¿½)
+   ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½á¹© gdbm/cdb 2ï¿½Ö¸ï¿½Ê½
 
-   (*) Àà¿âµ÷ÓÃ·½·¨¾ÙÀý:
+   (*) ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:
 
       require '/path/to/PSCWS2.class.php';
 	  $cws = new PSCWS2('dict/dict.xdb');
 	  $rs = $cws->segment($string);
 	  print_r($rs);
 
-	  // ÆäËü¿ÉÓÃ·½·¨½éÉÜ:
-	  ->set_dict($fpath);	// Éè¶¨´ÊµäÂ·¾¶ (ºó×ºÃûÎª¿âÀàÐÍ)
+	  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:
+	  ->set_dict($fpath);	// ï¿½è¶¨ï¿½Êµï¿½Â·ï¿½ï¿½ (ï¿½ï¿½×ºï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	  ->set_ignore_mark($trueORfalse);
-							// Éè¶¨ÊÇ·ñÉ¾³ý±êµã·ûºÅ
+							// ï¿½è¶¨ï¿½Ç·ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	  ->set_autodis($trueORflase);
-							// Éè¶¨ÊÇ·ñ×Ô¶¯½øÐÐÈËÃûÊ¶±ð
+							// ï¿½è¶¨ï¿½Ç·ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
 	  ->set_debug($trueORfalse);
-							// Õ¹Ê¾ÇÐ´Ê¹ý³Ì(echo)
+							// Õ¹Ê¾ï¿½Ð´Ê¹ï¿½ï¿½(echo)
 
 	  ->set_statistics($trueORfalse);
-							// ÊÇ·ñ¿ªÆô´Ê»ãÍ³¼Æ
+							// ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ê»ï¿½Í³ï¿½ï¿½
 	  ->get_statistics();
-							// ´îÅäÉÏÊö¿ª¹ØÊ¹ÓÃ, ·µ»ØÍ³¼Æ½á¹ûÊý×é
-							// ´ÊÎª¼ü, ÖµÊÇÓÉ´ÎÊýºÍÎ»ÖÃÁÐ±í×é³ÉµÄÊý×é
+							// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							// ï¿½ï¿½Îªï¿½ï¿½, Öµï¿½ï¿½ï¿½É´ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½
 
 	  ->segment($string, [$callback]);
-	  Õë¶Ô $string Ö´ÐÐ·Ö´Ê, $callback ×÷Îª»Øµ÷º¯Êý, ¿ÉÑ¡. ²ÎÊýÊÇÇÐ¸îºÃµÄ
-	  ´Ê×é³ÉµÄÊý×é. ÈôÎ´Éè¶¨ callback Ôò¸Ãº¯Êý·µ»ØÇÐºÃµÄ´Ê×é³ÉµÄÊý×é.
+	  ï¿½ï¿½ï¿½ $string Ö´ï¿½Ð·Ö´ï¿½, $callback ï¿½ï¿½Îªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ñ¡. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½Ãµï¿½
+	  ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½Î´ï¿½è¶¨ callback ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ÐºÃµÄ´ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½.
 
-	  ÓÉÓÚ±¾º¯ÊýÒ»´ÎÐÔÈ«²¿²Ù×÷Íê³É²Å·µ»Ø, ÈôÎÄ±¾¹ý³¤½¨Òé°´ÐÐ´«ÈëÇÐ¸îÒÔ¼ÓËÙ
+	  ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É²Å·ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½é°´ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½
 
    -----------------------------------------------------------------------
-   ×÷Õß: ÂíÃ÷Á·(hightman) (MSN: MingL_Mar@msn.com) (php-QQÈº: 17708754)
-   ÍøÕ¾: http://www.ftphp.com/scws
-   Ê±¼ä: 2005/11/25 (update: 2006/03/06)
-   ÐÞ¶©: 2008/12/20
-   Ä¿µÄ: Ñ§Ï°ÑÐ¾¿½»Á÷ÓÃ, Ï£ÍûÓÐºÃµÄ½¨Òé¼°ÓÃÍ¾ÄÜ½øÒ»²½½»Á÷.
+   ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(hightman) (MSN: MingL_Mar@msn.com) (php-QQÈº: 17708754)
+   ï¿½ï¿½Õ¾: http://www.ftphp.com/scws
+   Ê±ï¿½ï¿½: 2005/11/25 (update: 2006/03/06)
+   ï¿½Þ¶ï¿½: 2008/12/20
+   Ä¿ï¿½ï¿½: Ñ§Ï°ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Ï£ï¿½ï¿½ï¿½ÐºÃµÄ½ï¿½ï¿½é¼°ï¿½ï¿½Í¾ï¿½Ü½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
    $Id: pscws2.class.php,v 1.1 2008/12/20 12:03:00 hightman Exp $
    -----------------------------------------------------------------------
-   ÖÐÎÄ×Ö·ûµÄÅÐ¶Ï, ¸ßÎ»Âë 0x81 ~ 0xfe, µÍÎ»Âë 0x40 ~ 0xfe
-   ÆäÖÐ¸ßÎ» 0xa1 ~ 0xa9 ÊÇ·ûºÅÇø, ³ýÌØ±ð×Ö·ûÍâ×÷Îª¶Ï¾ä´¦Àí
+   ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ð¶ï¿½, ï¿½ï¿½Î»ï¿½ï¿½ 0x81 ~ 0xfe, ï¿½ï¿½Î»ï¿½ï¿½ 0x40 ~ 0xfe
+   ï¿½ï¿½ï¿½Ð¸ï¿½Î» 0xa1 ~ 0xa9 ï¿½Ç·ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ø±ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ï¾ä´¦ï¿½ï¿½
    -----------------------------------------------------------------------
-   °ë½Ç×Ö·û (ascii < 0x80)
-   ´óÐ´×ÖÄ¸: 0x41 ~ 0x5a
-   Ð¡Ð´×ÖÄ¸: 0x61 ~ 0x7a
-   Êý×Ö´óÈ«: 0x31 ~ 0x39
-   µãºÍÁ¬·û: 0x2d(-), 0x2e(.)
+   ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ (ascii < 0x80)
+   ï¿½ï¿½Ð´ï¿½ï¿½Ä¸: 0x41 ~ 0x5a
+   Ð¡Ð´ï¿½ï¿½Ä¸: 0x61 ~ 0x7a
+   ï¿½ï¿½ï¿½Ö´ï¿½È«: 0x31 ~ 0x39
+   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 0x2d(-), 0x2e(.)
    -----------------------------------------------------------------------
-   È«½Ç×Ö·û
-   0xa3 (0xb0 ~ 0xb9) ÊÇÈ«½ÇÊý×Ö:  £°~£¹Ó¦¸Ã±£Áô¶ÀÁ¢Ê¶±ð
-   0xa3 È«½ÇÓ¢ÎÄ×ÖÄ¸: £Á£­£Ú(0xc1 ~ 0xda) £á£­£ú(0xe1 ~ 0xfa)
-   0xa3 Á¬´Ê·û: £­ (0xad)  £®(0xae)
+   È«ï¿½ï¿½ï¿½Ö·ï¿½
+   0xa3 (0xb0 ~ 0xb9) ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:  ï¿½ï¿½~ï¿½ï¿½Ó¦ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
+   0xa3 È«ï¿½ï¿½Ó¢ï¿½ï¿½ï¿½ï¿½Ä¸: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(0xc1 ~ 0xda) ï¿½á£­ï¿½ï¿½(0xe1 ~ 0xfa)
+   0xa3 ï¿½ï¿½ï¿½Ê·ï¿½: ï¿½ï¿½ (0xad)  ï¿½ï¿½(0xae)
    -----------------------------------------------------------------------
-   »·¾³: PHP 4.1.0 ¼°¸ü¸ß°æ±¾º¬ PHP5 (±àÒë½¨Òé --enable-dba --with-[cdb|gdbm])
+   ï¿½ï¿½ï¿½ï¿½: PHP 4.1.0 ï¿½ï¿½ï¿½ï¿½ß°æ±¾ï¿½ï¿½ PHP5 (ï¿½ï¿½ï¿½ë½¨ï¿½ï¿½ --enable-dba --with-[cdb|gdbm])
 \* ----------------------------------------------------------------------- */
 
 /**
- * ´ÊµäÌØÐÔ¼°»»ÐÐ»Ø³µµÄÏà¹Ø¶¨Òå
+ * ï¿½Êµï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Ð»Ø³ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½
  */
 
-define ('_WORD_ALONE_',		0x4000000);	/// ³É´Ê±ê¼Ç
-define ('_WORD_PART_',		0x8000000);	/// ´Ê¶Î±ê¼Ç
-define ('_WORD_CKDEPTH_',	2);			/// Ïûáª¸´²éÉî¶È
+define ('_WORD_ALONE_', 0x4000000); /// ï¿½É´Ê±ï¿½ï¿½
+define ('_WORD_PART_', 0x8000000); /// ï¿½Ê¶Î±ï¿½ï¿½
+define ('_WORD_CKDEPTH_', 2); /// ï¿½ï¿½áª¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 if (!defined('_CRLF_'))
-	define ('_CRLF_',		"\r\n");
+    define ('_CRLF_', "\r\n");
 
 /**
- * ´ÊµäÀà½ñÆð¶ÀÁ¢Ò»¸öÎÄ¼þ
+ * ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½
  */
-require_once (dirname(__FILE__) . '/dict.class.php');
+require_once(dirname(__FILE__) . '/dict.class.php');
 
 /**
- * ·Ö´ÊºËÐÄÀà: ÕýÏò×î´óÆ¥Åä (N(2)¼¶¸´²é´ÊÆµ±È½Ï)
+ * ï¿½Ö´Êºï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ (N(2)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½È½ï¿½)
  */
 class PSCWS2
 {
-	var $_dict;				// ´Êµäµµ²éÑ¯Àà¾ä±ú
-	var $_ignore_mark;		// ÊÇ·ñÉ¾È¥·Ö¾ä±êµã (default: true)
-	var $_foregin_chars;	// ³£¼ûÍâÀ´ÒëÃûÓÃ×Ö
-	var $_surname_chars;	// ³£¼ûÐÕÊÏÓÃ×Ö
-	var $_surname2_chars;	// ³£¼û¸´ÐÕÁÐ±í
-	var $_noname_chars;		// ¼«ÉÙÓÃÓÚÃû×ÖµÄ×Ö
-	var $_mb_alpha_chars;	// Ë«×Ö½ÚµÄ×ÖÄ¸ÁÐ±í
-	var $_mb_num1_chars;	// Ë«×Ö½ÚÊý×ÖÁÐ±í1
-	var $_sb_alpha_chars;
-	var $_sb_num_chars;
-	var $_cur_sen_buf;
-	var $_cur_sen_len;
-	var $_debug;
-	var $_autodis;
-	var $_do_stats;
-	var $_statistics;			// hightman.060330: Ã¿´ÎÍ³¼Æ
-	var $_cur_sen_off;			// hightman.060330: Í³¼Æ×¨ÓÃ, µ±Ç°¾äÆ«ÒÆÁ¿
-
-	/** ¹¹Ôìº¯Êý, ³õÊ¼»¯Ïà¹ØÊý¾Ý */
-	function PSCWS2($dictfile = '')
-	{
-		$this->_ignore_mark = false;
-		$this->_debug		= false;
-		$this->_autodis		= false;
-		$this->_do_stats	= false;
-
-		$this->_foreign_chars  = "°¢¿ËÀ­¼ÓÄÚÑÇË¹±´°Í¶ûÄ·°®À¼ÓÈÀûÎ÷Õ²ÇÇÒÁ·Ñ½ÜÂÞÄÉ²¼¿É·ò¸£ºÕÀÕ¿ÂÌØ";
-		$this->_foreign_chars .= "ÀÍÂ×Ì¹Ê··ÒÄá¸ùµÇ¶¼²®ÁÖÎéÌ©ñãÀè¶í¿ÆË÷ÎÖ½ðÉ­°Â»ôÍß´ÄÆÕµÙÈûÎ¬´óÀû";
-		$this->_foreign_chars .= "¸ñÀ³µÂ¸ÔÈøÀ×Ä«¸ç¸¥¿â°ÄÂí¹þ¶à×È¸êÎÚÆæÇÐÅµ´÷ÀïÖîÈû¼ª»ùÑÓ¿Æ´ïËþ²©";
-		$this->_foreign_chars .= "¿¨ÑÅÀ´Äª²¨°¬¹þÂõÅî°²Â¬Ê²±ÈÄ¦ÂüÄËÐÝºÏÀµÃ×ÄÇµÏ¿­À³ÎÂÅÁÉ£ÅåÃÉ²©ÍÐ";
-		$this->_foreign_chars .= "Ð»¸ñÔóÂå¼°Ï£²·Â³Æ¥Æë×ÈÓ¡¹Å°£Å¬ÁÒ´ïÀÛ·¨¼ÖÍ¼¿¦ÍÁÄÂëè»ùÈ½ÐÝ¸ÇÒ®É³";
-		$this->_foreign_chars .= "Ñ·±öÂó»ªÍò";
-
-		$this->_surname_chars  = "°¬°²°½°×°à°ü±¦±£±«±´±Ï±ß±å°Ø²·²Ì²Üá¯²ñ²ý³£³µ³Â³É³Ì³Ù³ØñÒ³þ";
-		$this->_surname_chars .= "´¢´¾´Þ´÷µ¶µËµÒµó¶¡¶­ñ¼¶Å¶Ë¶Î·®·¶·½·¿ì³·Ñ·á·â·ë·ï·ü¸£¸µ¸Ç¸Ê";
-		$this->_surname_chars .= "¸ß¸ê¹¢¹¨¹¬¹´¹¶¹¼¹È¹Å¹Ë¹Ù¹Ø¹Ü¹ð¹ùº«º¼ºÂºÌºÎºØºÕºâºéºîºú»¨";
-		$this->_surname_chars .= "»ª»Æ»ô»ü¼§¼ª¼Í¼¾¼Ö¼òôå½ª½­½¯½¹½ú½ð½ù¾£¾Ó¿µ¿Â¿Õ¿×¿ïÚ÷¿öÀµÀ¶";
-		$this->_surname_chars .= "ÀÉÀÊÀÍÀÖÀ×ÀäÀèÀîÀíÀ÷ÀûÀøÁ¬Á®Á·Á¼ÁºÁÎÁÖÁèÁõÁøÂ¡ÁúÂ¥Â¦Â¬ÂÀÂ³";
-		$this->_surname_chars .= "Â½Â·Â×ÂÞÂåÂæÂéÂíÂóÂúÃ©Ã«Ã·ÃÏÃ×ÃççÑãÉÃ÷ÄªÄ²ÄÂÄßÄôÅ£Å¥Å©ÅËÅÓ";
-		$this->_surname_chars .= "ÅáÅíÆ¤ÆÓÆ½ÆÑäßÆÖÆÝÆîÆëÇ®Ç¿ÇÇÇØÇðÇñ³ðôÃÇüöÄÈ¨È½ÈÄÈÎÈÙÈÝÈî";
-		$this->_surname_chars .= "ÈðÜÇÈøÈüÉ³µ¥ÉÌÉÛÙÜÉêÉòÊ¢Ê¯Ê·ÊÙÊæË¹ËÎËÕËïÛ¢Ì·Ì¸ÌÀÌÆÌÕëø";
-		$this->_surname_chars .= "ÌïÙ¡ÙÚÍÀÍ¿ÍòÍôÍõÎ£Î¤ÎºÎÀÎµÎÂÎÅÎÌÎ×ÚùÎéÎäÎâÞÉÏ°ÏÄÏÊÏ¯Ùþ";
-		$this->_surname_chars .= "ÏîÏô½âÐ»ÐÁÐÏÐÒÐÜÐìÐíÐûÑ¦Ü÷ÑÕÑÖÑÔÑÏÑåêÌÑàÑîÑôÒ¦Ò¶ÒÏÒ×ÒóÒøÒü";
-		$this->_surname_chars .= "Ó¦Ó¢ÓÎÓÈÓÚì¶ÓãÓÝÓáÓàÓíÓ÷ÓôÎ¾ÔªÔ¬ÔÀÔÆê°Ôø²éµÔÕ²Õ¿ÕÅÕÂÕÐÕÔÕç";
-		$this->_surname_chars .= "Ö£ÖÓÖÜÖîÖìóÃ×£×¯×¿×Ú×Þ×æ×ó";
-
-		$this->_surname2_chars = "¶«¹ù ¹«Ëï »Ê¸¦ Ä½ÈÝ Å·Ñô µ¥ÓÚ Ë¾¿Õ Ë¾Âí Ë¾Í½ å£Ì¨ Öî¸ð ";
-
-		$this->_noname_chars   = "µÄËµ¶ÔÔÚºÍÊÇ±»×îËùÄÇÕâÓÐ½«»áÓëì¶ËûÎª²»Ã»ºÜ";
-
-		$this->_mb_alpha_chars  = "£á£â£ã£ä£å£æ£ç£è£é£ê£ë£ì£í£î£ï£ð£ñ£ò£ó£ô£õ£ö£÷£ø£ù£ú";
-		$this->_mb_alpha_chars .= "£Á£Â£Ã£Ä£Å£Æ£Ç£È£É£Ê£Ë£Ì£Í£Î£Ï£Ð£Ñ£Ò£Ó£Ô£Õ£Ö£×£Ø£Ù£Ú";
-
-		$this->_mb_num1_chars  .= "£°£±£²£³£´£µ£¶£·£¸£¹";
-
-		$this->_sb_alpha_chars  = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._-";
-		$this->_sb_num_chars    = "0123456789.";
-
-		if ('' !== $dictfile)
-			$this->set_dict($dictfile);
-	}
-
-	// FOR PHP5
-	function __construct($dictfile = '') { $this->PSCWS2($dictfile); }
-	function __destruct() { }
-
-	// Éè¶¨´Êµä (¸ù¾Ýºó×ºÃûÈ·¶¨ÀàÐÍ)
-	function set_dict($fpath)
-	{
-		$this->_dict = new PSCWS23_Dict($fpath);
-	}
-
-	// Éè¶¨ _ignore_mark ²ÎÊý
-	function set_ignore_mark($set)
-	{
-		if (is_bool($set))
-			$this->_ignore_mark = $set;
-	}
-
-	// Éè¶¨ÏÔÊ¾ debug ÐÅÏ¢
-	function set_debug($set)
-	{
-		if (is_bool($set))
-			$this->_debug = $set;
-	}
-
-	// Éè¶¨ÖÇÄÜÊ¶±ðÄê´úÃû×Ö
-	function set_autodis($set)
-	{
-		if (is_bool($set))
-			$this->_autodis = $set;
-	}
-
-	// hightman.060429: ÊÇ·ñ¿ªÆôÍ³¼Æ
-	function set_statistics($set)
-	{
-		if (is_bool($set))
-			$this->_do_stats = $set;
-	}
-
-	// ·µ»ØÉÏ´ÎÍ³¼Æ (ÊÇ·ñÐèÒª¼Ó¿ª¹Ø?)
-	function &get_statistics()
-	{
-		return $this->_statistics;
-	}
-
-	// ¼ÓÈëÍ³¼Æ
-	function _put_statistics($word, $off)
-	{
-		if (!isset($this->_statistics[$word]))
-		{
-			$this->_statistics[$word] = array('times' => 1, 'poses' => array($off));
-		}
-		else
-		{
-			$this->_statistics[$word]['times']++;
-			$this->_statistics[$word]['poses'][] = $off;
-		}
-	}
-
-	// ½«ÖÐÓ¢ÎÄ»ì±àµÄ×Ö·û´®ÇÐ¸î³É´Ê
-	function &segment($str, $cb = '')
-	{
-		$len = strlen($str);
-		$ret = array();
-		$qtr = '';
-		if (!empty($cb) && !function_exists($cb)) $cb = '';
-
-		// Í³¼Æ¿ªÊ¼
-		if ($this->_do_stats)
-			$this->_statistics = array();
-
-		for ($i = 0; $i < $len; $i++)
-		{
-			$char = $str[$i];
-			$ord = ord($char);
-
-			// ·Çºº×Ö¸ßÎ»Âë (¼´: °ë½Ç×Ö·û, º¬0x7f, 0x80)
-			if ($ord < 0x81)
-			{
-				// ´¦Àí¸Õ·ÖºÃµÄ¾ä×Ó
-				if (!empty($qtr))
-				{
-					$tmp = $this->_gbk_segment($qtr);
-					if (empty($cb)) $ret = array_merge($ret, $tmp);
-					else call_user_func($cb, $tmp);
-					$qtr = '';
-				}
-
-				$this->_cur_sen_off = $i;
-
-				// Èç¹ûÊÇ×ÖÄ¸, ¶Áµ½·Ç×ÖÄ¸ÎªÖ¹
-				if ($this->_is_alpha($char, true))
-				{
-					for (;;)
-					{
-						$j = $i + 1;
-						if ($j >= $len)
-							break;
-
-						$char2 = $str{$j};
-						if (!$this->_is_alpha($char2))
-							break;
-
-						$char .= $char2;
-						$i++;
-					}
-				}
-				// Èç¹ûÊÇÊý×Ö, ¶Áµ½·ÇÊý×ÖÎªÖ¹
-				else if ($this->_is_num($char, true))
-				{
-					for (;;)
-					{
-						$j = $i + 1;
-						if ($j >= $len)
-							break;
-
-						$char2 = $str{$j};
-
-						if (!$this->_is_num($char2))
-							break;
-
-						$char .= $char2;
-						$i++;
-					}
-				}
-				// ºöÂÔ \t\r ºÍ ' '(¿Õ¸ñ)
-				else if ($ord === 0x0d || $ord === 0x20 || $ord === 0x09)
-					$char = '';
-				else if ($ord !== 0x0a && $this->_ignore_mark)
-					$char = '';
-
-				// ´æÏÂ·Ç¿Õ½á¹û
-				if (strlen($char) > 0)
-				{
-					if (empty($cb)) array_push($ret, $char);
-					else call_user_func($cb, array($char));
-
-					if ($this->_do_stats && strlen($char) > 1)
-						$this->_put_statistics($char, $this->_cur_sen_off);
-				}
-			}
-			// ºº×ÖÇø
-			else if ($i < ($len - 1))
-			{
-				$i++;
-				$char .= $str[$i];
-
-				// ÊÇ·ñÎª·ûºÅÇøÇÐ·ÖÇø
-				if ($ord > 0xa0 && $ord < 0xb0)
-				{
-					// ´¦Àí¸Õ·ÖºÃµÄ¾ä×Ó
-					if (!empty($qtr))
-					{
-						$tmp = $this->_gbk_segment($qtr);
-						if (empty($cb)) $ret = array_merge($ret, $tmp);
-						else call_user_func($cb, $tmp);
-						$qtr = '';
-					}
-
-					$this->_cur_sen_off = $i - 1;
-
-					// Ë«×Ö½Ú(×ÖÄ¸|Êý×Ö)ÌØ±ð´¦Àí
-					if ($ord === 0xa3)
-					{
-						if (strpos($this->_mb_num1_chars, $char) !== false)
-						{
-							for (;;)
-							{
-								if ($i > ($len - 2))
-									break;
-
-								$char2 = substr($str, $i + 1, 2);
-								if (strpos($this->_mb_num1_chars, $char2) === false)
-									break;
-
-								$char .= $char2;
-								$i += 2;
-							}
-						}
-						else if (strpos($this->_mb_alpha_chars, $char) !== false)
-						{
-							for (;;)
-							{
-								if ($i > ($len - 2))
-									break;
-
-								$char2 = substr($str, $i + 1, 2);
-								if (strpos($this->_mb_alpha_chars, $char2) === false)
-									break;
-
-								$char .= $char2;
-								$i += 2;
-							}
-						}
-						else
-						{
-							$ord = 0xa4;	// ½ö½öÎªÁË != 0xa3
-						}
-					}
-
-					// ¸ù¾ÝÐèÒª½«ÇÐ¾ä·ûºÅ±£´æÏÂÀ´
-					if ($ord === 0xa3 || !$this->_ignore_mark)
-					{
-						if (empty($cb)) array_push($ret, $char);
-						else call_user_func($cb, array($char));
-
-						if (strlen($char) > 2 && $this->_do_stats)
-							$this->_put_statistics($char, $this->_cur_sen_off);
-					}
-				}
-				else
-				{
-					if (empty($qtr))
-						$this->_cur_sen_off = $i - 1;
-					$qtr .= $char;
-				}
-			}
-		}
-
-		// ¼ì²é×îºóÓàÁô¾ä×Ó (·ÅÔÚÍâÃæÊ¡¼¸´ÎÅÐ¶Ï $iÖµ)
-		if (!empty($qtr))
-		{
-			$tmp = $this->_gbk_segment($qtr);
-			if (empty($cb)) $ret = array_merge($ret, $tmp);
-			else call_user_func($cb, $tmp);
-		}
-
-		// ½«½á¹û·µ»Ø
-		return (empty($cb) ? $ret : true);
-	}
-
-	// ÇÐ·Ö´¿ÖÐÎÄ¾ä×Ó [ºËÐÄº¯Êý] (ÕýÏò×î´óÆ¥Åä, N¼¶´ÊÆµ±È½ÏÏûáª)
-	function _gbk_segment($sen)
-	{
-		$ret = array();
-		$len = strlen($sen);
-		$this->_cur_sen_buf = $sen;
-		$this->_cur_sen_len = $len;
-
-		if ($this->_debug)
-		{
-			echo _CRLF_ . "ÖÐÎÄ¶Ì¾ä: {$sen}";
-			echo _CRLF_ . "____________________________////";
-			flush();
-		}
-
-		$off = 0;
-		while ($off < $len)
-		{
-			do
-			{
-				// Ö»ÓÐÒ»¸ö×ÖµÄÊ±ºòÔÚ´Ë·µ»Ø
-				if (($off + ($r = 2)) >= $len)
-					break;
-
-				// ÖÐÎÄ¸´ÐÕÐÕÃû¼ì²é
-				if ($this->_autodis && ($r = $this->_fetch_zhname2($off)))
-					break;
-
-				// ÕýÏòÈ¡·Çáª³¤´Ê
-				if ($r = $this->_fetch_word($off))
-					break;
-
-				if ($this->_autodis)
-				{
-					// ÖÐÎÄµ¥ÐÕÐÕÃû¼ì²é
-					if ($r = $this->_fetch_zhname($off))
-						break;
-
-					// ÍâÎÄ·­ÒëÐÕÃû¼ì²é
-					if ($r = $this->_fetch_frname($off))
-						break;
-				}
-				$r = 2;
-			}
-			while (0);
-
-			$word = substr($sen, $off, $r);
-			if ($this->_do_stats)
-				$this->_put_statistics($word, $this->_cur_sen_off + $off);
-
-			array_push($ret, $word);
-			$off += $r;
-		}
-
-		if ($this->_debug)
-		{
-			echo _CRLF_ . "\\\\\\\\____________________________" . _CRLF_;
-			flush();
-		}
-
-		return $ret;
-	}
-
-	// ´Ó´¿ÖÐÎÄÖÐÕýÐòÈ¡³öÒ»¸öºÏÀíµÄ³¤´Ê, ·µ»Ø´Ê³¤
-	function _fetch_word($off)
-	{
-		$long = $this->_fetch_long($off);
-
-		return $long[0];
-	}
-
-	// ·µ»Ø (length, frequency) ³¤´Ê
-	function _fetch_long($off, $minlen = 4, $rc = _WORD_CKDEPTH_)
-	{
-		$ret = array(0, 0);
-
-		if (($off + $minlen) > $this->_cur_sen_len)
-			return $ret;
-
-		$tail = $this->_cur_sen_len;
-		$wlen = $minlen;
-		$plen = 0;
-		while (($off + $wlen) <= $tail)
-		{
-			$w = substr($this->_cur_sen_buf, $off, $wlen);
-
-			// debug message
-			if ($this->_debug)
-				echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc) . "¼ì²â: {$w} ... ";
-
-			$r = $this->_dict->find($w);
-			if ($r < 0)
-				break;
-
-			if ($r & _WORD_ALONE_)
-			{
-				$plen = $ret[0];	// save last length of the word
-				$ret[0] = $wlen;
-				$ret[1] = ($r & ~(_WORD_ALONE_ | _WORD_PART_));
-
-				// debug message
-				if ($this->_debug)
-					echo "(Y ÍêÕû´Ê) ";
-
-				if (!$rc)
-					break;
-			}
-
-			// ²»ÊÇ´Ê¶Î, ²»ÐèÍùÏÂ²éÁË.
-			if (!($r & _WORD_PART_))
-			{
-				// debug message
-				if ($this->_debug)
-					echo " [N ·Ç´Ê¶Î]";
-				break;
-			}
-
-			$wlen += 2;
-		}
-
-		// ¸ù¾ÝÐèÒª×÷Ïûáª¼ì²é (½ö×÷Ò»´Î¼ì²é?)
-		if ($ret[0] > 0 && $rc && ($off != 0 || $plen > 0 || $ret[1] < 5))
-		{
-			$off1 = $off + ($plen ? $plen : 2);
-			$off2 = $off + $ret[0];
-
-			// debug message
-			if ($this->_debug)
-			{
-				echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc);
-				echo "Ïûáª: ¸´²é({$off1} ~ {$off2})";
-			}
-
-			while ($off1 < $off2)
-			{
-				$chk = $this->_fetch_long($off1, $off2 - $off1 + 2, $rc - 1);
-				if ($chk[0] > 0 && ($chk[1] * $chk[0] > $ret[1] * $ret[0]))
-				{
-					$ret[0] = $plen;
-
-					if ($this->_debug)
-					{
-						echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc) . "·¢ÏÖ½Ï¸ßÆµ´Ê»ã(";
-						echo substr($this->_cur_sen_buf, $off1, $chk[0]) . "),";
-						echo "´ÊÓï±»²Ã¶ÏÖÁ {$plen} ´¦";
-					}
-
-					break;
-				}
-				$off1 += 2;
-			}
-		}
-
-		// debug message
-		if ($this->_debug)
-		{
-			echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc) . "½á¹û: ";
-			echo substr($w, 0, $ret[0]) . "({$ret[0]}) ... ";
-			flush();
-		}
-
-		return $ret;
-	}
-
-	// ¼ì²éÊÇ·ñÎªÖÐÎÄ¸´ÐÕÐÕÃû (Ãû: 1-2×Ö)
-	function _fetch_zhname2($off)
-	{
-		$ret = 0;
-		if (($off + 4) < $this->_cur_sen_len)
-		{
-			$s2 = substr($this->_cur_sen_buf, $off, 4) . " ";
-			if (($p = strpos($this->_surname2_chars, $s2)) !== false)
-			{
-				$ret = 4;
-				$off += 4;
-				$n = 0;
-
-				if ($this->_debug)
-					echo _CRLF_ . "  ¸´ÐÕ: {$s2} ... ";
-
-				do
-				{
-					if ($off >= $this->_cur_sen_len)
-						break;
-
-					$chk = $this->_fetch_long($off, 4, 0);
-					if ($chk[0] > 0)
-						break;
-
-					$zh = substr($this->_cur_sen_buf, $off, 2);
-					if (($p = strpos($this->_noname_chars, $zh)) !== false
-						&& !($p & 0x01))
-						break;
-
-					$off += 2;
-					$ret += 2;
-				}
-				while (++$n < 2);
-			}
-		}
-		return $ret;
-	}
-
-	// ¼ì²éÊÇ·ñÎªÖÐÎÄµ¥ÐÕÐÕÃû (Ãû: 1-2×Ö)
-	function _fetch_zhname($off)
-	{
-		$ret = 0;
-		if (($off + 2) < $this->_cur_sen_len)
-		{
-			$s1 = substr($this->_cur_sen_buf, $off, 2);
-			if (($p = strpos($this->_surname_chars, $s1)) !== false
-				&& (($p & 0x01) == 0))
-			{
-				$ret = 2;
-				$off += 2;
-				$n = 0;
-
-				if ($this->_debug)
-					echo _CRLF_ . "  µ¥ÐÕ: {$s1} ... ";
-
-				do
-				{
-					if ($off >= $this->_cur_sen_len)
-						break;
-
-					$chk = $this->_fetch_long($off, 4, 0);
-					if ($chk[0] > 0)
-						break;
-
-					$zh = substr($this->_cur_sen_buf, $off, 2);
-					if (($p = strpos($this->_noname_chars, $zh)) !== false
-						&& !($p & 0x01))
-						break;
-
-					$off += 2;
-					$ret += 2;
-				}
-				while (++$n < 2);
-			}
-		}
-
-		if ($ret <= 2)
-			$ret = 0;
-
-		return $ret;
-	}
-
-	// ¼ì²éÊÇ·ñÎªÍâ¹úÈËÃûÒë´Ê
-	function _fetch_frname($off)
-	{
-		$ret = 0;
-
-		do
-		{
-			if ($off >= $this->_cur_sen_len)
-				break;
-
-			$zh = substr($this->_cur_sen_buf, $off, 2);
-
-			if (($p = strpos($this->_mb_foreign_chars, $zh)) === false
-				|| ($p & 0x01))
-				break;
-
-			if ($ret > 0)
-			{
-				// ×¢Òâ±£»¤´Êµä´ÊµÄÍêÕûÐÔ
-				$chk = $this->_fetch_long($off, 4, 0);
-				if ($chk[0] > 0)
-					break;
-			}
-
-			$off += 2;
-			$ret += 2;
-		}
-		while (1);
-
-		if ($ret <= 2)
-			$ret = 0;
-
-		return $ret;
-	}
-
-	// ÅÐ¶Ï×Ö·ûÊÇ²»ÊÇ×ÖÄ¸(µ¥´ÊÖÐ)[a-z._-]
-	function _is_alpha($char, $strict = false)
-	{
-		$p = strpos($this->_sb_alpha_chars, $char);
-
-		if ($strict)
-			return ($p !== false && $p < 52);
-
-		return ($p !== false);
-	}
-
-	// ÅÐ¶Ï×Ö·ûÊÇ²»ÊÇÊý×Ö [0-9.]
-	function _is_num($char, $strict = false)
-	{
-		$p = strpos($this->_sb_num_chars, $char);
-
-		if ($strict)
-			return ($p !== false && $p < 10);
-
-		return ($p !== false);
-	}
+    var $_dict; // ï¿½Êµäµµï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+    var $_ignore_mark; // ï¿½Ç·ï¿½É¾È¥ï¿½Ö¾ï¿½ï¿½ï¿½ (default: true)
+    var $_foregin_chars; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    var $_surname_chars; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    var $_surname2_chars; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+    var $_noname_chars; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½
+    var $_mb_alpha_chars; // Ë«ï¿½Ö½Úµï¿½ï¿½ï¿½Ä¸ï¿½Ð±ï¿½
+    var $_mb_num1_chars; // Ë«ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½1
+    var $_sb_alpha_chars;
+    var $_sb_num_chars;
+    var $_cur_sen_buf;
+    var $_cur_sen_len;
+    var $_debug;
+    var $_autodis;
+    var $_do_stats;
+    var $_statistics; // hightman.060330: Ã¿ï¿½ï¿½Í³ï¿½ï¿½
+    var $_cur_sen_off; // hightman.060330: Í³ï¿½ï¿½×¨ï¿½ï¿½, ï¿½ï¿½Ç°ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½
+
+    /** ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½, ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    function PSCWS2($dictfile = '')
+    {
+        $this->_ignore_mark = false;
+        $this->_debug = false;
+        $this->_autodis = false;
+        $this->_do_stats = false;
+
+        $this->_foreign_chars = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½Í¶ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½ï¿½ï¿½ï¿½ï¿½Ñ½ï¿½ï¿½ï¿½ï¿½É²ï¿½ï¿½É·ò¸£ºï¿½ï¿½Õ¿ï¿½ï¿½ï¿½";
+        $this->_foreign_chars .= "ï¿½ï¿½ï¿½ï¿½Ì¹Ê·ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½É­ï¿½Â»ï¿½ï¿½ß´ï¿½ï¿½Õµï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½";
+        $this->_foreign_chars .= "ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ç¸¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿Æ´ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $this->_foreign_chars .= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î°²Â¬Ê²ï¿½ï¿½Ä¦ï¿½ï¿½ï¿½ï¿½ï¿½Ýºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÇµÏ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½";
+        $this->_foreign_chars .= "Ð»ï¿½ï¿½ï¿½ï¿½ï¿½å¼°Ï£ï¿½ï¿½Â³Æ¥ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½Å°ï¿½Å¬ï¿½Ò´ï¿½ï¿½Û·ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½ï¿½Ý¸ï¿½Ò®É³";
+        $this->_foreign_chars .= "Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+
+        $this->_surname_chars = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ß±ï¿½Ø²ï¿½ï¿½Ì²ï¿½á¯²ï¿½ï¿½Â³É³Ì³Ù³ï¿½ï¿½Ò³ï¿½";
+        $this->_surname_chars .= "ï¿½ï¿½ï¿½ï¿½ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ËµÒµó¶¡¶ï¿½ï¿½Å¶Ë¶Î·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³·Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½";
+        $this->_surname_chars .= "ï¿½ß¸ê¹¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¹Å¹Ë¹Ù¹Ø¹Ü¹ï¿½ï¿½ï¿½ÂºÌºÎºØºÕºï¿½ï¿½ï¿½ï¿½";
+        $this->_surname_chars .= "ï¿½ï¿½ï¿½Æ»ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ö¼ï¿½ï¿½å½ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½Â¿Õ¿×¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $this->_surname_chars .= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¡ï¿½ï¿½Â¥Â¦Â¬ï¿½ï¿½Â³";
+        $this->_surname_chars .= "Â½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã©Ã«Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄªÄ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å£Å¥Å©ï¿½ï¿½ï¿½ï¿½";
+        $this->_surname_chars .= "ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç®Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨È½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $this->_surname_chars .= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¢Ê¯Ê·ï¿½ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¢Ì·Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $this->_surname_chars .= "ï¿½ï¿½Ù¡ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î£Î¤Îºï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ï¿½Ï¯ï¿½ï¿½";
+        $this->_surname_chars .= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¦Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $this->_surname_chars .= "Ó¦Ó¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¾ÔªÔ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ²Õ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $this->_surname_chars .= "Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×£×¯×¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+
+        $this->_surname2_chars = "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¸ï¿½ Ä½ï¿½ï¿½ Å·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ë¾ï¿½ï¿½ Ë¾ï¿½ï¿½ Ë¾Í½ ï¿½Ì¨ ï¿½ï¿½ï¿½ ";
+
+        $this->_noname_chars = "ï¿½ï¿½Ëµï¿½ï¿½ï¿½Úºï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ã»ï¿½ï¿½";
+
+        $this->_mb_alpha_chars = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $this->_mb_alpha_chars .= "ï¿½ï¿½ï¿½Â£Ã£Ä£Å£Æ£Ç£È£É£Ê£Ë£Ì£Í£Î£Ï£Ð£Ñ£Ò£Ó£Ô£Õ£Ö£×£Ø£Ù£ï¿½";
+
+        $this->_mb_num1_chars .= "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+
+        $this->_sb_alpha_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._-";
+        $this->_sb_num_chars = "0123456789.";
+
+        if ('' !== $dictfile)
+            $this->set_dict($dictfile);
+    }
+
+    // FOR PHP5
+    function __construct($dictfile = '')
+    {
+        $this->PSCWS2($dictfile);
+    }
+
+    function __destruct()
+    {
+    }
+
+    // ï¿½è¶¨ï¿½Êµï¿½ (ï¿½ï¿½Ýºï¿½×ºï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+    function set_dict($fpath)
+    {
+        $this->_dict = new PSCWS23_Dict($fpath);
+    }
+
+    // ï¿½è¶¨ _ignore_mark ï¿½ï¿½ï¿½ï¿½
+    function set_ignore_mark($set)
+    {
+        if (is_bool($set))
+            $this->_ignore_mark = $set;
+    }
+
+    // ï¿½è¶¨ï¿½ï¿½Ê¾ debug ï¿½ï¿½Ï¢
+    function set_debug($set)
+    {
+        if (is_bool($set))
+            $this->_debug = $set;
+    }
+
+    // ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    function set_autodis($set)
+    {
+        if (is_bool($set))
+            $this->_autodis = $set;
+    }
+
+    // hightman.060429: ï¿½Ç·ï¿½ï¿½ï¿½Í³ï¿½ï¿½
+    function set_statistics($set)
+    {
+        if (is_bool($set))
+            $this->_do_stats = $set;
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½Í³ï¿½ï¿½ (ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½Ó¿ï¿½ï¿½ï¿½?)
+    function &get_statistics()
+    {
+        return $this->_statistics;
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½
+    function _put_statistics($word, $off)
+    {
+        if (!isset($this->_statistics[$word])) {
+            $this->_statistics[$word] = array('times' => 1, 'poses' => array($off));
+        } else {
+            $this->_statistics[$word]['times']++;
+            $this->_statistics[$word]['poses'][] = $off;
+        }
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Ó¢ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ð¸ï¿½É´ï¿½
+    function &segment($str, $cb = '')
+    {
+        $len = strlen($str);
+        $ret = array();
+        $qtr = '';
+        if (!empty($cb) && !function_exists($cb)) $cb = '';
+
+        // Í³ï¿½Æ¿ï¿½Ê¼
+        if ($this->_do_stats)
+            $this->_statistics = array();
+
+        for ($i = 0; $i < $len; $i++) {
+            $char = $str[$i];
+            $ord = ord($char);
+
+            // ï¿½Çºï¿½ï¿½Ö¸ï¿½Î»ï¿½ï¿½ (ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½Ö·ï¿½, ï¿½ï¿½0x7f, 0x80)
+            if ($ord < 0x81) {
+                // ï¿½ï¿½ï¿½ï¿½Õ·ÖºÃµÄ¾ï¿½ï¿½ï¿½
+                if (!empty($qtr)) {
+                    $tmp = $this->_gbk_segment($qtr);
+                    if (empty($cb)) $ret = array_merge($ret, $tmp);
+                    else call_user_func($cb, $tmp);
+                    $qtr = '';
+                }
+
+                $this->_cur_sen_off = $i;
+
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ÎªÖ¹
+                if ($this->_is_alpha($char, true)) {
+                    for (; ;) {
+                        $j = $i + 1;
+                        if ($j >= $len)
+                            break;
+
+                        $char2 = $str{$j};
+                        if (!$this->_is_alpha($char2))
+                            break;
+
+                        $char .= $char2;
+                        $i++;
+                    }
+                } // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÖ¹
+                else if ($this->_is_num($char, true)) {
+                    for (; ;) {
+                        $j = $i + 1;
+                        if ($j >= $len)
+                            break;
+
+                        $char2 = $str{$j};
+
+                        if (!$this->_is_num($char2))
+                            break;
+
+                        $char .= $char2;
+                        $i++;
+                    }
+                } // ï¿½ï¿½ï¿½ï¿½ \t\r ï¿½ï¿½ ' '(ï¿½Õ¸ï¿½)
+                else if ($ord === 0x0d || $ord === 0x20 || $ord === 0x09)
+                    $char = '';
+                else if ($ord !== 0x0a && $this->_ignore_mark)
+                    $char = '';
+
+                // ï¿½ï¿½ï¿½Â·Ç¿Õ½ï¿½ï¿½
+                if (strlen($char) > 0) {
+                    if (empty($cb)) array_push($ret, $char);
+                    else call_user_func($cb, array($char));
+
+                    if ($this->_do_stats && strlen($char) > 1)
+                        $this->_put_statistics($char, $this->_cur_sen_off);
+                }
+            } // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            else if ($i < ($len - 1)) {
+                $i++;
+                $char .= $str[$i];
+
+                // ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½
+                if ($ord > 0xa0 && $ord < 0xb0) {
+                    // ï¿½ï¿½ï¿½ï¿½Õ·ÖºÃµÄ¾ï¿½ï¿½ï¿½
+                    if (!empty($qtr)) {
+                        $tmp = $this->_gbk_segment($qtr);
+                        if (empty($cb)) $ret = array_merge($ret, $tmp);
+                        else call_user_func($cb, $tmp);
+                        $qtr = '';
+                    }
+
+                    $this->_cur_sen_off = $i - 1;
+
+                    // Ë«ï¿½Ö½ï¿½(ï¿½ï¿½Ä¸|ï¿½ï¿½ï¿½ï¿½)ï¿½Ø±ï¿½ï¿½ï¿½
+                    if ($ord === 0xa3) {
+                        if (strpos($this->_mb_num1_chars, $char) !== false) {
+                            for (; ;) {
+                                if ($i > ($len - 2))
+                                    break;
+
+                                $char2 = substr($str, $i + 1, 2);
+                                if (strpos($this->_mb_num1_chars, $char2) === false)
+                                    break;
+
+                                $char .= $char2;
+                                $i += 2;
+                            }
+                        } else if (strpos($this->_mb_alpha_chars, $char) !== false) {
+                            for (; ;) {
+                                if ($i > ($len - 2))
+                                    break;
+
+                                $char2 = substr($str, $i + 1, 2);
+                                if (strpos($this->_mb_alpha_chars, $char2) === false)
+                                    break;
+
+                                $char .= $char2;
+                                $i += 2;
+                            }
+                        } else {
+                            $ord = 0xa4; // ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ != 0xa3
+                        }
+                    }
+
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ð¾ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    if ($ord === 0xa3 || !$this->_ignore_mark) {
+                        if (empty($cb)) array_push($ret, $char);
+                        else call_user_func($cb, array($char));
+
+                        if (strlen($char) > 2 && $this->_do_stats)
+                            $this->_put_statistics($char, $this->_cur_sen_off);
+                    }
+                } else {
+                    if (empty($qtr))
+                        $this->_cur_sen_off = $i - 1;
+                    $qtr .= $char;
+                }
+            }
+        }
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ $iÖµ)
+        if (!empty($qtr)) {
+            $tmp = $this->_gbk_segment($qtr);
+            if (empty($cb)) $ret = array_merge($ret, $tmp);
+            else call_user_func($cb, $tmp);
+        }
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        return (empty($cb) ? $ret : true);
+    }
+
+    // ï¿½Ð·Ö´ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ [ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½] (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½, Nï¿½ï¿½ï¿½ï¿½Æµï¿½È½ï¿½ï¿½ï¿½ï¿½)
+    function _gbk_segment($sen)
+    {
+        $ret = array();
+        $len = strlen($sen);
+        $this->_cur_sen_buf = $sen;
+        $this->_cur_sen_len = $len;
+
+        if ($this->_debug) {
+            echo _CRLF_ . "ï¿½ï¿½ï¿½Ä¶Ì¾ï¿½: {$sen}";
+            echo _CRLF_ . "____________________________////";
+            flush();
+        }
+
+        $off = 0;
+        while ($off < $len) {
+            do {
+                // Ö»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Öµï¿½Ê±ï¿½ï¿½ï¿½Ú´Ë·ï¿½ï¿½ï¿½
+                if (($off + ($r = 2)) >= $len)
+                    break;
+
+                // ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                if ($this->_autodis && ($r = $this->_fetch_zhname2($off)))
+                    break;
+
+                // ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½áª³ï¿½ï¿½ï¿½
+                if ($r = $this->_fetch_word($off))
+                    break;
+
+                if ($this->_autodis) {
+                    // ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    if ($r = $this->_fetch_zhname($off))
+                        break;
+
+                    // ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    if ($r = $this->_fetch_frname($off))
+                        break;
+                }
+                $r = 2;
+            } while (0);
+
+            $word = substr($sen, $off, $r);
+            if ($this->_do_stats)
+                $this->_put_statistics($word, $this->_cur_sen_off + $off);
+
+            array_push($ret, $word);
+            $off += $r;
+        }
+
+        if ($this->_debug) {
+            echo _CRLF_ . "\\\\\\\\____________________________" . _CRLF_;
+            flush();
+        }
+
+        return $ret;
+    }
+
+    // ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ø´Ê³ï¿½
+    function _fetch_word($off)
+    {
+        $long = $this->_fetch_long($off);
+
+        return $long[0];
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½ (length, frequency) ï¿½ï¿½ï¿½ï¿½
+    function _fetch_long($off, $minlen = 4, $rc = _WORD_CKDEPTH_)
+    {
+        $ret = array(0, 0);
+
+        if (($off + $minlen) > $this->_cur_sen_len)
+            return $ret;
+
+        $tail = $this->_cur_sen_len;
+        $wlen = $minlen;
+        $plen = 0;
+        while (($off + $wlen) <= $tail) {
+            $w = substr($this->_cur_sen_buf, $off, $wlen);
+
+            // debug message
+            if ($this->_debug)
+                echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc) . "ï¿½ï¿½ï¿½: {$w} ... ";
+
+            $r = $this->_dict->find($w);
+            if ($r < 0)
+                break;
+
+            if ($r & _WORD_ALONE_) {
+                $plen = $ret[0]; // save last length of the word
+                $ret[0] = $wlen;
+                $ret[1] = ($r & ~(_WORD_ALONE_ | _WORD_PART_));
+
+                // debug message
+                if ($this->_debug)
+                    echo "(Y ï¿½ï¿½ï¿½ï¿½ï¿½) ";
+
+                if (!$rc)
+                    break;
+            }
+
+            // ï¿½ï¿½ï¿½Ç´Ê¶ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½.
+            if (!($r & _WORD_PART_)) {
+                // debug message
+                if ($this->_debug)
+                    echo " [N ï¿½Ç´Ê¶ï¿½]";
+                break;
+            }
+
+            $wlen += 2;
+        }
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½áª¼ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î¼ï¿½ï¿½?)
+        if ($ret[0] > 0 && $rc && ($off != 0 || $plen > 0 || $ret[1] < 5)) {
+            $off1 = $off + ($plen ? $plen : 2);
+            $off2 = $off + $ret[0];
+
+            // debug message
+            if ($this->_debug) {
+                echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc);
+                echo "ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½({$off1} ~ {$off2})";
+            }
+
+            while ($off1 < $off2) {
+                $chk = $this->_fetch_long($off1, $off2 - $off1 + 2, $rc - 1);
+                if ($chk[0] > 0 && ($chk[1] * $chk[0] > $ret[1] * $ret[0])) {
+                    $ret[0] = $plen;
+
+                    if ($this->_debug) {
+                        echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc) . "ï¿½ï¿½ï¿½Ö½Ï¸ï¿½Æµï¿½Ê»ï¿½(";
+                        echo substr($this->_cur_sen_buf, $off1, $chk[0]) . "),";
+                        echo "ï¿½ï¿½ï¿½ï±»ï¿½Ã¶ï¿½ï¿½ï¿½ {$plen} ï¿½ï¿½";
+                    }
+
+                    break;
+                }
+                $off1 += 2;
+            }
+        }
+
+        // debug message
+        if ($this->_debug) {
+            echo _CRLF_ . str_repeat("  ", _WORD_CKDEPTH_ - $rc) . "ï¿½ï¿½ï¿½: ";
+            echo substr($w, 0, $ret[0]) . "({$ret[0]}) ... ";
+            flush();
+        }
+
+        return $ret;
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½: 1-2ï¿½ï¿½)
+    function _fetch_zhname2($off)
+    {
+        $ret = 0;
+        if (($off + 4) < $this->_cur_sen_len) {
+            $s2 = substr($this->_cur_sen_buf, $off, 4) . " ";
+            if (($p = strpos($this->_surname2_chars, $s2)) !== false) {
+                $ret = 4;
+                $off += 4;
+                $n = 0;
+
+                if ($this->_debug)
+                    echo _CRLF_ . "  ï¿½ï¿½ï¿½ï¿½: {$s2} ... ";
+
+                do {
+                    if ($off >= $this->_cur_sen_len)
+                        break;
+
+                    $chk = $this->_fetch_long($off, 4, 0);
+                    if ($chk[0] > 0)
+                        break;
+
+                    $zh = substr($this->_cur_sen_buf, $off, 2);
+                    if (($p = strpos($this->_noname_chars, $zh)) !== false
+                        && !($p & 0x01)
+                    )
+                        break;
+
+                    $off += 2;
+                    $ret += 2;
+                } while (++$n < 2);
+            }
+        }
+        return $ret;
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½: 1-2ï¿½ï¿½)
+    function _fetch_zhname($off)
+    {
+        $ret = 0;
+        if (($off + 2) < $this->_cur_sen_len) {
+            $s1 = substr($this->_cur_sen_buf, $off, 2);
+            if (($p = strpos($this->_surname_chars, $s1)) !== false
+                && (($p & 0x01) == 0)
+            ) {
+                $ret = 2;
+                $off += 2;
+                $n = 0;
+
+                if ($this->_debug)
+                    echo _CRLF_ . "  ï¿½ï¿½ï¿½ï¿½: {$s1} ... ";
+
+                do {
+                    if ($off >= $this->_cur_sen_len)
+                        break;
+
+                    $chk = $this->_fetch_long($off, 4, 0);
+                    if ($chk[0] > 0)
+                        break;
+
+                    $zh = substr($this->_cur_sen_buf, $off, 2);
+                    if (($p = strpos($this->_noname_chars, $zh)) !== false
+                        && !($p & 0x01)
+                    )
+                        break;
+
+                    $off += 2;
+                    $ret += 2;
+                } while (++$n < 2);
+            }
+        }
+
+        if ($ret <= 2)
+            $ret = 0;
+
+        return $ret;
+    }
+
+    // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    function _fetch_frname($off)
+    {
+        $ret = 0;
+
+        do {
+            if ($off >= $this->_cur_sen_len)
+                break;
+
+            $zh = substr($this->_cur_sen_buf, $off, 2);
+
+            if (($p = strpos($this->_mb_foreign_chars, $zh)) === false
+                || ($p & 0x01)
+            )
+                break;
+
+            if ($ret > 0) {
+                // ×¢ï¿½â±£ï¿½ï¿½ï¿½Êµï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                $chk = $this->_fetch_long($off, 4, 0);
+                if ($chk[0] > 0)
+                    break;
+            }
+
+            $off += 2;
+            $ret += 2;
+        } while (1);
+
+        if ($ret <= 2)
+            $ret = 0;
+
+        return $ret;
+    }
+
+    // ï¿½Ð¶ï¿½ï¿½Ö·ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)[a-z._-]
+    function _is_alpha($char, $strict = false)
+    {
+        $p = strpos($this->_sb_alpha_chars, $char);
+
+        if ($strict)
+            return ($p !== false && $p < 52);
+
+        return ($p !== false);
+    }
+
+    // ï¿½Ð¶ï¿½ï¿½Ö·ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ [0-9.]
+    function _is_num($char, $strict = false)
+    {
+        $p = strpos($this->_sb_num_chars, $char);
+
+        if ($strict)
+            return ($p !== false && $p < 10);
+
+        return ($p !== false);
+    }
 }
+
 ?>

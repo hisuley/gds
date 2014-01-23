@@ -1,87 +1,87 @@
 <?php
-	header('Content-type: text/html; charset=gbk');
-	include_once("netpayclient_config.php");
+header('Content-type: text/html; charset=gbk');
+include_once("netpayclient_config.php");
 ?>
-<title>Ö§¸¶½»Ò×</title>
+<title>Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</title>
 <?php
-	//¼ÓÔØ netpayclient ×é¼þ
-	include_once("netpayclient.php");
-	
-	//µ¼ÈëË½Ô¿ÎÄ¼þ, ·µ»ØÖµ¼´ÎªÄúµÄÉÌ»§ºÅ£¬³¤¶È15Î»
-	$merid = buildKey(PRI_KEY);
-	if(!$merid) {
-		echo "µ¼ÈëË½Ô¿ÎÄ¼þÊ§°Ü£¡";
-		exit;
-	}
-	
-	//Éú³É¶©µ¥ºÅ£¬¶¨³¤16Î»£¬ÈÎÒâÊý×Ö×éºÏ£¬Ò»ÌìÄÚ²»ÔÊÐíÖØ¸´£¬±¾Àý²ÉÓÃµ±Ç°Ê±¼ä´Á£¬±ØÌî
-	$ordid = "00" . date('YmdHis');
-	//¶©µ¥½ð¶î£¬¶¨³¤12Î»£¬ÒÔ·ÖÎªµ¥Î»£¬²»×ã×ó²¹0£¬±ØÌî
-	$transamt = padstr('1',12);
-	//»õ±Ò´úÂë£¬3Î»£¬¾³ÄÚÉÌ»§¹Ì¶¨Îª156£¬±íÊ¾ÈËÃñ±Ò£¬±ØÌî
-	$curyid = "156";
-	//¶©µ¥ÈÕÆÚ£¬±¾Àý²ÉÓÃµ±Ç°ÈÕÆÚ£¬±ØÌî
-	$transdate = date('Ymd');
-	//½»Ò×ÀàÐÍ£¬0001 ±íÊ¾Ö§¸¶½»Ò×£¬0002 ±íÊ¾ÍË¿î½»Ò×
-	$transtype = "0001";
-	//½Ó¿Ú°æ±¾ºÅ£¬¾³ÄÚÖ§¸¶Îª 20070129£¬±ØÌî
-	$version = "20070129";
-	//Ò³Ãæ·µ»ØµØÖ·(Äú·þÎñÆ÷ÉÏ¿É·ÃÎÊµÄURL)£¬×î³¤80Î»£¬µ±ÓÃ»§Íê³ÉÖ§¸¶ºó£¬ÒøÐÐÒ³Ãæ»á×Ô¶¯Ìø×ªµ½¸ÃÒ³Ãæ£¬²¢POST¶©µ¥½á¹ûÐÅÏ¢£¬¿ÉÑ¡
-	$pagereturl = "$site_url/netpayclient_order_feedback.php";
-	//ºóÌ¨·µ»ØµØÖ·(Äú·þÎñÆ÷ÉÏ¿É·ÃÎÊµÄURL)£¬×î³¤80Î»£¬µ±ÓÃ»§Íê³ÉÖ§¸¶ºó£¬ÎÒ·½·þÎñÆ÷»áPOST¶©µ¥½á¹ûÐÅÏ¢µ½¸ÃÒ³Ãæ£¬±ØÌî
-	$bgreturl = "$site_url/netpayclient_order_feedback.php";
-	
-	/************************
-	Ò³Ãæ·µ»ØµØÖ·ºÍºóÌ¨·µ»ØµØÖ·µÄÇø±ð£º
-	ºóÌ¨·µ»Ø´ÓÎÒ·½·þÎñÆ÷·¢³ö£¬²»ÊÜÓÃ»§²Ù×÷ºÍä¯ÀÀÆ÷µÄÓ°Ïì£¬´Ó¶ø±£Ö¤½»Ò×½á¹ûµÄËÍ´ï¡£
-	************************/
-	
-	//Ö§¸¶Íø¹ØºÅ£¬4Î»£¬ÉÏÏßÊ±½¨ÒéÁô¿Õ£¬ÒÔÌø×ªµ½ÒøÐÐÁÐ±íÒ³ÃæÓÉÓÃ»§×ÔÓÉÑ¡Ôñ£¬±¾Ê¾ÀýÑ¡ÓÃ0001Å©ÉÌÐÐÍø¹Ø±ãÓÚ²âÊÔ£¬¿ÉÑ¡
-	$gateid = "0001";
-	//±¸×¢£¬×î³¤60Î»£¬½»Ò×³É¹¦ºó»áÔ­Ñù·µ»Ø£¬¿ÉÓÃÓÚ¶îÍâµÄ¶©µ¥¸ú×ÙµÈ£¬¿ÉÑ¡
-	$priv1 = "memo";
-	
-	//°´´ÎÐò×éºÏ¶©µ¥ÐÅÏ¢Îª´ýÇ©Ãû´®
-	$plain = $merid . $ordid . $transamt . $curyid . $transdate . $transtype . $priv1;
-	//Éú³ÉÇ©ÃûÖµ£¬±ØÌî
-	$chkvalue = sign($plain);
-	if (!$chkvalue) {
-		echo "Ç©ÃûÊ§°Ü£¡";
-		exit;
-	}
+//ï¿½ï¿½ï¿½ï¿½ netpayclient ï¿½ï¿½ï¿½
+include_once("netpayclient.php");
+
+//ï¿½ï¿½ï¿½ï¿½Ë½Ô¿ï¿½Ä¼ï¿½, ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ì»ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½15Î»
+$merid = buildKey(PRI_KEY);
+if (!$merid) {
+    echo "ï¿½ï¿½ï¿½ï¿½Ë½Ô¿ï¿½Ä¼ï¿½Ê§ï¿½Ü£ï¿½";
+    exit;
+}
+
+//ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½16Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½Ò»ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ç°Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$ordid = "00" . date('YmdHis');
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½ï¿½12Î»ï¿½ï¿½ï¿½Ô·ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$transamt = padstr('1', 12);
+//ï¿½ï¿½ï¿½Ò´ï¿½ï¿½ë£¬3Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½ï¿½Ì¶ï¿½Îª156ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½
+$curyid = "156";
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½
+$transdate = date('Ymd');
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½0001 ï¿½ï¿½Ê¾Ö§ï¿½ï¿½ï¿½ï¿½ï¿½×£ï¿½0002 ï¿½ï¿½Ê¾ï¿½Ë¿î½»ï¿½ï¿½
+$transtype = "0001";
+//ï¿½Ó¿Ú°æ±¾ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½Îª 20070129ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$version = "20070129";
+//Ò³ï¿½æ·µï¿½Øµï¿½Ö·(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿É·ï¿½ï¿½Êµï¿½URL)ï¿½ï¿½ï¿½î³¤80Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ£¬ï¿½ï¿½POSTï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Ñ¡
+$pagereturl = "$site_url/netpayclient_order_feedback.php";
+//ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½Øµï¿½Ö·(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿É·ï¿½ï¿½Êµï¿½URL)ï¿½ï¿½ï¿½î³¤80Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½POSTï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½
+$bgreturl = "$site_url/netpayclient_order_feedback.php";
+
+/************************
+ * Ò³ï¿½æ·µï¿½Øµï¿½Ö·ï¿½Íºï¿½Ì¨ï¿½ï¿½ï¿½Øµï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½Ø´ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ì£¬ï¿½Ó¶ï¿½Ö¤ï¿½ï¿½ï¿½×½ï¿½ï¿½ï¿½ï¿½Í´ï¡£
+ ************************/
+
+//Ö§ï¿½ï¿½ï¿½ï¿½ØºÅ£ï¿½4Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ñ£¬±ï¿½Ê¾ï¿½ï¿½Ñ¡ï¿½ï¿½0001Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½Ú²ï¿½ï¿½Ô£ï¿½ï¿½ï¿½Ñ¡
+$gateid = "0001";
+//ï¿½ï¿½×¢ï¿½ï¿½ï¿½î³¤60Î»ï¿½ï¿½ï¿½ï¿½ï¿½×³É¹ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÙµÈ£ï¿½ï¿½ï¿½Ñ¡
+$priv1 = "memo";
+
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Îªï¿½ï¿½Ç©ï¿½ï¿½
+$plain = $merid . $ordid . $transamt . $curyid . $transdate . $transtype . $priv1;
+//ï¿½ï¿½ï¿½Ç©ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$chkvalue = sign($plain);
+if (!$chkvalue) {
+    echo "Ç©ï¿½ï¿½Ê§ï¿½Ü£ï¿½";
+    exit;
+}
 ?>
-<h1>Ö§¸¶½»Ò×</h1>
-<h3>Ö§¸¶²âÊÔ·½·¨</h3>
-<h4>µã»÷¡°Ö§¸¶¡±°´Å¥£¬Ìø×ªµ½Å©ÉÌÐÐÍø¹ØÖ§¸¶Ò³Ãæºó£¬ÊäÈë¿¨ÃÜºÍÑéÖ¤Âë¼´¿ÉÍê³ÉÖ§¸¶£¬ÊäÈëÃÜÂëÊ±ÇëÑ¡Ôñ¡°¼üÅÌ¡±</h4>
-<h5>¿¨ºÅ£º[1234567890000000000]</h5>
-<h5>ÃÜÂë£º[000000]</h5>
-<h5><a href="javascript:window.location.reload()">Ë¢ÐÂ±¾Ò³ÒÔ¸Ä±ä¶©µ¥ºÅ</a></h5>
+<h1>Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</h1>
+<h3>Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½</h3>
+<h4>ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¿¨ï¿½Üºï¿½ï¿½ï¿½Ö¤ï¿½ë¼´ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ñ¡ï¿½ñ¡°¼ï¿½ï¿½Ì¡ï¿½</h4>
+<h5>ï¿½ï¿½ï¿½Å£ï¿½[1234567890000000000]</h5>
+<h5>ï¿½ï¿½ï¿½ë£º[000000]</h5>
+<h5><a href="javascript:window.location.reload()">Ë¢ï¿½Â±ï¿½Ò³ï¿½Ô¸Ä±ä¶©ï¿½ï¿½ï¿½ï¿½</a></h5>
 
 
 <form action="<?php echo REQ_URL_PAY; ?>" method="post" target="_blank">
-<label>ÉÌ»§ºÅ</label><br/>
-<input type="text" name="MerId" value="<?php echo $merid; ?>" readonly/><br/>
-<label>Ö§¸¶°æ±¾ºÅ</label><br/>
-<input type="text" name="Version" value="<?php echo $version; ?>" readonly/><br/>
-<label>¶©µ¥ºÅ</label><br/>
-<input type="text" name="OrdId" value="<?php echo $ordid; ?>" readonly/><br/>
-<label>¶©µ¥½ð¶î</label><br/>
-<input type="text" name="TransAmt" value="<?php echo $transamt; ?>" readonly/><br/>
-<label>»õ±Ò´úÂë</label><br/>
-<input type="text" name="CuryId" value="<?php echo $curyid; ?>" readonly/><br/>
-<label>¶©µ¥ÈÕÆÚ</label><br/>
-<input type="text" name="TransDate" value="<?php echo $transdate; ?>" readonly/><br/>
-<label>½»Ò×ÀàÐÍ</label><br/>
-<input type="text" name="TransType" value="<?php echo $transtype; ?>" readonly/><br/>
-<label>ºóÌ¨·µ»ØµØÖ·</label><br/>
-<input type="text" name="BgRetUrl" value="<?php echo $bgreturl; ?>"/><br/>
-<label>Ò³Ãæ·µ»ØµØÖ·</label><br/>
-<input type="text" name="PageRetUrl" value="<?php echo $pagereturl; ?>"/><br/>
-<label>Íø¹ØºÅ</label><br/>
-<input type="text" name="GateId" value="<?php echo $gateid; ?>"/><br/>
-<label>±¸×¢</label><br/>
-<input type="text" name="Priv1" value="<?php echo $priv1; ?>" readonly/><br/>
-<label>Ç©ÃûÖµ</label><br/>
-<input type="text" name="ChkValue" value="<?php echo $chkvalue; ?>" readonly/><br/>
-<input type="submit" value="Ö§¸¶">
+    <label>ï¿½Ì»ï¿½ï¿½ï¿½</label><br/>
+    <input type="text" name="MerId" value="<?php echo $merid; ?>" readonly/><br/>
+    <label>Ö§ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½</label><br/>
+    <input type="text" name="Version" value="<?php echo $version; ?>" readonly/><br/>
+    <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+    <input type="text" name="OrdId" value="<?php echo $ordid; ?>" readonly/><br/>
+    <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+    <input type="text" name="TransAmt" value="<?php echo $transamt; ?>" readonly/><br/>
+    <label>ï¿½ï¿½ï¿½Ò´ï¿½ï¿½ï¿½</label><br/>
+    <input type="text" name="CuryId" value="<?php echo $curyid; ?>" readonly/><br/>
+    <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+    <input type="text" name="TransDate" value="<?php echo $transdate; ?>" readonly/><br/>
+    <label>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><br/>
+    <input type="text" name="TransType" value="<?php echo $transtype; ?>" readonly/><br/>
+    <label>ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½Øµï¿½Ö·</label><br/>
+    <input type="text" name="BgRetUrl" value="<?php echo $bgreturl; ?>"/><br/>
+    <label>Ò³ï¿½æ·µï¿½Øµï¿½Ö·</label><br/>
+    <input type="text" name="PageRetUrl" value="<?php echo $pagereturl; ?>"/><br/>
+    <label>ï¿½ï¿½Øºï¿½</label><br/>
+    <input type="text" name="GateId" value="<?php echo $gateid; ?>"/><br/>
+    <label>ï¿½ï¿½×¢</label><br/>
+    <input type="text" name="Priv1" value="<?php echo $priv1; ?>" readonly/><br/>
+    <label>Ç©ï¿½ï¿½Öµ</label><br/>
+    <input type="text" name="ChkValue" value="<?php echo $chkvalue; ?>" readonly/><br/>
+    <input type="submit" value="Ö§ï¿½ï¿½">
 </form>

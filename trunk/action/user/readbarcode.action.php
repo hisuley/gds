@@ -14,7 +14,10 @@ $t_user = $tablePreStr . "users";
 $order_id = intval(get_args('order_id'));
 $mark_read = intval(get_args('mark_read'));
 $mark_as_paid = get_args('mark_as_paid');
+<<<<<<< HEAD
 $sign = short_check(get_args('sign'));
+=======
+>>>>>>> remotes/origin/master
 if ($mark_as_paid == 1) {
     $sql_update = "UPDATE $t_order_info SET pay_status = 1 WHERE order_id = " . $order_id;
     $dbo->exeUpdate($sql_update);
@@ -145,6 +148,7 @@ if ($mark_read == 1) {
     <table>
         <tr>
             <td colspan="2"><h1>桂林目的地营销系统二维码扫描</h1><a class="button"
+<<<<<<< HEAD
                                                       href="<?php echo $SYSINFO['web'] . "do.php?act=user_readbarcode&order_id=" . $order_id."&sign=".$sign; ?>">刷新</a>
             </td>
         </tr>
@@ -176,6 +180,39 @@ if ($mark_read == 1) {
                 ?>
             </td>
         </tr>
+=======
+                                                      href="<?php echo $SYSINFO['web'] . "do.php?act=user_readbarcode&order_id=" . $order_id; ?>">刷新</a>
+            </td>
+        </tr>
+
+        <?php if (!empty($message)) { ?>
+            <tr style="color:green;">
+                <td colspan="2"><?php echo $message; ?></td>
+            </tr>
+        <?php } ?>
+
+        <tr>
+            <th>订单号：</th>
+            <td><?php echo $order_id; ?></td>
+        </tr>
+
+        <tr>
+            <th>总金额：</th>
+            <td>
+                <?php
+                echo $result[order_amount];
+                ?>
+            </td>
+        </tr>
+        <tr>
+            <th>下单日期：</th>
+            <td>
+                <?php
+                echo $result[order_time];
+                ?>
+            </td>
+        </tr>
+>>>>>>> remotes/origin/master
         <tr>
             <th>订购商品：</th>
             <td><?php
@@ -220,14 +257,22 @@ if ($mark_read == 1) {
 <?php
 if ($result[pay_status] == 1) {
     ?>
+<<<<<<< HEAD
     <form method="post" action="<?php echo $SYSINFO['web'] . "do.php?act=user_readbarcode&order_id=" . $order_id."&sign=".$sign; ?>">
+=======
+    <form method="post" action="<?php echo $SYSINFO['web'] . "do.php?act=user_readbarcode&order_id=" . $order_id; ?>">
+>>>>>>> remotes/origin/master
         <input type="hidden" name="mark_as_paid" value="2"/>
         <input type="submit" value="撤销验票" style="background-color:red;color:white;"/>
     </form>
 <?php
 } else {
     ?>
+<<<<<<< HEAD
     <form method="post" action="<?php echo $SYSINFO['web'] . "do.php?act=user_readbarcode&order_id=" . $order_id."&sign=".$sign; ?>">
+=======
+    <form method="post" action="<?php echo $SYSINFO['web'] . "do.php?act=user_readbarcode&order_id=" . $order_id; ?>">
+>>>>>>> remotes/origin/master
         <input type="hidden" name="mark_as_paid" value="1"/>
         <input type="submit" value="验票" style="background-color:#99DD00;color:white"/>
     </form>

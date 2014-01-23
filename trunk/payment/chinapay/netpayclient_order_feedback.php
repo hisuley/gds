@@ -1,63 +1,66 @@
 <?php
-	header('Content-type: text/html; charset=gbk');
-	include_once("netpayclient_config.php");
+header('Content-type: text/html; charset=gbk');
+include_once("netpayclient_config.php");
 ?>
-<title>Ö§¸¶Ó¦´ð</title>
-<h1>Ö§¸¶Ó¦´ð</h1>
+<title>Ö§ï¿½ï¿½Ó¦ï¿½ï¿½</title>
+<h1>Ö§ï¿½ï¿½Ó¦ï¿½ï¿½</h1>
 <?php
-	//¼ÓÔØ netpayclient ×é¼þ
-	include_once("netpayclient.php");
-	
-	//µ¼Èë¹«Ô¿ÎÄ¼þ
-	$flag = buildKey(PUB_KEY);
-	if(!$flag) {
-		echo "µ¼Èë¹«Ô¿ÎÄ¼þÊ§°Ü£¡";
-		exit;
-	}
-	
-	//»ñÈ¡½»Ò×Ó¦´ðµÄ¸÷ÏîÖµ
-	$merid = $_REQUEST["merid"];
-	$orderno = $_REQUEST["orderno"];
-	$transdate = $_REQUEST["transdate"];
-	$amount = $_REQUEST["amount"];
-	$currencycode = $_REQUEST["currencycode"];
-	$transtype = $_REQUEST["transtype"];
-	$status = $_REQUEST["status"];
-	$checkvalue = $_REQUEST["checkvalue"];
-	$gateId = $_REQUEST["GateId"];
-	$priv1 = $_REQUEST["Priv1"];
-	
-	echo "ÉÌ»§ºÅ: [$merid]<br/>";
-	echo "¶©µ¥ºÅ: [$orderno]<br/>";
-	echo "¶©µ¥ÈÕÆÚ: [$transdate]<br/>";
-	echo "¶©µ¥½ð¶î: [$amount]<br/>";
-	echo "»õ±Ò´úÂë: [$currencycode]<br/>";
-	echo "½»Ò×ÀàÐÍ: [$transtype]<br/>";
-	echo "½»Ò××´Ì¬: [$status]<br/>";
-	echo "Íø¹ØºÅ: [$gateId]<br/>";
-	echo "±¸×¢: [$priv1]<br/>";
-	echo "Ç©ÃûÖµ: [$checkvalue]<br/>";
-	echo "===============================<br/>";
-	
-	//ÑéÖ¤Ç©ÃûÖµ£¬true ±íÊ¾ÑéÖ¤Í¨¹ý
-	$flag = verifyTransResponse($merid, $orderno, $amount, $currencycode, $transdate, $transtype, $status, $checkvalue);
-	if(!flag) {
-		echo "<h2>ÑéÖ¤Ç©ÃûÊ§°Ü£¡</h2>";
-		exit;
-	}
-	echo "<h2>ÑéÖ¤Ç©Ãû³É¹¦£¡</h2>";
-	//½»Ò××´Ì¬Îª1001±íÊ¾½»Ò×³É¹¦£¬ÆäËûÎª¸÷Àà´íÎó£¬Èç¿¨ÄÚÓà¶î²»×ãµÈ
-	if ($status == '1001'){
-		echo "<h3>½»Ò×³É¹¦£¡</h3>";
-		//ÄúµÄ´¦ÀíÂß¼­ÇëÐ´ÔÚÕâÀï£¬Èç¸üÐÂÊý¾Ý¿âµÈ¡£
-		//×¢Òâ£ºÈç¹ûÄúÔÚÌá½»Ê±Í¬Ê±ÌîÐ´ÁËÒ³Ãæ·µ»ØµØÖ·ºÍºóÌ¨·µ»ØµØÖ·£¬ÇÒµØÖ·ÏàÍ¬£¬ÇëÔÚÕâÀïÏÈ×öÒ»´ÎÊý¾Ý¿â²éÑ¯ÅÐ¶Ï¶©µ¥×´Ì¬£¬ÒÔ·ÀÖ¹ÖØ¸´´¦Àí¸Ã±Ê¶©µ¥
-		
-	} else {
-		echo "<h3>½»Ò×Ê§°Ü£¡</h3>";
-	}
-	
+//ï¿½ï¿½ï¿½ï¿½ netpayclient ï¿½ï¿½ï¿½
+include_once("netpayclient.php");
+
+//ï¿½ï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½
+$flag = buildKey(PUB_KEY);
+if (!$flag) {
+    echo "ï¿½ï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½Ê§ï¿½Ü£ï¿½";
+    exit;
+}
+
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Öµ
+$merid = $_REQUEST["merid"];
+$orderno = $_REQUEST["orderno"];
+$transdate = $_REQUEST["transdate"];
+$amount = $_REQUEST["amount"];
+$currencycode = $_REQUEST["currencycode"];
+$transtype = $_REQUEST["transtype"];
+$status = $_REQUEST["status"];
+$checkvalue = $_REQUEST["checkvalue"];
+$gateId = $_REQUEST["GateId"];
+$priv1 = $_REQUEST["Priv1"];
+
+echo "ï¿½Ì»ï¿½ï¿½ï¿½: [$merid]<br/>";
+echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: [$orderno]<br/>";
+echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: [$transdate]<br/>";
+echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: [$amount]<br/>";
+echo "ï¿½ï¿½ï¿½Ò´ï¿½ï¿½ï¿½: [$currencycode]<br/>";
+echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: [$transtype]<br/>";
+echo "ï¿½ï¿½ï¿½ï¿½×´Ì¬: [$status]<br/>";
+echo "ï¿½ï¿½Øºï¿½: [$gateId]<br/>";
+echo "ï¿½ï¿½×¢: [$priv1]<br/>";
+echo "Ç©ï¿½ï¿½Öµ: [$checkvalue]<br/>";
+echo "===============================<br/>";
+
+//ï¿½ï¿½Ö¤Ç©ï¿½ï¿½Öµï¿½ï¿½true ï¿½ï¿½Ê¾ï¿½ï¿½Ö¤Í¨ï¿½ï¿½
+$flag = verifyTransResponse($merid, $orderno, $amount, $currencycode, $transdate, $transtype, $status, $checkvalue);
+if (!flag) {
+    echo "<h2>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½Ê§ï¿½Ü£ï¿½</h2>";
+    exit;
+}
+echo "<h2>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½É¹ï¿½ï¿½ï¿½</h2>";
+//ï¿½ï¿½ï¿½ï¿½×´Ì¬Îª1001ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½×³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¿¨ï¿½ï¿½ï¿½ï¿½î²»ï¿½ï¿½ï¿½
+if ($status == '1001') {
+    echo "<h3>ï¿½ï¿½ï¿½×³É¹ï¿½ï¿½ï¿½</h3>";
+    //ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½È¡ï¿½
+    //×¢ï¿½â£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½»Ê±Í¬Ê±ï¿½ï¿½Ð´ï¿½ï¿½Ò³ï¿½æ·µï¿½Øµï¿½Ö·ï¿½Íºï¿½Ì¨ï¿½ï¿½ï¿½Øµï¿½Ö·ï¿½ï¿½ï¿½Òµï¿½Ö·ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ñ¯ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ô·ï¿½Ö¹ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½Ã±Ê¶ï¿½ï¿½ï¿½
+
+} else {
+    echo "<h3>ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½</h3>";
+}
+
 
 ?>
-<h5><a href="netpayclient_query_submit.php?transdate=<?php echo $transdate; ?>&ordid=<?php echo $orderno; ?>" target="_blank">²éÑ¯¸Ã±Ê¶©µ¥</a></h5>
+<h5><a href="netpayclient_query_submit.php?transdate=<?php echo $transdate; ?>&ordid=<?php echo $orderno; ?>"
+       target="_blank">ï¿½ï¿½Ñ¯ï¿½Ã±Ê¶ï¿½ï¿½ï¿½</a></h5>
 
-<h5><a href="netpayclient_refund_submit.php?priv1=<?php echo date('YmdHis');?>&transdate=<?php echo $transdate; ?>&ordid=<?php echo $orderno; ?>&refundamount=<?php echo $amount; ?>&transtype=0002" target="_blank">·¢ÆðÈ«¶îÍË¿î</a></h5>
+<h5>
+    <a href="netpayclient_refund_submit.php?priv1=<?php echo date('YmdHis'); ?>&transdate=<?php echo $transdate; ?>&ordid=<?php echo $orderno; ?>&refundamount=<?php echo $amount; ?>&transtype=0002"
+       target="_blank">ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½Ë¿ï¿½</a></h5>

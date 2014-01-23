@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="PublishConfigData" serverName="Tourism Server" createEmptyFolders="true" persistUploadOnCheckin="false">
+=======
+  <component name="PublishConfigData" autoUpload="Always" serverName="DMS_local" createEmptyFolders="true">
+>>>>>>> remotes/origin/master
     <serverData>
       <paths name="DMS_local">
         <serverdata>
@@ -17,6 +21,10 @@
         </serverdata>
       </paths>
     </serverData>
+<<<<<<< HEAD
+=======
+    <option name="myAutoUpload" value="ALWAYS" />
+>>>>>>> remotes/origin/master
   </component>
 </project>
 

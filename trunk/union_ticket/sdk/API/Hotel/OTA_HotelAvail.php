@@ -1,67 +1,70 @@
 <?php
+
 /**
  *
  * 酒店可订性检查接口
  * @author liuw2
  *
  */
-class set_OTA_HotelAvail{
-	/**
-	 * 客人数量，必须填写
-	 */
-	var $GuestCount="";
-	/**
-	 * 客人数量是否对应每间房
-	 */
-	var $IsPerRoom="";
-	/**
-	 * 房间数量
-	 */
-	var $RoomCount="";
-	/**
-	 * 最晚入住时间
-	 */
-	var $LastCheckInTime="";
-	/**
-	 * 离店时间
-	 */
-	var $CheckOutTime="";
-	/**
-	 * 入住时间
-	 */
-	var $CheckInTime="";
-	/**
-	 * 子房型ID
-	 */
-	var $HotelRoomCode="";
-	/**
-	 *  酒店ID
-	 */
-	var $HotelCode="";
-	/**
-	 *  时间戳
-	 */
-	var $TimeStamp="";
-	/**
-	 *返回体
-	 */
-	var $ResponseXML="";
-	/**
-	 * 构造请求体
-	 */
-	private  function getRequestXML()
-	{
-		/*
-		 * 从config.php中获取系统的联盟信息(只读)
-		 */
-		$AllianceID=Allianceid;
-		$SID=Sid;
-		$KEYS=SiteKey;
-		$RequestType="OTA_HotelAvail";
-		//构造权限头部
-		$headerRight=getRightString($AllianceID,$SID,$KEYS,$RequestType);
-		$gettime=getDateYMD('-')."T00:00:00.000+08:00";
-		$paravalues=<<<BEGIN
+class set_OTA_HotelAvail
+{
+    /**
+     * 客人数量，必须填写
+     */
+    var $GuestCount = "";
+    /**
+     * 客人数量是否对应每间房
+     */
+    var $IsPerRoom = "";
+    /**
+     * 房间数量
+     */
+    var $RoomCount = "";
+    /**
+     * 最晚入住时间
+     */
+    var $LastCheckInTime = "";
+    /**
+     * 离店时间
+     */
+    var $CheckOutTime = "";
+    /**
+     * 入住时间
+     */
+    var $CheckInTime = "";
+    /**
+     * 子房型ID
+     */
+    var $HotelRoomCode = "";
+    /**
+     *  酒店ID
+     */
+    var $HotelCode = "";
+    /**
+     *  时间戳
+     */
+    var $TimeStamp = "";
+    /**
+     *返回体
+     */
+    var $ResponseXML = "";
+
+    /**
+     * 构造请求体
+     */
+    private function getRequestXML()
+    {
+        /*
+         * 从config.php中获取系统的联盟信息(只读)
+         */
+        $AllianceID = Allianceid;
+        $SID = Sid;
+        $KEYS = SiteKey;
+        $RequestType = "OTA_HotelAvail";
+        //构造权限头部
+        $headerRight = getRightString($AllianceID, $SID, $KEYS, $RequestType);
+        $gettime = getDateYMD('-') . "T00:00:00.000+08:00";
+        $paravalues = <<<BEGIN
 <?xml version="1.0"?>
 <Request>
   <Header $headerRight/>
@@ -96,30 +99,29 @@ class set_OTA_HotelAvail{
   </HotelRequest>
 </Request>
 BEGIN;
-		return  $paravalues;
-	}
+        return $paravalues;
+    }
 
-	/**
-	 *
-	 * 调用取消订单的OTA接口
-	 */
-	function main(){
-		try{
-			$requestXML=$this->getRequestXML();
-		// echo $requestXML;die;
-			$commonRequestDo=new commonRequest();//常用数据请求
-	 	$commonRequestDo->requestURL=OTA_HotelAvail_Url;
-	 	$commonRequestDo->requestXML=$requestXML;
-	 	$commonRequestDo->requestType=System_RequestType;//取config中的配置
-	 	$commonRequestDo->doRequest();
-	 	
-	 //	print_r($commonRequestDo);die;
-	 	$this->ResponseXML=getXMLFromReturnString($commonRequestDo->responseXML);
-		}
-		catch(Exception $e)
-		{
-			$this->ResponseXML=null;
-		}
-	}
+    /**
+     *
+     * 调用取消订单的OTA接口
+     */
+    function main()
+    {
+        try {
+            $requestXML = $this->getRequestXML();
+            // echo $requestXML;die;
+            $commonRequestDo = new commonRequest(); //常用数据请求
+            $commonRequestDo->requestURL = OTA_HotelAvail_Url;
+            $commonRequestDo->requestXML = $requestXML;
+            $commonRequestDo->requestType = System_RequestType; //取config中的配置
+            $commonRequestDo->doRequest();
+
+            //	print_r($commonRequestDo);die;
+            $this->ResponseXML = getXMLFromReturnString($commonRequestDo->responseXML);
+        } catch (Exception $e) {
+            $this->ResponseXML = null;
+        }
+    }
 }
  

@@ -1,7 +1,7 @@
-/* iweb_mall Backup SQL File 
+/* dms Backup SQL File
  Version: v1.2 
  Time: 2013-12-11 17:26:18
- iweb_mall: http://www.guilin.com*/
+ dms: http://www.guilin.com*/
 
 
 

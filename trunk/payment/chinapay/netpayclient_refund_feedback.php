@@ -1,51 +1,51 @@
 <?php
-	header('Content-type: text/html; charset=gbk');
-	include_once("netpayclient_config.php");
+header('Content-type: text/html; charset=gbk');
+include_once("netpayclient_config.php");
 ?>
-<title>ÍË¿îÓ¦´ð</title>
-<h1>ÍË¿îÓ¦´ð</h1>
+    <title>ï¿½Ë¿ï¿½Ó¦ï¿½ï¿½</title>
+    <h1>ï¿½Ë¿ï¿½Ó¦ï¿½ï¿½</h1>
 <?php
-	//¼ÓÔØ netpayclient ×é¼þ
-	include_once("netpayclient.php");
-	
-	//µ¼Èë¹«Ô¿ÎÄ¼þ
-	$flag = buildKey(PUB_KEY);
-	if(!$flag) {
-		echo "µ¼Èë¹«Ô¿ÎÄ¼þÊ§°Ü£¡";
-		exit;
-	} 
-	
-	//È¡µÃÍË¿îÓ¦´ðÖÐµÄ¸÷ÏîÖµ
-	$merid = $_REQUEST["MerID"]; 
-	$orderno = $_REQUEST["OrderId"];
-	$refundamount = $_REQUEST["RefundAmout"];
-	$currencycode = $_REQUEST["currencycode"];
-	$processdate = $_REQUEST["ProcessDate"];
-	$sendtime = $_REQUEST["SendTime"];
-	$transtype = $_REQUEST["TransType"];
-	$status = $_REQUEST["Status"];
-	$checkvalue = $_REQUEST["CheckValue"];
-	$priv1 = $_REQUEST["Priv1"];
-	
-	$plain = $merid . $processdate . $transtype . $orderno . $refundamount . $status . $priv1;
-	//±¾Ê¾ÀýÔÚÕâÀï¼ÇÂ¼ÎÄ¼þÈÕÖ¾£¬·½±ãÄú²âÊÔÊÇ·ñÊÕµ½Ó¦´ð
-	traceLog("refund.log",$plain);
-	
-	$flag = verify($plain, $checkvalue);
-	if($flag) {
-		//ÑéÖ¤Ç©Ãû³É¹¦£¬
-		echo "<h4>ÑéÖ¤Ç©Ãû³É¹¦</h4>";
-		if ($status == '3'){
-			//ÍË¿îÍê³É
-			echo "<h3>ÍË¿î³É¹¦</h3>";
-			//Çë°ÑÄú×Ô¼ºÐèÒª´¦ÀíµÄÂß¼­Ð´ÔÚÕâÀï£¬
-			
+//ï¿½ï¿½ï¿½ï¿½ netpayclient ï¿½ï¿½ï¿½
+include_once("netpayclient.php");
 
-		} else {
-			echo "<h3>ÍË¿îÊ§°Ü</h3>";
-		}
-	} else {
-		echo "<h4>ÑéÖ¤Ç©ÃûÊ§°Ü£¡</h4>";
-	}
-	
+//ï¿½ï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½
+$flag = buildKey(PUB_KEY);
+if (!$flag) {
+    echo "ï¿½ï¿½ï¿½ë¹«Ô¿ï¿½Ä¼ï¿½Ê§ï¿½Ü£ï¿½";
+    exit;
+}
+
+//È¡ï¿½ï¿½ï¿½Ë¿ï¿½Ó¦ï¿½ï¿½ï¿½ÐµÄ¸ï¿½ï¿½ï¿½Öµ
+$merid = $_REQUEST["MerID"];
+$orderno = $_REQUEST["OrderId"];
+$refundamount = $_REQUEST["RefundAmout"];
+$currencycode = $_REQUEST["currencycode"];
+$processdate = $_REQUEST["ProcessDate"];
+$sendtime = $_REQUEST["SendTime"];
+$transtype = $_REQUEST["TransType"];
+$status = $_REQUEST["Status"];
+$checkvalue = $_REQUEST["CheckValue"];
+$priv1 = $_REQUEST["Priv1"];
+
+$plain = $merid . $processdate . $transtype . $orderno . $refundamount . $status . $priv1;
+//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½Ä¼ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Õµï¿½Ó¦ï¿½ï¿½
+traceLog("refund.log", $plain);
+
+$flag = verify($plain, $checkvalue);
+if ($flag) {
+    //ï¿½ï¿½Ö¤Ç©ï¿½ï¿½É¹ï¿½ï¿½ï¿½
+    echo "<h4>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½É¹ï¿½</h4>";
+    if ($status == '3') {
+        //ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½
+        echo "<h3>ï¿½Ë¿ï¿½É¹ï¿½</h3>";
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï£¬
+
+
+    } else {
+        echo "<h3>ï¿½Ë¿ï¿½Ê§ï¿½ï¿½</h3>";
+    }
+} else {
+    echo "<h4>ï¿½ï¿½Ö¤Ç©ï¿½ï¿½Ê§ï¿½Ü£ï¿½</h4>";
+}
+
 ?>

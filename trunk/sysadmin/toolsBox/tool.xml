@@ -3,16 +3,15 @@
 <toolbox>
 
 
-<tool_item id="clear_data">
-		<toolName>删除数据工具</toolName>
-		<author>dbojue</author>
-		<date>2010-02-25</date>
-		<explain>用于删除系统内的数据,使用时一定谨慎！</explain>
-		<contentIndex>clear_data</contentIndex>
-		<contentAct>clear_data.php</contentAct>
-		<programList>clear_data.php</programList>
-	</tool_item>
-	
-	
-	
-	</toolbox>
+    <tool_item id="clear_data">
+        <toolName>删除数据工具</toolName>
+        <author>dbojue</author>
+        <date>2010-02-25</date>
+        <explain>用于删除系统内的数据,使用时一定谨慎！</explain>
+        <contentIndex>clear_data</contentIndex>
+        <contentAct>clear_data.php</contentAct>
+        <programList>clear_data.php</programList>
+    </tool_item>
+
+
+</toolbox>

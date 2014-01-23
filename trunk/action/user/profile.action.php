@@ -1,24 +1,24 @@
 <?php
-if(!$IWEB_SHOP_IN) {
-	die('Hacking attempt');
+if (!$IWEB_SHOP_IN) {
+    die('Hacking attempt');
 }
 
 //引入模块公共方法文件
 require("foundation/module_users.php");
 
 //语言包引入
-$m_langpackage=new moduleslp;
+$m_langpackage = new moduleslp;
 
 //数据库操作
-dbtarget('w',$dbServs);
-$dbo=new dbex();
+dbtarget('w', $dbServs);
+$dbo = new dbex();
 
 //定义文件表
-$t_user_info = $tablePreStr."user_info";
+$t_user_info = $tablePreStr . "user_info";
 
 // 处理post变量
 $post['user_truename'] = short_check(get_args('user_truename'));
-$post['user_birthday'] = intval(get_args('Y')) . '-' .intval(get_args('M')) . '-' .intval(get_args('D'));
+$post['user_birthday'] = intval(get_args('Y')) . '-' . intval(get_args('M')) . '-' . intval(get_args('D'));
 $post['user_gender'] = intval(get_args('user_gender'));
 $post['user_marry'] = intval(get_args('user_marry'));
 $post['user_mobile'] = short_check(get_args('user_mobile'));
@@ -33,6 +33,7 @@ $post['user_province'] = intval(get_args('province'));
 $post['user_city'] = intval(get_args('city'));
 $post['user_district'] = intval(get_args('district'));
 
+<<<<<<< HEAD
 if(update_user_info($dbo,$t_user_info,$post,$user_id)) {
     //赠送积分
 
@@ -62,8 +63,12 @@ if(update_user_info($dbo,$t_user_info,$post,$user_id)) {
         update_account($dbo,$t_users, $user_info, $user_id);
     }
 	action_return(1,$m_langpackage->m_profile.$m_langpackage->m_save_succes,'-1');
+=======
+if (update_user_info($dbo, $t_user_info, $post, $user_id)) {
+    action_return(1, $m_langpackage->m_profile . $m_langpackage->m_save_succes, '-1');
+>>>>>>> remotes/origin/master
 } else {
-	action_return(0,$m_langpackage->m_edit_fail,'-1');
+    action_return(0, $m_langpackage->m_edit_fail, '-1');
 }
 exit;
 ?>

@@ -16,13 +16,14 @@
  * 如果debug模式下出错不能再次自动编译时，请进入后台手动编译！
  */
 /* debug模式运行生成代码 开始 */
-if(!function_exists("tpl_engine")) {
-	require("foundation/ftpl_compile.php");
+if (!function_exists("tpl_engine")) {
+    require("foundation/ftpl_compile.php");
 }
-if(filemtime("templates/default/shop/index_footer.html") > filemtime(__file__) || (file_exists("models/shop/index_footer.php") && filemtime("models/shop/index_footer.php") > filemtime(__file__)) ) {
-	tpl_engine("default","shop/index_footer.html",1);
-	include(__file__);
+if (filemtime("templates/default/shop/index_footer.html") > filemtime(__file__) || (file_exists("models/shop/index_footer.php") && filemtime("models/shop/index_footer.php") > filemtime(__file__))) {
+    tpl_engine("default", "shop/index_footer.html", 1);
+    include(__file__);
 } else {
+<<<<<<< HEAD
 /* debug模式运行生成代码 结束 */
 ?><?php
 if(!$IWEB_SHOP_IN) {
@@ -52,28 +53,73 @@ function SetCookie (name, value) {
 	document.cookie = name + "=" + escape(value) + "; expires=" + expires.toGMTString();
 }
 </script>
+=======
+    /* debug模式运行生成代码 结束 */
+    ?><?php
+    if (!$IWEB_SHOP_IN) {
+        trigger_error('Hacking attempt');
+    }
 
-<div style="clear:both"></div>
-<div id="flink">
-	<h2>友情链接</h2>
-	<div style="margin:auto;">
-		<ul>
-			<li><a href="#">百度</a></li>
-			<li><a href="#">谷歌</a></li>
-			<li><a href="#">桂林政府</a></li>
-			<li><a href="#">国家旅游局</a></li>
-			<li><a href="#">桂林旅游网</a></li>
-			<li style="clear:both;float:none;width:0px"></li>
-		</ul>
-	</div>
-	<div style="clear:both"></div>
-</div>
-<div id="footer" class="clearfix">
-  <p class="link_bar">
-    <!-- <?php echo $i_langpackage->i_language_ch;?>：<?php echo  show_back_lp($langpackage);?> 
+    require_once("foundation/asystem_info.php");
+
+    function show_back_lp($def_lp)
+    {
+        echo "<select name='langpackage' onchange='selectlangpackage (this.value)'>";
+        $res = opendir("langpackage");
+        while ($lp_dir = readdir($res)) {
+            if (!preg_match("/^\./", $lp_dir)) {
+                $l_selected = '';
+                if ($lp_dir == $def_lp) {
+                    $l_selected = "selected";
+                }
+                $lp_tip = trim(file_get_contents("langpackage" . "/" . $lp_dir . "/" . "tip.php"));
+                echo "<option value='" . $lp_dir . "' " . $l_selected . ">" . $lp_tip . "</option>";
+            }
+        }
+        echo "</select>";
+    }
+>>>>>>> remotes/origin/master
+
+    ?>
+    <script language="javascript" type="text/javascript">
+        function SetCookie(name, value) {
+            var today = new Date();
+            var expires = new Date();
+            expires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 365);
+            document.cookie = name + "=" + escape(value) + "; expires=" + expires.toGMTString();
+        }
+    </script>
+
+    <div style="clear:both"></div>
+    <div id="flink">
+        <h2>友情链接</h2>
+
+        <div style="margin:auto;">
+            <ul>
+                <li><a href="#">百度</a></li>
+                <li><a href="#">谷歌</a></li>
+                <li><a href="#">桂林政府</a></li>
+                <li><a href="#">国家旅游局</a></li>
+                <li><a href="#">桂林旅游网</a></li>
+                <li style="clear:both;float:none;width:0px"></li>
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div id="footer" class="clearfix">
+        <p class="link_bar">
+            <!-- <?php echo $i_langpackage->i_language_ch;?>：<?php echo  show_back_lp($langpackage);?>
     <?php echo $i_langpackage->i_language_ch;?><?php echo  show_back_lp($langpackage);?>-->
-    <a href="<?php echo  article_url(2);?>"><?php echo $i_langpackage->i_question_see;?></a>|<a href="<?php echo  article_url(3);?>"><?php echo $i_langpackage->i_safe_compp;?></a>|<a href="<?php echo  article_url(4);?>"><?php echo $i_langpackage->i_process_of_purchase;?></a>|<a href="<?php echo  article_url(5);?>"><?php echo $i_langpackage->i_howto_pay;?></a>|<a href="<?php echo  article_url(6);?>"><?php echo $i_langpackage->i_contact_us;?></a>|<a href="<?php echo  article_url(7);?>"><?php echo $i_langpackage->i_make_a_proposal;?></a>|<a href="<?php echo  article_url(8);?>"><?php echo $i_langpackage->i_site_map;?></a></p>
-  <p>由<a href="http://www.guilin.com"><?php echo  $SYSINFO['sys_company'];?></a>制作维护</p>
-  <?php echo  $SYSINFO['sys_copyright'];?> <?php echo  $SYSINFO['sys_icp'];?> <?php echo  $SYSINFO['sys_countjs'];?> </div>
+            <a href="<?php echo article_url(2); ?>"><?php echo $i_langpackage->i_question_see; ?></a>|<a
+                href="<?php echo article_url(3); ?>"><?php echo $i_langpackage->i_safe_compp; ?></a>|<a
+                href="<?php echo article_url(4); ?>"><?php echo $i_langpackage->i_process_of_purchase; ?></a>|<a
+                href="<?php echo article_url(5); ?>"><?php echo $i_langpackage->i_howto_pay; ?></a>|<a
+                href="<?php echo article_url(6); ?>"><?php echo $i_langpackage->i_contact_us; ?></a>|<a
+                href="<?php echo article_url(7); ?>"><?php echo $i_langpackage->i_make_a_proposal; ?></a>|<a
+                href="<?php echo article_url(8); ?>"><?php echo $i_langpackage->i_site_map; ?></a></p>
+
+        <p>由<a href="http://www.guilin.com"><?php echo $SYSINFO['sys_company']; ?></a>制作维护</p>
+        <?php echo $SYSINFO['sys_copyright']; ?> <?php echo $SYSINFO['sys_icp']; ?> <?php echo $SYSINFO['sys_countjs']; ?>
+    </div>
 
 <?php } ?>
