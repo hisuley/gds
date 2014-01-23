@@ -48,6 +48,10 @@ $t_users = $tablePreStr."users";
 
 $group_id = intval(get_args('id'));
 $state = intval(get_args('state'));
+$order_id = short_check(get_args('order_id'));
+$start_time = short_check(get_args('start_time'));
+$end_time = short_check(get_args('end_time'));
+
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 /* 商铺信息处理 */
@@ -59,10 +63,13 @@ if($row['locked']==1){
 	session_destroy();
 	trigger_error($m_langpackage->m_user_locked);//非法操作
 }
+
+
+
 if(empty($group_id)){
-	$result = get_myoder_list($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$shop_id,13,'shop',$state,$t_users);
+	$result = get_myoder_list_with_search($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$shop_id,13,'shop',$state,$t_users, $start_time, $end_time, $order_id);
 }else{
-	$result = get_myoder_list($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$group_id,13,'groupbuy',$state,$t_users);
+	$result = get_myoder_list_with_search($dbo,$t_order_info,$t_order_goods,$t_goods,$t_shop_info,$group_id,13,'groupbuy',$state,$t_users, $start_time, $end_time, $order_id);
 }
 $payment_info = get_payment_info($dbo,$t_payment);
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -77,6 +84,7 @@ $payment_info = get_payment_info($dbo,$t_payment);
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
+<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
 
 <style type="text/css">
 th{background:#EFEFEF}
@@ -100,11 +108,15 @@ td.img img{cursor:pointer}
         	<div class="right_top"></div>
             <div class="cont">
                 <div class="cont_title">
+
                 <span class="tr_op">
 				<form action="modules.php?app=shop_my_order" method="post">
 					<select name="state">
 						<option value='' <?php if($state=="") {echo 'selected'; }?>>全部</option>
-						<option value='1' <?php if($state=="1"){echo "selected";}?>>未确定</option>
+                        <option value='0' <?php if($state=="0"){echo "selected";}?>>已取消</option>
+
+						<option value='1' <?php if($state=="1"){echo "selected";}?>>处理中</option>
+
 						<option value='2' <?php if($state=="2"){echo "selected";}?>>已确定</option>
 						<option value='3' <?php if($state=="3"){echo "selected";}?>>未支付</option>
 						<option value='4' <?php if($state=="4"){echo "selected";}?>>已支付</option>
@@ -119,6 +131,18 @@ td.img img{cursor:pointer}
 				</span>
                 <?php echo $m_langpackage->m_recver_order;?></div>
                 <hr />
+                <div class="search">
+                    <form action="modules.php" method="get" name="search_form" style="float:left;">
+                        <p>
+                            订单号：<input class="txt" type="text" name="order_id" value="<?php echo $order_id;?>">
+                        </p>
+                        <p>
+                            支付日期：<input class="Wdate" type="text" name="start_time" id="start_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="<?php echo $start_time;?>"> ~
+                            <input class="Wdate" type="text" name="end_time" id="end_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="<?php echo $end_time;?>">
+                            <input type="hidden" value="shop_my_order" name="app">
+                            <input type="submit" name="submit" value="搜索"></p>
+                    </form>
+                </div>
 			<table width="100%" border="0" cellspacing="0">
 				<tr class="center"><th colspan="2"><?php echo  $m_langpackage->m_order_goods_info;?></th>
 					<th width=""><?php echo  $m_langpackage->m_count;?></th>
@@ -179,7 +203,7 @@ td.img img{cursor:pointer}
 										} else {
 											echo "<span class='red'>".$m_langpackage->m_order_notransported."</span><br />";
 										}
-									}	
+									}
 							}
 						}?>
 					</td>
@@ -213,7 +237,7 @@ td.img img{cursor:pointer}
 								<?php echo $m_langpackage->m_already_valuation;?>
 							<?php }?>
 							<!-- 订单评价 结束 -->
-							
+
 						<?php  }?>
 					</td>
 					<!-- 合并  -->
@@ -226,7 +250,7 @@ td.img img{cursor:pointer}
 				<tr><td colspan="6" class="center"><?php echo  $m_langpackage->m_nolist_record;?></td></tr>
 				<?php }?>
 			</table>
-			
+
 			</div>
 			<div class="right_bottom"></div>
 			<div class="back_top"><a href="#"></a></div>

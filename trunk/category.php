@@ -61,7 +61,7 @@ if(get_sess_user_id()) {
 }
 $brand_id=get_args("brand_id");
 $attr_arr = get_args("attr");
-
+$keyword_string = short_check(get_args("keyword"));
 
 /* 定义文件表 */
 $t_shop_info = $tablePreStr."shop_info";
@@ -75,7 +75,8 @@ $t_brand = $tablePreStr."brand";
 $t_brand_category = $tablePreStr."brand_category";
 $t_user_rank = $tablePreStr."user_rank";
 $t_tag = $tablePreStr."tag";
-
+$t_article = $tablePreStr."article";
+$t_comment = $tablePreStr."goods_comment";
 $viewlist="display:block";
 $viewwindow="display:none";
 
@@ -122,6 +123,21 @@ if(isset($attr_arr)&&$attr_arr){
 		$attr_id_arr[]="attr[".$k."]";
 	}
 }
+if($this_catinfo['cat_name'] == '景区' || $this_catinfo['cat_name'] == '景点'){
+    $jingqu_sql_hot = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND cat_id = ".$cat_id." AND  lock_flg=0 order by pv desc limit 5";
+    $jingqu_goods_hot = $dbo->getRs($jingqu_sql_hot);
+    $jingqu_sql_gonglue = "SELECT * FROM $t_article WHERE cat_id = 21 LIMIT 5";
+    $jingqu_gonglue = $dbo->getRs($jingqu_sql_gonglue);
+}
+$get_goods_id = "SELECT goods_id FROM $t_goods WHERE is_on_sale = 1 AND cat_id = ".$cat_id." AND  lock_flg=0 order by pv desc limit 5";
+$goods_id_box = $dbo->getCol($get_goods_id);
+$goods_id_box = implode(',', $goods_id_box);
+$sql_comment = "SELECT * FROM $t_comment where 1";
+if(!empty($goods_id_box)){
+    $sql_comment .= " AND goods_id IN(".$goods_id_box.") ";
+}
+$sql_comment .= " ORDER by add_time DESC";
+$goods_comments = $dbo->getRs($sql_comment);
 $areainfo = get_areas_kv($dbo,$t_areas);
 /* 产品处理 */
 $sql_best = "SELECT * FROM $t_goods WHERE is_on_sale=1 AND is_best=1 and lock_flg=0 order by pv desc limit 5";
@@ -138,7 +154,15 @@ foreach($get_arr as $k=>$value){
 	if(substr($k,0,4) == 'attr'){
 		$num = substr($k,4,strlen($k));
 		$and .= "g".$num.".goods_id and g".$num.".goods_id=";
-		$where .= " and g".$num.".attr_values = '$value'";
+        $sql_attr_type = "SELECT input_type FROM $t_attribute WHERE attr_id = ".$num;
+        $result = $dbo->getCol($sql_attr_type);
+        $result = !empty($result[0]) ? $result[0] : 0;
+        if($result == 3){
+            $where .= " and g".$num.".attr_values LIKE '%$value%'";
+        }else{
+            $where .= " and g".$num.".attr_values = '$value'";
+        }
+
 		$from .= "$t_goods_attr as g".$num.",";
 	}
 }
@@ -167,7 +191,13 @@ if($where){
 if ($brand_id>0) {
 	$sql.=" AND g.brand_id='$brand_id'";
 }
+
+if (!empty($keyword_string)){
+    $sql .= "AND g.goods_name LIKE '%".$keyword_string."%' ";
+}
+
 $k=short_check(get_args("k"));
+
 $kk=$k;
 //echo $k;
 
@@ -195,8 +225,9 @@ $kk=$k;
 //		$id_row=$dbo->getRow($k_sql);
 
 	}else{
-		$kk='无';
+		$kk='';
 	}
+
 if($_POST){
 	$order_name=$_POST['name'];
 	$order=$_POST['order'];
@@ -214,6 +245,8 @@ if($cat_id == ''){
 			s.shop_province,s.shop_city	FROM `$t_goods` AS g WHERE g.is_on_sale=1 AND g.shop_id=s.shop_id AND s.user_id=u.user_id AND u.rank_id=ur.rank_id ";
 
 }
+
+
 $result = $dbo->fetch_page($sql,$SYSINFO['product_page']);
 $goods_list=$result['result'];
 unset($result['result']);
@@ -325,6 +358,7 @@ if($result_category) {
 						</li>
 						<!--<li> <span>价格：</span> <a class="active" href="">全部</a> <a href="">1-999</a> <a href="">999-4500</a> <a href="">4500-9999</a> <a href="">10000以上</a> </li>-->
 						<?php  foreach($attr_info as $key => $value){?>
+                        <?php  if(($value['input_type'] == 1 || $value['input_type'] == 2 || $value['input_type'] == 3) AND !empty($value['attr_values'])){?>
 						<li>
 							<span><?php echo  $value['attr_name'];?>:</span>
 							<?php if(get_args('attr'.$value['attr_id'])) {?>
@@ -345,9 +379,20 @@ if($result_category) {
 							<?php }?>
 							<?php }?>
 						</li>
+                        <?php }?>
 						<?php }?>
-						<li><span><?php echo $i_langpackage->i_keywords;?>：</span><?php echo $kk;?></li>
 					</ul>
+                    <form method="get">
+                        <?php  foreach($get_arr as $k => $value){
+                            if(substr($k,0,4) == 'attr'){
+                                $num = substr($k,4,strlen($k));
+                                echo '<input type="hidden" name="attr'.$num.'" value="'.$value.'">';
+                             }
+                        }?>
+                        <input type="hidden" name="id" value="<?php echo $cat_id;?>">
+                        <input type="text" name="k" value="<?php echo $kk;?>" onclick="javascript:if(this.value == '无' || this.value == '请输入搜索关键词'){this.value = '';}" placeholder="请输入搜索关键词">
+                        <input type="submit" value="搜索"/>
+                    </form>
 				</div>
 				<div id="leftMian" class="content-common-box content-left-big-box">
 					<div class="title">
@@ -443,6 +488,12 @@ if($result_category) {
 				<!-- rightColumn -->
 				<div id="rightColumn">
 
+                    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
+                        <div class="title">
+                            <h2>广告</h2>
+                        </div>
+                        <script language="JavaScript" src="uploadfiles/asd/11.js"></script>
+                    </div>
 					<?php if($cat_id == 434){?>
 					<div class="tagSet bg_gary mg12b content-common-box content-right-middle-box">
 						<div class="title">
@@ -472,18 +523,11 @@ if($result_category) {
 							<h2>评论</h2>
 						</div>
 						<ul>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
-							<li>
-								<a href="goods.php?id=3224">价格不错，又实惠！</a>
-							</li>
+                            <?php foreach($goods_comments as $key => $v){?>
+                            <li>
+                                <a href="goods.php?id=<?php echo $v['goods_id'];?>"><?php echo $v['content'];?></a>
+                            </li>
+                            <?php }?>
 						</ul>
 					</div>
 					<?php }?>
@@ -497,6 +541,36 @@ if($result_category) {
 							<?php }?>
 						</div>
 					</div>
+                    <?php if($this_catinfo['cat_name'] == '景区' || $this_catinfo['cat_name'] == '景点'){ ?>
+                    <div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
+                        <div class="title">
+                            <h2>热门景点</h2>
+                        </div>
+                        <ul>
+                            <?php foreach($jingqu_goods_hot as $key => $v){?>
+                            <li <?php if($key%2!=0){?> class="doublenum"<?php }?>>
+                            <p class="photo"><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><img src="<?php echo  $v['is_set_image'] ? $v['goods_thumb'] : 'skin/default/images/nopic.gif';?>" alt="" width="58" height="58"  onerror="this.src='skin/default/images/nopic.gif'"/></a></p>
+                            <h4><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><?php echo  sub_str($v['goods_name'],38);?></a></h4>
+                            <p class="price"><?php echo $i_langpackage->i_money_sign;?><?php echo $v['goods_price'];?></p>
+                            </li>
+                            <?php }?>
+                        </ul>
+                    </div>
+                    <div class="tagSet bg_gary mg12b content-common-box content-right-middle-box news-box">
+                        <div class="title">
+                            <h2>景点攻略</h2>
+                        </div>
+
+                        <ul>
+                            <?php foreach($jingqu_gonglue as $key => $v){?>
+                            <li>
+                                <a href="article.php?id=<?php echo $v['article_id'];?>"><?php echo $v['title'];?></a>
+                            </li>
+                            <?php }?>
+
+                        </ul>
+                    </div>
+                    <?php }?>
 					<div class="hotgoods bg_gary mg12b content-common-box content-right-middle-box">
 						<div class="title">
 							<h2><?php echo $i_langpackage->i_goods_commend;?></h2>

@@ -1,1 +1,1 @@
-document.write("<a href='search.php?k=%E6%B5%8B%E8%AF%95'>测试</a> <a href='search.php?k=%E9%85%92%E5%BA%97'>酒店</a> ");
+document.write("<a href='search.php?k=%E9%85%92%E5%BA%97'>酒店</a> <a href='search.php?k=%E9%97%A8%E7%A5%A8'>门票</a> <a href='search.php?k=%E6%A0%87%E9%97%B4'>标间</a> <a href='search.php?k=%E6%B5%8B%E8%AF%95%E4%BE%9B%E5%BA%94%E5%95%86%E5%BA%97%E9%93%BA'>测试供应商店铺</a> ");

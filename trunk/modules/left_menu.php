@@ -143,6 +143,9 @@ if(filemtime("templates/default/modules/left_menu.html") > filemtime(__file__) |
 				<li><a id="user_address" onclick="menu_style_change('user_address')" href="modules.php?app=user_address"><?php echo $m_langpackage->m_getgoods_address;?></a></li>
                                 <li><a id="user_account_add" onclick="menu_style_change('user_account_add')" href="modules.php?app=user_account_add"><?php echo $m_langpackage->m_account_add;?></a></li>
                                 <li><a id="user_account_minus" onclick="menu_style_change('user_account_minus')" href="modules.php?app=user_account_minus"><?php echo $m_langpackage->m_account_minus;?></a></li>
+                                <li><a id="user_account_today" onclick="menu_style_change('user_account_today')" href="modules.php?app=user_account_today"><?php echo $m_langpackage->m_account_today;?></a></li>
+                                <li><a id="user_point" onclick="menu_style_change('user_point')" href="modules.php?app=user_point"><?php echo $m_langpackage->m_my_point;?></a></li>
+                                <li><a id="user_point_today" onclick="menu_style_change('user_point_today')" href="modules.php?app=user_point_today"><?php echo $m_langpackage->m_my_point_today;?></a></li>
 			</ul>
 		</div>
 		<div class="menu_title"> <span class="put"><a href="javascript:;" hidefocus="true" title="<?php echo $m_langpackage->m_programa;?>"></a></span> <a class="menuicon" id="seller" href="javascript:;"><?php echo  $m_langpackage->m_seller;?></a> </div>
@@ -178,6 +181,10 @@ if(filemtime("templates/default/modules/left_menu.html") > filemtime(__file__) |
 								<a id="groupbuy_list" onclick="menu_style_change('groupbuy_list')" href="modules.php?app=groupbuy_list">
 								<?php echo  $m_langpackage->m_groupbuy_list;?></a>
 								</li>
+                                <li>
+                                    <a id="promote_list" onclick="menu_style_change('promote_list')" href="modules.php?app=promote_list">
+                                        促销列表</a>
+                                </li>
 								<!--<li><a id="groupbuy_add" onclick="menu_style_change('groupbuy_add')" href="modules.php?app=groupbuy_add"><?php echo  $m_langpackage->m_add_groupbuy;?></a></li>-->
 								<!--<li><a id="csv_export" onclick="menu_style_change('csv_export')" href="modules.php?app=csv_export"><?php echo  $m_langpackage->m_csv_export;?></a></li>
 										<li><a id="csv_import" onclick="menu_style_change('csv_import')" href="modules.php?app=csv_import"><?php echo  $m_langpackage->m_csv_import;?></a></li>-->
@@ -267,16 +274,7 @@ if(filemtime("templates/default/modules/left_menu.html") > filemtime(__file__) |
         <div class="menu_title"> <span class="put"><a href="javascript:;" hidefocus="true" title="我的订阅"></a></span> <a class="menuicon" name="my_rss" id="option" href="javascript:;">我的订阅</a> </div>
         <div class="menu_li">
             <ul>
-                <li><a id="user_profile" onclick="menu_style_change('user_profile')" href="modules.php?app=rss_list">订阅列表</a></li>
-                <?php if($my_shop_info_num>0){?>
-                    <li><a id="user_remind" onclick="menu_style_change('user_remind')" href="modules.php?app=user_remind"><?php echo  $m_langpackage->m_remind_setting;?></a></li>
-                    <li><a id="user_remind_info" onclick="menu_style_change('user_remind_info')" href="modules.php?app=user_remind_info"><?php echo  $m_langpackage->m_my_remind;?></a></li>
-                <?php }?>
-                <?php if($im_enable){?>
-                    <li><a href="modules.php?app=user_ico"><?php echo  $m_langpackage->m_userico_setting;?></a></li>
-                <?php }?>
-                <li><a id="user_passwd" onclick="menu_style_change('user_passwd')" href="modules.php?app=user_passwd"><?php echo  $m_langpackage->m_edit_password;?></a></li>
-                <li><a href="do.php?act=logout"><?php echo  $m_langpackage->m_logout;?></a></li>
+                <li><a id="user_profile" onclick="menu_style_change('user_profile')" href="modules.php?app=user_rss">订阅列表</a></li>
             </ul>
         </div>
 		<!-- plugins !-->

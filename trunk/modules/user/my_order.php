@@ -44,8 +44,11 @@ $t_order_goods = $tablePreStr."order_goods";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 $state=intval(get_args('state'));
+$order_id = short_check(get_args('order_id'));
+$start_time = short_check(get_args('start_time'));
+$end_time = short_check(get_args('end_time'));
 $user_id = get_sess_user_id();
-$result = get_myorder_info($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goods,$user_id,$state,10);
+$result = get_myorder_info_with_search($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goods,$user_id,$state,10, $start_time, $end_time, $order_id);
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -60,7 +63,7 @@ $result = get_myorder_info($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goo
 <link rel="stylesheet" type="text/css" href="skin/<?php echo  $SYSINFO['templates'];?>/css/common.css">
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/userchangeStyle.js"></script>
-
+<script type='text/javascript' src='servtools/date/WdatePicker.js'></script>
 <style type="text/css">
 .red{color:#fc0000;}
 .green {color:green;}
@@ -81,8 +84,8 @@ $result = get_myorder_info($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goo
 				<form action="modules.php?app=user_my_order" method="post">
 					<select name="state">
 						<option value='' <?php if($state=="") {echo 'selected'; }?>>全部</option>
-                                                <option value='0' <?php if($state=="1"){echo "selected";}?>>已取消订单</option>
-						<option value='1' <?php if($state=="1"){echo "selected";}?>>未确定</option>
+                                                <option value='0' <?php if($state=="0"){echo "selected";}?>>已取消订单</option>
+						<option value='1' <?php if($state=="1"){echo "selected";}?>>处理中</option>
 						<option value='2' <?php if($state=="2"){echo "selected";}?>>已确定</option>
 						<option value='3' <?php if($state=="3"){echo "selected";}?>>未支付</option>
 						<option value='4' <?php if($state=="4"){echo "selected";}?>>已支付</option>
@@ -98,7 +101,20 @@ $result = get_myorder_info($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goo
 				<?php echo $m_langpackage->m_my_order;?>
 				<!-- <a href="javascript:;" onclick="merge_sub()"><?php echo $m_langpackage->m_merge_order;?></a> -->
 			</div>
+
 			<hr />
+            <div class="search">
+                <form action="modules.php" method="get" name="search_form" style="float:left;">
+                    <p>
+                        订单号：<input class="txt" type="text" name="order_id" value="<?php echo $order_id;?>">
+                    </p>
+                    <p>
+                        支付日期：<input class="Wdate" type="text" name="start_time" id="start_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="<?php echo $start_time;?>"> ~
+                        <input class="Wdate" type="text" name="end_time" id="end_time" onfocus="WdatePicker({isShowClear:false,readOnly:true})" value="<?php echo $end_time;?>">
+                        <input type="hidden" value="user_my_order" name="app">
+                        <input type="submit" name="submit" value="搜索"></p>
+                </form>
+            </div>
  			 <table class="commodityCart" width="100%" border="0" cellspacing="0">
         <tbody>
           <tr>
@@ -114,11 +130,11 @@ $result = get_myorder_info($dbo,$t_order_info,$t_shop_info,$t_goods,$t_order_goo
 				foreach($result['result'] as $v) {?>
           <!-- order01 -->
           <tr class="orderInfo">
-            <td colspan="6"><?php echo $m_langpackage->m_order_group;?>：<?php echo $v['payid'];?></td>
+            <td colspan="6"><?php echo $m_langpackage->m_order_group;?>：<a href="modules.php?app=user_order_view&order_id=<?php echo  $v['order_id'];?>"><?php echo $v['payid'];?></a></td>
           </tr>
           <?php $num =count($v['order_goods']); foreach($v['order_goods'] as $k=> $goods){?>
           <tr>
-            <td><img src="<?php echo $goods['goods_thumb'];?>" alt="<?php echo $goods['goods_name'];?>" width="80" width="80" onerror="this.src='skin/default/images/nopic.gif'"/></td>
+            <td><a href="modules.php?app=user_order_view&order_id=<?php echo  $v['order_id'];?>"><img src="<?php echo $goods['goods_thumb'];?>" alt="<?php echo $goods['goods_name'];?>" width="80" width="80" onerror="this.src='skin/default/images/nopic.gif'"/></a></td>
             <td><a href="modules.php?app=user_photo_view&id=<?php echo $goods['id'];?>&path=user_my_order" target="_blank" ><?php echo $goods['goods_name'];?></a></td>
             <!-- 合并  -->
             <?php if($k==0){?>

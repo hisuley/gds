@@ -125,7 +125,7 @@ td.img img { cursor:pointer }
 			<form action="do.php?act=shop_credit_add&id=<?php echo $oid;?>&t=<?php echo $t;?>" name="form1" method="post" onsubmit="return check();">
 				<table width="98%" class="form_table_02">
 					<tr class="center">
-						<th class="hor"><?php echo  $m_langpackage->m_appraiser;?></th>
+						<th class="hor">评价人</th>
 						<td class="textleft"><?php echo  $result['user_name'];?></td>
 					</tr>
 					<tr class="center">

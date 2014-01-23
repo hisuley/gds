@@ -92,6 +92,32 @@ dbtarget('w',$dbServs);
 $dbo=new dbex();
 if($SYSINFO['email_send']=='true'){
 	$user_id = insert_user_info($dbo,$t_users,$post);
+
+
+    //赠送积分
+    if(!isset($t_user_point)){
+        $t_user_point = $tablePreStr."user_point";
+    }
+    if(!isset($t_users)){
+        $t_users = $tablePreStr."users";
+    }
+    if(isset($SYSINFO['reg_points']) && $SYSINFO['reg_points'] > 0){
+        require_once("foundation/module_account.php");
+        $user_integral = array(
+            'user_id' => $user_id,
+            'admin_user' => 'system',
+            'point' => $SYSINFO['reg_points'],
+            'add_time' => date("Y-m-d H:i:s", strtotime('now')),
+            'admin_note' => '自动赠送积分',
+            'process_type' => 1,
+        );
+        $user_info = array(
+            'user_integral' => $SYSINFO['reg_points']
+        );
+        insert_account_info($dbo,$t_user_point,$user_integral);
+        update_account($dbo,$t_users, $user_info, $user_id);
+    }
+
 	$arr1 = array('{user_name}','{site_name}','{baseUrl}','{user_id}','{email_check_code}');
 	$arr2 = array($post['user_name'],$SYSINFO['sys_name'],$baseUrl,$user_id,$post['email_check_code']);
 	$mailbody = str_replace($arr1,$arr2,$mail_row['tpl_content']);
@@ -118,6 +144,31 @@ if($SYSINFO['email_send']=='true'){
 	exit;
 }else{
 	$user_id = insert_user_info($dbo,$t_users,$post);
+
+
+    //赠送积分
+    if(!isset($t_user_point)){
+        $t_user_point = $tablePreStr."user_point";
+    }
+    if(!isset($t_users)){
+        $t_users = $tablePreStr."users";
+    }
+    if(isset($SYSINFO['reg_points']) && $SYSINFO['reg_points'] > 0){
+        $user_integral = array(
+            'user_id' => $user_id,
+            'admin_user' => 'system',
+            'point' => $SYSINFO['reg_points'],
+            'add_time' => date("Y-m-d H:i:s", strtotime('now')),
+            'admin_note' => '自动赠送积分',
+            'process_type' => 1,
+        );
+        $user_info = array(
+            'user_integral' => $SYSINFO['reg_points']
+        );
+        insert_account_info($dbo,$t_user_point,$array);
+        update_account($dbo,$t_users, $user_info, $user_id);
+    }
+
 	$post_info['user_id'] = $user_id;
 	insert_user_info($dbo,$t_user_info,$post_info);
 	$post_upd['email_check']='1';

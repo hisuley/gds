@@ -20,7 +20,7 @@ $t_attribute = $tablePreStr."attribute";
 $dbo = new dbex;
 dbtarget('r',$dbServs);
 
-$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_type != 1 AND  attr_name='门票促销'";
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_name='门票促销'";
 $result = $dbo->getRs($sql);
 
 foreach($result as $row){
@@ -98,7 +98,7 @@ foreach($right_array as $key => $value){
 <script language="JavaScript">
 <!--
 var cat_id = "<?php echo $cat_id;?>";
-var attr_values = '门票促销';
+var attr_values = '类型';
 
 function attr_info_cancel(v) {
     var deltr = document.getElementById("tr_"+v);

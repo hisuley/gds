@@ -111,7 +111,9 @@ $nav_selected=3;
       <div class="shop_nav"> <?php  require("shop/menu.php");?> </div>
     </div>
     <?php  require("shop/left.php");?>
-    <div id="rightCloumn"><div class="wrp_b">
+    <div id="rightCloumn">
+
+     <div class="wrp_b">
       <h3 class="ttlm_font"><?php echo $s_langpackage->s_shop_groupbuy;?></h3>
       <div class="pro_show">
         <table class="tab_group" width="100%">

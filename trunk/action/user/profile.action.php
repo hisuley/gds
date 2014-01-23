@@ -34,6 +34,33 @@ $post['user_city'] = intval(get_args('city'));
 $post['user_district'] = intval(get_args('district'));
 
 if(update_user_info($dbo,$t_user_info,$post,$user_id)) {
+    //赠送积分
+
+    if(isset($SYSINFO['info_points']) && $SYSINFO['info_points'] > 0 && !empty($user_id)){
+        if(!isset($t_user_point)){
+            $t_user_point = $tablePreStr."user_point";
+        }
+        if(!isset($t_users)){
+            $t_users = $tablePreStr."users";
+        }
+        require_once("foundation/module_account.php");
+        require_once("foundation/module_users.php");
+        $user_detail = get_user_info($dbo,$t_users,$user_id);
+        $total_points_temp = $user_detail['user_integral']+$SYSINFO['info_points'];
+        $user_integral = array(
+            'user_id' => $user_id,
+            'admin_user' => 'system',
+            'point' => $SYSINFO['info_points'],
+            'add_time' => date("Y-m-d H:i:s", strtotime('now')),
+            'admin_note' => '自动赠送积分',
+            'process_type' => 1,
+        );
+        $user_info = array(
+            'user_integral' => $total_points_temp
+        );
+        insert_account_info($dbo,$t_user_point,$user_integral);
+        update_account($dbo,$t_users, $user_info, $user_id);
+    }
 	action_return(1,$m_langpackage->m_profile.$m_langpackage->m_save_succes,'-1');
 } else {
 	action_return(0,$m_langpackage->m_edit_fail,'-1');

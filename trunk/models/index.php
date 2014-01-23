@@ -112,7 +112,7 @@ $goods_promote = get_hot_goods_by_cat($dbo, $t_goods, $promote_id, 6);
 /* 友情链接 */
 $flink_rs = $dbo->getRs($sql_flink);
 /* 商家信息 */
-$sql_shop = "SELECT a.*,b.user_name FROM $t_shop_info as a,$t_users as b,$t_shop_request as c  where a.user_id = b.user_id and a.user_id = c.user_id and c.status=1 and a.shop_commend=1 and a.lock_flg=0 and a.open_flg=0 order by a.shop_commend desc limit 7;";
+$sql_shop = "SELECT a.*,b.user_name FROM $t_shop_info as a,$t_users as b,$t_shop_request as c  where a.user_id = b.user_id and a.user_id = c.user_id and c.status=1 and a.shop_commend=1 and a.lock_flg=0 and a.open_flg=0 order by shop_commend desc,a.shop_id desc limit 7;";
 $shop_info = $dbo->getRs($sql_shop);
 
 /*导航位置*/

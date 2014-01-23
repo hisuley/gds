@@ -1,14 +1,12 @@
 <?php
 header("content-type:text/html;charset=utf-8");
 $IWEB_SHOP_IN = true;
-//require("../foundation/asession.php");
-//require("../configuration.php");
-//require("../includes.php");
+require("../foundation/asession.php");
+require("../configuration.php");
+require("../includes.php");
 if(!$IWEB_SHOP_IN) {
 	die('Hacking attempt');
 }
-
-/* 使用例子
 //引入语言包
 $i_langpackage=new indexlp;
 
@@ -24,8 +22,8 @@ $sql = "select goods_id,goods_name,goods_intro,add_time from `$t_goods` where is
 $result = $dbo->getRs($sql);
 
 $rss = new RSS();
-foreach($result as $info){
-    $rss->AddItem($info['goods_name'],$baseUrl.'/goods.php?id='.$info['goods_id'],htmlspecialchars($info['goods_intro']),$info['add_time']);
+foreach($result as $row){
+    $rss->AddItem($row['goods_name'],$baseUrl.'/goods.php?id='.$row['goods_id'],htmlspecialchars($row['goods_intro']),$row['add_time']);
 }
 
 $title = $i_langpackage->i_index." - ".$SYSINFO['sys_title'];
@@ -34,7 +32,7 @@ $rss->RSS($title,$baseUrl,$description);
 $rss->BuildRSS();
 $rss->SaveToFile('rss.xml');
 $rss->getFile('rss.xml');
-*/
+
 /**
 * Class name: RSS
 */
@@ -126,7 +124,7 @@ class RSS {
     /**************************************************************************/
     function Show() {
         if (empty($this->content)) $this->BuildRSS();
-        return $this->content;
+        echo($this->content);
     }
     /**************************************************************************/
     // 函数名: SaveToFile

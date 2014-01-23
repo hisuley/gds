@@ -208,7 +208,9 @@ td span{color:red;}
 		<div class="main_right">
   <div class="cont">
   
-            <div class="title_uc"><h3><?php echo  $m_langpackage->m_my_order;?></h3></div>
+            <div class="title_uc"><h3><?php echo  $m_langpackage->m_my_order;?></h3>
+                <a href="goods.php?id=<?php echo $goods_id[0];?>">返回</a>
+            </div>
             <hr />
              <div id="stepTip" class="clearfix">
      <ul class="list_step1 clearfix">
@@ -217,11 +219,13 @@ td span{color:red;}
      <li style="padding-right:0"><?php echo $m_langpackage->m_u_third;?>:<br /><?php echo $m_langpackage->m_accomplish;?></li>
      </ul>
      </div>
-     
+
 		<form action="modules.php?app=user_order&gid=<?php echo implode(',',$goods_id);?>&v=<?php echo implode(',',$order_num);?>" method="post" name="for<?php echo  $m_langpackage->m_profile;?>" onsubmit="return checkform();">
 
-
-		<table width="100%" class="form_table">
+        <div style="width:100px;height:320px;float:left;margin-right:10px">
+            <script language="JavaScript" src="uploadfiles/asd/10.js"></script>
+        </div>
+		<table width="80%" class="form_table" style="float:left;">
 			<tr class="center"><th colspan="7"><?php echo $m_langpackage->m_getgoods_addresslist;?></th></tr>
 			<?php if(empty($address_rs)){?>
 				<tr><td class="center" colspan="7"><?php echo $m_langpackage->m_dontsave_getgoods_addresslist;?></td></tr>

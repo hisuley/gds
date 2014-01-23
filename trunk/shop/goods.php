@@ -221,6 +221,12 @@ if($result_category) {
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/izoom.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QjqqNhmWH1AwigvbgreLScYC"></script>
+<style type="text/css">
+#allmap{width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-hotel{height:100%;min-height:380px;width:68%;float:left;border-right:2px solid #bcbcbc;}
+#r-hotel{height:100%;min-height:300px;width:30%;float:left;}
+</style>
 <script type="text/javascript">
 var attr_ids =  <?php echo  $attr_ids;?>;
 var goodsAttr_value = new Array();
@@ -387,9 +393,7 @@ function changeImage(obj){
 				<li id="tab_content2" onclick="show_tabs('2');"><a href="javascript:;" ><?php echo $s_langpackage->s_wholesale;?></a></li>
 				<li id="tab_content3" onclick="show_tabs('3');"><a href="javascript:;" >商品评价</a></li>
 				<li id="tab_content4" onclick="show_tabs('4');"><a href="javascript:;" >成交记录</a></li>
-                <li id="tab_content5" onclick="show_tabs('5');"><a href="javascript:;" >附近酒店</a></li>
-                <li id="tab_content6" onclick="show_tabs('6');"><a href="javascript:;" >附近餐饮</a></li>
-                <li id="tab_content7" onclick="show_tabs('7');"><a href="javascript:;" >附近景点</a></li>
+                <li style="width:150px" id="tab_content5" onclick="show_tabs('5');"><a href="javascript:;" >附近酒店餐饮娱乐</a></li>
 			</ul>
 			<div class="pannel" id="tab1_content1">
                 <!--
@@ -430,21 +434,17 @@ function changeImage(obj){
                         foreach($attr as $key=>$value){?>
                             <?php if($attribute[$key]['attr_values'] == '设施' || $attribute[$key]['attr_values'] == '基础服务') {
                                 $valueArr = explode("\n", $value['attr_values']);
-                                echo '<li class="c1">';
+
                                 foreach($valueArr as $subVal){
+                                    echo '<li class="c1">';
                                     echo '<span class="provide" title="提供此服务"></span>'.$subVal;
+                                    echo '</li>';
                                 }
-                                echo '</li>';
+
                             }
                         } }?>
                     </ul>
-                    <?php 
-                    if($attr_status) {
-                    foreach($attr as $key=>$value){?>
-                    <?php if($attribute[$key]['attr_values'] == '地图') {?>
-                    <img class="map" src="http://api.map.baidu.com/staticimage?width=230&height=150&center=<?php echo  $value['attr_values'];?>&markers=<?php echo  $value['attr_values'];?>&zoom=14&markerStyles=s,A,0xff0000">
-                    <?php  }
-                    } }?>
+
                     <div class="clearfix"></div>
                 </div>
 
@@ -457,30 +457,43 @@ function changeImage(obj){
 			<div id="tab1_content3" class="pannel" style="display:none"> </div>
 			<!-- 商品成交记录 -->
 			<div id="tab1_content4" class="pannel" style="display:none"> </div>
-            <div id="tab1_content5" class="panel" style="display: none">
-                <?php if($attr_status){
+            <div id="tab1_content5" class="pannel">
+                <?php 
+                if($attr_status){
                     foreach($attr as $key=>$value){
+
                         if($attribute[$key]['attr_values'] == '地址'){
-                            $geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=renderOption&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
-                            echo print_r($geoAddress, true);
-                            //$geoAddress = json_decode($geoAddress);
+                            echo '<div id="allmap"><div id="l-hotel"></div><div id="r-hotel"></div><div class="clearfix"></div></div>';
+                            //echo $value['attr_values'];
+                            $geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=showMap&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
+                            $geoAddress = str_replace('showMap&&showMap', '', $geoAddress);
+                            $geoAddress = str_replace('(','', $geoAddress);
+                            $geoAddress = str_replace(')','', $geoAddress);
+                            //echo print_r($geoAddress, true);
+                            $geoAddress = json_decode($geoAddress, true);
+                            //echo print_r($geoAddress, true);
                         }
                     }
-                }
                 }?>
-                <?php if(!empty($geoAddress['location'])){?>
+                <?php if(!empty($geoAddress['result']['location'])){?>
                 <script type="text/javascript">
+                        // 百度地图API功能
+                        var map = new BMap.Map("l-hotel");            // 创建Map实例
+                        map.centerAndZoom(new BMap.Point(<?php echo $geoAddress['result']['location']['lng'];?>, <?php echo $geoAddress['result']['location']['lat'];?>), 15);
 
-                    // 百度地图API功能
-                    var map = new BMap.Map("allmap");            // 创建Map实例
-                    map.centerAndZoom(new BMap.Point(<?php echo $geoAddress['location']['lng'];?>, <?php echo $geoAddress['location']['lat'];?>), 11);
-                    var local = new BMap.LocalSearch(map, {
-                        renderOptions:{map: map, autoViewport:true}
-                    });
-                    local.searchNearby("酒店", "旅馆", "饭店");
+                        var myKeys = ["酒店", "餐饮", "娱乐", "KTV", "饭店"];
+                        var local = new BMap.LocalSearch(map, {
+                            renderOptions:{map: map, panel:"r-hotel",pageCapacity:1,selectFirstResult:false},
+                            pageCapacity:1,
+                        });
+                        local.searchInBounds(myKeys, map.getBounds());
+                        var marker = new BMap.Marker(new BMap.Point(<?php echo $geoAddress['result']['location']['lng'];?>, <?php echo $geoAddress['result']['location']['lat'];?>));        // 创建标注
+                        map.addOverlay(marker);
+                        var label = new BMap.Label("酒店位置",{offset:new BMap.Size(20,-10)});
+                        marker.setLabel(label);// 将标注添加到地图中
                 </script>
                 <?php }?>
-
+                <div class="clearfix"></div>
             </div>
 		</div>
 		<div id="goodTags">
@@ -497,7 +510,7 @@ function changeImage(obj){
 			</div>
 		</div>
 		<div id="sellrecom" class="bg_gary content-common-box">
-			<div class="title"><h2><?php echo $s_langpackage->s_seller_commend;?></h2></div>
+			<div class="title"><h2>其他</h2>  <span><a href="category.php?id=<?php echo $goodsinfo['cat_id'];?>&brand_id=<?php echo $goodsinfo['brand_id'];?>">更多&gt;&gt;</a></div>
 			<ul class="list_125 clearfix">
 				<?php if($best_goods) {
 				foreach($best_goods as $value){?>
@@ -718,6 +731,21 @@ function changeImage(obj){
 			document.getElementById("tab1_content4").style.display ="block";
 			get_order_record(<?php echo $goods_id;?>,1);
 		}
+
+        if (flg == '5'){
+            document.getElementById("tab_content1").className ="";
+            document.getElementById("tab_content2").className ="";
+            document.getElementById("tab_content3").className ="";
+            document.getElementById("tab_content4").className ="";
+            document.getElementById("tab1_content1").style.display ="none";
+            document.getElementById("tab1_content2").style.display ="none";
+            document.getElementById("tab1_content3").style.display ="none";
+            document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab1_content5").className ="now";
+            document.getElementById("tab1_content5").style.display ="block";
+            makeMaps('hotel');
+        }
+
 	}
 	String.prototype.Trim = function()
 	{ return this.replace(/(^\s*)|(\s*$)/g, ""); }
@@ -779,8 +807,11 @@ function changeImage(obj){
 					if(scredit=='-1'){
 						buyer_credit="<?php echo $s_langpackage->s_credit_bad;?>";
 					}
-					
-					credit+='<tr><td align="center">'+buyer_credit+'</td><td style="text-align:left">'+result[$i].buyer_evaluate+'</td><td><span class="c_gray">'+result[$i].buyer_evaltime+'</span></td><td>'+result[$i].user_name+'</td></tr>';
+                    if(result[$i].buyer_evaluate == null){
+                        result[$i].buyer_evaluate = '该买家太懒了，没有填写评价内容。';
+                    }
+
+					credit+='<tr><td align="center">'+buyer_credit+'</td><td style="text-align:left">'+result[$i].seller_evaluate+'</td><td><span class="c_gray">'+result[$i].seller_evaltime+'</span></td><td>'+result[$i].user_name+'['+result[$i].level_name+']<img src='+result[$i].head_img+' width="20px" height="20px" style="vertical-align:middle;margin-left:5px;margin-top:-1px;"/></td></tr>';
 				}
 			obj_credit.innerHTML = "<table class=\"tab_com\" width=\"100%\"><tr>"+
 					"<th width=\"15%\" >评价等级</th>"+
@@ -810,7 +841,7 @@ function changeImage(obj){
 			var result = data.result;
 			var record='';
 			for($i=0;$i<result.length;$i++){
-				record+='<tr><td>'+result[$i].user_name+'</td><td style="text-align:left"><a href="<?php echo goods_url($goods_id);?>">'+result[$i].goods_name+'</a></td><td>'+result[$i].goods_price+'</td><td>'+result[$i].order_num+'</td><td>'+result[$i].shipping_time+'</td><td>成交</td></tr>';
+				record+='<tr><td>'+result[$i].user_name+'</td><td style="text-align:left"><a href="<?php echo goods_url($goods_id);?>">'+result[$i].goods_name+'</a></td><td>'+result[$i].goods_price+'</td><td>'+result[$i].order_num+'</td><td>'+result[$i].order_time+'</td><td>成交</td></tr>';
 			}
 			obj_record.innerHTML = "<table class=\"tab_record\" width=\"100%\"><tr><th width=\"10%\">买家</th><th width=\"45%\"  style=\"text-align:left\">商品名称</th><th width=\"10%\">出价记录</th><th width=\"10%\">数量</th><th width=\"15%\">成交时间</th><th width=\"10%\">状态</th></tr>"+record+pagehtml+"</table>";
 		}else{

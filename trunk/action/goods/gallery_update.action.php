@@ -70,7 +70,7 @@ foreach(get_args('img_desc') as $k=>$v) {
 
 $img_size=unserialize(get_sess_privilege());
 $img_size_k=$img_size['8']*1024*1024;
-if($row['count_imgsize']>$img_size_k){
+if($row['count_imgsize']>$img_size_k && 0){
 	action_return(0,$m_langpackage->m_img_prompt.$img_size['8'].$m_langpackage->m_img_prompt2,'-1');
 }else
 if($file) {

@@ -109,14 +109,12 @@
 						}else {
 							if($v['pay_status']==0) {
 								echo "<span class='red'>".lp{m_order_nopayed}."</span><br /> ";
-							} elseif($v['pay_status']==1) {
-                                echo "<span class='green'>已付款</span><br /> ";
-                            } elseif($v['pay_status']==2){
+							} elseif($v['pay_status']==2){
 								echo "<span class='red'>待退款</span><br /> ";
 							} elseif($v['pay_status']==3){
 								echo "<span class='red'>已退款</span><br /> ";
 							} elseif($v['pay_status']==4){
-								echo "<span class='green'>退款成功</span><br /> ";
+								echo "<span class='red'>退款成功</span><br /> ";
 							}else {
 								if($v['transport_status']) {
 									echo "<span class='red'>".lp{m_order_transported}."</span><br /> ";
@@ -140,8 +138,7 @@
 			{sta:}else[exc]}
 				{sta:if($v['order_status']==1  && $v['pay_status']==0) [exc]}
 					<a href="do.php?act=user_order_del&id={echo: $v['order_id'];/}" onclick="return confirm('{echo: lp{m_sure_cancelthisorder};/}');">{echo: lp{m_cancelorder};/}</a><br />
-					<a href="pay.php?order_id={echo: $v['order_id'];/}&pay_id={echo:$v['pay_id'];/}&shop_id={echo:$v['shop_id'];/}">{echo: lp{m_pay};/}</a><br />
-                <a href="modules.php?app=user_payment_message&id={echo: $v['order_id'];/}">更换付款方式</a><br />
+					<a href="modules.php?app=user_payment_message&id={echo: $v['order_id'];/}">{echo: lp{m_pay};/}</a><br />
 				{end:if/}
 				{sta:if($v['order_status']==1 && $v['pay_status']==1 &&$v['transport_status']==0) [exc]}
 					<a href="do.php?act=ask_back_money&id={echo: $v['order_id'];/}">申请退款</a><br />

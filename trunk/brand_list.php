@@ -49,7 +49,9 @@ if(get_sess_user_id()) {
 	$USER['user_email'] = '';
 	$USER['shop_id'] = '';
 }
-
+$type=short_check(get_args("type"));
+$rank=short_check(get_args("rank"));
+$area=short_check(get_args("area"));
 //引入语言包
 $i_langpackage=new indexlp;
 
@@ -60,13 +62,70 @@ $header['description'] = $SYSINFO['sys_description'];
 /* 定义文件表 */
 
 $t_brand = $tablePreStr."brand";
-
+$t_brand_attr = $tablePreStr."brand_attr";
 
 /* 数据库操作 */
 dbtarget('r',$dbServs);
 $dbo=new dbex();
 
-$result = get_brand_list($dbo,$t_brand,'',12);
+$page = 12;
+$sql = "select * from `$t_brand` where is_show=1 and brand_logo!=''";
+
+if($type){
+    $sql .= " and brand_type like '%$type%'";
+}
+if($rank){
+    $sql .= " and brand_rank like '%$rank%'";
+}
+if($area){
+    $sql .= " and brand_area like '%$area%'";
+}
+$sql .= " ORDER BY brand_id DESC";
+$result =$dbo->fetch_page($sql,$page);
+//$result = get_brand_list($dbo,$t_brand,'',12);
+
+$url_this = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+$sql_type = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where attr_name='类型'";
+$brand_type = $dbo->getRs($sql_type);
+foreach($brand_type as $key => $value){
+	$values_after=str_replace(array("\r\n","\r","\n"),',',$value['attr_values']);
+	$type_info[$key]['attr_values']=explode(',',$values_after);
+
+	foreach($type_info[$key]['attr_values'] as $k => $va){
+		$va=trim($va);
+		$sql = "select count(*) AS attr_count from $t_brand where brand_type='$va' and is_show=1";
+		$goods_attr_info = $dbo->getRow($sql);
+		$type_info[$key]['values_count'][$k]=$goods_attr_info["attr_count"];
+	}
+}
+
+$sql_rank = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where attr_name='级别'";
+$brand_rank = $dbo->getRs($sql_rank);
+foreach($brand_rank as $key => $value){
+	$values_after=str_replace(array("\r\n","\r","\n"),',',$value['attr_values']);
+	$rank_info[$key]['attr_values']=explode(',',$values_after);
+
+	foreach($rank_info[$key]['attr_values'] as $k => $va){
+		$va=trim($va);
+		$sql = "select count(*) AS attr_count from $t_brand where brand_rank='$va' and is_show=1";
+		$goods_attr_info = $dbo->getRow($sql);
+		$rank_info[$key]['values_count'][$k]=$goods_attr_info["attr_count"];
+	}
+}
+
+$sql_area = "select brand_attr_id,brand_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_brand_attr` where attr_name='区域'";
+$brand_area = $dbo->getRs($sql_area);
+foreach($brand_area as $key => $value){
+	$values_after=str_replace(array("\r\n","\r","\n"),',',$value['attr_values']);
+	$area_info[$key]['attr_values']=explode(',',$values_after);
+
+	foreach($area_info[$key]['attr_values'] as $k => $va){
+		$va=trim($va);
+		$sql = "select count(*) AS attr_count from $t_brand where brand_area='$va' and is_show=1";
+		$goods_attr_info = $dbo->getRow($sql);
+		$area_info[$key]['values_count'][$k]=$goods_attr_info["attr_count"];
+	}
+}
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -88,30 +147,70 @@ $result = get_brand_list($dbo,$t_brand,'',12);
         <ul>
           <li>
             <span>级别：</span>
-            <!-- 用提取到属性值进行替换 -->
-            <a class="active">全部</a>
-            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">AAA</a>
-            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">AA</a>
-            <a title="漓江景区" href="http://202.103.241.239/test1225/category.php?id=434&amp;brand_id=23">A</a>
+            <?php  foreach($rank_info as $key => $value){?>
+                    <?php if(get_args('rank'.$value['brand_attr_id'])) {?>
+                    <a href=<?php echo preg_replace("/&rank".$value['brand_attr_id']."=([^&]+)/","",$url_this);?>><?php echo $i_langpackage->i_all;?></a>
+                    <?php }else{?>
+                    <font class="active"><?php echo $i_langpackage->i_all;?></font>
+                    <?php }?>
+                    <?php  foreach($value['attr_values'] as $k => $v){?>
+                    <?php if(get_args('rank'.$value['brand_attr_id'])) {?>
+                    <?php $url = preg_replace("/rank".$value['brand_attr_id']."=([^&]+)/","rank".$value['brand_attr_id']."=".urlencode($v),$url_this);?>
+                    <?php }else {?>
+                    <?php $url = $url_this."&rank".$value['brand_attr_id']."=".urlencode($v);?>
+                    <?php }?>
+                    <?php if(get_args('rank'.$value['brand_attr_id'])==$v) {?>
+                    <a class="active" ><?php echo  $v;?></a>
+                    <?php }else{?>
+                    <a title="<?php echo  $v;?>" href="<?php echo $url;?>"><?php echo  $v;?></a>
+                    <?php }?>
+                    <?php }?>
+            <?php }?>
           </li>
           
           <li>
             <span>区域:</span>
-            <font class="active">全部</font>
-            <!-- 用提取到属性值进行替换 -->
-            <a title="七星区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E4%B8%83%E6%98%9F%E5%8C%BA">七星区</a>
-            <a title="象山区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E8%B1%A1%E5%B1%B1%E5%8C%BA">象山区</a>
-            <a title="秀峰区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E7%A7%80%E5%B3%B0%E5%8C%BA">秀峰区</a>
-            <a title="叠彩区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E5%8F%A0%E5%BD%A9%E5%8C%BA">叠彩区</a>
+            <?php  foreach($area_info as $key => $value){?>
+                    <?php if(get_args('area'.$value['brand_attr_id'])) {?>
+                    <a href=<?php echo preg_replace("/&area".$value['brand_attr_id']."=([^&]+)/","",$url_this);?>><?php echo $i_langpackage->i_all;?></a>
+                    <?php }else{?>
+                    <font class="active"><?php echo $i_langpackage->i_all;?></font>
+                    <?php }?>
+                    <?php  foreach($value['attr_values'] as $k => $v){?>
+                    <?php if(get_args('area'.$value['brand_attr_id'])) {?>
+                    <?php $url = preg_replace("/area".$value['brand_attr_id']."=([^&]+)/","area".$value['brand_attr_id']."=".urlencode($v),$url_this);?>
+                    <?php }else {?>
+                    <?php $url = $url_this."&area".$value['brand_attr_id']."=".urlencode($v);?>
+                    <?php }?>
+                    <?php if(get_args('area'.$value['brand_attr_id'])==$v) {?>
+                    <a class="active" ><?php echo  $v;?></a>
+                    <?php }else{?>
+                    <a title="<?php echo  $v;?>" href="<?php echo $url;?>"><?php echo  $v;?></a>
+                    <?php }?>
+                    <?php }?>
+            <?php }?>
           </li>
           <li>
             <span>类型:</span>
-            <font class="active">全部</font>
-            <!-- 用提取到属性值进行替换 -->
-            <a title="七星区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E4%B8%83%E6%98%9F%E5%8C%BA">古代遗迹</a>
-            <a title="象山区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E8%B1%A1%E5%B1%B1%E5%8C%BA">历史建筑</a>
-            <a title="秀峰区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E7%A7%80%E5%B3%B0%E5%8C%BA">自然风景名胜区</a>
-            <a title="叠彩区" href="http://202.103.241.239/test1225/category.php?id=434&amp;attr47=%E5%8F%A0%E5%BD%A9%E5%8C%BA">叠彩区</a>
+            <?php  foreach($type_info as $key => $value){?>
+                    <?php if(get_args('type'.$value['brand_attr_id'])) {?>
+                    <a href=<?php echo preg_replace("/&type".$value['brand_attr_id']."=([^&]+)/","",$url_this);?>><?php echo $i_langpackage->i_all;?></a>
+                    <?php }else{?>
+                    <font class="active"><?php echo $i_langpackage->i_all;?></font>
+                    <?php }?>
+                    <?php  foreach($value['attr_values'] as $k => $v){?>
+                    <?php if(get_args('type'.$value['brand_attr_id'])) {?>
+                    <?php $url = preg_replace("/type".$value['brand_attr_id']."=([^&]+)/","type".$value['brand_attr_id']."=".urlencode($v),$url_this);?>
+                    <?php }else {?>
+                    <?php $url = $url_this."&type".$value['brand_attr_id']."=".urlencode($v);?>
+                    <?php }?>
+                    <?php if(get_args('type'.$value['brand_attr_id'])==$v) {?>
+                    <a class="active" ><?php echo  $v;?></a>
+                    <?php }else{?>
+                    <a title="<?php echo  $v;?>" href="<?php echo $url;?>"><?php echo  $v;?></a>
+                    <?php }?>
+                    <?php }?>
+            <?php }?>
           </li>
           <li><span>关键字：</span>无</li>
         </ul>

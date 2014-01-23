@@ -183,11 +183,11 @@ td{text-align:left;}
 .ulselect li.select {background:#F6A248; color:#fff;}
 .category_com {height:30px; line-height:30px; text-align:center;}
 .attr_class { background:#FFF2E6; }
-.attr_class div.div {border:2px solid #fff; padding:3px;}
-.attr_class div span.left{display:block; width:150px; float:left; margin-left:10px; text-align:right; _line-height:24px;}
-.attr_class div span.right{display:block; width:350px; float:left; margin-left:5px; text-align:left;}
+.attr_class div.div {border:2px solid #fff; padding:3px;width:700px;}
+.attr_class div span.left{display:block; width:115px; float:left; margin-left:10px; text-align:right; _line-height:24px;}
+.attr_class div span.right{display:block; width:450px; float:left; margin-left:5px; text-align:left;}
 .attr_class div span.right input {margin-left:5px;}
-
+.attr_class div span.right textarea{width:400px;}
 #picspan {width:82px; height:82px; padding:1px; border:1px solid #efefef; line-height:80px; text-align:center; display:inline-block; overflow:hidden; float:right;}
 </style>
 <script type="text/javascript" src="servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
@@ -198,6 +198,9 @@ td{text-align:left;}
 <script type="text/javascript" src="servtools/swfupload/fileprogress.js"></script>
 <script type="text/javascript" src="servtools/swfupload/handlers.js"></script>
 <script type="text/javascript">
+    var must_fill_attr = new Array();
+    var not_same_attr = new Array();
+    var not_same_check = false;
 		var swfu;
 
 		window.onload = function() {
@@ -352,6 +355,18 @@ function checkForm() {
 			return false;
 		}
 	}
+    if(must_fill_attr.length > 0){
+        for(var i=0;i< must_fill_attr.length;i++){
+            var tempAttrName = 'attr['+must_fill_attr[i]+']';
+            var tempAttrValue = document.getElementsByName(tempAttrName)[0];
+            if(tempAttrValue.value == ''){
+                alert('属性没有填写完整！');
+                tempAttrValue.focus();
+                return false;
+            }
+
+        }
+    }
 	return true;
 }
 });
@@ -387,9 +402,11 @@ function checkForm() {
 						<input type="radio" name="type_id" value="2" <?php if($goods_info['type_id']=='2'){?>checked<?php }?> /><?php echo $m_langpackage->m_goods_notnew;?> &nbsp;&nbsp;
 						<input type="radio" name="type_id" value="3" <?php if($goods_info['type_id']=='3'){?>checked<?php }?> /><?php echo $m_langpackage->m_goods_isnull;?> </span></td>
 					</tr>
+                    <tr>
+                        <td class="textright"><?php echo $m_langpackage->m_goods_attr;?>：</td>
+                    </tr>
 					<tr id="goods_attr_tr">
-						<td class="textright"><?php echo $m_langpackage->m_goods_attr;?>：</td>
-						<td align="left" class="attr_class" id="attr_content"></td>
+						<td colspan='2' align="left" class="attr_class" id="attr_content"></td>
 					</tr>
 					<tr>
 						<td class="textright"><?php echo  $m_langpackage->m_goods_name;?>：</td>
@@ -789,9 +806,12 @@ function changeAttrTr(objvalue) {
 	var html = '';
 	var temp = '';
 	for(var i=0; i<objvalue.length; i++) {
+        if(objvalue[i].attr_name == '编号'){
+            must_fill_attr.push(objvalue[i].attr_id);
+        }
 		temp = formatFormElement(objvalue[i].attr_id,objvalue[i].input_type,objvalue[i].attr_name,objvalue[i].attr_values,objvalue[i].price);
 		html += '<div class="div"><span class="left">'+objvalue[i].attr_name+'：</span><span class="right">'+temp+'</span><div class="clear"></div></div>';
-	}
+    }
 	attr_content.innerHTML = html;
 }
 

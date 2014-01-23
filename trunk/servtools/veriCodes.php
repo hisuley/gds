@@ -100,11 +100,12 @@ class VerifyCode {
 			'spacing' => 0,
 			'minSize' => $this->height/2+2,
 			'maxSize' => $this->height/2+4,
-			'font' => 'Duality.ttf'
+			'font' => './Duality.ttf'
 		);
 
         $x      = 10*$this->scale;
         $y      = round(($this->height*27/40)*$this->scale);
+
         $length = strlen($text);
         for ($i=0; $i<$length; $i++) {
             $degree   = rand($this->maxRotation*-1, $this->maxRotation);

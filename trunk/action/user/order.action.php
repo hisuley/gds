@@ -25,7 +25,6 @@ $t_useraddress=$tablePreStr."user_address";
 $t_order_goods = $tablePreStr."order_goods";
 $t_credit = $tablePreStr."credit";
 $t_good_photo = $tablePreStr."good_photo";
-$t_payment = $tablePreStr."payment";
 // 处理post变量
 
 $post['group_id'] = intval(get_args('group_id'));
@@ -41,16 +40,8 @@ if (is_array($goods_id)) {
 }else{
 	$goods_id=array(intval($goods_id));
 }
-
 $post['pay_id'] = intval(get_args('pay_id'));
-//print_r($user_info);
-$payment_sql = "select pay_name from `$t_payment` where pay_id='".$post['pay_id']."' LIMIT 0,1";
-$payment_name = $dbo->getRow($payment_sql);
-if(!empty($payment_name)){
-    $post['pay_name'] = $payment_name[0];
-}else{
-    $post['pay_name'] = short_check(get_args('pay_name'));
-}
+$post['pay_name'] = short_check(get_args('pay_name'));
 $goods_name=get_args('goods_name');
 //$post['goods_price'] = floatval(get_args('goods_price'));
 $goods_price = get_args(('goods_price'));

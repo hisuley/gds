@@ -144,7 +144,9 @@ foreach ($buy_goods as $k=>$v){
 }
 if(!$goods_info) { exit($m_langpackage->m_handle_err); }
 //是否是酒店或者景点分类下的商品, 酒店ID：433，景点ID：434
-$cid_arr = get_category_cid($dbo,$t_category,$goods_info[0]['cat_id']);$grogshop_flag=in_array(433,$cid_arr);$scenic_flag=in_array(434,$cid_arr);
+$cid_arr = get_category_cid($dbo,$t_category,$goods_info[0]['cat_id']);
+$grogshop_flag=in_array(433,$cid_arr);
+$scenic_flag=in_array(434,$cid_arr);
 $shop_id=get_sess_shop_id();
 if($shop_id == $goods_info[0]['shop_id']) {
 	set_sess_err_msg($m_langpackage->m_dontbuy_youself);
@@ -236,12 +238,14 @@ td span{color:red;}
 					<input type="hidden" value="<?php echo  $goods_info[0]['shop_id'];?>" name="sshop_id" />
 					<tr><th colspan="2"><?php echo  $m_langpackage->m_goods_name;?></th><th><?php echo  $m_langpackage->m_goods_price;?></th><th><?php echo  $m_langpackage->m_buy_num;?></th></tr>
 					<?php foreach($goods_info as $k=>$v){?>
-					<tr><td class="name" colspan="2"><a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><?php echo  $v['goods_name'];?></a></td>
-					<td align="center"><?php echo  $v['goods_price'];?><?php echo  $m_langpackage->m_yuan;?></td>
-					<td align="center"><input type="text" value="<?php echo  $buy_goods[$v['goods_id']];?>" name="order_num[]" style="width:30px"></td>
+					<tr>
+                        <td class="name" colspan="2">
+                            <a href="<?php echo  goods_url($v['goods_id']);?>" target="_blank"><img src="<?php echo  $v['is_set_image'] ? str_replace('thumb_','',$v['goods_thumb']) : 'skin/default/images/nopic.gif';?>"  width="40" height="40"  alt="<?php echo $v['goods_name'];?>"   onerror="this.src='skin/default/images/nopic.gif'"/><?php echo  $v['goods_name'];?></a></td>
+					<td align="center"><span id="goods_price" style="color:black;font-weight:normal"><?php echo  $v['goods_price'];?></span><?php echo  $m_langpackage->m_yuan;?></td>
+					<td align="center"><input type="text" value="<?php echo  $buy_goods[$v['goods_id']];?>" name="order_num[]" style="width:30px" onblur="(changePrice(this))" onkeyup="(changePrice(this))"></td>
 					<input type="hidden" value="<?php echo  $v['goods_id'];?>" name="goods_id[]" />
 					<input type="hidden" value="<?php echo  $v['goods_name'];?>" name="goods_name[]" />
-					<input type="hidden" value="<?php echo  $v['goods_price'];?>" name="goods_price[]" />
+					<input type="hidden" value="<?php echo  $v['goods_price'];?>" name="goods_price[]" id="one_good_price" />
 					<input type="hidden" value="<?php echo  $v['goods_price'] *$buy_goods[$v['goods_id']] ;?>" id="order_amount" name="order_amount[]" />
 					</tr>
 					<?php }?>
@@ -359,6 +363,16 @@ function inputTxt2(obj,act, initVal){
     //obj.style.color="#000000"
     }
 }
+function changePrice(obj){
+    var goodsPrice = document.getElementById("goods_price");
+    var goodsPriceInit = document.getElementById("one_good_price").value;
+    goodsPrice.innerHTML = '';
+    var goodsNumber = parseInt(obj.value);
+    if(goodsNumber == '' || goodsNumber == null || goodsNumber == 0)
+        goodsNumber = 0;
+    goodsPrice.innerHTML = goodsPriceInit * goodsNumber + '.00';
+    var realpriceSecondCheck = document.getElementById("order_amount").value = goodsPriceInit * goodsNumber;
+}
 function compareDate(){
     var departDate = document.getElementById('departDateInput').value;
     var departDateArray = departDate.split("-");
@@ -423,6 +437,11 @@ function show(id) {
 
 
 function checkform(){
+    var realpriceCheck = document.getElementById('order_amount');
+    if(realpriceCheck.value == 0 || realpriceCheck.value == ''){
+        alert('商品数量不能为空！');
+        return false;
+    }
 	var to_user_name = document.getElementsByName('to_user_name')[0];
 	if(to_user_name.value==''){
 		alert('<?php echo $m_langpackage->m_pl_getgoods_name;?>');
@@ -466,6 +485,31 @@ function checkform(){
 		return false;
 	}
 
+    <?php if($grogshop_flag==true){?>
+    var checkinDate = document.getElementsByName('checkinDate')[0];
+    var checkoutDate = document.getElementsByName('checkoutDate')[0];
+    if(checkinDate.value == '' || checkoutDate.value == '' || checkinDate.value == '请选择入住日期' || checkoutDate.value == '请选择入住日期'){
+        alert('预订日期没有填写完整！');
+        return false;
+    }
+    var checkinPerson = document.getElementsByName('checkin_person')[0];
+    if(checkinPerson.value == '' || parseInt(checkinPerson.value) == 0 ){
+        alert('预订人数不能为空或者0！');
+        return false;
+    }
+    var contactPerson = document.getElementsByName('contact_person')[0];
+    var contactMobile = document.getElementsByName('contact_mobile')[0];
+    if(contactPerson.value == '' || contactMobile.value == '' ){
+        alert('请填写完整预订人信息！');
+        return false;
+    }
+
+    <?php }?>
+
+
+
+
+
 	var textareac = document.getElementById("textareac");
 	if(textareac.value.length>300){
 		alert("<?php echo $s_langpackage->s_work_count_error;?>");
@@ -492,6 +536,8 @@ function checkform(){
 	}else {
 		return true;
 	}
+
+
 
 
 }

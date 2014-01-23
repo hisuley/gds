@@ -253,7 +253,7 @@ td span {color:red;}
 					<?php }?>
 					<a href="m.php?app=order_view&id=<?php echo $value['order_id'];?>"><?php echo $a_langpackage->a_look;?>
                     <br />
-                    <a target="_blank" href="<?php echo $SYSINFO['web'];?>/do.php?act=user_getbarcode&order_id=<?php echo $value['order_id']; ?>">二维码
+                    <a target="_blank" href="<?php echo $SYSINFO['web'];?>/do.php?act=user_getbarcode&order_id=<?php echo $value['order_id']; ?>&sign=<?php echo md5($value['order_id'].$value['payid']."fjowiegwoiehowigewiog"); ?>">二维码
                     </a>
 				</td>
 			</tr>

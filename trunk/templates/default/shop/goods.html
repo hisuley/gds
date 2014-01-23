@@ -21,7 +21,6 @@
 #r-hotel{height:100%;min-height:300px;width:30%;float:left;}
 </style>
 <script type="text/javascript">
-var attr_ids =  {echo: $attr_ids;/};
 var goodsAttr_value = new Array();
 var goodsAttr_name = new Array();
 var goodsAttr_price = new Array();
@@ -253,18 +252,27 @@ function changeImage(obj){
             <div id="tab1_content5" class="pannel">
                 {sta:
                 if($attr_status){
+
                     foreach($attr as $key=>$value){
 
-                        if($attribute[$key]['attr_values'] == '地址'){
-                            echo '<div id="allmap"><div id="l-hotel"></div><div id="r-hotel"></div><div class="clearfix"></div></div>';
-                            //echo $value['attr_values'];
-                            $geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=showMap&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
-                            $geoAddress = str_replace('showMap&&showMap', '', $geoAddress);
-                            $geoAddress = str_replace('(','', $geoAddress);
-                            $geoAddress = str_replace(')','', $geoAddress);
-                            //echo print_r($geoAddress, true);
-                            $geoAddress = json_decode($geoAddress, true);
-                            //echo print_r($geoAddress, true);
+                        if(!empty($attribute[$key]) && !empty($attribute[$key]['attr_values'])){
+
+                            if($attribute[$key]['attr_values'] == '地址'){
+
+                                echo '<div id="allmap"><div id="l-hotel"></div><div id="r-hotel"></div><div class="clearfix"></div></div>';
+                                //echo $value['attr_values'];
+                               $geoAddress = file_get_contents('http://api.map.baidu.com/geocoder/v2/?ak=QjqqNhmWH1AwigvbgreLScYC&callback=showMap&output=json&address='.$value['attr_values'].'&city=%E6%A1%82%E6%9E%97%E5%B8%82', 'r');
+                               // echo "<!-- ".print_r($geoAddress, true)." -->";
+                                $geoAddress = str_replace('showMap&&showMap', '', $geoAddress);
+                                $geoAddress = str_replace('(','', $geoAddress);
+                                $geoAddress = str_replace(')','', $geoAddress);
+                                //echo print_r($geoAddress, true);
+                                //echo "<!-- ".print_r($geoAddress, true)." -->";
+                                $geoAddress = json_decode($geoAddress, true);
+                                //echo print_r($geoAddress, true);
+                                //echo "<!-- ".print_r($geoAddress, true)." -->";
+                                break;
+                            }
                         }
                     }
                 if/}
@@ -475,6 +483,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="none";
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab1_content5").style.display ="block";
 		}
 		if (flg == '2'){
 			document.getElementById("tab_content1").className ="";
@@ -485,6 +494,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="block";
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab1_content5").style.display ="none";
 		}
 		if (flg == '3'){
 			document.getElementById("tab_content1").className ="";
@@ -495,6 +505,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="none";
 			document.getElementById("tab1_content3").style.display ="block";
 			document.getElementById("tab1_content4").style.display ="none";
+            document.getElementById("tab1_content5").style.display ="none";
 			get_goods_credit({echo:$goods_id;/},1);
 		}
 		if (flg == '4'){
@@ -506,6 +517,7 @@ function changeImage(obj){
 			document.getElementById("tab1_content2").style.display ="none";
 			document.getElementById("tab1_content3").style.display ="none";
 			document.getElementById("tab1_content4").style.display ="block";
+            document.getElementById("tab1_content5").style.display ="none";
 			get_order_record({echo:$goods_id;/},1);
 		}
 

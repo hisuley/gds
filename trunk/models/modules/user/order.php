@@ -57,7 +57,6 @@ $t_user_address = $tablePreStr."user_address";
 $t_cart = $tablePreStr."cart";
 $t_transport = $tablePreStr."transport";
 $t_category = $tablePreStr."category";
-$t_order_info = $tablePreStr."order_info";
 
 $dbo=new dbex;
 //读写分离定义方法
@@ -80,7 +79,7 @@ $user_info=array(
 	'zipcode'=>'',
 	'mobile'=>'',
 	'telphone'=>'',
-	'email'=>''
+	'email'=>'',
 
 );
 
@@ -133,7 +132,6 @@ $areas_info = get_areas_info($dbo,$t_areas);
 //print_r($user_info);
 $sql = "select * from `$t_shop_payment` where shop_id='".$goods_info[0]['shop_id']."'";
 $payment_info = $dbo->getRow($sql);
-$payment_shop_info = get_shop_payment_info($dbo,$t_shop_payment,$goods_info[0]['shop_id'],1);
 $payment = get_payment_info($dbo,$t_payment);
 $transport_type =0;
 //查询开启的配送方式

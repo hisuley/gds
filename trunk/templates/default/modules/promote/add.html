@@ -170,31 +170,55 @@ function checknum(){
     return true;
 	
 }
-function checkform() {
-    var goods_id = document.getElementsByName('goods_id')[0];
-    if(goods_id.value == '' || goods_id.value == 0){
-        alert("请选择商品！");
-        return false;
-    }
-    var promote_price = document.getElementsByName('promote_price')[0];
-    if(promote_price.value=='') {
-        alert("请填写商品价格！");
+function checkform(){
+    var promote_name = document.getElementsByName('promote_name')[0];
+    var cday = new Date();
+    var cdate=cday.getFullYear()+"-"+(cday.getMonth()+1)+"-"+cday.getDate();
+    if(promote_name.value==''){
+        alert('{echo:lp{m_promote_no_name};/}');
         return false;
     }
     var start_time = document.getElementsByName('start_time')[0];
-    if(start_time.value=='') {
-        alert("请填写开始时间！");
+    if(start_time.value==''){
+        alert('{echo:lp{m_sta_no_time};/}');
         return false;
     }
     var end_time = document.getElementsByName('end_time')[0];
-    if(end_time.value=='') {
-        alert("请填写结束时间！");
+    if(end_time.value==''){
+        alert('{echo:lp{m_end_no_time};/}');
         return false;
     }
-    if(end_time.value < start_time.value){
-        alert("结束时间必须大于开始时间！");
+    if(isNaN(DateDiff(start_time.value,end_time.value))){
+        alert('{echo:lp{m_timeformat_error};/}');
+           return false;
+        }
+    if(DateDiff(start_time.value,end_time.value)>0){
+        alert('{echo:lp{m_start_time_error};/}');
         return false;
     }
+    if(DateDiff(start_time.value,cdate)<0){
+        alert('{echo:lp{m_startend_time_error};/}');
+        return false;
+    }
+    var d1 = new Date(start_time.value.replace(/-/g, "/")); 
+    var d2 = new Date(end_time.value.replace(/-/g, "/")); 
+    if (Date.parse(d1) - Date.parse(d2) == 0) { 
+    	alert('{echo:lp{m_start_end_time_error};/}');
+      return false; 
+    } 
+      
+    var goods_id = document.getElementsByName('goods_id')[0];
+    if(goods_id.value==''){
+        alert('{echo:lp{m_products_no_name};/}');
+        return false;
+    }
+
+    var promote_price = document.getElementsByName('promote_price')[0];
+    if(promote_price.value==''){
+        alert('{echo:lp{m_promote_no_price};/}');
+        return false;
+    }
+
     return true;
 }
 

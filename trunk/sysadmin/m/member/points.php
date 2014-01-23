@@ -64,10 +64,6 @@ td span {color:red;}
 				<th><?php echo $a_langpackage->a_integral_rmb_rate;?>：</th>
 				<td><input type="text" class="small-text" name="sysinfo[points_rate]" value="<?php echo $SYSINFO['points_rate']; ?>" style="width:35px;" /> ：<input type="text" class="small-text" name="sysinfo[rmb_rate]" value="<?php echo $SYSINFO['rmb_rate']; ?>" style="width:35px;" />（<?php echo $a_langpackage->a_integral_rmb_rate_mess;?>）</td>
 			</tr>
-            <tr>
-                <th>积分使用时间段：</th>
-                <td><input type="text" class="small-text" name="sysinfo[points_rate_start]" value="<?php echo $SYSINFO['points_rate_start']; ?>" style="width:100px;" /> 至 <input type="text" class="small-text" name="sysinfo[points_rate_end]" value="<?php echo $SYSINFO['points_rate_end']; ?>" style="width:100px;" />（留空则为不限制）</td>
-            </tr>
 			</tbody>
 		</table>
 		<table class="form-table">

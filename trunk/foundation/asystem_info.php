@@ -12,7 +12,7 @@ $SYSINFO['sys_company'] = '桂林旅游局';
 $SYSINFO['sys_copyright'] = 'Copyright © 2013-2013';
 $SYSINFO['sys_icp'] = '桂ICP备01000010号';
 $SYSINFO['sys_registerinfo'] = '';
-$SYSINFO['sys_kftelphone'] = '0773-';
+$SYSINFO['sys_kftelphone'] = '0531-';
 $SYSINFO['sys_kfqq'] = '';
 $SYSINFO['email_send'] = 'false';
 $SYSINFO['sys_smtpserver'] = 'mail.qq.com';
@@ -44,10 +44,9 @@ $SYSINFO['map_key'] = '';
 $SYSINFO['sys_logo'] = '';
 $SYSINFO['sys_domain'] = '0';
 $SYSINFO['sys_smtptest'] = '';
-$SYSINFO['version'] = 'v1.0';
-$SYSINFO['credit_withdraw'] = '0.01';
+$SYSINFO['version'] = 'v1.2';
 $SYSINFO['verifycode'] = 'a:4:{i:1;s:1:"0";i:2;s:1:"1";i:3;s:1:"1";i:4;s:1:"0";}'; 
-$SYSINFO['site_domain'] = '.dms.com';
+$SYSINFO['site_domain'] = '.iwebmall.com'; 
 if(file_exists($webRoot."/cache/setting.php")) {
 	include($webRoot."/cache/setting.php");
 }

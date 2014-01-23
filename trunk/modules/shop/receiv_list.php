@@ -30,7 +30,7 @@ if(filemtime("templates/default/modules/shop/receiv_list.html") > filemtime(__fi
 		-----------------------------------------
 		文件：receiv_list.php。
 		功能: 商铺收款单。
-		日期：2013-11-23
+		日期：2010-11-23
 		-----------------------------------------
 	*/
 	
@@ -46,6 +46,8 @@ if(filemtime("templates/default/modules/shop/receiv_list.html") > filemtime(__fi
 	$end_time = short_check(get_args('end_time'));
 	$user_name = short_check(get_args('user_name'));
 	$payid = short_check(get_args('payid'));
+    $orderby = short_check(get_args('orderby'));
+    $orderway = short_check(get_args('orderway'));
 
 	//数据表定义区
 	$t_receiv_list = $tablePreStr."receiv_list";
@@ -80,7 +82,11 @@ if(filemtime("templates/default/modules/shop/receiv_list.html") > filemtime(__fi
 	{
 		$sql .= " and receiv_date <= '$end_time'";
 	}
-	$sql .= " order by receiv_date desc";
+    if($orderby && $orderway) {
+        $sql .= " order by $orderby $orderway";
+    } else {
+        $sql .= " order by receiv_date desc;";
+    }
 	$result = $dbo->fetch_page($sql,10);
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -138,14 +144,14 @@ p{
 			</div>
 				<table width="100%" class="">
 					<tr class="">
-						<th width="40">订单号</th>
-						<th width="100">支付单号</th>
-						<th width="100">支付方式</th>
+						<th width="40">订单号<a href="modules.php?app=shop_receiv_list&orderby=receiv_id&orderway=asc">↑</a><a href="modules.php?app=shop_receiv_list&orderby=receiv_id&orderway=desc">↓</a></th>
+						<th width="100">支付单号<a href="modules.php?app=shop_receiv_list&orderby=order_id&orderway=asc">↑</a><a href="modules.php?app=shop_receiv_list&orderby=order_id&orderway=desc">↓</a></th>
+						<th width="100">支付方式<?php echo $a_langpackage->a_receiv_payid;?> <a href="modules.php?app=shop_receiv_list&orderby=payid&orderway=asc">↑</a><a href="modules.php?app=shop_receiv_list&orderby=payid&orderway=desc">↓</a></th>
 						<th width="90">支付时间</th>
 						<th width="50">收款人</th>
-						<th width="60">收款时间</th>
+						<th width="60">收款时间<a href="modules.php?app=shop_receiv_list&orderby=receiv_date&orderway=asc">↑</a><a href="modules.php?app=shop_receiv_list&orderby=receiv_date&orderway=desc">↓</a></th>
 						<th width="100">收款账号</th>
-						<th width="60">收款金额</th>
+						<th width="60">收款金额<a href="modules.php?app=shop_receiv_list&orderby=receiv_money&orderway=asc">↑</a><a href="modules.php?app=shop_receiv_list&orderby=receiv_money&orderway=desc">↓</a></th>
 				   </tr>
 					<?php 
 					if(!empty($result['result'])) {

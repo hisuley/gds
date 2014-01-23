@@ -42,6 +42,8 @@ $i_langpackage=new indexlp;
  }
 //数据表定义区
 $t_goods = $tablePreStr."goods";
+$t_attribute = $tablePreStr."attribute";
+$t_goods_attr = $tablePreStr."goods_attr";
 $t_category = $tablePreStr."category";
 $t_shop_category = $tablePreStr."shop_category";
 $t_shop_payment = $tablePreStr."shop_payment";
@@ -97,6 +99,14 @@ if($imagelistid){
 	$imagelistid=substr($imagelistid,0,strlen($imagelistid)-1);
 }
 
+$cat_ids = get_top_category($dbo, $t_category);
+$sql = "select attr_id,cat_id,attr_name,input_type,attr_values,sort_order, selectable, price from `$t_attribute` where attr_name = '编号' AND cat_id IN(".implode(',', $cat_ids).")";
+$result = $dbo->getRs($sql);
+$arrIds = array();
+foreach($result as $v){
+    array_push($arrIds, $v['attr_id']);
+}
+
 set_session("goodsvercode",md5(rand(10000,999999)));
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -126,11 +136,11 @@ td{text-align:left;}
 .ulselect li.select {background:#F6A248; color:#fff;}
 .category_com {height:30px; padding-bottom:10px; line-height:30px; text-align:center;}
 .attr_class { background:#FFF2E6; }
-.attr_class div.div {border:2px solid #fff; padding:3px;float:left;width:auto;}
-.attr_class div span.left{display:block; width:auto; float:left; margin-left:10px; text-align:right; _line-height:24px;}
-.attr_class div span.right{display:block; width:auto; float:left; margin-left:5px; text-align:left;}
+.attr_class div.div {border:2px solid #fff; padding:3px;width:700px;}
+.attr_class div span.left{display:block; width:115px; float:left; margin-left:10px; text-align:right; _line-height:24px;}
+.attr_class div span.right{display:block; width:450px; float:left; margin-left:5px; text-align:left;}
 .attr_class div span.right input {margin-left:5px;}
-
+.attr_class div span.right textarea{width:400px;}
 #picspan {width:82px; height:82px; padding:1px; border:1px solid #efefef; line-height:80px; text-align:center; display:inline-block; overflow:hidden; float:right;}
 </style>
 <script type="text/javascript" src="servtools/jquery-1.3.2.min.js?v=1.3.2"></script>
@@ -143,6 +153,9 @@ td{text-align:left;}
 <script type="text/javascript" src="servtools/swfupload/fileprogress.js"></script>
 <script type="text/javascript" src="servtools/swfupload/handlers.js"></script>
 <script type="text/javascript">
+    var must_fill_attr = new Array();
+    var not_same_attr = new Array();
+    var not_same_check = false;
 		var swfu;
 
 		window.onload = function() {
@@ -308,9 +321,45 @@ function checkForm() {
 			return false;
 		}
 	}
+    if(must_fill_attr.length > 0){
+        for(var i=0;i< must_fill_attr.length;i++){
+            var tempAttrName = 'attr['+must_fill_attr[i]+']';
+            var tempAttrValue = document.getElementsByName(tempAttrName)[0];
+            if(tempAttrValue.value == ''){
+                alert('属性没有填写完整！');
+                tempAttrValue.focus();
+                return false;
+            }
+
+        }
+    }
+    if(not_same_attr.length > 0){
+        for(var i=0;i < not_same_attr.length;i++){
+            var tempAttrName = 'attr['+not_same_attr[i]+']';
+            var tempAttrValue = document.getElementsByName(tempAttrName)[0];
+            ajax("do.php?act=goods_attr_check","POST","id="+not_same_attr[i]+"&v="+tempAttrValue.value,function(data){
+                changeData(data);
+            },'JSON');
+            if(not_same_check){
+                alert('属性值已经存在，请修改！');
+                tempAttrValue.focus();
+                return false;
+            }
+
+        }
+
+    }
 	var submit_button = document.getElementsByName('submit')[0];
 	submit_button.disabled = true;
 	return true;
+}
+function changeData(data){
+    console.log(data);
+    if(data.return_code == 1){
+        not_same_check = true;
+    }else{
+        not_same_check = false;
+    }
 }
 </script>
 </head>
@@ -342,9 +391,11 @@ function checkForm() {
 						<td id="brand_box">&nbsp;&nbsp;</td>
 					</tr>
 					<input type="hidden" name="type_id" value="1"  />
-					<tr id="goods_attr_tr">
-						<td class="textright"><?php echo $m_langpackage->m_goods_attr;?>：</td>
-						<td class="attr_class" id="attr_content"></td>
+					<tr>
+                        <td class="textright"><?php echo $m_langpackage->m_goods_attr;?>：</td>
+					</tr>
+                    <tr id="goods_attr_tr">
+						<td colspan='2' class="attr_class" id="attr_content"></td>
 					</tr>
 					<tr>
 						<td class="textright"><?php echo  $m_langpackage->m_goods_name;?>：</td>
@@ -650,6 +701,10 @@ function changeAttrTr(objvalue) {
 	var html = '';
 	var temp = '';
 	for(var i=0; i<objvalue.length; i++) {
+        if(objvalue[i].attr_name == '编号'){
+            must_fill_attr.push(objvalue[i].attr_id);
+            not_same_attr.push(objvalue[i].attr_id);
+        }
 		temp = formatFormElement(objvalue[i].attr_id,objvalue[i].input_type,objvalue[i].attr_name,objvalue[i].attr_values,objvalue[i].price);
 		html += '<div class="div"><span class="left">'+objvalue[i].attr_name+'：</span><span class="right">'+temp+'</span><div class="clear"></div></div>';
 		/*

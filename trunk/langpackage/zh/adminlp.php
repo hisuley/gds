@@ -69,8 +69,7 @@ class adminlp{
 	var $a_m_member_level_add = "添加会员级别";
 	var $a_m_check_commember = "未审核企业";
 	var $a_m_shop_mengament = "企业管理";
-    var $a_m_suppliers_mengament = "供应商管理";
-    var $a_m_suppliers_management = "供应商管理";
+        var $a_m_suppliers_mengament = "供应商管理";
 	var $a_m_order_mengament = "交易管理";
 	var $a_m_opayedrder_list = "已付款订单列表";
 	var $a_m_aboutgoods_management = "商品管理";
@@ -263,7 +262,6 @@ class adminlp{
         var $a_hotel_brand_management = "酒店品牌管理";
         var $a_hotel_stars_management = "酒店星级管理";
         var $a_hotel_facilities_management = "酒店设施管理";
-        var $a_hotel_facilties_management = "酒店设施管理";
         var $a_hotel_landmark_management = "酒店地标管理";
         var $a_scenic_type_management = "景点类别管理";
         var $a_scenic_rank_management = "景点级别管理";
@@ -548,8 +546,6 @@ class adminlp{
 	var $a_suppliers_name = "供应商名称";
         var $a_suppliers_zip ="供应商邮编";
         var $a_suppliers_categorys = "供应商分类";
-
-    var $a_suppliers_category = "供应商分类";
         var $a_user_name_none = "会员名称不能为空！";
         var $a_suppliers_categories_export = "供应商分类导出";
 	var $a_suppliers_categories_import = "供应商分类导入";
@@ -558,7 +554,6 @@ class adminlp{
         var $a_suppliers_commission_ratio = "佣金比例";
         var $a_suppliers_status = "供应商状态";
 	var $a_lock_suppliers = "锁定供应商";
-    var $a_suppliers_lock_status = "锁定供应商";
         var $a_free_suppliers_mess1 = "供应商，该供应商下的商品同时下架！";
         var $a_m_suppliers_integral = "供应商信用等级";
         var $a_m_check_suppliers = "未审核供应商";
@@ -905,7 +900,7 @@ class adminlp{
 	var $a_setting_message15 = "（产品列表页面每页的显示数设置）";
 	var $a_setting_message16 = "（文章列表页面每页的显示数设置）";
 	var $a_setting_message17 = "（开启重写时会使前台所有页面静态化，更容易被搜索引擎挖掘，提高被收录的机率。）<br />（开启简单重写：服务器无需Rewrite模块的支持）<br />（开启复杂重写：服务器需要对Rewrite模块的支持，需要把docs/目录下的.htaccess放到您的网站根目录下。）";
-	var $a_setting_message18 = "（IM开启需要TQ产品的支持，源码可到官方主站";
+	var $a_setting_message18 = "（IM开启需要iwebIM产品的支持，源码可到官方主站";
 	var $a_setting_message19 = " 下载";
 	var $a_setting_message20 = "（关闭网站，此时任何人都无法访问站点内容。默认：打开）";
 	var $a_setting_message21 = "（如果您需要增加流量统计代码，请把它放到这里。）";

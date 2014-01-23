@@ -29,7 +29,7 @@ $session_prefix = 'gds_';
 
 // web访问根目录
 
-$baseUrl = 'http://localhost/gds/trunk/';
+$baseUrl = 'http://192.168.2.84/dms/';
 
 
 // url_rewrite 是否开启

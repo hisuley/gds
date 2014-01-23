@@ -69,6 +69,9 @@ $t_tag = $tablePreStr."tag";
 $t_nav = $tablePreStr."nav";
 $t_category = $tablePreStr."category";
 
+
+/* canshu */
+$kk = short_check(get_args("k"));
 /* 数据库操作 */
 dbtarget('r',$dbServs);
 $dbo=new dbex();
@@ -132,6 +135,9 @@ $dbo->exeUpdate($sql);
 
 $sql = "SELECT b.*,g.* FROM `$t_groupbuy` b left join `$t_goods` g on b.goods_id = g.goods_id";
 $sql .= " WHERE b.recommended = 0 and g.lock_flg =0 and b.group_condition ='0' and b.examine = '1'";
+if(!empty($kk)){
+    $sql .= " and (g.goods_name LIKE '%".trim($kk)."%' OR b.group_name LIKE '%".trim($kk)."%') ";
+}
 //$sql .= " and b.start_time <= '$now_time' and '$now_time' <= b.end_time";
 $result = $dbo->fetch_page($sql,$SYSINFO['product_page']);
 $tag_list = get_tag_list($dbo,$t_tag,15);
@@ -177,6 +183,13 @@ if($result_category) {
   	
 
     <div id="leftColumn">
+        <div class="SubCategoryBox mg12b">
+            <h3>团购列表-<?php echo $i_langpackage->i_shop_filter;?></h3>
+            <form method="get">
+                <input type="text" name="k" value="<?php echo $kk;?>" placeholder="请输入搜索关键词">
+                <input type="submit" value="搜索"/>
+            </form>
+        </div>
       <div id="leftMian" class="content-common-box content-left-big-box">
         <div class="title">
           <!--<span class="right"><a id="list" onclick="changeStyle2('list',this)" class="selected" href="javascript:void(0);" hidefocus="true"><?php echo $i_langpackage->i_list;?></a><a id="window" onclick="changeStyle2('window',this)" href="javascript:void(0);" hidefocus="true"><?php echo $i_langpackage->i_show_window;?></a></span> -->

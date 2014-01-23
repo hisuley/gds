@@ -98,31 +98,6 @@ if ($shop_id){
 }
 
 $cat_id = intval(get_args('cat_id'));
-
-$searchParams = array();
-if(!empty($cat_id)){
-    array_push($searchParams, array('name'=>'cat_id', 'value'=>$cat_id));
-}
-if(!empty($name)){
-    array_push($searchParams, array('name'=>'name', 'value'=>$name));
-}
-if(!empty($admin_promote)){
-    array_push($searchParams, array('name'=>'admin_promote', 'value'=>$admin_promote));
-}
-if(!empty($index)){
-    array_push($searchParams, array('name'=>'index', 'value'=>$index));
-}
-if(!empty($attr_values)){
-    array_push($searchParams, array('name'=>'attr_name', 'value'=>$attr_values));
-}
-$otherUrl = '';
-foreach($searchParams as $v){
-    $otherUrl .= '&'.$v['name']."=".$v['value'];
-}
-
-if(!empty($sale)){
-    array_push($searchParams, array('name'=>'sale', 'value'=>$sale));
-}
 if ($cat_id){
     $subCat_sql = "SELECT cat_id FROM $t_category WHERE parent_id = ".$cat_id;
     $subCat = $dbo->getCol($subCat_sql);
@@ -142,20 +117,15 @@ if ($index){
 		header('location:m.php?app=error');
 		exit;
 	}else {
-		$sql = "SELECT * FROM `$t_goods` as a,`$t_goods_attr` as b WHERE a.`goods_id`=b.`goods_id` AND b.`attr_values` LIKE '%$attr_values%' ";
+		$sql = "SELECT * FROM `$t_goods` a,`$t_goods_attr` b WHERE a.`goods_id`=b.`goods_id` AND b.attr_id = $index AND b.`attr_values` LIKE '%$attr_values%' ";
 	}
 }
 
 $orderby = short_check(get_args('orderby'));
 $orderway = short_check(get_args('orderway'));
 if(!empty($orderby) && !empty($orderway)){
-    if($index){
-        $sql .= " order by a.".$orderby." ".$orderway.";";
-    }else{
-        $sql .= " order by ".$orderby." ".$orderway.";";
-    }
-
-}elseif(empty($index)){
+    $sql .= " order by ".$orderby." ".$orderway.";";
+}else{
     $sql .= " order by add_time desc;";
 }
 
@@ -241,7 +211,7 @@ td img {cursor:pointer;}
                                 <?php foreach($allCat as $val){
                                     echo "<option value='".$val['cat_id']."'";
                                     if($val['cat_id'] == $cat_id){
-                                        echo " selected";
+                                        echo " checked";
                                     }
                                     echo ">".$val['cat_name']."</option>";
                                 }?>
@@ -271,9 +241,9 @@ td img {cursor:pointer;}
 		  <thead>
 			<tr style="text-align: center;">
 				<th width="2px"><input type="checkbox" onclick="checkall(this,'goods_id[]');" value='' /></th>
-				<th width="40px">ID <a href="m.php?app=goods_list&orderby=goods_id&orderway=asc<?php echo $otherUrl; ?>">↑</a><a href="m.php?app=goods_list&orderby=goods_id&orderway=desc<?php echo $otherUrl; ?>">↓</a></th>
-				<th align="left" width=""><?php echo $a_langpackage->a_goods_name; ?> <a href="m.php?app=goods_list&orderby=goods_name&orderway=asc<?php echo $otherUrl; ?>">↑</a><a href="m.php?app=goods_list&orderby=goods_name&orderway=desc<?php echo $otherUrl; ?>">↓</a></th>
-				<th width="80px"><?php echo $a_langpackage->a_goods_price; ?> <a href="m.php?app=goods_list&orderby=goods_price&orderway=asc<?php echo $otherUrl; ?>">↑</a><a href="m.php?app=goods_list&orderby=goods_price&orderway=desc<?php echo $otherUrl; ?>">↓</a></th>
+				<th width="40px">ID <a href="m.php?app=goods_list&orderby=goods_id&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=goods_id&orderway=desc">↓</a></th>
+				<th align="left" width=""><?php echo $a_langpackage->a_goods_name; ?> <a href="m.php?app=goods_list&orderby=goods_name&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=goods_name&orderway=desc">↓</a></th>
+				<th width="80px"><?php echo $a_langpackage->a_goods_price; ?> <a href="m.php?app=goods_list&orderby=goods_price&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=goods_price&orderway=desc">↓</a></th>
 				<th width="60px"><?php echo $a_langpackage->a_transport_price; ?></th>
 				<th width="60px"><?php echo $a_langpackage->a_goods_number; ?></th>
 				<th width="35px"><?php echo $a_langpackage->a_on_sale; ?></th>
@@ -283,8 +253,8 @@ td img {cursor:pointer;}
 				<th width="35px"><?php echo $a_langpackage->a_hot; ?></th>
 				<th width="35px"><?php echo $a_langpackage->a_promote; ?></th>-->
 				<th width="35px"><?php echo $a_langpackage->a_admin_promote; ?></th>
-				<th width="45px"><?php echo $a_langpackage->a_goods_pv; ?> <a href="m.php?app=goods_list&orderby=pv&orderway=asc<?php echo $otherUrl; ?>">↑</a><a href="m.php?app=goods_list&orderby=pv&orderway=desc<?php echo $otherUrl; ?>">↓</a></th>
-				<th width="90px"><?php echo $a_langpackage->a_add_time; ?>  <a href="m.php?app=goods_list&orderby=add_time&orderway=asc<?php echo $otherUrl; ?>">↑</a><a href="m.php?app=goods_list&orderby=add_time&orderway=desc<?php echo $otherUrl; ?>">↓</a></th>
+				<th width="45px"><?php echo $a_langpackage->a_goods_pv; ?> <a href="m.php?app=goods_list&orderby=pv&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=pv&orderway=desc">↓</a></th>
+				<th width="90px"><?php echo $a_langpackage->a_add_time; ?>  <a href="m.php?app=goods_list&orderby=add_time&orderway=asc">↑</a><a href="m.php?app=goods_list&orderby=add_time&orderway=desc">↓</a></th>
 				<th width="40px"><?php echo $a_langpackage->a_operate; ?></th>
 			</tr>
 			</thead>

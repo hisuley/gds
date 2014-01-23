@@ -46,6 +46,8 @@ $t_shop_category = $tablePreStr."shop_category";
 $t_goods = $tablePreStr."goods";
 $t_article = $tablePreStr."article";
 $t_article_cat = $tablePreStr."article_cat";
+$t_attribute = $tablePreStr."attribute";
+$t_article_attr = $tablePreStr."article_attr";
 
 $sql = "SELECT * FROM `$t_article_cat` order by sort_order ";
 $article_cat = $dbo->getRs($sql);
@@ -55,6 +57,48 @@ if(!$article_cat) {
 $article_info = get_article_info($dbo,$t_article,$article_id);
 if(!$article_info) {
 	trigger_error($s_langpackage->s_no_news,E_USER_ERROR);
+}
+
+//手动分页
+$page = intval(get_args('page'));
+$page = max($page,1);
+$CONTENT_POS = strpos($article_info['content'], '<hr />');
+if($CONTENT_POS !== false) {
+        $contents = array_filter(explode('<hr />', $article_info['content']));
+        $pagenumber = count($contents);
+        for($i=1; $i<=$pagenumber; $i++) {
+                $pageurls[$i] = page_url($article_info['article_id'], $i);
+        }
+        //当不存在 [/page]时，则使用下面分页
+        $pages = content_pages($pagenumber,$page, $pageurls);
+
+        $newArr['pages'] = $pages; //分页
+        $newArr['contentfulltext'] = $contents[$page-1]; //正文
+}else{
+        $newArr['contentfulltext'] = $article_info['content']; //正文
+}
+
+/* 新闻属性 */
+$sql = "SELECT * FROM $t_article_attr WHERE article_id='$article_id'";
+$article_attr = $dbo->getRs($sql);
+$attr = array();
+$attr_ids = array();
+$attr_status = false;
+if($article_attr) {
+	foreach($article_attr as $key=>$value) {
+                $attr[$value['attr_id']]['attr_id'] = $value['attr_id'];
+                $attr[$value['attr_id']]['attr_values'] = $value['attr_values'];
+                $attr[$value['attr_id']]['price'] = $value['price'];
+		$attr_ids[] = $value['attr_id'];
+	}
+	$sql = "SELECT attr_id,attr_name,input_type FROM $t_attribute WHERE attr_id IN (".implode(',',$attr_ids).")";
+	$attribute_result = $dbo->getRs($sql);
+	$attribute = array();
+	foreach($attribute_result as $value) {
+		$attribute[$value['attr_id']]['attr_values'] = $value['attr_name'];
+                $attribute[$value['attr_id']]['input_type'] = $value['input_type'];
+	}
+	$attr_status = true;
 }
 
 foreach ($article_cat as $val){
@@ -69,11 +113,10 @@ if($article_info['is_link'] && $article_info['link_url']) {
 	echo "<script>location.href = '".$article_info['link_url']."'</script>";
 	exit;
 }
-//@TODO 请检查为何失效
-//include('pscws23/pscws_call.php');
-//$segmentResult = generateString($article_info['title']);
-//$sql = "SELECT * FROM `$t_article` WHERE article_id NOT IN(".$article_info['article_id'].") AND (".$segmentResult.") LIMIT 10";
-$sql = "SELECT * FROM $t_article WHERE 1 AND ";
+//@TODO 请检查为何失效，调用pscws_call.php的时候报错。
+include('pscws23/pscws_call.php');
+$segmentResult = generateString($article_info['title'],$article_info['article_id']);
+$sql = "SELECT * FROM `$t_article` WHERE ".$segmentResult." LIMIT 10";
 $relatedArticle = $dbo->getRs($sql);
 $header = get_header_info($article_info);
 
@@ -137,8 +180,17 @@ $left_article_list =$dbo->getRs($sql);
 <base href="<?php echo  $baseUrl;?>" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/import.css" type="text/css" rel="stylesheet" />
 <link href="skin/<?php echo  $SYSINFO['templates'];?>/css/article.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="skin/<?php echo  $SYSINFO['templates'];?>/js/changeStyle.js"></script>
 </head>
+<?php if($cat_name == '美食' || $cat_name == '桂林美食'){?>
+<style>
+div.artTxt img{float:right;clear:both;}
+div.artTxt div.left{float:left;width:50%;margin-right:3%}
+div.artTxt div.right{float:left;width:46%;}
+div.artTxt div.right img{max-width: 100%}
+</style>
+<?php }?>
 <body>
 <div id="wrapper">
 	<?php  require("shop/index_header.php");?>
@@ -157,13 +209,46 @@ $left_article_list =$dbo->getRs($sql);
         </ul>
       <div class="artpan">
       <h4 class="artTitle"><font style="color:<?php echo  $article_info['tag_color'];?> "><?php echo  $article_info['title'];?></font></h4>
+         <?php if(!empty($article_info['sub_title'])){?> <h5 class="artTitle"><font style="font-size:13px;font-weight:bold;"><?php echo  $article_info['sub_title'];?></font></h5><?php }?>
       <div class="artInfo">
         <span><?php echo  $s_langpackage->s_time;?>: <?php echo  substr($article_info['add_time'],0,10);?></span>
 
       </div>
       <div class="artTxt">
-      	<p><?php echo  $article_info['content'];?></p>
+         <?php 
+         if($cat_name == '桂林美食'){
+            $content = str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr['contentfulltext']);
+            preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i',$content,$images );
+            $content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', ' ', $content);
+            echo "<div class='left'>".$content."</div>";
+            echo "<div class='right'>";
+            foreach($images[0] as $v){
+                echo $v;
+            }
+            echo "</div>";
+         }else{
+      	    echo "<p>".str_replace('../uploadfiles', $SYSINFO['web'].'/uploadfiles', $newArr['contentfulltext'])."</p>";
+         }?>
       </div>
+      <div class="facility_baseinfo clrfix"><span style="text-align:center;margin:0 auto;"><?php echo $newArr [pages];?></span>
+            <ul class="telephoneinfo">
+                <?php 
+                if($attr_status) {
+                foreach($attr as $key=>$value){?>
+                    <?php if($attribute[$key]['input_type'] == 3 && !empty($attribute[$key]['attr_values'])) {
+                        $valueArr = explode("\n", $value['attr_values']);
+                        echo "<li>".$attribute[$key]['attr_values']."：";
+                        foreach($valueArr as $subVal){
+                            echo "<input type='checkbox' checked />".$subVal;
+                        }
+                        echo "</li>";
+                    } else {
+                        echo "<li>".$attribute[$key]['attr_values']."：".$value['attr_values']."</li>";
+                    }
+                } }?>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
       <!-- FIXED -->
       <div class="artRelated">
         <h3>相关文章</h3>

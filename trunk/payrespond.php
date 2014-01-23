@@ -21,29 +21,17 @@ $m_langpackage=new moduleslp;
 $t_shop_payment=$tablePreStr."shop_payment";
 $t_order_info=$tablePreStr."order_info";
 $t_payment=$tablePreStr."payment";
-$t_receiv_info = $tablePreStr."receiv_list";
 
 
-$check_cnpay = intval(get_args('is_chinapay'));
-if($check_cnpay == 1){
-    $pay_id = get_args('pay_id');
-    $pay_id = str_replace('/', '', $pay_id);
-    if(!empty($pay_id)){
-        $dbo=new dbex;
-        dbtarget('w',$dbServs);
-        //print_r($pay_id);
-        $sql = "UPDATE `$t_order_info` SET pay_status = 1, pay_time = '".date('Y-m-d H:i:s')."' WHERE payid = ".$pay_id;
-        $dbo->exeUpdate($sql);
-        $sql = "INSERT INTO `$t_receiv_info`('order_id', 'pay_id', 'shop_id', 'payment_type', 'receiver', 'receiv_date', 'receiv_account', 'receiv_money', 'operator') VALUES(".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].",".$orderinfo['order_id'].")";
-    }
-    echo "支付成功！<a href='modules.php?app=user_my_order'>返回</a>";
-    exit();
-}
+
+
 //取得返回的订单号
 $pay_code = get_payment_code();
 if(!$pay_code){
 	exit("非法请求");
 }
+$pay_code = str_replace('/', '', $pay_code);
+
 $dbo=new dbex;
 //读写分离定义方法
 dbtarget('r',$dbServs);
@@ -78,17 +66,15 @@ if(strlen($pay_code) != 16){	//用户充值
 		}
 	}
 }else{							//订单付款
+
 	$order_info = get_order_info_bypayid($dbo,$t_order_info,$pay_code);
 	$pay_info = get_one_shopandpayment($dbo,$t_shop_payment,$t_payment,$order_info['shop_id'],$order_info['pay_id']);
 	$order_info['show_url'] = $baseUrl."modules.php?app=user_order_view&order_id=".$order_info['order_id'];
-    //print_r($pay_info);
-    //print_r($order_info);
 	if(!$order_info or !$pay_info){
 		exit($m_langpackage->m_order_info_not_right);
 	}else{
 
 		require("payment/".$pay_info['pay_code']."/".$pay_info['pay_code'].".php");
-
 		$result = respond($order_info,$pay_info);
 		if($result == 1){		//买家付款成功
 
@@ -106,8 +92,29 @@ if(strlen($pay_code) != 16){	//用户充值
 //					$sql = "update `$t_users` set points = points+$value[points],coin = coin+$value[coin] where user_id = $order_info[user_id]";
 //					$dbo->exeUpdate($sql);
 //				}
+                if(!empty($order_info['mobile']) && (strlen($order_info['mobile']) == 13 || strlen($order_info['mobile']) == 11)){
+                    echo "<br />订单二维码已发送！";
+                    require_once('foundation/module_barcode.php');
+                    require_once('foundation/mms_sender.php');
+                    $address = $SYSINFO['web']."do.php?act=user_readbarcode&order_id=".$order_info['order_id']."&mark_read=1&sign=".md5($order_info['order_id'].$order_info['payid']."fjowiegwoiehowigewiog");
+                    $barcodeFile = generateQRfromGoogleRaw($address);
+                    $QR = imagecreatefrompng($barcodeFile);
+//header('Content-type: image/jpg');
+                    $filename = 'uploadfiles/qr/'.rand('0000000', '9999999999')."_qr.jpg";
+                    imagejpeg($QR, $filename);
+                    $mmsSender = new mms_sender($order_info['mobile']);
+                    $mmsSender->addFrame(mms_sender::TYPE_JPG, $filename, 'jpg');
+                    $qrResult = $mmsSender->send();
+                    imagedestroy($QR);
+                    if($qrResult['code'] == 0){
+                        print_r($qrResult);
+                    }
+
+                }
 			}
 			echo "支付成功.！<a href=\"".$baseUrl."modules.php?app=user_my_order\">支付成功</a>";
+
+
 
 		}else if($result == 2){	//卖家发货成功
 
@@ -131,7 +138,7 @@ if(strlen($pay_code) != 16){	//用户充值
 }
 
 function get_payment_code(){
-	$code_arr = array('out_trade_no','sp_billno','v_oid','c_order','orderId','balance_id', 'credit_id');
+	$code_arr = array('out_trade_no','sp_billno','v_oid','c_order','orderId','balance_id', 'pay_id','credit_id');
 	foreach($code_arr as $value){
 		if(get_args($value)){
 			return get_args($value);

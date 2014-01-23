@@ -116,6 +116,13 @@ if($rs){
                 action_return(0,$a_langpackage->a_memeber_nonote_point,'-1');
             }
         }
+        if($post2['user_integral_surplus']){
+            if($post2['user_integral_surplus'] - $rs['user_integral_surplus'] > 0){
+                $post2['user_integral'] += ($post2['user_integral_surplus'] - $rs['user_integral_surplus']);
+                $point_notes  .= "\n增加可用积分[".$post2['user_integral_surplus']."]";
+            }
+
+        }
         //修改余额时提醒备注
         if($post2['user_money']){
             if($rs['user_money'] != $post2['user_money'] && empty($amount_notes)){

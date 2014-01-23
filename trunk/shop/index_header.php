@@ -213,7 +213,7 @@ $j(document).ready(function(){
     <li class="sep"></li>
     <li><a href="article_index.php">资讯全览</a>
       <div class="cui_subnav_wrap">
-        <div class="cui_sub_nav"><a href="news_list.php?id=11" title="最新资讯">最新资讯</a>|<a href="news_list.php?id=12" title="桂林景点">桂林景点</a>|<a href="news_list.php?id=13" title="桂林酒店">桂林酒店</a>|<a href="news_list.php?id=14" title="桂林线路">桂林线路</a>|<a href="news_list.php?id=16" title="桂林交通">桂林交通</a>|<a href="news_list.php?id=15" title="桂林美食">桂林美食</a>|<a href="news_list.php?id=17" title="桂林特产">桂林特产</a>|<a href="news_list.php?id=18" title="购在桂林">购在桂林</a>|<a href="news_list.php?id=19" title="夜美桂林">夜美桂林</a>|<a href="news_list.php?id=20" title="节庆活动">节庆活动</a></div>
+        <div class="cui_sub_nav"><a href="news_list.php?id=11" title="最新资讯">最新资讯</a>|<a href="brand_list.php?id=25" title="桂林景点">桂林景点</a>|<a href="news_list.php?id=13" title="桂林酒店">桂林酒店</a>|<a href="news_list.php?id=14" title="桂林线路">桂林线路</a>|<a href="news_list.php?id=16" title="桂林交通">桂林交通</a>|<a href="news_list.php?id=15" title="桂林美食">桂林美食</a>|<a href="news_list.php?id=17" title="桂林特产">桂林特产</a>|<a href="news_list.php?id=18" title="购在桂林">购在桂林</a>|<a href="news_list.php?id=19" title="夜美桂林">夜美桂林</a>|<a href="news_list.php?id=20" title="节庆活动">节庆活动</a></div>
 
       </div>
     </li>
@@ -224,7 +224,7 @@ $j(document).ready(function(){
     </li>
     <li class="sep"></li>
     <li><a href="promote_index.php">特惠专区</a>
-      <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="category.php?id=437" title="旅游卡特惠">旅游卡特惠</a>|<a href="groupbuy.php" title="团购乐翻天">团购乐翻天</a>|<a href="category.php?id=438" title="秒杀超值购">秒杀超值购</a>|<a href="news_list.php?id=26" title="优惠全掌握">优惠全掌握</a></div>
+      <div class="cui_subnav_wrap"><div class="cui_sub_nav"><a href="category.php?id=437" title="旅游卡特惠">旅游卡特惠</a>|<a href="groupbuy.php" title="团购乐翻天">团购乐翻天</a>|<a href="promote.php" title="秒杀超值购">秒杀超值购</a>|<a href="news_list.php?id=26" title="优惠全掌握">优惠全掌握</a></div>
       </div>
     </li>
     <li class="sep"></li>

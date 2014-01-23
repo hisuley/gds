@@ -81,7 +81,8 @@ $night_result = get_article_list($dbo,$t_article,$night_id,$SYSINFO['article_pag
 $holiday_result = get_article_list($dbo,$t_article,$holiday_id,$SYSINFO['article_page']);
 $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['article_page']);
 
-
+$sql = "SELECT cat_id,cat_icon FROM `$t_article_cat`";
+$article_cat_icon = $dbo->getRs($sql);
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -105,7 +106,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
   <div id="contents" class="clearfix" >
   <div class="content-news-box">
     <div class="title">
-      <a href="#newest"><h2 class="active"><a href="news_list.php?id=11">最新资讯</h2></a></a>
+      <a href="#newest"><h2 class="active"><a href="news_list.php?id=11">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 11 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>最新资讯</h2></a></a>
     </div>
     <div class="content" id="newest">
       <div class="column-3">
@@ -139,7 +145,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
   </div>
   <div class="column-3">
     <div class="content-common-box content-left-middle-box content-siver">
-      <div class="title"><h2><a href="news_list.php?id=20">节庆活动</a></h2><span><a href="news_list.php?id=20">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=20">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 20 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>节庆活动</a></h2><span><a href="news_list.php?id=20">更多&gt;&gt;</a></span></div>
       <div class="content">
         <ul>
           <?php foreach($holiday_result['result'] as $val){?>
@@ -162,7 +173,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
     </div>
     <div class="content-common-box content-left-middle-box content-siver">
       <div class="title">
-        <h2><a href="news_list.php?id=14">桂林线路</a></h2>
+        <h2><a href="news_list.php?id=14">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 14 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>桂林线路</a></h2>
         <span><a href="news_list.php?id=14">更多&gt;&gt;</a></span>
       </div>
        <?php  foreach($line_result['result'] as $v){?>
@@ -184,7 +200,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
   </div>
   <div class="column-7">
     <div class="content-common-box">
-      <div class="title"><h2><a href="news_list.php?id=12">桂林景点</a></h2><span><a href="news_list.php?id=12">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=12">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 12 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>桂林景点</a></h2><span><a href="news_list.php?id=12">更多&gt;&gt;</a></span></div>
       <?php  foreach($scenic_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -202,7 +223,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
     </div>
     <div class="content-common-box">
-      <div class="title"><h2><a href="news_list.php?id=13">桂林酒店</a></h2><span><a href="news_list.php?id=13">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=13">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 13 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>桂林酒店</a></h2><span><a href="news_list.php?id=13">更多&gt;&gt;</a></span></div>
       <?php  foreach($hotel_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -220,7 +246,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
     </div>
     <div class="content-common-box">
-      <div class="title"><h2><a href="news_list.php?id=15">桂林美食</a></h2><span><a href="news_list.php?id=15">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=15">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 15 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>桂林美食</a></h2><span><a href="news_list.php?id=15">更多&gt;&gt;</a></span></div>
       <?php  foreach($food_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -238,7 +269,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
     </div>
      <div class="content-common-box">
-      <div class="title"><h2><a href="news_list.php?id=19">夜美桂林</a></h2><span><a href="news_list.php?id=19">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=19">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 19 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>夜美桂林</a></h2><span><a href="news_list.php?id=19">更多&gt;&gt;</a></span></div>
       <?php  foreach($night_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -256,7 +292,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
     </div>
     <div class="content-common-box">
-      <div class="title"><h2><a href="news_list.php?id=17">桂林特产</a></h2><span><a href="news_list.php?id=17">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=17">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 17 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>桂林特产</a></h2><span><a href="news_list.php?id=17">更多&gt;&gt;</a></span></div>
       <?php  foreach($techan_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">
@@ -274,7 +315,12 @@ $tutorial_result = get_article_list($dbo,$t_article,$tutorial_id,$SYSINFO['artic
         <?php }?>
     </div>
      <div class="content-common-box">
-      <div class="title"><h2><a href="news_list.php?id=18">购在桂林</a></h2><span><a href="news_list.php?id=18">更多&gt;&gt;</a></span></div>
+      <div class="title"><h2><a href="news_list.php?id=18">
+        <?php  foreach($article_cat_icon as $val){?>
+            <?php if($val['cat_id'] == 18 && $val['cat_icon']){?>
+                 <img src="<?php echo $val['cat_icon'];?>" width="30px" height="30px">
+            <?php }?>
+        <?php }?>购在桂林</a></h2><span><a href="news_list.php?id=18">更多&gt;&gt;</a></span></div>
       <?php  foreach($techan_result['result'] as $v){?>
        <?php if($v['thumb'] != ''){?>
          <div class="item-box" style="margin-left:0px;">

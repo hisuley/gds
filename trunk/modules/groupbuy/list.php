@@ -126,7 +126,7 @@ td span.category{color:#FF6600;}
 						<?php if($v['examine']!=0) {?>
 						<?php if($v['recommended']==0){ if($v['start_time']<= $now_time and $v['end_time'] >= $now_time) { echo $m_langpackage->m_ing; } if($v['start_time']>= $now_time) { echo $m_langpackage->m_no_published; } if($v['end_time']<= $now_time) { echo $m_langpackage->m_end; } } else{ echo $m_langpackage->m_end; }?>
 						<?php  } else {?>
-						<?php echo  $i_langpackage->i_groupbuy_lock;?>
+						<?php echo  $m_langpackage->m_not_audit;?>
 						<?php }?>
 						</td>
 						<td class="name"><?php echo  $m_langpackage->m_from;?><?php echo $v['start_time'];?><br /><?php echo  $m_langpackage->m_to;?><?php echo $v['end_time'];?></td>
